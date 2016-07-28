@@ -3,11 +3,11 @@
     .container {width: 1230px}
     .banner-area {height: 1196px}
     .banner-product-image {margin-top: 66%;}
-    .banner-text h1 {font-size: 69px;}
+    .banner-text h1 {font-size: 45px;}
     .banner-area .col-lg-5.col-md-4 {padding-left: 0;}
     .banner-apps {
-        margin-left: 76px;
-        margin-top: -315px;
+        margin-left: 0px;
+        margin-top: 0px;
     }
     .single-app {
         height: 140px;
@@ -138,7 +138,7 @@
         background: url("../img/logo.svg") no-repeat scroll left top;
     }
     .header-blue .mobile-menu .mean-bar {
-        background: url("../img/logo.svg") no-repeat scroll left top;
+        background: url("../img/logo32.svg") no-repeat scroll left top;
     }
     .header-yellow .mobile-menu .mean-bar {
         background: url("../img/logo.svg") no-repeat scroll left top;
@@ -382,6 +382,7 @@
 }
 /* Large Mobile :480px. */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
+
     .container {width:450px}
     .banner-text p {
         font-size: 15px;
