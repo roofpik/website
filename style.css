@@ -112,60 +112,60 @@ body {
 }
 @font-face {
     font-family: 'latobold';
-    src: url('fonts/lato-bold-webfont.eot');
-    src: url('fonts/lato-bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/lato-bold-webfont.woff2') format('woff2'),
-         url('fonts/lato-bold-webfont.woff') format('woff'),
-         url('fonts/lato-bold-webfont.ttf') format('truetype'),
-         url('fonts/lato-bold-webfont.svg#latobold') format('svg');
+    src: url('http://cdn.roofpik.com/website/fonts/lato-bold-webfont.eot');
+    src: url('http://cdn.roofpik.com/website/fonts/lato-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('http://cdn.roofpik.com/website/fonts/lato-bold-webfont.woff2') format('woff2'),
+         url('http://cdn.roofpik.com/website/fonts/lato-bold-webfont.woff') format('woff'),
+         url('http://cdn.roofpik.com/website/fonts/lato-bold-webfont.ttf') format('truetype'),
+         url('http://cdn.roofpik.com/website/fonts/lato-bold-webfont.svg#latobold') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'latolight';
-    src: url('fonts/lato-light-webfont.eot');
-    src: url('fonts/lato-light-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/lato-light-webfont.woff2') format('woff2'),
-         url('fonts/lato-light-webfont.woff') format('woff'),
-         url('fonts/lato-light-webfont.ttf') format('truetype'),
-         url('fonts/lato-light-webfont.svg#latolight') format('svg');
+    src: url('http://cdn.roofpik.com/website/fonts/lato-light-webfont.eot');
+    src: url('http://cdn.roofpik.com/website/fonts/lato-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('http://cdn.roofpik.com/website/fonts/lato-light-webfont.woff2') format('woff2'),
+         url('http://cdn.roofpik.com/website/fonts/lato-light-webfont.woff') format('woff'),
+         url('http://cdn.roofpik.com/website/fonts/lato-light-webfont.ttf') format('truetype'),
+         url('http://cdn.roofpik.com/website/fonts/lato-light-webfont.svg#latolight') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'latomedium';
-    src: url('fonts/lato-medium-webfont.eot');
-    src: url('fonts/lato-medium-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/lato-medium-webfont.woff2') format('woff2'),
-         url('fonts/lato-medium-webfont.woff') format('woff'),
-         url('fonts/lato-medium-webfont.ttf') format('truetype'),
-         url('fonts/lato-medium-webfont.svg#latomedium') format('svg');
+    src: url('http://cdn.roofpik.com/website/fonts/lato-medium-webfont.eot');
+    src: url('http://cdn.roofpik.com/website/fonts/lato-medium-webfont.eot?#iefix') format('embedded-opentype'),
+         url('http://cdn.roofpik.com/website/fonts/lato-medium-webfont.woff2') format('woff2'),
+         url('http://cdn.roofpik.com/website/fonts/lato-medium-webfont.woff') format('woff'),
+         url('http://cdn.roofpik.com/website/fonts/lato-medium-webfont.ttf') format('truetype'),
+         url('http://cdn.roofpik.com/website/fonts/lato-medium-webfont.svg#latomedium') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'latoregular';
-    src: url('fonts/lato-regular-webfont.eot');
-    src: url('fonts/lato-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/lato-regular-webfont.woff2') format('woff2'),
-         url('fonts/lato-regular-webfont.woff') format('woff'),
-         url('fonts/lato-regular-webfont.ttf') format('truetype'),
-         url('fonts/lato-regular-webfont.svg#latoregular') format('svg');
+    src: url('http://cdn.roofpik.com/website/fonts/lato-regular-webfont.eot');
+    src: url('http://cdn.roofpik.com/website/fonts/lato-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('http://cdn.roofpik.com/website/fonts/lato-regular-webfont.woff2') format('woff2'),
+         url('http://cdn.roofpik.com/website/fonts/lato-regular-webfont.woff') format('woff'),
+         url('http://cdn.roofpik.com/website/fonts/lato-regular-webfont.ttf') format('truetype'),
+         url('http://cdn.roofpik.com/website/fonts/lato-regular-webfont.svg#latoregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'latosemibold';
-    src: url('fonts/lato-semibold-webfont.eot');
-    src: url('fonts/lato-semibold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/lato-semibold-webfont.woff2') format('woff2'),
-         url('fonts/lato-semibold-webfont.woff') format('woff'),
-         url('fonts/lato-semibold-webfont.ttf') format('truetype'),
-         url('fonts/lato-semibold-webfont.svg#latosemibold') format('svg');
+    src: url('http://cdn.roofpik.com/website/fonts/lato-semibold-webfont.eot');
+    src: url('http://cdn.roofpik.com/website/fonts/lato-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('http://cdn.roofpik.com/website/fonts/lato-semibold-webfont.woff2') format('woff2'),
+         url('http://cdn.roofpik.com/website/fonts/lato-semibold-webfont.woff') format('woff'),
+         url('http://cdn.roofpik.com/website/fonts/lato-semibold-webfont.ttf') format('truetype'),
+         url('http://cdn.roofpik.com/website/fonts/lato-semibold-webfont.svg#latosemibold') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -461,7 +461,7 @@ padding-left:0px;}
 /*  6. Features Area
 /*--------------------------------------------*/
 .features-area {
-    background: url("img/banner/preview.png") ;
+    background: url("http://cdn.roofpik.com/website/img/banner/preview.png") ;
     margin-top: -112px;
     padding-top: 35px;
 	background-size:63% auto;
@@ -488,7 +488,7 @@ padding-left:0px;}
 /*  7. Download Area
 /*--------------------------------------------*/
 .download-area, .domain-name-area {
-    background: url("img/banner-blue/back2.jpg");
+    background: url("http://cdn.roofpik.com/website/img/banner-blue/back2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -499,7 +499,7 @@ padding-left:0px;}
     z-index: -2;
 }
 .download-area:before, .footer-area:before, .banner-area:before, .domain-name-area:before {
-    background-image: url("img/banner/shape.png");
+    background-image: url("http://cdn.roofpik.com/website/img/banner/shape.png");
     background-repeat: no-repeat;
     background-position: left top;
     background-size: cover;
@@ -512,7 +512,7 @@ padding-left:0px;}
     z-index: 2;
 }
 .download-area:after, .domain-name-area:after {
-    background-image: url("img/banner/shape.png");
+    background-image: url("http://cdn.roofpik.com/website/img/banner/shape.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -816,7 +816,7 @@ padding-left:0px;}
 /*  11. Footer Area
 /*--------------------------------------------*/
 .footer-area {
-    background-image: url("img/banner-blue/back1.jpg");
+    background-image: url("http://cdn.roofpik.com/website/img/banner-blue/back1.jpg");
 	background-size:cover;
 	background-position:center top;
 	background-repeat:no-repeat;
@@ -991,7 +991,7 @@ textarea.form-control {
     color: #ffffff !important;
 }
 .features-area.features-blue {
-    background: url("img/banner-blue/preview.png");
+    background: url("http://cdn.roofpik.com/website/img/banner-blue/preview.png");
     background-repeat: no-repeat;
     background-position: -4% 60%;
     background-size: 63% auto;
@@ -1024,7 +1024,7 @@ textarea.form-control {
     color: #ffffff !important;
 }
 .features-area.features-yellow {
-    background: url("img/banner-yellow/preview.png");
+    background: url("http://cdn.roofpik.com/website/img/banner-yellow/preview.png");
     background-repeat: no-repeat;
     background-position: -11% 79%;
     background-size: 63% auto;
@@ -1049,7 +1049,7 @@ textarea.form-control {
     margin-right: 0;
 }
 .banner-area.banner-image {
-    background-image: url("img/banner/5.jpg");
+    background-image: url("http://cdn.roofpik.com/website/img/banner/5.jpg");
     height: 970px;
     overflow: hidden;
     position: relative;
@@ -1161,7 +1161,7 @@ textarea.form-control {
     z-index: 100;
 }
 .search-cat {
-    background: url("img/icon/arrow.png") no-repeat scroll 80% 23px;
+    background: url("http://cdn.roofpik.com/website/img/icon/arrow.png") no-repeat scroll 80% 23px;
     cursor: pointer;
     height: 100%;
 }

@@ -88,21 +88,21 @@
     .features-area .single-item:nth-child(3) {margin-left: 149px}
     .features-area .single-item {margin-bottom: 55px}
     .features-area {
-        background: url("../img/banner/preview.png");
+        background: url("http://cdn.roofpik.com/website/img/banner/preview.png");
         background-repeat: no-repeat;
         background-position: -11% 64%;
         background-size: 53% auto;
         margin-top: -145px;
     }    
     .features-area.features-yellow {
-        background: url("../img/banner-yellow/preview.png");
+        background: url("http://cdn.roofpik.com/website/img/banner-yellow/preview.png");
         background-repeat: no-repeat;
         background-position: -11% 64%;
         background-size: 53% auto;
         margin-top: -145px;
     }    
     .features-area.features-blue {
-        background: url("../img/banner-blue/preview.png");
+        background: url("http://cdn.roofpik.com/website/img/banner-blue/preview.png");
         background-repeat: no-repeat;
         background-position: -11% 64%;
         background-size: 53% auto;
@@ -135,13 +135,13 @@
 @media (min-width: 768px) and (max-width: 991px) {
     .container {width:750px}
     .mobile-menu .mean-bar {
-        background: url("../img/logo.svg") no-repeat scroll left top;
+        background: url("http://cdn.roofpik.com/website/img/logo.svg") no-repeat scroll left top;
     }
     .header-blue .mobile-menu .mean-bar {
-        background: url("../img/logo32.svg") no-repeat scroll left top;
+        background: url("http://cdn.roofpik.com/website/img/logo32.svg") no-repeat scroll left top;
     }
     .header-yellow .mobile-menu .mean-bar {
-        background: url("../img/logo.svg") no-repeat scroll left top;
+        background: url("http://cdn.roofpik.com/website/img/logo.svg") no-repeat scroll left top;
     }
     #main-menu {top: 70px}
     .banner-area {height: 620px}
@@ -246,13 +246,13 @@
 @media (max-width: 767px) {
     .container {width:300px}
     .mobile-menu .mean-bar {
-        background: url("../img/logo.svg") no-repeat scroll left top;
+        background: url("http://cdn.roofpik.com/website/img/logo.svg") no-repeat scroll left top;
     }
     .header-blue .mobile-menu .mean-bar {
-        background: url("../img/logo32.svg") no-repeat scroll left top;
+        background: url("http://cdn.roofpik.com/website/img/logo32.svg") no-repeat scroll left top;
     }
     .header-yellow .mobile-menu .mean-bar {
-        background: url("../img/logo.svg") no-repeat scroll left top;
+        background: url("http://cdn.roofpik.com/website/img/logo.svg") no-repeat scroll left top;
     }
     #main-menu {top: 40px}
     .banner-area {height: 610px;}
