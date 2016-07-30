@@ -707,7 +707,7 @@ header .menu-btn {
 /*--------------------------------------------*/
 
 .features-area {
-    background: url("http://cdn.roofpik.com/website/img/banner/preview.png");
+    background: url("img/banner/preview-new.png");
     margin-top: -112px;
     padding-top: 35px;
     background-size: 63% auto;
@@ -1486,9 +1486,9 @@ textarea.form-control {
 }
 
 .features-area.features-blue {
-    background: url("http://cdn.roofpik.com/website/img/banner-blue/preview.png");
+    background: url("img/banner-blue/preview-new.png");
     background-repeat: no-repeat;
-    background-position: -4% 80%;
+    background-position: -15% 80%;
     background-size: 63% auto;
 }
 
