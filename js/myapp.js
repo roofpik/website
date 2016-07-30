@@ -17,11 +17,17 @@
      };
      // Get a key for a new Post.
      var newPostKey = firebase.database().ref().child('contactUs').push().key;
+
+     $('#thankYouModal').modal('show');
      console.log(newPostKey);
      // Write the new post's data simultaneously in the posts list and the user's post list.
      var updates = {};
      updates['/contactUs/' + newPostKey] = postData;
      firebase.database().ref().update(updates);
+
+     $('#uname').val("");
+        $('#uemail').val("");
+        $('#umessage').val("");
 
 
  }
