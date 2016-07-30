@@ -2104,9 +2104,15 @@ textarea.form-control {
     width: 80%;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1170px) {
     .banner-apps {
         display: none;
+    }
+}
+
+@media (max-width: 1400px) {
+    .banner-apps {
+        margin-top:0px;
     }
 }
 
