@@ -2203,3 +2203,13 @@ textarea.form-control {
     text-align: center;
     padding-bottom: 50px;
 }
+
+
+
+
+
+
+.panel-heading a:hover {
+    color: #3f63a9;
+    text-decoration: none;
+}
