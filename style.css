@@ -439,7 +439,7 @@ header .menu-btn {
 }
 
 .banner-buttons img {
-    width: 40%;
+    width: 30%;
 }
 
 .banner-text {
@@ -2050,7 +2050,7 @@ textarea.form-control {
         text-align: center;
     }
     .banner-buttons img {
-        width: 80%;
+        width: 40%;
     }
     .banner-table-cell {
         margin-top: 0px;
