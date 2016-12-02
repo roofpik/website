@@ -1,0 +1,59 @@
+<md-dialog>
+    <form ng-cloak class="login-dialog">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 class="center-text">Log In</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <i class="material-icons">close</i>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div layout="column">
+                    <md-button class="md-raised fb-login-button">
+                        <img src="images/general/facebook.png" /> Login with Facebook
+                    </md-button>
+                    <md-button class="md-raised gl-login-button">
+                        <img src="images/general/google.png" /> Login with Google
+                    </md-button>
+                    <p class="center-text">
+                        ------------ Or ------------
+                    </p>
+                    <md-input-container md-no-float class="md-block login-email">
+                        <md-icon>email</md-icon>
+                        <input placeholder="Email" type="email">
+                    </md-input-container>
+                    <md-input-container md-no-float class="md-block login-password">
+                        <md-icon>lock</md-icon>
+                        <input placeholder="Password" type="password">
+                    </md-input-container>
+                </div>
+                <div layout="row" flex layout-wrap layout-align="center center" class="reset-option">
+                    <div flex="50">
+                        <md-checkbox>
+                            Remember me
+                        </md-checkbox>
+                    </div>
+                    <div flex="50" class="right-text">
+                        Reset Password
+                    </div>
+                </div>
+                <div layout="column">
+                    <md-button class="md-raised em-login-button md-primary" ng-click="login()">
+                        Login
+                    </md-button>
+                </div>
+                <div layout="row" flex layout-wrap class="sign-up-option">
+                    <div flex="50" class="no-account">
+                        <span>Doesn't have an account?</span>
+                    </div>
+                    <div flex="50" class="right-text">
+                        <md-button class="md-accent" ng-click="signUp()">Sign Up</md-button>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

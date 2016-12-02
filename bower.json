@@ -1,0 +1,21 @@
+{
+  "name": "parallax",
+  "authors": [
+    "Arpit Mittal <arpit@roofpik.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-router": "^0.3.2"
+  }
+}
