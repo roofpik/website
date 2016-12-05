@@ -22,6 +22,10 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css" />
     <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+    <link rel="stylesheet" href="bower_components/Croppie/croppie.css" />
+    <script src="bower_components/Croppie/croppie.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+    <script src="js/general/sweetalert.min.js"></script>
 </head>
 </head>
 
@@ -36,11 +40,18 @@
     </footer>
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
     <script>
+    // var config = {
+    //     apiKey: "AIzaSyD_4bPp5HKryXDzaQwfRhqAU5SsSAdDIJ0",
+    //     authDomain: "roofpik-948d0.firebaseapp.com",
+    //     databaseURL: "https://roofpik-948d0.firebaseio.com",
+    //     storageBucket: "roofpik-948d0.appspot.com",
+    // };
     var config = {
-        apiKey: "AIzaSyD_4bPp5HKryXDzaQwfRhqAU5SsSAdDIJ0",
-        authDomain: "roofpik-948d0.firebaseapp.com",
-        databaseURL: "https://roofpik-948d0.firebaseio.com",
-        storageBucket: "roofpik-948d0.appspot.com",
+        apiKey: "AIzaSyCKaEjpBt-dv65ktLuLmEj8NwdAAkD9Ba4",
+        authDomain: "project-313476129231192088.firebaseapp.com",
+        databaseURL: "https://project-313476129231192088.firebaseio.com",
+        storageBucket: "project-313476129231192088.appspot.com",
+        messagingSenderId: "1045198624069"
     };
     firebase.initializeApp(config);
     </script>
@@ -61,6 +72,8 @@
     <script src="js/controllers/home.ctrl.js"></script>
     <script src="js/controllers/header.ctrl.js"></script>
     <script src="js/controllers/auth.ctrl.js"></script>
+    <script src="js/controllers/profile.ctrl.js"></script>
+    <script src="js/controllers/user-all-reviews.ctrl.js"></script>
 </body>
 
 </html>

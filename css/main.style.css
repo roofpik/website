@@ -20,12 +20,12 @@ html, body {
     color: #8a8a8a;
 }
 
-header,
+/*header,
 footer,
 md-content {
     display: none;
      color: #484848 !important;
-}
+}*/
 
 md-content {
     z-index: 1;

@@ -1,0 +1,140 @@
+<md-content class="profile-page has-header">
+    <div layout="row" flex="70" class="profile-page-content">
+        <div flex="30" id="image-container">
+       		<img id="profile-img" ng-src="{{uploadedImage}}" alt="http://www.e-codices.unifr.ch/documents/media/Collections/img-not-available_en.jpg"/>
+			<div class="profile-img-upload">
+				<input type="file" id="profile-image-test" onchange="angular.element(this).scope().getFileDetails(event)" accept="image/*" single/>
+	        	<md-button class="md-raised" ng-click="uploadImage()" id="submit-btn">Change Image</md-button>
+			</div>
+        	<h3 id="view-reviews" ng-click="showUserReviews()">View Reviews</h3>
+        </div>
+        <div flex="70" id="info-container">
+            <div flex="100" id="info-heading">
+	            <h3>Profile Information</h3>
+	        </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="25" class="detail-label">
+                    <h4>First Name</h4>
+                </div>
+                <div flex="75" layout="row" layout-align="start center">
+                    <input type="text" ng-model="user.fname">
+                </div>
+            </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="25" class="detail-label">
+                    <h4>Last Name</h4>
+                </div>
+                <div flex="75" layout="row" layout-align="start center">
+                    <input type="text" ng-model="user.lname">
+                </div>
+            </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="25" class="detail-label">
+                    <h4>I Am</h4>
+                </div>
+                <div flex="75" layout="row" layout-align="start center">
+                    <select ng-model="user.gender" id="gender-dropdown">
+						<option ng-value="gender" ng-repeat="gender in allGenders">{{gender}}</option>
+					</select>
+                </div>
+            </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="25" class="detail-label">
+                    <h4>Birth Date</h4>
+                </div>
+                <div flex="75" layout="row" layout-align="start center">
+                    <select ng-model="user.birthDay.month" id="month-dropdown">
+						<option ng-value="month" ng-repeat="month in allMonths">{{month}}</option>
+					</select>
+					<select ng-model="user.birthDay.date" id="date-dropdown">
+						<option ng-value="date" ng-repeat="date in allDates">{{date}}</option>
+					</select>
+					<select ng-model="user.birthDay.year" id="year-dropdown">
+						<option ng-value="year" ng-repeat="year in allYears">{{year}}</option>
+					</select>
+                </div>
+            </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="25" class="detail-label">
+                    <h4>Email Address</h4>
+                </div>
+                <div flex="75" layout="row" layout-align="start center">
+                    <input type="email" ng-model="user.email.emailAddress" disabled>
+                </div>
+            </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="25" class="detail-label">
+                    <h4>Mobile</h4>
+                </div>
+                <div flex="75" layout="row" layout-align="start center" layout-wrap>
+                    <div flex="100">
+                        <input type="tel" ng-model="user.mobile.mobileNum" ng-hide="user.mobile.mobileProvided == false" disabled>
+                    </div>
+                    <div flex="100">
+                        <p ng-show="user.mobile.mobileProvided == false">Mobile number not provided</p>
+                    </div>
+                    <div flex="100">
+                        <p ng-show="user.mobile.mobileProvided == false && !addMobileClicked" layout="row" ng-click="addMobile()" id="add-mobile-btn">
+                        	<span>
+                        		<i class="material-icons">add</i>
+                        	</span>
+                        	<span id="add-mobile-btn-link">Add Mobile</span>
+                        </p>
+                    </div>
+                    <div flex="100">
+                        <div ng-show="addMobileClicked" layout="row" flex="50" id="mobile-div">
+                        	<div id="extra-code"><b>+91</b></div>
+                        	<div><input type="tel" ng-model="mobno" maxlength="10" minlength="10"></div>
+                        	<span id="add-num-btn" ng-click="addMobileNumber(mobno)">Add</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="25" class="detail-label">
+                    <h4>City</h4>
+                </div>
+                <div flex="75" layout="row" layout-align="start center">
+                    <select ng-model="city" id="city-dropdown">
+						<option ng-value="city" ng-repeat="city in cities">{{city}}</option>
+					</select>
+                </div>
+            </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="25" class="detail-label">
+                    <h4>Society/Locality</h4>
+                </div>
+                <div flex="75" layout="row" layout-align="start center">
+                    <input type="text" ng-model="user.address.societyLocality">
+                </div>
+            </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="25" class="detail-label">
+                    <h4>Flat/House No.</h4>
+                </div>
+                <div flex="75" layout="row" layout-align="start center">
+                    <input type="text" ng-model="user.address.flatHouseNo">
+                </div>
+            </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="25" class="detail-label">
+                    <h4>Block/Building No.</h4>
+                </div>
+                <div flex="75" layout="row" layout-align="start center">
+                    <input type="text" ng-model="user.address.blockBuildingNo">
+                </div>
+            </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="25" class="detail-label">
+                    <h4>Pincode</h4>
+                </div>
+                <div flex="75" layout="row" layout-align="start center">
+                    <input type="text" ng-model="user.address.pincode">
+                </div>
+            </div>
+            <div id="save-btn">
+            	<md-button class="md-raised" ng-click="submit()" id="submit-btn">Save</md-button>
+            </div>
+        </div>
+    </div>
+</md-content>

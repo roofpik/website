@@ -1,0 +1,28 @@
+<md-content class="user-all-reviews-page" >
+    <div flex="50" id="review-container">
+        <div flex="100" id="page-title" style="margin: 0px;
+    padding: 5px 15px;
+    background-color: #ccc;">
+            <h3>Past Reviews</h3>
+        </div>
+        <div flex="100" class="md-padding" ng-show="noReviews">
+            <h3>Currently you do not have any reviews</h3>
+        </div>
+        <div flex="100" class="md-padding" ng-hide="noReviews">
+            <div ng-repeat="review in allReviews" ng-show="dataloaded" flex="100" layout="row">
+                <div flex="10"><h3>{{$index+1}}</h3></div>
+                <div flex="70">
+                    <h3>{{review.reviewTitle}}</h3>
+                    <p ng-if="review.createdDate">{{review.createdDate | date:'MMM dd, yyyy'}}</p>
+                    <p ng-if="review.projectName">{{review.projectName}}</p>
+                    <p ng-if="review.locationName">{{review.locationName}}</p>
+                </div>
+                <div flex="20">
+                    <md-button class="md-fab md-mini" id="edit-btn-box" style="line-height:55px;background-color: #1CB1D3;margin-top:20px;">
+                        <i id="edit-btn" class="material-icons" ng-click="editReview(review)">mode_edit</i>
+                    </md-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</md-content>

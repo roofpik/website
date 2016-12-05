@@ -1,0 +1,31 @@
+.user-all-reviews-page #review-container {
+	margin:100px auto;
+	border:1px solid #ccc;
+	color:#404040;
+}
+
+.user-all-reviews #page-title h3{
+	background-color: #ccc !important;
+    margin: 0 !important;
+    padding: 5px 15px !important;
+}
+
+.user-all-reviews-page #user-review-card {
+    margin: 8px 40px;
+}
+
+.user-all-reviews-page #edit-review-btn {
+    text-align: center;
+}
+
+.user-all-reviews-page #edit-review-btn i {
+    font-size: 30px;
+}
+
+.user-all-reviews-page .user-review p {
+    font-size: 16px;
+}
+
+.user-all-review-page #edit-btn:focus {
+    outline:none;
+}

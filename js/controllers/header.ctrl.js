@@ -1,4 +1,4 @@
-app.controller('headerCtrl', function($scope, $mdDialog){
+app.controller('headerCtrl', function($scope, $mdDialog, $state){
 	$scope.user = false;
 	$scope.showAdvanced = function(ev) {
     $mdDialog.show({
@@ -15,4 +15,13 @@ app.controller('headerCtrl', function($scope, $mdDialog){
       $scope.status = 'You cancelled the dialog.';
     });
   };
+
+  $scope.takeToProfile = function(){
+    $state.go('profile');
+  };
+
+  $scope.takeToMyReviews = function(){
+    $state.go('user-all-reviews');
+  };
+
 });

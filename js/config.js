@@ -7,5 +7,19 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             controller: 'homeCtrl'
         });
 
+    $stateProvider
+        .state('profile', {
+            url: '/profile',
+            templateUrl: 'templates/profile.html',
+            controller: 'profileCtrl'
+        });
+
+    $stateProvider
+        .state('user-all-reviews', {
+            url: '/user-all-reviews',
+            templateUrl: 'templates/user-all-reviews.html',
+            controller: 'userAllReviewsCtrl'
+        });
+
         $urlRouterProvider.otherwise('/');
 }]);
