@@ -21,5 +21,19 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             controller: 'userAllReviewsCtrl'
         });
 
+    $stateProvider
+        .state('write-review', {
+            url: '/write-review',
+            templateUrl: 'templates/write-review.html',
+            controller: 'writeReviewCtrl'
+        });
+
+    $stateProvider
+        .state('edit-review', {
+            url: '/edit-review',
+            templateUrl: 'templates/edit-review.html',
+            controller: 'editReviewCtrl'
+        });
+
         $urlRouterProvider.otherwise('/');
 }]);
