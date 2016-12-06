@@ -7,6 +7,63 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
     var basic;
     $scope.showMoreLess = 'Show More +';
     $scope.showMore = false;
+    $scope.ratingParams = [
+        {
+            name: 'Security',
+            id: 2
+        },
+        {
+            name: 'Amenities',
+            id: 3
+        },
+        {
+            name: 'Open and green areas',
+            id: 4
+        },
+        {
+            name: 'Electricity and water supply',
+            id: 5
+        },
+        {
+            name: 'Convenience of housemaids',
+            id: 6
+        },
+        {
+            name: 'Convenience of parking',
+            id: 7
+        },
+        {
+            name: 'Infrastructure',
+            id: 8
+        },
+        {
+            name: 'Layout of the apartment',
+            id: 9
+        }
+    ];
+
+    $scope.yesNoParam = [
+        {
+            ques: 'Is the project conveniently located ?',
+            id: 'projectConvenientlyLocated'
+        },
+        {
+            ques: 'Do you have easy access to public transport ?',
+            id: 'easyAccessToPublicTransport'
+        },
+        {
+            ques: 'Do you have good schools nearby ?',
+            id: 'goodSchools'
+        },
+        {
+            ques: 'Do you have markets nearby ?',
+            id: 'markets'
+        },
+        {
+            ques: 'Do you have good hospitals nearby ?',
+            id: 'goodHospitals'
+        }
+    ];
 
     $scope.login = {};
     $scope.$watch('loginStatus', function() {
@@ -227,7 +284,7 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
 
     $scope.ratingsCallback = function(rating, index) {
         // console.log('Selected rating is : ', rating, ' and index is ', index);
-
+        console.log($scope.review.overallRating);
         if (index == 1) {
             $scope.review.overallRating = rating;
         } else if (index == 2) {
@@ -250,81 +307,91 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
     };
 
     $scope.submitReview = function(imageUrl, review) {
-
-        var user = firebase.auth().currentUser;
-        $scope.review.userName = user.displayName;
-        $scope.review.userId = user.uid;
-        $scope.review.blocked = false;
-        $scope.review.createdDate = new Date().getTime();
-        $scope.review.status = 'live';
-        if (imageUrl != 'no-image') {
-            $scope.review.imageUrl = imageUrl;
-        }
-        if ($scope.selectedProjectOrLocality.type == 'Project') {
-            var updates = {};
-            $scope.useReviewData = {
-                projectId: $scope.selectedProjectOrLocality.id,
-                projectName: $scope.selectedProjectOrLocality.name,
-                cityId: '-KPmH9oIem1N1_s4qpCv',
-                cityName: 'Gurgaon',
-                reviewTitle: $scope.review.reviewTitle,
-                status: 'live',
-                createdDate: $scope.review.createdDate
+        console.log(review);
+        if(!review.userType || !$scope.selectedProjectOrLocality || !review.reviewTitle || !review.reviewText){
+            sweetAlert("Cannot submit review", "Please fill all the required information!", "error");
+        } else {
+            swal({
+              title: "Submitting Review",
+              text: "Please wait...",
+              imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
+              showConfirmButton: false
+            });
+            var user = firebase.auth().currentUser;
+            $scope.review.userName = user.displayName;
+            $scope.review.userId = user.uid;
+            $scope.review.blocked = false;
+            $scope.review.createdDate = new Date().getTime();
+            $scope.review.status = 'live';
+            if (imageUrl != 'no-image') {
+                $scope.review.imageUrl = imageUrl;
             }
-            $scope.review.wordCount = ($scope.review.reviewText).length;
-            updates['reviews/-KPmH9oIem1N1_s4qpCv/residential/' + $scope.selectedProjectOrLocality.id + '/' + newKey] = $scope.review;
-            updates['userReviews/' + user.uid + '/residential/' + newKey] = $scope.useReviewData
-            db.ref().update(updates).then(function() {
-                console.log('review successfully submitted');
-                $timeout(function() {
-                    $scope.review = {};
-                    $scope.selectedItem = '';
-                    $scope.selectedProjectOrLocality = {};
-                    swal({
-                        title: "Done",
-                        text: "Your review was successfully submitted!",
-                        type: "success",
-                        showCancelButton: false,
-                        confirmButtonColor: "#AEDEF4",
-                        confirmButtonText: "OK",
-                        closeOnConfirm: false
-                    }, function() {
-                        window.location.reload(true);
-                    });
-                }, 50);
-            })
-        } else if ($scope.selectedProjectOrLocality.type == 'Locality') {
-            var updates = {};
-            $scope.useReviewData = {
-                locationId: $scope.selectedProjectOrLocality.id,
-                locationName: $scope.selectedProjectOrLocality.name,
-                cityId: '-KPmH9oIem1N1_s4qpCv',
-                cityName: 'Gurgaon',
-                reviewTitle: $scope.review.reviewTitle,
-                status: 'live',
-                createdDate: $scope.review.createdDate
+            if ($scope.selectedProjectOrLocality.type == 'Project') {
+                var updates = {};
+                $scope.useReviewData = {
+                    projectId: $scope.selectedProjectOrLocality.id,
+                    projectName: $scope.selectedProjectOrLocality.name,
+                    cityId: '-KPmH9oIem1N1_s4qpCv',
+                    cityName: 'Gurgaon',
+                    reviewTitle: $scope.review.reviewTitle,
+                    status: 'live',
+                    createdDate: $scope.review.createdDate
+                }
+                $scope.review.wordCount = ($scope.review.reviewText).length;
+                updates['reviews/-KPmH9oIem1N1_s4qpCv/residential/' + $scope.selectedProjectOrLocality.id + '/' + newKey] = $scope.review;
+                updates['userReviews/' + user.uid + '/residential/' + newKey] = $scope.useReviewData
+                db.ref().update(updates).then(function() {
+                    console.log('review successfully submitted');
+                    $timeout(function() {
+                        $scope.review = {};
+                        $scope.selectedItem = '';
+                        $scope.selectedProjectOrLocality = {};
+                        swal({
+                            title: "Done",
+                            text: "Your review was successfully submitted!",
+                            type: "success",
+                            showCancelButton: false,
+                            confirmButtonColor: "#AEDEF4",
+                            confirmButtonText: "OK",
+                            closeOnConfirm: false
+                        }, function() {
+                            window.location.reload(true);
+                        });
+                    }, 50);
+                })
+            } else if ($scope.selectedProjectOrLocality.type == 'Locality') {
+                var updates = {};
+                $scope.useReviewData = {
+                    locationId: $scope.selectedProjectOrLocality.id,
+                    locationName: $scope.selectedProjectOrLocality.name,
+                    cityId: '-KPmH9oIem1N1_s4qpCv',
+                    cityName: 'Gurgaon',
+                    reviewTitle: $scope.review.reviewTitle,
+                    status: 'live',
+                    createdDate: $scope.review.createdDate
+                }
+                updates['reviews/-KPmH9oIem1N1_s4qpCv/locality/' + $scope.selectedProjectOrLocality.id + '/' + newKey] = $scope.review;
+                updates['userReviews/' + user.uid + '/locality/' + newKey] = $scope.useReviewData;
+                db.ref().update(updates).then(function() {
+                    console.log('review successfully submitted');
+                    $timeout(function() {
+                        $scope.review = {};
+                        $scope.selectedItem = '';
+                        $scope.selectedProjectOrLocality = {};
+                        swal({
+                            title: "Done",
+                            text: "Your review was successfully submitted!",
+                            type: "success",
+                            showCancelButton: false,
+                            confirmButtonColor: "#AEDEF4",
+                            confirmButtonText: "OK",
+                            closeOnConfirm: false
+                        }, function() {
+                            window.location.reload(true);
+                        });
+                    }, 50);
+                })
             }
-            updates['reviews/-KPmH9oIem1N1_s4qpCv/locality/' + $scope.selectedProjectOrLocality.id + '/' + newKey] = $scope.review;
-            updates['userReviews/' + user.uid + '/locality/' + newKey] = $scope.useReviewData;
-            db.ref().update(updates).then(function() {
-                console.log('review successfully submitted');
-                $timeout(function() {
-                    $scope.review = {};
-                    $scope.selectedItem = '';
-                    $scope.selectedProjectOrLocality = {};
-                    swal({
-                        title: "Done",
-                        text: "Your review was successfully submitted!",
-                        type: "success",
-                        showCancelButton: false,
-                        confirmButtonColor: "#AEDEF4",
-                        confirmButtonText: "OK",
-                        closeOnConfirm: false
-                    }, function() {
-                        window.location.reload(true);
-                    });
-                }, 50);
-            })
         }
     }
 

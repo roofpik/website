@@ -25,10 +25,14 @@
 	background-color: #ccc;
 }
 
+.write-review-page #review-form-fields {
+	padding:25px;
+}
+
 .write-review-page #project-name {
 	border: 1px solid #ccc;
 	padding:8px 10px;
-	width:94%;
+	width:100%;
 }
 
 .write-review-page .searchList {
@@ -36,7 +40,7 @@
     overflow: scroll;
     border: 1px solid #f2f2f2;
     margin: 3px 0 0;
-    width: 98%;
+    width: 100%;
     box-shadow: 5px 6px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -61,7 +65,6 @@
 
 .write-review-page .param-title {
 	text-align:left;
-	margin-left:20px;
 }
 
 .write-review-page .roofGreen {
@@ -70,4 +73,31 @@
 
 .write-review-page .roofGrey {
 	color: #031317;
+}
+
+.write-review-page #review-title {
+	border: 1px solid #ccc;
+	padding:8px 10px;
+	width:95%;
+}
+
+.write-review-page #review-text {
+	width:95%;
+	border: 1px solid #ccc;
+	padding:8px 10px;
+}
+
+.write-review-page #show-more {
+	text-align:right;
+	margin-top:35px;
+}
+
+
+.write-review-page .yes-no-ques,
+.write-review-page .rating-ques {
+	margin-top:35px;
+}
+
+.write-review-page .yes-no-ques #radio-btns {
+	padding-right:40px;
 }
