@@ -38,8 +38,39 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog) {
             prevArrow: '<button type="button" class="prev-proj arrows"><i class="material-icons">navigate_before</i></button>',
             nextArrow: '<button type="button" class="next-proj arrows"><i class="material-icons">navigate_next</i></button>',
             speed: 300,
-            slidesToShow: 3,
-            slidesToScroll: 3,
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3
+                    }
+                }, {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                }, {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+
+
+         $('.blogs-wrapper').slick({
+            dots: false,
+            infinite: true,
+            prevArrow: '<button type="button" class="prev-blog arrows"><i class="material-icons">navigate_before</i></button>',
+            nextArrow: '<button type="button" class="next-blog arrows"><i class="material-icons">navigate_next</i></button>',
+            speed: 300,
+            slidesToShow: 4,
+            slidesToScroll: 4,
             responsive: [{
                     breakpoint: 1024,
                     settings: {
@@ -68,22 +99,22 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog) {
         $('.story-wrapper').slick({
             dots: false,
             infinite: true,
-            prevArrow: '<button type="button" class="prev-proj arrows"><i class="material-icons">navigate_before</i></button>',
-            nextArrow: '<button type="button" class="next-proj arrows"><i class="material-icons">navigate_next</i></button>',
+            autoplay: true,
+            arrows: false,
             speed: 300,
-            slidesToShow: 3,
-            slidesToScroll: 3,
+            slidesToShow: 1,
+            slidesToScroll: 1,
             responsive: [{
                     breakpoint: 1024,
                     settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3
+                        slidesToShow: 1,
+                        slidesToScroll: 1
                     }
                 }, {
                     breakpoint: 600,
                     settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
+                        slidesToShow: 1,
+                        slidesToScroll: 1
                     }
                 }, {
                     breakpoint: 480,
@@ -92,11 +123,11 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog) {
                         slidesToScroll: 1
                     }
                 }
-                // You can unslick at a given breakpoint now by adding:
-                // settings: "unslick"
-                // instead of a settings object
             ]
         });
     }, 2000);
+
+
+    
 
 });
