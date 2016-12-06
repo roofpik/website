@@ -65,7 +65,7 @@
     height: 55px;
     padding: 18px 0;
     border-radius: 6px;
-    margin: 0 20px 0 0;
+    margin: 0;
     border: 0;
 }
 
@@ -94,6 +94,46 @@
     background: rgba(0, 0, 0, 0.4)
 }
 
+.city-list{
+    margin: 0 0 10px;
+}
+
+.city-list ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+}
+
+.city-list ul li {
+    font-size: 14px;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+    position: relative;
+    padding:0px 30px;
+    background: rgba(255, 255, 255, 0.75);
+    margin: 0 10px 0 0;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.city-list ul li:hover{
+    background: #fff;
+}
+
+.city-list ul li span{
+    display: block;
+}
+
+.city-list ul li.city-active{
+    background: #ea7740;
+    color:#fff;
+    font-weight: 600;
+}
+.city-list ul li span.city-status{
+    display: none;
+}
 
 /* Info Box */
 
@@ -338,4 +378,52 @@
         font-size: 14px;
     display: block;
     line-height: 30px;
+}
+
+
+
+/*Blogs*/
+.blogs{
+    position:relative;
+}
+
+.blogs-wrapper{
+        margin:0px 0 100px;
+}
+
+.prev-blog{
+    position:absolute;
+    bottom:-70px;
+    left:45%;
+    background: rgba(0,0,0,0.1);
+    border:0px;
+
+}
+
+.prev-blog:hover{
+     background: rgba(0,0,0,0.3);
+}
+
+.next-blog{
+    position:absolute;
+    bottom:-70px;
+    right:45%;
+    background: rgba(0,0,0,0.1);
+    border:0px;
+
+}
+
+.next-blog:hover{
+     background: rgba(0,0,0,0.3);
+}
+
+
+.blog-details figcaption{
+    font-size: 18px;
+    line-height: 20px;
+    margin: 10px 0;
+}
+
+.blog-details .blog-info span{
+    display: block;
 }
