@@ -1,8 +1,6 @@
 <md-content class="user-all-reviews-page" >
     <div flex="50" id="review-container">
-        <div flex="100" id="page-title" style="margin: 0px;
-    padding: 5px 15px;
-    background-color: #ccc;">
+        <div flex="100" id="user-all-reviews-title">
             <h3>Past Reviews</h3>
         </div>
         <div flex="100" class="md-padding" ng-show="noReviews">
@@ -18,7 +16,7 @@
                     <p ng-if="review.locationName">{{review.locationName}}</p>
                 </div>
                 <div flex="20">
-                    <md-button class="md-fab md-mini" id="edit-btn-box" style="line-height:55px;background-color: #1CB1D3;margin-top:20px;">
+                    <md-button class="md-fab md-mini" id="edit-btn-box">
                         <i id="edit-btn" class="material-icons" ng-click="editReview(review)">mode_edit</i>
                     </md-button>
                 </div>

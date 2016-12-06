@@ -4,28 +4,22 @@
 	color:#404040;
 }
 
-.user-all-reviews #page-title h3{
-	background-color: #ccc !important;
-    margin: 0 !important;
-    padding: 5px 15px !important;
-}
-
-.user-all-reviews-page #user-review-card {
-    margin: 8px 40px;
-}
-
-.user-all-reviews-page #edit-review-btn {
-    text-align: center;
-}
-
-.user-all-reviews-page #edit-review-btn i {
-    font-size: 30px;
+.user-all-reviews-page #user-all-reviews-title{
+    margin: 0px;
+    padding: 5px 15px;
+    background-color: #ccc;
 }
 
 .user-all-reviews-page .user-review p {
     font-size: 16px;
 }
 
-.user-all-review-page #edit-btn:focus {
+.user-all-reviews-page #edit-btn-box {
+    line-height:55px;
+    background-color: #1CB1D3;
+    margin-top:20px;
+}
+
+.user-all-reviews-page #edit-btn:focus {
     outline:none;
 }
