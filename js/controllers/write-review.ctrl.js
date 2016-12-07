@@ -317,6 +317,8 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
             $scope.review.userId = user.uid;
             $scope.review.blocked = false;
             $scope.review.createdDate = new Date().getTime();
+            $scope.review.dataFormat = 1;
+            $scope.review.source = 'website';
             $scope.review.status = 'live';
             if (imageUrl != 'no-image') {
                 $scope.review.imageUrl = imageUrl;
