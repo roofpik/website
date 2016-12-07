@@ -413,10 +413,11 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
         }
         review.createdDate = new Date().getTime();
         var updates = {};
+        console.log('userReviews/'+review.userId+'/'+$stateParams.type+'/'+$stateParams.id+'/createdDate');
         updates['reviews/-KPmH9oIem1N1_s4qpCv/'+$stateParams.type+'/'+$stateParams.typeId+'/'+$stateParams.id] = review;
         updates['userReviews/'+review.userId+'/'+$stateParams.type+'/'+$stateParams.id+'/createdDate'] = review.createdDate;
         updates['userReviews/'+review.userId+'/'+$stateParams.type+'/'+$stateParams.id+'/reviewTitle'] = review.reviewTitle;
-        // console.log(updates);
+        console.log(updates);
         db.ref().update(updates).then(function(){
             // console.log('updated review');
             swal({
