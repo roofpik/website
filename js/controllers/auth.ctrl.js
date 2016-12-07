@@ -17,6 +17,32 @@
 
       $scope.signUp = function() {
           console.log('signup');
+      };
+
+      firebase.auth().signOut().then(function() {
+          // Sign-out successful.
+      }, function(error) {
+          // An error happened.
+      });
+
+      firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+              console.log(user);
+              // User is signed in.
+          } else {
+              console.log('No user is signed in');
+              // No user is signed in.
+          }
+      });
+
+      var user1 = firebase.auth().currentUser;
+
+      if (user1) {
+          // User is signed in.
+          console.log(user1);
+      } else {
+          console.log('no current user');
+          // No user is signed in.
       }
 
       $scope.googleLogin = function() {
