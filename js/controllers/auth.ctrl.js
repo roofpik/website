@@ -24,7 +24,7 @@
       $scope.signUp = function() {
           console.log('google link with facebook');
           var provider = new firebase.auth.GoogleAuthProvider();
-          auth.currentUser.linkWithPopup(provider).then(function(result) {
+          firebase.auth().currentUser.linkWithPopup(provider).then(function(result) {
               // Accounts successfully linked.
               var credential = result.credential;
               var user = result.user;
