@@ -24,11 +24,8 @@
       $scope.signUp = function() {
           console.log('google link with facebook');
           var provider = new firebase.auth.GoogleAuthProvider();
-          provider.addScope('profile');
           provider.addScope('email');
-
-          provider.addScope('https://www.googleapis.com/auth/plus.login');
-          firebase.auth().currentUser.linkWithPopup(provider).then(function(result) {
+          firebase.auth().currentUser.linkWithRedirect(provider).then(function(result) {
               // Accounts successfully linked.
               var credential = result.credential;
               var user = result.user;
