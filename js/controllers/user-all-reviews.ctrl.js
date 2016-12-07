@@ -49,6 +49,6 @@ app.controller('userAllReviewsCtrl', function($scope, $timeout, $state){
 			reviewTypeId = review.locationId;
 			reviewTypeName = review.locationName;
 		}
-		$state.go('review-details', {city:review.cityId, type:review.type, typeId:reviewTypeId, typeName:reviewTypeName, id:review.id});
+		$state.go('edit-review', {city:review.cityId, type:review.type, typeId:reviewTypeId, typeName:reviewTypeName, id:review.id});
 	};
 })

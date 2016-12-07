@@ -7,6 +7,14 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
     var basic;
     $scope.showMoreLess = 'Show More +';
     $scope.showMore = false;
+    $scope.size = '800x600';
+    $scope.imageNames = '';
+    $scope.size_url = [];
+    $scope.review = {
+        ratings: {}
+    }
+    $scope.selectedItem = '';
+    $scope.projectLocality = [];
     $scope.ratingParams = [
         {
             name: 'Security',
@@ -205,11 +213,6 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
         }
     }
 
-    $scope.size = '800x600';
-
-    $scope.imageNames = '';
-
-    $scope.size_url = [];
     $scope.upload = function(review, path) {
         $http.post("http://139.162.3.205/api/testupload", { path: JSON.stringify($scope.uploadedImage) })
             .success(function(response) {
@@ -221,14 +224,6 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
                 sweetAlert("Cannot submit review", "Something went wrong!", "error");
             })
     }
-
-
-    $scope.review = {
-        ratings: {}
-    }
-    $scope.selectedItem = '';
-
-    $scope.projectLocality = [];
 
     $scope.pushToProjectLocality = function(data) {
         $scope.projectLocality = [];
