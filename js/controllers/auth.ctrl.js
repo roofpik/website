@@ -12,18 +12,30 @@
       };
 
       $scope.login = function() {
-          console.log('login');
+          console.log('sign out');
+          firebase.auth().signOut().then(function() {
+              // Sign-out successful.
+          }, function(error) {
+              // An error happened.
+          });
+
       };
 
       $scope.signUp = function() {
-          console.log('signup');
+          console.log('google link with facebook');
+          var provider = new firebase.auth.GoogleAuthProvider();
+          auth.currentUser.linkWithPopup(provider).then(function(result) {
+              // Accounts successfully linked.
+              var credential = result.credential;
+              var user = result.user;
+              // ...
+          }).catch(function(error) {
+              // Handle Errors here.
+              // ...
+          });
       };
 
-      firebase.auth().signOut().then(function() {
-          // Sign-out successful.
-      }, function(error) {
-          // An error happened.
-      });
+
 
       firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
