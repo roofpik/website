@@ -73,8 +73,9 @@
               var user = result.user;
 
               // ...
-          }).catch(function(error) {
+          }, function(error) {
               // Handle Errors here.
+              console.log(error);
               var errorCode = error.code;
               var errorMessage = error.message;
               // The email of the user's account used.
@@ -92,7 +93,7 @@
           //     'display': 'popup'
           // });
 
-
+           provider.addScope('email');
           firebase.auth().signInWithPopup(provider).then(function(result) {
               // This gives you a Facebook Access Token. You can use it to access the Facebook API.
               var token = result.credential.accessToken;
@@ -103,8 +104,9 @@
               console.log(result.user);
               var user = result.user;
               // ...
-          }).catch(function(error) {
+          }, function(error) {
               // Handle Errors here.
+              console.log(error)
               var errorCode = error.code;
               var errorMessage = error.message;
               // The email of the user's account used.
