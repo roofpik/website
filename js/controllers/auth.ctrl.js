@@ -24,6 +24,10 @@
       $scope.signUp = function() {
           console.log('google link with facebook');
           var provider = new firebase.auth.GoogleAuthProvider();
+          provider.addScope('profile');
+          provider.addScope('email');
+
+          provider.addScope('https://www.googleapis.com/auth/plus.login');
           firebase.auth().currentUser.linkWithPopup(provider).then(function(result) {
               // Accounts successfully linked.
               var credential = result.credential;
@@ -60,6 +64,7 @@
       $scope.googleLogin = function() {
           var provider = new firebase.auth.GoogleAuthProvider();
           provider.addScope('profile');
+          provider.addScope('email');
           provider.addScope('https://www.googleapis.com/auth/plus.login');
           firebase.auth().signInWithPopup(provider).then(function(result) {
               // This gives you a Google Access Token. You can use it to access the Google API.
