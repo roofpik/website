@@ -1,4 +1,62 @@
-app.controller('homeCtrl', function($scope, $timeout, $mdDialog) {
+app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state) {
+
+    $scope.projectList = [];
+    $scope.searchList = [];
+    $scope.dataVersions = {};
+
+    db.ref('dataVersions').once('value', function(response){
+        $scope.dataVersions = response.val();
+    }).then(function(){
+        if(checkLocalStorage('projectList')){
+            var projectListVersion = (getLocalStorage('projectList')).version;
+            if(projectListVersion == $scope.dataVersions.projectList){
+                $scope.projectList = getLocalStorage('projectList').value;
+                $timeout(function(){
+                     $scope.makeTopRated();
+                 }, 500);
+            } else {
+                getProjectList($scope.dataVersions.projectList);
+            }
+        } else {
+            getProjectList($scope.dataVersions.projectList);
+        }
+        if(checkLocalStorage('searchList')){
+            var searchListVersion = (getLocalStorage('searchList')).version;
+            if(searchListVersion == $scope.dataVersions.searchList){
+                $scope.searchList = getLocalStorage('searchList').value;
+            } else {
+                getSearchList($scope.dataVersions.searchList);
+            }
+        } else {
+            getSearchList($scope.dataVersions.searchList);
+        }
+    });
+
+    function getProjectList(version){
+        db.ref('projectList/-KYJONgh0P98xoyPPYm9/residential').once('value', function(snapshot){
+            $timeout(function(){
+                for(key in snapshot.val()){
+                    $scope.projectList.push(snapshot.val()[key]);
+                }
+                setLocalStorage($scope.projectList, 'projectList', version);
+                $timeout(function(){
+                     $scope.makeTopRated();
+                 }, 500)
+               
+            },0);
+        })
+    }
+
+    function getSearchList(version){
+        db.ref('search').once('value', function(snapshot){
+            $timeout(function(){
+                for(key in snapshot.val()){
+                    $scope.searchList.push(snapshot.val()[key]);
+                }
+                setLocalStorage($scope.searchList, 'searchList', version);
+            },0);
+        })  
+    }
 
     $scope.showSearch = function(ev) {
         $mdDialog.show({
@@ -7,7 +65,10 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog) {
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 clickOutsideToClose: true,
-                fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+                fullscreen: $scope.customFullscreen, // Only for -xs, -sm breakpoints.
+                locals: {
+                    version: $scope.dataVersions.searchList
+                }
             })
             .then(function(answer) {
                 $scope.status = 'You said the information was "' + answer + '".';
@@ -17,7 +78,9 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog) {
     };
 
 
-    function searchController($scope, $mdDialog) {
+    function searchController($scope, $mdDialog, locals) {
+        $scope.searchList = [];
+        var version = locals.version;
         $scope.hide = function() {
             $mdDialog.hide();
         };
@@ -29,9 +92,48 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog) {
         $scope.answer = function(answer) {
             $mdDialog.hide(answer);
         };
-    }
-    $timeout(function() {
 
+        if(checkLocalStorage('searchList')){
+            var searchListVersion = (getLocalStorage('searchList')).version;
+            if(searchListVersion == version){
+                $scope.searchList = getLocalStorage('searchList').value;
+                filterList();
+            } else {
+                getSearchList(version);
+            }
+        } else {
+            getSearchList(version);
+        }
+
+        function getSearchList(version){
+            db.ref('search').once('value', function(snapshot){
+                $timeout(function(){
+                    for(key in snapshot.val()){
+                        $scope.searchList.push(snapshot.val()[key]);
+                    }
+                    setLocalStorage($scope.searchList, 'searchList', version);
+                    filterList();
+                },0);
+            })  
+        }
+
+        function filterList(){
+            for(key in $scope.searchList){
+                if($scope.searchList[key].type == 'Project'){
+                    if($scope.searchList[key].live){
+                        $scope.searchList[key].show = true;
+                    } else {
+                        $scope.searchList[key].show = false;
+                    }
+                } else {
+                    $scope.searchList[key].show = true;
+                }
+            }
+            // console.log($scope.searchList);
+        }
+    }
+
+    $scope.makeTopRated = function(){
         $('.projects-wrapper').slick({
             dots: false,
             infinite: true,
@@ -61,7 +163,9 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog) {
                 }
             ]
         });
+    }
 
+    $timeout(function() {
 
          $('.blogs-wrapper').slick({
             dots: false,
@@ -127,7 +231,33 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog) {
         });
     }, 2000);
 
-
-    
+    $scope.gotoWriteReviews = function(){
+        $state.go('write-review');
+    }
 
 });
+
+
+function checkLocalStorage(name){
+    if (localStorage.getItem(name) === null) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function setLocalStorage(value, name, v){
+    var dataObject = {
+        value: value,
+        version: v
+    }
+    localStorage.setItem(name, JSON.stringify(dataObject));
+}
+
+function deleteLocalStorage(name){
+    localStorage.removeItem(name);
+}
+
+function getLocalStorage(name){
+    return JSON.parse(localStorage.getItem(name));
+}

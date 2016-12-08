@@ -227,27 +227,56 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
 
     $scope.pushToProjectLocality = function(data) {
         $scope.projectLocality = [];
-        angular.forEach(data, function(value, key) {
-            if (value.type != 'Developer') {
-                $scope.projectLocality.push(value);
+        for(key in data){
+            if(data[key].type != 'Developer'){
+                $scope.projectLocality.push(data[key]);
             }
-        })
+        }
     }
-    if (!checkLocalStorage('search')) {
-        db.ref('search').once('value', function(dataSnapshot) {
-            console.log(dataSnapshot);
-            $timeout(function() {
-                $scope.searchObject = dataSnapshot.val();
-                setLocalStorage('search', $scope.searchObject, 1);
-                console.log($scope.searchObject);
-                $scope.pushToProjectLocality($scope.searchObject);
-            }, 0);
-        })
-    } else {
-        var data = getLocalStorage('searchObject');
-        console.log(data);
-        $scope.pushToProjectLocality(data);
+
+    db.ref('dataVersions').once('value', function(response){
+        $scope.dataVersions = response.val();
+    }).then(function(){
+        if(checkLocalStorage('searchList')){
+            var searchListVersion = (getLocalStorage('searchList')).version;
+            if(searchListVersion == $scope.dataVersions.searchList){
+                $scope.searchList = getLocalStorage('searchList').value;
+                $scope.pushToProjectLocality($scope.searchList);
+            } else {
+                getSearchList($scope.dataVersions.searchList);
+            }
+        } else {
+            getSearchList($scope.dataVersions.searchList);
+        }
+    })
+
+    function getSearchList(version){
+        db.ref('search').once('value', function(snapshot){
+            $timeout(function(){
+                for(key in snapshot.val()){
+                    $scope.searchList.push(snapshot.val()[key]);
+                }
+                setLocalStorage($scope.searchList, 'searchList', version);
+                $scope.pushToProjectLocality($scope.searchList);
+            },0);
+        })  
     }
+
+    // if (!checkLocalStorage('searchList')) {
+    //     db.ref('search').once('value', function(dataSnapshot) {
+    //         console.log(dataSnapshot);
+    //         $timeout(function() {
+    //             $scope.searchList = dataSnapshot.val();
+    //             setLocalStorage('search', $scope.searchList, 1);
+    //             console.log($scope.searchObject);
+    //             $scope.pushToProjectLocality($scope.searchObject);
+    //         }, 0);
+    //     })
+    // } else {
+    //     var data = getLocalStorage('searchList');
+    //     console.log(data);
+    //     $scope.pushToProjectLocality(data);
+    // }
 
     $scope.nameEntered = function() {
         if ($scope.selectedItem) {

@@ -11,23 +11,24 @@
     <md-dialog-content>
         <div class="md-dialog-content" layout="flex" flex layout-align="center center" layout-wrap>
             <div flex="100">
-                <input type="text" placeholder="Search by project, builder, landmark or locality" />
+                <input type="text" placeholder="Search by project, builder, landmark or locality" ng-model="searchText" autofocus/>
             </div>
             <md-list flex="100">
-                <md-list-item class="md-3-line search-item" ng-click="null" class="">
+                <md-list-item class="md-3-line search-item" ng-click="null" class="" ng-repeat="item in searchList | filter:searchText | limitTo:'10'" ng-show="{{item.show}}">
+                    <img ng-src="{{item.img}}" style="width:150px;height:100px;"/>
+                    <div class="md-list-item-text" layout="column">
+                        <h3>{{item.name}}</h3>
+                        <p ng-if="item.displayAddress">{{item.displayAddress}}</p>
+                        <p ng-show="item.type != 'Project'">{{item.type}}</p>
+                    </div>
+                </md-list-item>
+                <!-- <md-list-item class="md-3-line search-item" ng-click="null" class="">
                     <img src="http://placehold.it/150x100" />
                     <div class="md-list-item-text" layout="column">
                         <h3>Project Name</h3>
                         <p>Location</p>
                     </div>
-                </md-list-item>
-                <md-list-item class="md-3-line search-item" ng-click="null" class="">
-                    <img src="http://placehold.it/150x100" />
-                    <div class="md-list-item-text" layout="column">
-                        <h3>Project Name</h3>
-                        <p>Location</p>
-                    </div>
-                </md-list-item>
+                </md-list-item> -->
             </md-list>
         </div>
     </md-dialog-content>

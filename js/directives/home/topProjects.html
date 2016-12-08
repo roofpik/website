@@ -6,7 +6,18 @@
         </div>
     </div>
     <div class="projects-wrapper" flex="80">
-        <div class="top-project-details">
+        <div class="top-project-details" ng-repeat="project in projectList | orderBy:'overallRating'|limitTo:5">
+            <figure>
+                <img ng-src="{{project.imgUrl}}"/>
+                <figcaption> #{{$index + 1}} of 8 projects in Gurgaon </figcaption>
+            </figure>
+            <div class="top-project-info">
+                <span class="top-project-name">{{project.projectName}}</span>
+                <span class="top-project-loc">{{project.displayAddress}}</span>
+                <!-- <span class="top-project-flats">2,3,5 BHK Flats</span> -->
+            </div>
+        </div>
+        <!-- <div class="top-project-details">
             <figure>
                 <img src="http://placehold.it/300x200" />
                 <figcaption> #1 of 8 projects in Gurgaon </figcaption>
@@ -49,17 +60,6 @@
                 <span class="top-project-loc">Sohna Road, Sector 49</span>
                 <span class="top-project-flats">2,3,5 BHK Flats</span>
             </div>
-        </div>
-        <div class="top-project-details">
-            <figure>
-                <img src="http://placehold.it/300x200" />
-                <figcaption> #1 of 8 projects in Gurgaon </figcaption>
-            </figure>
-            <div class="top-project-info">
-                <span class="top-project-name">Vatika City</span>
-                <span class="top-project-loc">Sohna Road, Sector 49</span>
-                <span class="top-project-flats">2,3,5 BHK Flats</span>
-            </div>
-        </div>
+        </div> -->
     </div>
 </section>
