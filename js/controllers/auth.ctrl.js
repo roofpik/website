@@ -1,4 +1,7 @@
-  function DialogController($scope, $mdDialog) {
+  function loginController($scope, $mdDialog, $rootScope) {
+
+      $scope.user = null;
+
       $scope.hide = function() {
           $mdDialog.hide();
       };
@@ -11,17 +14,40 @@
           $mdDialog.hide(answer);
       };
 
-      $scope.login = function() {
+      $scope.logout = function() {
           console.log('sign out');
           firebase.auth().signOut().then(function() {
               // Sign-out successful.
+              $rootScope.loginStatus = false;
+
           }, function(error) {
               // An error happened.
           });
 
       };
 
-      $scope.signUp = function() {
+        firebase.auth().fetchProvidersForEmail('arpit1.hello@gmail.com').then(function(providers) {
+          console.log(providers);
+        });
+
+      $scope.createAccount = function() {
+
+          console.log($scope.user);
+          firebase.auth().createUserWithEmailAndPassword($scope.user.email, $scope.user.password)
+          .then(function(result){
+            console.log(result);
+          })
+          .catch(function(error) {
+              // Handle Errors here.
+              console.log(error);
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              // ...
+          });
+
+      }
+
+      $scope.linkAccount = function() {
           console.log('google link with facebook');
           var provider = new firebase.auth.GoogleAuthProvider();
           provider.addScope('email');
@@ -31,6 +57,7 @@
               var user = result.user;
               // ...
           }).catch(function(error) {
+            console.log(error);
               // Handle Errors here.
               // ...
           });
@@ -93,7 +120,7 @@
           //     'display': 'popup'
           // });
 
-           provider.addScope('email');
+          provider.addScope('email');
           firebase.auth().signInWithPopup(provider).then(function(result) {
               // This gives you a Facebook Access Token. You can use it to access the Facebook API.
               var token = result.credential.accessToken;
@@ -106,13 +133,14 @@
               // ...
           }, function(error) {
               // Handle Errors here.
-              console.log(error)
+              console.log(error);
               var errorCode = error.code;
               var errorMessage = error.message;
               // The email of the user's account used.
               var email = error.email;
               // The firebase.auth.AuthCredential type that was used.
               var credential = error.credential;
+
               // ...
           });
       }

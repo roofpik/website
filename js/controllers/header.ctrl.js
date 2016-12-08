@@ -1,27 +1,43 @@
-app.controller('headerCtrl', function($scope, $mdDialog, $state){
-	$scope.user = false;
-	$scope.showAdvanced = function(ev) {
-    $mdDialog.show({
-      controller: DialogController,
-      templateUrl: '/templates/dialogs/auth.html',
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose:true,
-      fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-    })
-    .then(function(answer) {
-      $scope.status = 'You said the information was "' + answer + '".';
-    }, function() {
-      $scope.status = 'You cancelled the dialog.';
-    });
-  };
+app.controller('headerCtrl', function($scope, $mdDialog, $state) {
+    $scope.user = false;
+    $scope.showLogin = function(ev) {
+        $mdDialog.show({
+                controller: loginController,
+                templateUrl: '/templates/dialogs/auth.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+            })
+            .then(function(answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+            }, function() {
+                $scope.status = 'You cancelled the dialog.';
+            });
+    };
 
-  $scope.takeToProfile = function(){
-    $state.go('profile');
-  };
+    $scope.showSignUp = function(ev) {
+        $mdDialog.show({
+                controller: DialogController,
+                templateUrl: '/templates/dialogs/auth.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+            })
+            .then(function(answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+            }, function() {
+                $scope.status = 'You cancelled the dialog.';
+            });
+    }
 
-  $scope.takeToMyReviews = function(){
-    $state.go('user-all-reviews');
-  };
+    $scope.takeToProfile = function() {
+        $state.go('profile');
+    };
+
+    $scope.takeToMyReviews = function() {
+        $state.go('user-all-reviews');
+    };
 
 });

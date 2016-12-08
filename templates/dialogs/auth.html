@@ -23,11 +23,11 @@
                     </p>
                     <md-input-container md-no-float class="md-block login-email">
                         <md-icon>email</md-icon>
-                        <input placeholder="Email" type="email">
+                        <input placeholder="Email" type="email" ng-model="user.email">
                     </md-input-container>
-                    <md-input-container md-no-float class="md-block login-password">
+                    <md-input-container md-no-float class="md-block login-password" >
                         <md-icon>lock</md-icon>
-                        <input placeholder="Password" type="password">
+                        <input placeholder="Password" type="password" ng-model="user.password">
                     </md-input-container>
                 </div>
                 <div layout="row" flex layout-wrap layout-align="center center" class="reset-option">
@@ -41,8 +41,11 @@
                     </div>
                 </div>
                 <div layout="column">
-                    <md-button class="md-raised em-login-button md-primary" ng-click="login()">
-                        Login
+                    <md-button class="md-raised em-login-button md-primary" ng-click="logout()">
+                        Logout
+                    </md-button>
+                     <md-button class="md-raised em-login-button md-primary" ng-click="createAccount()">
+                        Create
                     </md-button>
                 </div>
                 <div layout="row" flex layout-wrap class="sign-up-option">
@@ -50,7 +53,7 @@
                         <span>Doesn't have an account?</span>
                     </div>
                     <div flex="50" class="right-text">
-                        <md-button class="md-accent" ng-click="signUp()">Sign Up</md-button>
+                        <md-button class="md-accent" ng-click="linkAccount()">Link Account</md-button>
                     </div>
                 </div>
             </div>
