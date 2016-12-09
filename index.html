@@ -34,7 +34,7 @@
     <header>
         <div header user="player"></div>
     </header>
-    <ui-view></ui-view>
+    <ui-view autoscroll="true"></ui-view>
     <footer>
         <div footer></div>
     </footer>
@@ -53,6 +53,13 @@
     //     storageBucket: "project-313476129231192088.appspot.com",
     //     messagingSenderId: "1045198624069"
     // };
+  // var config = {
+  //   apiKey: "AIzaSyAapASzaLGFxHgbMpu9Cibfn97MSEheCcU",
+  //   authDomain: "roofpik-f8f55.firebaseapp.com",
+  //   databaseURL: "https://roofpik-f8f55.firebaseio.com",
+  //   storageBucket: "roofpik-f8f55.appspot.com",
+  //   messagingSenderId: "303104341936"
+  // };
     firebase.initializeApp(config);
     </script>
     <!-- Angular Material requires Angular.js Libraries -->
@@ -83,6 +90,7 @@
     <script src="js/controllers/user-all-reviews.ctrl.js"></script>
     <script src="js/controllers/write-review.ctrl.js"></script>
     <script src="js/controllers/edit-review.ctrl.js"></script>
+    <script src="js/controllers/projects.ctrl.js"></script>
 </body>
 
 </html>

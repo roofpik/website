@@ -1,35 +1,40 @@
-function setLocalStorage(name, value){
-    var newField = name+'Version';
-
-    var dataStored = {
-        value: value,
-        createdDate: new Date().getTime(),
-         version: versions[newField]
-    }
-
-    localStorage.setItem(name+'Object' , JSON.stringify(dataStored));
-}
-
-function checkLocalStorage(val){
-    var currentDate = new Date().getTime();
-    var factor = 604800000;
-    var checkingValue = val+'Version';
-    if (localStorage.getItem(val+'Object') === null) {
-        return false;
-    } else if(JSON.parse(localStorage.getItem(val+'Object')).createdDate+ factor < currentDate || JSON.parse(localStorage.getItem(val+'Object')).version != versions[checkingValue]){
-        deleteLocalStorage(val+'Object');
+function checkLocalStorage(name){
+    if (localStorage.getItem(name) === null) {
         return false;
     } else {
         return true;
     }
 }
 
-function deleteLocalStorage(val){
-    localStorage.removeItem(val);
+function setLocalStorage(value, name, v){
+    var dataObject = {
+        value: value,
+        version: v
+    }
+    localStorage.setItem(name, JSON.stringify(dataObject));
 }
 
-function getLocalStorage(val){
-    // console.log(val);
-    // console.log(JSON.parse(localStorage.getItem(val)));
-    return JSON.parse(localStorage.getItem(val)).value;
+function deleteLocalStorage(name){
+    localStorage.removeItem(name);
+}
+
+function getLocalStorage(name){
+    return JSON.parse(localStorage.getItem(name));
+}
+
+function convertToHyphenSeparated(data){
+    console.log(data);
+    if (data == null || data == "") {
+      return data;
+    }
+
+    data = data.trim();
+    return data.split(" ").join("-").toLowerCase();
+}
+
+function convertHyphenSeparatedToNormal(str){
+    str = str.trim();
+   return str.split('-').map(function(word){
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }).join(' ');
 }
