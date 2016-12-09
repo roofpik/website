@@ -6,7 +6,7 @@ var config = {
     databaseURL: "https://roofpik-f8f55.firebaseio.com",
     storageBucket: "roofpik-f8f55.appspot.com",
     messagingSenderId: "303104341936"
-  };
+};
 
 
 // Production DB

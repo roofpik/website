@@ -2,7 +2,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 
     $stateProvider
         .state('home', {
-            url: '/',
+            url: '/home',
             templateUrl: 'templates/home.html',
             controller: 'homeCtrl'
         });
@@ -35,5 +35,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             controller: 'editReviewCtrl'
         });
 
+
+
+ $stateProvider
+        .state('coming-soon', {
+            url: '/',
+            templateUrl: 'coming-soon/index.html'
+        });
         $urlRouterProvider.otherwise('/');
 }]);
