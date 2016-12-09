@@ -109,7 +109,7 @@
       }
       try{
       $.getJSON('//freegeoip.net/json/?callback=?', function(data) {
-          console.log(JSON.stringify(data, null, 2));
+          var ip  = JSON.stringify(data, null, 2);
       });
     }
     catch(e){
@@ -137,9 +137,9 @@
               user.google.photoURL = result.user.providerData[0].photoURL;
               user.google.uid = result.user.providerData[0].uid;
               user.uid = result.user.uid;
+              user.ip = ip;
               console.log(user);
-              var user = result.user;
-              // ...
+           //   var user = result.user;
           }, function(error) {
               // Handle Errors here.
               console.log(error);
