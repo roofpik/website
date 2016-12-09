@@ -1,0 +1,170 @@
+/*Project List page*/
+.project-list-page {
+    background-color:#F4F3F0;
+    margin-top:60px;
+}
+
+.project-list-page .project-list-box {
+    margin:auto;
+}
+
+ .project-list-page .project-card {
+    padding:20px;
+}
+
+.project-list-page .project-profile-img {
+    padding:5px 0 0;
+}
+
+.project-list-page .project-profile-img img{
+    height:150px;
+    width:100%;
+}
+
+.project-list-page h2{
+    margin:5px 10px;
+    color:#006699;
+}
+
+.project-list-page p {
+    height: 25px;
+}
+
+.project-list-page #project-name {
+    margin:5px 10px;
+    color:#006699; 
+}
+
+.project-list-page h4{
+    margin:5px 10px;color:#666;
+}
+
+.project-list-page h3{
+    margin:10px;
+    color:#589442;
+}
+
+.project-list-page .project-card:focus {
+    outline: none;
+}
+
+.project-list-page .project-card p {
+    margin:5px 10px;
+    color:#4d4d4d;
+}
+
+.project-list-page .rating {
+    color:#006699;
+}
+
+.project-list-page .rank {
+    color:#589442;
+}
+
+.project-list-page .price-headings {
+    font-weight:bold;
+    color:#006699;
+}
+
+.project-list-page .extra-details {
+    padding-top:20px;
+}
+
+.project-list-page .filters {
+    padding: 0 16px;
+}
+
+.project-list-page #filter-headings{
+    background-color: #E9E8E2;
+    color: #000;
+    padding: 10px 16px;
+    margin: 0px;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.project-list-page md-checkbox .md-icon{
+    height:17px;
+    width:17px;
+}
+
+.project-list-page md-input-container label:not(.md-no-float):not(.md-container-ignore), md-input-container .md-placeholder{
+    padding-left:10px;
+}
+
+.project-list-page .price-optn {
+    line-height:80px;
+}
+
+.project-list-page input {
+    border:1px solid #f2f2f2;
+}
+
+.project-list-page .price-separator {
+    line-height:80px;
+    font-size:22px;
+    padding-left: 5px;
+}
+
+.project-list-page .price-submit {
+    background-color: #ccc;
+    padding: 4px 7px;
+    border: 1px solid #b3b3b3;
+    border-radius: 3px;
+    float: right;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.project-list-page #clear-filter {
+    background-color: #ccc;
+    font-size: 12px;
+    float: right;
+    color: #fff;
+    border-radius: 2px;
+    border: 1px solid #b3b3b3;
+    padding: 2px 7px;
+}
+
+.project-list-page .shown-projects {
+    text-align: right;
+    font-size: 16px;
+    font-weight: bold;
+    color: #006699;
+    padding-right: 10px;
+}
+
+#home-btn:hover {
+    cursor:auto;
+    color:#006699;
+}
+
+#home-btn:focus{
+    outline:none;
+}
+
+.project-list-page .roofGreen {
+    color:#54C3DD;;
+}
+
+.project-list-page .grey {
+    color: #a6a6a6;
+}
+
+.path-filters .path-btn {
+    padding: 0 4px;
+}
+
+.project-list-page .path-filters span.path-btn {
+    display: inline-block;
+}
+
+.project-list-page .path-filters span.path-btn:nth-child(even) {
+    color: #262626;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.project-list-page .path-filters span.path-btn:nth-child(odd) {
+    color: #22a8f4;
+}

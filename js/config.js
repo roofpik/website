@@ -8,6 +8,13 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         });
 
     $stateProvider
+        .state('projects', {
+            url: '/projects/:year/:city/:type/:category/:categoryId/:id',
+            templateUrl: 'templates/projects.html',
+            controller: 'projectsCtrl'
+        });
+
+    $stateProvider
         .state('profile', {
             url: '/profile',
             templateUrl: 'templates/profile.html',

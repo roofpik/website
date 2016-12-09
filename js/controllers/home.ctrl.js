@@ -7,29 +7,31 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state) {
     db.ref('dataVersions').once('value', function(response){
         $scope.dataVersions = response.val();
     }).then(function(){
-        if(checkLocalStorage('projectList')){
-            var projectListVersion = (getLocalStorage('projectList')).version;
-            if(projectListVersion == $scope.dataVersions.projectList){
-                $scope.projectList = getLocalStorage('projectList').value;
-                $timeout(function(){
-                     $scope.makeTopRated();
-                 }, 500);
+        $timeout(function(){
+            if(checkLocalStorage('projectList')){
+                var projectListVersion = (getLocalStorage('projectList')).version;
+                if(projectListVersion == $scope.dataVersions.projectList){
+                    $scope.projectList = getLocalStorage('projectList').value;
+                    $timeout(function(){
+                         $scope.makeTopRated();
+                     }, 1000);
+                } else {
+                    getProjectList($scope.dataVersions.projectList);
+                }
             } else {
                 getProjectList($scope.dataVersions.projectList);
             }
-        } else {
-            getProjectList($scope.dataVersions.projectList);
-        }
-        if(checkLocalStorage('searchList')){
-            var searchListVersion = (getLocalStorage('searchList')).version;
-            if(searchListVersion == $scope.dataVersions.searchList){
-                $scope.searchList = getLocalStorage('searchList').value;
+            if(checkLocalStorage('searchList')){
+                var searchListVersion = (getLocalStorage('searchList')).version;
+                if(searchListVersion == $scope.dataVersions.searchList){
+                    $scope.searchList = getLocalStorage('searchList').value;
+                } else {
+                    getSearchList($scope.dataVersions.searchList);
+                }
             } else {
                 getSearchList($scope.dataVersions.searchList);
             }
-        } else {
-            getSearchList($scope.dataVersions.searchList);
-        }
+        }, 100);
     });
 
     function getProjectList(version){
@@ -41,9 +43,9 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state) {
                 setLocalStorage($scope.projectList, 'projectList', version);
                 $timeout(function(){
                      $scope.makeTopRated();
-                 }, 500)
+                 }, 1000)
                
-            },0);
+            },100);
         })
     }
 
@@ -129,7 +131,19 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state) {
                     $scope.searchList[key].show = true;
                 }
             }
-            // console.log($scope.searchList);
+        }
+
+        $scope.selectItem = function(val){
+            console.log(val);
+            console.log(val.name);
+            var year = new Date().getFullYear();
+            if(val.type == 'Builder'){
+                $scope.cancel();
+                $state.go('projects', {year: year, city: 'gurgaon', type: 'residential-projects', category:convertToHyphenSeparated(val.name) , categoryId:val.id , id: 2});
+            } else if(val.type == 'Locality'){
+                $scope.cancel();
+                $state.go('projects', {year: year, city: 'gurgaon', type: 'residential-projects', category:convertToHyphenSeparated(val.name) , categoryId:val.id , id: 3});
+            }
         }
     }
 
@@ -235,29 +249,10 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state) {
         $state.go('write-review');
     }
 
+    $scope.takeToProjects = function(val){
+        console.log(val);
+        var year = new Date().getFullYear();
+        $state.go('projects', {year: year, city: 'gurgaon', type: 'residential-projects', category:val , categoryId:'-KQ9cIdfaoKpCj34yAWC' , id: 1});
+    }
+
 });
-
-
-function checkLocalStorage(name){
-    if (localStorage.getItem(name) === null) {
-        return false;
-    } else {
-        return true;
-    }
-}
-
-function setLocalStorage(value, name, v){
-    var dataObject = {
-        value: value,
-        version: v
-    }
-    localStorage.setItem(name, JSON.stringify(dataObject));
-}
-
-function deleteLocalStorage(name){
-    localStorage.removeItem(name);
-}
-
-function getLocalStorage(name){
-    return JSON.parse(localStorage.getItem(name));
-}
