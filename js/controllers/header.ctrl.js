@@ -1,5 +1,10 @@
 app.controller('headerCtrl', function($scope, $mdDialog, $state) {
     $scope.user = false;
+       $scope.gotoHome = function(){
+        console.log('called');
+        $state.go('home');
+    }
+
     $scope.showLogin = function(ev) {
         $mdDialog.show({
                 controller: loginController,

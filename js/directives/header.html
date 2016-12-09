@@ -1,5 +1,5 @@
 <div layout="row" class="header">
-    <div flex="20" class="logo" layout-align="start center" layout="row">
+    <div flex="20" class="logo" layout-align="start center" layout="row" ng-click="gotoHome()">
         <img src="images/general/logo.png" />
     </div>
     <div flex="80" class="main-menu" layout-align="end center" layout="row">
@@ -18,15 +18,15 @@
                     <i class="material-icons fade">help_outline</i>
                 </div>
             </li> -->
-            <li ng-if="!loginStatus">
+          <!--   <li ng-if="!loginStatus">
                 <div class="menu-item">
                     <span>Sign Up</span>
                     <i class="material-icons fade">face</i>
                 </div>
-            </li>
+            </li> -->
             <li ng-if="!loginStatus">
                 <div class="menu-item" ng-click="showLogin($event)">
-                    <span>Login</span>
+                    <span>Login/Sign up</span>
                     <i class="material-icons fade">fingerprint</i>
                 </div>
             </li>
