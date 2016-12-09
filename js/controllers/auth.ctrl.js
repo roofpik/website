@@ -105,12 +105,15 @@
               "token": null
           },
           "ip": null,
-          "facebook":
+          "facebook": null
       }
       try{
       $.getJSON('//freegeoip.net/json/?callback=?', function(data) {
           console.log(JSON.stringify(data, null, 2));
       });
+    }
+    catch(e){
+      
     }
 
       $scope.googleLogin = function() {
