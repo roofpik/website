@@ -143,6 +143,9 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state) {
             } else if(val.type == 'Locality'){
                 $scope.cancel();
                 $state.go('projects', {year: year, city: 'gurgaon', type: 'residential-projects', category:convertToHyphenSeparated(val.name) , categoryId:val.id , id: 3});
+            } else {
+                $scope.cancel();
+                $state.go('project-detail', {year: year, city: 'gurgaon', type: 'residential-projects', project:convertToHyphenSeparated(val.name) , id: val.id});
             }
         }
     }
@@ -255,4 +258,9 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state) {
         $state.go('projects', {year: year, city: 'gurgaon', type: 'residential-projects', category:val , categoryId:'-KQ9cIdfaoKpCj34yAWC' , id: 1});
     }
 
+    $scope.takeToDetails = function(val){
+        console.log(val);
+        var year = new Date().getFullYear();
+        $state.go('project-detail', {year: year, city: 'gurgaon', type: 'residential-projects', project:convertToHyphenSeparated(val.projectName) , id: val.projectId});
+    }
 });

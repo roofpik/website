@@ -323,7 +323,8 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
             $timeout(function() {
                 $scope.uploadedImage = $scope.stepsModel[0];
                 console.log($scope.uploadedImage);
-                $scope.showAdvanced($scope.uploadedImage);
+                $scope.createPath($scope.uploadedImage);
+                // $scope.showAdvanced($scope.uploadedImage);
             }, 0);
         });
     }

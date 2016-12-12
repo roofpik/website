@@ -1,0 +1,163 @@
+<md-content class="project-details-page">
+    <section layout="row" class="header-story" layout-wrap>
+        <article flex="100">
+            <div class="featured-story" style="background-image:url({{project.images.main['2100x800']}});">
+                <span class="gallery-btn" ng-click="showAdvanced($event, project.images.other)">View Photos</span>
+            </div>
+        </article>
+        <article flex="100" class="md-padding">
+            <div flex="100" class="path-filters">
+                <span class="path-btn" ng-click="takeToHome()">Home</span>
+                <span class="path-btn" ng-repeat="filter in path track by $index">{{filter}}</span>
+            </div>
+        </article>
+    </section>
+    <section layout="row" flex="80" class="project-basic-details" layout-wrap>
+        <article flex="70" class="project-basic-details-container">
+            <h1 id="project-name">{{projectName}}</h1>
+            <p id="display-address">{{project.projectDetails.address.displayAddress}} &nbsp;&nbsp;&nbsp;
+                <span ng-repeat="rate in [1,2,3,4,5] track by $index">
+                    <i class="fa fa-star" ng-class="($index<=(allRatings.overallRating-1))?'newGreen':'grey'" id="overall-rating"></i>
+                </span>
+                {{allRatings.overallRatingNum}} Review<span ng-show="allRatings.overallRatingNum > 1">s</span>
+            </p>
+            <div layout="row" id="status-segment">
+                <div flex="50" id="status">
+                    <i class="fa fa-home"></i>
+                    <p>{{project.projectStatus}}</p>
+                </div>
+                <!-- <div flex="33">
+                    <i style="font-size: 30px;" class="fa fa-bed"></i>
+                    <p style="font-size: 14px;">{{bhkAvailable}}</p>
+                </div> -->
+                <div flex="50" id="segment">
+                    <i class="fa fa-diamond"></i>
+                    <p>{{project.segment}}</p>
+                </div>
+            </div>
+            <div layout="row" id="address">
+                <div flex="20" id="address-title">
+                    <p>Address</p>
+                </div>
+                <div flex="80" layout="row" id="address-value">
+                    <p>{{project.projectDetails.address.addressLine1}}, {{project.projectDetails.address.addressLine2}}</p>
+                </div>
+            </div>
+
+            <div layout="row" layout-wrap>
+                <p flex="100" id="rating">
+                    {{allRatings.overallRatingNum}} Review<span ng-show="allRatings.overallRatingNum > 1">s</span>
+                    <span ng-repeat="rate in [1,2,3,4,5] track by $index">
+                        <i class="fa fa-star" ng-class="($index<=(allRatings.overallRating-1))?'newGreen':'grey'"></i>
+                    </span> ({{allRatings.overallRating}})
+                </p>
+                <div class="all-reviews" flex="100">
+                    <div class="user-review" ng-repeat="review in reviews | orderBy :'-'" layout="row" layout-wrap ng-show="$index < viewReviews">
+                        <div class="user-img" flex-gt-sm="15" flex-xs="100" flex-sm="100">
+                            <img src="images/general/noImage.png" alt="User">
+                        </div>
+                        <div flex-gt-sm="85" flex-xs="100" flex-sm="100">
+                            <div class="review-detail-basic">
+                                <p ng-show="!review.anonymous"><b>{{review.userName}}</b> | {{review.createdDate | date:'MMM dd, yy'}}</p>
+                                <p ng-show="review.anonymous"><b>Anonymous</b> | {{review.createdDate | date:'MMM dd, yy'}}</p>
+                            </div>
+                            <div class="rating-title">
+                                <h3>
+                                    <span ng-repeat="rate in [1,2,3,4,5] track by $index"><i class="fa fa-star" ng-class="($index<=(review.overallRating-1))?'newGreen':'grey'"></i></span> 
+                                </h3>
+                                <h3 id="review-title">{{review.reviewTitle}}</h3>
+                            </div>
+                            <p id="review-text">{{review.reviewText}}</p>
+                        </div>
+                    </div>
+                    <div class="more-review-btn" ng-show="showReviewBtn">
+                        <md-button ng-click="showMoreReviews()">View More</md-button>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <article flex="30" id="rating-container">
+            <div class="all-rating-summary" flex="100">
+                <p class="rating-summary-title">User Ratings</p>
+                <ul>
+                    <li>Excellent ({{allRatings.fiveStar}})
+                        <div class="progress-bar">
+                            <span class="my-progress" id="excellentStar"></span>
+                        </div>
+                    </li>
+                    <li>Very Good ({{allRatings.fourStar}})
+                        <div class="progress-bar">
+                            <span class="my-progress" id="veryGoodStar"></span>
+                        </div>
+                    </li>
+                    <li>Good ({{allRatings.threeStar}})
+                        <div class="progress-bar">
+                            <span class="my-progress" id="goodStar"></span>
+                        </div>
+                    </li>
+                    <li>Average ({{allRatings.twoStar}})
+                        <div class="progress-bar">
+                            <span class="my-progress" id="averageStar"></span>
+                        </div>
+                    </li>
+                    <li>Bad ({{allRatings.oneStar}})
+                        <div class="progress-bar">
+                            <span class="my-progress" id="badStar"></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="rating-summary" flex="100">
+                <p class="rating-summary-title">Rating Summary</p>
+                <p class="rating-summary-ratings" ng-show="allRatings.amenities">
+                    <span>Amenities <span class="roofpikGreen">({{allRatings.amenities}})</span></span>
+                    <span class="overall-ratings">
+                            <span ng-repeat="rate in [1,2,3,4,5] track by $index" >
+                                <i class="fa fa-star" ng-class="($index<=(allRatings.amenities1-1))?'newGreen':'grey'"></i>
+                            </span>
+                    </span>
+                </p>
+                <p class="rating-summary-ratings" ng-show="allRatings.security">
+                    <span>Security <span class="roofpikGreen">({{allRatings.security}})</span></span>
+                    <span class="overall-ratings">
+                            <span ng-repeat="rate in [1,2,3,4,5] track by $index" >
+                                <i class="fa fa-star" ng-class="($index<=(allRatings.security1-1))?'newGreen':'grey'"></i>
+                            </span>
+                    </span>
+                </p>
+                <p class="rating-summary-ratings" ng-show="allRatings.openAndGreenAreas">
+                    <span>Open And Green Areas <span class="roofpikGreen">({{allRatings.openAndGreenAreas}})</span></span>
+                    <span class="overall-ratings">
+                            <span ng-repeat="rate in [1,2,3,4,5] track by $index" >
+                                <i class="fa fa-star" ng-class="($index<=(allRatings.openAndGreenAreas1-1))?'newGreen':'grey'"></i>
+                            </span>
+                    </span>
+                </p>
+                <p class="rating-summary-ratings" ng-show="allRatings.electricityAndWaterSupply">
+                    <span>Electricity And Water Supply <span class="roofpikGreen">({{allRatings.electricityAndWaterSupply}})</span></span>
+                    <span class="overall-ratings">
+                            <span ng-repeat="rate in [1,2,3,4,5] track by $index" >
+                            <i class="fa fa-star" ng-class="($index<=(allRatings.electricityAndWaterSupply1-1))?'newGreen':'grey'"></i>
+                            </span>
+                    </span>
+                </p>
+                <p class="rating-summary-ratings" ng-show="allRatings.convenienceOfHouseMaids">
+                    <span>Convenience Of House Maids <span class="roofpikGreen">({{allRatings.convenienceOfHouseMaids}})</span></span>
+                    <span class="overall-ratings">
+                            <span ng-repeat="rate in [1,2,3,4,5] track by $index" >
+                                <i class="fa fa-star" ng-class="($index<=(allRatings.convenienceOfHouseMaids1-1))?'newGreen':'grey'"></i>
+                            </span>
+                    </span>
+                </p>
+                <p class="rating-summary-ratings" ng-show="allRatings.convenienceOfParking">
+                    <span>Convenience Of Parking <span class="roofpikGreen">({{allRatings.convenienceOfParking}})</span></span>
+                    <span class="overall-ratings">
+                            <span ng-repeat="rate in [1,2,3,4,5] track by $index" >
+                                <i class="fa fa-star" ng-class="($index<=(allRatings.convenienceOfParking1-1))?'newGreen':'grey'"></i>
+                            </span>
+                    </span>
+                </p>
+            </div>
+        </article>
+    </section>
+</md-content>

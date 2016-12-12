@@ -15,6 +15,20 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         });
 
     $stateProvider
+        .state('project-details', {
+            url: '/project-details/:year/:city/:type/:category/:project/:id',
+            templateUrl: 'templates/project-details.html',
+            controller: 'projectDetailsCtrl'
+        });
+
+    $stateProvider
+        .state('project-detail', {
+            url: '/project-detail/:year/:city/:type/:project/:id',
+            templateUrl: 'templates/project-details.html',
+            controller: 'projectDetailsCtrl'
+        });
+
+    $stateProvider
         .state('profile', {
             url: '/profile',
             templateUrl: 'templates/profile.html',
