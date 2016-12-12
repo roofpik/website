@@ -93,7 +93,7 @@
           },
           "mobile": {
               "mobileProvided": false
-          }
+          },
           "fname": null,
           "lname": null,
           "referral": null,
