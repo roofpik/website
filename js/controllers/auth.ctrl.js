@@ -1,7 +1,7 @@
   function loginController($scope, $mdDialog, $rootScope) {
 
       $scope.user = null;
-
+      var ip;
       $scope.hide = function() {
           $mdDialog.hide();
       };
@@ -26,7 +26,9 @@
 
       };
 
-      firebase.auth().fetchProvidersForEmail('arpit1.hello@gmail.com').then(function(providers) {
+      $scope.logout();
+
+      firebase.auth().fetchProvidersForEmail('arpit.hello@gmail.com').then(function(providers) {
           console.log(providers);
       });
 
@@ -117,7 +119,8 @@
       }
       try {
           $.getJSON('//freegeoip.net/json/?callback=?', function(data) {
-              var ip = JSON.stringify(data, null, 2);
+              ip = JSON.stringify(data, null, 2);
+              console.log(ip);
           });
       } catch (e) {
 
