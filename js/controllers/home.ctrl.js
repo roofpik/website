@@ -4,6 +4,8 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state) {
     $scope.searchList = [];
     $scope.dataVersions = {};
 
+
+ 
     db.ref('dataVersions').once('value', function(response){
         $scope.dataVersions = response.val();
     }).then(function(){

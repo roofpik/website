@@ -26,24 +26,24 @@
 
       };
 
-        firebase.auth().fetchProvidersForEmail('arpit1.hello@gmail.com').then(function(providers) {
+      firebase.auth().fetchProvidersForEmail('arpit1.hello@gmail.com').then(function(providers) {
           console.log(providers);
-        });
+      });
 
       $scope.createAccount = function() {
 
           console.log($scope.user);
           firebase.auth().createUserWithEmailAndPassword($scope.user.email, $scope.user.password)
-          .then(function(result){
-            console.log(result);
-          })
-          .catch(function(error) {
-              // Handle Errors here.
-              console.log(error);
-              var errorCode = error.code;
-              var errorMessage = error.message;
-              // ...
-          });
+              .then(function(result) {
+                  console.log(result);
+              })
+              .catch(function(error) {
+                  // Handle Errors here.
+                  console.log(error);
+                  var errorCode = error.code;
+                  var errorMessage = error.message;
+                  // ...
+              });
 
       }
 
@@ -57,7 +57,7 @@
               var user = result.user;
               // ...
           }).catch(function(error) {
-            console.log(error);
+              console.log(error);
               // Handle Errors here.
               // ...
           });
@@ -85,6 +85,37 @@
           // No user is signed in.
       }
 
+      var user = {
+          "createdDate": null,
+          "email": {
+              "emailAddress": null,
+              "emailVerified": true
+          },
+          "fname": null,
+          "lname": null,
+          "referral": null,
+          "registeredFlag": null,
+          "uid": null,
+          "welcomeEmailSent": false,
+          "profileImage": null,
+          "google": {
+              "active": false,
+              "uid": null,
+              "photoURL": null,
+              "token": null
+          },
+          "ip": null,
+          "facebook": null
+      }
+      try{
+      $.getJSON('//freegeoip.net/json/?callback=?', function(data) {
+          console.log(JSON.stringify(data, null, 2));
+      });
+    }
+    catch(e){
+      
+    }
+
       $scope.googleLogin = function() {
           var provider = new firebase.auth.GoogleAuthProvider();
           provider.addScope('profile');
@@ -92,13 +123,22 @@
           provider.addScope('https://www.googleapis.com/auth/plus.login');
           firebase.auth().signInWithPopup(provider).then(function(result) {
               // This gives you a Google Access Token. You can use it to access the Google API.
-              var token = result.credential.accessToken;
-              console.log(token);
+              // var token = result.credential.accessToken;
+              // console.log(token);
               // The signed-in user info.
-              console.log(result.user.providerData[0]);
-              console.log(result.user);
+              user.createdDate = new Date.getTime();
+              user.email.emailAddress = result.user.providerData[0].email;
+              var uname = split(result.user.providerData[0].displayName, " ");
+              user.fname = uname[0];
+              user.lname = uname[1];
+              user.profileImage = result.user.providerData[0].photoURL;
+              user.google.active = true;
+              user.google.token = result.credential.accessToken;
+              user.google.photoURL = result.user.providerData[0].photoURL;
+              user.google.uid = result.user.providerData[0].uid;
+              user.uid = result.user.uid;
+              console.log(user);
               var user = result.user;
-
               // ...
           }, function(error) {
               // Handle Errors here.
