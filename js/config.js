@@ -63,5 +63,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             controller: 'coverStoriesCtrl'
         });
 
+    $stateProvider
+        .state('story', {
+            url: '/story/:id',
+            templateUrl: 'templates/story.html',
+            controller: 'storyCtrl'
+        });
+
         $urlRouterProvider.otherwise('/');
 }]);

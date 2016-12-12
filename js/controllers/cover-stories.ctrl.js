@@ -2,17 +2,6 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
 
   $scope.showNoStories = false;
 
-  $scope.close = function () {
-    // Component lookup should always be available since we are not using `ng-if`
-    $mdSidenav('right').close()
-      .then(function () {
-        $log.debug("close RIGHT is done");
-      });
-  };
-
-  $scope.toggleRight = function(){
-  	$mdSidenav('right').open()
-  }
   $scope.featuredStories = [];
 
   db.ref('featuredStories/-KYJONgh0P98xoyPPYm9').once('value', function(data){
@@ -136,7 +125,7 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
 
   $scope.goToStoryDetails = function(id){
     console.log(id);
-    $state.go('story-details', {id: id});
+    $state.go('story', {id: id});
   }
 
 })
