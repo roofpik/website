@@ -161,7 +161,7 @@
               // The signed-in user info.
               user.createdDate = new Date().getTime();
               user.email.emailAddress = result.user.providerData[0].email;
-              var uname = split(result.user.providerData[0].displayName, " ");
+              var uname = result.user.providerData[0].displayName.split(" ");
               user.fname = uname[0];
               user.lname = uname[1];
               user.profileImage = result.user.providerData[0].photoURL;
