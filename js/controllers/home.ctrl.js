@@ -265,4 +265,8 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state) {
         var year = new Date().getFullYear();
         $state.go('project-detail', {year: year, city: 'gurgaon', type: 'residential-projects', project:convertToHyphenSeparated(val.projectName) , id: val.projectId});
     }
+
+    $scope.goToCoverStories = function(){
+        $state.go('cover-stories', {from:'home'})
+    }
 });

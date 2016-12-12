@@ -56,5 +56,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             controller: 'editReviewCtrl'
         });
 
+    $stateProvider
+        .state('cover-stories', {
+            url: '/cover-stories/:from',
+            templateUrl: 'templates/cover-stories.html',
+            controller: 'coverStoriesCtrl'
+        });
+
         $urlRouterProvider.otherwise('/');
 }]);
