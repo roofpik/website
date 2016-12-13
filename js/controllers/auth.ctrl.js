@@ -235,7 +235,7 @@
               updates['userRegistration/referrals/' + user.referral] = result.user.uid;
               updates['users/' + result.user.uid] = user;
               console.log(updates);
-              db..ref().update(updates);
+              db.ref().update(updates);
               }
             });
               // This gives you a Google Access Token. You can use it to access the Google API.
