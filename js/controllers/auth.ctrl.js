@@ -211,7 +211,7 @@
           firebase.auth().signInWithPopup(provider).then(function(result) {
             db.ref('userRegistration/emails/' + changeEmail(result.user.providerData[0].email)).once('value').then(function(snapshot) {
                console.log(snapshot.val());
-              if(snapshot.val().length != 0){
+              if(snapshot.val()){
                 console.log('user exists');
               }
               else{
