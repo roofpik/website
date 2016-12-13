@@ -114,12 +114,12 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state){
         $state.go('home');
     }
 
- //    $scope.selectProject = function(id, name) {
- //        // console.log(id, name);
- //        var year = new Date().getFullYear();
- //        // $state.go('project-details', { id: id, name: name, path: JSON.stringify($scope.filterPath) });
- //        $state.go('project-details', {year: year, city: 'gurgaon', type:'residential-projects', category:$stateParams.category, project:convertToHyphenSeparated(name), id:id});
- //    }
+    $scope.selectProject = function(id, name) {
+        // console.log(id, name);
+        var year = new Date().getFullYear();
+        // $state.go('project-details', { id: id, name: name, path: JSON.stringify($scope.filterPath) });
+        $state.go('project-details', {year: year, city: 'gurgaon', type:'residential-projects', category:$stateParams.category, project:convertToHyphenSeparated(name), id:id});
+    }
 
  //    function convertCurrency(value){
  //        valueLen = getlength(value);
