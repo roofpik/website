@@ -116,7 +116,7 @@
 
       };
 
-      $scope.linkAccount('arpit.hello@gmail.com');
+   //   $scope.linkAccount('arpit.hello@gmail.com');
 
       firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
@@ -160,7 +160,7 @@
               "photoURL": null,
               "token": null
           },
-          "ip": null,
+          "signupIp": null,
           "facebook": {
               "active": false,
               "fid": null,
@@ -171,7 +171,7 @@
       try {
           $.getJSON('//freegeoip.net/json/?callback=?', function(data) {
               ip = JSON.stringify(data, null, 2);
-              console.log(ip);
+              console.log(JSON.parse(ip));
           });
       } catch (e) {
 
@@ -228,7 +228,7 @@
               user.uid = result.user.uid;
               user.referral = getReferralCode(user.fname, user.lname);
               user.registeredFlag = true;
-              user.ip = ip;
+              user.signupIp = JSON.parse(ip);
               console.log(user);
               var updates = {};
               updates['userRegistration/emails/' + changeEmail(result.user.providerData[0].email)] = result.user.uid;
