@@ -116,7 +116,7 @@
 
       };
 
-      $scope.linkAccount('arpit.hello@gmail.com');
+   //   $scope.linkAccount('arpit.hello@gmail.com');
 
       firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
@@ -160,7 +160,7 @@
               "photoURL": null,
               "token": null
           },
-          "ip": null,
+          "signupIp": null,
           "facebook": {
               "active": false,
               "fid": null,
@@ -171,7 +171,7 @@
       try {
           $.getJSON('//freegeoip.net/json/?callback=?', function(data) {
               ip = JSON.stringify(data, null, 2);
-              console.log(ip);
+              console.log(JSON.parse(ip));
           });
       } catch (e) {
 
@@ -209,10 +209,12 @@
           provider.addScope('email');
           provider.addScope('https://www.googleapis.com/auth/plus.login');
           firebase.auth().signInWithPopup(provider).then(function(result) {
-              // This gives you a Google Access Token. You can use it to access the Google API.
-              // var token = result.credential.accessToken;
-              // console.log(token);
-              // The signed-in user info.
+            db.ref('userRegistration/emails/' + changeEmail(result.user.providerData[0].email)).once('value').then(function(snapshot) {
+               console.log(snapshot.val());
+              if(snapshot.val()){
+                console.log('user exists');
+              }
+              else{
               user.createdDate = new Date().getTime();
               user.email.emailAddress = result.user.providerData[0].email;
               var uname = result.user.providerData[0].displayName.split(" ");
@@ -226,8 +228,21 @@
               user.uid = result.user.uid;
               user.referral = getReferralCode(user.fname, user.lname);
               user.registeredFlag = true;
-              user.ip = ip;
+              user.signupIp = JSON.parse(ip);
               console.log(user);
+              var updates = {};
+              updates['userRegistration/emails/' + changeEmail(result.user.providerData[0].email)] = result.user.uid;
+              updates['userRegistration/referrals/' + user.referral] = result.user.uid;
+              updates['users/' + result.user.uid] = user;
+              console.log(updates);
+              db.ref().update(updates);
+              }
+            });
+              // This gives you a Google Access Token. You can use it to access the Google API.
+              // var token = result.credential.accessToken;
+              // console.log(token);
+              // The signed-in user info.
+              
               //db.ref('users').
               //   var user = result.user;
           }, function(error) {
