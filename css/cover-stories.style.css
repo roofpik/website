@@ -250,3 +250,10 @@
     color: #fff;
     font-weight: 600;
 }
+
+.cover-stories #facebook-share {
+    background-color: #4267b2;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 3px;
+}

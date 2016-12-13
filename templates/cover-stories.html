@@ -1,21 +1,4 @@
 <md-content class="cover-stories">
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '213246709130054',
-      xfbml      : true,
-      version    : 'v2.8'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
     <div layout="column" flex layout-wrap>
         <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="header-story">
             <article flex="50" flex-xs="100" flex-sm="100">
@@ -55,7 +38,7 @@
                     <img ng-src="{{story.coverImage}}" class="md-card-image" alt="Washed Out"/>
                     <md-card-header>
                         <md-card-header-text>
-                            <span class="md-title" ng-click="shareonfb(story)">{{story.title}}</span>
+                            <span class="md-title">{{story.title}}</span>
                         </md-card-header-text>
                     </md-card-header>
                     <md-card-title>
@@ -70,6 +53,7 @@
                     <md-card-content>
                         <p ng-bind-html="toTrustedHTML(story.shortStory)">
                         </p>
+                        <span id="facebook-share" ng-click="shareonfb(story)"><i class="fa fa-facebook"></i>&nbsp;&nbsp;&nbsp;Share</span>
                         <span id="showMoreBtn" ng-click="goToStoryDetails(story.storyId)">Show More</span>
                     </md-card-content>
                     <md-card-header>

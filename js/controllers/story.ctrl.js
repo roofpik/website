@@ -57,4 +57,16 @@ app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $stat
 		console.log(tag);
 		$state.go('cover-story', {city:'gurgaon', cityId: $scope.cityId, from:2, fromId: tag});
 	}
+
+  $scope.shareonfb = function(story){
+  	console.log(story);
+    FB.ui({
+        method: 'feed',
+        name: story.storyTitle,
+        link: 'http://test.roofpik.com/#/story/'+story.storyId,
+        picture: story.coverImage['700x500'],
+        caption: story.placeName,
+        description: story.userName
+    });
+  }
 })

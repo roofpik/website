@@ -1,4 +1,4 @@
-app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav, $sce, $stateParams, Socialshare){
+app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav, $sce, $stateParams){
 
   $scope.showNoStories = false;
   console.log($stateParams);
