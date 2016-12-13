@@ -1,4 +1,4 @@
-app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav, $sce, $stateParams){
+app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav, $sce, $stateParams, Socialshare){
 
   $scope.showNoStories = false;
   console.log($stateParams);
@@ -66,6 +66,7 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
   $scope.showAllStories = function(){
     angular.forEach($scope.allStories, function(value, key){
       value.selected = true;
+      $scope.selectedStory = value.data;
     })
   }
 
@@ -128,6 +129,52 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
   $scope.goToStoryDetails = function(id){
     console.log(id);
     $state.go('story', {id: id});
+  }
+
+  $scope.sharePost = function(post){
+    console.log(post);
+    FB.ui({
+      method: 'feed',
+      link: 'https://developers.facebook.com/docs/',
+      caption: 'An example caption',
+    }, function(response){
+      console.log(response);
+    });
+  }
+
+  // window.fbAsyncInit = function() {
+  //   FB.init({
+  //     appId      : '213246709130054',
+  //     xfbml      : true,
+  //     version    : 'v2.8'
+  //   });
+  // };
+
+  // (function(d, s, id){
+  //    var js, fjs = d.getElementsByTagName(s)[0];
+  //    if (d.getElementById(id)) {return;}
+  //    js = d.createElement(s); js.id = id;
+  //    js.src = "//connect.facebook.net/en_US/sdk.js";
+  //    fjs.parentNode.insertBefore(js, fjs);
+  //  }(document, 'script', 'facebook-jssdk'));
+
+  $scope.shareonfb = function(){
+    // Socialshare.share({
+    //   'provider': 'facebook',
+    //   'attrs': {
+    //     'socialshareUrl': 'test.roofpik.com',
+    //     'socialshareType': 'feed'
+    //   }
+    // });
+  FB.ui({
+      method: 'feed',
+      name: 'Name you want to show',
+      link: 'http://test.roofpik.com',
+      picture: 'https://media.licdn.com/mpr/mpr/shrink_200_200/AAEAAQAAAAAAAAk0AAAAJDJmYjZkYTBjLThhNjAtNGUzZC04ZWZkLTg5ODIxZTQxMzExMg.png',
+      caption: 'Caption you want to show',
+      description: 'Description you want to show',
+      message: 'Message you want to show'
+  });
   }
 
 })
