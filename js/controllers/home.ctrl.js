@@ -267,6 +267,6 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state) {
     }
 
     $scope.goToCoverStories = function(){
-        $state.go('cover-stories', {from:'home'})
+        $state.go('cover-stories', {city: 'gurgaon', cityId: '-KYJONgh0P98xoyPPYm9', from:1})
     }
 });

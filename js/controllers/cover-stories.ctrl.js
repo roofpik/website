@@ -1,10 +1,11 @@
 app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav, $sce, $stateParams){
 
   $scope.showNoStories = false;
-
+  console.log($stateParams);
   $scope.featuredStories = [];
+  $scope.cityId = $stateParams.cityId;
 
-  db.ref('featuredStories/-KYJONgh0P98xoyPPYm9').once('value', function(data){
+  db.ref('featuredStories/'+$scope.cityId).once('value', function(data){
     $timeout(function(){
       if(data.val()){
         angular.forEach(data.val(), function(value, key){
@@ -14,7 +15,7 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
     },0);
   })
 
-  db.ref('shortStories/-KYJONgh0P98xoyPPYm9').once('value', function(snapshot){
+  db.ref('shortStories/'+$scope.cityId).once('value', function(snapshot){
     $timeout(function(){
       if(snapshot.val()){
         $scope.allStories = snapshot.val();
@@ -25,17 +26,18 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
       } else {
         $scope.showNoStories = true;
       }
-      if($stateParams.from == 'locality'){
-        $scope.getLocalityPosts($stateParams.id);
-      } else if($stateParams.from == 'tag'){
-        $scope.getRelatedStories($stateParams.id);
-      } else if($stateParams.from == 'home'){
+      if($stateParams.from == 3){
+      	console.log($stateParams.fromId);
+        $scope.getLocalityPosts($stateParams.fromId);
+      } else if($stateParams.from == 2){
+        $scope.getRelatedStories($stateParams.fromId);
+      } else if($stateParams.from == 1){
         $scope.showAllStories();
       }
-    })
+    }, 0);
   })
 
-  db.ref('popularStories/-KYJONgh0P98xoyPPYm9').once('value', function(snapshot){
+  db.ref('popularStories/'+$scope.cityId).once('value', function(snapshot){
     $timeout(function(){
       if(snapshot.val()){
         $scope.popularStories = snapshot.val();
@@ -51,7 +53,7 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
     },0);
   })
 
-  db.ref('popularLocalities/-KYJONgh0P98xoyPPYm9').once('value', function(snapshot){
+  db.ref('popularLocalities/'+$scope.cityId).once('value', function(snapshot){
     $timeout(function(){
       $scope.popularLocalities = snapshot.val();
     },0)

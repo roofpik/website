@@ -58,7 +58,14 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 
     $stateProvider
         .state('cover-stories', {
-            url: '/cover-stories/:from',
+            url: '/cover-stories/:city/:cityId/:from',
+            templateUrl: 'templates/cover-stories.html',
+            controller: 'coverStoriesCtrl'
+        });
+
+    $stateProvider
+        .state('cover-story', {
+            url: '/cover-story/:city/:cityId/:from/:fromId',
             templateUrl: 'templates/cover-stories.html',
             controller: 'coverStoriesCtrl'
         });

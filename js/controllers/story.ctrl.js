@@ -1,6 +1,7 @@
 app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $state){
 	console.log($stateParams);
 	$scope.featuredStories = [];
+	$scope.cityId = '-KYJONgh0P98xoyPPYm9';
 	db.ref('coverStory/stories/'+$stateParams.id).once('value', function(snapshot){
 		console.log(snapshot.val());
 		$timeout(function(){
@@ -8,7 +9,7 @@ app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $stat
 		},50);
 	})
 
-	db.ref('featuredStories/-KYJONgh0P98xoyPPYm9').once('value', function(data){
+	db.ref('featuredStories/'+$scope.cityId).once('value', function(data){
 		$timeout(function(){
 			if(data.val()){
 				angular.forEach(data.val(), function(value, key){
@@ -17,7 +18,7 @@ app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $stat
 			}
 		},0);
 	})
-	db.ref('popularStories/-KYJONgh0P98xoyPPYm9').once('value', function(snapshot){
+	db.ref('popularStories/'+$scope.cityId).once('value', function(snapshot){
 		$timeout(function(){
 			if(snapshot.val()){
 				$scope.popularStories = snapshot.val();
@@ -33,7 +34,7 @@ app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $stat
 		},0);
 	})
 
-	db.ref('popularLocalities/-KYJONgh0P98xoyPPYm9').once('value', function(snapshot){
+	db.ref('popularLocalities/'+$scope.cityId).once('value', function(snapshot){
 		$timeout(function(){
 			$scope.popularLocalities = snapshot.val();
 		},0)
@@ -49,12 +50,11 @@ app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $stat
 	}
 
 	$scope.getLocalityPosts = function(locality){
-		// console.log(locality);
-		$state.go('cover-stories', {from:'locality', id: locality.locationId});
+		$state.go('cover-story', {city:'gurgaon', cityId: $scope.cityId, from:3, fromId: locality});
 	}
 
 	$scope.getRelatedStories = function(tag){
-		// console.log(tag);
-		$state.go('cover-stories', {from:'tag', id: tag.tagId});
+		console.log(tag);
+		$state.go('cover-story', {city:'gurgaon', cityId: $scope.cityId, from:2, fromId: tag});
 	}
 })
