@@ -1,13 +1,12 @@
-<md-content style="margin-top:60px;" class="cover-stories">
+<md-content class="cover-stories">
     <div layout="column" flex layout-wrap>
         <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="header-story">
             <article flex="50" flex-xs="100" flex-sm="100">
                 <div class="featured-story" style="background-image:url({{featuredStories[0].coverImage}});" ng-click="goToStoryDetails(featuredStories[0].storyId)">
                     <div class="featured-caption">
                         <div class="featured-caption-content">
-                            <!-- <div class="featured-caption-category"><a href="#">{{featuredStories[0].placeName}}</a></div> -->
                             <h3><a href="#">{{featuredStories[0].title}}</a></h3>
-                            <div style="color: #fff;font-weight: 600;"><span style="font-size: 22px;margin-right: 12px;">{{featuredStories[0].placeName}}</span><time>{{featuredStories[0].createdDate | date:'MMM dd, yy'}}</time></div>
+                            <div id="place-name"><span>{{featuredStories[0].placeName}}</span><time>{{featuredStories[0].createdDate | date:'MMM dd, yy'}}</time></div>
                             <ul class="featured-tags">
                                 <li ng-repeat="tag in featuredStories[0].hashtags"><a href="#">#{{tag.tag}}</a></li>
                             </ul>
@@ -19,9 +18,8 @@
                 <div class="featured-story" style="background-image:url({{featuredStories[1].coverImage}});" ng-click="goToStoryDetails(featuredStories[1].storyId)">
                     <div class="featured-caption">
                         <div class="featured-caption-content">
-                            <!-- <div class="featured-caption-category"><a href="#">{{featuredStories[1].placeName}}</a></div> -->
                             <h3><a href="#">{{featuredStories[1].title}}</a></h3>
-                            <div style="color: #fff;font-weight: 600;"><span style="font-size: 22px;margin-right: 12px;">{{featuredStories[1].placeName}}</span><time>{{featuredStories[1].createdDate | date:'MMM dd, yy'}}</time></div>
+                            <div id="place-name"><span>{{featuredStories[1].placeName}}</span><time>{{featuredStories[1].createdDate | date:'MMM dd, yy'}}</time></div>
                             <ul class="featured-tags">
                                 <li ng-repeat="tag in featuredStories[1].hashtags"><a href="#">#{{tag.tag}}</a></li>
                             </ul>
@@ -32,8 +30,8 @@
         </section>
         <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="main-board" layout-align="center top">
             <div flex="50" class="story-board" flex-xs="100" flex-sm="100">
-                <md-card class="story-card" style="margin:20px 0;">
-                    <img ng-src="{{story.coverImage['700x500']}}" class="md-card-image" alt="Washed Out" style="height: 350px;"/>
+                <md-card class="story-card">
+                    <img ng-src="{{story.coverImage['700x500']}}" class="md-card-image" alt="Washed Out"/>
                     <md-card-header>
                         <md-card-header-text>
                             <span class="md-title">{{story.title}}</span>
@@ -55,9 +53,9 @@
                         <md-card-header-text layout-align="end center" layout="row">
                             <md-card-avatar>
                                 <!-- <md-icon class="md-avatar-icon" md-svg-icon="images/general/noImage.png"></md-icon> -->
-                                <img src="images/general/noImage.png" style="border-radius:50%;margin-right:10px;"/>
+                                <img src="images/general/noImage.png" id="user-img"/>
                             </md-card-avatar>
-                            <span class="md-title" style="margin-left:10px;">{{story.userName}}</span>
+                            <span class="md-title" id="user-name">{{story.userName}}</span>
                         </md-card-header-text>
                     </md-card-header>
                 </md-card>

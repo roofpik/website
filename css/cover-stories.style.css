@@ -1,3 +1,8 @@
+/*CSS for cover stories and story details*/
+
+.cover-stories {
+    margin-top:60px;
+}
 .cover-stories .featured-story a {
     text-decoration: none;
     transition: all ease .3s;
@@ -42,6 +47,8 @@
     color: #ffffff;
     font-size: 27px;
     line-height: 40px;
+    font-size: 35px;
+    line-height: 50px;
 }
 
 .cover-stories .featured-caption-content {
@@ -51,9 +58,14 @@
     z-index: 10000;
 }
 
-.cover-stories .featured-caption-content h3 {
-    font-size: 35px;
-    line-height: 50px;
+.cover-stories .featured-caption-content #place-name {
+    color: #fff;
+    font-weight: 600;
+}
+
+.cover-stories .featured-caption-content #place-name span{
+    font-size: 22px;
+    margin-right: 12px;
 }
 
 .cover-stories .featured-caption-category a {
@@ -158,6 +170,27 @@
 
 .cover-stories md-card md-card-title {
     padding: 0 16px 10px;
+}
+
+.cover-stories .story-card {
+    margin:20px 0;
+}
+
+.cover-stories #showMoreBtn {
+    float:right;
+    color:#54C3DD;
+}
+
+.cover-stories #user-img {
+    border-radius:50%;
+}
+
+.cover-stories #user-name {
+    margin-left:10px;
+}
+
+.cover-stories .story-card .md-card-image {
+    height: 350px;
 }
 
 .cover-stories .story-card .story-project-header md-card-title {
