@@ -166,15 +166,15 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
     //     'socialshareType': 'feed'
     //   }
     // });
-  FB.ui({
-      method: 'feed',
-      name: 'Name you want to show',
-      link: 'http://test.roofpik.com',
-      picture: 'https://media.licdn.com/mpr/mpr/shrink_200_200/AAEAAQAAAAAAAAk0AAAAJDJmYjZkYTBjLThhNjAtNGUzZC04ZWZkLTg5ODIxZTQxMzExMg.png',
-      caption: 'Caption you want to show',
-      description: 'Description you want to show',
-      message: 'Message you want to show'
-  });
+  // FB.ui({
+  //     method: 'feed',
+  //     name: 'Name you want to show',
+  //     link: 'http://test.roofpik.com',
+  //     picture: 'https://media.licdn.com/mpr/mpr/shrink_200_200/AAEAAQAAAAAAAAk0AAAAJDJmYjZkYTBjLThhNjAtNGUzZC04ZWZkLTg5ODIxZTQxMzExMg.png',
+  //     caption: 'Caption you want to show',
+  //     description: 'Description you want to show',
+  //     message: 'Message you want to show'
+  // });
   }
 
 })
