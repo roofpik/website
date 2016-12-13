@@ -142,39 +142,15 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
     });
   }
 
-  // window.fbAsyncInit = function() {
-  //   FB.init({
-  //     appId      : '213246709130054',
-  //     xfbml      : true,
-  //     version    : 'v2.8'
-  //   });
-  // };
-
-  // (function(d, s, id){
-  //    var js, fjs = d.getElementsByTagName(s)[0];
-  //    if (d.getElementById(id)) {return;}
-  //    js = d.createElement(s); js.id = id;
-  //    js.src = "//connect.facebook.net/en_US/sdk.js";
-  //    fjs.parentNode.insertBefore(js, fjs);
-  //  }(document, 'script', 'facebook-jssdk'));
-
   $scope.shareonfb = function(story){
-    // Socialshare.share({
-    //   'provider': 'facebook',
-    //   'attrs': {
-    //     'socialshareUrl': 'test.roofpik.com',
-    //     'socialshareType': 'feed'
-    //   }
-    // });
-  FB.ui({
-      method: 'feed',
-      name: 'Name you want to show',
-      link: 'http://test.roofpik.com/story/'+story.storyId,
-      picture: 'https://media.licdn.com/mpr/mpr/shrink_200_200/AAEAAQAAAAAAAAk0AAAAJDJmYjZkYTBjLThhNjAtNGUzZC04ZWZkLTg5ODIxZTQxMzExMg.png',
-      caption: 'Caption you want to show',
-      description: 'Description you want to show',
-      message: 'Message you want to show'
-  });
+    FB.ui({
+        method: 'feed',
+        name: story.storyTitle,
+        link: 'http://test.roofpik.com/#/story/'+story.storyId,
+        picture: story.coverImage,
+        caption: story.placeName,
+        description: story.userName
+    });
   }
 
 })
