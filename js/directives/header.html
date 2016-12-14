@@ -18,19 +18,19 @@
                     <i class="material-icons fade">help_outline</i>
                 </div>
             </li> -->
-          <!--   <li ng-if="!loginStatus">
+          <!--   <li ng-if="!logStatus">
                 <div class="menu-item">
                     <span>Sign Up</span>
                     <i class="material-icons fade">face</i>
                 </div>
             </li> -->
-            <li ng-if="!loginStatus">
+            <li ng-if="!logStatus">
                 <div class="menu-item" ng-click="showLogin($event)">
                     <span>Login/Sign up</span>
                     <i class="material-icons fade">fingerprint</i>
                 </div>
             </li>
-             <li class="user-menu-item" ng-if="loginStatus">
+             <li class="user-menu-item" ng-if="logStatus">
                 <div class="menu-item" ng-click="showSignUp($event)">
                     <img src="https://dummyimage.com/32x32/676767/fff" />
                     <span>User</span>
