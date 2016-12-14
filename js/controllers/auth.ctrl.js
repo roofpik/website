@@ -123,20 +123,7 @@
 
    //   $scope.linkAccount('arpit.hello@gmail.com');
 
-      firebase.auth().onAuthStateChanged(function(user) {
-          if (user) {
-              console.log(user);
-              $rootScope.uid = user.uid;
-              $rootScope.loginStatus = true;
-              // User is signed in.
-          } else {
-              $rootScope.uid = null;
-              $rootScope.loginStatus = true;
-              console.log('No user is signed in');
-              // No user is signed in.
-          }
-      });
-
+     
       var user1 = firebase.auth().currentUser;
 
       if (user1) {
