@@ -1,9 +1,11 @@
-app.controller('headerCtrl', function($scope, $mdDialog, $state) {
+app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope) {
     $scope.user = false;
        $scope.gotoHome = function(){
         console.log('called');
         $state.go('home');
     }
+
+    $scope.loginStatus = $rootScope.loginStatus;
 
     $scope.showLogin = function(ev) {
         $mdDialog.show({
