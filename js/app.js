@@ -1,11 +1,15 @@
 var app = angular.module('roofpik', ['ngMaterial', 'ui.router']);
 
-app.run(function($rootScope, $mdDialog) {
+app.run(function($rootScope, $mdDialog, $timeout) {
     $rootScope.loginStatus = false;
     $rootScope.uid = null;
     firebase.auth().onAuthStateChanged(function(user) {
+    	$timeout(function(){
+
+
         if (user) {
             console.log(user);
+
             $rootScope.uid = user.uid;
             $rootScope.loginStatus = true;
             console.log($rootScope.loginStatus);
@@ -18,5 +22,6 @@ app.run(function($rootScope, $mdDialog) {
             $mdDialog.hide();
             // No user is signed in.
         }
+        }, 500);
     });
 });
