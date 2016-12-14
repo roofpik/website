@@ -131,17 +131,6 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
     $state.go('story', {id: id});
   }
 
-  $scope.sharePost = function(post){
-    console.log(post);
-    FB.ui({
-      method: 'feed',
-      link: 'https://developers.facebook.com/docs/',
-      caption: 'An example caption',
-    }, function(response){
-      console.log(response);
-    });
-  }
-
   $scope.shareonfb = function(story){
     FB.ui({
         method: 'feed',

@@ -77,5 +77,26 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             controller: 'storyCtrl'
         });
 
+    $stateProvider
+        .state('blogs', {
+            url: '/blogs/:city/:cityId/:from',
+            templateUrl: 'templates/blogs.html',
+            controller: 'blogsCtrl'
+        });
+
+    $stateProvider
+        .state('blog', {
+            url: '/blog/:city/:cityId/:from/:fromId',
+            templateUrl: 'templates/blogs.html',
+            controller: 'blogsCtrl'
+        });
+
+    $stateProvider
+        .state('blog-details', {
+            url: '/blog-details/:id',
+            templateUrl: 'templates/blog-details.html',
+            controller: 'blogDetailsCtrl'
+        });
+
         $urlRouterProvider.otherwise('/');
 }]);

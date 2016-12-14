@@ -1,27 +1,14 @@
 <md-content class="cover-stories">
     <div layout="column" flex layout-wrap>
         <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="header-story">
-            <article flex="50" flex-xs="100" flex-sm="100">
-                <div class="featured-story" style="background-image:url({{featuredStories[0].coverImage}});" ng-click="goToStoryDetails(featuredStories[0].storyId)">
+            <article flex="100">
+                <div class="featured-story" style="background-image:url({{story.coverImage['700x500']}});">
                     <div class="featured-caption">
                         <div class="featured-caption-content">
-                            <h3><a href="#">{{featuredStories[0].title}}</a></h3>
-                            <div id="place-name"><span>{{featuredStories[0].placeName}}</span><time>{{featuredStories[0].createdDate | date:'MMM dd, yy'}}</time></div>
+                            <h3>{{story.title}}</h3>
+                            <div id="place-name"><span>{{story.placeName}}</span><time>{{story.createdDate | date:'MMM dd, yy'}}</time></div>
                             <ul class="featured-tags">
-                                <li ng-repeat="tag in featuredStories[0].hashtags"><a href="#">#{{tag.tag}}</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article flex="50" flex-xs="100" flex-sm="100">
-                <div class="featured-story" style="background-image:url({{featuredStories[1].coverImage}});" ng-click="goToStoryDetails(featuredStories[1].storyId)">
-                    <div class="featured-caption">
-                        <div class="featured-caption-content">
-                            <h3><a href="#">{{featuredStories[1].title}}</a></h3>
-                            <div id="place-name"><span>{{featuredStories[1].placeName}}</span><time>{{featuredStories[1].createdDate | date:'MMM dd, yy'}}</time></div>
-                            <ul class="featured-tags">
-                                <li ng-repeat="tag in featuredStories[1].hashtags"><a href="#">#{{tag.tag}}</a></li>
+                                <li ng-repeat="tag in story.hashtags" ng-click="getRelatedStories(tag.tagId)"><a href="#">#{{tag.tag}}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -31,21 +18,6 @@
         <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="main-board" layout-align="center top">
             <div flex="50" class="story-board" flex-xs="100" flex-sm="100">
                 <md-card class="story-card">
-                    <img ng-src="{{story.coverImage['700x500']}}" class="md-card-image" alt="Washed Out"/>
-                    <md-card-header>
-                        <md-card-header-text>
-                            <span class="md-title">{{story.title}}</span>
-                        </md-card-header-text>
-                    </md-card-header>
-                    <md-card-title>
-                        <md-card-title-text>
-                            <span class="md-headline">{{story.placeName}}</span>
-                            <span class="md-subhead">By {{story.adminName}}</span>
-                        </md-card-title-text>
-                    </md-card-title>
-                    <md-card-actions layout="row" layout-align="start center" class="story-tags">
-                        <span class="story-tag" ng-repeat="tag in story.hashtags" ng-click="getRelatedStories(tag.tagId)">#{{tag.tag}}</span>
-                    </md-card-actions>
                     <md-card-content>
                         <p ng-bind-html="toTrustedHTML(story.data)"></p>
                         <span id="facebook-share" ng-click="shareonfb(story)"><i class="fa fa-facebook"></i>&nbsp;&nbsp;&nbsp;Share</span>
@@ -53,7 +25,6 @@
                     <md-card-header>
                         <md-card-header-text layout-align="end center" layout="row">
                             <md-card-avatar>
-                                <!-- <md-icon class="md-avatar-icon" md-svg-icon="images/general/noImage.png"></md-icon> -->
                                 <img src="images/general/noImage.png" id="user-img"/>
                             </md-card-avatar>
                             <span class="md-title" id="user-name">{{story.userName}}</span>

@@ -281,6 +281,10 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state) {
     }
 
     $scope.goToCoverStories = function(){
-        $state.go('cover-stories', {city: 'gurgaon', cityId: $scope.cityId, from:1})
+        $state.go('cover-stories', {city: 'gurgaon', cityId: $scope.cityId, from:1});
+    }
+
+    $scope.goToBlogs = function(){
+        $state.go('blogs', {city: 'gurgaon', cityId: $scope.cityId, from:1})
     }
 });

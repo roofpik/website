@@ -9,15 +9,6 @@ app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $stat
 		},50);
 	})
 
-	db.ref('featuredStories/'+$scope.cityId).once('value', function(data){
-		$timeout(function(){
-			if(data.val()){
-				angular.forEach(data.val(), function(value, key){
-					$scope.featuredStories.push(value);
-				})
-			}
-		},0);
-	})
 	db.ref('popularStories/'+$scope.cityId).once('value', function(snapshot){
 		$timeout(function(){
 			if(snapshot.val()){
