@@ -5,7 +5,11 @@ app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope) {
         $state.go('home');
     }
 
-    $scope.loginStatus = $rootScope.loginStatus;
+
+$rootScope.$watch($rootScope.loginStatus, function(){
+     $scope.loginStatus = $rootScope.loginStatus;
+});
+   
 
     $scope.showLogin = function(ev) {
         $mdDialog.show({
