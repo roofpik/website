@@ -124,15 +124,15 @@
    //   $scope.linkAccount('arpit.hello@gmail.com');
 
      
-      var user1 = firebase.auth().currentUser;
+      // var user1 = firebase.auth().currentUser;
 
-      if (user1) {
-          // User is signed in.
-          console.log(user1);
-      } else {
-          console.log('no current user');
-          // No user is signed in.
-      }
+      // if (user1) {
+      //     // User is signed in.
+      //     console.log(user1);
+      // } else {
+      //     console.log('no current user');
+      //     // No user is signed in.
+      // }
 
       var user = {
           "createdDate": null,
