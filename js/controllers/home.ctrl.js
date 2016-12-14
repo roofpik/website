@@ -3,8 +3,9 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state) {
     $scope.projectList = [];
     $scope.searchList = [];
     $scope.dataVersions = {};
-
-
+    $scope.localities = {};
+    $scope.cityId = '-KYJONgh0P98xoyPPYm9';
+    var year = new Date().getFullYear();
  
     db.ref('dataVersions').once('value', function(response){
         $scope.dataVersions = response.val();
@@ -27,6 +28,7 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state) {
                 var searchListVersion = (getLocalStorage('searchList')).version;
                 if(searchListVersion == $scope.dataVersions.searchList){
                     $scope.searchList = getLocalStorage('searchList').value;
+                    getLocalities($scope.searchList);
                 } else {
                     getSearchList($scope.dataVersions.searchList);
                 }
@@ -37,7 +39,7 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state) {
     });
 
     function getProjectList(version){
-        db.ref('projectList/-KYJONgh0P98xoyPPYm9/residential').once('value', function(snapshot){
+        db.ref('projectList/'+$scope.cityId+'/residential').once('value', function(snapshot){
             $timeout(function(){
                 for(key in snapshot.val()){
                     $scope.projectList.push(snapshot.val()[key]);
@@ -57,9 +59,19 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state) {
                 for(key in snapshot.val()){
                     $scope.searchList.push(snapshot.val()[key]);
                 }
+                getLocalities($scope.searchList);
                 setLocalStorage($scope.searchList, 'searchList', version);
             },0);
         })  
+    }
+
+    function getLocalities(list){
+        for(key in list){
+            if(list[key].type == 'Locality'){
+                $scope.localities[list[key].name] = list[key].id;
+            }
+        }
+        console.log($scope.localities);
     }
 
     $scope.showSearch = function(ev) {
@@ -138,7 +150,7 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state) {
         $scope.selectItem = function(val){
             console.log(val);
             console.log(val.name);
-            var year = new Date().getFullYear();
+
             if(val.type == 'Builder'){
                 $scope.cancel();
                 $state.go('projects', {year: year, city: 'gurgaon', type: 'residential-projects', category:convertToHyphenSeparated(val.name) , categoryId:val.id , id: 2});
@@ -256,17 +268,19 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state) {
 
     $scope.takeToProjects = function(val){
         console.log(val);
-        var year = new Date().getFullYear();
         $state.go('projects', {year: year, city: 'gurgaon', type: 'residential-projects', category:val , categoryId:'-KQ9cIdfaoKpCj34yAWC' , id: 1});
     }
 
+    $scope.takeToLocalityProjects = function(val){
+        var valId = $scope.localities[val];
+        $state.go('projects', {year: year, city: 'gurgaon', type: 'residential-projects', category:convertToHyphenSeparated(val) , categoryId: valId , id: 3});
+    }
+
     $scope.takeToDetails = function(val){
-        console.log(val);
-        var year = new Date().getFullYear();
         $state.go('project-detail', {year: year, city: 'gurgaon', type: 'residential-projects', project:convertToHyphenSeparated(val.projectName) , id: val.projectId});
     }
 
     $scope.goToCoverStories = function(){
-        $state.go('cover-stories', {city: 'gurgaon', cityId: '-KYJONgh0P98xoyPPYm9', from:1})
+        $state.go('cover-stories', {city: 'gurgaon', cityId: $scope.cityId, from:1})
     }
 });

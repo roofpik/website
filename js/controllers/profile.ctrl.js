@@ -250,8 +250,6 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
         var basic;
 
         function cropImage(source) {
-            // console.log(source);
-            // console.log($('.demo').html());
             basic = $('.demo').croppie({
                 viewport: {
                     width: 200,
