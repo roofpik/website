@@ -123,7 +123,7 @@
 
    //   $scope.linkAccount('arpit.hello@gmail.com');
 
-     
+
       // var user1 = firebase.auth().currentUser;
 
       // if (user1) {
@@ -269,7 +269,7 @@
           // });
 
           provider.addScope('email');
-          firebase.auth().signInWithRedirect(provider).then(function(result) {
+          firebase.auth().signInWithPopup(provider).then(function(result) {
               // This gives you a Facebook Access Token. You can use it to access the Facebook API.
               var token = result.credential.accessToken;
               // The signed-in user info.
@@ -312,7 +312,7 @@
               var credential = error.credential;
               console.log(credential);
               if (errorCode == "auth/account-exists-with-different-credential") {
-                  linkAccount(email);
+                  console.log("error");
               } else {
                   alert(errorMessage);
               }
