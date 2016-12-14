@@ -6,7 +6,7 @@ app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope) {
     }
 
 
-$rootScope.$watch($rootScope.loginStatus, function(){
+$rootScope.$watch('loginStatus', function(){
     console.log($rootScope.loginStatus);
      $scope.logStatus = $rootScope.loginStatus;
 });
