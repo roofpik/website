@@ -1,6 +1,6 @@
 app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope) {
     $scope.user = false;
-       $scope.gotoHome = function(){
+    $scope.gotoHome = function() {
         console.log('called');
         $state.go('home');
     }
@@ -22,6 +22,19 @@ app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope) {
                 $scope.status = 'You cancelled the dialog.';
             });
     };
+
+    $scope.logout = function() {
+        console.log('sign out');
+        firebase.auth().signOut().then(function() {
+            // Sign-out successful.
+            $rootScope.loginStatus = false;
+
+        }, function(error) {
+            // An error happened.
+        });
+
+    };
+
 
     $scope.showSignUp = function(ev) {
         $mdDialog.show({

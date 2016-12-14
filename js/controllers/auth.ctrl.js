@@ -14,17 +14,17 @@
           $mdDialog.hide(answer);
       };
 
-      $scope.logout = function() {
-          console.log('sign out');
-          firebase.auth().signOut().then(function() {
-              // Sign-out successful.
-              $rootScope.loginStatus = false;
+      // $scope.logout = function() {
+      //     console.log('sign out');
+      //     firebase.auth().signOut().then(function() {
+      //         // Sign-out successful.
+      //         $rootScope.loginStatus = false;
 
-          }, function(error) {
-              // An error happened.
-          });
+      //     }, function(error) {
+      //         // An error happened.
+      //     });
 
-      };
+      // };
 
       // $scope.logout();
 
