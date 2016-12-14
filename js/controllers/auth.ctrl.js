@@ -26,36 +26,41 @@
 
       };
 
-      $scope.logout();
+      // $scope.logout();
 
-      firebase.auth().fetchProvidersForEmail('tinassood@gmail.com').then(function(providers) {
-          console.log(providers);
-          //     for (index in providers) {
-          //         if (provider == null || provider != 'email')
-          //             provider = providers[index];
-          //     }
-          // for (provider in providers) {
-          //     console.log(provider);
-          //     console.log(providers[provider]);
-          // }
-      });
+      // db.ref('users').orderByKey().startAt('8sbLBHdolnene5heupJdAEVdWM42').limitToFirst(2).once('value').then(function(snapshot){
+      //   console.log(snapshot.val());
 
-      $scope.createAccount = function() {
+      // })
 
-          console.log($scope.user);
-          firebase.auth().createUserWithEmailAndPassword($scope.user.email, $scope.user.password)
-              .then(function(result) {
-                  console.log(result);
-              })
-              .catch(function(error) {
-                  // Handle Errors here.
-                  console.log(error);
-                  var errorCode = error.code;
-                  var errorMessage = error.message;
-                  // ...
-              });
+      // firebase.auth().fetchProvidersForEmail('tinassood@gmail.com').then(function(providers) {
+      //     console.log(providers);
+      //     //     for (index in providers) {
+      //     //         if (provider == null || provider != 'email')
+      //     //             provider = providers[index];
+      //     //     }
+      //     // for (provider in providers) {
+      //     //     console.log(provider);
+      //     //     console.log(providers[provider]);
+      //     // }
+      // });
 
-      }
+      // $scope.createAccount = function() {
+
+      //     // console.log($scope.user);
+      //     firebase.auth().createUserWithEmailAndPassword($scope.user.email, $scope.user.password)
+      //         .then(function(result) {
+      //             console.log(result);
+      //         })
+      //         .catch(function(error) {
+      //             // Handle Errors here.
+      //             console.log(error);
+      //             var errorCode = error.code;
+      //             var errorMessage = error.message;
+      //             // ...
+      //         });
+
+      // }
 
 
       function changeEmail(str) {
@@ -121,8 +126,12 @@
       firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
               console.log(user);
+              $rootScope.uid = user.uid;
+              $rootScope.loginStatus = true;
               // User is signed in.
           } else {
+              $rootScope.uid = null;
+              $rootScope.loginStatus = true;
               console.log('No user is signed in');
               // No user is signed in.
           }
@@ -260,6 +269,7 @@
 
               // The firebase.auth.AuthCredential type that was used.
               var credential = error.credential;
+              $scope.linkAccount(error.email);
               // ...
           });
       }
