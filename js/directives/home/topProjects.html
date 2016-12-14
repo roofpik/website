@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="projects-wrapper" flex="80">
-        <div class="top-project-details" ng-repeat="project in projectList | orderBy:'overallRating'|limitTo:5">
+        <div class="top-project-details" ng-repeat="project in projectList | orderBy:'overallRating'|limitTo:5" ng-click="takeToDetails(project)">
             <figure>
                 <img ng-src="{{project.imgUrl}}"/>
                 <figcaption> #{{$index + 1}} of 8 projects in Gurgaon </figcaption>

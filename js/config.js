@@ -15,6 +15,20 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         });
 
     $stateProvider
+        .state('project-details', {
+            url: '/project-details/:year/:city/:type/:category/:project/:id',
+            templateUrl: 'templates/project-details.html',
+            controller: 'projectDetailsCtrl'
+        });
+
+    $stateProvider
+        .state('project-detail', {
+            url: '/project-detail/:year/:city/:type/:project/:id',
+            templateUrl: 'templates/project-details.html',
+            controller: 'projectDetailsCtrl'
+        });
+
+    $stateProvider
         .state('profile', {
             url: '/profile',
             templateUrl: 'templates/profile.html',
@@ -40,6 +54,27 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             url: '/edit-review/:city/:type/:typeId/:typeName/:id',
             templateUrl: 'templates/edit-review.html',
             controller: 'editReviewCtrl'
+        });
+
+    $stateProvider
+        .state('cover-stories', {
+            url: '/cover-stories/:city/:cityId/:from',
+            templateUrl: 'templates/cover-stories.html',
+            controller: 'coverStoriesCtrl'
+        });
+
+    $stateProvider
+        .state('cover-story', {
+            url: '/cover-story/:city/:cityId/:from/:fromId',
+            templateUrl: 'templates/cover-stories.html',
+            controller: 'coverStoriesCtrl'
+        });
+
+    $stateProvider
+        .state('story', {
+            url: '/story/:id',
+            templateUrl: 'templates/story.html',
+            controller: 'storyCtrl'
         });
 
         $urlRouterProvider.otherwise('/');
