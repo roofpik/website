@@ -12,48 +12,6 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
     $scope.ratingsObject7 = {};
     $scope.ratingsObject8 = {};
     $scope.ratingsObject9 = {};
-    // $scope.ratingParams = [
-    //     {
-    //         name: 'Security',
-    //         id: 2,
-    //         ratingObject: 'ratingsObject2'
-    //     },
-    //     {
-    //         name: 'Amenities',
-    //         id: 3,
-    //         ratingObject: 'ratingsObject3'
-    //     },
-    //     {
-    //         name: 'Open and green areas',
-    //         id: 4,
-    //         ratingObject: 'ratingsObject4'
-    //     },
-    //     {
-    //         name: 'Electricity and water supply',
-    //         id: 5,
-    //         ratingObject: 'ratingsObject5'
-    //     },
-    //     {
-    //         name: 'Convenience of housemaids',
-    //         id: 6,
-    //         ratingObject: 'ratingsObject6'
-    //     },
-    //     {
-    //         name: 'Convenience of parking',
-    //         id: 7,
-    //         ratingObject: 'ratingsObject7'
-    //     },
-    //     {
-    //         name: 'Infrastructure',
-    //         id: 8,
-    //         ratingObject: 'ratingsObject8'
-    //     },
-    //     {
-    //         name: 'Layout of the apartment',
-    //         id: 9,
-    //         ratingObject: 'ratingsObject9'
-    //     }
-    // ];
 
     $scope.yesNoParam = [
         {

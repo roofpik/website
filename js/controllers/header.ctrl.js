@@ -1,4 +1,4 @@
-app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope) {
+app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope, $timeout) {
     $scope.user = false;
     $scope.gotoHome = function() {
         console.log('called');
@@ -6,10 +6,17 @@ app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope) {
     }
 
 
-$rootScope.$watch('loginStatus', function(){
-    console.log($rootScope.loginStatus);
-     $scope.logStatus = $rootScope.loginStatus;
-});
+    $rootScope.$watch('loginStatus', function(){
+        console.log($rootScope.loginStatus);
+         $scope.loginStatus = $rootScope.loginStatus;
+    });
+
+    $rootScope.$on("callShowLogin", function(){
+        console.log('called');
+        $timeout(function(){
+            $scope.showLogin();
+        },1000);
+    });
    
 
     $scope.showLogin = function(ev) {

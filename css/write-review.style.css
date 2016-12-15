@@ -101,3 +101,9 @@
 .write-review-page .yes-no-ques #radio-btns {
 	padding-right:40px;
 }
+
+.write-review-page #loginSignup {
+	float:right;
+	color:red;
+	font-size:14px;
+}

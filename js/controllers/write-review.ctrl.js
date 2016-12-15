@@ -1,4 +1,5 @@
 app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $mdDialog, $rootScope) {
+    $scope.cityId = '-KYJONgh0P98xoyPPYm9';
 
     $scope.stepsModel = [];
     var newKey = '';
@@ -72,11 +73,14 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
             id: 'goodHospitals'
         }
     ];
-
-    $scope.login = {};
-    $scope.$watch('loginStatus', function() {
-        $scope.login.status = $rootScope.loginStatus;
-        console.log($scope.login.status);
+    $scope.loginStatus = $rootScope.loginStatus;
+    if(!$scope.loginStatus){
+        console.log('called');
+        $rootScope.$emit("callShowLogin", {});
+    }
+    $rootScope.$watch('loginStatus', function(){
+        console.log($rootScope.loginStatus);
+         $scope.loginStatus = $rootScope.loginStatus;
     });
 
     $scope.showMoreFn = function(){
@@ -186,11 +190,11 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
 
     $scope.createPath = function(review) {
         if ($scope.selectedProjectOrLocality.type == 'Project') {
-            newKey = db.ref('websiteReviews/-KPmH9oIem1N1_s4qpCv/residential/' + $scope.selectedProjectOrLocality.id).push().key;
-            $scope.path = 'websiteReviews/-KPmH9oIem1N1_s4qpCv/residential/' + $scope.selectedProjectOrLocality.id + '/' + newKey;
+            newKey = db.ref('websiteReviews/'+$scope.cityId+'/residential/' + $scope.selectedProjectOrLocality.id).push().key;
+            $scope.path = 'websiteReviews/'+$scope.cityId+'/residential/' + $scope.selectedProjectOrLocality.id + '/' + newKey;
         } else if ($scope.selectedProjectOrLocality.type == 'Locality') {
-            newKey = db.ref('websiteReviews/-KPmH9oIem1N1_s4qpCv/residential/' + $scope.selectedProjectOrLocality.id).push().key;
-            $scope.path = 'websiteReviews/-KPmH9oIem1N1_s4qpCv/residential/' + $scope.selectedProjectOrLocality.id + '/' + newKey;
+            newKey = db.ref('websiteReviews/'+$scope.cityId+'/residential/' + $scope.selectedProjectOrLocality.id).push().key;
+            $scope.path = 'websiteReviews/'+$scope.cityId+'/residential/' + $scope.selectedProjectOrLocality.id + '/' + newKey;
         }
         if ($scope.selectedFile) {
             $http({
@@ -360,14 +364,14 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
                 $scope.useReviewData = {
                     projectId: $scope.selectedProjectOrLocality.id,
                     projectName: $scope.selectedProjectOrLocality.name,
-                    cityId: '-KPmH9oIem1N1_s4qpCv',
+                    cityId: $scope.cityId,
                     cityName: 'Gurgaon',
                     reviewTitle: $scope.review.reviewTitle,
                     status: $scope.review.status,
                     createdDate: $scope.review.createdDate
                 }
                 $scope.review.wordCount = ($scope.review.reviewText).length;
-                updates['websiteReviews/-KPmH9oIem1N1_s4qpCv/residential/' + $scope.selectedProjectOrLocality.id + '/' + newKey] = $scope.review;
+                updates['websiteReviews/'+$scope.cityId+'/residential/' + $scope.selectedProjectOrLocality.id + '/' + newKey] = $scope.review;
                 updates['userReviews/' + $scope.review.userId + '/residential/' + newKey] = $scope.useReviewData
                 db.ref().update(updates).then(function() {
                     console.log('review successfully submitted');
@@ -393,13 +397,13 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
                 $scope.useReviewData = {
                     locationId: $scope.selectedProjectOrLocality.id,
                     locationName: $scope.selectedProjectOrLocality.name,
-                    cityId: '-KPmH9oIem1N1_s4qpCv',
+                    cityId: $scope.cityId,
                     cityName: 'Gurgaon',
                     reviewTitle: $scope.review.reviewTitle,
                     status: $scope.review.status,
                     createdDate: $scope.review.createdDate
                 }
-                updates['websiteReviews/-KPmH9oIem1N1_s4qpCv/locality/' + $scope.selectedProjectOrLocality.id + '/' + newKey] = $scope.review;
+                updates['websiteReviews/'+$scope.cityId+'/locality/' + $scope.selectedProjectOrLocality.id + '/' + newKey] = $scope.review;
                 updates['userReviews/' + $scope.review.userId + '/locality/' + newKey] = $scope.useReviewData;
                 db.ref().update(updates).then(function() {
                     console.log('review successfully submitted');
@@ -423,11 +427,6 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
             }
         }
     }
-
-    // $scope.openLogin = function() {
-    //     $('#gl-side-menu-btn').click();
-    // }
-
     $scope.uploadImage = function(){
         console.log('called');
         $( "#review-image" ).click();

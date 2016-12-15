@@ -1,7 +1,6 @@
 app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $http){
     console.log('working');
-
-    var uid = 'hT1YLR90MkUDX3PMgDpbdmyYviF3';
+    var uid = '8XGzXWp7l8RzbiCCfFv5GEzx6Mw2';
     $scope.cities = [];
     $scope.dataloaded = false;
     $scope.fileName = 'No Image Selected';
@@ -25,7 +24,7 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
         },0);
     })
 
-    db.ref('users/hT1YLR90MkUDX3PMgDpbdmyYviF3').once('value', function(snapshot){
+    db.ref('users/'+uid).once('value', function(snapshot){
         console.log(snapshot.val());
         $timeout(function(){
             $scope.user = snapshot.val();
@@ -44,8 +43,9 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
             if($scope.user.profileImage){
                 $scope.uploadedImage = $scope.user.profileImage;
             }
-            console.log($scope.user.address.cityName);
-            $scope.city = $scope.user.address.cityName;
+            if($scope.user.address){
+                $scope.city = $scope.user.address.cityName;
+            }
         }, 0);
     }).then(function(){
         $scope.dataloaded = true;
@@ -133,9 +133,9 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
         });
         var updates = {};
         db.ref('userRegistration/mobile/'+$scope.user.mobile.mobileNum).remove();
-        updates['users/hT1YLR90MkUDX3PMgDpbdmyYviF3/mobile/mobileNum'] = mob;
-        updates['users/hT1YLR90MkUDX3PMgDpbdmyYviF3/mobile/mobileProvided'] = true;
-        updates['users/hT1YLR90MkUDX3PMgDpbdmyYviF3/mobile/mobileVerified'] = true;
+        updates['users/'+uid+'/mobile/mobileNum'] = mob;
+        updates['users/'+uid+'/mobile/mobileProvided'] = true;
+        updates['users/'+uid+'/mobile/mobileVerified'] = true;
         updates['userRegistration/mobile/'+mob] = $scope.user.uid;
         console.log(updates);
         db.ref().update(updates).then(function(){
@@ -158,11 +158,17 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
         });
         // swal({ title: "Saving...", text: "Please wait.", showConfirmButton: false });
         console.log($scope.user);
-        if($scope.city != 'Gurgaon'){
-            console.log('city changed');
+        if($scope.city){
+            if($scope.city == 'Gurgaon'){
+                $scope.user.address ={};
+                $scope.user.address = {
+                    cityName: 'Gurgaon',
+                    cityId: '-KYJONgh0P98xoyPPYm9'
+                }
+            }
         }
         var updates = {};
-        updates['users/hT1YLR90MkUDX3PMgDpbdmyYviF3'] = $scope.user;
+        updates['users/'+uid] = $scope.user;
         db.ref().update(updates).then(function(){
             swal({
                 title: "Saved",
@@ -188,7 +194,7 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
           imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
           showConfirmButton: false
         });
-        $scope.path = 'users/hT1YLR90MkUDX3PMgDpbdmyYviF3/profileImage';
+        $scope.path = 'users/'+uid+'/profileImage';
 
         $http({
             method: 'POST',
@@ -213,7 +219,7 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
         $http.post("http://139.162.3.205/api/testupload", { path: JSON.stringify(imgUrl) })
             .success(function(response) {
                 if (response.StatusCode == 200) {
-                    db.ref('users/hT1YLR90MkUDX3PMgDpbdmyYviF3/profileImage').set(response.Message).then(function(){
+                    db.ref('users/'+uid+'/profileImage').set(response.Message).then(function(){
                         sweetAlert("Success", "Profile image successfully uploaded!", "success");
                     })
                 }
@@ -321,8 +327,8 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
             $timeout(function() {
                 $scope.uploadedImage = $scope.stepsModel[0];
                 console.log($scope.uploadedImage);
-                $scope.createPath($scope.uploadedImage);
-                // $scope.showAdvanced($scope.uploadedImage);
+                // $scope.createPath($scope.uploadedImage);
+                $scope.showAdvanced($scope.uploadedImage);
             }, 0);
         });
     }
@@ -331,5 +337,4 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
         console.log('called');
         $( "#profile-image-test" ).click();
     }
-
-})
+});
