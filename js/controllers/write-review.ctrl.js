@@ -427,4 +427,5 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
         console.log('called');
         $( "#review-image" ).click();
     }
+
 });
