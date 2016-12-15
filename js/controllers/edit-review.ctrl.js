@@ -13,6 +13,8 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
     $scope.ratingsObject8 = {};
     $scope.ratingsObject9 = {};
 
+    $scope.cityId = '-KYJONgh0P98xoyPPYm9';
+
     $scope.yesNoParam = [
         {
             ques: 'Is the project conveniently located ?',
@@ -35,6 +37,11 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
             id: 'goodHospitals'
         }
     ];
+    $scope.stepsModel = [];
+    var newKey = '';
+    $scope.selectedFile;
+    var basic;
+    $scope.uploadedImage = '';
 
     $scope.showMoreFn = function(){
         $scope.showMore = !$scope.showMore;
@@ -45,107 +52,125 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
         }
     }
     // console.log('reviews/'+$stateParams.city+'/'+$stateParams.type+'/'+$stateParams.typeId+'/'+$stateParams.id);
-    db.ref('reviews/'+$stateParams.city+'/'+$stateParams.type+'/'+$stateParams.typeId+'/'+$stateParams.id).once('value', function(snapshot){
-        $timeout(function(){
-            console.log(snapshot.val());
-            $scope.review = snapshot.val();
-            if($scope.review.imageUrl){
-                $scope.uploadedImage = $scope.review.imageUrl;
+    if($stateParams.reviewIn == 1){
+        db.ref('websiteReviews/'+$stateParams.city+'/'+$stateParams.type+'/'+$stateParams.typeId+'/'+$stateParams.id).once('value', function(snapshot){
+            $timeout(function(){
+                console.log(snapshot.val());
+                $scope.review = snapshot.val();
+                initializeValues();
+            },0);
+            
+        })        
+    } else {
+        db.ref('reviews/'+$stateParams.city+'/'+$stateParams.type+'/'+$stateParams.typeId+'/'+$stateParams.id).once('value', function(snapshot){
+            $timeout(function(){
+                console.log(snapshot.val());
+                $scope.review = snapshot.val();
+                initializeValues();
+            },0);
+        })
+    }
+
+    function initializeValues(){
+        if($scope.review.imageUrl){
+            $scope.uploadedImage = $scope.review.imageUrl;
+        }
+        $scope.ratingsObject1 = {
+            iconOnColor: 'rgb(255,87,34)', //Optional
+            iconOffColor: 'rgb(140, 140, 140)', //Optional
+            rating: $scope.review.overallRating || 0, //Optional
+            minRating: 0, //Optional
+            readOnly: false, //Optional
+            callback: function(rating, index) { //Mandatory    
+                $scope.ratingsCallback1(rating, 1);
             }
-            $scope.ratingsObject1 = {
-                iconOnColor: 'rgb(255,87,34)', //Optional
-                iconOffColor: 'rgb(140, 140, 140)', //Optional
-                rating: $scope.review.overallRating || 0, //Optional
-                minRating: 0, //Optional
-                readOnly: false, //Optional
-                callback: function(rating, index) { //Mandatory    
-                    $scope.ratingsCallback1(rating, 1);
-                }
-            };
-            $scope.ratingsObject2 = {
-                iconOnColor: 'rgb(255,87,34)', //Optional
-                iconOffColor: 'rgb(140, 140, 140)', //Optional
-                rating: $scope.review.ratings.security || 0, //Optional
-                minRating: 0, //Optional
-                readOnly: false, //Optional
-                callback: function(rating, index) { //Mandatory    
-                    $scope.ratingsCallback2(rating, 2);
-                }
-            };
-            $scope.ratingsObject3 = {
-                iconOnColor: 'rgb(255,87,34)', //Optional
-                iconOffColor: 'rgb(140, 140, 140)', //Optional
-                rating: $scope.review.ratings.amenities || 0, //Optional
-                minRating: 0, //Optional
-                readOnly: false, //Optional
-                callback: function(rating, index) { //Mandatory    
-                    $scope.ratingsCallback3(rating, 3);
-                }
-            };
-            $scope.ratingsObject4 = {
-                iconOnColor: 'rgb(255,87,34)', //Optional
-                iconOffColor: 'rgb(140, 140, 140)', //Optional
-                rating: $scope.review.ratings.openAndGreenAreas || 0, //Optional
-                minRating: 0, //Optional
-                readOnly: false, //Optional
-                callback: function(rating, index) { //Mandatory    
-                    $scope.ratingsCallback4(rating, 4);
-                }
-            };
-            $scope.ratingsObject5 = {
-                iconOnColor: 'rgb(255,87,34)', //Optional
-                iconOffColor: 'rgb(140, 140, 140)', //Optional
-                rating: $scope.review.ratings.electricityAndWaterSupply || 0, //Optional
-                minRating: 0, //Optional
-                readOnly: false, //Optional
-                callback: function(rating, index) { //Mandatory    
-                    $scope.ratingsCallback5(rating, 5);
-                }
-            };
-            $scope.ratingsObject6 = {
-                iconOnColor: 'rgb(255,87,34)', //Optional
-                iconOffColor: 'rgb(140, 140, 140)', //Optional
-                rating: $scope.review.ratings.convenienceOfHouseMaids || 0, //Optional
-                minRating: 0, //Optional
-                readOnly: false, //Optional
-                callback: function(rating, index) { //Mandatory    
-                    $scope.ratingsCallback6(rating, 6);
-                }
-            };
-            $scope.ratingsObject7 = {
-                iconOnColor: 'rgb(255,87,34)', //Optional
-                iconOffColor: 'rgb(140, 140, 140)', //Optional
-                rating: $scope.review.ratings.convenienceOfParking || 0, //Optional
-                minRating: 0, //Optional
-                readOnly: false, //Optional
-                callback: function(rating, index) { //Mandatory    
-                    $scope.ratingsCallback7(rating, 7);
-                }
-            };
-            $scope.ratingsObject8 = {
-                iconOnColor: 'rgb(255,87,34)', //Optional
-                iconOffColor: 'rgb(140, 140, 140)', //Optional
-                rating: $scope.review.ratings.infrastructure || 0, //Optional
-                minRating: 0, //Optional
-                readOnly: false, //Optional
-                callback: function(rating, index) { //Mandatory    
-                    $scope.ratingsCallback8(rating, 8);
-                }
-            };
-            $scope.ratingsObject9 = {
-                iconOnColor: 'rgb(255,87,34)', //Optional
-                iconOffColor: 'rgb(140, 140, 140)', //Optional
-                rating: $scope.review.ratings.layoutOfApartment || 0, //Optional
-                minRating: 0, //Optional
-                readOnly: false, //Optional
-                callback: function(rating, index) { //Mandatory    
-                    $scope.ratingsCallback9(rating, 9);
-                }
-            };
-            $scope.dataloaded = true;
-        },0);
-        
-    })
+        };
+        if(!$scope.review.ratings){
+            $scope.review.ratings = {};
+        }
+        $scope.ratingsObject2 = {
+            iconOnColor: 'rgb(255,87,34)', //Optional
+            iconOffColor: 'rgb(140, 140, 140)', //Optional
+            rating: $scope.review.ratings.security || 0, //Optional
+            minRating: 0, //Optional
+            readOnly: false, //Optional
+            callback: function(rating, index) { //Mandatory    
+                $scope.ratingsCallback2(rating, 2);
+            }
+        };
+        $scope.ratingsObject3 = {
+            iconOnColor: 'rgb(255,87,34)', //Optional
+            iconOffColor: 'rgb(140, 140, 140)', //Optional
+            rating: $scope.review.ratings.amenities || 0, //Optional
+            minRating: 0, //Optional
+            readOnly: false, //Optional
+            callback: function(rating, index) { //Mandatory    
+                $scope.ratingsCallback3(rating, 3);
+            }
+        };
+        $scope.ratingsObject4 = {
+            iconOnColor: 'rgb(255,87,34)', //Optional
+            iconOffColor: 'rgb(140, 140, 140)', //Optional
+            rating: $scope.review.ratings.openAndGreenAreas || 0, //Optional
+            minRating: 0, //Optional
+            readOnly: false, //Optional
+            callback: function(rating, index) { //Mandatory    
+                $scope.ratingsCallback4(rating, 4);
+            }
+        };
+
+        $scope.ratingsObject5 = {
+            iconOnColor: 'rgb(255,87,34)', //Optional
+            iconOffColor: 'rgb(140, 140, 140)', //Optional
+            rating: $scope.review.ratings.electricityAndWaterSupply || 0, //Optional
+            minRating: 0, //Optional
+            readOnly: false, //Optional
+            callback: function(rating, index) { //Mandatory    
+                $scope.ratingsCallback5(rating, 5);
+            }
+        };
+        $scope.ratingsObject6 = {
+            iconOnColor: 'rgb(255,87,34)', //Optional
+            iconOffColor: 'rgb(140, 140, 140)', //Optional
+            rating: $scope.review.ratings.convenienceOfHouseMaids || 0, //Optional
+            minRating: 0, //Optional
+            readOnly: false, //Optional
+            callback: function(rating, index) { //Mandatory    
+                $scope.ratingsCallback6(rating, 6);
+            }
+        };
+        $scope.ratingsObject7 = {
+            iconOnColor: 'rgb(255,87,34)', //Optional
+            iconOffColor: 'rgb(140, 140, 140)', //Optional
+            rating: $scope.review.ratings.convenienceOfParking || 0, //Optional
+            minRating: 0, //Optional
+            readOnly: false, //Optional
+            callback: function(rating, index) { //Mandatory    
+                $scope.ratingsCallback7(rating, 7);
+            }
+        };
+        $scope.ratingsObject8 = {
+            iconOnColor: 'rgb(255,87,34)', //Optional
+            iconOffColor: 'rgb(140, 140, 140)', //Optional
+            rating: $scope.review.ratings.infrastructure || 0, //Optional
+            minRating: 0, //Optional
+            readOnly: false, //Optional
+            callback: function(rating, index) { //Mandatory    
+                $scope.ratingsCallback8(rating, 8);
+            }
+        };
+        $scope.ratingsObject9 = {
+            iconOnColor: 'rgb(255,87,34)', //Optional
+            iconOffColor: 'rgb(140, 140, 140)', //Optional
+            rating: $scope.review.ratings.layoutOfApartment || 0, //Optional
+            minRating: 0, //Optional
+            readOnly: false, //Optional
+            callback: function(rating, index) { //Mandatory    
+                $scope.ratingsCallback9(rating, 9);
+            }
+        };
+        $scope.dataloaded = true;
+    }
 
     $scope.ratingsCallback1 = function(rating, index) {
         // console.log('Selected rating is : ', rating, ' and index is ', index);
@@ -191,16 +216,6 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
         // console.log('Selected rating is : ', rating, ' and index is ', index);
         $scope.review.ratings.layoutOfApartment= rating;
     };
-
-
-
-    $scope.stepsModel = [];
-    var newKey = '';
-
-    $scope.selectedFile;
-
-    var basic;
-    $scope.uploadedImage = '';
 
     $scope.showAdvanced = function(imageUrl) {
         // console.log($scope.uploadedImage);
@@ -318,9 +333,8 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
     
 
     $scope.createPath = function(review){
-        // console.log(review);
-        // console.log($scope.selectedFile);
-        $scope.path = 'reviews/-KPmH9oIem1N1_s4qpCv/'+$stateParams.type+'/'+$stateParams.typeId+'/'+$stateParams.id;
+
+        $scope.path = 'reviews/'+$scope.cityId+'/'+$stateParams.type+'/'+$stateParams.typeId+'/'+$stateParams.id;
         // $scope.path = ''
         if($scope.selectedFile){
             // console.log('called');
@@ -370,10 +384,12 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
             review.imageUrl = imageUrl;
         }
         review.createdDate = new Date().getTime();
+        review.status = 'uploaded';
         var updates = {};
-        updates['reviews/-KPmH9oIem1N1_s4qpCv/'+$stateParams.type+'/'+$stateParams.typeId+'/'+$stateParams.id] = review;
+        updates['websiteReviews/'+$scope.cityId+'/'+$stateParams.type+'/'+$stateParams.typeId+'/'+$stateParams.id] = review;
         updates['userReviews/'+review.userId+'/'+$stateParams.type+'/'+$stateParams.id+'/createdDate'] = review.createdDate;
         updates['userReviews/'+review.userId+'/'+$stateParams.type+'/'+$stateParams.id+'/reviewTitle'] = review.reviewTitle;
+        updates['userReviews/'+review.userId+'/'+$stateParams.type+'/'+$stateParams.id+'/status'] = 'uploaded';
         // console.log(updates);
         db.ref().update(updates).then(function(){
             // console.log('updated review');

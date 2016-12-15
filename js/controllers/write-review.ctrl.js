@@ -3,7 +3,7 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
 
     $scope.stepsModel = [];
     var newKey = '';
-
+    var user;
     $scope.selectedFile;
     var basic;
     $scope.showMoreLess = 'Show More +';
@@ -73,15 +73,25 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
             id: 'goodHospitals'
         }
     ];
-    $scope.loginStatus = $rootScope.loginStatus;
-    if(!$scope.loginStatus){
-        console.log('called');
+
+    $rootScope.$watch('loginStatus', function(){
+        if($rootScope.loginStatus){
+            user = firebase.auth().currentUser;
+            console.log(user);
+        }
+    });
+
+    if(checkLocalStorage('loginStatus')){
+        $scope.loginStatus = JSON.parse(localStorage.getItem('loginStatus'));
+        if(JSON.parse(localStorage.getItem('loginStatus'))){
+            user = firebase.auth().currentUser;
+            console.log(user);   
+        } else{
+            $rootScope.$emit("callShowLogin", {});
+        }
+    } else {
         $rootScope.$emit("callShowLogin", {});
     }
-    $rootScope.$watch('loginStatus', function(){
-        console.log($rootScope.loginStatus);
-         $scope.loginStatus = $rootScope.loginStatus;
-    });
 
     $scope.showMoreFn = function(){
         $scope.showMore = !$scope.showMore;
@@ -232,7 +242,7 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
     $scope.pushToProjectLocality = function(data) {
         $scope.projectLocality = [];
         for(key in data){
-            if(data[key].type != 'Developer'){
+            if(data[key].type != 'Builder'){
                 $scope.projectLocality.push(data[key]);
             }
         }
@@ -265,22 +275,6 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
             },0);
         })  
     }
-
-    // if (!checkLocalStorage('searchList')) {
-    //     db.ref('search').once('value', function(dataSnapshot) {
-    //         console.log(dataSnapshot);
-    //         $timeout(function() {
-    //             $scope.searchList = dataSnapshot.val();
-    //             setLocalStorage('search', $scope.searchList, 1);
-    //             console.log($scope.searchObject);
-    //             $scope.pushToProjectLocality($scope.searchObject);
-    //         }, 0);
-    //     })
-    // } else {
-    //     var data = getLocalStorage('searchList');
-    //     console.log(data);
-    //     $scope.pushToProjectLocality(data);
-    // }
 
     $scope.nameEntered = function() {
         if ($scope.selectedItem) {
@@ -345,11 +339,11 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
               imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
               showConfirmButton: false
             });
-            var user = firebase.auth().currentUser;
-            // $scope.review.userName = user.displayName;
-            $scope.review.userName = 'Anu Porwal';
-            // $scope.review.userId = user.uid;
-            $scope.review.userId = '2cQ2XQ7w7pdT9WGq2nyGJhrPSOo2';
+            console.log(user);
+            $scope.review.userName = user.displayName;
+            // $scope.review.userName = 'Anu Porwal';
+            $scope.review.userId = user.uid;
+            // $scope.review.userId = '2cQ2XQ7w7pdT9WGq2nyGJhrPSOo2';
             $scope.review.blocked = false;
             $scope.review.createdDate = new Date().getTime();
             $scope.review.dataFormat = 1;
@@ -372,7 +366,8 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
                 }
                 $scope.review.wordCount = ($scope.review.reviewText).length;
                 updates['websiteReviews/'+$scope.cityId+'/residential/' + $scope.selectedProjectOrLocality.id + '/' + newKey] = $scope.review;
-                updates['userReviews/' + $scope.review.userId + '/residential/' + newKey] = $scope.useReviewData
+                updates['userReviews/' + $scope.review.userId + '/residential/' + newKey] = $scope.useReviewData;
+                console.log(updates);
                 db.ref().update(updates).then(function() {
                     console.log('review successfully submitted');
                     $timeout(function() {
@@ -395,8 +390,8 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
             } else if ($scope.selectedProjectOrLocality.type == 'Locality') {
                 var updates = {};
                 $scope.useReviewData = {
-                    locationId: $scope.selectedProjectOrLocality.id,
-                    locationName: $scope.selectedProjectOrLocality.name,
+                    localityId: $scope.selectedProjectOrLocality.id,
+                    localityName: $scope.selectedProjectOrLocality.name,
                     cityId: $scope.cityId,
                     cityName: 'Gurgaon',
                     reviewTitle: $scope.review.reviewTitle,
@@ -405,6 +400,7 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
                 }
                 updates['websiteReviews/'+$scope.cityId+'/locality/' + $scope.selectedProjectOrLocality.id + '/' + newKey] = $scope.review;
                 updates['userReviews/' + $scope.review.userId + '/locality/' + newKey] = $scope.useReviewData;
+                console.log(updates);
                 db.ref().update(updates).then(function() {
                     console.log('review successfully submitted');
                     $timeout(function() {

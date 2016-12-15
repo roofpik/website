@@ -51,7 +51,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 
     $stateProvider
         .state('edit-review', {
-            url: '/edit-review/:city/:type/:typeId/:typeName/:id',
+            url: '/edit-review/:city/:type/:typeId/:typeName/:id/:reviewIn',
             templateUrl: 'templates/edit-review.html',
             controller: 'editReviewCtrl'
         });
