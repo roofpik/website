@@ -98,5 +98,19 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             controller: 'blogDetailsCtrl'
         });
 
+    $stateProvider
+        .state('about-us', {
+            url: '/about-us',
+            templateUrl: 'templates/about-us.html',
+            controller: 'aboutUsCtrl'
+        });
+
+    $stateProvider
+        .state('contact-us', {
+            url: '/contact-us',
+            templateUrl: 'templates/contact-us.html',
+            controller: 'contactUsCtrl'
+        });
+
         $urlRouterProvider.otherwise('/');
 }]);
