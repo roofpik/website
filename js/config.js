@@ -112,5 +112,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             controller: 'contactUsCtrl'
         });
 
+    $stateProvider
+        .state('faq', {
+            url: '/faq',
+            templateUrl: 'templates/faq.html',
+            controller: 'faqCtrl'
+        });
+
         $urlRouterProvider.otherwise('/');
 }]);

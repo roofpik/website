@@ -39,8 +39,11 @@ app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope, $ti
         console.log('sign out');
         firebase.auth().signOut().then(function() {
             // Sign-out successful.
-            $rootScope.loginStatus = false;
-            deleteLocalStorage('loginStatus');
+            $timeout(function(){
+                $scope.loginStatus = false;
+                $rootScope.loginStatus = false;
+                deleteLocalStorage('loginStatus');
+            },100);
 
         }, function(error) {
             // An error happened.

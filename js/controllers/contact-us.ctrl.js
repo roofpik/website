@@ -7,7 +7,7 @@ app.controller('contactUsCtrl', function($timeout, $scope) {
     	var bounds = new google.maps.LatLngBounds();
         var mapCanvas = document.getElementById("map");
         var mapOptions = {
-            center: new google.maps.LatLng(28.406697, 77.042664),
+            center: new google.maps.LatLng(28.408844, 77.042313),
             zoom: 16
         }
         var map = new google.maps.Map(mapCanvas, mapOptions);
