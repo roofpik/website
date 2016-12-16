@@ -12,6 +12,10 @@
     cursor: pointer;
 }
 
+#faq .faq-question h3 {
+	font-size:20px;
+}
+
 #faq .faq-question:focus {
     outline: none;
     border: 0;
@@ -19,6 +23,7 @@
 
 #faq .faq-answer {
     background: #fff;
+    font-size:18px;
 }
 
 
