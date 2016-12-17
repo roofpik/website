@@ -2,7 +2,7 @@ app.controller('faqCtrl', function($scope, $timeout){
 	$scope.faq = [
 		{
 			ques: 'What is Roofpik?',
-			ans: 'Roofpik is your very own Platform which captures your views on a residential project,under construction property and locality.',
+			ans: 'Roofpik is your very own Platform which captures your views on a residential project, under construction property and locality.',
 			val: false
 		},
 		{
