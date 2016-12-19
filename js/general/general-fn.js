@@ -48,16 +48,6 @@ function randomString(length) {
     return result;
 }
 
-// function checkUserToken(){
-//     var userToken = '';
-//     if(checkLocalStorage('userToken')){
-//         userToken = getLocalStorage('userToken');
-//     } else {
-//         userToken = randomString(16);
-//         localStorage.setItem('userToken', JSON.stringify(userToken));
-//     }
-// }
-
 
 app.factory("UserTokenService", function($timeout){
    var service = {};
@@ -74,19 +64,14 @@ app.factory("UserTokenService", function($timeout){
             localStorage.setItem('userToken', JSON.stringify(userToken));
         }
         if(from == 1){
-            console.log('called 1');
-            storeData(urlInfo,timestamp,userToken, 'pageVisit', 0);
+            storeData(urlInfo, timestamp, userToken, 'pageVisit', 0);
         } else if(from ==2){
-            console.log('called 2');
-            storeData(urlInfo,timestamp,userToken, 'cityClicked', 0);
+            storeData(urlInfo, timestamp, userToken, 'cityClicked', 0);
         } else if(from == 3){
-            console.log('called 3');
             storeData(urlInfo, timestamp, userToken, 'searchItems', 0);
         } else if(from == 4) {
-            console.log('called 4');
             storeData(urlInfo, timestamp, userToken, 'uid', true);
         } else if(from == 5) {
-            console.log('called 5');
             storeData(urlInfo, timestamp, userToken, 'uid', false);
         }
     }
