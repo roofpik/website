@@ -1,4 +1,10 @@
-app.controller('faqCtrl', function($scope, $timeout){
+app.controller('faqCtrl', function($scope, $timeout, UserTokenService, $location){
+    var timestamp = new Date().getTime();
+    var urlInfo = {
+        url: $location.path()
+    }
+    UserTokenService.checkToken(urlInfo, timestamp, 1);
+    
 	$scope.faq = [
 		{
 			ques: 'What is Roofpik?',

@@ -1,6 +1,11 @@
-app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $rootScope, $state, $sce, $mdDialog){
+app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $rootScope, $state, $sce, $mdDialog, UserTokenService, $location){
 
-
+    var timestamp = new Date().getTime();
+    var urlInfo = {
+        url: $location.path()
+    }
+    UserTokenService.checkToken(urlInfo, timestamp, 1);
+    
     var rates = [1, 2, 3, 4, 5];
     $scope.projectId = $stateParams.id;
     $scope.reviews = [];

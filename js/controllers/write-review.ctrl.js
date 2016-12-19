@@ -1,6 +1,11 @@
-app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $mdDialog, $rootScope) {
-    $scope.cityId = '-KYJONgh0P98xoyPPYm9';
+app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $mdDialog, $rootScope, UserTokenService, $location) {
+    var timestamp = new Date().getTime();
+    var urlInfo = {
+        url: $location.path()
+    }
+    UserTokenService.checkToken(urlInfo, timestamp, 1);
 
+    $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.stepsModel = [];
     var newKey = '';
     var user;

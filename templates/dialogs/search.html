@@ -11,7 +11,7 @@
     <md-dialog-content>
         <div class="md-dialog-content" layout="flex" flex layout-align="center center" layout-wrap>
             <div flex="100">
-                <input type="text" placeholder="Search by project, builder, landmark or locality" ng-model="searchText" autofocus/>
+                <input type="text" placeholder="Search by project, builder, landmark or locality" ng-model="searchText" ng-change="printSearchText()" autofocus/>
             </div>
             <md-list flex="100">
                 <md-list-item class="md-3-line search-item" ng-click="selectItem(item)" class="" ng-repeat="item in searchList | filter:searchText | limitTo:'10'" ng-show="{{item.show}}">

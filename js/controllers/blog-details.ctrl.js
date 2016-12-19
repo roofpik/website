@@ -1,5 +1,10 @@
-app.controller('blogDetailsCtrl', function($scope, $timeout, $stateParams, $sce, $state){
-	console.log($stateParams);
+app.controller('blogDetailsCtrl', function($scope, $timeout, $stateParams, $sce, $state, UserTokenService, $location){
+    var timestamp = new Date().getTime();
+    var urlInfo = {
+        url: $location.path()
+    }
+    UserTokenService.checkToken(urlInfo, timestamp, 1);
+    
 	$scope.currentStory = {};
 	$scope.cityId ='-KYJONgh0P98xoyPPYm9';
 	db.ref('blogs/allBlogs/'+$stateParams.id).once('value', function(snapshot){

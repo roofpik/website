@@ -1,7 +1,14 @@
-app.controller('contactUsCtrl', function($timeout, $scope) {
+app.controller('contactUsCtrl', function($timeout, $scope, UserTokenService,$location) {
 	$timeout(function() {
         myMap();
     }, 100);
+
+    var timestamp = new Date().getTime();
+    var urlInfo = {
+        url: $location.path()
+    }
+    UserTokenService.checkToken(urlInfo, timestamp, 1);
+    
 
     function myMap() {
     	var bounds = new google.maps.LatLngBounds();

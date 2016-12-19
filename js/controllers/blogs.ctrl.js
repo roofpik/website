@@ -1,4 +1,10 @@
-app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce, $stateParams) {
+app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce, $stateParams, UserTokenService, $location) {
+    var timestamp = new Date().getTime();
+    var urlInfo = {
+        url: $location.path()
+    }
+    UserTokenService.checkToken(urlInfo, timestamp, 1);
+    
 
     $scope.showNoBlogs = false;
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';

@@ -1,5 +1,11 @@
-app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $stateParams, $mdDialog){
+app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $stateParams, $mdDialog, UserTokenService, $location){
     // console.log($stateParams);
+    var timestamp = new Date().getTime();
+    var urlInfo = {
+        url: $location.path()
+    }
+    UserTokenService.checkToken(urlInfo, timestamp, 1);
+    
     $scope.dataloaded = false;
     $scope.reviewName = $stateParams.typeName;
     $scope.showMoreLess = 'Show More +';

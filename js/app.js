@@ -1,13 +1,14 @@
 var app = angular.module('roofpik', ['ngMaterial', 'ui.router']);
 
-app.run(function($rootScope, $mdDialog, $timeout) {
+app.run(function($rootScope, $mdDialog, $timeout, UserTokenService) {
     $rootScope.loginStatus = false;
     $rootScope.uid = null;
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             console.log(user);
-
             $rootScope.uid = user.uid;
+            var timestamp = new Date().getTime();
+            UserTokenService.checkToken($rootScope.uid, timestamp, 4);
             $rootScope.loginStatus = true;
             localStorage.setItem('loginStatus', true);
             console.log($rootScope.loginStatus);

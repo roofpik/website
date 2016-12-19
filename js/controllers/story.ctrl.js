@@ -1,5 +1,10 @@
-app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $state){
-	console.log($stateParams);
+app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $state, UserTokenService, $location){
+    var timestamp = new Date().getTime();
+    var urlInfo = {
+        url: $location.path()
+    }
+    UserTokenService.checkToken(urlInfo, timestamp, 1);
+    
 	$scope.featuredStories = [];
 	$scope.cityId = '-KYJONgh0P98xoyPPYm9';
 	db.ref('coverStory/stories/'+$stateParams.id).once('value', function(snapshot){

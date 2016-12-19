@@ -1,6 +1,11 @@
-app.controller('userAllReviewsCtrl', function($scope, $timeout, $state, $rootScope){
+app.controller('userAllReviewsCtrl', function($scope, $timeout, $state, $rootScope, UserTokenService, $location){
 	// var user = firebase.auth().currentUser;
-
+    var timestamp = new Date().getTime();
+    var urlInfo = {
+        url: $location.path()
+    }
+    UserTokenService.checkToken(urlInfo, timestamp, 1);
+    
 	$scope.allReviews = {};
 	var count = 0;
 	$scope.dataloaded = false;

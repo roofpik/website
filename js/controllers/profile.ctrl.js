@@ -1,5 +1,10 @@
-app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $http){
-    console.log('working');
+app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $http, UserTokenService, $location){
+    var timestamp = new Date().getTime();
+    var urlInfo = {
+        url: $location.path()
+    }
+    UserTokenService.checkToken(urlInfo, timestamp, 1);
+    
     var uid = '8XGzXWp7l8RzbiCCfFv5GEzx6Mw2';
     $scope.cities = [];
     $scope.dataloaded = false;
