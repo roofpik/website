@@ -74,20 +74,33 @@ app.factory("UserTokenService", function($timeout){
             localStorage.setItem('userToken', JSON.stringify(userToken));
         }
         if(from == 1){
-            storeData(urlInfo,timestamp,userToken, 'pageVisit');
+            console.log('called 1');
+            storeData(urlInfo,timestamp,userToken, 'pageVisit', 0);
         } else if(from ==2){
-            storeData(urlInfo,timestamp,userToken, 'cityClicked');
+            console.log('called 2');
+            storeData(urlInfo,timestamp,userToken, 'cityClicked', 0);
         } else if(from == 3){
-            storeData(urlInfo, timestamp, userToken, 'searchItems');
-        } else {
-            storeData(urlInfo, timestamp, userToken, 'uid');
+            console.log('called 3');
+            storeData(urlInfo, timestamp, userToken, 'searchItems', 0);
+        } else if(from == 4) {
+            console.log('called 4');
+            storeData(urlInfo, timestamp, userToken, 'uid', true);
+        } else if(from == 5) {
+            console.log('called 5');
+            storeData(urlInfo, timestamp, userToken, 'uid', false);
         }
     }
 
-    function storeData(data, timestamp, id, path){
+    function storeData(data, timestamp, id, path, val){
         var updates = {};
         if(path == 'uid'){
-            updates['userWebsiteClicksInfo/-KYJONgh0P98xoyPPYm9/'+id+'/uid'] = data;
+            var key;
+            if(val){
+                key = 'loginTime';
+            } else {
+                key = 'logoutTime';
+            }
+            updates['userWebsiteClicksInfo/-KYJONgh0P98xoyPPYm9/'+id+'/uid/'+data+'/'+key+'/'+timestamp] = val;
         } else {
             updates['userWebsiteClicksInfo/-KYJONgh0P98xoyPPYm9/'+id+'/'+path+'/'+timestamp] = data;
         }

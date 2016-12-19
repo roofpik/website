@@ -1,4 +1,4 @@
-app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope, $timeout) {
+app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope, $timeout, UserTokenService) {
     $scope.user = false;
     $scope.gotoHome = function() {
         console.log('called');
@@ -37,6 +37,8 @@ app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope, $ti
 
     $scope.logout = function() {
         console.log('sign out');
+        var timestamp = new Date().getTime();
+        UserTokenService.checkToken($rootScope.uid, timestamp, 5);
         firebase.auth().signOut().then(function() {
             // Sign-out successful.
             $timeout(function(){
@@ -47,6 +49,8 @@ app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope, $ti
 
         }, function(error) {
             // An error happened.
+            var timestamp = new Date().getTime();
+            UserTokenService.checkToken($rootScope.uid, timestamp, 4);
         });
 
     };
