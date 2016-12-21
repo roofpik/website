@@ -4,17 +4,21 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
         url: $location.path()
     }
     UserTokenService.checkToken(urlInfo, timestamp, 1);
+    var uid = '8XGzXWp7l8RzbiCCfFv5GEzx6Mw2';
 
-
+    $scope.imageType = 'profile';
+    $scope.uploadPath = 'users/'+uid+'/profileImage';
+    $scope.imageName = uid;
     $scope.imageUploadResponseFn = function(valueFromDirective) {
-        db.ref('users/' + uid + '/profileImage').set(valueFromDirective.imgUrl).then(function() {
+        console.log(valueFromDirective);
+        db.ref('users/' + uid + '/profileImage').set(valueFromDirective).then(function() {
             sweetAlert("Success", "Profile image successfully uploaded!", "success");
         });
     }
 
 
 
-    var uid = '8XGzXWp7l8RzbiCCfFv5GEzx6Mw2';
+    
     $scope.cities = [];
     $scope.dataloaded = false;
     $scope.fileName = 'No Image Selected';
@@ -55,7 +59,7 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
                 $scope.showAddMobile = true;
             }
             if ($scope.user.profileImage) {
-                $scope.uploadedImage = "http://cdn.roofpik.com/roofpik/test/11/"+$scope.user.profileImage+'-xs.jpg';
+                $scope.uploadedImage = "http://cdn.roofpik.com/roofpik/users/"+uid+'/profileImage/'+$scope.user.profileImage+'-m.jpg';
             }
             if ($scope.user.address) {
                 $scope.city = $scope.user.address.cityName;

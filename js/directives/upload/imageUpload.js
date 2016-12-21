@@ -13,13 +13,15 @@ app.directive('imageUpload', function() {
             imageType: '@imageType',
             minHeight: '@minHeight',
             minWidth: '@minWidth',
+            uploadPath: '@uploadPath',
+            imageName: '@imageName',
+            imageType: '@imageType',
             imageUploadResponse: "="
         },
         templateUrl: 'js/directives/upload/imageUpload.html',
         controller: 'imageUploadCtrl'
     }
 });
-
 app.controller('imageUploadCtrl', function($scope, $timeout, uploadImage, $q, $http) {
     var can = document.getElementById('img-canvas');
     var ctx = can.getContext('2d');
@@ -34,13 +36,16 @@ app.controller('imageUploadCtrl', function($scope, $timeout, uploadImage, $q, $h
         ['viewPortHeight', 400],
         ['boundryWidth', 600],
         ['boundryHeight', 600],
-        ['imageType', 'general']
+        ['imageType', 'general'],
+        ['imageName', null],
+        ['uploadPath', 'imageUpload']
     ];
     for (var i = 0, len = allScopeVar.length; i < len; i++) {
         initializeScopeVar(allScopeVar[i][0], allScopeVar[i][1]);
     }
 
     $timeout(function() {
+
         $("#crop-dialog").dialog({
             autoOpen: false,
             minHeight: ($scope.boundryHeight * 1.2),
@@ -170,16 +175,13 @@ app.controller('imageUploadCtrl', function($scope, $timeout, uploadImage, $q, $h
 
     $('#uploadImage').on('click', function() {
         loading(true);
-
         q = $q.defer();
-        var upload = uploadImage.profileImage(can.toDataURL(), q);
+        var upload = uploadImage.upload($scope.uploadPath, can.toDataURL(), $scope.imageType, $scope.imageName, q);
         upload.then(function(response) {
             clearFile();
             loading(false);
-            console.log(response);
-            $scope.imageUploadResponse(response);
+            $scope.imageUploadResponse(response.imgUrl);
         }, function(error) {
-            console.log(error);
             clearFile();
             loading(false);
         });
@@ -225,16 +227,21 @@ app.controller('imageUploadCtrl', function($scope, $timeout, uploadImage, $q, $h
 app.service('uploadImage', function($http) {
 
     return {
-        profileImage: function(image, q) {
+        upload: function(path, image, imgType, imgName, q) {
 
             $http({
                     url: 'http://139.162.9.71/api/uploadImage',
                     method: "POST",
-                    data: { 'img': image, 'path': 'test/11' }
+                    data: {
+                        'path': path,
+                        'img': image,
+                        'imgType': imgType,
+                        'imgName': imgName
+                    }
                 })
                 .then(function(response) {
                         // success
-                        console.log(response.data)
+                        console.log(response);
                         if (response.data.status == 200) {
                             q.resolve({
                                 imgUrl: response.data.imageName
@@ -248,6 +255,7 @@ app.service('uploadImage', function($http) {
                     },
                     function(response) { // optional
                         // failed
+                        console.log(response);
                         q.reject({
                             imgUrl: 'NA'
                         });
