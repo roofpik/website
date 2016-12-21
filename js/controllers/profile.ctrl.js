@@ -1,10 +1,19 @@
-app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $http, UserTokenService, $location){
+app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $http, UserTokenService, $location) {
     var timestamp = new Date().getTime();
     var urlInfo = {
         url: $location.path()
     }
     UserTokenService.checkToken(urlInfo, timestamp, 1);
-    
+
+
+    $scope.imageUploadResponseFn = function(valueFromDirective) {
+        db.ref('users/' + uid + '/profileImage').set(valueFromDirective.imgUrl).then(function() {
+            sweetAlert("Success", "Profile image successfully uploaded!", "success");
+        });
+    }
+
+
+
     var uid = '8XGzXWp7l8RzbiCCfFv5GEzx6Mw2';
     $scope.cities = [];
     $scope.dataloaded = false;
@@ -19,64 +28,64 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
 
     $('.profile-page').hide();
 
-    db.ref('city').once('value', function(snapshot){
-        $timeout(function(){
+    db.ref('city').once('value', function(snapshot) {
+        $timeout(function() {
             $scope.cities.push('Select City');
             $scope.city = 'Select City';
-            angular.forEach(snapshot.val(), function(value, key){
+            angular.forEach(snapshot.val(), function(value, key) {
                 $scope.cities.push(value.cityName);
             });
-        },0);
+        }, 0);
     })
 
-    db.ref('users/'+uid).once('value', function(snapshot){
+    db.ref('users/' + uid).once('value', function(snapshot) {
         console.log(snapshot.val());
-        $timeout(function(){
+        $timeout(function() {
             $scope.user = snapshot.val();
             // if(!$scope.user.gender){
             //     $scope.user.gender = 'Gender';
             // }
-            if(!$scope.user.birthDay){
+            if (!$scope.user.birthDay) {
                 $scope.user.birthDay = {};
                 $scope.user.birthDay.date = '1';
                 $scope.user.birthDay.month = 'December';
                 $scope.user.birthDay.year = '1999';
             }
-            if($scope.user.mobile.mobileProvided == false){
+            if ($scope.user.mobile.mobileProvided == false) {
                 $scope.showAddMobile = true;
             }
-            if($scope.user.profileImage){
-                $scope.uploadedImage = $scope.user.profileImage;
+            if ($scope.user.profileImage) {
+                $scope.uploadedImage = "http://cdn.roofpik.com/roofpik/test/11/"+$scope.user.profileImage+'-xs.jpg';
             }
-            if($scope.user.address){
+            if ($scope.user.address) {
                 $scope.city = $scope.user.address.cityName;
             }
         }, 0);
-    }).then(function(){
+    }).then(function() {
         $scope.dataloaded = true;
         $('.profile-page').fadeIn();
     })
 
-    for(var i = 1; i <=31; i++){
+    for (var i = 1; i <= 31; i++) {
         $scope.allDates.push(i);
     }
 
-    for(var i = 0; i < 100; i++){
-        $scope.allYears.push(currentYear-100);
+    for (var i = 0; i < 100; i++) {
+        $scope.allYears.push(currentYear - 100);
         currentYear++;
     }
 
-    $scope.addMobile = function(){
+    $scope.addMobile = function() {
         console.log('add mobile called');
         $scope.addMobileClicked = true;
     }
 
-    $scope.addMobileNumber = function(mob){
+    $scope.addMobileNumber = function(mob) {
         swal({
-          title: "Sending OTP",
-          text: "Please wait...",
-          imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
-          showConfirmButton: false
+            title: "Sending OTP",
+            text: "Please wait...",
+            imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
+            showConfirmButton: false
         });
         var verificationCode = Math.floor(1000 + Math.random() * 9000);
         console.log(verificationCode);
@@ -88,63 +97,62 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
                 otp: verificationCode,
                 mobile: mob
             }
-        }).success(function(response){
+        }).success(function(response) {
             console.log(response);
-            if(response.status == 200){
+            if (response.status == 200) {
                 swal({
-                    title: "OTP Sent",
-                    text: "Enter OTP to verify your mobile number",
-                    type: "input",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    inputPlaceholder: "Enter OTP"
-                },
-                function(inputValue){
-                    console.log(inputValue.length);
-                    if (inputValue === false){
-                        console.log('cancel');
-                        $timeout(function(){
-                           $scope.addMobileClicked = false; 
-                        }, 10);
-                        return false;
-                    }
-                    if (inputValue.length == '') {
-                        swal.showInputError("Code not entered!");
-                        return false;
-                    }
-                    else if(inputValue.length == 4 && inputValue == verificationCode){
-                        mobileVerified(mob);
-                    } else {
-                        swal.showInputError("Incorrect Code");
-                        return false;
-                    }
-                });
+                        title: "OTP Sent",
+                        text: "Enter OTP to verify your mobile number",
+                        type: "input",
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        inputPlaceholder: "Enter OTP"
+                    },
+                    function(inputValue) {
+                        console.log(inputValue.length);
+                        if (inputValue === false) {
+                            console.log('cancel');
+                            $timeout(function() {
+                                $scope.addMobileClicked = false;
+                            }, 10);
+                            return false;
+                        }
+                        if (inputValue.length == '') {
+                            swal.showInputError("Code not entered!");
+                            return false;
+                        } else if (inputValue.length == 4 && inputValue == verificationCode) {
+                            mobileVerified(mob);
+                        } else {
+                            swal.showInputError("Incorrect Code");
+                            return false;
+                        }
+                    });
             }
-        }).error(function(err){
+        }).error(function(err) {
             console.log(err);
             sweetAlert("Error", "Error sending code, please try again later", "error");
-            $timeout(function(){
-               $scope.addMobileClicked = false; 
-           }, 10);
+            $timeout(function() {
+                $scope.addMobileClicked = false;
+            }, 10);
         })
     }
 
-    function mobileVerified(mob){
+    function mobileVerified(mob) {
         swal({
-          title: "Mobile Verified",
-          text: "Updating mobile number",
-          imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
-          showConfirmButton: false
+            title: "Mobile Verified",
+            text: "Updating mobile number",
+            imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
+            showConfirmButton: false
         });
         var updates = {};
-        db.ref('userRegistration/mobile/'+$scope.user.mobile.mobileNum).remove();
-        updates['users/'+uid+'/mobile/mobileNum'] = mob;
-        updates['users/'+uid+'/mobile/mobileProvided'] = true;
-        updates['users/'+uid+'/mobile/mobileVerified'] = true;
-        updates['userRegistration/mobile/'+mob] = $scope.user.uid;
+        db.ref('userRegistration/mobile/' + $scope.user.mobile.mobileNum).remove();
+        updates['users/' + uid + '/mobile/mobileNum'] = mob;
+        updates['users/' + uid + '/mobile/mobileProvided'] = true;
+        updates['users/' + uid + '/mobile/mobileVerified'] = true;
+        updates['userRegistration/mobile/' + mob] = $scope.user.uid;
         console.log(updates);
-        db.ref().update(updates).then(function(){
-            $timeout(function(){
+        db.ref().update(updates).then(function() {
+            $timeout(function() {
                 $scope.user.mobile.mobileNum = mob;
                 $scope.user.mobile.mobileProvided = true;
                 updates = {};
@@ -155,17 +163,17 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
         $scope.addMobileClicked = false;
     }
 
-    $scope.submit = function(){
+    $scope.submit = function() {
         swal({
-          title: "Saving",
-          imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
-          showConfirmButton: false
+            title: "Saving",
+            imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
+            showConfirmButton: false
         });
         // swal({ title: "Saving...", text: "Please wait.", showConfirmButton: false });
         console.log($scope.user);
-        if($scope.city){
-            if($scope.city == 'Gurgaon'){
-                $scope.user.address ={};
+        if ($scope.city) {
+            if ($scope.city == 'Gurgaon') {
+                $scope.user.address = {};
                 $scope.user.address = {
                     cityName: 'Gurgaon',
                     cityId: '-KYJONgh0P98xoyPPYm9'
@@ -173,8 +181,8 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
             }
         }
         var updates = {};
-        updates['users/'+uid] = $scope.user;
-        db.ref().update(updates).then(function(){
+        updates['users/' + uid] = $scope.user;
+        db.ref().update(updates).then(function() {
             swal({
                 title: "Saved",
                 text: "Your information was successfully saved!",
@@ -189,17 +197,17 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
         })
     }
 
-    $scope.showUserReviews = function(){
+    $scope.showUserReviews = function() {
         $state.go('user-all-reviews');
     }
 
     $scope.createPath = function(imgUrl) {
         swal({
-          title: "Uploading",
-          imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
-          showConfirmButton: false
+            title: "Uploading",
+            imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
+            showConfirmButton: false
         });
-        $scope.path = 'users/'+uid+'/profileImage';
+        $scope.path = 'users/' + uid + '/profileImage';
 
         $http({
             method: 'POST',
@@ -224,7 +232,7 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
         $http.post("http://139.162.3.205/api/testupload", { path: JSON.stringify(imgUrl) })
             .success(function(response) {
                 if (response.StatusCode == 200) {
-                    db.ref('users/'+uid+'/profileImage').set(response.Message).then(function(){
+                    db.ref('users/' + uid + '/profileImage').set(response.Message).then(function() {
                         sweetAlert("Success", "Profile image successfully uploaded!", "success");
                     })
                 }
@@ -338,8 +346,8 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
         });
     }
 
-    $scope.uploadImage = function(){
+    $scope.uploadImage = function() {
         console.log('called');
-        $( "#profile-image-test" ).click();
+        $("#profile-image-test").click();
     }
 });

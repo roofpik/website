@@ -24,3 +24,12 @@ app.run(function($rootScope, $mdDialog, $timeout, UserTokenService) {
         }
     });
 });
+
+function loading(status) {
+    if (status) {
+        $('.loader-modal').fadeIn();
+    } else {
+        $('.loader-modal').fadeOut();
+    }
+}
+

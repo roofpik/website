@@ -3,8 +3,7 @@
         <div flex="30" id="image-container">
        		<img id="profile-img" ng-src="{{uploadedImage}}" alt="http://www.e-codices.unifr.ch/documents/media/Collections/img-not-available_en.jpg"/>
 			<div class="profile-img-upload">
-				<input type="file" id="profile-image-test" onchange="angular.element(this).scope().getFileDetails(event)" accept="image/*" single/>
-	        	<md-button class="md-raised" ng-click="uploadImage()" id="submit-btn">Change Image</md-button>
+				<image-upload max-height="400" max-width="400" min-height="200" min-width="100" cropping="true" view-port-width="200" view-port-height="200" boundry-width="300" boundry-height="300" image-type="profile" image-upload-response="imageUploadResponseFn"></image-upload>
 			</div>
         	<h3 id="view-reviews" ng-click="showUserReviews()">View Reviews</h3>
         </div>

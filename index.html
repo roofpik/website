@@ -27,11 +27,13 @@
     <script src="bower_components/Croppie/croppie.js"></script>
     <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
     <script src="js/general/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 </head>
 
 <body ng-app="roofpik">
     <div loading></div>
+    <content-loading></content-loading>
     <header>
         <div header user="player"></div>
     </header>
@@ -52,6 +54,9 @@
 
     <!-- Google maps -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBw11e3mCdbPwpJCwtxHn5yCGt1uwErX24"></script>
+
+    <!-- Jquery Plugins -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <!-- Project Javascript -->
     <script src="js/db.js"></script>
@@ -84,6 +89,7 @@
     <script src="js/controllers/about-us.ctrl.js"></script>
     <script src="js/controllers/contact-us.ctrl.js"></script>
     <script src="js/controllers/faq.ctrl.js"></script>
+    <script src="js/directives/upload/imageUpload.js"></script>
 </body>
 
 </html>

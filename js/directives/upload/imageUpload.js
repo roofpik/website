@@ -15,11 +15,10 @@ app.directive('imageUpload', function() {
             minWidth: '@minWidth',
             imageUploadResponse: "="
         },
-        templateUrl: 'imageUpload.html',
+        templateUrl: 'js/directives/upload/imageUpload.html',
         controller: 'imageUploadCtrl'
     }
 });
-
 
 app.controller('imageUploadCtrl', function($scope, $timeout, uploadImage, $q, $http) {
     var can = document.getElementById('img-canvas');
@@ -177,7 +176,10 @@ app.controller('imageUploadCtrl', function($scope, $timeout, uploadImage, $q, $h
         upload.then(function(response) {
             clearFile();
             loading(false);
+            console.log(response);
+            $scope.imageUploadResponse(response);
         }, function(error) {
+            console.log(error);
             clearFile();
             loading(false);
         });
@@ -232,9 +234,10 @@ app.service('uploadImage', function($http) {
                 })
                 .then(function(response) {
                         // success
-                        if (response.status == 300) {
+                        console.log(response.data)
+                        if (response.data.status == 200) {
                             q.resolve({
-                                imgUrl: response.status
+                                imgUrl: response.data.imageName
                             });
                         } else {
                             // sweetAlert("Error", "Profile image cannot be uploaded!", "error");
