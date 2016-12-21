@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 $( function() {
 // Add background image
 	$.backstretch('http://www.grupoamah.com/Imagenes/Home-And-Landscape-Design-exterior-perky-beautiful-house-summer-garden-landscape-design-inspiration-pretty-garden-landscapes-inspiration.jpg');
-	var endDate = "December  9, 2016 23:59:59";
+	var endDate = "December  22, 2016 23:59:59";
 	$('.countdown.simple').countdown({ date: endDate });
 	$('.countdown.styled').countdown({
 	  date: endDate,
