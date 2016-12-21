@@ -14,6 +14,17 @@
           $mdDialog.hide(answer);
       };
 
+
+      firebase.auth().signInWithEmailAndPassword('arpit@roofpik.com', '123456').then(function(result) {
+          console.log(result);
+      }).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          console.log(error);
+          // ...
+      });
+
       // $scope.logout = function() {
       //     console.log('sign out');
       //     firebase.auth().signOut().then(function() {
@@ -45,22 +56,24 @@
       //     // }
       // });
 
-      // $scope.createAccount = function() {
+      $scope.createAccount = function() {
 
-      //     // console.log($scope.user);
-      //     firebase.auth().createUserWithEmailAndPassword($scope.user.email, $scope.user.password)
-      //         .then(function(result) {
-      //             console.log(result);
-      //         })
-      //         .catch(function(error) {
-      //             // Handle Errors here.
-      //             console.log(error);
-      //             var errorCode = error.code;
-      //             var errorMessage = error.message;
-      //             // ...
-      //         });
+          // console.log($scope.user);
+          firebase.auth().createUserWithEmailAndPassword('arpit@roofpik.com', '123456')
+              .then(function(result) {
+                  console.log(result);
+              })
+              .catch(function(error) {
+                  // Handle Errors here.
+                  console.log(error);
+                  var errorCode = error.code;
+                  var errorMessage = error.message;
+                  // ...
+              });
 
-      // }
+      }
+
+       // $scope.createAccount();
 
 
       function changeEmail(str) {
@@ -90,7 +103,7 @@
                           if (pass.val() != null) {
 
                               firebase.auth().signInWithEmailAndPassword(email, pass.val().toString()).then(function(result) {
-                                console.log(result);
+                                  console.log(result);
                                   var provider = new firebase.auth.GoogleAuthProvider();
                                   provider.addScope('email');
                                   firebase.auth().currentUser.linkWithRedirect(provider).then(function(result) {
@@ -121,7 +134,7 @@
 
       };
 
-   //   $scope.linkAccount('arpit.hello@gmail.com');
+      //   $scope.linkAccount('arpit.hello@gmail.com');
 
 
       // var user1 = firebase.auth().currentUser;
@@ -205,40 +218,39 @@
           provider.addScope('email');
           provider.addScope('https://www.googleapis.com/auth/plus.login');
           firebase.auth().signInWithPopup(provider).then(function(result) {
-            db.ref('userRegistration/emails/' + changeEmail(result.user.providerData[0].email)).once('value').then(function(snapshot) {
-               console.log(snapshot.val());
-              if(snapshot.val()){
-                console.log('user exists');
-              }
-              else{
-              user.createdDate = new Date().getTime();
-              user.email.emailAddress = result.user.providerData[0].email;
-              var uname = result.user.providerData[0].displayName.split(" ");
-              user.fname = uname[0];
-              user.lname = uname[1];
-              user.profileImage = result.user.providerData[0].photoURL;
-              user.google.active = true;
-              user.google.token = result.credential.accessToken;
-              user.google.photoURL = result.user.providerData[0].photoURL;
-              user.google.gid = result.user.providerData[0].uid;
-              user.uid = result.user.uid;
-              user.referral = getReferralCode(user.fname, user.lname);
-              user.registeredFlag = true;
-              user.signupIp = JSON.parse(ip);
-              console.log(user);
-              var updates = {};
-              updates['userRegistration/emails/' + changeEmail(result.user.providerData[0].email)] = result.user.uid;
-              updates['userRegistration/referrals/' + user.referral] = result.user.uid;
-              updates['users/' + result.user.uid] = user;
-              console.log(updates);
-              db.ref().update(updates);
-              }
-            });
+              db.ref('userRegistration/emails/' + changeEmail(result.user.providerData[0].email)).once('value').then(function(snapshot) {
+                  console.log(snapshot.val());
+                  if (snapshot.val()) {
+                      console.log('user exists');
+                  } else {
+                      user.createdDate = new Date().getTime();
+                      user.email.emailAddress = result.user.providerData[0].email;
+                      var uname = result.user.providerData[0].displayName.split(" ");
+                      user.fname = uname[0];
+                      user.lname = uname[1];
+                      user.profileImage = result.user.providerData[0].photoURL;
+                      user.google.active = true;
+                      user.google.token = result.credential.accessToken;
+                      user.google.photoURL = result.user.providerData[0].photoURL;
+                      user.google.gid = result.user.providerData[0].uid;
+                      user.uid = result.user.uid;
+                      user.referral = getReferralCode(user.fname, user.lname);
+                      user.registeredFlag = true;
+                      user.signupIp = JSON.parse(ip);
+                      console.log(user);
+                      var updates = {};
+                      updates['userRegistration/emails/' + changeEmail(result.user.providerData[0].email)] = result.user.uid;
+                      updates['userRegistration/referrals/' + user.referral] = result.user.uid;
+                      updates['users/' + result.user.uid] = user;
+                      console.log(updates);
+                      db.ref().update(updates);
+                  }
+              });
               // This gives you a Google Access Token. You can use it to access the Google API.
               // var token = result.credential.accessToken;
               // console.log(token);
               // The signed-in user info.
-              
+
               //db.ref('users').
               //   var user = result.user;
           }, function(error) {

@@ -1,5 +1,4 @@
 app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $http){
-    console.log('working');
 
     var uid = 'hT1YLR90MkUDX3PMgDpbdmyYviF3';
     $scope.cities = [];
@@ -21,7 +20,7 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
             $scope.city = 'Select City';
             angular.forEach(snapshot.val(), function(value, key){
                 $scope.cities.push(value.cityName);
-            })
+            });
         },0);
     })
 
@@ -29,9 +28,9 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
         console.log(snapshot.val());
         $timeout(function(){
             $scope.user = snapshot.val();
-            if(!$scope.user.gender){
-                $scope.user.gender = 'Gender';
-            }
+            // if(!$scope.user.gender){
+            //     $scope.user.gender = 'Gender';
+            // }
             if(!$scope.user.birthDay){
                 $scope.user.birthDay = {};
                 $scope.user.birthDay.date = '1';
