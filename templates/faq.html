@@ -1,0 +1,18 @@
+<md-content class="faq-page">
+    <md-divider></md-divider>
+    <div layout="column"  id="faq">
+        <md-card layout="column" ng-repeat="item in faq">
+            <div layout="row" class="faq-question md-padding" ng-click="showFaq(item, $index)">
+                <h3 flex>{{item.ques}}</h3>
+                <div flex="10" layout="row" layout-align="center center">
+                    <i ng-show="!item.val" class="fa fa-plus"></i>
+                    <i ng-show="item.val" class="fa fa-minus"></i>
+                </div>
+            </div>
+            <div class="faq-answer md-padding" ng-show="item.val">
+                <p>{{item.ans}}</p>
+            </div>
+            <md-divider></md-divider>
+        </md-card>
+    </div>
+</md-content>

@@ -1,5 +1,10 @@
-app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $state){
-	console.log($stateParams);
+app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $state, UserTokenService, $location){
+    var timestamp = new Date().getTime();
+    var urlInfo = {
+        url: $location.path()
+    }
+    UserTokenService.checkToken(urlInfo, timestamp, 1);
+    
 	$scope.featuredStories = [];
 	$scope.cityId = '-KYJONgh0P98xoyPPYm9';
 	db.ref('coverStory/stories/'+$stateParams.id).once('value', function(snapshot){
@@ -9,15 +14,6 @@ app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $stat
 		},50);
 	})
 
-	db.ref('featuredStories/'+$scope.cityId).once('value', function(data){
-		$timeout(function(){
-			if(data.val()){
-				angular.forEach(data.val(), function(value, key){
-					$scope.featuredStories.push(value);
-				})
-			}
-		},0);
-	})
 	db.ref('popularStories/'+$scope.cityId).once('value', function(snapshot){
 		$timeout(function(){
 			if(snapshot.val()){

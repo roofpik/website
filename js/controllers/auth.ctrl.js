@@ -1,4 +1,9 @@
-  function loginController($scope, $mdDialog, $rootScope) {
+  function loginController($scope, $mdDialog, $rootScope, UserTokenService, $location) {
+    var timestamp = new Date().getTime();
+    var urlInfo = {
+        url: $location.path()
+    }
+    UserTokenService.checkToken(urlInfo, timestamp, 1);
 
       $scope.user = null;
       var ip;

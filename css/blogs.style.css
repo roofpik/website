@@ -1,9 +1,9 @@
- /*CSS for cover stories and story details*/
+ /*CSS for blogs and blog details*/
 
-.cover-stories {
+.blogs {
     margin-top:60px;
 }
-.cover-stories .featured-story a {
+.blogs .featured-blog a {
     text-decoration: none;
     transition: all ease .3s;
     -webkit-transition: all ease .3s;
@@ -11,7 +11,7 @@
     color: #ffffff;
 }
 
-.cover-stories .featured-story img {
+.blogs .featured-blog img {
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
@@ -19,7 +19,7 @@
     transform: translate3d(0, 0, 0);
 }
 
-.cover-stories .featured-story {
+.blogs .featured-blog {
     height: 506px;
     background-size: cover !important;
     background-position: center center;
@@ -27,7 +27,7 @@
     position: relative;
 }
 
-.cover-stories .featured-caption {
+.blogs .featured-caption {
     top: 0px;
     bottom: 0px;
     left: 0px;
@@ -41,32 +41,31 @@
     background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
 }
 
-.cover-stories .featured-caption-content h3 {
+.blogs .featured-caption-content h2 {
     margin: 0;
     padding: 0;
     color: #ffffff;
-    font-size: 35px;
     line-height: 50px;
 }
 
-.cover-stories .featured-caption-content {
-    padding: 48px 49px;
+.blogs .featured-caption-content {
+    padding: 20px;
     vertical-align: bottom;
     display: table-cell;
     z-index: 10000;
 }
 
-.cover-stories .featured-caption-content #place-name {
+.blogs .featured-caption-content #place-name {
     color: #fff;
     font-weight: 600;
 }
 
-.cover-stories .featured-caption-content #place-name span{
+.blogs .featured-caption-content #place-name span{
     font-size: 22px;
     margin-right: 12px;
 }
 
-.cover-stories .featured-caption-category a {
+.blogs .featured-caption-category a {
     display: inline-block;
     white-space: nowrap;
     padding: 9px 16px;
@@ -79,16 +78,16 @@
     background: #00b36e;
 }
 
-.cover-stories .featured-story time {
+.blogs .featured-blog time {
     color: #ccc;
 }
 
-.cover-stories .featured-tags {
+.blogs .featured-tags {
     margin: 10px 0 0;
     padding: 0;
 }
 
-.cover-stories .featured-tags li {
+.blogs .featured-tags li {
     display: inline;
     white-space: nowrap;
     color: #a3dcff;
@@ -98,11 +97,11 @@
     margin: 0 5px 0 0;
 }
 
-.cover-stories .featured-tags li a {
+.blogs .featured-tags li a {
     color: #a3dcff;
     font-size: 1.2em;
 }
-.cover-stories .story-widget md-card-header {
+.blogs .blog-widget md-card-header {
     background: #ffffff;
     color: #333333;
     border: 1px solid #eeeeee;
@@ -110,19 +109,19 @@
     padding: 18px 30px;
 }
 
-.cover-stories .story-widget md-card-header .md-title {
+.blogs .blog-widget md-card-header .md-title {
     font-size: 24px;
     font-weight: 500;
 }
 
-.cover-stories .popular-localities ul {
+.blogs .popular-localities ul {
     list-style: none;
     margin: 0;
     padding: 0;
     margin-bottom: 2px;
 }
 
-.cover-stories .popular-localities ul li {
+.blogs .popular-localities ul li {
     font-size: 16px;
     font-weight: 300;
     border-bottom: 1px dotted #e2e2e2;
@@ -133,73 +132,80 @@
     display: list-item;
 }
 
-.cover-stories .popular-localities i {
+.blogs .popular-localities i {
     margin-right: 12px;
     margin-left: -18px;
 }
 
-.cover-stories .popular-localities ul li span {
+.blogs .popular-localities ul li span {
     color: #111111;
     text-decoration: none;
     vertical-align: top;
 }
 
-.cover-stories .popular-stories md-card-title {
+.blogs .popular-blogs md-card-title {
     padding:7px 10px;
 }
 
-.cover-stories .popular-stories md-card-title span {
+.blogs .popular-blogs md-card-title span {
     padding-top: 0px !important;
 }
 
-.cover-stories .popular-stories img {
+.blogs .popular-blogs img {
     width: 100%;
     height:200px;
 }
 
-.cover-stories .story-tags button {
+.blogs .blog-tags button {
     margin: 0px;
     min-width: 0px;
 }
 
-.cover-stories .story-tags button span {
+.blogs .blog-tags button span {
     color: #0c8cce;
 }
 
-.cover-stories md-card md-card-title {
+.blogs md-card md-card-title {
     padding: 0 16px 10px;
 }
 
-.cover-stories .story-card {
+.blogs .blog-card {
     margin:20px 0;
 }
 
-.cover-stories #showMoreBtn {
+.blogs .blog-title {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: .005em;
+    color: #006699;
+}
+
+.blogs #showMoreBtn {
     float:right;
     color:#006699;
 }
 
-.cover-stories #user-img {
+.blogs #user-img {
     border-radius:50%;
 }
 
-.cover-stories #user-name {
+.blogs #user-name {
     margin-left:10px;
 }
 
-.cover-stories .story-card .md-card-image {
+.blogs .blog-card .md-card-image {
     height: 350px;
 }
 
-.cover-stories .story-card .story-project-header md-card-title {
+.blogs .blog-card .blog-project-header md-card-title {
     padding: 0px;
 }
 
-.cover-stories .story-card .story-project-header md-card-title-text .md-subhead {
+.blogs .blog-card .blog-project-header md-card-title-text .md-subhead {
     padding-top: 0px;
 }
 
-.cover-stories .tagcloud p {
+.blogs .tagcloud p {
     font-size: 16px !important;
     background: #27BA7D;
     color: #ffffff;
@@ -214,42 +220,42 @@
     text-decoration: none;
 }
 
-.cover-stories .story-widget md-card {
+.blogs .blog-widget md-card {
     margin: 10px 0px 50px 40px;
 }
 
 @media only screen and (max-width: 960px) {
-    .cover-stories .story-widget md-card {
+    .blogs .blog-widget md-card {
         margin: 30px 0px 0px 0px;
     }
 }
 
-.cover-stories .tagcloud .tag-btn {
+.blogs .tagcloud .tag-btn {
     font-weight:bold;
     font-size:16px !important;
 }
 
-.cover-stories .tagcloud p.tag-btn {
+.blogs .tagcloud p.tag-btn {
     display: inline-block;
     color: #484848;
     background-color:#f2f2f2;
 }
 
-.cover-stories .story-tags .story-tag {
+.blogs .blog-tags .blog-tag {
     margin:4px 10px;
     font-weight:bold;
     color:#1c8097;
 }
 
-.cover-stories .popular-localities md-card-header,
-.cover-stories .popular-stories md-card-header,
-.cover-stories .popular-tags md-card-header {
+.blogs .popular-localities md-card-header,
+.blogs .popular-blogs md-card-header,
+.blogs .popular-tags md-card-header {
     background-color: #484848;
     color: #fff;
     font-weight: 600;
 }
 
-.cover-stories #facebook-share {
+.blogs #facebook-share {
     background-color: #4267b2;
     color: #fff;
     padding: 4px 10px;

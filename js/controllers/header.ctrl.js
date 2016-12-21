@@ -1,4 +1,4 @@
-app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope) {
+app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope, $timeout, UserTokenService) {
     $scope.user = false;
     $scope.gotoHome = function() {
         console.log('called');
@@ -6,10 +6,17 @@ app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope) {
     }
 
 
-$rootScope.$watch('loginStatus', function(){
-    console.log($rootScope.loginStatus);
-     $scope.logStatus = $rootScope.loginStatus;
-});
+    $rootScope.$watch('loginStatus', function(){
+        console.log($rootScope.loginStatus);
+         $scope.loginStatus = $rootScope.loginStatus;
+    });
+
+    $rootScope.$on("callShowLogin", function(){
+        console.log('called');
+        $timeout(function(){
+            $scope.showLogin();
+        },0);
+    });
    
 
     $scope.showLogin = function(ev) {
@@ -30,12 +37,20 @@ $rootScope.$watch('loginStatus', function(){
 
     $scope.logout = function() {
         console.log('sign out');
+        var timestamp = new Date().getTime();
+        UserTokenService.checkToken($rootScope.uid, timestamp, 5);
         firebase.auth().signOut().then(function() {
             // Sign-out successful.
-            $rootScope.loginStatus = false;
+            $timeout(function(){
+                $scope.loginStatus = false;
+                $rootScope.loginStatus = false;
+                deleteLocalStorage('loginStatus');
+            },100);
 
         }, function(error) {
             // An error happened.
+            var timestamp = new Date().getTime();
+            UserTokenService.checkToken($rootScope.uid, timestamp, 4);
         });
 
     };

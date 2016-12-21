@@ -1,5 +1,9 @@
-app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state){
-  console.log($stateParams);
+app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, UserTokenService,$location){
+    var timestamp = new Date().getTime();
+    var urlInfo = {
+        url: $location.path()
+    }
+    UserTokenService.checkToken(urlInfo, timestamp, 1);
 
     var type = $stateParams.type || null;
     var id = $stateParams.id || null;

@@ -1,5 +1,11 @@
-app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav, $sce, $stateParams){
+app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav, $sce, $stateParams, UserTokenService, $location){
 
+  var timestamp = new Date().getTime();
+    var urlInfo = {
+        url: $location.path()
+    }
+  UserTokenService.checkToken(urlInfo, timestamp, 1);
+    
   $scope.showNoStories = false;
   console.log($stateParams);
   $scope.featuredStories = [];
@@ -129,17 +135,6 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
   $scope.goToStoryDetails = function(id){
     console.log(id);
     $state.go('story', {id: id});
-  }
-
-  $scope.sharePost = function(post){
-    console.log(post);
-    FB.ui({
-      method: 'feed',
-      link: 'https://developers.facebook.com/docs/',
-      caption: 'An example caption',
-    }, function(response){
-      console.log(response);
-    });
   }
 
   $scope.shareonfb = function(story){

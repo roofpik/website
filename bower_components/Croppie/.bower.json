@@ -6,10 +6,7 @@
     "Ethan Calvert <calvert1591@gmail.com>"
   ],
   "description": "A javascript image cropper",
-  "main": [
-    "croppie.css",
-    "croppie.js"
-  ],
+  "main": "croppie.js",
   "moduleType": [],
   "keywords": [
     "image",
@@ -32,15 +29,15 @@
     "jquery": "~2.1.4",
     "exif-js": "~2.1.1"
   },
-  "version": "2.4.0",
-  "_release": "2.4.0",
+  "version": "2.3.0",
+  "_release": "2.3.0",
   "_resolution": {
     "type": "version",
-    "tag": "v2.4.0",
-    "commit": "37bf53c462a2533f054456a0a86397d97da8b9ca"
+    "tag": "v2.3.0",
+    "commit": "b2fa99c8f980c026cad98e219bffa3deb7a71fe8"
   },
   "_source": "https://github.com/Foliotek/Croppie.git",
-  "_target": "^2.4.0",
+  "_target": "^2.3.0",
   "_originalSource": "croppie",
   "_direct": true
 }

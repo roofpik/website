@@ -6,10 +6,7 @@
     "Ethan Calvert <calvert1591@gmail.com>"
   ],
   "description": "A javascript image cropper",
-  "main": [
-    "croppie.css",
-    "croppie.js"
-  ],
+  "main": "croppie.js",
   "moduleType": [],
   "keywords": [
     "image",

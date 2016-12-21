@@ -1,0 +1,17 @@
+#contact-us-map {
+    width: 100%;
+    height: 400px;
+}
+
+#contact-us-form {
+    width: 85%;
+    height: auto;
+    margin: 0 auto;
+    background-color: #ffffff;
+}
+
+.contact-us-page input,
+.contact-us-page textarea {
+	font-size:13px;
+	color:#484848;
+}

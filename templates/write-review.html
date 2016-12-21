@@ -64,7 +64,7 @@
                             <h4>Review Text *</h4>
                         </div>
                         <div flex="70">
-                            <textarea ng-model="review.reviewText" rows="5" columns="20" placeholder="Write your review" id="review-text" required></textarea>
+                            <textarea ng-model="review.reviewText" rows="10" columns="20" placeholder="Write your review" id="review-text" required></textarea>
                         </div>
                     </div>
                     <div flex="100" id="show-more">
@@ -96,8 +96,9 @@
                         </div>
                     </div>
                     <div layout="row" layout-align="end center">
-                        <md-button class="md-raised md-warn" ng-click="createPath(review)" ng-disabled="(reviewForm.$invalid) || (!review.overallRating)">Submit</md-button>
+                        <md-button class="md-raised md-warn" ng-click="createPath(review)" ng-disabled="(reviewForm.$invalid) || (!review.overallRating) || !loginStatus">Submit</md-button>
                     </div>
+                    <p ng-hide="loginStatus" id="loginSignup">Please login/signup to submit review *</p>
                 </form>
             </div>
         </div>
