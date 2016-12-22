@@ -62,4 +62,5 @@ app.controller('contactUsCtrl', function($timeout, $scope, UserTokenService,$loc
             sweetAlert("Done!", "Your query was successfully submitted.", "success");
         })
     }
+    loading(false);
 });

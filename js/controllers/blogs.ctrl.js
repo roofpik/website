@@ -151,4 +151,6 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
         });
     }
 
+    loading(false);
+
 })

@@ -412,4 +412,6 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
         });
     }
 
+    loading(false);
+
 })
