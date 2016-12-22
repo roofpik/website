@@ -65,4 +65,5 @@ app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $stat
         description: story.userName
     });
   }
+  loading(false);
 })

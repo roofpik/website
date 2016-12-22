@@ -8,7 +8,7 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
 
     $scope.imageType = 'profile';
     $scope.uploadPath = 'users/'+uid+'/profileImage';
-    $scope.imageName = uid;
+    // $scope.imageName = uid;
     $scope.imageUploadResponseFn = function(valueFromDirective) {
         console.log(valueFromDirective);
         db.ref('users/' + uid + '/profileImage').set(valueFromDirective).then(function() {
@@ -354,4 +354,5 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
         console.log('called');
         $("#profile-image-test").click();
     }
+    loading(false);
 });

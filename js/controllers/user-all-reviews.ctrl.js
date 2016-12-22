@@ -78,4 +78,6 @@ app.controller('userAllReviewsCtrl', function($scope, $timeout, $state, $rootSco
 		}
 		$state.go('edit-review', {city:review.cityId, type:review.type, typeId:reviewTypeId, typeName:reviewTypeName, id:review.id, reviewIn: reviewIn});
 	};
+
+	loading(false);
 })

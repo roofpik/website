@@ -364,4 +364,6 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, 
  //    filterList();
  //  }
 
+ loading(false);
+
 })

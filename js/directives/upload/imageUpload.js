@@ -232,7 +232,7 @@ app.service('uploadImage', function($http) {
 
     return {
         upload: function(path, image, imgType, imgName, q) {
-
+            console.log(imgName);
             $http({
                     url: 'http://139.162.9.71/api/uploadImage',
                     method: "POST",
