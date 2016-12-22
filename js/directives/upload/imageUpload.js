@@ -122,18 +122,17 @@ app.controller('imageUploadCtrl', function($scope, $timeout, uploadImage, $q, $h
 
      $('#cancelCrop').on('click', function() {
         clearFile();
-        $("#crop-dialog").dialog("close");
-
     });
 
     $('#cancelUpload').on('click', function() {
         clearFile();
-        $("#upload-dialog").dialog("close");
     });
 
     function clearFile() {
         $("#img-file").val('');
         $('#file-name').text('Choose a file');
+        $("#crop-dialog").dialog("close");
+        $("#upload-dialog").dialog("close");
     }
 
     $('#cropImage').on('click', function() {
