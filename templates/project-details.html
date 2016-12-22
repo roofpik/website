@@ -12,8 +12,8 @@
             </div>
         </article>
     </section>
-    <section layout="row" flex="80" class="project-basic-details" layout-wrap>
-        <article flex="70" class="project-basic-details-container">
+    <section layout="row" flex="80" flex-xs="90" flex-sm="90" class="project-basic-details" layout-wrap>
+        <article flex="70" flex-xs="100" class="project-basic-details-container">
             <h1 id="project-name">{{projectName}}</h1>
             <p id="display-address">{{project.projectDetails.address.displayAddress}} &nbsp;&nbsp;&nbsp;
                 <span ng-repeat="rate in [1,2,3,4,5] track by $index">
@@ -46,17 +46,17 @@
 
             <div layout="row" layout-wrap>
                 <p flex="100" id="rating">
-                    {{allRatings.overallRatingNum}} Review<span ng-show="allRatings.overallRatingNum > 1">s</span>
+                    {{allRatings.overallRatingNum}} Review<span ng-show="allRatings.overallRatingNum > 1"></span>
                     <span ng-repeat="rate in [1,2,3,4,5] track by $index">
                         <i class="fa fa-star" ng-class="($index<=(allRatings.overallRating-1))?'newGreen':'grey'"></i>
                     </span> ({{allRatings.overallRating}})
                 </p>
                 <div class="all-reviews" flex="100">
                     <div class="user-review" ng-repeat="review in reviews | orderBy :'-'" layout="row" layout-wrap ng-show="$index < viewReviews">
-                        <div class="user-img" flex-gt-sm="15" flex-xs="100" flex-sm="100">
+                        <div class="user-img" flex-gt-sm="15" flex-xs="25" flex-sm="20">
                             <img src="images/general/noImage.png" alt="User">
                         </div>
-                        <div flex-gt-sm="85" flex-xs="100" flex-sm="100">
+                        <div flex-gt-sm="85" flex-xs="75" flex-sm="75">
                             <div class="review-detail-basic">
                                 <p ng-show="!review.anonymous"><b>{{review.userName}}</b> | {{review.createdDate | date:'MMM dd, yy'}}</p>
                                 <p ng-show="review.anonymous"><b>Anonymous</b> | {{review.createdDate | date:'MMM dd, yy'}}</p>
@@ -76,7 +76,7 @@
                 </div>
             </div>
         </article>
-        <article flex="30" id="rating-container">
+        <article flex="30" flex-xs="100" id="rating-container">
             <div class="all-rating-summary" flex="100">
                 <p class="rating-summary-title">User Ratings</p>
                 <ul>
