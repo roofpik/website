@@ -1,3 +1,4 @@
+.header .logo {cursor: pointer;}
 .blog-details figcaption {
     margin: 10px 0 0 0 !important;
     font-size: 17px;
@@ -22,6 +23,7 @@
 #faq .faq-answer p{font-size: 16px; margin: 5px 0px;}
 .profile-page .profile-page-content{font-size: 15px;}
 .user-menu-list-item-span{cursor: pointer;}
+.rf-footer ul li{cursor: pointer; padding: 2px 0px;}
 
 @media (max-width: 480px) {
     .xs_posit {
@@ -99,6 +101,8 @@
 .profile-page .detail-label h4{margin:10px 0px;}
 #faq .faq-question h3{font-size: 16px; margin: 5px 0;}
 #faq .faq-answer{font-size: 15px;}
+.header .logo img{max-width: 100px;}
+.header .main-menu ul li{width: 120px}
 }
 @media (min-width: 481px) and (max-width: 599px) {
 

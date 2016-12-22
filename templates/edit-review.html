@@ -62,7 +62,7 @@
                     </div> -->
                     <div class="rating-ques">
                         <div layout="row" class="review-param" layout-wrap>
-                            <div flex="50" layout="row">
+                            <div flex="50" flex-xs="100" layout="row">
                                 <div flex class="param-title">
                                     <h4>Security</h4>
                                 </div>
@@ -70,7 +70,7 @@
                                     <review-ratings ratingsobj='ratingsObject2' index='2'></review-ratings>
                                 </div>
                             </div>
-                            <div flex="50" layout="row">
+                            <div flex="50" flex-xs="100" layout="row">
                                 <div flex class="param-title">
                                     <h4>Amenities</h4>
                                 </div>
@@ -78,7 +78,7 @@
                                     <review-ratings ratingsobj='ratingsObject3' index='3'></review-ratings>
                                 </div>
                             </div>
-                            <div flex="50" layout="row">
+                            <div flex="50" flex-xs="100" layout="row">
                                 <div flex class="param-title">
                                     <h4>Open and green areas</h4>
                                 </div>
@@ -86,7 +86,7 @@
                                     <review-ratings ratingsobj='ratingsObject4' index='4'></review-ratings>
                                 </div>
                             </div>
-                            <div flex="50" layout="row">
+                            <div flex="50" flex-xs="100" layout="row">
                                 <div flex class="param-title">
                                     <h4>Electricity and water supply</h4>
                                 </div>
@@ -94,7 +94,7 @@
                                     <review-ratings ratingsobj='ratingsObject5' index='5'></review-ratings>
                                 </div>
                             </div>
-                            <div flex="50" layout="row">
+                            <div flex="50" flex-xs="100" layout="row">
                                 <div flex class="param-title">
                                     <h4>Convenience of housemaids</h4>
                                 </div>
@@ -102,7 +102,7 @@
                                     <review-ratings ratingsobj='ratingsObject6' index='6'></review-ratings>
                                 </div>
                             </div>
-                            <div flex="50" layout="row">
+                            <div flex="50" flex-xs="100" layout="row">
                                 <div flex class="param-title">
                                     <h4>Convenience of parking</h4>
                                 </div>
@@ -110,7 +110,7 @@
                                     <review-ratings ratingsobj='ratingsObject7' index='7'></review-ratings>
                                 </div>
                             </div>
-                            <div flex="50" layout="row">
+                            <div flex="50" flex-xs="100" layout="row">
                                 <div flex class="param-title">
                                     <h4>Infrastructure</h4>
                                 </div>
@@ -118,7 +118,7 @@
                                     <review-ratings ratingsobj='ratingsObject8' index='8'></review-ratings>
                                 </div>
                             </div>
-                            <div flex="50" layout="row">
+                            <div flex="50" flex-xs="100"  layout="row">
                                 <div flex class="param-title">
                                     <h4>Layout of the apartment</h4>
                                 </div>
@@ -128,11 +128,11 @@
                             </div>
                         </div>
                         <div class="yes-no-ques">
-                            <div layout="row" class="review-param" ng-repeat="item in yesNoParam">
-                                <div flex="70" class="param-title">
+                            <div layout="row" layout-wrap class="review-param" ng-repeat="item in yesNoParam">
+                                <div flex="70" flex-xs="100" flex-sm="70" class="param-title">
                                     <h4>{{item.ques}}</h4>
                                 </div>
-                                <div layout-align="end center" layout="row" flex="30" id="radio-btns">
+                                <div layout-align="end center" layout="row" flex="30" flex-xs="100" flex-sm="30"  id="radio-btns">
                                     <md-radio-group ng-model="review[item.id]" layout="row" class="md-warn">
                                         <md-radio-button value="Yes"> Yes</md-radio-button>
                                         <md-radio-button value="No"> No </md-radio-button>
