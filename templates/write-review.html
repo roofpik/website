@@ -51,7 +51,7 @@
                             <review-ratings ratingsobj='ratingsObject' index='1'></review-ratings>
                         </div>
                     </div>
-                    <div layout="row"layout-wrap  class="review-param">
+                    <div layout="row" layout-wrap  class="review-param">
                         <div flex="30" flex-xs="100" class="param-title">
                             <h4>Review Title *</h4>
                         </div>
@@ -72,7 +72,7 @@
                     </div>
                     <div ng-show="showMore" class="rating-ques">
                         <div layout="row" class="review-param" layout-wrap>
-                            <div flex="50" layout="row" ng-repeat="item in ratingParams">
+                            <div flex="50" flex-sm="100" flex-xs="100"  layout="row" ng-repeat="item in ratingParams">
                                 <div flex class="param-title">
                                     <h4>{{item.name}}</h4>
                                 </div>
@@ -82,8 +82,8 @@
                             </div>
                         </div>
                         <div class="yes-no-ques">
-                            <div layout="row" class="review-param" ng-repeat="item in yesNoParam">
-                                <div flex="70" class="param-title">
+                            <div layout="row" layout-wrap class="review-param" ng-repeat="item in yesNoParam">
+                                <div flex="70" flex-xs="100" class="param-title">
                                     <h4>{{item.ques}}</h4>
                                 </div>
                                 <div layout-align="end center" layout="row" flex="30" id="radio-btns">
