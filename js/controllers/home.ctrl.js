@@ -77,7 +77,6 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTok
                 $scope.localities[list[key].name] = list[key].id;
             }
         }
-        console.log($scope.localities);
     }
 
     $scope.showSearch = function(ev) {

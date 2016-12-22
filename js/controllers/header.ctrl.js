@@ -34,15 +34,17 @@ app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope, $ti
     };
 
     $scope.logout = function() {
-        console.log('sign out');
+        
         var timestamp = new Date().getTime();
         UserTokenService.checkToken($rootScope.uid, timestamp, 5);
+        $rootScope.logoutSuccess = true;
         firebase.auth().signOut().then(function() {
             // Sign-out successful.
             $timeout(function(){
                 $scope.loginStatus = false;
                 $rootScope.loginStatus = false;
                 deleteLocalStorage('loginStatus');
+
             },100);
 
         }, function(error) {

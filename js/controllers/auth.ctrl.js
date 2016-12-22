@@ -96,7 +96,6 @@
       $scope.linkAccount = function(email, newLoginProvider) {
           var provider = null;
           firebase.auth().fetchProvidersForEmail(email).then(function(providers) {
-              console.log(providers);
               for (index in providers) {
                   if (provider == null || provider == 'password')
                       provider = providers[index];
@@ -105,9 +104,12 @@
               if (provider == 'password') {
 
                   db.ref('userRegistration/emails/' + changeEmail(email)).once('value').then(function(snapshot) {
+                    console.log(snapshot.val());
                       db.ref('users/' + snapshot.val() + '/tempPassword/').once('value').then(function(pass) {
                           if (pass.val() != null) {
                               firebase.auth().signInWithEmailAndPassword(email, pass.val().toString()).then(function(result) {
+                                  console.log(result);
+                                  console.log(newLoginProvider);
                                   if (newLoginProvider == 'google') {
                                       var provider = new firebase.auth.GoogleAuthProvider();
                                       provider.addScope('profile');
@@ -116,19 +118,58 @@
                                       firebase.auth().currentUser.linkWithPopup(provider).then(function(result) {
                                           // Accounts successfully linked.
                                           var credential = result.credential;
-                                          var user = result.user;
+                                          user.createdDate = new Date().getTime();
+                                          user.email.emailAddress = result.user.providerData[0].email;
+                                          var uname = result.user.providerData[0].displayName.split(" ");
+                                          user.fname = uname[0];
+                                          user.lname = uname[1];
+                                          user.profileImage = result.user.providerData[0].photoURL;
+                                          user.google.active = true;
+                                          user.google.token = result.credential.accessToken;
+                                          user.google.photoURL = result.user.providerData[0].photoURL;
+                                          user.google.gid = result.user.providerData[0].uid;
+                                          user.uid = result.user.uid;
+                                          user.registeredFlag = true;
+                                          user.signupIp = JSON.parse(ip);
+                                          var updates = {};
+                                          updates['users/' + result.user.uid] = user;
+                                          db.ref().update(updates);
+                                          var user = firebase.auth().currentUser;
+                                          user.updateProfile({
+                                              displayName: result.user.providerData[0].displayName,
+                                              photoURL: user.profileImage
+                                          })
                                       }).catch(function(error) {
                                           // Handle Errors here.
                                           // ...
                                       });
                                   } else {
+                                      console.log('reached');
                                       var provider = new firebase.auth.FacebookAuthProvider();
                                       provider.addScope('email');
                                       firebase.auth().currentUser.linkWithPopup(provider).then(function(result) {
                                           // Accounts successfully linked.
+                                          console.log(result);
                                           var credential = result.credential;
-                                          var user = result.user;
+                                          user.createdDate = new Date().getTime();
+                                          user.email.emailAddress = result.user.providerData[0].email;
+                                          var uname = result.user.providerData[0].displayName.split(" ");
+                                          user.fname = uname[0];
+                                          user.lname = uname[1];
+                                          user.profileImage = result.user.providerData[0].photoURL;
+                                          user.facebook.active = true;
+                                          user.facebook.token = result.credential.accessToken;
+                                          user.facebook.photoURL = result.user.providerData[0].photoURL;
+                                          user.facebook.gid = result.user.providerData[0].uid;
+                                          user.uid = result.user.uid;
+                                          user.referral = getReferralCode(user.fname, user.lname);
+                                          user.registeredFlag = true;
+                                          user.signupIp = JSON.parse(ip);
+                                          var updates = {};
+                                          updates['users/' + result.user.uid] = user;
+                                          db.ref().update(updates);
                                       }).catch(function(error) {
+                                        console.log(error);
                                           // Handle Errors here.
                                           // ...
                                       });
@@ -142,9 +183,9 @@
                   });
 
               } else if (provider == 'google.com') {
-                sweetAlert("Alert", "You have created your account on roofpik using google!", "error");
+                  sweetAlert("Alert", "You have created your account on roofpik using google!", "error");
               } else if (provider == 'facebook.com') {
-                sweetAlert("Alert", "You have created your account on roofpik using facebook!", "error");
+                  sweetAlert("Alert", "You have created your account on roofpik using facebook!", "error");
 
               }
           });
@@ -232,11 +273,13 @@
       }
 
       $scope.googleLogin = function() {
+
           var provider = new firebase.auth.GoogleAuthProvider();
           provider.addScope('profile');
           provider.addScope('email');
           provider.addScope('https://www.googleapis.com/auth/plus.login');
           firebase.auth().signInWithPopup(provider).then(function(result) {
+              $rootScope.loginSuccess = true;
               db.ref('userRegistration/emails/' + changeEmail(result.user.providerData[0].email)).once('value').then(function(snapshot) {
                   console.log(snapshot.val());
                   if (snapshot.val()) {
@@ -261,9 +304,11 @@
                       updates['userRegistration/referrals/' + user.referral] = result.user.uid;
                       updates['users/' + result.user.uid] = user;
                       db.ref().update(updates);
+
                   }
               });
-                 sweetAlert("Login Success", "You have successfully Signed In!", "success");
+
+              $rootScope.loginSuccess = true;
 
           }, function(error) {
               // Handle Errors here.
@@ -277,7 +322,7 @@
               var credential = error.credential;
               if (errorCode == "auth/account-exists-with-different-credential") {
                   $scope.linkAccount(error.email, 'google');
-              } 
+              }
           });
       }
 
@@ -286,8 +331,8 @@
           var provider = new firebase.auth.FacebookAuthProvider();
           provider.addScope('email');
           firebase.auth().signInWithPopup(provider).then(function(result) {
-                 db.ref('userRegistration/emails/' + changeEmail(result.user.providerData[0].email)).once('value').then(function(snapshot) {
-                  console.log(snapshot.val());
+              $rootScope.loginSuccess = true;
+              db.ref('userRegistration/emails/' + changeEmail(result.user.providerData[0].email)).once('value').then(function(snapshot) {
                   if (snapshot.val()) {
                       // Do nothing
                   } else {
@@ -311,10 +356,11 @@
                       updates['users/' + result.user.uid] = user;
                       db.ref().update(updates);
                   }
+
               });
               // ...
           }, function(error) {
-                            // Handle Errors here.
+              // Handle Errors here.
               var errorCode = error.code;
               var errorMessage = error.message;
               // The email of the user's account used.
