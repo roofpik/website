@@ -112,6 +112,8 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
         return $sce.trustAsHtml( html );
     }
 
+    loading(false);
+
 })
 
 

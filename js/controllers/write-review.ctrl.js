@@ -433,4 +433,6 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
         $( "#review-image" ).click();
     }
 
+    loading(false);
+
 });

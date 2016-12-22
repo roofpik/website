@@ -7,12 +7,10 @@ app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope, $ti
 
 
     $rootScope.$watch('loginStatus', function(){
-        console.log($rootScope.loginStatus);
          $scope.loginStatus = $rootScope.loginStatus;
     });
 
     $rootScope.$on("callShowLogin", function(){
-        console.log('called');
         $timeout(function(){
             $scope.showLogin();
         },0);
@@ -79,5 +77,7 @@ app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope, $ti
     $scope.takeToMyReviews = function() {
         $state.go('user-all-reviews');
     };
+
+    loading(false);
 
 });

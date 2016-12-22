@@ -5,5 +5,5 @@ app.controller('aboutUsCtrl', function($scope, $timeout, UserTokenService, $loca
         url: $location.path()
     }
     UserTokenService.checkToken(urlInfo, timestamp, 1);
-    
-})
+    loading(false);
+});

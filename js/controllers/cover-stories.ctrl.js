@@ -147,5 +147,6 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
         description: story.userName
     });
   }
+  loading(false);
 
 })

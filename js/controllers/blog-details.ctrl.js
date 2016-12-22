@@ -67,5 +67,5 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $stateParams, $sce,
 	    });
 	}
 
-	
+	loading(false);
 })

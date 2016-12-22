@@ -61,4 +61,5 @@ app.controller('faqCtrl', function($scope, $timeout, UserTokenService, $location
 			}
 		}
 	}
+	loading(false);
 })
