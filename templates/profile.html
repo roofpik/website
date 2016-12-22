@@ -3,7 +3,7 @@
         <div flex="30" id="image-container">
             <img id="profile-img" ng-src="{{uploadedImage}}" alt="http://www.e-codices.unifr.ch/documents/media/Collections/img-not-available_en.jpg" />
             <div class="profile-img-upload">
-                <image-upload max-height="400" max-width="400" min-height="200" min-width="100" cropping="true" view-port-width="200" view-port-height="200" boundry-width="300" boundry-height="300" image-type="{{imageType}}" image-upload-response="imageUploadResponseFn" upload-path="{{uploadPath}}" image-name="{{imageName}}"></image-upload>
+                <image-upload max-height="800" max-width="800" min-height="300" min-width="300" cropping="true" view-port-width="300" view-port-height="300" boundry-width="400" boundry-height="400" image-type="{{imageType}}" image-upload-response="imageUploadResponseFn" upload-path="{{uploadPath}}" image-name="{{imageName}}"></image-upload>
             </div>
             <h3 id="view-reviews" ng-click="showUserReviews()">View Reviews</h3>
         </div>

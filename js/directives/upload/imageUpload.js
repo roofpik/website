@@ -73,7 +73,11 @@ app.controller('imageUploadCtrl', function($scope, $timeout, uploadImage, $q, $h
                 origImg.src = e.target.result;
                 var checkSize = checkImageSize();
                 if (checkSize) {
-                    cropBind();
+                    if ($scope.cropping == 'true') {
+                        cropBind();
+                    } else {
+                        img.src = e.target.result;
+                    }
                 } else {
                     clearFile();
                     swal({
@@ -116,20 +120,20 @@ app.controller('imageUploadCtrl', function($scope, $timeout, uploadImage, $q, $h
         });
     }
 
-    $('#cancelCrop').on('click', function() {
+     $('#cancelCrop').on('click', function() {
         clearFile();
+        $("#crop-dialog").dialog("close");
 
     });
 
     $('#cancelUpload').on('click', function() {
         clearFile();
+        $("#upload-dialog").dialog("close");
     });
 
     function clearFile() {
         $("#img-file").val('');
-        $('#file-name').text('Choose a file...');
-        $("#crop-dialog").dialog("close");
-        $("#upload-dialog").dialog("close");
+        $('#file-name').text('Choose a file');
     }
 
     $('#cropImage').on('click', function() {
@@ -166,8 +170,8 @@ app.controller('imageUploadCtrl', function($scope, $timeout, uploadImage, $q, $h
         ctx.drawImage(img, 0, 0);
         $("#crop-dialog").dialog("close");
         $("#upload-dialog").dialog({
-            minHeight: (img.height * 1.5),
-            minWidth: (img.width * 1.2)
+            minHeight: 600,
+            minWidth: 650
         });
         $("#upload-dialog").dialog("open");
 
