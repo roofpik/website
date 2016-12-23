@@ -1,6 +1,6 @@
 <md-content class="write-review-page">
-    <div layout="row" flex="80" id="write-review-container">
-        <div flex="25">
+    <div layout="row" flex="80" flex-xs="90" flex-sm="90" flex-md="90" layout-align-xs="center center" layout-wrap id="write-review-container">
+        <div flex="25" flex-xs="100">
             <div id="review-tips">
             <h3>Reviewing Tips</h3>
             <p><b>Your review can directly impact someone’s decision to buy or rent property. So make it count by using these reviewing tips:</b></p>
@@ -14,18 +14,18 @@
             <p><b>Review Anonymously: </b>Our hawk-eyed moderators have a thing against reviews with personal information such as names, phone numbers, emails, or other contact details. Make sure your review doesn’t include such information.</p>
             </div>
         </div>
-        <div flex="5"></div>
-        <div flex="70" >
+        <div flex="5" flex-xs="100"></div>
+        <div flex="70" flex-xs="100" class="mgtxs5">
             <div id="review-form-container">
                 <div flex="100" id="review-form-title">
                     <h3>{{reviewName}}</h3>
                 </div>
                 <form name="reviewForm" id="review-form-fields">
-                    <div layout="row" class="review-param">
-                        <div flex="30" class="param-title">
+                    <div layout="row" layout-wrap class="review-param">
+                        <div flex="30" flex-xs="100" class="param-title">
                             <h4>Are you a *</h4>
                         </div>
-                        <div flex="70" layout="row" layout-align="start center">
+                        <div flex="70" flex-xs="100" layout="row" layout-align="start center">
                             <md-radio-group ng-model="review.customerType" layout="row" class="md-warn" required>
                                 <md-radio-button value="Owner"> Owner </md-radio-button>
                                 <md-radio-button value="Tenant"> Tenant </md-radio-button>
@@ -33,27 +33,27 @@
                             </md-radio-group>
                         </div>
                     </div>
-                    <div layout="row" class="review-param">
-                        <div flex="30" class="param-title">
+                    <div layout="row" layout-wrap class="review-param">
+                        <div flex="30" flex-xs="100" class="param-title">
                             <h4>Overall rating *</h4>
                         </div>
-                        <div layout="row" flex="70" layout-align="none center">
+                        <div layout="row" flex="70" flex-xs="100" layout-align="none center">
                             <review-ratings ratingsobj='ratingsObject1' index='1'></review-ratings>
                         </div>
                     </div>
-                    <div layout="row" class="review-param">
-                        <div flex="30" class="param-title">
+                    <div layout="row" layout-wrap class="review-param">
+                        <div flex="30" flex-xs="100" class="param-title">
                             <h4>Review Title *</h4>
                         </div>
-                        <div flex="70">
+                        <div flex="70" flex-xs="100">
                             <input ng-model="review.reviewTitle" placeholder="Review Title" id="review-title" required>
                         </div>
-                    </div>
-                    <div layout="row" class="review-param">
-                        <div flex="30" class="param-title">
+                    </div> 
+                    <div layout="row" layout-wrap class="review-param">
+                        <div flex="30" flex-xs="100" class="param-title">
                             <h4>Review Text *</h4>
                         </div>
-                        <div flex="70">
+                        <div flex="70" flex-xs="100">
                             <textarea ng-model="review.reviewText" rows="10" columns="20" placeholder="Write your review" id="review-text" required></textarea>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                     </div> -->
                     <div class="rating-ques">
                         <div layout="row" class="review-param" layout-wrap>
-                            <div flex="50" layout="row">
+                            <div flex="50" flex-xs="100" flex-sm="100" layout="row">
                                 <div flex class="param-title">
                                     <h4>Security</h4>
                                 </div>
@@ -70,7 +70,7 @@
                                     <review-ratings ratingsobj='ratingsObject2' index='2'></review-ratings>
                                 </div>
                             </div>
-                            <div flex="50" layout="row">
+                            <div flex="50" flex-xs="100" flex-sm="100" layout="row">
                                 <div flex class="param-title">
                                     <h4>Amenities</h4>
                                 </div>
@@ -78,7 +78,7 @@
                                     <review-ratings ratingsobj='ratingsObject3' index='3'></review-ratings>
                                 </div>
                             </div>
-                            <div flex="50" layout="row">
+                            <div flex="50" flex-xs="100" flex-sm="100" layout="row">
                                 <div flex class="param-title">
                                     <h4>Open and green areas</h4>
                                 </div>
@@ -86,7 +86,7 @@
                                     <review-ratings ratingsobj='ratingsObject4' index='4'></review-ratings>
                                 </div>
                             </div>
-                            <div flex="50" layout="row">
+                            <div flex="50" flex-xs="100" flex-sm="100" layout="row">
                                 <div flex class="param-title">
                                     <h4>Electricity and water supply</h4>
                                 </div>
@@ -94,7 +94,7 @@
                                     <review-ratings ratingsobj='ratingsObject5' index='5'></review-ratings>
                                 </div>
                             </div>
-                            <div flex="50" layout="row">
+                            <div flex="50" flex-xs="100" flex-sm="100" layout="row">
                                 <div flex class="param-title">
                                     <h4>Convenience of housemaids</h4>
                                 </div>
@@ -102,7 +102,7 @@
                                     <review-ratings ratingsobj='ratingsObject6' index='6'></review-ratings>
                                 </div>
                             </div>
-                            <div flex="50" layout="row">
+                            <div flex="50" flex-xs="100" flex-sm="100" layout="row">
                                 <div flex class="param-title">
                                     <h4>Convenience of parking</h4>
                                 </div>
@@ -110,7 +110,7 @@
                                     <review-ratings ratingsobj='ratingsObject7' index='7'></review-ratings>
                                 </div>
                             </div>
-                            <div flex="50" layout="row">
+                            <div flex="50" flex-xs="100" flex-sm="100" layout="row">
                                 <div flex class="param-title">
                                     <h4>Infrastructure</h4>
                                 </div>
@@ -118,7 +118,7 @@
                                     <review-ratings ratingsobj='ratingsObject8' index='8'></review-ratings>
                                 </div>
                             </div>
-                            <div flex="50" layout="row">
+                            <div flex="50" flex-xs="100" flex-sm="100"  layout="row">
                                 <div flex class="param-title">
                                     <h4>Layout of the apartment</h4>
                                 </div>
@@ -128,11 +128,11 @@
                             </div>
                         </div>
                         <div class="yes-no-ques">
-                            <div layout="row" class="review-param" ng-repeat="item in yesNoParam">
-                                <div flex="70" class="param-title">
+                            <div layout="row" layout-wrap class="review-param" ng-repeat="item in yesNoParam">
+                                <div flex="70" flex-xs="100" flex-sm="70" class="param-title">
                                     <h4>{{item.ques}}</h4>
                                 </div>
-                                <div layout-align="end center" layout="row" flex="30" id="radio-btns">
+                                <div layout-align="end center" layout="row" flex="30" flex-xs="100" flex-sm="30"  id="radio-btns">
                                     <md-radio-group ng-model="review[item.id]" layout="row" class="md-warn">
                                         <md-radio-button value="Yes"> Yes</md-radio-button>
                                         <md-radio-button value="No"> No </md-radio-button>
@@ -141,7 +141,7 @@
                             </div>
                         </div>
                     </div>
-                    <div layout="row" layout-align="end center">
+                    <div layout="row" class="mgtxs5" layout-align="end center">
                         <md-button class="md-raised md-warn" ng-click="createPath(review)" ng-disabled="(reviewForm.$invalid) || (!review.overallRating)">Submit</md-button>
                     </div>
                 </form>

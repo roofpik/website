@@ -1,3 +1,4 @@
+.header .logo {cursor: pointer;}
 .blog-details figcaption {
     margin: 10px 0 0 0 !important;
     font-size: 17px;
@@ -18,6 +19,16 @@
 .city-list ul {
     text-align: center;
 }
+#faq .faq-question h3{font-size: 17px; margin: 0px;}
+#faq .faq-answer p{font-size: 16px; margin: 5px 0px;}
+.profile-page .profile-page-content{font-size: 15px;}
+.user-menu-list-item-span{cursor: pointer;}
+.rf-footer ul li{cursor: pointer; padding: 2px 0px;}
+.user-all-reviews-page #review-container{color: #444;}
+.menu-name{padding-left: 40px; display:block; overflow: hidden; white-space: nowrap;text-overflow: ellipsis;}
+.header .main-menu ul li{text-align: left;}
+.header .main-menu .menu-item{padding-left: 10px;}
+.fixrtmenu{width: 150px !important; }
 
 @media (max-width: 480px) {
     .xs_posit {
@@ -93,6 +104,12 @@
     .profile-page #info-container{padding-left: 10px;padding-right: 10px;}
 .profile-page #info-heading{margin-top: 10px;}
 .profile-page .detail-label h4{margin:10px 0px;}
+#faq .faq-question h3{font-size: 16px; margin: 5px 0;}
+#faq .faq-answer{font-size: 15px;}
+.header .logo img{max-width: 100px;}
+.header .main-menu ul li{width: 120px}
+.review_ratings .material-icons{font-size: 20px;}
+.rating-ques{font-size: 15px;}
 }
 @media (min-width: 481px) and (max-width: 599px) {
 
@@ -100,6 +117,8 @@
 	  .profile-page .detail-label{text-align: left;}
 }
 @media (min-width: 481px) and (max-width: 767px) {
+#faq .faq-question h3{font-size: 16px; margin: 5px 0;}
+#faq .faq-answer{font-size: 15px;}
 	.profile-page #profile-img{width: 150px; height: 150px;}
 	.profile-page .detail-label{font-size: 15px;}
 	.search-dialog input {
@@ -143,10 +162,15 @@
     .city-list ul li {
         padding: 0 20px;
     }
+    #faq .faq-question h3{font-size: 17px; margin:0;}
+#faq .faq-answer{font-size: 16px;}
 }
 
 @media (min-width: 961px) and (max-width: 1024px) {
     .city-list ul li {
         padding: 0 25px;
     }
+      #faq .faq-question h3{font-size: 17px; margin: 0px;}
+#faq .faq-answer{font-size: 16px;}
+#faq .faq-answer p{margin:0;}
 }

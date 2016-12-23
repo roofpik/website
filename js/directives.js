@@ -13,24 +13,28 @@ app.directive('footer', function() {
         restrict: 'A', //This menas that it will be used as an attribute and NOT as an element. I don't like creating custom HTML elements
         replace: true,
         templateUrl: "/js/directives/footer.html",
-        controller: ['$scope', '$state', function($scope, $state) {
+        controller: ['$scope', '$state', '$timeout', function($scope, $state, $timeout) {
             // Your behaviour goes here :
-            var year = new Date().getFullYear();
-            $scope.localities = {};
-            $scope.searchList = getLocalStorage('searchList').value;
-            getLocalities($scope.searchList);
+            $timeout(function() {
 
-            function getLocalities(list) {
-                for (key in list) {
-                    if (list[key].type == 'Locality') {
-                        $scope.localities[list[key].name] = list[key].id;
+
+                var year = new Date().getFullYear();
+                $scope.localities = {};
+                $scope.searchList = getLocalStorage('searchList').value;
+                getLocalities($scope.searchList);
+
+                function getLocalities(list) {
+                    for (key in list) {
+                        if (list[key].type == 'Locality') {
+                            $scope.localities[list[key].name] = list[key].id;
+                        }
                     }
                 }
-            }
-            $scope.takeToLocalityProjects = function(val) {
-                var valId = $scope.localities[val];
-                $state.go('projects', { year: year, city: 'gurgaon', type: 'residential-projects', category: convertToHyphenSeparated(val), categoryId: valId, id: 3 });
-            }
+                $scope.takeToLocalityProjects = function(val) {
+                    var valId = $scope.localities[val];
+                    $state.go('projects', { year: year, city: 'gurgaon', type: 'residential-projects', category: convertToHyphenSeparated(val), categoryId: valId, id: 3 });
+                }
+            }, 5000);
 
         }]
     }

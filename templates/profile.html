@@ -1,6 +1,6 @@
 <md-content class="profile-page has-header">
-    <div layout="row" flex="70" class="profile-page-content">
-        <div flex="30" id="image-container">
+      <div layout="row" layout-wrap flex="70" flex-sm="90" flex-xs="90" class="profile-page-content">
+       <div flex="30" flex-xs="100" id="image-container">
             <img id="profile-img" ng-src="{{uploadedImage}}" alt="http://www.e-codices.unifr.ch/documents/media/Collections/img-not-available_en.jpg" />
             <div class="profile-img-upload">
                 <image-upload max-height="800" max-width="800" min-height="300" min-width="300" cropping="true" view-port-width="300" view-port-height="300" boundry-width="400" boundry-height="400" image-type="{{imageType}}" image-upload-response="imageUploadResponseFn" upload-path="{{uploadPath}}" image-name="{{imageName}}"></image-upload>
