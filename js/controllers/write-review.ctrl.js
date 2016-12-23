@@ -81,11 +81,14 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
 
     $rootScope.$watch('loginStatus', function(){
         if($rootScope.loginStatus){
+            $scope.loginStatus = true;
             user = firebase.auth().currentUser;
             console.log(user);
+        } else {
+            $scope.loginStatus = false;
         }
     });
-
+    console.log(checkLocalStorage('loginStatus'));
     if(checkLocalStorage('loginStatus')){
         $scope.loginStatus = JSON.parse(localStorage.getItem('loginStatus'));
         if(JSON.parse(localStorage.getItem('loginStatus'))){

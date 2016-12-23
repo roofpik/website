@@ -13,6 +13,13 @@ app.run(function($rootScope, $mdDialog, $timeout, UserTokenService) {
             UserTokenService.checkToken($rootScope.uid, timestamp, 4);
             $rootScope.loginStatus = true;
             localStorage.setItem('loginStatus', true);
+            $mdDialog.hide();
+            // User is signed in.
+        } else {
+            $rootScope.uid = null;
+            $rootScope.loginStatus = false;
+            localStorage.setItem('loginStatus', false);
+            // No user is signed in.
         }
     });
 

@@ -1,13 +1,22 @@
-app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $http, UserTokenService, $location) {
+app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $http, UserTokenService, $location, $rootScope) {
+    loading(true);
     var timestamp = new Date().getTime();
     var urlInfo = {
         url: $location.path()
     }
     UserTokenService.checkToken(urlInfo, timestamp, 1);
-    var uid = '8XGzXWp7l8RzbiCCfFv5GEzx6Mw2';
+    var uid;
+    var user;
+    $rootScope.$watch('loginStatus', function(){
+        if($rootScope.loginStatus){
+            user = firebase.auth().currentUser;
+            console.log(user);
+            uid = user.uid;
+            getUserInfo();
+        }
+    });
 
     $scope.imageType = 'profile';
-    $scope.uploadPath = 'users/'+uid+'/profileImage';
     // $scope.imageName = uid;
     $scope.imageUploadResponseFn = function(valueFromDirective) {
         console.log(valueFromDirective);
@@ -15,9 +24,6 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
             sweetAlert("Success", "Profile image successfully uploaded!", "success");
         });
     }
-
-
-
     
     $scope.cities = [];
     $scope.dataloaded = false;
@@ -42,33 +48,41 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
         }, 0);
     })
 
-    db.ref('users/' + uid).once('value', function(snapshot) {
-        console.log(snapshot.val());
-        $timeout(function() {
-            $scope.user = snapshot.val();
-            // if(!$scope.user.gender){
-            //     $scope.user.gender = 'Gender';
-            // }
-            if (!$scope.user.birthDay) {
-                $scope.user.birthDay = {};
-                $scope.user.birthDay.date = '1';
-                $scope.user.birthDay.month = 'December';
-                $scope.user.birthDay.year = '1999';
-            }
-            if ($scope.user.mobile.mobileProvided == false) {
-                $scope.showAddMobile = true;
-            }
-            if ($scope.user.profileImage) {
-                $scope.uploadedImage = "http://cdn.roofpik.com/roofpik/users/"+uid+'/profileImage/'+$scope.user.profileImage+'-m.jpg';
-            }
-            if ($scope.user.address) {
-                $scope.city = $scope.user.address.cityName;
-            }
-        }, 0);
-    }).then(function() {
-        $scope.dataloaded = true;
-        $('.profile-page').fadeIn();
-    })
+    function getUserInfo(){
+        $scope.uploadPath = 'users/'+uid+'/profileImage';
+        db.ref('users/' + uid).once('value', function(snapshot) {
+            console.log(snapshot.val());
+            $timeout(function() {
+                $scope.user = snapshot.val();
+                // if(!$scope.user.gender){
+                //     $scope.user.gender = 'Gender';
+                // }
+                if (!$scope.user.birthDay) {
+                    $scope.user.birthDay = {};
+                    $scope.user.birthDay.date = '1';
+                    $scope.user.birthDay.month = 'December';
+                    $scope.user.birthDay.year = '1999';
+                }
+                if ($scope.user.mobile.mobileProvided == false) {
+                    $scope.showAddMobile = true;
+                }
+                if ($scope.user.profileImage) {
+                    if($scope.user.profileImage.indexOf('http') !== -1){
+                        $scope.uploadedImage = $scope.user.profileImage;
+                    } else {
+                        $scope.uploadedImage = "http://cdn.roofpik.com/roofpik/users/"+uid+'/profileImage/'+$scope.user.profileImage+'-m.jpg';
+                    }
+                }
+                if ($scope.user.address) {
+                    $scope.city = $scope.user.address.cityName;
+                }
+            }, 0);
+        }).then(function() {
+            $scope.dataloaded = true;
+            loading(false);
+            $('.profile-page').fadeIn();
+        })
+    }
 
     for (var i = 1; i <= 31; i++) {
         $scope.allDates.push(i);
@@ -354,5 +368,5 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
         console.log('called');
         $("#profile-image-test").click();
     }
-    loading(false);
+    // loading(false);
 });
