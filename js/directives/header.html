@@ -4,7 +4,7 @@
     </div>
     <div flex="80" class="main-menu" layout-align="end center" layout="row">
         <ul>
-          <!--   <li class="shortlist-menu-item">
+            <!--   <li class="shortlist-menu-item">
                 <div class="menu-item">
                     <span>Shortlisted</span>
                     <i class="material-icons fade">favorite_border </i>
@@ -12,25 +12,37 @@
                 </div>
                 <shortlisted-project></shortlisted-project>
             </li> -->
-           <!--  <li>
+            <!--  <li>
                 <div class="menu-item">
                     <span>Help</span>
                     <i class="material-icons fade">help_outline</i>
                 </div>
             </li> -->
-          <!--   <li ng-if="!loginStatus">
-                <div class="menu-item">
-                    <span>Sign Up</span>
-                    <i class="material-icons fade">face</i>
-                </div>
-            </li> -->
-            <li ng-if="!loginStatus">
-                <div class="menu-item" ng-click="showLogin($event)">
-                    <span>Login/Sign up</span>
-                    <i class="material-icons fade">fingerprint</i>
+            <li>
+                <div class="menu-item" ng-click="goToCoverStories()">
+                    <i class="material-icons fade">recent_actors</i>
+                    <span>Cover Story</span>
                 </div>
             </li>
-             <li class="user-menu-item" ng-if="loginStatus">
+            <li>
+                <div class="menu-item" ng-click="goToBlogs()">
+                    <i class="material-icons fade">library_books</i>
+                    <span>Blogs</span>
+                </div>
+            </li>
+            <li>
+                <div class="menu-item" ng-click="goToCoverStories()">
+                    <i class="material-icons fade">mode_edit</i>
+                    <span>Write Review</span>
+                </div>
+            </li>
+            <li ng-if="!loginStatus">
+                <div class="menu-item" ng-click="showLogin($event)">
+                    <i class="material-icons fade">fingerprint</i>
+                    <span>Login/Sign up</span>
+                </div>
+            </li>
+            <li class="user-menu-item" ng-if="loginStatus">
                 <div class="menu-item">
                     <img src="https://dummyimage.com/32x32/676767/fff" />
                     <span>User</span>

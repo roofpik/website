@@ -1,21 +1,18 @@
 app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope, $timeout, UserTokenService) {
     $scope.user = false;
     $scope.gotoHome = function() {
-        console.log('called');
         $state.go('home');
     }
 
-
-    $rootScope.$watch('loginStatus', function(){
-         $scope.loginStatus = $rootScope.loginStatus;
+    $rootScope.$watch('loginStatus', function() {
+        $scope.loginStatus = $rootScope.loginStatus;
     });
 
-    $rootScope.$on("callShowLogin", function(){
-        $timeout(function(){
+    $rootScope.$on("callShowLogin", function() {
+        $timeout(function() {
             $scope.showLogin();
-        },0);
+        }, 0);
     });
-   
 
     $scope.showLogin = function(ev) {
         $mdDialog.show({
@@ -34,18 +31,18 @@ app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope, $ti
     };
 
     $scope.logout = function() {
-        
+
         var timestamp = new Date().getTime();
         UserTokenService.checkToken($rootScope.uid, timestamp, 5);
-        $rootScope.logoutSuccess = true;
         firebase.auth().signOut().then(function() {
             // Sign-out successful.
-            $timeout(function(){
-                $scope.loginStatus = false;
+            $timeout(function() {
+                $rootScope.uid = null;
                 $rootScope.loginStatus = false;
-                deleteLocalStorage('loginStatus');
-
-            },100);
+                localStorage.setItem('loginStatus', false);
+                $mdDialog.hide();
+                sweetAlert("Logout Successful", "You have successfully logged out!", "success");
+            }, 100);
 
         }, function(error) {
             // An error happened.
@@ -80,6 +77,18 @@ app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope, $ti
         $state.go('user-all-reviews');
     };
 
-    loading(false);
+      $scope.goToCoverStories = function() {
+        $state.go('cover-stories', { city: 'gurgaon', cityId: $scope.cityId, from: 1 });
+    }
+
+    $scope.goToBlogs = function() {
+        $state.go('blogs', { city: 'gurgaon', cityId: $scope.cityId, from: 1 })
+    }
+
+    $scope.gotoWriteReviews = function() {
+        $state.go('write-review');
+    }
+
+    
 
 });
