@@ -11,7 +11,7 @@ app.run(function($rootScope, $mdDialog, $timeout, UserTokenService) {
             UserTokenService.checkToken($rootScope.uid, timestamp, 4);
             $rootScope.loginStatus = true;
             localStorage.setItem('loginStatus', true);
-            console.log($rootScope.loginStatus);
+            console.log($rootScope.loginStatus, $rootScope.uid);
             $mdDialog.hide();
             // User is signed in.
         } else {
