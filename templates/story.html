@@ -2,7 +2,7 @@
     <div layout="column" flex layout-wrap>
         <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="header-story">
             <article flex="100">
-                <div class="featured-story" style="background-image:url({{story.coverImage['700x500']}});">
+                <div class="featured-story" style="background-image:url({{story.coverPhoto}});">
                     <div class="featured-caption">
                         <div class="featured-caption-content">
                             <h3>{{story.title}}</h3>
@@ -40,7 +40,7 @@
                         </md-card-header-text>
                     </md-card-header>
                     <article ng-repeat="story in popularStories" ng-click="goToStoryDetails(story.storyId)">
-                        <img ng-src="{{story.coverImage}}" class="md-card-image" alt="Washed Out" />
+                        <img ng-src="{{story.coverPhoto}}" class="md-card-image" alt="Washed Out" />
                         <md-card-title>
                             <md-card-title-text>
                                 <span class="md-headline">{{story.title}}</span>

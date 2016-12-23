@@ -2,7 +2,7 @@
     <div layout="column" flex layout-wrap>
         <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="header-blog">
             <article flex="100">
-                <div class="featured-blog" style="background-image:url({{blog.coverImage['1600x900']}});">
+                <div class="featured-blog" style="background-image:url({{blog.coverPhoto}});">
                     <div class="featured-caption">
                         <div class="featured-caption-content">
                             <h2>{{blog.title}}</h2>
@@ -33,7 +33,7 @@
                         </md-card-header-text>
                     </md-card-header>
                     <article ng-repeat="blog in popularBlogs" ng-click="goToBlogDetails(blog.blogId)">
-                        <img ng-src="{{blog.coverImage['1600x900']}}" class="md-card-image" alt="Washed Out" />
+                        <img ng-src="{{blog.coverPhoto}}" class="md-card-image" alt="Washed Out" />
                         <md-card-title>
                             <md-card-title-text>
                                 <h3>{{blog.title}}</h3>
