@@ -181,8 +181,8 @@ header {
 .header .main-menu ul li {
     font-size: 14px;
     display: inline-block;
-    width: 150px;
-    text-align: center;
+   /* width: 150px;*/
+    text-align: left; float: left;
     line-height: 60px;
     position: relative;
 }

@@ -4,6 +4,10 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
         url: $location.path()
     }
     UserTokenService.checkToken(urlInfo, timestamp, 1);
+    loading(true);
+    $timeout(function(){
+        loading(false);
+    },1000);
 
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.stepsModel = [];
@@ -436,6 +440,6 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
         $( "#review-image" ).click();
     }
 
-    loading(false);
+    // loading(false);
 
 });

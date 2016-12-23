@@ -27,8 +27,13 @@
 .user-all-reviews-page #review-container{color: #444;}
 .menu-name{padding-left: 40px; display:block; overflow: hidden; white-space: nowrap;text-overflow: ellipsis;}
 .header .main-menu ul li{text-align: left;}
-.header .main-menu .menu-item{padding-left: 10px;}
-.fixrtmenu{width: 150px !important; }
+.header .main-menu .menu-item{padding: 0 7px;}
+.fixrtmenu{width: 145px; }
+.user-all-reviews-page #user-all-reviews-title{background-color: #ddd;}
+.write-review-page #review-form-title{background-color: #ddd; color: #444;}
+footer{margin-top: 30px}
+.proj-imgfix{overflow: hidden; height: 400px;}
+
 
 @media (max-width: 480px) {
     .xs_posit {
@@ -97,7 +102,8 @@
     .project-list-page .path-filters span.path-btn{font-size: 14px;}
     .section-header h1{font-size: 22px;}
     .section-header {padding: 25px 0 50px; }
-    .write-reviews .reviews-wrapper h1{font-size: 28px;}
+    .write-reviews .reviews-wrapper h1{font-size: 21px;}
+    .write-reviews .reviews-wrapper h2{font-size: 18px;}
     .mgtxs5{margin-top: 5%;}
     .profile-page .detail-label{text-align: left;}
     .profile-page input{width: 100%;}
@@ -107,16 +113,37 @@
 #faq .faq-question h3{font-size: 16px; margin: 5px 0;}
 #faq .faq-answer{font-size: 15px;}
 .header .logo img{max-width: 100px;}
-.header .main-menu ul li{width: 120px}
+.header .logo{max-width: 10px; overflow: hidden;}
 .review_ratings .material-icons{font-size: 20px;}
 .rating-ques{font-size: 15px;}
-}
-@media (min-width: 481px) and (max-width: 599px) {
+.fixrtmenu{width: 95px !important; }
 
+
+}
+@media (min-width: 200px) and (max-width: 359px) {
+.header .main-menu .menu-item{ padding: 0 4px;  }
+.header .logo{padding: 10px 15px}
+.header .main-menu ul li{line-height: 55px; font-size: 13px;}
+}
+
+@media (min-width: 360px) and (max-width: 480px) {
+.header .main-menu .menu-item{ padding: 0 5px;  }
+.header .logo{padding: 10px 15px}
+.header .main-menu ul li{line-height: 55px; font-size: 14px;}
+}
+
+
+@media (min-width: 481px) and (max-width: 599px) {
+.fixrtmenu{width: 125px !important; }
 	  .mgtxs5{margin-top: 5%;}
+	  .header .main-menu .menu-item{ padding: 0 7px;  }
 	  .profile-page .detail-label{text-align: left;}
+	  .header .logo{max-width: 10px; overflow: hidden;}
+
 }
 @media (min-width: 481px) and (max-width: 767px) {
+	.section-header{padding: 40px 0 20px}
+	.write-reviews .reviews-wrapper h1{font-size: 32px;}
 #faq .faq-question h3{font-size: 16px; margin: 5px 0;}
 #faq .faq-answer{font-size: 15px;}
 	.profile-page #profile-img{width: 150px; height: 150px;}
@@ -125,7 +152,8 @@
     width: 100%;
     padding: 5px 0 5px;   
     font-size: 16px;}
-
+  .top-features h2{font-size: 14px; line-height: 15px;}
+  .featured-header h1{font-size: 16px; margin:10px 0;}
 	.featured-header .home-search {
         padding: 7px 0;
         height: 35px; line-height: 17px;
@@ -151,19 +179,23 @@
     }
     md-list-item.md-no-proxy, md-list-item .md-no-style{padding:0 9px;}
       .imgsrh{width: 100px; height: 80px;}
+      .project-details-page #project-name{font-size: 24px;}
+      .project-details-page #rating{font-size: 21px;}
+      .fixrtmenu{width: 125px !important; }
 }
 
 @media (min-width: 768px) and (max-width: 960px) {
 	body{font-size: 14px;}
     .featured-header h1 {
-        font-size: 24px;
-        padding: 0 20px;
+        font-size: 21px;
+        padding: 0 10px;
     }
     .city-list ul li {
         padding: 0 20px;
     }
     #faq .faq-question h3{font-size: 17px; margin:0;}
 #faq .faq-answer{font-size: 16px;}
+.top-features{height: 175px;}
 }
 
 @media (min-width: 961px) and (max-width: 1024px) {
