@@ -16,7 +16,12 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTok
     $rootScope.$watch('localStorageCount', function() {
         if ($rootScope.localStorageCount == 2) {
             $scope.projectList = getLocalStorage('projectList').value;
-
+            for(key in $scope.projectList){
+                if($scope.projectList[key].imgUrl.indexOf('http') == -1){
+                    $scope.projectList[key].imgUrl = "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.projectList[key].projectId+'/images/coverPhoto/'+$scope.projectList[key].imgUrl+'-s.jpg';
+                }
+                console.log($scope.projectList[key].imgUrl);
+            }
             $timeout(function() {
                 $scope.makeTopRated();
             }, 1000);
