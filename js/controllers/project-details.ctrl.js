@@ -12,6 +12,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
     $scope.dataLoaded = false;
     $scope.isActive = '';
     $scope.viewReviews = 5;
+    $scope.cityId = '-KYJONgh0P98xoyPPYm9';
 
     String.prototype.capitalize = function() {
         return this.charAt(0).toUpperCase() + this.slice(1);
@@ -21,9 +22,8 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
         // console.log(snapshot.val());
         $timeout(function() {
             $scope.project = snapshot.val();
-            console.log($scope.project.images);
-            console.log($scope.project.images.main['2100x800']);
             $scope.projectName = $scope.project.projectName;
+            $scope.coverImage = "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.project.projectId+'/images/coverPhoto/'+$scope.project.images.coverPhoto+'-m.jpg';
             $scope.path = [">","Gurgaon", ">","Residential", ">"];
             if(angular.isDefined($stateParams.category)){
                 $scope.path.push(($stateParams.category).capitalize());
