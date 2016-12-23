@@ -1,4 +1,4 @@
-app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTokenService, $location) {
+app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTokenService, $location, $rootScope) {
     $scope.projectList = [];
     $scope.searchList = [];
     $scope.dataVersions = {};
@@ -16,6 +16,7 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTok
     $rootScope.$watch('localStorageCount', function() {
         if ($rootScope.localStorageCount == 2) {
             $scope.projectList = getLocalStorage('projectList').value;
+
             $timeout(function() {
                 $scope.makeTopRated();
             }, 1000);
@@ -108,12 +109,9 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTok
         }
 
         function printSearchText() {
-            console.log($scope.searchText);
         }
 
         $scope.selectItem = function(val) {
-            console.log(val);
-            console.log(val.name);
             var timestamp = new Date().getTime();
             if (val.type == 'Builder') {
                 $scope.cancel();
@@ -121,7 +119,6 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTok
                     searchKeyword: $scope.searchText || null,
                     url: '/projects/' + year + '/gurgaon/residential-projects/' + convertToHyphenSeparated(val.name) + '/' + val.id + '/' + 2
                 }
-                console.log(searchData);
                 UserTokenService.checkToken(searchData, timestamp, 3);
                 $state.go('projects', { year: year, city: 'gurgaon', type: 'residential-projects', category: convertToHyphenSeparated(val.name), categoryId: val.id, id: 2 });
             } else if (val.type == 'Locality') {
@@ -130,7 +127,6 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTok
                     searchKeyword: $scope.searchText || null,
                     url: '/projects/' + year + '/gurgaon/residential-projects/' + convertToHyphenSeparated(val.name) + '/' + val.id + '/' + 3
                 }
-                console.log(searchData);
                 UserTokenService.checkToken(searchData, timestamp, 3);
                 $state.go('projects', { year: year, city: 'gurgaon', type: 'residential-projects', category: convertToHyphenSeparated(val.name), categoryId: val.id, id: 3 });
             } else {
@@ -139,7 +135,6 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTok
                     searchKeyword: $scope.searchText || null,
                     url: '/project-detail/' + year + '/gurgaon/residential-projects/' + convertToHyphenSeparated(val.name) + '/' + val.id
                 }
-                console.log(searchData);
                 UserTokenService.checkToken(searchData, timestamp, 3);
                 $state.go('project-detail', { year: year, city: 'gurgaon', type: 'residential-projects', project: convertToHyphenSeparated(val.name), id: val.id });
             }
@@ -248,7 +243,6 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTok
     }
 
     $scope.takeToProjects = function(val) {
-        console.log(val);
         $state.go('projects', { year: year, city: 'gurgaon', type: 'residential-projects', category: val, categoryId: '-KQ9cIdfaoKpCj34yAWC', id: 1 });
     }
 

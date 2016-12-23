@@ -4,8 +4,10 @@ app.run(function($rootScope, $mdDialog, $timeout, UserTokenService) {
     $rootScope.loginStatus = false;
     $rootScope.uid = null;
     $rootScope.localStorageCount = 0;
-    $scope.cityId = '-KYJONgh0P98xoyPPYm9';
-    
+    cityId = '-KYJONgh0P98xoyPPYm9';
+    var searchList = [];
+    var projectList = [];
+
     firebase.auth().onAuthStateChanged(function(user) {
         if (user && $rootScope.uid == null) {
             $rootScope.uid = user.uid;
@@ -24,54 +26,56 @@ app.run(function($rootScope, $mdDialog, $timeout, UserTokenService) {
     });
 
     db.ref('dataVersions').once('value', function(response) {
-        $scope.dataVersions = response.val();
+        dataVersions = response.val();
     }).then(function() {
         $timeout(function() {
             if (checkLocalStorage('projectList')) {
                 var projectListVersion = (getLocalStorage('projectList')).version;
-                if (projectListVersion != $scope.dataVersions.projectList) {
-                    getProjectList($scope.dataVersions.projectList);
-                }
-                else{
+                if (projectListVersion != dataVersions.projectList) {
+                    getProjectList(dataVersions.projectList);
+                } else {
                     $rootScope.localStorageCount = $rootScope.localStorageCount + 1;
                 }
             } else {
-                getProjectList($scope.dataVersions.projectList);
+                getProjectList(dataVersions.projectList);
             }
 
             if (checkLocalStorage('searchList')) {
                 var searchListVersion = (getLocalStorage('searchList')).version;
-                if (searchListVersion != $scope.dataVersions.searchList) {
-                    getSearchList($scope.dataVersions.searchList);
-                }
-                else{
+                if (searchListVersion != dataVersions.searchList) {
+                    getSearchList(dataVersions.searchList);
+                } else {
                     $rootScope.localStorageCount = $rootScope.localStorageCount + 1;
                 }
             } else {
-                getSearchList($scope.dataVersions.searchList);
+                getSearchList(dataVersions.searchList);
             }
         }, 100);
     });
 
 
     function getProjectList(version) {
-        db.ref('projectList/' + $scope.cityId + '/residential').once('value', function(snapshot) {
+        db.ref('projectList/' + cityId + '/residential').once('value', function(snapshot) {
+
             for (key in snapshot.val()) {
-                $scope.projectList.push(snapshot.val()[key]);
+                projectList.push(snapshot.val()[key]);
             }
-            setLocalStorage($scope.projectList, 'projectList', version);
-            $rootScope.localStorageCount = $rootScope.localStorageCount + 1;
+            setLocalStorage(projectList, 'projectList', version);
+            $timeout(function() {
+                $rootScope.localStorageCount = $rootScope.localStorageCount + 1;
+            }, 500);
         });
     };
 
     function getSearchList(version) {
         db.ref('search').once('value', function(snapshot) {
             for (key in snapshot.val()) {
-                $scope.searchList.push(snapshot.val()[key]);
+                searchList.push(snapshot.val()[key]);
             }
-            setLocalStorage($scope.searchList, 'searchList', version);
-            $rootScope.localStorageCount = $rootScope.localStorageCount + 1;
-
+            setLocalStorage(searchList, 'searchList', version);
+            $timeout(function() {
+                $rootScope.localStorageCount = $rootScope.localStorageCount + 1;
+            }, 500);
         })
     };
 });
@@ -81,7 +85,6 @@ function loading(status, timer) {
         timer = 10000;
     }
     if (status) {
-        console.log(timer);
         $('.loader-modal').fadeIn();
         setTimeout(function() {
             $('.loader-modal').fadeOut();
