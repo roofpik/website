@@ -1,11 +1,20 @@
 app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope, $timeout, UserTokenService) {
-    $scope.user = false;
+    $scope.user = {};
     $scope.gotoHome = function() {
         $state.go('home');
     }
 
     $rootScope.$watch('loginStatus', function() {
         $scope.loginStatus = $rootScope.loginStatus;
+
+        if($rootScope.loginStatus){
+            $scope.user.photo = $rootScope.photoURL;
+            $scope.user.name = $rootScope.displayName;
+        }
+        else{
+            $scope.user.photo = null;
+            $scope.user.name = null;
+        }
     });
 
     $rootScope.$on("callShowLogin", function() {
