@@ -11,6 +11,10 @@
     color: #ffffff;
 }
 
+.story-tags{
+    display: inline;
+}
+
 .cover-stories .featured-story img {
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
@@ -86,6 +90,9 @@
 .cover-stories .featured-tags {
     margin: 10px 0 0;
     padding: 0;
+        display: block;
+    overflow: hidden;
+    width: 40%;
 }
 
 .cover-stories .featured-tags li {
