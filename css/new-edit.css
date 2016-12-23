@@ -24,6 +24,11 @@
 .profile-page .profile-page-content{font-size: 15px;}
 .user-menu-list-item-span{cursor: pointer;}
 .rf-footer ul li{cursor: pointer; padding: 2px 0px;}
+.user-all-reviews-page #review-container{color: #444;}
+.menu-name{padding-left: 40px; display:block; overflow: hidden; white-space: nowrap;text-overflow: ellipsis;}
+.header .main-menu ul li{text-align: left;}
+.header .main-menu .menu-item{padding-left: 10px;}
+.fixrtmenu{width: 150px !important; }
 
 @media (max-width: 480px) {
     .xs_posit {
@@ -103,6 +108,8 @@
 #faq .faq-answer{font-size: 15px;}
 .header .logo img{max-width: 100px;}
 .header .main-menu ul li{width: 120px}
+.review_ratings .material-icons{font-size: 20px;}
+.rating-ques{font-size: 15px;}
 }
 @media (min-width: 481px) and (max-width: 599px) {
 
