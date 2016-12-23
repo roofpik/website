@@ -154,7 +154,7 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
             method: 'feed',
             name: blog.blogTitle,
             link: 'http://test.roofpik.com/#/blog/' + blog.blogId,
-            picture: blog.coverImage['700x500'],
+            picture: blog.coverPhoto,
             caption: hashtag,
             description: blog.adminName
         });

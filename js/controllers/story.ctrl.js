@@ -66,7 +66,7 @@ app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $stat
         method: 'feed',
         name: story.storyTitle,
         link: 'http://test.roofpik.com/#/story/'+story.storyId,
-        picture: story.coverImage['700x500'],
+        picture: story.coverPhoto,
         caption: story.placeName,
         description: story.userName
     });

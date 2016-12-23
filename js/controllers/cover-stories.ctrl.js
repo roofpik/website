@@ -148,7 +148,7 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
         method: 'feed',
         name: story.storyTitle,
         link: 'http://test.roofpik.com/#/story/'+story.storyId,
-        picture: story.coverImage,
+        picture: story.coverPhoto,
         caption: story.placeName,
         description: story.userName
     });
