@@ -107,6 +107,20 @@
                     <span flex="50" ng-repeat="feature in project.standoutFeatures" id="feature-name">{{feature.featureName}}</span>
                 </div>
             </div>
+            <div flex="100" ng-show="project.configurations" id="detail">
+                <div layout="row" id="detail-title">
+                    <div flex="25">Unit Types</div>
+                    <div flex="25">Super Built Area</div>
+                    <div flex="25">Buy Price</div>
+                    <div flex="25">Rent Price</div>
+                </div>
+                <div layout="row" ng-repeat="config in configurations | orderBy: 'bhk'" id="detail-value">
+                    <div flex="25">{{config.bhk}} BHK {{config.unit}}</div>
+                    <div flex="25">{{config.superBuiltArea}} Sq. Ft.</div>
+                    <div flex="25">&#8377;{{config.buyMin}} <span ng-show="config.buyMin != config.buyMax">- &#8377;{{config.buyMax}}</span></div>
+                    <div flex="25">&#8377;{{config.rentMin}} <span ng-show="config.rentMin != config.rentMax">- &#8377;{{config.rentMax}}</span></div>
+                </div>
+            </div>
             <div layout="row" layout-wrap>
                 <p flex="100" id="rating">
                     {{allRatings.overallRatingNum}} Review<span ng-show="allRatings.overallRatingNum > 1"></span>

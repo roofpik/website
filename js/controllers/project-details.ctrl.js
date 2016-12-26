@@ -16,6 +16,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
     $scope.minArea;
     $scope.maxArea;
     $scope.propertyTypes = [];
+    $scope.configurations = [];
     $scope.buySelected = true;
     $scope.rentSelected = false;
     $scope.showMoreNotClicked = true;
@@ -98,6 +99,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
                 generateAmenitiesList($scope.project.amenities);
             }
             generateImageList($scope.project.images);
+            generateConfigurations($scope.project.configurations);
             $scope.buyMin = convertCurrency($scope.project.price.buy.min);
             $scope.buyMax = convertCurrency($scope.project.price.buy.max);
             $scope.rentMin = convertCurrency($scope.project.price.rent.min);
@@ -222,6 +224,29 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
             if(data.length != 0){
                 $scope.amenities[key] = data;
             }
+        }
+    }
+
+    function generateConfigurations(configs){
+        for(key in configs){
+            var data = {
+                unit: configs[key].unit,                
+                bhk: configs[key].bhk,                
+                superBuiltArea: configs[key].superBuiltArea         
+            }
+            if(configs[key].pricing.buy.min){
+                data.buyMin = convertCurrency(configs[key].pricing.buy.min);
+            }
+            if(configs[key].pricing.buy.max){
+                data.buyMax = convertCurrency(configs[key].pricing.buy.max);
+            }  
+            if(configs[key].pricing.rent.min){
+                data.rentMin = convertCurrency(configs[key].pricing.rent.min);
+            }
+            if(configs[key].pricing.rent.max){
+                data.rentMax = convertCurrency(configs[key].pricing.rent.max);
+            }
+            $scope.configurations.push(data);                
         }
     }
 
