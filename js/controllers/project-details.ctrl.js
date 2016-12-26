@@ -248,6 +248,73 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
             }
             $scope.configurations.push(data);                
         }
+        // var example = {};
+        // for(key in configs){
+        //     if(example[configs[key].bhk]){
+        //         if(example[configs[key].bhk].unit == configs[key].unit){
+        //             if(configs[key].superBuiltArea < example[configs[key].bhk].superBuiltAreaMin){
+        //                 example[configs[key].bhk].superBuiltAreaMin = configs[key].superBuiltArea;
+        //             } else if(configs[key].superBuiltArea > example[configs[key].bhk].superBuiltAreaMax){
+        //                 example[configs[key].bhk].superBuiltAreaMax = configs[key].superBuiltArea;
+        //             }
+
+        //             if(configs[key].pricing.buy.min < example[configs[key].bhk].buyMin){
+        //                 example[configs[key].bhk].buyMin = convertCurrency(configs[key].pricing.buy.min);
+        //             }
+        //             if(configs[key].pricing.buy.max < example[configs[key].bhk].buyMax){
+        //                 example[configs[key].bhk].buyMax = convertCurrency(configs[key].pricing.buy.max);
+        //             }
+        //             if(configs[key].pricing.rent.min < example[configs[key].bhk].rentMin){
+        //                 example[configs[key].bhk].rentMin = convertCurrency(configs[key].pricing.rent.min);
+        //             }
+        //             if(configs[key].pricing.rent.max < example[configs[key].bhk].rentMax){
+        //                 example[configs[key].bhk].rentMax = convertCurrency(configs[key].pricing.rent.max);
+        //             }
+
+        //         } else {
+        //             var data = {
+        //                 unit: configs[key].unit,                
+        //                 bhk: configs[key].bhk,                
+        //                 superBuiltAreaMin: configs[key].superBuiltArea,
+        //                 superBuiltAreaMax: configs[key].superBuiltArea
+        //             }
+        //             if(configs[key].pricing.buy.min){
+        //                 data.buyMin = convertCurrency(configs[key].pricing.buy.min);
+        //             }
+        //             if(configs[key].pricing.buy.max){
+        //                 data.buyMax = convertCurrency(configs[key].pricing.buy.max);
+        //             }  
+        //             if(configs[key].pricing.rent.min){
+        //                 data.rentMin = convertCurrency(configs[key].pricing.rent.min);
+        //             }
+        //             if(configs[key].pricing.rent.max){
+        //                 data.rentMax = convertCurrency(configs[key].pricing.rent.max);
+        //             }
+        //             example[configs[key].bhk+'2'] = data;
+        //         }         
+        //     } else {
+        //         var data = {
+        //             unit: configs[key].unit,                
+        //             bhk: configs[key].bhk,                
+        //             superBuiltAreaMin: configs[key].superBuiltArea,
+        //             superBuiltAreaMax: configs[key].superBuiltArea
+        //         }
+        //         if(configs[key].pricing.buy.min){
+        //             data.buyMin = convertCurrency(configs[key].pricing.buy.min);
+        //         }
+        //         if(configs[key].pricing.buy.max){
+        //             data.buyMax = convertCurrency(configs[key].pricing.buy.max);
+        //         }  
+        //         if(configs[key].pricing.rent.min){
+        //             data.rentMin = convertCurrency(configs[key].pricing.rent.min);
+        //         }
+        //         if(configs[key].pricing.rent.max){
+        //             data.rentMax = convertCurrency(configs[key].pricing.rent.max);
+        //         }
+        //         example[configs[key].bhk] = data;
+        //     }
+        // }
+        // console.log(example);
     }
 
     function generateImageList(images){

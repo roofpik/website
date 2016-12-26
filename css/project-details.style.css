@@ -250,6 +250,7 @@
 
 .project-details-page #amenity-category {
     text-transform: capitalize;
+    text-decoration:underline;
 }
 
 .project-details-page .gallery-btn{
