@@ -2,6 +2,10 @@
     line-height:1.43;
 }
 
+.project-details-page ul li {
+    list-style:none;
+}
+
 .project-details-page .featured-story a {
     text-decoration: none;
     transition: all ease .3s;
@@ -69,27 +73,28 @@
 }
 
 .project-details-page #status-segment #status i,
-.project-details-page #status-segment #segment i{
+.project-details-page #status-segment #segment i,
+.project-details-page #status-segment #bhk i{
     font-size: 30px;
 }
 
 .project-details-page #status-segment #status p,
-.project-details-page #status-segment #segment p{
+.project-details-page #status-segment #segment p
+.project-details-page #status-segment #bhk p{
     font-size: 14px;
 }
 
-.project-details-page #address {
+.project-details-page #detail {
     border-bottom: 1px solid #ccc;
 }
 
-.project-details-page #address-title {
+.project-details-page #detail-title {
     padding: 20px;
     font-size:19px;
     font-weight:bold;
 }
 
-.project-details-page #address-value {
-    text-align: center;
+.project-details-page #detail-value {
     padding: 20px;
     font-size: 16px;
 }
@@ -160,8 +165,11 @@
 .project-basic-details .rating-summary .rating-summary-ratings i {
     font-size:14px;
 }
+.project-details-page .all-rating-summary .rating-block {
+    padding: 14px 15px;
+    font-size: 14px; 
+}
 
-.project-details-page .all-rating-summary ul li,
 .project-basic-details .rating-summary .rating-summary-ratings {
     padding: 10px 15px;
     font-size: 14px;
@@ -212,3 +220,37 @@
 .project-details-page .path-filters span.path-btn:nth-child(odd) {
     color: #22a8f4;
 }
+
+.project-details-page #property-types {
+    padding: 20px 0px;
+}
+
+.project-details-page #feature-name {
+    padding:15px 15px 15px 0px;
+}
+
+.project-details-page .stikeText {
+    text-decoration: line-through;
+    padding: 0 0 20px;
+}
+
+.project-details-page .normal {
+    padding: 0 0 20px;
+}
+
+.project-details-page .all-amenities {
+    padding: 0px 0px 20px;
+}
+
+.project-details-page #show-more-btn {
+    float: right;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.project-details-page #amenity-category {
+    text-transform: capitalize;
+}
+
+
+

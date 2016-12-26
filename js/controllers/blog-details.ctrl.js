@@ -8,11 +8,13 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $stateParams, $sce,
 	$scope.currentStory = {};
 	$scope.cityId ='-KYJONgh0P98xoyPPYm9';
 	$scope.popularBlogs = {};
+	loading(true);
 	db.ref('blogs/allBlogs/'+$scope.cityId+'/'+$stateParams.id).once('value', function(snapshot){
 		$timeout(function(){
 			$scope.blog = snapshot.val();
 			$scope.blog.coverPhoto = 'http://cdn.roofpik.com/roofpik/blogs/allBlogs/'+$scope.cityId+'/'+$scope.blog.blogId+'/coverPhoto/'+$scope.blog.coverPhoto+'-l.jpg'
 			console.log($scope.blog);
+			loading(false);
 		},0);
 	})
 

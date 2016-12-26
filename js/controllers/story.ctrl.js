@@ -4,7 +4,7 @@ app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $stat
         url: $location.path()
     }
     UserTokenService.checkToken(urlInfo, timestamp, 1);
-    
+    loading(true);
 	$scope.featuredStories = [];
 	$scope.cityId = '-KYJONgh0P98xoyPPYm9';
 	$scope.popularStories = {};
@@ -13,6 +13,7 @@ app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $stat
 		$timeout(function(){
 			$scope.story = snapshot.val();
 			$scope.story.coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/'+$scope.cityId+'/'+$scope.story.storyId+'/coverPhoto/'+$scope.story.coverPhoto+'-m.jpg';
+			loading(false);
 		},50);
 	})
 

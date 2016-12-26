@@ -34,6 +34,10 @@ app.directive('footer', function() {
                         $state.go('projects', { year: year, city: 'gurgaon', type: 'residential-projects', category: convertToHyphenSeparated(val), categoryId: valId, id: 3 });
                     }
 
+                    $scope.takeToPage = function(val){
+                        $state.go(val);
+                    }
+
                 }
             });
 
