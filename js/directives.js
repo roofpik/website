@@ -148,3 +148,15 @@ app.directive('contentLoading', function() {
             '<div class="loader"></div></div></div>'
     }
 });
+
+app.directive('gallery', function() {
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'templates/dialogs/gallery.html',
+        controller: 'galleryCtrl',
+        scope: {
+            galleryResponse: '='
+        }
+    }
+});

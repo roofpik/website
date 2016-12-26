@@ -3,7 +3,10 @@
         <article flex="100">
         <div flex="100" class="proj-imgfix">
             <div class="featured-story" style="background-image:url({{coverImage}});">
-                <span class="gallery-btn" ng-click="showAdvanced($event, project.images.other)">View Photos</span>
+                <div class="gallery-btn">
+                    <gallery></gallery>
+                </div>
+                <!-- <span class="gallery-btn" ng-click="showAdvanced($event, project.images.other)">View Photos</span> -->
             </div>
             </div>
         </article>

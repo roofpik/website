@@ -16,6 +16,8 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
     $scope.minArea;
     $scope.maxArea;
     $scope.propertyTypes = [];
+    $scope.buySelected = true;
+    $scope.rentSelected = false;
     $scope.showMoreNotClicked = true;
     $scope.amenitiesMoreLess = 'More +';
     $scope.amenities = {};
@@ -95,6 +97,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
             if($scope.project.amenities){
                 generateAmenitiesList($scope.project.amenities);
             }
+            generateImageList($scope.project.images);
             $scope.buyMin = convertCurrency($scope.project.price.buy.min);
             $scope.buyMax = convertCurrency($scope.project.price.buy.max);
             $scope.rentMin = convertCurrency($scope.project.price.rent.min);
@@ -109,7 +112,6 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
         db.ref('reviews/-KYJONgh0P98xoyPPYm9/residential/'+$scope.projectId)
         .orderByChild('wordCount')
         .once('value', function(snapshot) {
-            console.log(snapshot.val());
             var allReviewsCount = Object.keys(snapshot.val()).length;
             $timeout(function(){
                 var reviewCount = 0;
@@ -123,13 +125,11 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
                         }
                     }
                 });
-                console.log($scope.reviews);
             },0);
 
         }).then(function() {
             db.ref('ratingReview/-KYJONgh0P98xoyPPYm9/residential/'+$scope.projectId).once('value', function(snapshot) {
                 $timeout(function() {
-                    console.log(snapshot.val());
                     $scope.allRatings = snapshot.val();
                     $("#excellentStar").css("width", ($scope.allRatings.fiveStar / $scope.allRatings.overallRatingNum) * 100 + '%');
                     $("#veryGoodStar").css("width", ($scope.allRatings.fourStar / $scope.allRatings.overallRatingNum) * 100 + '%');
@@ -223,7 +223,31 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
                 $scope.amenities[key] = data;
             }
         }
-        console.log($scope.amenities);
+    }
+
+    function generateImageList(images){
+        var imageData = [];
+        for(key in images){
+            if(key == 'coverPhoto'){
+                var newImage = {
+                    thumb: "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.project.projectId+'/images/coverPhoto/'+images[key]+'-s.jpg',
+                    src: "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.project.projectId+'/images/coverPhoto/'+images[key]+'-m.jpg',
+                    display: false
+                }
+                imageData.push(newImage);
+            } else {
+                for(key1 in images[key]){
+                    var newImage = {
+                        thumb: "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.project.projectId+'/images/'+key+'/'+key1+'/'+images[key][key1]+'-s.jpg',
+                        src: "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.project.projectId+'/images/'+key+'/'+key1+'/'+images[key][key1]+'-m.jpg',
+                        display: false
+                    }
+                    imageData.push(newImage);
+                }
+            }
+        }
+        console.log(imageData);
+        $rootScope.$broadcast('initGallery',imageData);
     }
 
     $scope.showMoreAmenities = function(){
@@ -244,14 +268,6 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
         }
     }
 
-    $scope.starrating = function(rating) {
-        rating = Math.round(rating);
-        return new Array(rating); //ng-repeat will run as many times as size of array
-    }
-
-    $scope.buySelected = true;
-    $scope.rentSelected = false;
-
     $scope.takeToHome = function(){
         $state.go('home');
     }
@@ -259,5 +275,4 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
     $scope.toTrustedHTML = function( html ){
         return $sce.trustAsHtml( html );
     }
-
 });
