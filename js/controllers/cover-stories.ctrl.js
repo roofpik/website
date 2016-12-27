@@ -9,9 +9,9 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
   $scope.showNoStories = false;
   console.log($stateParams);
   $scope.featuredStories = [];
- $scope.cityId = '-KYJONgh0P98xoyPPYm9';;
+  $scope.cityId = '-KYJONgh0P98xoyPPYm9';;
   $scope.popularStories = {};
-
+  loading(true);
   db.ref('featuredStories/'+$scope.cityId).once('value', function(data){
     $timeout(function(){
       if(data.val()){
@@ -80,6 +80,7 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
       value.selected = true;
       $scope.selectedStory = value.data;
     })
+    loading(false);
   }
 
   $scope.getRelatedStories = function(tag){
@@ -112,6 +113,7 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
           })
           $scope.showNoStories = true;
         }
+        loading(false);
       },50);
     })
   }
@@ -135,7 +137,8 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
           $scope.showNoStories = false;
         }
       }
-    })
+    });
+    loading(false);
   }
 
   $scope.goToStoryDetails = function(id){

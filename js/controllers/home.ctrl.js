@@ -1,4 +1,4 @@
-app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTokenService, $location, $rootScope) {
+app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTokenService, $location, $rootScope, appLoad) {
     $scope.projectList = [];
     $scope.searchList = [];
     $scope.dataVersions = {};
@@ -11,24 +11,44 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTok
         url: $location.path()
     }
     UserTokenService.checkToken(urlInfo, timestamp, 1);
-
-
-    $rootScope.$watch('localStorageCount', function() {
-        if ($rootScope.localStorageCount == 2) {
+    loading(false);
+    db.ref('dataVersions').once('value', function(response) {
+        appLoad.localObjects(response.val())
+        .then(function(result){
             $scope.projectList = getLocalStorage('projectList').value;
+            $scope.searchList = getLocalStorage('searchList').value;
+            getLocalities($scope.searchList);
             for(key in $scope.projectList){
                 if($scope.projectList[key].imgUrl.indexOf('http') == -1){
                     $scope.projectList[key].imgUrl = "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.projectList[key].projectId+'/images/coverPhoto/'+$scope.projectList[key].imgUrl+'-s.jpg';
-                }
-                console.log($scope.projectList[key].imgUrl);
-            }
-            $timeout(function() {
+                };
+            };
+            $timeout(function(){
                 $scope.makeTopRated();
-            }, 1000);
-            $scope.searchList = getLocalStorage('searchList').value;
-            getLocalities($scope.searchList);
-        };
+            }, 2000);
+            
+
+        });
     });
+
+
+
+    // $rootScope.$watch('localStorageCount', function() {
+    //     if ($rootScope.localStorageCount == 2) {
+    //         $scope.projectList = getLocalStorage('projectList').value;
+    //         for(key in $scope.projectList){
+    //             if($scope.projectList[key].imgUrl.indexOf('http') == -1){
+    //                 $scope.projectList[key].imgUrl = "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.projectList[key].projectId+'/images/coverPhoto/'+$scope.projectList[key].imgUrl+'-s.jpg';
+    //             }
+    //             console.log($scope.projectList[key].imgUrl);
+    //         }
+    //         $timeout(function() {
+    //             $scope.makeTopRated();
+    //         }, 1000);
+    //         $scope.searchList = getLocalStorage('searchList').value;
+    //         getLocalities($scope.searchList);
+    //     };
+    // });
 
 
     function getLocalities(list) {
@@ -82,8 +102,8 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTok
         function filterList() {
             for (key in $scope.searchList) {
                 if ($scope.searchList[key].type == 'Project') {
-                    if($scope.searchList[key].img.indexOf("http") == -1){
-                        $scope.searchList[key].img = "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.searchList[key].id+'/images/coverPhoto/'+$scope.searchList[key].img+'-s.jpg';
+                    if ($scope.searchList[key].img.indexOf("http") == -1) {
+                        $scope.searchList[key].img = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/residential/' + $scope.searchList[key].id + '/images/coverPhoto/' + $scope.searchList[key].img + '-s.jpg';
                     }
                     if ($scope.searchList[key].live) {
                         $scope.searchList[key].show = true;
@@ -96,8 +116,7 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTok
             }
         }
 
-        function printSearchText() {
-        }
+        function printSearchText() {}
 
         $scope.selectItem = function(val) {
             var timestamp = new Date().getTime();
@@ -158,8 +177,8 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTok
                 }
             }]
         });
-        loading(false, 0);
-    }
+        $('.top-projects-loading').hide();
+    };
 
     // $timeout(function() {
 

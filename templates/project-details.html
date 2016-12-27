@@ -3,7 +3,10 @@
         <article flex="100">
         <div flex="100" class="proj-imgfix">
             <div class="featured-story" style="background-image:url({{coverImage}});">
-                <span class="gallery-btn" ng-click="showAdvanced($event, project.images.other)">View Photos</span>
+                <div class="gallery-btn">
+                    <gallery></gallery>
+                </div>
+                <!-- <span class="gallery-btn" ng-click="showAdvanced($event, project.images.other)">View Photos</span> -->
             </div>
             </div>
         </article>
@@ -24,28 +27,100 @@
                 {{allRatings.overallRatingNum}} Review<span ng-show="allRatings.overallRatingNum > 1">s</span>
             </p>
             <div layout="row" id="status-segment">
-                <div flex="50" id="status">
+                <div flex id="status">
                     <i class="fa fa-home"></i>
                     <p>{{project.projectStatus}}</p>
                 </div>
-                <!-- <div flex="33">
-                    <i style="font-size: 30px;" class="fa fa-bed"></i>
-                    <p style="font-size: 14px;">{{bhkAvailable}}</p>
-                </div> -->
-                <div flex="50" id="segment">
+                <div flex id="bhk" ng-show="project.configurations">
+                    <i class="fa fa-bed"></i>
+                    <p>{{bhk}}</p>
+                </div>
+                <div flex id="segment">
                     <i class="fa fa-diamond"></i>
                     <p>{{project.segment}}</p>
                 </div>
             </div>
-            <div layout="row" id="address">
-                <div flex="20" id="address-title">
+            <div layout="row" id="detail">
+                <div flex="20" id="detail-title">
+                    <p>Price</p>
+                </div>
+                <div flex="80" layout="row" id="detail-value">
+                    <div flex="50">
+                        <p><b>Buy:&nbsp;&nbsp;</b>&#8377;{{buyMin}}<span ng-show="buyMin != buyMax"> - &#8377;{{buyMax}}</span></p>
+                    </div>
+                    <div flex="50">
+                        <p><b>Rent:&nbsp;&nbsp;</b>&#8377;{{rentMin}}<span ng-show="rentMin != rentMax"> - &#8377;{{rentMax}}</p>
+                    </div>
+                </div>
+            </div>
+            <div layout="row" id="detail" ng-show="project.configurations">
+                <div flex="20" id="detail-title">
+                    <p>Area</p>
+                </div>
+                <div flex="80" layout="row" id="detail-value">
+                    <p><span>{{minArea}} Sq.Ft.<span><span ng-show="minArea != maxArea"> - {{maxArea}} Sq.Ft.</span></p>
+                </div>
+            </div>
+            <div layout="row" id="detail">
+                <div flex="20" id="detail-title">
                     <p>Address</p>
                 </div>
-                <div flex="80" layout="row" id="address-value">
+                <div flex="80" layout="row" id="detail-value">
                     <p>{{project.projectDetails.address.addressLine1}}, {{project.projectDetails.address.addressLine2}}</p>
                 </div>
             </div>
-
+            <div layout="row" ng-show="project.configurations" id="detail">
+                <div flex="20" id="detail-title">
+                    <p>Property Type</p>
+                </div>
+                <div flex="80" layout="row" id="detail-value" layout-align="start center" layout-wrap>
+                    <span flex="33" ng-repeat="prop in propertyTypes" id="property-types">{{prop}}</span>
+                </div>
+            </div>
+            <div layout="row" ng-show="project.amenities" id="detail">
+                <div flex="20" id="detail-title">
+                    <p>Amenities</p>
+                </div>
+                <div flex="80" id="detail-value">
+                    <div ng-repeat="(key,value) in amenities" layout="row" layout-wrap layout-align="start center">
+                        <span flex="100" ng-show="((key == 'basic')|| (key != 'basic' && !showMoreNotClicked))">
+                            <p id="amenity-category"><b>{{key}}</b></p>
+                        </span>
+                        <span flex="50" 
+                                ng-repeat="item in value" 
+                                ng-show="((item.category == 'basic')|| (item.category != 'basic' && !showMoreNotClicked))" 
+                                ng-class="item.value  != 'No'?'normal':'stikeText'">
+                                {{item.name}}
+                                <span ng-show="item.value != 'Yes' && item.value!= 'No'">
+                                ({{item.value}})
+                                </span>
+                        </span>
+                    </div>
+                    <span flex="100" id="show-more-btn" ng-class="showMoreNotClicked? 'newGreen':'normalGrey'" ng-click="showMoreAmenities()">Show {{amenitiesMoreLess}}</span>
+                </div>
+            </div>
+            <div layout="row" ng-show="project.standoutFeatures" id="detail">
+                <div flex="20" id="detail-title">
+                    <p>Highlights</p>
+                </div>
+                <div flex="80" id="detail-value" layout="row" layout-wrap layout-align="start center">
+                    <span flex="50" ng-repeat="feature in project.standoutFeatures" id="feature-name">{{feature.featureName}}</span>
+                </div>
+            </div>
+            <div flex="100" ng-show="project.configurations" id="detail">
+                <div layout="row" id="detail-title">
+                    <div flex="25">Unit Types</div>
+                    <div flex="25">Super Built Area</div>
+                    <div flex="25">Buy Price</div>
+                    <div flex="25">Rent Price</div>
+                </div>
+                <div layout="row" ng-repeat="config in configurations | orderBy: 'bhk'" id="detail-value">
+                    <div flex="25">{{config.bhk}} BHK {{config.unit}}</div>
+                    <div flex="25">{{config.superBuiltArea}} Sq. Ft.</div>
+                    <div flex="25"><span ng-show="config.buyMin != 'NA'">&#8377;</span>{{config.buyMin}} <span ng-show="config.buyMin != config.buyMax">- &#8377;{{config.buyMax}}</span></div>
+                    <div flex="25"><span ng-show="config.rentMin != 'NA'">&#8377;</span>{{config.rentMin}} <span ng-show="config.rentMin != config.rentMax">- &#8377;{{config.rentMax}}</span></div>
+                </div>
+            </div>
             <div layout="row" layout-wrap>
                 <p flex="100" id="rating">
                     {{allRatings.overallRatingNum}} Review<span ng-show="allRatings.overallRatingNum > 1"></span>
@@ -81,33 +156,36 @@
         <article flex="30" flex-xs="100" id="rating-container">
             <div class="all-rating-summary" flex="100">
                 <p class="rating-summary-title">User Ratings</p>
-                <ul>
-                    <li>Excellent ({{allRatings.fiveStar}})
+                    <div class="rating-block">
+                        Excellent ({{allRatings.fiveStar}})
                         <div class="progress-bar">
                             <span class="my-progress" id="excellentStar"></span>
                         </div>
-                    </li>
-                    <li>Very Good ({{allRatings.fourStar}})
+                    </div>
+                    <div class="rating-block">
+                        Very Good ({{allRatings.fourStar}})
                         <div class="progress-bar">
                             <span class="my-progress" id="veryGoodStar"></span>
                         </div>
-                    </li>
-                    <li>Good ({{allRatings.threeStar}})
+                    </div>
+                    <div class="rating-block">
+                        Good ({{allRatings.threeStar}})
                         <div class="progress-bar">
                             <span class="my-progress" id="goodStar"></span>
                         </div>
-                    </li>
-                    <li>Average ({{allRatings.twoStar}})
+                    </div>
+                    <div class="rating-block">
+                        Average ({{allRatings.twoStar}})
                         <div class="progress-bar">
                             <span class="my-progress" id="averageStar"></span>
                         </div>
-                    </li>
-                    <li>Bad ({{allRatings.oneStar}})
+                    </div>
+                    <div class="rating-block">
+                        Bad ({{allRatings.oneStar}})
                         <div class="progress-bar">
                             <span class="my-progress" id="badStar"></span>
                         </div>
-                    </li>
-                </ul>
+                    </div>
             </div>
             <div class="rating-summary" flex="100">
                 <p class="rating-summary-title">Rating Summary</p>

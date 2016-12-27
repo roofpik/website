@@ -19,8 +19,8 @@ app.directive('footer', function() {
                 if ($rootScope.localStorageCount == 2) {
                     var year = new Date().getFullYear();
                     $scope.localities = {};
-                    $scope.searchList = getLocalStorage('searchList').value;
-                    getLocalities($scope.searchList);
+                    // $scope.searchList = getLocalStorage('searchList').value;
+                    // getLocalities($scope.searchList);
 
                     function getLocalities(list) {
                         for (key in list) {
@@ -32,6 +32,10 @@ app.directive('footer', function() {
                     $scope.takeToLocalityProjects = function(val) {
                         var valId = $scope.localities[val];
                         $state.go('projects', { year: year, city: 'gurgaon', type: 'residential-projects', category: convertToHyphenSeparated(val), categoryId: valId, id: 3 });
+                    }
+
+                    $scope.takeToPage = function(val){
+                        $state.go(val);
                     }
 
                 }
@@ -142,5 +146,17 @@ app.directive('contentLoading', function() {
         replace: true,
         template: '<div class="loader-modal"><div class="loader-cont">' +
             '<div class="loader"></div></div></div>'
+    }
+});
+
+app.directive('gallery', function() {
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'templates/dialogs/gallery.html',
+        controller: 'galleryCtrl',
+        scope: {
+            galleryResponse: '='
+        }
     }
 });

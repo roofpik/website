@@ -4,7 +4,7 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
         url: $location.path()
     }
     UserTokenService.checkToken(urlInfo, timestamp, 1);
-    
+    loading(true);
 
     $scope.showNoBlogs = false;
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
@@ -81,7 +81,8 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
         console.log($scope.allBlogs);
         angular.forEach($scope.allBlogs, function(value, key) {
             value.selected = true;
-        })
+        });
+        loading(false);
     }
 
     $scope.getRelatedBlogs = function(tag) {
@@ -114,6 +115,7 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
                     })
                     $scope.showNoBlogs = true;
                 }
+                loading(false);
             }, 50);
         })
     }
@@ -138,7 +140,8 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
                     $scope.showNoBlogs = false;
                 }
             }
-        })
+        });
+        loading(false);
     }
 
     $scope.goToBlogDetails = function(id) {
