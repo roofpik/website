@@ -172,6 +172,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
         }
         $scope.propertyTypes = jQuery.unique($scope.propertyTypes);
         bhkData = jQuery.unique(bhkData);
+        console.log(bhkData);
         bhkData = bhkData.sort();
         areaData = jQuery.unique(areaData);
         areaData = areaData.sort();
@@ -234,17 +235,25 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
                 bhk: configs[key].bhk,                
                 superBuiltArea: configs[key].superBuiltArea         
             }
-            if(configs[key].pricing.buy.min){
+            if(configs[key].pricing.buy.min != 'NA'){
                 data.buyMin = convertCurrency(configs[key].pricing.buy.min);
+            } else {
+                data.buyMin = configs[key].pricing.buy.min;
             }
-            if(configs[key].pricing.buy.max){
+            if(configs[key].pricing.buy.max != 'NA'){
                 data.buyMax = convertCurrency(configs[key].pricing.buy.max);
-            }  
-            if(configs[key].pricing.rent.min){
+            } else {
+                data.buyMax = configs[key].pricing.buy.max;
+            } 
+            if(configs[key].pricing.rent.min != 'NA'){
                 data.rentMin = convertCurrency(configs[key].pricing.rent.min);
+            } else {
+                data.rentMin = configs[key].pricing.rent.min;
             }
-            if(configs[key].pricing.rent.max){
+            if(configs[key].pricing.rent.max != 'NA'){
                 data.rentMax = convertCurrency(configs[key].pricing.rent.max);
+            } else {
+                data.rentMax = configs[key].pricing.rent.min;
             }
             $scope.configurations.push(data);                
         }
