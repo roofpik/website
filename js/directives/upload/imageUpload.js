@@ -177,7 +177,7 @@ app.controller('imageUploadCtrl', function($scope, $timeout, uploadImage, $q, $h
     }
 
     $('#uploadImage').on('click', function() {
-        loading(true);
+        loading(true, 75000);
         q = $q.defer();
         var upload = uploadImage.upload($scope.uploadPath, can.toDataURL(), $scope.imageType, $scope.imageName, q);
         upload.then(function(response) {

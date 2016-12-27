@@ -11,7 +11,6 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, 
 
     $scope.category = $stateParams.category || null;
     $scope.filterPath = [];
-    $scope.projects = {};
     $scope.bhk = ['1', '2', '3', '4', '5', '6', '6+'];
     $scope.ratings = [1, 2, 3, 4, 5];
     $scope.filters = {
@@ -27,6 +26,7 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, 
     $scope.projectList = [];
     $scope.projects = [];
     $scope.dataVersions = {};
+    $scope.cityId = '-KYJONgh0P98xoyPPYm9';
 
     if($stateParams.category == 'family'){
       $scope.category = 'family';
@@ -48,32 +48,15 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, 
       }, 0);
     })
 
-    db.ref('dataVersions').once('value', function(response){
-        $scope.dataVersions = response.val();
-    }).then(function(){
-        $timeout(function(){
-            if(checkLocalStorage('projectList')){
-                var projectListVersion = (getLocalStorage('projectList')).version;
-                if(projectListVersion == $scope.dataVersions.projectList){
-                    $scope.projectList = getLocalStorage('projectList').value;
-                    preprocessData($scope.projectList);
-                } else {
-                    getProjectList($scope.dataVersions.projectList);
-                }
-            } else {
-                getProjectList($scope.dataVersions.projectList);
-            }
-        }, 100);
-    });
-
-    function getProjectList(version){
-        db.ref('projectList/-KYJONgh0P98xoyPPYm9/residential').once('value', function(snapshot){
-            $timeout(function(){
-                preprocessData();
-                setLocalStorage($scope.projectList, 'projectList', version);               
-            },100);
-        })
+    $scope.projectList = getLocalStorage('projectList').value;
+    for(key in $scope.projectList){
+      if($scope.projectList[key].imgUrl.indexOf('http') == -1){
+          $scope.projectList[key].imgUrl = "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.projectList[key].projectId+'/images/coverPhoto/'+$scope.projectList[key].imgUrl+'-s.jpg';
+      }
     }
+    console.log($stateParams.category);
+    preprocessData($scope.projectList);
+
 
     function preprocessData(projectList){
       if($stateParams.id == 1){
@@ -103,15 +86,16 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, 
       $scope.numProjects = $scope.projects.length;
     }
 
-    String.prototype.capitalize = function() {
-        return this.charAt(0).toUpperCase() + this.slice(1);
-    }
-
     function getSortingParam() {
+      console.log($scope.category, $stateParams.category);
       if($stateParams.id == 1){
         $scope.sortByParam = '-'+$scope.category;
-        $scope.filterPath = ["Gurgaon",">","Residential",">", ($stateParams.category).capitalize()];
+        $scope.filterPath = ["Gurgaon",">","Residential",">", firstCapital($stateParams.category)];
       }
+    }
+
+    function firstCapital(str){
+      return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
     $scope.takeToHome = function(){

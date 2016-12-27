@@ -7,24 +7,30 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
     UserTokenService.checkToken(urlInfo, timestamp, 1);
     var uid;
     var user;
-    $rootScope.$watch('loginStatus', function(){
-        if($rootScope.loginStatus){
+    $rootScope.$watch('loginStatus', function() {
+        if ($rootScope.loginStatus) {
             user = firebase.auth().currentUser;
-            console.log(user);
+            $scope.uploadedImage = $rootScope.photoURL;
             uid = user.uid;
+            $scope.imageName = uid;
             getUserInfo();
         }
     });
 
     $scope.imageType = 'profile';
-    // $scope.imageName = uid;
     $scope.imageUploadResponseFn = function(valueFromDirective) {
         console.log(valueFromDirective);
         db.ref('users/' + uid + '/profileImage').set(valueFromDirective).then(function() {
+            var currentUser = firebase.auth().currentUser;
+            currentUser.updateProfile({
+                photoURL: "http://cdn.roofpik.com/roofpik/users/" + uid + '/profileImage/' + valueFromDirective + '-s.jpg'
+            });
+            var ts = new Date().getTime();
+            $scope.uploadedImage = "http://cdn.roofpik.com/roofpik/users/" + uid + '/profileImage/' + valueFromDirective + '-s.jpg?' + ts;
             sweetAlert("Success", "Profile image successfully uploaded!", "success");
         });
     }
-    
+
     $scope.cities = [];
     $scope.dataloaded = false;
     $scope.fileName = 'No Image Selected';
@@ -48,12 +54,21 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
         }, 0);
     })
 
-    function getUserInfo(){
-        $scope.uploadPath = 'users/'+uid+'/profileImage';
+    function getUserInfo() {
+        $scope.uploadPath = 'users/' + uid + '/profileImage';
         db.ref('users/' + uid).once('value', function(snapshot) {
             console.log(snapshot.val());
             $timeout(function() {
+
                 $scope.user = snapshot.val();
+                if ($scope.user.mobile) {
+                    if ($scope.user.mobile.mobileProvided == false) {
+                        $scope.showAddMobile = true;
+                    }
+                }
+                else{
+                    $scope.showAddMobile = true;
+                }
                 // if(!$scope.user.gender){
                 //     $scope.user.gender = 'Gender';
                 // }
@@ -63,14 +78,12 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
                     $scope.user.birthDay.month = 'December';
                     $scope.user.birthDay.year = '1999';
                 }
-                if ($scope.user.mobile.mobileProvided == false) {
-                    $scope.showAddMobile = true;
-                }
+
                 if ($scope.user.profileImage) {
-                    if($scope.user.profileImage.indexOf('http') !== -1){
+                    if ($scope.user.profileImage.indexOf('http') !== -1) {
                         $scope.uploadedImage = $scope.user.profileImage;
                     } else {
-                        $scope.uploadedImage = "http://cdn.roofpik.com/roofpik/users/"+uid+'/profileImage/'+$scope.user.profileImage+'-m.jpg';
+                        $scope.uploadedImage = "http://cdn.roofpik.com/roofpik/users/" + uid + '/profileImage/' + $scope.user.profileImage + '-m.jpg';
                     }
                 }
                 if ($scope.user.address) {
@@ -106,7 +119,6 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
             showConfirmButton: false
         });
         var verificationCode = Math.floor(1000 + Math.random() * 9000);
-        console.log(verificationCode);
 
         $http({
             url: 'http://139.162.27.64/api/resend-otp',
@@ -365,8 +377,8 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
     }
 
     $scope.uploadImage = function() {
-        console.log('called');
-        $("#profile-image-test").click();
-    }
-    // loading(false);
+            console.log('called');
+            $("#profile-image-test").click();
+        }
+        // loading(false);
 });

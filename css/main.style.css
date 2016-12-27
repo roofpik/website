@@ -16,6 +16,10 @@ html, body {
     font-family: 'Roboto', sans-serif, Helvetica, Arial;
 }
 
+.profile-thumbnail{
+    height: 32px;
+    width:32px;
+}
 .fade {
     color: #8a8a8a;
 }

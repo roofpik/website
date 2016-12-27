@@ -256,8 +256,11 @@
           $rootScope.uid = loginUser.uid;
           var timestamp = new Date().getTime();
           UserTokenService.checkToken($rootScope.uid, timestamp, 4);
+          $rootScope.photoURL = user.photoURL;
+          $rootScope.displayName = user.displayName;
           $rootScope.loginStatus = true;
           localStorage.setItem('loginStatus', true);
+
           $mdDialog.hide();
           loading(false, 0);
           sweetAlert("Welcome", "You have successfully logged in!", "success");

@@ -16,7 +16,12 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTok
     $rootScope.$watch('localStorageCount', function() {
         if ($rootScope.localStorageCount == 2) {
             $scope.projectList = getLocalStorage('projectList').value;
-
+            for(key in $scope.projectList){
+                if($scope.projectList[key].imgUrl.indexOf('http') == -1){
+                    $scope.projectList[key].imgUrl = "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.projectList[key].projectId+'/images/coverPhoto/'+$scope.projectList[key].imgUrl+'-s.jpg';
+                }
+                console.log($scope.projectList[key].imgUrl);
+            }
             $timeout(function() {
                 $scope.makeTopRated();
             }, 1000);
@@ -57,6 +62,7 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTok
     function searchController($scope, $mdDialog, locals) {
         $scope.searchList = [];
         $scope.searchText = '';
+        $scope.cityId = '-KYJONgh0P98xoyPPYm9';
         var version = locals.version;
         $scope.hide = function() {
             $mdDialog.hide();
@@ -70,33 +76,15 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTok
             $mdDialog.hide(answer);
         };
 
-        if (checkLocalStorage('searchList')) {
-            var searchListVersion = (getLocalStorage('searchList')).version;
-            if (searchListVersion == version) {
-                $scope.searchList = getLocalStorage('searchList').value;
-                filterList();
-            } else {
-                getSearchList(version);
-            }
-        } else {
-            getSearchList(version);
-        }
-
-        function getSearchList(version) {
-            db.ref('search').once('value', function(snapshot) {
-                $timeout(function() {
-                    for (key in snapshot.val()) {
-                        $scope.searchList.push(snapshot.val()[key]);
-                    }
-                    setLocalStorage($scope.searchList, 'searchList', version);
-                    filterList();
-                }, 0);
-            })
-        }
+        $scope.searchList = getLocalStorage('searchList').value;
+        filterList();
 
         function filterList() {
             for (key in $scope.searchList) {
                 if ($scope.searchList[key].type == 'Project') {
+                    if($scope.searchList[key].img.indexOf("http") == -1){
+                        $scope.searchList[key].img = "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.searchList[key].id+'/images/coverPhoto/'+$scope.searchList[key].img+'-s.jpg';
+                    }
                     if ($scope.searchList[key].live) {
                         $scope.searchList[key].show = true;
                     } else {

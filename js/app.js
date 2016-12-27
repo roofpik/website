@@ -9,6 +9,7 @@ app.run(function($rootScope, $mdDialog, $timeout, UserTokenService) {
     var projectList = [];
 
     firebase.auth().onAuthStateChanged(function(user) {
+        console.log(user);
         if (user && $rootScope.uid == null) {
             $rootScope.uid = user.uid;
             var timestamp = new Date().getTime();
@@ -16,6 +17,8 @@ app.run(function($rootScope, $mdDialog, $timeout, UserTokenService) {
             $rootScope.loginStatus = true;
             localStorage.setItem('loginStatus', true);
             $mdDialog.hide();
+            $rootScope.photoURL = user.photoURL;
+            $rootScope.displayName = user.displayName;
             // User is signed in.
         } else {
             $rootScope.uid = null;

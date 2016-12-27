@@ -9,12 +9,14 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
   $scope.showNoStories = false;
   console.log($stateParams);
   $scope.featuredStories = [];
-  $scope.cityId = $stateParams.cityId;
-
+  $scope.cityId = '-KYJONgh0P98xoyPPYm9';;
+  $scope.popularStories = {};
+  loading(true);
   db.ref('featuredStories/'+$scope.cityId).once('value', function(data){
     $timeout(function(){
       if(data.val()){
         angular.forEach(data.val(), function(value, key){
+          value.coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/'+$scope.cityId+'/'+value.storyId+'/coverPhoto/'+value.coverPhoto+'-m.jpg';
           $scope.featuredStories.push(value);
         })
       }
@@ -27,6 +29,7 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
         $scope.allStories = snapshot.val();
         console.log($scope.allStories);
         angular.forEach($scope.allStories, function(value, key){
+          value.coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/'+$scope.cityId+'/'+value.storyId+'/coverPhoto/'+value.coverPhoto+'-m.jpg';
           value.selected = true;
         })
       } else {
@@ -46,11 +49,14 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
   db.ref('popularStories/'+$scope.cityId).once('value', function(snapshot){
     $timeout(function(){
       if(snapshot.val()){
-        $scope.popularStories = snapshot.val();
-      }''
+        var coverStoryData = snapshot.val();
+                for(key in coverStoryData){
+                    coverStoryData[key].coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/'+$scope.cityId+'/'+coverStoryData[key].storyId+'/coverPhoto/'+coverStoryData[key].coverPhoto+'-m.jpg';
+                    $scope.popularStories[key] = coverStoryData[key];
+                }
+      }
     },0);
   })
-
   db.ref('tagCloud').once('value', function(snapshot){
     $timeout(function(){
       if(snapshot.val()){
@@ -74,6 +80,7 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
       value.selected = true;
       $scope.selectedStory = value.data;
     })
+    loading(false);
   }
 
   $scope.getRelatedStories = function(tag){
@@ -106,6 +113,7 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
           })
           $scope.showNoStories = true;
         }
+        loading(false);
       },50);
     })
   }
@@ -129,7 +137,8 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
           $scope.showNoStories = false;
         }
       }
-    })
+    });
+    loading(false);
   }
 
   $scope.goToStoryDetails = function(id){
@@ -142,7 +151,7 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
         method: 'feed',
         name: story.storyTitle,
         link: 'http://test.roofpik.com/#/story/'+story.storyId,
-        picture: story.coverImage,
+        picture: story.coverPhoto,
         caption: story.placeName,
         description: story.userName
     });
