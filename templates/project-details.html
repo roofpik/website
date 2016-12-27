@@ -17,8 +17,8 @@
             </div>
         </article>
     </section>
-    <section layout="row" flex="80" flex-xs="90" flex-sm="90" class="project-basic-details" layout-wrap>
-        <article flex="70" flex-xs="100" class="project-basic-details-container">
+    <section layout="row" flex="80" flex-xs="100" flex-sm="95" flex-md="90" class="project-basic-details" layout-wrap>
+        <article flex="70" flex-xs="100"   class="project-basic-details-container">
             <h1 id="project-name">{{projectName}}</h1>
             <p id="display-address">{{project.projectDetails.address.displayAddress}} &nbsp;&nbsp;&nbsp;
                 <span ng-repeat="rate in [1,2,3,4,5] track by $index">
@@ -26,67 +26,67 @@
                 </span>
                 {{allRatings.overallRatingNum}} Review<span ng-show="allRatings.overallRatingNum > 1">s</span>
             </p>
-            <div layout="row" id="status-segment">
-                <div flex id="status">
+            <div layout="row" layout-wrap id="status-segment">
+                <div flex flex-xs="50" id="status">
                     <i class="fa fa-home"></i>
                     <p>{{project.projectStatus}}</p>
                 </div>
-                <div flex id="bhk" ng-show="project.configurations">
+                <div flex flex-xs="50" id="bhk"  ng-show="project.configurations">
                     <i class="fa fa-bed"></i>
                     <p>{{bhk}}</p>
                 </div>
-                <div flex id="segment">
+                <div flex flex-xs="100" id="segment">
                     <i class="fa fa-diamond"></i>
                     <p>{{project.segment}}</p>
                 </div>
             </div>
-            <div layout="row" id="detail">
-                <div flex="20" id="detail-title">
+            <div layout="row" layout-wrap  id="detail">
+                <div flex="20" flex-xs="30" id="detail-title">
                     <p>Price</p>
                 </div>
-                <div flex="80" layout="row" id="detail-value">
-                    <div flex="50">
+                <div flex="80"  flex-xs="70" layout-wrap layout="row" id="detail-value">
+                    <div flex="50" flex-xs="100" flex-sm="100">
                         <p><b>Buy:&nbsp;&nbsp;</b>&#8377;{{buyMin}}<span ng-show="buyMin != buyMax"> - &#8377;{{buyMax}}</span></p>
                     </div>
-                    <div flex="50">
+                    <div flex="50" flex-xs="100" flex-sm="100">
                         <p><b>Rent:&nbsp;&nbsp;</b>&#8377;{{rentMin}}<span ng-show="rentMin != rentMax"> - &#8377;{{rentMax}}</p>
                     </div>
                 </div>
             </div>
-            <div layout="row" id="detail" ng-show="project.configurations">
-                <div flex="20" id="detail-title">
+            <div layout="row" layout-wrap id="detail" ng-show="project.configurations">
+                <div flex="20" flex-xs="30" id="detail-title">
                     <p>Area</p>
                 </div>
-                <div flex="80" layout="row" id="detail-value">
+                <div flex="80" flex-xs="70" layout="row" id="detail-value">
                     <p><span>{{minArea}} Sq.Ft.<span><span ng-show="minArea != maxArea"> - {{maxArea}} Sq.Ft.</span></p>
                 </div>
             </div>
-            <div layout="row" id="detail">
-                <div flex="20" id="detail-title">
+            <div layout="row" layout-wrap id="detail">
+                <div flex="20" flex-xs="30" id="detail-title">
                     <p>Address</p>
                 </div>
-                <div flex="80" layout="row" id="detail-value">
+                <div flex="80" flex-xs="70" layout="row" id="detail-value">
                     <p>{{project.projectDetails.address.addressLine1}}, {{project.projectDetails.address.addressLine2}}</p>
                 </div>
             </div>
-            <div layout="row" ng-show="project.configurations" id="detail">
-                <div flex="20" id="detail-title">
+            <div layout="row" layout-wrap ng-show="project.configurations" id="detail">
+                <div flex="20" flex-xs="30" id="detail-title">
                     <p>Property Type</p>
                 </div>
-                <div flex="80" layout="row" id="detail-value" layout-align="start center" layout-wrap>
+                <div flex="80" flex-xs="70" layout="row" id="detail-value" layout-align="start center" layout-wrap>
                     <span flex="33" ng-repeat="prop in propertyTypes" id="property-types">{{prop}}</span>
                 </div>
             </div>
-            <div layout="row" ng-show="project.amenities" id="detail">
-                <div flex="20" id="detail-title">
+            <div layout="row" layout-wrap ng-show="project.amenities" id="detail">
+                <div flex="20"  flex-xs="30" id="detail-title">
                     <p>Amenities</p>
                 </div>
-                <div flex="80" id="detail-value">
+                <div flex="80" flex-xs="70" id="detail-value">
                     <div ng-repeat="(key,value) in amenities" layout="row" layout-wrap layout-align="start center">
-                        <span flex="100" ng-show="((key == 'basic')|| (key != 'basic' && !showMoreNotClicked))">
+                        <span flex="100" flex-xs="100" ng-show="((key == 'basic')|| (key != 'basic' && !showMoreNotClicked))">
                             <p id="amenity-category"><b>{{key}}</b></p>
                         </span>
-                        <span flex="50" 
+                        <span flex="50" flex-xs="100"
                                 ng-repeat="item in value" 
                                 ng-show="((item.category == 'basic')|| (item.category != 'basic' && !showMoreNotClicked))" 
                                 ng-class="item.value  != 'No'?'normal':'stikeText'">
@@ -99,12 +99,12 @@
                     <span flex="100" id="show-more-btn" ng-class="showMoreNotClicked? 'newGreen':'normalGrey'" ng-click="showMoreAmenities()">Show {{amenitiesMoreLess}}</span>
                 </div>
             </div>
-            <div layout="row" ng-show="project.standoutFeatures" id="detail">
-                <div flex="20" id="detail-title">
+            <div layout="row" layout-wrap ng-show="project.standoutFeatures" id="detail">
+                <div flex="20" flex-xs="30" id="detail-title">
                     <p>Highlights</p>
                 </div>
-                <div flex="80" id="detail-value" layout="row" layout-wrap layout-align="start center">
-                    <span flex="50" ng-repeat="feature in project.standoutFeatures" id="feature-name">{{feature.featureName}}</span>
+                <div flex="80" flex-xs="70" id="detail-value" layout="row" layout-wrap layout-align="start center">
+                    <span flex="50" flex-xs="100" ng-repeat="feature in project.standoutFeatures" id="feature-name">{{feature.featureName}}</span>
                 </div>
             </div>
             <div flex="100" ng-show="project.configurations" id="detail">
