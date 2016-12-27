@@ -40,6 +40,8 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, 
       $scope.category = 'lifestyle';
     } else if($stateParams.category == 'pets'){
       $scope.category = 'pets';
+    } else if($stateParams.category == 'top-rated'){
+      $scope.category = 'Top Rated'
     }
 
     db.ref('locality/-KYJONgh0P98xoyPPYm9').once('value', function(snapshot){
@@ -89,8 +91,13 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, 
     function getSortingParam() {
       console.log($scope.category, $stateParams.category);
       if($stateParams.id == 1){
-        $scope.sortByParam = '-'+$scope.category;
-        $scope.filterPath = ["Gurgaon",">","Residential",">", firstCapital($stateParams.category)];
+        if($stateParams.category == 'top-rated'){
+          $scope.sortByParam = '-overallRating';
+          $scope.filterPath = ["Gurgaon",">","Residential",">", "Top Rated"];
+        } else {
+          $scope.sortByParam = '-'+$scope.category;
+          $scope.filterPath = ["Gurgaon",">","Residential",">", firstCapital($stateParams.category)];
+        }
       }
     }
 
