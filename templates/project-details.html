@@ -27,15 +27,15 @@
                 {{allRatings.overallRatingNum}} Review<span ng-show="allRatings.overallRatingNum > 1">s</span>
             </p>
             <div layout="row" id="status-segment">
-                <div flex="33" id="status">
+                <div flex id="status">
                     <i class="fa fa-home"></i>
                     <p>{{project.projectStatus}}</p>
                 </div>
-                <div flex="33" id="bhk">
+                <div flex id="bhk" ng-show="project.configurations">
                     <i class="fa fa-bed"></i>
                     <p>{{bhk}}</p>
                 </div>
-                <div flex="33" id="segment">
+                <div flex id="segment">
                     <i class="fa fa-diamond"></i>
                     <p>{{project.segment}}</p>
                 </div>
