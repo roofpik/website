@@ -100,7 +100,11 @@ footer{margin-top: 30px}
     .project-details-page #project-name{font-size: 24px;}
     .project-details-page #address-title{font-size: 16px;}
     .project-details-page #address-value{font-size: 15px;}
+    .project-details-page #detail-value {font-size: 14px; padding: 10px;}
+    .project-details-page #detail-title{font-size: 16px; padding: 7px 0px;}
+    .project-details-page #feature-name{padding: 15px 15px 5px 0px;}
     .project-list-page .path-filters span.path-btn{font-size: 14px;}
+    .project-details-page .project-basic-details-container{padding: 0 15px;}
     .section-header h1{font-size: 22px;}
     .section-header {padding: 25px 0 50px; }
     .write-reviews .reviews-wrapper h1{font-size: 21px;}
@@ -125,6 +129,8 @@ footer{margin-top: 30px}
 .header .main-menu .menu-item{ padding: 0 4px;  }
 .header .logo{padding: 10px 15px}
 .header .main-menu ul li{line-height: 55px; font-size: 13px;}
+ .project-details-page #detail-value {font-size: 13px !important;}
+   .project-details-page #detail-title{font-size: 15px !important;}
 }
 
 @media (min-width: 360px) and (max-width: 480px) {
