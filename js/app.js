@@ -26,61 +26,15 @@ app.run(function($rootScope, $mdDialog, $timeout, UserTokenService) {
             // No user is signed in.
         }
     });
-
-    // db.ref('dataVersions').once('value', function(response) {
-    //     dataVersions = response.val();
-    // }).then(function() {
-    //     $timeout(function() {
-    //         if (checkLocalStorage('projectList')) {
-    //             var projectListVersion = (getLocalStorage('projectList')).version;
-    //             if (projectListVersion != dataVersions.projectList) {
-    //                 getProjectList(dataVersions.projectList);
-    //             } else {
-    //                 $rootScope.localStorageCount = $rootScope.localStorageCount + 1;
-    //             }
-    //         } else {
-    //             getProjectList(dataVersions.projectList);
-    //         }
-
-    //         if (checkLocalStorage('searchList')) {
-    //             var searchListVersion = (getLocalStorage('searchList')).version;
-    //             if (searchListVersion != dataVersions.searchList) {
-    //                 getSearchList(dataVersions.searchList);
-    //             } else {
-    //                 $rootScope.localStorageCount = $rootScope.localStorageCount + 1;
-    //             }
-    //         } else {
-    //             getSearchList(dataVersions.searchList);
-    //         }
-    //     }, 100);
-    // });
-
-
-    // function getProjectList(version) {
-    //     db.ref('projectList/' + cityId + '/residential').once('value', function(snapshot) {
-
-    //         for (key in snapshot.val()) {
-    //             projectList.push(snapshot.val()[key]);
-    //         }
-    //         setLocalStorage(projectList, 'projectList', version);
-    //         $timeout(function() {
-    //             $rootScope.localStorageCount = $rootScope.localStorageCount + 1;
-    //         }, 500);
-    //     });
-    // };
-
-    // function getSearchList(version) {
-    //     db.ref('search').once('value', function(snapshot) {
-    //         for (key in snapshot.val()) {
-    //             searchList.push(snapshot.val()[key]);
-    //         }
-    //         setLocalStorage(searchList, 'searchList', version);
-    //         $timeout(function() {
-    //             $rootScope.localStorageCount = $rootScope.localStorageCount + 1;
-    //         }, 500);
-    //     })
-    // };
 });
+
+app.service('log', function(){
+    return{
+        print: function(val){
+            console.log(val);
+        }
+    }
+})
 
 function loading(status, timer) {
     if (!timer) {

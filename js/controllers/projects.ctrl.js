@@ -56,7 +56,6 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, 
           $scope.projectList[key].imgUrl = "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.projectList[key].projectId+'/images/coverPhoto/'+$scope.projectList[key].imgUrl+'-s.jpg';
       }
     }
-    console.log($stateParams.category);
     preprocessData($scope.projectList);
 
 
@@ -89,7 +88,6 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, 
     }
 
     function getSortingParam() {
-      console.log($scope.category, $stateParams.category);
       if($stateParams.id == 1){
         if($stateParams.category == 'top-rated'){
           $scope.sortByParam = '-overallRating';
@@ -110,7 +108,6 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, 
     }
 
     $scope.selectProject = function(id, name) {
-        // console.log(id, name);
         var year = new Date().getFullYear();
         // $state.go('project-details', { id: id, name: name, path: JSON.stringify($scope.filterPath) });
         $state.go('project-details', {year: year, city: 'gurgaon', type:'residential-projects', category:$stateParams.category, project:convertToHyphenSeparated(name), id:id});
@@ -160,12 +157,9 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, 
  //               }
  //             }
  //           }
- //           console.log(exists);
  //           if(exists){
- //             console.log('exists');
  
  //           } else {
- //             console.log('does not exist');
  //             $scope.projects[key].show = false;
  //           }
  //         }
@@ -198,7 +192,6 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, 
    }
 
  //   function filterPriceBuy(filters){
- //     console.log(filters);
  //     for(key in $scope.projects){
  //       if($scope.projects[key].show){
   //      if($scope.projects[key].price.buy.min>= filters.min && $scope.projects[key].price.buy.max <= filters.max){
@@ -211,7 +204,6 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, 
  //   }
 
  //   function filterPriceRent(filters){
- //     console.log(filters);
  //     for(key in $scope.projects){
  //       if($scope.projects[key].show){
   //      if($scope.projects[key].price.rent.min>= filters.min && $scope.projects[key].price.rent.max <= filters.max){
@@ -275,7 +267,6 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, 
    else {
      $scope.filters.status.push(item);
    }
-   console.log($scope.filters.status);
    filterList();
   };
 
@@ -291,7 +282,6 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, 
   //  else {
   //    $scope.filters.bhk.push(item);
   //  }
-  //  console.log($scope.filters.bhk);
   //  filterList();
   // };
 
@@ -326,7 +316,6 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, 
    }
    else {
      for(var i = item; i <=5; i++){
-       console.log(i);
        if($scope.filters.ratings.indexOf(i) > -1){
 
        } else {
@@ -335,12 +324,10 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, 
      }
 
    }
-   console.log($scope.filters.ratings);
    filterList();
   };
 
   // $scope.applyPriceFilter = function(){
-  //  console.log($scope.filters.price);
   //  if($scope.filters.price.buy.min && $scope.filters.price.buy.max){
   //    filterList();
   //  }

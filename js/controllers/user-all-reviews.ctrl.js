@@ -13,7 +13,6 @@ app.controller('userAllReviewsCtrl', function($scope, $timeout, $state, $rootSco
     $rootScope.$watch('loginStatus', function(){
         if($rootScope.loginStatus){
             user = firebase.auth().currentUser;
-            console.log(user);
             fetchReviews();
         }
     });
@@ -21,12 +20,10 @@ app.controller('userAllReviewsCtrl', function($scope, $timeout, $state, $rootSco
     function fetchReviews(){
 		db.ref('userReviews/'+user.uid).once('value', function(snapshot){
 		// db.ref('userReviews/2cQ2XQ7w7pdT9WGq2nyGJhrPSOo2').once('value', function(snapshot){
-			console.log(snapshot.val());
 			if(snapshot.val()){
 				$timeout(function(){
 					angular.forEach(snapshot.val(), function(value, key){
 						count++;
-						// console.log(value, key);
 						angular.forEach(value, function(value1, key1){
 							if(key == 'residential'){
 								value1.type = 'residential',
@@ -45,7 +42,6 @@ app.controller('userAllReviewsCtrl', function($scope, $timeout, $state, $rootSco
 					})
 				},0);
 			} else {
-				console.log('else called');
 				$timeout(function(){
 					$scope.dataloaded = true;
 					$scope.noReviews = true;
@@ -55,7 +51,6 @@ app.controller('userAllReviewsCtrl', function($scope, $timeout, $state, $rootSco
     }
 
 	$scope.editReview = function(review){
-		// console.log(review.id);
 		var reviewTypeId = '';
 		var reviewTypeName = '';
 		var reviewIn = '';

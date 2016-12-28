@@ -23,7 +23,6 @@ function getLocalStorage(name){
 }
 
 function convertToHyphenSeparated(data){
-    console.log(data);
     if (data == null || data == "") {
       return data;
     }

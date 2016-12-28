@@ -1,5 +1,4 @@
 app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $stateParams, $mdDialog, UserTokenService, $location){
-    // console.log($stateParams);
     var timestamp = new Date().getTime();
     var urlInfo = {
         url: $location.path()
@@ -57,11 +56,9 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
             $scope.showMoreLess = 'Show More +';
         }
     }
-    // console.log('reviews/'+$stateParams.city+'/'+$stateParams.type+'/'+$stateParams.typeId+'/'+$stateParams.id);
     if($stateParams.reviewIn == 1){
         db.ref('websiteReviews/'+$stateParams.city+'/'+$stateParams.type+'/'+$stateParams.typeId+'/'+$stateParams.id).once('value', function(snapshot){
             $timeout(function(){
-                console.log(snapshot.val());
                 $scope.review = snapshot.val();
                 initializeValues();
             },0);
@@ -70,7 +67,6 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
     } else {
         db.ref('reviews/'+$stateParams.city+'/'+$stateParams.type+'/'+$stateParams.typeId+'/'+$stateParams.id).once('value', function(snapshot){
             $timeout(function(){
-                console.log(snapshot.val());
                 $scope.review = snapshot.val();
                 initializeValues();
             },0);
@@ -179,53 +175,41 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
     }
 
     $scope.ratingsCallback1 = function(rating, index) {
-        // console.log('Selected rating is : ', rating, ' and index is ', index);
         $scope.review.overallRating = rating;
 
-        // console.log($scope.review);
     };
     $scope.ratingsCallback2 = function(rating, index) {
-        // console.log('Selected rating is : ', rating, ' and index is ', index);
         $scope.review.ratings.security = rating;
     };
     $scope.ratingsCallback3 = function(rating, index) {
-        // console.log('Selected rating is : ', rating, ' and index is ', index);
         $scope.review.ratings.amenities = rating;
     };
 
     $scope.ratingsCallback4 = function(rating, index) {
-        // console.log('Selected rating is : ', rating, ' and index is ', index);
         $scope.review.ratings.openAndGreenAreas = rating;
     };
 
     $scope.ratingsCallback5 = function(rating, index) {
-        // console.log('Selected rating is : ', rating, ' and index is ', index);
         $scope.review.ratings.electricityAndWaterSupply= rating;
     };
 
     $scope.ratingsCallback6 = function(rating, index) {
-        // console.log('Selected rating is : ', rating, ' and index is ', index);
         $scope.review.ratings.convenienceOfHouseMaids= rating;
     };
 
     $scope.ratingsCallback7 = function(rating, index) {
-        // console.log('Selected rating is : ', rating, ' and index is ', index);
         $scope.review.ratings.convenienceOfParking= rating;
     };
 
     $scope.ratingsCallback8 = function(rating, index) {
-        // console.log('Selected rating is : ', rating, ' and index is ', index);
         $scope.review.ratings.infrastructure= rating;
     };
 
     $scope.ratingsCallback9 = function(rating, index) {
-        // console.log('Selected rating is : ', rating, ' and index is ', index);
         $scope.review.ratings.layoutOfApartment= rating;
     };
 
     $scope.showAdvanced = function(imageUrl) {
-        // console.log($scope.uploadedImage);
-        // console.log('called');
         $mdDialog.show({
             controller: cropImageCtrl,
             templateUrl: 'templates/crop-image.html',
@@ -241,7 +225,6 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
             $timeout(function(){
                 $scope.uploadedImage = answer;
                 // alert(JSON.stringify($scope.uploadedImage));
-                // console.log($scope.uploadedImage);
             },0);
             $scope.status = 'You said the information was "' + answer + '".';
         }, function() {
@@ -251,12 +234,10 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
 
 
     $scope.getFileDetails = function(event){
-        // console.log('getFileDetails called');
         $scope.selectedFile;
         $scope.uploadedImage = '';
          var files = event.target.files; //FileList object
          $scope.selectedFile = files[0];
-         // console.log($scope.selectedFile);
          for (var i = 0; i < files.length; i++) {
             var file = files[i];
             var reader = new FileReader();
@@ -266,13 +247,11 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
     }
 
     $scope.imageIsLoaded = function(e){
-        // console.log('imageIsLoaded called');
         $scope.stepsModel = [];
         $scope.$apply(function() {
             $scope.stepsModel.push(e.target.result);
             $timeout(function(){
                 $scope.uploadedImage = $scope.stepsModel[0];
-                // console.log($scope.uploadedImage);
                 $scope.showAdvanced($scope.uploadedImage);
             },0);
         });
@@ -280,12 +259,10 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
 
     function cropImageCtrl($scope, $mdDialog, locals) {
         $scope.locals = locals;
-        // console.log($scope.locals);
         $('.demo').croppie({
             url: $scope.locals.imageUrl,
         });
 
-        // console.log($('.demo').html());
         $timeout(function(){
             cropImage($scope.locals.imageUrl);
         },0);
@@ -305,8 +282,6 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
         var basic;
 
         function cropImage(source){
-            // console.log(source);
-            // console.log($('.demo').html());
              basic = $('.demo').croppie({
                 viewport: {
                 width: 250,
@@ -320,14 +295,11 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
         }
 
         $scope.cropClick = function(){
-            // console.log(' crop click called');
             basic.croppie('result', {
                 type: 'canvas',
                 format: 'jpeg',
                 square: true
             }).then(function (resp) {
-                // console.log('called');
-                // console.log(resp);
                 $timeout(function(){
                     $scope.answer(resp);
                     // $scope.uploadedImage = resp;
@@ -343,7 +315,6 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
         $scope.path = 'reviews/'+$scope.cityId+'/'+$stateParams.type+'/'+$stateParams.typeId+'/'+$stateParams.id;
         // $scope.path = ''
         if($scope.selectedFile){
-            // console.log('called');
             $http({
                 method:'POST',
                 url:'http://139.162.3.205/api/createPath',
@@ -353,11 +324,9 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
             }).then(function successCallback(response){
                 if(response.data.SuccessCode == 200){
                     $scope.path = response.data.path;
-                    // console.log('Path Created');
                     $scope.upload(review, $scope.path);
                 }
             }, function errorCallback(response){
-                // console.log(response);
                 sweetAlert("Cannot submit review", "Something went wrong!", "error");
             });
         } else {
@@ -373,19 +342,16 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
     $scope.upload = function(review, path){
         $http.post("http://139.162.3.205/api/testupload", {path: JSON.stringify($scope.uploadedImage)})
         .success(function(response){
-            // console.log(response);
             if(response.StatusCode == 200){
                 $scope.submitReview(response.Message, review);
             }
         })
         .error(function(err){
             sweetAlert("Cannot submit review", "Something went wrong!", "error");
-            // console.log(err);
         })
     }
 
     $scope.submitReview = function(imageUrl, review){
-        console.log(imageUrl, review);
         if(imageUrl != 'no-image'){
             review.imageUrl = imageUrl;
         }
@@ -396,9 +362,7 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
         updates['userReviews/'+review.userId+'/'+$stateParams.type+'/'+$stateParams.id+'/createdDate'] = review.createdDate;
         updates['userReviews/'+review.userId+'/'+$stateParams.type+'/'+$stateParams.id+'/reviewTitle'] = review.reviewTitle;
         updates['userReviews/'+review.userId+'/'+$stateParams.type+'/'+$stateParams.id+'/status'] = 'uploaded';
-        // console.log(updates);
         db.ref().update(updates).then(function(){
-            // console.log('updated review');
             swal({
                 title: "Done",
                 text: "Your review was successfully submitted!",

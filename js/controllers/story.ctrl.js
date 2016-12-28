@@ -9,7 +9,6 @@ app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $stat
 	$scope.cityId = '-KYJONgh0P98xoyPPYm9';
 	$scope.popularStories = {};
 	db.ref('coverStory/stories/'+$scope.cityId+'/'+$stateParams.id).once('value', function(snapshot){
-		console.log(snapshot.val());
 		$timeout(function(){
 			$scope.story = snapshot.val();
 			$scope.story.coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/'+$scope.cityId+'/'+$scope.story.storyId+'/coverPhoto/'+$scope.story.coverPhoto+'-m.jpg';
@@ -48,7 +47,6 @@ app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $stat
 	}
 
 	$scope.goToStoryDetails = function(id){
-		console.log(id);
 		$state.go('story', {id: id});
 	}
 
@@ -57,12 +55,10 @@ app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $stat
 	}
 
 	$scope.getRelatedStories = function(tag){
-		console.log(tag);
 		$state.go('cover-story', {city:'gurgaon', cityId: $scope.cityId, from:2, fromId: tag});
 	}
 
   $scope.shareonfb = function(story){
-  	console.log(story);
     FB.ui({
         method: 'feed',
         name: story.storyTitle,

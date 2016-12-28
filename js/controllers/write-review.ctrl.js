@@ -87,17 +87,14 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
         if($rootScope.loginStatus){
             $scope.loginStatus = true;
             user = firebase.auth().currentUser;
-            console.log(user);
         } else {
             $scope.loginStatus = false;
         }
     });
-    console.log(checkLocalStorage('loginStatus'));
     if(checkLocalStorage('loginStatus')){
         $scope.loginStatus = JSON.parse(localStorage.getItem('loginStatus'));
         if(JSON.parse(localStorage.getItem('loginStatus'))){
             user = firebase.auth().currentUser;
-            console.log(user);   
         } else{
             $rootScope.$emit("callShowLogin", {});
         }
@@ -228,7 +225,6 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
             }).then(function successCallback(response) {
                 if (response.data.SuccessCode == 200) {
                     $scope.path = response.data.path;
-                    console.log('Path Created');
                     $scope.upload(review, $scope.path);
                 }
             }, function errorCallback(response) {
@@ -317,8 +313,6 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
 
 
     $scope.ratingsCallback = function(rating, index) {
-        // console.log('Selected rating is : ', rating, ' and index is ', index);
-        console.log($scope.review.overallRating);
         if (index == 1) {
             $scope.review.overallRating = rating;
         } else if (index == 2) {
@@ -341,7 +335,6 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
     };
 
     $scope.submitReview = function(imageUrl, review) {
-        console.log(review);
         if(!review.customerType || !$scope.selectedProjectOrLocality || !review.reviewTitle || !review.reviewText){
             sweetAlert("Cannot submit review", "Please fill all the required information!", "error");
         } else {
@@ -351,7 +344,6 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
               imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
               showConfirmButton: false
             });
-            console.log(user);
             $scope.review.userName = user.displayName;
             // $scope.review.userName = 'Anu Porwal';
             $scope.review.userId = user.uid;
@@ -379,9 +371,7 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
                 $scope.review.wordCount = ($scope.review.reviewText).length;
                 updates['websiteReviews/'+$scope.cityId+'/residential/' + $scope.selectedProjectOrLocality.id + '/' + newKey] = $scope.review;
                 updates['userReviews/' + $scope.review.userId + '/residential/' + newKey] = $scope.useReviewData;
-                console.log(updates);
                 db.ref().update(updates).then(function() {
-                    console.log('review successfully submitted');
                     $timeout(function() {
                         $scope.review = {};
                         $scope.selectedItem = '';
@@ -412,9 +402,7 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
                 }
                 updates['websiteReviews/'+$scope.cityId+'/locality/' + $scope.selectedProjectOrLocality.id + '/' + newKey] = $scope.review;
                 updates['userReviews/' + $scope.review.userId + '/locality/' + newKey] = $scope.useReviewData;
-                console.log(updates);
                 db.ref().update(updates).then(function() {
-                    console.log('review successfully submitted');
                     $timeout(function() {
                         $scope.review = {};
                         $scope.selectedItem = '';
@@ -436,7 +424,6 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
         }
     }
     $scope.uploadImage = function(){
-        console.log('called');
         $( "#review-image" ).click();
     }
 
