@@ -1,5 +1,7 @@
 app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $http, UserTokenService, $location, $rootScope) {
     loading(true);
+    ga('set', 'page', '/profile.html');
+    ga('send', 'pageview');
     var timestamp = new Date().getTime();
     var urlInfo = {
         url: $location.path()
@@ -19,7 +21,6 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
 
     $scope.imageType = 'profile';
     $scope.imageUploadResponseFn = function(valueFromDirective) {
-        console.log(valueFromDirective);
         db.ref('users/' + uid + '/profileImage').set(valueFromDirective).then(function() {
             var currentUser = firebase.auth().currentUser;
             currentUser.updateProfile({
@@ -57,7 +58,6 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
     function getUserInfo() {
         $scope.uploadPath = 'users/' + uid + '/profileImage';
         db.ref('users/' + uid).once('value', function(snapshot) {
-            console.log(snapshot.val());
             $timeout(function() {
 
                 $scope.user = snapshot.val();
@@ -107,7 +107,6 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
     }
 
     $scope.addMobile = function() {
-        console.log('add mobile called');
         $scope.addMobileClicked = true;
     }
 
@@ -128,7 +127,6 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
                 mobile: mob
             }
         }).success(function(response) {
-            console.log(response);
             if (response.status == 200) {
                 swal({
                         title: "OTP Sent",
@@ -139,9 +137,7 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
                         inputPlaceholder: "Enter OTP"
                     },
                     function(inputValue) {
-                        console.log(inputValue.length);
                         if (inputValue === false) {
-                            console.log('cancel');
                             $timeout(function() {
                                 $scope.addMobileClicked = false;
                             }, 10);
@@ -159,7 +155,6 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
                     });
             }
         }).error(function(err) {
-            console.log(err);
             sweetAlert("Error", "Error sending code, please try again later", "error");
             $timeout(function() {
                 $scope.addMobileClicked = false;
@@ -180,7 +175,6 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
         updates['users/' + uid + '/mobile/mobileProvided'] = true;
         updates['users/' + uid + '/mobile/mobileVerified'] = true;
         updates['userRegistration/mobile/' + mob] = $scope.user.uid;
-        console.log(updates);
         db.ref().update(updates).then(function() {
             $timeout(function() {
                 $scope.user.mobile.mobileNum = mob;
@@ -200,7 +194,6 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
             showConfirmButton: false
         });
         // swal({ title: "Saving...", text: "Please wait.", showConfirmButton: false });
-        console.log($scope.user);
         if ($scope.city) {
             if ($scope.city == 'Gurgaon') {
                 $scope.user.address = {};
@@ -248,7 +241,6 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
         }).then(function successCallback(response) {
             if (response.data.SuccessCode == 200) {
                 $scope.path = response.data.path;
-                console.log('Path Created');
                 $scope.upload($scope.path, imgUrl);
             }
         }, function errorCallback(response) {
@@ -274,12 +266,10 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
 
     function DialogController($scope, $mdDialog, locals) {
         $scope.locals = locals;
-        // console.log($scope.locals);
         $('.demo').croppie({
             url: $scope.locals.imageUrl,
         });
 
-        // console.log($('.demo').html());
         $timeout(function() {
             cropImage($scope.locals.imageUrl);
         }, 0);
@@ -343,7 +333,6 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
                     $scope.createPath(answer);
                 }, 0);
             }, function() {
-                console.log('Dialog cancelled');
             });
     };
 
@@ -354,7 +343,6 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
         var files = event.target.files; //FileList object
         $scope.selectedFile = files[0];
         $scope.fileName = files[0].name;
-        console.log(files[0]);
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
             var reader = new FileReader();
@@ -369,7 +357,6 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
             $scope.stepsModel.push(e.target.result);
             $timeout(function() {
                 $scope.uploadedImage = $scope.stepsModel[0];
-                console.log($scope.uploadedImage);
                 // $scope.createPath($scope.uploadedImage);
                 $scope.showAdvanced($scope.uploadedImage);
             }, 0);
@@ -377,7 +364,6 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
     }
 
     $scope.uploadImage = function() {
-            console.log('called');
             $("#profile-image-test").click();
         }
         // loading(false);

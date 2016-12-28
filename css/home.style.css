@@ -13,6 +13,14 @@
     font-weight: 400;
 }
 
+.projects-wrapper{
+    display: none;
+}
+
+.top-projects-loading{
+    text-align: center;
+}
+
 
 /* Featured Header*/
 

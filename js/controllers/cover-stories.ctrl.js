@@ -7,7 +7,6 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
   UserTokenService.checkToken(urlInfo, timestamp, 1);
     
   $scope.showNoStories = false;
-  console.log($stateParams);
   $scope.featuredStories = [];
   $scope.cityId = '-KYJONgh0P98xoyPPYm9';;
   $scope.popularStories = {};
@@ -27,7 +26,6 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
     $timeout(function(){
       if(snapshot.val()){
         $scope.allStories = snapshot.val();
-        console.log($scope.allStories);
         angular.forEach($scope.allStories, function(value, key){
           value.coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/'+$scope.cityId+'/'+value.storyId+'/coverPhoto/'+value.coverPhoto+'-m.jpg';
           value.selected = true;
@@ -36,7 +34,6 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
         $scope.showNoStories = true;
       }
       if($stateParams.from == 3){
-      	console.log($stateParams.fromId);
         $scope.getLocalityPosts($stateParams.fromId);
       } else if($stateParams.from == 2){
         $scope.getRelatedStories($stateParams.fromId);
@@ -84,11 +81,9 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
   }
 
   $scope.getRelatedStories = function(tag){
-    console.log(tag);
     db.ref('coverStory/hashtags/'+tag+'/stories').once('value', function(snapshot){
       $timeout(function(){
         if(snapshot.val()){
-          console.log(snapshot.val());
           var storyCount = 0;
           var count = 0;
           angular.forEach($scope.allStories, function(value, key){
@@ -119,7 +114,6 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
   }
 
   $scope.getLocalityPosts = function(locality){
-    console.log(locality);
     var count = 0;
     var localityStoryCount = 0;
     angular.forEach($scope.allStories, function(value, key){
@@ -142,7 +136,6 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
   }
 
   $scope.goToStoryDetails = function(id){
-    console.log(id);
     $state.go('story', {id: id});
   }
 
@@ -150,7 +143,7 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
     FB.ui({
         method: 'feed',
         name: story.storyTitle,
-        link: 'http://test.roofpik.com/#/story/'+story.storyId,
+        link: 'http://roofpik.com/#/story/'+story.storyId,
         picture: story.coverPhoto,
         caption: story.placeName,
         description: story.userName
