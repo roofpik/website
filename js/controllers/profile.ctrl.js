@@ -1,5 +1,7 @@
 app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $http, UserTokenService, $location, $rootScope) {
     loading(true);
+    ga('set', 'page', '/profile.html');
+    ga('send', 'pageview');
     var timestamp = new Date().getTime();
     var urlInfo = {
         url: $location.path()
