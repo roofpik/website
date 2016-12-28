@@ -46,7 +46,6 @@ app.controller('contactUsCtrl', function($timeout, $scope, UserTokenService,$loc
     }
 
     $scope.submit = function(){
-        console.log($scope.user);
         swal({
           title: "Submitting Query",
           text: "Please wait...",

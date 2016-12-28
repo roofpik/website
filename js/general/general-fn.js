@@ -23,7 +23,6 @@ function getLocalStorage(name){
 }
 
 function convertToHyphenSeparated(data){
-    console.log(data);
     if (data == null || data == "") {
       return data;
     }
@@ -92,4 +91,25 @@ app.factory("UserTokenService", function($timeout){
         db.ref().update(updates);
     }
 });
+
+
+var log = {
+    print: function (lineNo, val) {
+        console.log("line: " + lineNo + ", Data:", val);
+    }
+};
+
+function loading(status, timer) {
+    if (!timer) {
+        timer = 10000;
+    };
+    if (status) {
+        $('.loader-modal').fadeIn();
+        setTimeout(function() {
+            $('.loader-modal').fadeOut();
+        }, timer);
+    } else {
+        $('.loader-modal').fadeOut();
+    };
+};
 

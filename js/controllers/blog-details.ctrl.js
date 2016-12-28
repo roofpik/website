@@ -13,7 +13,6 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $stateParams, $sce,
 		$timeout(function(){
 			$scope.blog = snapshot.val();
 			$scope.blog.coverPhoto = 'http://cdn.roofpik.com/roofpik/blogs/allBlogs/'+$scope.cityId+'/'+$scope.blog.blogId+'/coverPhoto/'+$scope.blog.coverPhoto+'-l.jpg'
-			console.log($scope.blog);
 			loading(false);
 		},0);
 	})
@@ -21,12 +20,9 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $stateParams, $sce,
     db.ref('popularBlogs/' + $scope.cityId).once('value', function(snapshot) {
         $timeout(function() {
             if (snapshot.val()) {
-                console.log(snapshot.val());
                 var blogData = snapshot.val();
                 for(key in blogData){
-                    console.log('http://cdn.roofpik.com/roofpik/blogs/allBlogs/'+$scope.cityId+'/'+blogData[key].blogId+'/coverPhoto/'+blogData[key].coverPhoto+'-m.jpg');
                     blogData[key].coverPhoto = 'http://cdn.roofpik.com/roofpik/blogs/allBlogs/'+$scope.cityId+'/'+blogData[key].blogId+'/coverPhoto/'+blogData[key].coverPhoto+'-m.jpg';
-                    console.log(blogData[key]);
                     $scope.popularBlogs[key] = blogData[key];
                 }
             }
