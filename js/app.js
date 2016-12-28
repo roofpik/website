@@ -27,25 +27,3 @@ app.run(function($rootScope, $mdDialog, $timeout, UserTokenService) {
         }
     });
 });
-
-app.service('log', function(){
-    return{
-        print: function(val){
-            console.log(val);
-        }
-    }
-})
-
-function loading(status, timer) {
-    if (!timer) {
-        timer = 10000;
-    }
-    if (status) {
-        $('.loader-modal').fadeIn();
-        setTimeout(function() {
-            $('.loader-modal').fadeOut();
-        }, timer);
-    } else {
-        $('.loader-modal').fadeOut();
-    }
-}

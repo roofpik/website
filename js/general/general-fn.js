@@ -92,3 +92,24 @@ app.factory("UserTokenService", function($timeout){
     }
 });
 
+
+var log = {
+    print: function (lineNo, val) {
+        console.log("line: " + lineNo + ", Data:", val);
+    }
+};
+
+function loading(status, timer) {
+    if (!timer) {
+        timer = 10000;
+    };
+    if (status) {
+        $('.loader-modal').fadeIn();
+        setTimeout(function() {
+            $('.loader-modal').fadeOut();
+        }, timer);
+    } else {
+        $('.loader-modal').fadeOut();
+    };
+};
+
