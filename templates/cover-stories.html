@@ -1,0 +1,119 @@
+<md-content class="cover-stories">
+    <div layout="column" flex layout-wrap>
+        <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="header-story">
+            <article flex="50" flex-xs="100" flex-sm="100">
+                <div class="featured-story" style="background-image:url({{featuredStories[0].coverPhoto}});" ng-click="goToStoryDetails(featuredStories[0].storyId)">
+                    <div class="featured-caption">
+                        <div class="featured-caption-content">
+                            <h3><a href="#">{{featuredStories[0].title}}</a></h3>
+                            <div id="place-name"><span>{{featuredStories[0].placeName}}</span><time>{{featuredStories[0].createdDate | date:'MMM dd, yy'}}</time></div>
+                            <ul class="featured-tags">
+                                <li ng-repeat="tag in featuredStories[0].hashtags"><a href="#">#{{tag.tag}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article flex="50" flex-xs="100" flex-sm="100">
+                <div class="featured-story" style="background-image:url({{featuredStories[1].coverPhoto}});" ng-click="goToStoryDetails(featuredStories[1].storyId)">
+                    <div class="featured-caption">
+                        <div class="featured-caption-content">
+                            <h3><a href="#">{{featuredStories[1].title}}</a></h3>
+                            <div id="place-name"><span>{{featuredStories[1].placeName}}</span><time>{{featuredStories[1].createdDate | date:'MMM dd, yy'}}</time></div>
+                            <ul class="featured-tags">
+                                <li ng-repeat="tag in featuredStories[1].hashtags"><a href="#">#{{tag.tag}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+        <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="main-board" layout-align="center top">
+            <div flex="50" class="story-board" flex-xs="100" flex-sm="100">
+                <md-card class="story-card" ng-show="showNoStories">
+                    <h2>No Stories with this tag</h2>
+                </md-card>
+                <md-card class="story-card" ng-repeat="story in allStories" ng-show="!showNoStories && story.selected">
+                    <!-- <a href="https://www.facebook.com/sharer/sharer.php?u=test.roofpik.com" target="_blank">FACEBOOK</a> -->
+                    <img ng-src="{{story.coverPhoto}}" class="md-card-image" alt="Washed Out"/>
+                    <md-card-header>
+                        <md-card-header-text>
+                            <span class="md-title">{{story.title}}</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">{{story.placeName}}</span>
+                            <span class="md-subhead">By {{story.adminName}}</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-actions layout="row" layout-align="start center" class="story-tags">
+                        <span class="story-tag" ng-repeat="tag in story.hashtags" ng-click="getRelatedStories(tag.tagId)">#{{tag.tag}}</span>
+                    </md-card-actions>
+                    <md-card-content>
+                        <p ng-bind-html="toTrustedHTML(story.shortStory)">
+                        </p>
+                        <span id="facebook-share" ng-click="shareonfb(story)"><i class="fa fa-facebook"></i>&nbsp;&nbsp;&nbsp;Share</span>
+                        <span id="showMoreBtn" ng-click="goToStoryDetails(story.storyId)">Show More</span>
+                    </md-card-content>
+                    <md-card-header>
+                        <md-card-header-text layout-align="end center" layout="row">
+                            <md-card-avatar>
+                                <!-- <md-icon class="md-avatar-icon" md-svg-icon="images/general/noImage.png"></md-icon> -->
+                                <img src="images/general/noImage.png" id="user-img"/>
+                            </md-card-avatar>
+                            <span class="md-title" id="user-name">{{story.userName}}</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                </md-card>
+            </div>
+            <div flex="30" class="story-widget" flex-xs="100" flex-sm="100">
+                <md-card class="popular-stories">
+                    <md-card-header>
+                        <md-card-header-text>
+                            <span class="md-title">Popular Stories</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <article ng-repeat="story in popularStories" ng-click="goToStoryDetails(story.storyId)">
+                        <img ng-src="{{story.coverPhoto}}" class="md-card-image" alt="Washed Out" />
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline">{{story.title}}</span>
+                                <span class="md-subhead">{{story.placeName}}</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </article>
+                </md-card>
+                <md-card class="popular-localities">
+                    <md-card-header>
+                        <md-card-header-text>
+                            <span class="md-title">Popular Localities</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                        <ul>
+                            <li ng-repeat="locality in popularLocalities">
+                                <div><i class="material-icons">&#xE409;</i><span ng-click="getLocalityPosts(locality.localityId)">{{locality.localityName}}</span></div>
+                                <div class="clearfix"></div>
+                            </li>
+                        </ul>
+                    </md-card-content>
+                </md-card>
+                <md-card class="popular-tags">
+                    <md-card-header>
+                        <md-card-header-text>
+                            <span class="md-title">Tag Cloud</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                        <div class="tagcloud">
+                            <p class="tag-btn" ng-click="getRelatedStories(tag.tagId)" ng-repeat="tag in tagCloudData">#{{tag.tag}}</p>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </section>
+    </div>
+    <!-- <md-button class="md-primary" ng-click="shareonfb()">FACEBOOK</md-button> -->
+
+</md-content>

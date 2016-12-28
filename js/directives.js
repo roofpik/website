@@ -13,32 +13,58 @@ app.directive('footer', function() {
         restrict: 'A', //This menas that it will be used as an attribute and NOT as an element. I don't like creating custom HTML elements
         replace: true,
         templateUrl: "/js/directives/footer.html",
-        controller: ['$scope', function($scope) {
-            // Your behaviour goes here :)
+        controller: ['$scope', '$state', '$timeout', '$rootScope', function($scope, $state, $timeout, $rootScope) {
+            // Your behaviour goes here :
+            $rootScope.$watch('localStorageCount', function() {
+                if ($rootScope.localStorageCount == 2) {
+                    var year = new Date().getFullYear();
+                    $scope.localities = {};
+                    // $scope.searchList = getLocalStorage('searchList').value;
+                    // getLocalities($scope.searchList);
+
+                    function getLocalities(list) {
+                        for (key in list) {
+                            if (list[key].type == 'Locality') {
+                                $scope.localities[list[key].name] = list[key].id;
+                            }
+                        }
+                    }
+                    $scope.takeToLocalityProjects = function(val) {
+                        var valId = $scope.localities[val];
+                        $state.go('projects', { year: year, city: 'gurgaon', type: 'residential-projects', category: convertToHyphenSeparated(val), categoryId: valId, id: 3 });
+                    }
+
+                    $scope.takeToPage = function(val){
+                        $state.go(val);
+                    }
+
+                }
+            });
+
         }]
     }
 });
 
 
-app.directive('loading', function() {
-    return {
-        restrict: 'A', //This menas that it will be used as an attribute and NOT as an element. I don't like creating custom HTML elements
-        replace: true,
-        templateUrl: "/js/directives/loading.html",
-        controller: ['$scope', '$timeout', function($scope, $timeout) {
-            $timeout(function() {
-                $('.loading').animate({
-                    opacity: 0,
-                    bottom: "+=50",
-                    height: "toggle"
-                }, 2000);
-                $('header').fadeIn();
-                $('footer').fadeIn();
-                $('md-content').fadeIn();
-            }, 2000);
-        }]
-    }
-});
+// app.directive('loading', function() {
+//     return {
+//         restrict: 'A', //This menas that it will be used as an attribute and NOT as an element. I don't like creating custom HTML elements
+//         replace: true,
+//         templateUrl: "/js/directives/loading.html",
+//         controller: ['$scope', '$timeout', function($scope, $timeout) {
+//             $timeout(function() {
+//                 $('.loading').animate({
+//                     opacity: 0,
+//                     bottom: "+=50",
+//                     height: "toggle"
+//                 }, 2000);
+//                 $('header').fadeIn();
+//                 $('footer').fadeIn();
+//                 $('md-content').fadeIn();
+//             }, 2000);
+//         }]
+//     }
+// });
 
 app.directive('shortlistedProject', function() {
     return {
@@ -114,3 +140,23 @@ app.directive('blogs', function() {
     }
 });
 
+app.directive('contentLoading', function() {
+    return {
+        restrict: 'E', //This menas that it will be used as an attribute and NOT as an element. I don't like creating custom HTML elements
+        replace: true,
+        template: '<div class="loader-modal"><div class="loader-cont">' +
+            '<div class="loader"></div></div></div>'
+    }
+});
+
+app.directive('gallery', function() {
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'templates/dialogs/gallery.html',
+        controller: 'galleryCtrl',
+        scope: {
+            galleryResponse: '='
+        }
+    }
+});

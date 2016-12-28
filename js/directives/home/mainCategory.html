@@ -7,54 +7,54 @@
     </div>
     <div layout-fill layout="column" flex="66">
         <md-grid-list md-cols="8" md-gutter="20px" md-row-height="2:3">
-            <md-grid-tile class="family" md-rowspan="2" md-colspan="4">
+            <md-grid-tile class="family" md-rowspan="2" md-colspan="4" ng-click="takeToProjects('family')">
                 <md-grid-tile-footer>
                     <h3>Family</h3>
                 </md-grid-tile-footer>
             </md-grid-tile>
-            <md-grid-tile class="elderly" md-colspan="2">
+            <md-grid-tile class="elderly" md-colspan="2" ng-click="takeToProjects('elderly')">
                 <md-grid-tile-footer>
                     <h3>Elderly</h3>
                 </md-grid-tile-footer>
             </md-grid-tile>
-            <md-grid-tile class="sohna-rd" md-colspan="2">
+            <md-grid-tile class="sohna-rd" md-colspan="2" ng-click="takeToLocalityProjects('Sohna Road')">
                 <md-grid-tile-footer>
                     <h3>Sohna Road</h3>
                 </md-grid-tile-footer>
             </md-grid-tile>
-            <md-grid-tile class="bachelors" md-colspan="2">
+            <md-grid-tile class="bachelors" md-colspan="2" ng-click="takeToProjects('bachelors')">
                 <md-grid-tile-footer>
                     <h3>Bachelors</h3>
                 </md-grid-tile-footer>
             </md-grid-tile>
-            <md-grid-tile class="golf-rd" md-colspan="2">
+            <md-grid-tile class="golf-rd" md-colspan="2" ng-click="takeToLocalityProjects('Golf Course Road')">
                 <md-grid-tile-footer>
                     <h3>Golf Course Road</h3>
                 </md-grid-tile-footer>
             </md-grid-tile>
-            <md-grid-tile class="children" md-colspan="2">
+            <md-grid-tile class="children" md-colspan="2" ng-click="takeToProjects('children')">
                 <md-grid-tile-footer>
                     <h3>Children</h3>
                 </md-grid-tile-footer>
             </md-grid-tile>
-            <md-grid-tile class="married" md-rowspan="2" md-colspan="4">
+            <md-grid-tile class="married" md-rowspan="2" md-colspan="4" ng-click="takeToProjects('married')">
                 <md-grid-tile-footer>
                     <h3>Married</h3>
                 </md-grid-tile-footer>
             </md-grid-tile>
-            <md-grid-tile class="dwarka-exp" md-colspan="2">
+            <md-grid-tile class="dwarka-exp" md-colspan="2" ng-click="takeToLocalityProjects('Dwarka Expressway')">
                 <md-grid-tile-footer>
                     <h3>Dwarka Expressway</h3>
                 </md-grid-tile-footer>
             </md-grid-tile>
-            <md-grid-tile class="pets" md-colspan="2">
+            <md-grid-tile class="pets" md-colspan="2" ng-click="takeToProjects('pets')">
                 <md-grid-tile-footer>
                     <h3>Pets</h3>
                 </md-grid-tile-footer>
             </md-grid-tile>
-            <md-grid-tile class="golf-extn" md-colspan="2">
+            <md-grid-tile class="golf-extn" md-colspan="2" ng-click="takeToLocalityProjects('Golf Course Road Extn.')">
                 <md-grid-tile-footer>
-                    <h3>Golf Course Ext Road</h3>
+                    <h3>Golf Course Road Extn.</h3>
                 </md-grid-tile-footer>
             </md-grid-tile>
         </md-grid-list>

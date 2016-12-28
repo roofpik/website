@@ -1,6 +1,6 @@
 <md-content class="write-review-page">
-    <div layout="row" flex="80" id="write-review-container">
-        <div flex="25">
+    <div layout="row" flex="85" flex-xs="90" flex-sm="90" layout-wrap id="write-review-container">
+        <div flex="25" flex-xs="100">
             <div id="review-tips">
             <h3>Reviewing Tips</h3>
             <p><b>Your review can directly impact someone’s decision to buy or rent property. So make it count by using these reviewing tips:</b></p>
@@ -14,8 +14,8 @@
             <p><b>Review Anonymously: </b>Our hawk-eyed moderators have a thing against reviews with personal information such as names, phone numbers, emails, or other contact details. Make sure your review doesn’t include such information.</p>
             </div>
         </div>
-        <div flex="5"></div>
-        <div flex="70" >
+        <div flex="5" flex-xs="100"></div>
+        <div flex="70" flex-xs="100" class="mgtxs5">
             <div id="review-form-container">
                 <div flex="100" id="review-form-title">
                     <h3>Review</h3>
@@ -31,40 +31,40 @@
                             </md-list>
                         </div>
                     </div>
-                    <div layout="row" class="review-param">
-                        <div flex="30" class="param-title">
+                    <div layout="row" layout-wrap class="review-param">
+                        <div flex="30" flex-xs="100" class="param-title">
                             <h4>Are you a *</h4>
                         </div>
-                        <div flex="70" layout="row" layout-align="start center">
-                            <md-radio-group ng-model="review.userType" layout="row" class="md-warn" required>
+                        <div flex="70" flex-xs="100" layout="row" layout-align="start center">
+                            <md-radio-group ng-model="review.customerType" layout="row" class="md-warn" required>
                                 <md-radio-button value="Owner"> Owner </md-radio-button>
                                 <md-radio-button value="Tenant"> Tenant </md-radio-button>
                                 <md-radio-button value="Visitor"> Visitor </md-radio-button>
                             </md-radio-group>
                         </div>
                     </div>
-                    <div layout="row" class="review-param">
-                        <div flex="30" class="param-title">
+                    <div layout="row" layout-wrap class="review-param">
+                        <div flex="30" flex-xs="100" class="param-title">
                             <h4>Overall rating *</h4>
                         </div>
-                        <div layout="row" flex="70" layout-align="none center">
+                        <div layout="row" flex="70" flex-xs="100" layout-align="none center">
                             <review-ratings ratingsobj='ratingsObject' index='1'></review-ratings>
                         </div>
                     </div>
-                    <div layout="row" class="review-param">
-                        <div flex="30" class="param-title">
+                    <div layout="row" layout-wrap  class="review-param">
+                        <div flex="30" flex-xs="100" class="param-title">
                             <h4>Review Title *</h4>
                         </div>
-                        <div flex="70">
+                        <div flex="70" flex-xs="100">
                             <input ng-model="review.reviewTitle" placeholder="Review Title" id="review-title" required>
                         </div>
                     </div>
-                    <div layout="row" class="review-param">
-                        <div flex="30" class="param-title">
+                    <div layout="row" layout-wrap class="review-param">
+                        <div flex="30" flex-xs="100" class="param-title">
                             <h4>Review Text *</h4>
                         </div>
-                        <div flex="70">
-                            <textarea ng-model="review.reviewText" rows="5" columns="20" placeholder="Write your review" id="review-text" required></textarea>
+                        <div flex="70" flex-xs="100">
+                            <textarea ng-model="review.reviewText" rows="10" columns="20" placeholder="Write your review" id="review-text" required></textarea>
                         </div>
                     </div>
                     <div flex="100" id="show-more">
@@ -72,7 +72,7 @@
                     </div>
                     <div ng-show="showMore" class="rating-ques">
                         <div layout="row" class="review-param" layout-wrap>
-                            <div flex="50" layout="row" ng-repeat="item in ratingParams">
+                            <div flex="50" flex-xs="100" flex-sm="100" layout="row" ng-repeat="item in ratingParams">
                                 <div flex class="param-title">
                                     <h4>{{item.name}}</h4>
                                 </div>
@@ -82,11 +82,11 @@
                             </div>
                         </div>
                         <div class="yes-no-ques">
-                            <div layout="row" class="review-param" ng-repeat="item in yesNoParam">
-                                <div flex="70" class="param-title">
+                            <div layout="row" class="review-param" layout-wrap ng-repeat="item in yesNoParam">
+                                <div flex="70"  flex-xs="100" flex-sm="100"  class="param-title">
                                     <h4>{{item.ques}}</h4>
                                 </div>
-                                <div layout-align="end center" layout="row" flex="30" id="radio-btns">
+                                <div layout-align="end center" layout="row" flex="30"  flex-xs="100" flex-sm="100" id="radio-btns">
                                     <md-radio-group ng-model="review[item.id]" layout="row" class="md-warn">
                                         <md-radio-button value="Yes"> Yes</md-radio-button>
                                         <md-radio-button value="No"> No </md-radio-button>
@@ -96,8 +96,9 @@
                         </div>
                     </div>
                     <div layout="row" layout-align="end center">
-                        <md-button class="md-raised md-warn" ng-click="createPath(review)" ng-disabled="(reviewForm.$invalid) || (!review.overallRating)">Submit</md-button>
+                        <md-button class="md-raised md-warn" ng-click="createPath(review)" ng-disabled="(reviewForm.$invalid) || (!review.overallRating) || !loginStatus">Submit</md-button>
                     </div>
+                    <p ng-hide="loginStatus" id="loginSignup">Please login/signup to submit review *</p>
                 </form>
             </div>
         </div>

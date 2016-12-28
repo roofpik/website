@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular-ui-router": "^0.3.2"
+    "angular-ui-router": "^0.3.2",
+    "angular-socialshare": "angularjs-socialshare#^2.3.3"
   }
 }

@@ -1,5 +1,5 @@
 <md-content class="user-all-reviews-page" >
-    <div flex="50" id="review-container">
+    <div flex="50" flex-xs="90" id="review-container">
         <div flex="100" id="user-all-reviews-title">
             <h3>Past Reviews</h3>
         </div>
@@ -13,7 +13,7 @@
                     <h3>{{review.reviewTitle}}</h3>
                     <p ng-if="review.createdDate">{{review.createdDate | date:'MMM dd, yyyy'}}</p>
                     <p ng-if="review.projectName">{{review.projectName}}</p>
-                    <p ng-if="review.locationName">{{review.locationName}}</p>
+                    <p ng-if="review.localityName">{{review.localityName}}</p>
                 </div>
                 <div flex="20">
                     <md-button class="md-fab md-mini" id="edit-btn-box">

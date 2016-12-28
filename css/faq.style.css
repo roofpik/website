@@ -1,0 +1,36 @@
+.faq-page {
+	background-color: #fff;
+}
+
+#faq {
+    width: 85%;
+    margin: 60px auto 0;
+    background-color: #ffffff;
+}
+
+#faq .faq-question {
+    cursor: pointer;
+}
+
+#faq .faq-question h3 {
+	font-size:20px;
+}
+
+#faq .faq-question:focus {
+    outline: none;
+    border: 0;
+}
+
+#faq .faq-answer {
+    background: #fff;
+    font-size:18px;
+}
+
+
+#faq md-card:nth-child(even){
+	background-color:#e9f8fc;
+}
+
+#faq md-card:nth-child(odd){
+	background-color:#f2f2f2;	
+}

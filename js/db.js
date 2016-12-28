@@ -18,7 +18,6 @@ var config = {
 //     storageBucket: "roofpik-948d0.appspot.com",
 // };
 
-
 firebase.initializeApp(config);
 
 var db = firebase.database();

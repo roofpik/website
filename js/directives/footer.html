@@ -1,41 +1,41 @@
 <div layout="row" flex layout-wrap class="footer">
     <div layout="row" layout-align="center center" flex="100" class="top-footer">
-        <div flex="80" layout="row">
-            <div flex="33">
+        <div flex="80" layout="row" layout-wrap>
+            <div flex="33" flex-xs="100"  class="rf-footer">
                 <h3>Roofpik</h3>
                 <ul>
-                    <li>
+                    <li ng-click="takeToPage('about-us')">
                         About
                     </li>
-                    <li>
+                    <!--                     <li>
                         Career
-                    </li>
-                    <li>
+                    </li> -->
+                    <li ng-click="takeToPage('faq')">
                         FAQ's
                     </li>
-                    <li>
-                        Conact Us
+                    <li ng-click="takeToPage('contact-us')">
+                        Contact Us
                     </li>
                 </ul>
             </div>
-            <div flex="33">
+            <div flex="33" flex-xs="100" class="rf-footer">
                 <h3>Localities</h3>
                 <ul>
-                    <li>
+                    <li ng-click="takeToLocalityProjects('Sohna Road')">
                         Sohna Road
                     </li>
-                    <li>
+                    <li ng-click="takeToLocalityProjects('Golf Course Road')">
                         Golf Course Road
                     </li>
-                    <li>
+                    <li ng-click="takeToLocalityProjects('Golf Course Road Extn.')">
                         Golf Course Extn Road
                     </li>
-                    <li>
-                        MG Road
+                    <li ng-click="takeToLocalityProjects('Dwarka Expressway')">
+                        Dwarka Expressway
                     </li>
                 </ul>
             </div>
-            <div flex="33">
+            <div flex="33" flex-xs="100">
                 <h3>Contact</h3>
                 <p>
                     250, Vipul Trade Center
@@ -47,23 +47,30 @@
         </div>
     </div>
     <div layout="row" layout-align="center center" flex="100" class="bottom-footer">
-        <div flex="80" layout="row">
-            <div flex="33" layout="row" layout-align="start center">
+
+        <div flex="80" class="flex-xs-90" layout="row" layout-wrap>
+            <div flex="33"  class="flex-xs-100" layout="row" layout-align="center center">
                 © Alpha Binary Technologies Pvt Ltd
             </div>
-            <div flex="66" layout="row" layout-align="end center">
+            <div flex="66" class="flex-xs-100" layout="row" layout-align="end center">
                 <ul>
                     <li>
                         Terms and Privacy
                     </li>
                     <li>
-                        <img src="images/general/facebook.png" />
+                        <a href="https://www.facebook.com/roofpik" target="_blank">
+                            <img src="images/general/facebook.png" />
+                        </a>
                     </li>
                     <li>
-                        <img src="images/general/linked-in.png" />
+                        <a href="https://www.linkedin.com/company/roofpik?trk=job_view_topcard_company_name" target="_blank">
+                            <img src="images/general/linked-in.png" />
+                        </a>
                     </li>
                     <li>
-                        <img src="images/general/twitter.png" />
+                        <a href="https://www.twitter.com/roofpik" target="_blank">
+                            <img src="images/general/twitter.png" />
+                        </a>
                     </li>
                 </ul>
             </div>

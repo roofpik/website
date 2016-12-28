@@ -16,6 +16,10 @@ html, body {
     font-family: 'Roboto', sans-serif, Helvetica, Arial;
 }
 
+.profile-thumbnail{
+    height: 32px;
+    width:32px;
+}
 .fade {
     color: #8a8a8a;
 }
@@ -181,8 +185,8 @@ header {
 .header .main-menu ul li {
     font-size: 14px;
     display: inline-block;
-    width: 120px;
-    text-align: center;
+   /* width: 150px;*/
+    text-align: left; float: left;
     line-height: 60px;
     position: relative;
 }
@@ -303,8 +307,8 @@ header {
     text-align: left;
     border: 1px solid #dce0e0;
     z-index: 4;
-    left: -156px;
-    width: 275px;
+    right:0px;
+    width: 200px;
     background: #fff;
     padding: 10px 0;
 }

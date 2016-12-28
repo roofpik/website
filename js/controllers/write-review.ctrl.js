@@ -1,8 +1,18 @@
-app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $mdDialog, $rootScope) {
+app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $mdDialog, $rootScope, UserTokenService, $location) {
+    var timestamp = new Date().getTime();
+    var urlInfo = {
+        url: $location.path()
+    }
+    UserTokenService.checkToken(urlInfo, timestamp, 1);
+    loading(true);
+    $timeout(function(){
+        loading(false);
+    },1000);
 
+    $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.stepsModel = [];
     var newKey = '';
-
+    var user;
     $scope.selectedFile;
     var basic;
     $scope.showMoreLess = 'Show More +';
@@ -73,11 +83,27 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
         }
     ];
 
-    $scope.login = {};
-    $scope.$watch('loginStatus', function() {
-        $scope.login.status = $rootScope.loginStatus;
-        console.log($scope.login.status);
+    $rootScope.$watch('loginStatus', function(){
+        if($rootScope.loginStatus){
+            $scope.loginStatus = true;
+            user = firebase.auth().currentUser;
+            console.log(user);
+        } else {
+            $scope.loginStatus = false;
+        }
     });
+    console.log(checkLocalStorage('loginStatus'));
+    if(checkLocalStorage('loginStatus')){
+        $scope.loginStatus = JSON.parse(localStorage.getItem('loginStatus'));
+        if(JSON.parse(localStorage.getItem('loginStatus'))){
+            user = firebase.auth().currentUser;
+            console.log(user);   
+        } else{
+            $rootScope.$emit("callShowLogin", {});
+        }
+    } else {
+        $rootScope.$emit("callShowLogin", {});
+    }
 
     $scope.showMoreFn = function(){
         $scope.showMore = !$scope.showMore;
@@ -186,11 +212,11 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
 
     $scope.createPath = function(review) {
         if ($scope.selectedProjectOrLocality.type == 'Project') {
-            newKey = db.ref('reviews/-KPmH9oIem1N1_s4qpCv/residential/' + $scope.selectedProjectOrLocality.id).push().key;
-            $scope.path = 'reviews/-KPmH9oIem1N1_s4qpCv/residential/' + $scope.selectedProjectOrLocality.id + '/' + newKey;
+            newKey = db.ref('websiteReviews/'+$scope.cityId+'/residential/' + $scope.selectedProjectOrLocality.id).push().key;
+            $scope.path = 'websiteReviews/'+$scope.cityId+'/residential/' + $scope.selectedProjectOrLocality.id + '/' + newKey;
         } else if ($scope.selectedProjectOrLocality.type == 'Locality') {
-            newKey = db.ref('reviews/-KPmH9oIem1N1_s4qpCv/residential/' + $scope.selectedProjectOrLocality.id).push().key;
-            $scope.path = 'reviews/-KPmH9oIem1N1_s4qpCv/residential/' + $scope.selectedProjectOrLocality.id + '/' + newKey;
+            newKey = db.ref('websiteReviews/'+$scope.cityId+'/residential/' + $scope.selectedProjectOrLocality.id).push().key;
+            $scope.path = 'websiteReviews/'+$scope.cityId+'/residential/' + $scope.selectedProjectOrLocality.id + '/' + newKey;
         }
         if ($scope.selectedFile) {
             $http({
@@ -227,26 +253,39 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
 
     $scope.pushToProjectLocality = function(data) {
         $scope.projectLocality = [];
-        angular.forEach(data, function(value, key) {
-            if (value.type != 'Developer') {
-                $scope.projectLocality.push(value);
+        for(key in data){
+            if(data[key].type != 'Builder'){
+                $scope.projectLocality.push(data[key]);
             }
-        })
+        }
     }
-    if (!checkLocalStorage('search')) {
-        db.ref('search').once('value', function(dataSnapshot) {
-            console.log(dataSnapshot);
-            $timeout(function() {
-                $scope.searchObject = dataSnapshot.val();
-                setLocalStorage('search', $scope.searchObject, 1);
-                console.log($scope.searchObject);
-                $scope.pushToProjectLocality($scope.searchObject);
-            }, 0);
-        })
-    } else {
-        var data = getLocalStorage('searchObject');
-        console.log(data);
-        $scope.pushToProjectLocality(data);
+
+    db.ref('dataVersions').once('value', function(response){
+        $scope.dataVersions = response.val();
+    }).then(function(){
+        if(checkLocalStorage('searchList')){
+            var searchListVersion = (getLocalStorage('searchList')).version;
+            if(searchListVersion == $scope.dataVersions.searchList){
+                $scope.searchList = getLocalStorage('searchList').value;
+                $scope.pushToProjectLocality($scope.searchList);
+            } else {
+                getSearchList($scope.dataVersions.searchList);
+            }
+        } else {
+            getSearchList($scope.dataVersions.searchList);
+        }
+    })
+
+    function getSearchList(version){
+        db.ref('search').once('value', function(snapshot){
+            $timeout(function(){
+                for(key in snapshot.val()){
+                    $scope.searchList.push(snapshot.val()[key]);
+                }
+                setLocalStorage($scope.searchList, 'searchList', version);
+                $scope.pushToProjectLocality($scope.searchList);
+            },0);
+        })  
     }
 
     $scope.nameEntered = function() {
@@ -303,7 +342,7 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
 
     $scope.submitReview = function(imageUrl, review) {
         console.log(review);
-        if(!review.userType || !$scope.selectedProjectOrLocality || !review.reviewTitle || !review.reviewText){
+        if(!review.customerType || !$scope.selectedProjectOrLocality || !review.reviewTitle || !review.reviewText){
             sweetAlert("Cannot submit review", "Please fill all the required information!", "error");
         } else {
             swal({
@@ -312,14 +351,17 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
               imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
               showConfirmButton: false
             });
-            var user = firebase.auth().currentUser;
+            console.log(user);
             $scope.review.userName = user.displayName;
+            // $scope.review.userName = 'Anu Porwal';
             $scope.review.userId = user.uid;
+            // $scope.review.userId = '2cQ2XQ7w7pdT9WGq2nyGJhrPSOo2';
             $scope.review.blocked = false;
             $scope.review.createdDate = new Date().getTime();
             $scope.review.dataFormat = 1;
+            $scope.review.wordCount = ($scope.review.reviewText).length;
             $scope.review.source = 'website';
-            $scope.review.status = 'live';
+            $scope.review.status = 'uploaded';
             if (imageUrl != 'no-image') {
                 $scope.review.imageUrl = imageUrl;
             }
@@ -328,15 +370,16 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
                 $scope.useReviewData = {
                     projectId: $scope.selectedProjectOrLocality.id,
                     projectName: $scope.selectedProjectOrLocality.name,
-                    cityId: '-KPmH9oIem1N1_s4qpCv',
+                    cityId: $scope.cityId,
                     cityName: 'Gurgaon',
                     reviewTitle: $scope.review.reviewTitle,
-                    status: 'live',
+                    status: $scope.review.status,
                     createdDate: $scope.review.createdDate
                 }
                 $scope.review.wordCount = ($scope.review.reviewText).length;
-                updates['reviews/-KPmH9oIem1N1_s4qpCv/residential/' + $scope.selectedProjectOrLocality.id + '/' + newKey] = $scope.review;
-                updates['userReviews/' + user.uid + '/residential/' + newKey] = $scope.useReviewData
+                updates['websiteReviews/'+$scope.cityId+'/residential/' + $scope.selectedProjectOrLocality.id + '/' + newKey] = $scope.review;
+                updates['userReviews/' + $scope.review.userId + '/residential/' + newKey] = $scope.useReviewData;
+                console.log(updates);
                 db.ref().update(updates).then(function() {
                     console.log('review successfully submitted');
                     $timeout(function() {
@@ -359,16 +402,17 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
             } else if ($scope.selectedProjectOrLocality.type == 'Locality') {
                 var updates = {};
                 $scope.useReviewData = {
-                    locationId: $scope.selectedProjectOrLocality.id,
-                    locationName: $scope.selectedProjectOrLocality.name,
-                    cityId: '-KPmH9oIem1N1_s4qpCv',
+                    localityId: $scope.selectedProjectOrLocality.id,
+                    localityName: $scope.selectedProjectOrLocality.name,
+                    cityId: $scope.cityId,
                     cityName: 'Gurgaon',
                     reviewTitle: $scope.review.reviewTitle,
-                    status: 'live',
+                    status: $scope.review.status,
                     createdDate: $scope.review.createdDate
                 }
-                updates['reviews/-KPmH9oIem1N1_s4qpCv/locality/' + $scope.selectedProjectOrLocality.id + '/' + newKey] = $scope.review;
-                updates['userReviews/' + user.uid + '/locality/' + newKey] = $scope.useReviewData;
+                updates['websiteReviews/'+$scope.cityId+'/locality/' + $scope.selectedProjectOrLocality.id + '/' + newKey] = $scope.review;
+                updates['userReviews/' + $scope.review.userId + '/locality/' + newKey] = $scope.useReviewData;
+                console.log(updates);
                 db.ref().update(updates).then(function() {
                     console.log('review successfully submitted');
                     $timeout(function() {
@@ -391,13 +435,11 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
             }
         }
     }
-
-    // $scope.openLogin = function() {
-    //     $('#gl-side-menu-btn').click();
-    // }
-
     $scope.uploadImage = function(){
         console.log('called');
         $( "#review-image" ).click();
     }
+
+    // loading(false);
+
 });
