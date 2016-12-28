@@ -66,7 +66,7 @@ app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $stat
     FB.ui({
         method: 'feed',
         name: story.storyTitle,
-        link: 'http://test.roofpik.com/#/story/'+story.storyId,
+        link: 'http://roofpik.com/#/story/'+story.storyId,
         picture: story.coverPhoto,
         caption: story.placeName,
         description: story.userName

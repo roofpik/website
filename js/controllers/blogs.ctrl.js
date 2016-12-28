@@ -156,7 +156,7 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
         FB.ui({
             method: 'feed',
             name: blog.blogTitle,
-            link: 'http://test.roofpik.com/#/blog/' + blog.blogId,
+            link: 'http://roofpik.com/#/blog/' + blog.blogId,
             picture: blog.coverPhoto,
             caption: hashtag,
             description: blog.adminName

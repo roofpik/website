@@ -150,7 +150,7 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
     FB.ui({
         method: 'feed',
         name: story.storyTitle,
-        link: 'http://test.roofpik.com/#/story/'+story.storyId,
+        link: 'http://roofpik.com/#/story/'+story.storyId,
         picture: story.coverPhoto,
         caption: story.placeName,
         description: story.userName
