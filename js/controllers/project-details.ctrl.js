@@ -86,7 +86,6 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
     }
 
     db.ref('projects/-KYJONgh0P98xoyPPYm9/residential/'+$scope.projectId).once('value', function(snapshot) {
-        // console.log(snapshot.val());
         $timeout(function() {
             $scope.project = snapshot.val();
             $scope.projectName = $scope.project.projectName;
@@ -119,7 +118,6 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
                 var reviewCount = 0;
                 snapshot.forEach(function(childSnapshot){
                     reviewCount++;
-                    // console.log(childSnapshot.val().wordCount);
                     $scope.reviews.push(childSnapshot.val());
                     if(reviewCount == allReviewsCount){
                         if(reviewCount > 5){
@@ -172,7 +170,6 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
         }
         $scope.propertyTypes = jQuery.unique($scope.propertyTypes);
         bhkData = jQuery.unique(bhkData);
-        console.log(bhkData);
         bhkData = bhkData.sort();
         areaData = jQuery.unique(areaData);
         areaData = areaData.sort();
@@ -323,7 +320,6 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
         //         example[configs[key].bhk] = data;
         //     }
         // }
-        // console.log(example);
     }
 
     function generateImageList(images){
@@ -347,7 +343,6 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
                 }
             }
         }
-        console.log(imageData);
         $rootScope.$broadcast('initGallery',imageData);
     }
 

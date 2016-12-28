@@ -26,7 +26,6 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
         $timeout(function() {
             if (snapshot.val()) {
                 $scope.allBlogs = snapshot.val();
-                console.log($scope.allBlogs);
                 angular.forEach($scope.allBlogs, function(value, key) {
                     value.coverPhoto = 'http://cdn.roofpik.com/roofpik/blogs/allBlogs/'+$scope.cityId+'/'+value.blogId+'/coverPhoto/'+value.coverPhoto+'-m.jpg';
                     value.selected = true;
@@ -47,12 +46,9 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
     db.ref('popularBlogs/' + $scope.cityId).once('value', function(snapshot) {
         $timeout(function() {
             if (snapshot.val()) {
-                console.log(snapshot.val());
                 var blogData = snapshot.val();
                 for(key in blogData){
-                    console.log('http://cdn.roofpik.com/roofpik/blogs/allBlogs/'+$scope.cityId+'/'+blogData[key].blogId+'/coverPhoto/'+blogData[key].coverPhoto+'-m.jpg');
                     blogData[key].coverPhoto = 'http://cdn.roofpik.com/roofpik/blogs/allBlogs/'+$scope.cityId+'/'+blogData[key].blogId+'/coverPhoto/'+blogData[key].coverPhoto+'-m.jpg';
-                    console.log(blogData[key]);
                     $scope.popularBlogs[key] = blogData[key];
                 }
             }
@@ -78,7 +74,6 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
     }
 
     $scope.showAllBlogs = function() {
-        console.log($scope.allBlogs);
         angular.forEach($scope.allBlogs, function(value, key) {
             value.selected = true;
         });
@@ -86,7 +81,6 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
     }
 
     $scope.getRelatedBlogs = function(tag) {
-        console.log(tag);
         db.ref('blogs/hashtags/' + tag + '/blogs').once('value', function(snapshot) {
             $timeout(function() {
                 if (snapshot.val()) {
@@ -101,7 +95,6 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
                             value.selected = false;
                         }
                         if (count == Object.keys($scope.allBlogs).length) {
-                            console.log('blogCount ', blogCount);
                             if (blogCount == 0) {
                                 $scope.showNoBlogs = true;
                             } else {
@@ -123,7 +116,6 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
     $scope.getLocalityBlogs = function(locality) {
         var count = 0;
         var localityBlogCount = 0;
-        console.log(locality);
         angular.forEach($scope.allBlogs, function(value, key) {
             count++;
             if (value.placeId == locality) {
@@ -133,7 +125,6 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
                 value.selected = false;
             }
             if (count == Object.keys($scope.allBlogs).length) {
-                console.log('localityBlogCount ', localityBlogCount);
                 if (localityBlogCount == 0) {
                     $scope.showNoBlogs = true;
                 } else {

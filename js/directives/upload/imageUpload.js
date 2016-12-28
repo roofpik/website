@@ -231,7 +231,6 @@ app.service('uploadImage', function($http) {
 
     return {
         upload: function(path, image, imgType, imgName, q) {
-            console.log(imgName);
             $http({
                     url: 'http://139.162.9.71/api/uploadImage',
                     method: "POST",
@@ -244,7 +243,6 @@ app.service('uploadImage', function($http) {
                 })
                 .then(function(response) {
                         // success
-                        console.log(response);
                         if (response.data.status == 200) {
                             q.resolve({
                                 imgUrl: response.data.imageName
@@ -258,7 +256,6 @@ app.service('uploadImage', function($http) {
                     },
                     function(response) { // optional
                         // failed
-                        console.log(response);
                         q.reject({
                             imgUrl: 'NA'
                         });
