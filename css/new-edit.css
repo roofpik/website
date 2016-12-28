@@ -16,6 +16,7 @@
 .mgt3 {
     margin-top: 30px;
 }
+.pdleft1{padding-left: 15px; padding-top: 5px;}
 
 .city-list ul {
     text-align: center;
@@ -150,6 +151,10 @@ footer{margin-top: 30px}
 
 }
 @media (min-width: 481px) and (max-width: 767px) {
+    .project-details-page .all-rating-summary .rating-block {
+    padding: 10px;
+    font-size: 13px;
+}
 	.section-header{padding: 40px 0 20px}
 	.write-reviews .reviews-wrapper h1{font-size: 32px;}
 #faq .faq-question h3{font-size: 16px; margin: 5px 0;}
@@ -194,6 +199,10 @@ footer{margin-top: 30px}
 }
 
 @media (min-width: 768px) and (max-width: 960px) {
+    .project-details-page .all-rating-summary .rating-block {
+    padding: 10px;
+    font-size: 13px;
+}
 	body{font-size: 14px;}
     .featured-header h1 {
         font-size: 21px;

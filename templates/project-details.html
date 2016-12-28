@@ -10,8 +10,8 @@
             </div>
             </div>
         </article>
-        <article flex="100" class="md-padding">
-            <div flex="100" class="path-filters">
+        <article class="project-basic-details" layout="row"   flex="80" flex-xs="100" flex-sm="95" flex-md="90">
+            <div flex="100" class="path-filters pdleft1">
                 <span class="path-btn" ng-click="takeToHome()">Home</span>
                 <span class="path-btn" ng-repeat="filter in path track by $index">{{filter}}</span>
             </div>
@@ -26,16 +26,16 @@
                 </span>
                 {{allRatings.overallRatingNum}} Review<span ng-show="allRatings.overallRatingNum > 1">s</span>
             </p>
-            <div layout="row" layout-wrap id="status-segment">
-                <div flex flex-xs="50" id="status">
+            <div layout="row" id="status-segment">
+                <div flex id="status">
                     <i class="fa fa-home"></i>
                     <p>{{project.projectStatus}}</p>
                 </div>
-                <div flex flex-xs="50" id="bhk"  ng-show="project.configurations">
+                <div flex id="bhk"  ng-show="project.configurations">
                     <i class="fa fa-bed"></i>
                     <p>{{bhk}}</p>
                 </div>
-                <div flex flex-xs="100" id="segment">
+                <div flex id="segment">
                     <i class="fa fa-diamond"></i>
                     <p>{{project.segment}}</p>
                 </div>
@@ -156,33 +156,33 @@
         <article flex="30" flex-xs="100" id="rating-container">
             <div class="all-rating-summary" flex="100">
                 <p class="rating-summary-title">User Ratings</p>
-                    <div class="rating-block">
-                        Excellent ({{allRatings.fiveStar}})
-                        <div class="progress-bar">
+                    <div layout="row" class="rating-block">
+                      <div flex="50">  Excellent ({{allRatings.fiveStar}})</div>
+                        <div flex="50" class="progress-bar">
                             <span class="my-progress" id="excellentStar"></span>
                         </div>
                     </div>
-                    <div class="rating-block">
-                        Very Good ({{allRatings.fourStar}})
-                        <div class="progress-bar">
+                    <div layout="row" class="rating-block">
+                    <div flex="50">    Very Good ({{allRatings.fourStar}})</div>
+                        <div flex="50" class="progress-bar">
                             <span class="my-progress" id="veryGoodStar"></span>
                         </div>
                     </div>
-                    <div class="rating-block">
-                        Good ({{allRatings.threeStar}})
-                        <div class="progress-bar">
+                    <div layout="row" class="rating-block">
+                  <div flex="50">      Good ({{allRatings.threeStar}})</div>
+                        <div flex="50" class="progress-bar">
                             <span class="my-progress" id="goodStar"></span>
                         </div>
                     </div>
-                    <div class="rating-block">
-                        Average ({{allRatings.twoStar}})
-                        <div class="progress-bar">
+                    <div layout="row" class="rating-block">
+                  <div flex="50">      Average ({{allRatings.twoStar}})</div>
+                        <div flex="50" class="progress-bar">
                             <span class="my-progress" id="averageStar"></span>
                         </div>
                     </div>
-                    <div class="rating-block">
-                        Bad ({{allRatings.oneStar}})
-                        <div class="progress-bar">
+                    <div layout="row" class="rating-block">
+                    <div flex="50">    Bad ({{allRatings.oneStar}})</div>
+                        <div flex="50" class="progress-bar">
                             <span class="my-progress" id="badStar"></span>
                         </div>
                     </div>
