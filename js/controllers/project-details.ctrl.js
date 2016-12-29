@@ -89,7 +89,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
         $timeout(function() {
             $scope.project = snapshot.val();
             $scope.projectName = $scope.project.projectName;
-            $scope.coverImage = "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.project.projectId+'/images/coverPhoto/'+$scope.project.images.coverPhoto+'-m.jpg';
+            $scope.coverImage = "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.project.projectId+'/images/coverPhoto/'+$scope.project.images.coverPhoto.url+'-m.jpg';
             $scope.path = [">","Gurgaon", ">","Residential", ">"];
             if($scope.project.configurations){
                 generateInfo($scope.project.configurations);
@@ -113,48 +113,51 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
         db.ref('reviews/-KYJONgh0P98xoyPPYm9/residential/'+$scope.projectId)
         .orderByChild('wordCount')
         .once('value', function(snapshot) {
+            if(snapshot.val()){
             var allReviewsCount = Object.keys(snapshot.val()).length;
-            $timeout(function(){
-                var reviewCount = 0;
-                snapshot.forEach(function(childSnapshot){
-                    reviewCount++;
-                    $scope.reviews.push(childSnapshot.val());
-                    if(reviewCount == allReviewsCount){
-                        if(reviewCount > 5){
-                            $scope.showReviewBtn = true;
+                $timeout(function(){
+                    var reviewCount = 0;
+                    snapshot.forEach(function(childSnapshot){
+                        reviewCount++;
+                        $scope.reviews.push(childSnapshot.val());
+                        if(reviewCount == allReviewsCount){
+                            if(reviewCount > 5){
+                                $scope.showReviewBtn = true;
+                            }
                         }
-                    }
-                });
-            },0);
-
+                    });
+                },0);
+            }
         }).then(function() {
             db.ref('ratingReview/-KYJONgh0P98xoyPPYm9/residential/'+$scope.projectId).once('value', function(snapshot) {
                 $timeout(function() {
-                    $scope.allRatings = snapshot.val();
-                    $("#excellentStar").css("width", ($scope.allRatings.fiveStar / $scope.allRatings.overallRatingNum) * 100 + '%');
-                    $("#veryGoodStar").css("width", ($scope.allRatings.fourStar / $scope.allRatings.overallRatingNum) * 100 + '%');
-                    $("#goodStar").css("width", ($scope.allRatings.threeStar / $scope.allRatings.overallRatingNum) * 100 + '%');
-                    $("#averageStar").css("width", ($scope.allRatings.twoStar / $scope.allRatings.overallRatingNum) * 100 + '%');
-                    $("#badStar").css("width", ($scope.allRatings.oneStar / $scope.allRatings.overallRatingNum) * 100 + '%');
-                    if($scope.allRatings.amenities){
-                       $scope.allRatings.amenities1 = Math.round($scope.allRatings.amenities); 
+                    if(snapshot.val()){
+                        $scope.allRatings = snapshot.val();
+                        $("#excellentStar").css("width", ($scope.allRatings.fiveStar / $scope.allRatings.overallRatingNum) * 100 + '%');
+                        $("#veryGoodStar").css("width", ($scope.allRatings.fourStar / $scope.allRatings.overallRatingNum) * 100 + '%');
+                        $("#goodStar").css("width", ($scope.allRatings.threeStar / $scope.allRatings.overallRatingNum) * 100 + '%');
+                        $("#averageStar").css("width", ($scope.allRatings.twoStar / $scope.allRatings.overallRatingNum) * 100 + '%');
+                        $("#badStar").css("width", ($scope.allRatings.oneStar / $scope.allRatings.overallRatingNum) * 100 + '%');
+                        if($scope.allRatings.amenities){
+                           $scope.allRatings.amenities1 = Math.round($scope.allRatings.amenities); 
+                        }
+                        if($scope.allRatings.security){
+                           $scope.allRatings.security1 = Math.round($scope.allRatings.security); 
+                        }
+                        if($scope.allRatings.openAndGreenAreas){
+                           $scope.allRatings.openAndGreenAreas1 = Math.round($scope.allRatings.openAndGreenAreas); 
+                        }
+                        if($scope.allRatings.electricityAndWaterSupply){
+                           $scope.allRatings.electricityAndWaterSupply1 = Math.round($scope.allRatings.electricityAndWaterSupply); 
+                        }
+                        if($scope.allRatings.convenienceOfHouseMaids){
+                           $scope.allRatings.convenienceOfHouseMaids1 = Math.round($scope.allRatings.convenienceOfHouseMaids); 
+                        }
+                        if($scope.allRatings.convenienceOfParking){
+                           $scope.allRatings.convenienceOfParking1 = Math.round($scope.allRatings.convenienceOfParking); 
+                        }
+                        loading(false);
                     }
-                    if($scope.allRatings.security){
-                       $scope.allRatings.security1 = Math.round($scope.allRatings.security); 
-                    }
-                    if($scope.allRatings.openAndGreenAreas){
-                       $scope.allRatings.openAndGreenAreas1 = Math.round($scope.allRatings.openAndGreenAreas); 
-                    }
-                    if($scope.allRatings.electricityAndWaterSupply){
-                       $scope.allRatings.electricityAndWaterSupply1 = Math.round($scope.allRatings.electricityAndWaterSupply); 
-                    }
-                    if($scope.allRatings.convenienceOfHouseMaids){
-                       $scope.allRatings.convenienceOfHouseMaids1 = Math.round($scope.allRatings.convenienceOfHouseMaids); 
-                    }
-                    if($scope.allRatings.convenienceOfParking){
-                       $scope.allRatings.convenienceOfParking1 = Math.round($scope.allRatings.convenienceOfParking); 
-                    }
-                    loading(false);
                 }, 50);
             })
         })
@@ -327,21 +330,28 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
         for(key in images){
             if(key == 'coverPhoto'){
                 var newImage = {
-                    thumb: "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.project.projectId+'/images/coverPhoto/'+images[key]+'-s.jpg',
-                    src: "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.project.projectId+'/images/coverPhoto/'+images[key]+'-m.jpg',
+                    thumb: "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.project.projectId+'/images/coverPhoto/'+images[key].url+'-s.jpg',
+                    src: "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.project.projectId+'/images/coverPhoto/'+images[key].url+'-m.jpg',
                     display: false
+                }
+                if(images[key].description){
+                    newImage.caption = images[key].description;
                 }
                 imageData.push(newImage);
             } else {
                 for(key1 in images[key]){
                     var newImage = {
-                        thumb: "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.project.projectId+'/images/'+key+'/'+key1+'/'+images[key][key1]+'-s.jpg',
-                        src: "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.project.projectId+'/images/'+key+'/'+key1+'/'+images[key][key1]+'-m.jpg',
+                        thumb: "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.project.projectId+'/images/'+key+'/'+key1+'/'+images[key][key1].url+'-s.jpg',
+                        src: "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.project.projectId+'/images/'+key+'/'+key1+'/'+images[key][key1].url+'-m.jpg',
                         display: false
+                    }
+                    if(images[key][key1].description){
+                        newImage.caption = images[key][key1].description;
                     }
                     imageData.push(newImage);
                 }
             }
+            console.log(imageData);
         }
         $rootScope.$broadcast('initGallery',imageData);
     }
