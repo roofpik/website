@@ -58,7 +58,7 @@
                     <p>Area</p>
                 </div>
                 <div flex="80" flex-xs="70" layout="row" id="detail-value">
-                    <p><span>{{minArea}} Sq.Ft.<span><span ng-show="minArea != maxArea"> - {{maxArea}} Sq.Ft.</span></p>
+                    <p>{{minArea}} <span ng-show="minArea != 'NA'">Sq.Ft.<span><span ng-show="minArea != maxArea"> - {{maxArea}} Sq.Ft.</span></p>
                 </div>
             </div>
             <div layout="row" layout-wrap id="detail">
@@ -116,7 +116,7 @@
                 </div>
                 <div layout="row" ng-repeat="config in configurations | orderBy: 'bhk'" id="detail-value">
                     <div flex="25">{{config.bhk}} BHK {{config.unit}}</div>
-                    <div flex="25">{{config.superBuiltArea}} Sq. Ft.</div>
+                    <div flex="25">{{config.superBuiltAreaMin}} Sq. Ft. <span ng-show="config.superBuiltAreaMin != config.superBuiltAreaMax">- {{config.superBuiltAreaMax}} Sq. Ft.</span></div>
                     <div flex="25"><span ng-show="config.buyMin != 'NA'">&#8377;</span>{{config.buyMin}} <span ng-show="config.buyMin != config.buyMax">- &#8377;{{config.buyMax}}</span></div>
                     <div flex="25"><span ng-show="config.rentMin != 'NA'">&#8377;</span>{{config.rentMin}} <span ng-show="config.rentMin != config.rentMax">- &#8377;{{config.rentMax}}</span></div>
                 </div>
