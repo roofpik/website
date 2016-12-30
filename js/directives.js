@@ -19,8 +19,8 @@ app.directive('footer', function() {
                 if ($rootScope.localStorageCount == 2) {
                     var year = new Date().getFullYear();
                     $scope.localities = {};
-                    // $scope.searchList = getLocalStorage('searchList').value;
-                    // getLocalities($scope.searchList);
+                    $scope.searchList = getLocalStorage('searchList').value;
+                    getLocalities($scope.searchList);
 
                     function getLocalities(list) {
                         for (key in list) {

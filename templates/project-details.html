@@ -12,20 +12,19 @@
         </article>
         <article flex="100" class="md-padding">
             <div flex="100" class="path-filters">
-                <span class="path-btn" ng-click="takeToHome()">Home</span>
+                <span class="path-btn" id="home-btn" ng-click="takeToHome()">Home</span>
                 <span class="path-btn" ng-repeat="filter in path track by $index">{{filter}}</span>
             </div>
         </article>
     </section>
     <section layout="row" flex="80" flex-xs="100" flex-sm="95" flex-md="90" class="project-basic-details" layout-wrap>
         <article flex="70" flex-xs="100"   class="project-basic-details-container">
-            <h1 id="project-name">{{projectName}}</h1>
-            <p id="display-address">{{project.projectDetails.address.displayAddress}} &nbsp;&nbsp;&nbsp;
-                <span ng-repeat="rate in [1,2,3,4,5] track by $index">
+            <h1 id="project-name">{{projectName}}&nbsp;&nbsp;<span ng-repeat="rate in [1,2,3,4,5] track by $index">
                     <i class="fa fa-star" ng-class="($index<=(allRatings.overallRating-1))?'newGreen':'grey'" id="overall-rating"></i>
                 </span>
-                {{allRatings.overallRatingNum}} Review<span ng-show="allRatings.overallRatingNum > 1">s</span>
-            </p>
+                <span id="review-num">({{allRatings.overallRatingNum}} Review<span ng-show="allRatings.overallRatingNum > 1">s</span>)</span>
+            </h1>
+            <p id="display-address">{{project.projectDetails.address.displayAddress}}</p>
             <div layout="row" layout-wrap id="status-segment">
                 <div flex flex-xs="50" id="status">
                     <i class="fa fa-home"></i>
@@ -77,6 +76,14 @@
                     <span flex="33" ng-repeat="prop in propertyTypes" id="property-types">{{prop}}</span>
                 </div>
             </div>
+            <div layout="row" layout-wrap ng-show="project.standoutFeatures" id="detail">
+                <div flex="20" flex-xs="30" id="detail-title">
+                    <p>Standout Features</p>
+                </div>
+                <div flex="80" flex-xs="70" id="detail-value" layout="row" layout-wrap layout-align="start center">
+                    <span flex="50" flex-xs="100" ng-repeat="feature in project.standoutFeatures" id="feature-name">{{feature.featureName}}</span>
+                </div>
+            </div>
             <div layout="row" layout-wrap ng-show="project.amenities" id="detail">
                 <div flex="20"  flex-xs="30" id="detail-title">
                     <p>Amenities</p>
@@ -97,14 +104,6 @@
                         </span>
                     </div>
                     <span flex="100" id="show-more-btn" ng-class="showMoreNotClicked? 'newGreen':'normalGrey'" ng-click="showMoreAmenities()">Show {{amenitiesMoreLess}}</span>
-                </div>
-            </div>
-            <div layout="row" layout-wrap ng-show="project.standoutFeatures" id="detail">
-                <div flex="20" flex-xs="30" id="detail-title">
-                    <p>Highlights</p>
-                </div>
-                <div flex="80" flex-xs="70" id="detail-value" layout="row" layout-wrap layout-align="start center">
-                    <span flex="50" flex-xs="100" ng-repeat="feature in project.standoutFeatures" id="feature-name">{{feature.featureName}}</span>
                 </div>
             </div>
             <div flex="100" ng-show="project.configurations" id="detail">
