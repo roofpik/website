@@ -12,7 +12,11 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $stateParams, $sce,
 	db.ref('blogs/allBlogs/'+$scope.cityId+'/'+$stateParams.id).once('value', function(snapshot){
 		$timeout(function(){
 			$scope.blog = snapshot.val();
-			$scope.blog.redirectionUrl = '/#/blog-details/gurgaon/'+convertToHyphenSeparated($scope.blog.title)+'/'+$scope.blog.blogId;
+        	if($scope.blog.placeId){
+				$scope.blog.redirectionUrl ='/#/blog-detail/gurgaon/'+'/'+convertToHyphenSeparated($scope.blog.placeName)+'/'+convertToHyphenSeparated($scope.blog.title)+'/'+$scope.blog.blogId;
+        	} else {
+				$scope.blog.redirectionUrl ='/#/blog-details/gurgaon/'+convertToHyphenSeparated($scope.blog.title)+'/'+$scope.blog.blogId;
+        	}
 			$scope.blog.redirectionUrl = $scope.blog.redirectionUrl.replace(/[?=]/g, "");
 			$scope.blog.coverPhoto = 'http://cdn.roofpik.com/roofpik/blogs/allBlogs/'+$scope.cityId+'/'+$scope.blog.blogId+'/coverPhoto/'+$scope.blog.coverPhoto+'-l.jpg'
 			loading(false);
@@ -24,8 +28,12 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $stateParams, $sce,
             if (snapshot.val()) {
                 var blogData = snapshot.val();
                 for(key in blogData){
-                    blogData[key].redirectionUrl ='/#/blog-details/gurgaon/'+convertToHyphenSeparated(blogData[key].title)+'/'+blogData[key].blogId;
-                    blogData[key].redirectionUrl = blogData[key].redirectionUrl.replace(/[?=]/g, "");
+                	if(blogData[key].placeId){
+    					blogData[key].redirectionUrl ='/#/blog-detail/gurgaon/'+'/'+convertToHyphenSeparated(blogData[key].placeName)+'/'+convertToHyphenSeparated(blogData[key].title)+'/'+blogData[key].blogId;
+                	} else {
+						blogData[key].redirectionUrl ='/#/blog-details/gurgaon/'+convertToHyphenSeparated(blogData[key].title)+'/'+blogData[key].blogId;
+                	}
+                	blogData[key].redirectionUrl = blogData[key].redirectionUrl.replace(/[?=]/g, "");
                     blogData[key].coverPhoto = 'http://cdn.roofpik.com/roofpik/blogs/allBlogs/'+$scope.cityId+'/'+blogData[key].blogId+'/coverPhoto/'+blogData[key].coverPhoto+'-m.jpg';
                     $scope.popularBlogs[key] = blogData[key];
                 }
