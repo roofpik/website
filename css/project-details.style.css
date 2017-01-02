@@ -63,7 +63,11 @@
 }
 
 .project-details-page #overall-rating{
-    font-size:15px;
+    font-size:20px;
+}
+
+.project-details-page #review-num {
+    font-size:20px;
 }
 
 .project-details-page #status-segment {
@@ -211,6 +215,10 @@
     display: inline-block;
 }
 
+.project-details-page .path-filters #home-btn {
+    cursor:pointer;
+}
+
 .project-details-page .path-filters span.path-btn:nth-child(even) {
     color: #262626;
     font-size: 16px;
@@ -246,6 +254,7 @@
     float: right;
     margin-right: 10px;
     font-weight: bold;
+    cursor:pointer;
 }
 
 .project-details-page #amenity-category {

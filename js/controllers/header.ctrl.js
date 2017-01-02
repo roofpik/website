@@ -1,5 +1,6 @@
 app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope, $timeout, UserTokenService) {
     $scope.user = {};
+    $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.gotoHome = function() {
         $state.go('home');
     }
@@ -77,27 +78,5 @@ app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope, $ti
                 $scope.status = 'You cancelled the dialog.';
             });
     }
-
-    $scope.takeToProfile = function() {
-        $state.go('profile');
-    };
-
-    $scope.takeToMyReviews = function() {
-        $state.go('user-all-reviews');
-    };
-
-      $scope.goToCoverStories = function() {
-        $state.go('cover-stories', { city: 'gurgaon', cityId: $scope.cityId, from: 1 });
-    }
-
-    $scope.goToBlogs = function() {
-        $state.go('blogs', { city: 'gurgaon', cityId: $scope.cityId, from: 1 })
-    }
-
-    $scope.gotoWriteReviews = function() {
-        $state.go('write-review');
-    }
-
-    
 
 });

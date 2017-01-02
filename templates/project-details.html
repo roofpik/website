@@ -12,20 +12,19 @@
         </article>
         <article flex="100" class="md-padding">
             <div flex="100" class="path-filters">
-                <span class="path-btn" ng-click="takeToHome()">Home</span>
+                <span class="path-btn" id="home-btn" ng-click="takeToHome()">Home</span>
                 <span class="path-btn" ng-repeat="filter in path track by $index">{{filter}}</span>
             </div>
         </article>
     </section>
     <section layout="row" flex="80" flex-xs="100" flex-sm="95" flex-md="90" class="project-basic-details" layout-wrap>
         <article flex="70" flex-xs="100"   class="project-basic-details-container">
-            <h1 id="project-name">{{projectName}}</h1>
-            <p id="display-address">{{project.projectDetails.address.displayAddress}} &nbsp;&nbsp;&nbsp;
-                <span ng-repeat="rate in [1,2,3,4,5] track by $index">
+            <h1 id="project-name">{{projectName}}&nbsp;&nbsp;<span ng-repeat="rate in [1,2,3,4,5] track by $index">
                     <i class="fa fa-star" ng-class="($index<=(allRatings.overallRating-1))?'newGreen':'grey'" id="overall-rating"></i>
                 </span>
-                {{allRatings.overallRatingNum}} Review<span ng-show="allRatings.overallRatingNum > 1">s</span>
-            </p>
+                <span id="review-num">({{allRatings.overallRatingNum}} Review<span ng-show="allRatings.overallRatingNum > 1">s</span>)</span>
+            </h1>
+            <p id="display-address">{{project.projectDetails.address.displayAddress}}</p>
             <div layout="row" layout-wrap id="status-segment">
                 <div flex flex-xs="50" id="status">
                     <i class="fa fa-home"></i>
@@ -58,7 +57,7 @@
                     <p>Area</p>
                 </div>
                 <div flex="80" flex-xs="70" layout="row" id="detail-value">
-                    <p><span>{{minArea}} Sq.Ft.<span><span ng-show="minArea != maxArea"> - {{maxArea}} Sq.Ft.</span></p>
+                    <p>{{minArea}} <span ng-show="minArea != 'NA'">Sq.Ft.<span><span ng-show="minArea != maxArea"> - {{maxArea}} Sq.Ft.</span></p>
                 </div>
             </div>
             <div layout="row" layout-wrap id="detail">
@@ -75,6 +74,14 @@
                 </div>
                 <div flex="80" flex-xs="70" layout="row" id="detail-value" layout-align="start center" layout-wrap>
                     <span flex="33" ng-repeat="prop in propertyTypes" id="property-types">{{prop}}</span>
+                </div>
+            </div>
+            <div layout="row" layout-wrap ng-show="project.standoutFeatures" id="detail">
+                <div flex="20" flex-xs="30" id="detail-title">
+                    <p>Standout Features</p>
+                </div>
+                <div flex="80" flex-xs="70" id="detail-value" layout="row" layout-wrap layout-align="start center">
+                    <span flex="50" flex-xs="100" ng-repeat="feature in project.standoutFeatures" id="feature-name">{{feature.featureName}}</span>
                 </div>
             </div>
             <div layout="row" layout-wrap ng-show="project.amenities" id="detail">
@@ -99,14 +106,6 @@
                     <span flex="100" id="show-more-btn" ng-class="showMoreNotClicked? 'newGreen':'normalGrey'" ng-click="showMoreAmenities()">Show {{amenitiesMoreLess}}</span>
                 </div>
             </div>
-            <div layout="row" layout-wrap ng-show="project.standoutFeatures" id="detail">
-                <div flex="20" flex-xs="30" id="detail-title">
-                    <p>Highlights</p>
-                </div>
-                <div flex="80" flex-xs="70" id="detail-value" layout="row" layout-wrap layout-align="start center">
-                    <span flex="50" flex-xs="100" ng-repeat="feature in project.standoutFeatures" id="feature-name">{{feature.featureName}}</span>
-                </div>
-            </div>
             <div flex="100" ng-show="project.configurations" id="detail">
                 <div layout="row" id="detail-title">
                     <div flex="25">Unit Types</div>
@@ -116,7 +115,7 @@
                 </div>
                 <div layout="row" ng-repeat="config in configurations | orderBy: 'bhk'" id="detail-value">
                     <div flex="25">{{config.bhk}} BHK {{config.unit}}</div>
-                    <div flex="25">{{config.superBuiltArea}} Sq. Ft.</div>
+                    <div flex="25">{{config.superBuiltAreaMin}} Sq. Ft. <span ng-show="config.superBuiltAreaMin != config.superBuiltAreaMax">- {{config.superBuiltAreaMax}} Sq. Ft.</span></div>
                     <div flex="25"><span ng-show="config.buyMin != 'NA'">&#8377;</span>{{config.buyMin}} <span ng-show="config.buyMin != config.buyMax">- &#8377;{{config.buyMax}}</span></div>
                     <div flex="25"><span ng-show="config.rentMin != 'NA'">&#8377;</span>{{config.rentMin}} <span ng-show="config.rentMin != config.rentMax">- &#8377;{{config.rentMax}}</span></div>
                 </div>

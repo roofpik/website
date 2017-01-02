@@ -6,9 +6,11 @@
                     <div class="featured-caption">
                         <div class="featured-caption-content">
                             <h2>{{blog.title}}</h2>
-                            <div id="place-name"><span ng-show="blog.placeName">{{blog.placeName}}</span><time>{{blog.createdDate | date:'MMM dd, yy'}}</time></div>
+                            <div id="place-name"><span ng-show="blog.placeName">{{blog.placeName}}</span>
+                                <time>{{blog.createdDate | date:'MMM dd, yy'}}</time>
+                            </div>
                             <ul class="featured-tags">
-                                <li ng-repeat="tag in blog.hashtags" ng-click="getRelatedBlogs(tag.tagId)"><a href="#">#{{tag.tag}}</a></li>
+                                <li ng-repeat="tag in blog.hashtags"><a ng-href="/#/blog/gurgaon/{{cityId}}/2/{{tag.tagId}}">#{{tag.tag}}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -21,7 +23,7 @@
                     <md-card-content>
                         <p ng-bind-html="toTrustedHTML(blog.details)">
                         </p>
-                        <span id="facebook-share" ng-click="shareonfb(blog)"><i class="fa fa-facebook"></i>&nbsp;&nbsp;&nbsp;Share</span>
+                        <span class="facebook-share" ng-click="shareonfb(blog)"><i class="fa fa-facebook"></i>&nbsp;&nbsp;&nbsp;Share</span>
                     </md-card-content>
                 </md-card>
             </div>
@@ -32,14 +34,16 @@
                             <span class="md-title">Popular Blogs</span>
                         </md-card-header-text>
                     </md-card-header>
-                    <article ng-repeat="blog in popularBlogs" ng-click="goToBlogDetails(blog.blogId)">
-                        <img ng-src="{{blog.coverPhoto}}" class="md-card-image" alt="Washed Out" />
-                        <md-card-title>
-                            <md-card-title-text>
-                                <h3>{{blog.title}}</h3>
-                                <span class="md-subhead">{{blog.createdDate | date:'MMM dd, yy'}}</span>
-                            </md-card-title-text>
-                        </md-card-title>
+                    <article ng-repeat="blog in popularBlogs">
+                        <a ng-href="{{blog.redirectionUrl}}">
+                            <img ng-src="{{blog.coverPhoto}}" class="md-card-image" alt="Washed Out" />
+                            <md-card-title>
+                                <md-card-title-text>
+                                    <h3>{{blog.title}}</h3>
+                                    <span class="md-subhead">{{blog.createdDate | date:'MMM dd, yy'}}</span>
+                                </md-card-title-text>
+                            </md-card-title>
+                        </a>
                     </article>
                 </md-card>
                 <md-card class="popular-localities">
@@ -51,7 +55,7 @@
                     <md-card-content>
                         <ul>
                             <li ng-repeat="locality in popularLocalities">
-                                <div><i class="material-icons">&#xE409;</i><span ng-click="getLocalityBlogs(locality.localityId)">{{locality.localityName}}</span></div>
+                                <div><i class="material-icons">&#xE409;</i><a ng-href="/#/blog/gurgaon/{{cityId}}/3/{{locality.localityId}}">{{locality.localityName}}</a></div>
                                 <div class="clearfix"></div>
                             </li>
                         </ul>
@@ -65,7 +69,7 @@
                     </md-card-header>
                     <md-card-content>
                         <div class="tagcloud">
-                            <p class="tag-btn" ng-click="getRelatedBlogs(tag.tagId)" ng-repeat="tag in tagCloudData">#{{tag.tag}}</p>
+                            <a class="tag-btn" ng-href="/#/blog/gurgaon/{{cityId}}/2/{{tag.tagId}}" ng-repeat="tag in tagCloudData">#{{tag.tag}}</a>
                         </div>
                     </md-card-content>
                 </md-card>

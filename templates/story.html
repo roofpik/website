@@ -8,7 +8,7 @@
                             <h3>{{story.title}}</h3>
                             <div id="place-name"><span>{{story.placeName}}</span><time>{{story.createdDate | date:'MMM dd, yy'}}</time></div>
                             <ul class="featured-tags">
-                                <li ng-repeat="tag in story.hashtags" ng-click="getRelatedStories(tag.tagId)"><a href="#">#{{tag.tag}}</a></li>
+                                <li ng-repeat="tag in story.hashtags"><a ng-href="/#/cover-story/gurgaon/{{cityId}}/2/{{tag.tagId}}">#{{tag.tag}}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -39,14 +39,16 @@
                             <span class="md-title">Popular Stories</span>
                         </md-card-header-text>
                     </md-card-header>
-                    <article ng-repeat="story in popularStories" ng-click="goToStoryDetails(story.storyId)">
-                        <img ng-src="{{story.coverPhoto}}" class="md-card-image" alt="Washed Out" />
-                        <md-card-title>
-                            <md-card-title-text>
-                                <span class="md-headline">{{story.title}}</span>
-                                <span class="md-subhead">{{story.placeName}}</span>
-                            </md-card-title-text>
-                        </md-card-title>
+                    <article ng-repeat="story in popularStories">
+                        <a ng-href="{{story.redirectionUrl}}">
+                            <img ng-src="{{story.coverPhoto}}" class="md-card-image" alt="Washed Out" />
+                            <md-card-title>
+                                <md-card-title-text>
+                                    <span class="md-headline">{{story.title}}</span>
+                                    <span class="md-subhead">{{story.placeName}}</span>
+                                </md-card-title-text>
+                            </md-card-title>
+                        </a>
                     </article>
                 </md-card>
                 <md-card class="popular-localities">
@@ -58,7 +60,7 @@
                     <md-card-content>
                         <ul>
                             <li ng-repeat="locality in popularLocalities">
-                                <div><i class="material-icons">&#xE409;</i><span ng-click="getLocalityPosts(locality.localityId)">{{locality.localityName}}</span></div>
+                                <div><i class="material-icons">&#xE409;</i><a ng-href="/#/cover-story/gurgaon/{{cityId}}/3/{{locality.localityId}}">{{locality.localityName}}</a></div>
                                 <div class="clearfix"></div>
                             </li>
                         </ul>
@@ -72,7 +74,7 @@
                     </md-card-header>
                     <md-card-content>
                         <div class="tagcloud">
-                            <p class="tag-btn" ng-click="getRelatedStories(tag.tagId)" ng-repeat="tag in tagCloudData">#{{tag.tag}}</p>
+                            <a class="tag-btn" ng-href="/#/cover-story/gurgaon/{{cityId}}/2/{{tag.tagId}}" ng-repeat="tag in tagCloudData">#{{tag.tag}}</a>
                         </div>
                     </md-card-content>
                 </md-card>

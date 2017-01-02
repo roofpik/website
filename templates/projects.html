@@ -1,5 +1,5 @@
 <md-content class="project-list-page">
-    <div layout="row" flex="80" layout-align="start start" class="project-list-box flex-xs-90 flex-sm-90"  layout-wrap>
+    <div layout="row" flex="80" layout-align="start start" class="project-list-box flex-xs-90 flex-sm-90" layout-wrap>
         <div flex="100" layout="row" style="margin:20px;">
             <div flex="80" style="text-align:left;" class="path-filters">
                 <span class="path-btn" id="home-btn" ng-click="takeToHome()">Home</span>
@@ -10,8 +10,7 @@
                 {{showCount}}/{{numProjects}}
             </div>
         </div>
-
-        <div flex="30" flex-xs="100"  layout="column">
+        <div flex="30" flex-xs="100" layout="column">
             <md-card flex="100">
                 <p id="filter-headings">Project Status</p>
                 <div class="filters">
@@ -97,30 +96,32 @@
                 </div>
             </md-card> -->
         </div>
-        <div flex="70" flex-xs="100"  layout="column">
+        <div flex="70" flex-xs="100" layout="column">
             <md-card ng-show="showCount == 0" class="md-padding">
                 <h2>No projects available</h2>
             </md-card>
             <div ng-show="showCount != 0">
-                <md-card flex="100" layout="row" ng-repeat="project in projects | orderBy: sortByParam" class="project-card" ng-click="selectProject(project.projectId, project.projectName)" ng-show="project.show">
-                    <div flex="25" class="project-profile-img">
-                        <img ng-src="{{project.imgUrl}}" alt="" />
-                    </div>
-                    <div layout="column" class="md-padding" flex="50" flex-xs="75" flex-sm="85" class="project-data">
-                        <h3 id="project-name">{{project.projectName}}</h3>
-                        <h4>{{project.displayAddress}}</h4>
-                        <p class="rating">
-                            <span ng-repeat="rate in [1,2,3,4,5] track by $index">
+                <md-card flex="100" layout="row" ng-repeat="project in projects | orderBy: sortByParam" class="project-card" ng-show="project.show">
+                    <a ng-href="/#/project-details/{{year}}/gurgaon/residential-projects/{{category}}/{{project.displayName}}/{{project.projectId}}" flex="100" layout="row">
+                        <div flex="25" class="project-profile-img">
+                            <img ng-src="{{project.imgUrl}}" alt="" />
+                        </div>
+                        <div layout="column" class="md-padding" flex="50" flex-xs="75" flex-sm="85" class="project-data">
+                            <h3 id="project-name">{{project.projectName}}</h3>
+                            <h4>{{project.displayAddress}}</h4>
+                            <p class="rating">
+                                <span ng-repeat="rate in [1,2,3,4,5] track by $index">
                                 <i class="material-icons" ng-class="($index<=(project.overallRating-1))?'roofGreen':'grey'" style="font-size:12px;">grade</i>
                             </span>{{project.overallRatingNum}} Review<span ng-show="project.overallRatingNum>1">s</span>
-                        </p>
-                        <p class="rank">#{{$index+1}} of {{numProjects}} projects in Gurgaon</p>
-                    </div>
-                    <!-- <div flex="25" layout="column" class="extra-details">
+                            </p>
+                            <p class="rank">#{{$index+1}} of {{numProjects}} projects in Gurgaon</p>
+                        </div>
+                        <!-- <div flex="25" layout="column" class="extra-details">
                         <p><span class="price-headings">BUY : </span>&#8377;{{project.buyMin}} - &#8377;{{project.buyMax}}</p>
                         <p><span class="price-headings">RENT : </span>&#8377;{{project.rentMin}} - &#8377;{{project.rentMax}}</p>
                         <h3>{{project.bhkAvailable}}</h3>
                     </div> -->
+                    </a>
                 </md-card>
             </div>
         </div>
