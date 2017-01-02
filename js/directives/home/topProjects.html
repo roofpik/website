@@ -8,10 +8,10 @@
     <div class="top-projects-loading" flex="80"><img src="images/general/ripple.svg"/></div>
     <div class="projects-wrapper" flex="80">
 
-        <div class="top-project-details" ng-repeat="project in projectList | orderBy:'overallRating'|limitTo:5" ng-click="takeToDetails(project)">
+        <div class="top-project-details" ng-repeat="project in projectList | orderBy:'overallRating'|limitTo:10" ng-click="takeToDetails(project)">
             <figure>
                 <img ng-src="{{project.imgUrl}}"/>
-                <figcaption> #{{$index + 1}} of 8 projects in Gurgaon </figcaption>
+                <figcaption> #{{$index + 1}} of 10 projects in Gurgaon</figcaption>
             </figure>
             <div class="top-project-info">
                 <span class="top-project-name">{{project.projectName}}</span>
@@ -21,6 +21,6 @@
         </div>
     </div>
     <div flex="100" class="center-text Cover mgt3">
-        <md-button class="md-raised md-primary" ng-click="takeToProjects('top-rated')">View Projects</md-button>
+        <md-button class="md-raised md-primary" ng-click="takeToProjects('top-rated')">View All Projects</md-button>
     </div>
 </section>

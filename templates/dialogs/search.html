@@ -14,7 +14,7 @@
                 <input type="text" placeholder="Search by project, builder, landmark or locality" ng-model="searchText" ng-change="printSearchText()" autofocus="true"/>
             </div>
             <md-list flex="100">
-                <md-list-item class="md-3-line search-item" ng-click="selectItem(item)" class="" ng-repeat="item in searchList | filter:searchText | limitTo:'10'" ng-show="{{item.show}}">
+                <md-list-item class="md-3-line search-item" ng-click="selectItem(item)" class="" ng-repeat="item in searchList | filter:searchText | orderBy:['-show', '-type']| limitTo:10" ng-show="{{item.show}}">
                     <img ng-src="{{item.img}}" class="imgsrh" ng-show="item.img"/>
                     <img ng-src="/images/general/default.jpg" ng-hide="item.img" class="imgsrh" />
                     <div class="md-list-item-text" layout="column">
