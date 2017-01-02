@@ -4,34 +4,25 @@
             <div flex="33" flex-xs="100"  class="rf-footer">
                 <h3>Roofpik</h3>
                 <ul>
-                    <li ng-click="takeToPage('about-us')">
-                        About
+                    <li>
+                        <a ng-href="/#/about-us">About</a>
                     </li>
                     <!--                     <li>
                         Career
                     </li> -->
-                    <li ng-click="takeToPage('faq')">
-                        FAQ's
+                    <li>
+                        <a ng-href="/#/faq">FAQ's</a>
                     </li>
-                    <li ng-click="takeToPage('contact-us')">
-                        Contact Us
+                    <li>
+                        <a ng-href="/#/contact-us">Contact Us</a>
                     </li>
                 </ul>
             </div>
             <div flex="33" flex-xs="100" class="rf-footer">
                 <h3>Localities</h3>
                 <ul>
-                    <li ng-click="takeToLocalityProjects('Sohna Road')">
-                        Sohna Road
-                    </li>
-                    <li ng-click="takeToLocalityProjects('Golf Course Road')">
-                        Golf Course Road
-                    </li>
-                    <li ng-click="takeToLocalityProjects('Golf Course Road Extn.')">
-                        Golf Course Extn Road
-                    </li>
-                    <li ng-click="takeToLocalityProjects('Dwarka Expressway')">
-                        Dwarka Expressway
+                    <li ng-repeat="locality in localities">
+                        <a ng-href="/#/projects/{{year}}/gurgaon/residential-projects/{{locality.category}}/{{locality.id}}/3">{{locality.name}}</a>
                     </li>
                 </ul>
             </div>

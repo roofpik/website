@@ -293,6 +293,10 @@
     margin: 10px 0;
 }
 
+.search-item a {
+    text-decoration:none;
+}
+
 .your-class {
     background: #fff;
     color: #3498db;
@@ -348,6 +352,11 @@
 .top-project-details{
     margin:0 10px;
     cursor: pointer;
+}
+
+.top-project-details a{
+    text-decoration: none;
+    color:#484848;
 }
 
 .projects-wrapper .top-project-details figure {
@@ -435,4 +444,9 @@
 
 .blog-details .blog-info span{
     display: block;
+}
+
+.top-projects #projects-btn a {
+    text-decoration:none;
+    color:#fff;
 }

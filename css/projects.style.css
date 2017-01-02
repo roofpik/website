@@ -12,6 +12,10 @@
     cursor:pointer;
 }
 
+.project-list-page .project-card a {
+    text-decoration:none;
+}
+
 .project-list-page .project-profile-img {
     padding:5px 0 0;
 }

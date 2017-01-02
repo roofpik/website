@@ -335,6 +335,11 @@ header {
     -webkit-transition: margin-left 0.2s linear;
 }
 
+.header .main-menu .user-menu-list-item-span a {
+    text-decoration: none;
+    color:#484848;
+}
+
 .header .main-menu .user-menu-list-item:hover .user-menu-list-item-span {
     -webkit-transition: margin-left 0.2s linear;
     margin-left: 5px;
@@ -390,6 +395,11 @@ footer .bottom-footer ul li {
     padding: 0 5px;
     position: relative;
     vertical-align: middle;
+}
+
+.footer .rf-footer ul li a{
+    text-decoration:none;
+    color:#484848;
 }
 
 

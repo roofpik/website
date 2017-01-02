@@ -79,12 +79,4 @@ app.controller('headerCtrl', function($scope, $mdDialog, $state, $rootScope, $ti
             });
     }
 
-    $scope.takeToProfile = function() {
-        $state.go('profile');
-    };
-
-    $scope.takeToMyReviews = function() {
-        $state.go('user-all-reviews');
-    };    
-
 });

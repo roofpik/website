@@ -10,7 +10,6 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.featuredBlogs = [];
     $scope.popularBlogs = {};
-    console.log($stateParams);
 
     db.ref('featuredBlogs/' + $scope.cityId).once('value', function(data) {
         $timeout(function() {
@@ -82,9 +81,7 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
     }
 
     $scope.getRelatedBlogs = function(tag) {
-        console.log(tag);
         db.ref('blogs/hashtags/' + tag + '/blogs').once('value', function(snapshot) {
-            console.log(snapshot.val());
             $timeout(function() {
                 if (snapshot.val()) {
                     var blogCount = 0;
