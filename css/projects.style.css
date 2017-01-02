@@ -9,6 +9,11 @@
 
  .project-list-page .project-card {
     padding:20px;
+    cursor:pointer;
+}
+
+.project-list-page .project-card a {
+    text-decoration:none;
 }
 
 .project-list-page .project-profile-img {
@@ -156,6 +161,10 @@
 
 .project-list-page .path-filters span.path-btn {
     display: inline-block;
+}
+
+.project-list-page .path-filters #home-btn {
+    cursor:pointer;
 }
 
 .project-list-page .path-filters span.path-btn:nth-child(even) {

@@ -27,6 +27,7 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, 
     $scope.projects = [];
     $scope.dataVersions = {};
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
+    $scope.year = new Date().getFullYear();
 
     if($stateParams.category == 'family'){
       $scope.category = 'family';
@@ -63,11 +64,13 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, 
       if($stateParams.id == 1){
         for(key in projectList){
             projectList[key].show= true;
+            projectList[key].displayName = convertToHyphenSeparated(projectList[key].projectName);
             $scope.projects.push(projectList[key]);
         }
         getSortingParam();
       } else if($stateParams.id == 2){
         for(key in projectList){
+          projectList[key].displayName = convertToHyphenSeparated(projectList[key].projectName);
           if(projectList[key].builderId == $stateParams.categoryId){
             projectList[key].show= true;
             $scope.projects.push(projectList[key]);
@@ -76,6 +79,7 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, 
         $scope.filterPath = ["Gurgaon",">","Residential",">", convertHyphenSeparatedToNormal($stateParams.category)];
       } else if($stateParams.id == 3){
         for(key in projectList){
+          projectList[key].displayName = convertToHyphenSeparated(projectList[key].projectName);
           if(projectList[key].localityId == $stateParams.categoryId){
             projectList[key].show= true;
             $scope.projects.push(projectList[key]);

@@ -17,27 +17,23 @@ app.directive('footer', function() {
             // Your behaviour goes here :
             $rootScope.$watch('localStorageCount', function() {
                 if ($rootScope.localStorageCount == 2) {
-                    var year = new Date().getFullYear();
+                    $scope.year = new Date().getFullYear();
                     $scope.localities = {};
-                    // $scope.searchList = getLocalStorage('searchList').value;
-                    // getLocalities($scope.searchList);
+                    $scope.searchList = getLocalStorage('searchList').value;
+                    getLocalities($scope.searchList);
 
                     function getLocalities(list) {
                         for (key in list) {
                             if (list[key].type == 'Locality') {
-                                $scope.localities[list[key].name] = list[key].id;
+                                $scope.localities[list[key].id] = {};
+                                $scope.localities[list[key].id] = {
+                                    id: list[key].id,
+                                    name: list[key].name,
+                                    category: convertToHyphenSeparated(list[key].name)
+                                };
                             }
                         }
                     }
-                    $scope.takeToLocalityProjects = function(val) {
-                        var valId = $scope.localities[val];
-                        $state.go('projects', { year: year, city: 'gurgaon', type: 'residential-projects', category: convertToHyphenSeparated(val), categoryId: valId, id: 3 });
-                    }
-
-                    $scope.takeToPage = function(val){
-                        $state.go(val);
-                    }
-
                 }
             });
 

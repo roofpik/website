@@ -72,7 +72,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 
     $stateProvider
         .state('story', {
-            url: '/story/:id',
+            url: '/story/:city/:place/:title/:id',
             templateUrl: 'templates/story.html',
             controller: 'storyCtrl'
         });
@@ -93,7 +93,14 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 
     $stateProvider
         .state('blog-details', {
-            url: '/blog-details/:id',
+            url: '/blog-details/:city/:title/:id',
+            templateUrl: 'templates/blog-details.html',
+            controller: 'blogDetailsCtrl'
+        });
+
+    $stateProvider
+        .state('blog-detail', {
+            url: '/blog-detail/:city/:place/:title/:id',
             templateUrl: 'templates/blog-details.html',
             controller: 'blogDetailsCtrl'
         });

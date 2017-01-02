@@ -4,7 +4,7 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $stateParams, $sce,
         url: $location.path()
     }
     UserTokenService.checkToken(urlInfo, timestamp, 1);
-    
+    console.log($stateParams);
 	$scope.currentStory = {};
 	$scope.cityId ='-KYJONgh0P98xoyPPYm9';
 	$scope.popularBlogs = {};
@@ -12,6 +12,12 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $stateParams, $sce,
 	db.ref('blogs/allBlogs/'+$scope.cityId+'/'+$stateParams.id).once('value', function(snapshot){
 		$timeout(function(){
 			$scope.blog = snapshot.val();
+        	if($scope.blog.placeId){
+				$scope.blog.redirectionUrl ='/#/blog-detail/gurgaon/'+'/'+convertToHyphenSeparated($scope.blog.placeName)+'/'+convertToHyphenSeparated($scope.blog.title)+'/'+$scope.blog.blogId;
+        	} else {
+				$scope.blog.redirectionUrl ='/#/blog-details/gurgaon/'+convertToHyphenSeparated($scope.blog.title)+'/'+$scope.blog.blogId;
+        	}
+			$scope.blog.redirectionUrl = $scope.blog.redirectionUrl.replace(/[?=]/g, "");
 			$scope.blog.coverPhoto = 'http://cdn.roofpik.com/roofpik/blogs/allBlogs/'+$scope.cityId+'/'+$scope.blog.blogId+'/coverPhoto/'+$scope.blog.coverPhoto+'-l.jpg'
 			loading(false);
 		},0);
@@ -22,6 +28,12 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $stateParams, $sce,
             if (snapshot.val()) {
                 var blogData = snapshot.val();
                 for(key in blogData){
+                	if(blogData[key].placeId){
+    					blogData[key].redirectionUrl ='/#/blog-detail/gurgaon/'+'/'+convertToHyphenSeparated(blogData[key].placeName)+'/'+convertToHyphenSeparated(blogData[key].title)+'/'+blogData[key].blogId;
+                	} else {
+						blogData[key].redirectionUrl ='/#/blog-details/gurgaon/'+convertToHyphenSeparated(blogData[key].title)+'/'+blogData[key].blogId;
+                	}
+                	blogData[key].redirectionUrl = blogData[key].redirectionUrl.replace(/[?=]/g, "");
                     blogData[key].coverPhoto = 'http://cdn.roofpik.com/roofpik/blogs/allBlogs/'+$scope.cityId+'/'+blogData[key].blogId+'/coverPhoto/'+blogData[key].coverPhoto+'-m.jpg';
                     $scope.popularBlogs[key] = blogData[key];
                 }
@@ -47,18 +59,6 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $stateParams, $sce,
 		return $sce.trustAsHtml( html );
 	}
 
-	$scope.goToBlogDetails = function(id){
-		$state.go('blog-details', {id: id});
-	}
-
-	$scope.getLocalityBlogs = function(locality){
-		$state.go('blog', {city:'gurgaon', cityId: $scope.cityId, from:3, fromId: locality});
-	}
-
-	$scope.getRelatedBlogs = function(tag){
-		$state.go('blog', {city:'gurgaon', cityId: $scope.cityId, from:2, fromId: tag});
-	}
-
 	$scope.shareonfb = function(blog) {
 	    var hashtag = '';
 	    for (key in blog.hashtags) {
@@ -67,12 +67,10 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $stateParams, $sce,
 	    FB.ui({
 	        method: 'feed',
 	        name: blog.blogTitle,
-	        link: 'http://roofpik.com/#/blog/' + blog.blogId,
+	        link: 'http://roofpik.com'+blog.redirectionUrl,
 	        picture: blog.coverPhoto,
 	        caption: hashtag,
 	        description: blog.adminName
 	    });
 	}
-
-	loading(false);
 })
