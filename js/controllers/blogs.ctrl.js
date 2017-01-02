@@ -142,6 +142,7 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
     }
 
     $scope.shareonfb = function(blog) {
+        console.log(blog);
         var hashtag = '';
         for (key in blog.hashtags) {
             hashtag += ' #' + blog.hashtags[key].tag;
@@ -149,7 +150,7 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
         FB.ui({
             method: 'feed',
             name: blog.blogTitle,
-            link: 'http://roofpik.com/#/blog/' + blog.blogId,
+            link: 'http://roofpik.com'+blog.redirectionUrl,
             picture: blog.coverPhoto,
             caption: hashtag,
             description: blog.adminName

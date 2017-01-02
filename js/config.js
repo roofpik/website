@@ -99,6 +99,13 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         });
 
     $stateProvider
+        .state('blog-detail', {
+            url: '/blog-detail/:city/:place/:title/:id',
+            templateUrl: 'templates/blog-details.html',
+            controller: 'blogDetailsCtrl'
+        });
+
+    $stateProvider
         .state('about-us', {
             url: '/about-us',
             templateUrl: 'templates/about-us.html',

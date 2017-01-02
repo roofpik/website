@@ -14,6 +14,8 @@ app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $stat
     db.ref('coverStory/stories/'+ $scope.cityId + '/' + $stateParams.id).once('value', function(snapshot) {
         $timeout(function() {
             $scope.story = snapshot.val();
+            $scope.story.redirectionUrl = '/#/story/gurgaon/'+convertToHyphenSeparated($scope.story.placeName)+'/'+convertToHyphenSeparated($scope.story.title)+'/'+$scope.story.storyId;
+            $scope.story.redirectionUrl = $scope.story.redirectionUrl.replace(/[?=]/g, "");
             $scope.story.coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/' + $scope.cityId + '/' + $scope.story.storyId + '/coverPhoto/' + $scope.story.coverPhoto + '-m.jpg';
             loading(false);
         }, 50);
@@ -63,7 +65,7 @@ app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $stat
     FB.ui({
         method: 'feed',
         name: story.storyTitle,
-        link: 'http://roofpik.com/#/story/'+story.storyId,
+        link: 'http://roofpik.com'+story.redirectionUrl,
         picture: story.coverPhoto,
         caption: story.placeName,
         description: story.userName
