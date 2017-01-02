@@ -15,6 +15,8 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
     $timeout(function(){
       if(data.val()){
         angular.forEach(data.val(), function(value, key){
+          value.redirectionUrl = '/#/story/gurgaon/'+convertToHyphenSeparated(value.placeName)+'/'+convertToHyphenSeparated(value.title)+'/'+value.storyId;
+          value.redirectionUrl = value.redirectionUrl.replace(/[?=]/g, "");
           value.coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/'+$scope.cityId+'/'+value.storyId+'/coverPhoto/'+value.coverPhoto+'-m.jpg';
           $scope.featuredStories.push(value);
         })
@@ -27,6 +29,8 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
       if(snapshot.val()){
         $scope.allStories = snapshot.val();
         angular.forEach($scope.allStories, function(value, key){
+          value.redirectionUrl = '/#/story/gurgaon/'+convertToHyphenSeparated(value.placeName)+'/'+convertToHyphenSeparated(value.title)+'/'+value.storyId;
+          value.redirectionUrl = value.redirectionUrl.replace(/[?=]/g, "");
           value.coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/'+$scope.cityId+'/'+value.storyId+'/coverPhoto/'+value.coverPhoto+'-m.jpg';
           value.selected = true;
         })
@@ -47,10 +51,12 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
     $timeout(function(){
       if(snapshot.val()){
         var coverStoryData = snapshot.val();
-                for(key in coverStoryData){
-                    coverStoryData[key].coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/'+$scope.cityId+'/'+coverStoryData[key].storyId+'/coverPhoto/'+coverStoryData[key].coverPhoto+'-m.jpg';
-                    $scope.popularStories[key] = coverStoryData[key];
-                }
+        for(key in coverStoryData){
+            coverStoryData[key].redirectionUrl = '/#/story/gurgaon/'+convertToHyphenSeparated(coverStoryData[key].placeName)+'/'+convertToHyphenSeparated(coverStoryData[key].title)+'/'+coverStoryData[key].storyId;
+            coverStoryData[key].redirectionUrl = coverStoryData[key].redirectionUrl.replace(/[?=]/g, "");
+            coverStoryData[key].coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/'+$scope.cityId+'/'+coverStoryData[key].storyId+'/coverPhoto/'+coverStoryData[key].coverPhoto+'-m.jpg';
+            $scope.popularStories[key] = coverStoryData[key];
+        }
       }
     },0);
   })

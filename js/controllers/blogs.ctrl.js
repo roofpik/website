@@ -15,6 +15,8 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
         $timeout(function() {
             if (data.val()) {
                 angular.forEach(data.val(), function(value, key) {
+                    value.redirectionUrl ='/#/blog-details/gurgaon/'+convertToHyphenSeparated(value.title)+'/'+value.blogId;
+                    value.redirectionUrl = value.redirectionUrl.replace(/[?=]/g, "");
                     value.coverPhoto = 'http://cdn.roofpik.com/roofpik/blogs/allBlogs/'+$scope.cityId+'/'+value.blogId+'/coverPhoto/'+value.coverPhoto+'-m.jpg';
                     $scope.featuredBlogs.push(value);
                 })
@@ -27,6 +29,8 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
             if (snapshot.val()) {
                 $scope.allBlogs = snapshot.val();
                 angular.forEach($scope.allBlogs, function(value, key) {
+                    value.redirectionUrl ='/#/blog-details/gurgaon/'+convertToHyphenSeparated(value.title)+'/'+value.blogId;
+                    value.redirectionUrl = value.redirectionUrl.replace(/[?=]/g, "");
                     value.coverPhoto = 'http://cdn.roofpik.com/roofpik/blogs/allBlogs/'+$scope.cityId+'/'+value.blogId+'/coverPhoto/'+value.coverPhoto+'-m.jpg';
                     value.selected = true;
                 })
@@ -48,6 +52,8 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
             if (snapshot.val()) {
                 var blogData = snapshot.val();
                 for(key in blogData){
+                    blogData[key].redirectionUrl ='/#/blog-details/gurgaon/'+convertToHyphenSeparated(blogData[key].title)+'/'+blogData[key].blogId;
+                    blogData[key].redirectionUrl = blogData[key].redirectionUrl.replace(/[?=]/g, "");
                     blogData[key].coverPhoto = 'http://cdn.roofpik.com/roofpik/blogs/allBlogs/'+$scope.cityId+'/'+blogData[key].blogId+'/coverPhoto/'+blogData[key].coverPhoto+'-m.jpg';
                     $scope.popularBlogs[key] = blogData[key];
                 }

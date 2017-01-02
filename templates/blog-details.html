@@ -35,7 +35,7 @@
                         </md-card-header-text>
                     </md-card-header>
                     <article ng-repeat="blog in popularBlogs">
-                        <a ng-href="/#/blog-details/{{blog.blogId}}">
+                        <a ng-href="{{blog.redirectionUrl}}">
                             <img ng-src="{{blog.coverPhoto}}" class="md-card-image" alt="Washed Out" />
                             <md-card-title>
                                 <md-card-title-text>

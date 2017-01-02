@@ -3,7 +3,7 @@
         <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="header-blog">
             <article flex="50" flex-xs="100" flex-sm="100">
                 <div class="featured-blog" style="background-image:url({{featuredBlogs[0].coverPhoto}});">
-                    <a ng-href="/#/blog-details/{{featuredBlogs[0].blogId}}">
+                    <a ng-href="{{featuredBlogs[0].redirectionUrl}}">
                         <div class="featured-caption">
                             <div class="featured-caption-content">
                                 <h2>{{featuredBlogs[0].title}}</h2>
@@ -20,7 +20,7 @@
             </article>
             <article flex="50" flex-xs="100" flex-sm="100">
                 <div class="featured-blog" style="background-image:url({{featuredBlogs[1].coverPhoto}});">
-                    <a ng-href="/#/blog-details/{{featuredBlogs[1].blogId}}">
+                    <a ng-href="{{featuredBlogs[1].redirectionUrl}}">
                         <div class="featured-caption">
                             <div class="featured-caption-content">
                                 <h2>{{featuredBlogs[1].title}}</h2>
@@ -63,7 +63,7 @@
                         </p>
                         <p>
                             <span class="facebook-share " ng-click="shareonfb(blog) "><i class="fa fa-facebook "></i>&nbsp;&nbsp;&nbsp;Share</span>
-                            <span id="showMoreBtn"><a ng-href="/#/blog-details/{{blog.blogId}}">Show More</a></span>
+                            <span id="showMoreBtn"><a ng-href="{{blog.redirectionUrl}}">Show More</a></span>
                         </p>
                     </md-card-content>
                 </md-card>
@@ -76,7 +76,7 @@
                         </md-card-header-text>
                     </md-card-header>
                     <article ng-repeat="blog in popularBlogs ">
-                    <a ng-href="/#/blog-details/{{blog.blogId}} ">
+                    <a ng-href="{{blog.redirectionUrl}}">
                         <img ng-src="{{blog.coverPhoto}} " class="md-card-image " alt="Washed Out " />
                         <md-card-title>
                             <md-card-title-text>

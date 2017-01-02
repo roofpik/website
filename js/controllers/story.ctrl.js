@@ -24,6 +24,8 @@ app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $stat
             if (snapshot.val()) {
                 var coverStoryData = snapshot.val();
                 for (key in coverStoryData) {
+                    coverStoryData[key].redirectionUrl = '/#/story/gurgaon/'+convertToHyphenSeparated(coverStoryData[key].placeName)+'/'+convertToHyphenSeparated(coverStoryData[key].title)+'/'+coverStoryData[key].storyId;
+                    coverStoryData[key].redirectionUrl = coverStoryData[key].redirectionUrl.replace(/[?=]/g, "");
                     coverStoryData[key].coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/' + $scope.cityId + '/' + coverStoryData[key].storyId + '/coverPhoto/' + coverStoryData[key].coverPhoto + '-m.jpg';
                     $scope.popularStories[key] = coverStoryData[key];
                 }

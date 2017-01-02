@@ -40,7 +40,7 @@
                         </md-card-header-text>
                     </md-card-header>
                     <article ng-repeat="story in popularStories">
-                        <a ng-href="/#/story/{{story.storyId}}">
+                        <a ng-href="{{story.redirectionUrl}}">
                             <img ng-src="{{story.coverPhoto}}" class="md-card-image" alt="Washed Out" />
                             <md-card-title>
                                 <md-card-title-text>

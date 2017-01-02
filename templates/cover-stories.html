@@ -3,7 +3,7 @@
         <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="header-story">
             <article flex="50" flex-xs="100" flex-sm="100">
                 <div class="featured-story" style="background-image:url({{featuredStories[0].coverPhoto}});">
-                    <a ng-href="/#/story/{{featuredStories[0].storyId}}">
+                    <a ng-href="{{featuredStories[0].redirectionUrl}}">
                         <div class="featured-caption">
                             <div class="featured-caption-content">
                                 <h3>{{featuredStories[0].title}}</h3>
@@ -20,7 +20,7 @@
             </article>
             <article flex="50" flex-xs="100" flex-sm="100">
                 <div class="featured-story" style="background-image:url({{featuredStories[1].coverPhoto}});" ng-click="goToStoryDetails(featuredStories[1].storyId)">
-                    <a ng-href="/#/story/{{featuredStories[0].storyId}}">
+                    <a ng-href="{{featuredStories[0].redirectionUrl}}">
                         <div class="featured-caption">
                             <div class="featured-caption-content">
                                 <h3>{{featuredStories[1].title}}</h3>
@@ -62,7 +62,7 @@
                         <p ng-bind-html="toTrustedHTML(story.shortStory)">
                         </p>
                         <span id="facebook-share" ng-click="shareonfb(story)"><i class="fa fa-facebook"></i>&nbsp;&nbsp;&nbsp;Share</span>
-                        <span id="showMoreBtn"><a ng-href="/#/story/{{story.storyId}}">Show More</a></span>
+                        <span id="showMoreBtn"><a ng-href="{{story.redirectionUrl}}">Show More</a></span>
                     </md-card-content>
                     <md-card-header>
                         <md-card-header-text layout-align="end center" layout="row">
@@ -83,7 +83,7 @@
                         </md-card-header-text>
                     </md-card-header>
                     <article ng-repeat="story in popularStories">
-                        <a ng-href="/#/story/{{story.storyId}}">
+                        <a ng-href="{{story.redirectionUrl}}">
                             <img ng-src="{{story.coverPhoto}}" class="md-card-image" alt="Washed Out" />
                             <md-card-title>
                                 <md-card-title-text>
