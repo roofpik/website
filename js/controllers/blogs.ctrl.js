@@ -10,6 +10,7 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.featuredBlogs = [];
     $scope.popularBlogs = {};
+    console.log($stateParams);
 
     db.ref('featuredBlogs/' + $scope.cityId).once('value', function(data) {
         $timeout(function() {
@@ -34,9 +35,9 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
                 $scope.showNoBlogs = true;
             }
             if ($stateParams.from == 3) {
-                $scope.getLocalityBlogs($stateParams.id);
+                $scope.getLocalityBlogs($stateParams.fromId);
             } else if ($stateParams.from == 2) {
-                $scope.getRelatedBlogs($stateParams.id);
+                $scope.getRelatedBlogs($stateParams.fromId);
             } else if ($stateParams.from == 1) {
                 $scope.showAllBlogs();
             }
@@ -81,7 +82,9 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
     }
 
     $scope.getRelatedBlogs = function(tag) {
+        console.log(tag);
         db.ref('blogs/hashtags/' + tag + '/blogs').once('value', function(snapshot) {
+            console.log(snapshot.val());
             $timeout(function() {
                 if (snapshot.val()) {
                     var blogCount = 0;
@@ -135,10 +138,6 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
         loading(false);
     }
 
-    $scope.goToBlogDetails = function(id) {
-        $state.go('blog-details', { id: id });
-    }
-
     $scope.shareonfb = function(blog) {
         var hashtag = '';
         for (key in blog.hashtags) {
@@ -153,7 +152,4 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
             description: blog.adminName
         });
     }
-
-    loading(false);
-
 })

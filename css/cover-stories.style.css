@@ -183,6 +183,7 @@
 .cover-stories #showMoreBtn {
     float:right;
     color:#006699;
+    cursor: pointer;
 }
 
 .cover-stories #user-img {
@@ -256,4 +257,10 @@
     color: #fff;
     padding: 4px 10px;
     border-radius: 3px;
+}
+
+.cover-stories .popular-localities ul li,
+.cover-stories .popular-stories article,
+.cover-stories .story-tag {
+    cursor:pointer;
 }

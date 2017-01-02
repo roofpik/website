@@ -347,6 +347,7 @@
 
 .top-project-details{
     margin:0 10px;
+    cursor: pointer;
 }
 
 .projects-wrapper .top-project-details figure {

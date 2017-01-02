@@ -5,7 +5,7 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTok
     $scope.localities = {};
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     var year = new Date().getFullYear();
-     ga('set', 'page', '/home.html');
+    ga('set', 'page', '/home.html');
     ga('send', 'pageview');
 
     var timestamp = new Date().getTime();

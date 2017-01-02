@@ -181,6 +181,10 @@
 
 .blogs #showMoreBtn {
     float:right;
+}
+.blogs #showMoreBtn a {
+    cursor: pointer;
+    text-decoration:none;
     color:#006699;
 }
 
@@ -230,16 +234,19 @@
     font-size:16px !important;
 }
 
-.blogs .tagcloud p.tag-btn {
+.blogs .tagcloud a.tag-btn {
     display: inline-block;
     color: #484848;
     background-color:#f2f2f2;
+    text-decoration:none;
+    cursor:pointer;
 }
 
 .blogs .blog-tags .blog-tag {
     margin:4px 10px;
     font-weight:bold;
     color:#1c8097;
+    text-decoration:none;
 }
 
 .blogs .popular-localities md-card-header,
@@ -250,9 +257,21 @@
     font-weight: 600;
 }
 
-.blogs #facebook-share {
+.blogs .facebook-share {
     background-color: #4267b2;
     color: #fff;
     padding: 4px 10px;
     border-radius: 3px;
+}
+
+.blogs .popular-localities ul li,
+.blogs .popular-blogs article,
+.blogs .blog-tag {
+    cursor:pointer;
+}
+
+.blogs .popular-blogs a,
+.blogs .popular-localities a {
+    text-decoration: none;
+    color:#484848;
 }

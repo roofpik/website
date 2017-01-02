@@ -194,6 +194,11 @@ header {
 .header .main-menu .menu-item {
     border-left: 1px solid #dce0e0;
     cursor:pointer;
+    text-decoration:none;
+    color:#484848;
+}
+.header .main-menu .menu-item:focus {
+    outline: none;
 }
 
 .header .main-menu .menu-item:hover{

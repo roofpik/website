@@ -47,18 +47,6 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $stateParams, $sce,
 		return $sce.trustAsHtml( html );
 	}
 
-	$scope.goToBlogDetails = function(id){
-		$state.go('blog-details', {id: id});
-	}
-
-	$scope.getLocalityBlogs = function(locality){
-		$state.go('blog', {city:'gurgaon', cityId: $scope.cityId, from:3, fromId: locality});
-	}
-
-	$scope.getRelatedBlogs = function(tag){
-		$state.go('blog', {city:'gurgaon', cityId: $scope.cityId, from:2, fromId: tag});
-	}
-
 	$scope.shareonfb = function(blog) {
 	    var hashtag = '';
 	    for (key in blog.hashtags) {
@@ -73,6 +61,4 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $stateParams, $sce,
 	        description: blog.adminName
 	    });
 	}
-
-	loading(false);
 })
