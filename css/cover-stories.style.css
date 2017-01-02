@@ -145,10 +145,10 @@
     margin-left: -18px;
 }
 
-.cover-stories .popular-localities ul li span {
-    color: #111111;
+.cover-stories .popular-stories a,
+.cover-stories .popular-localities a {
     text-decoration: none;
-    vertical-align: top;
+    color:#484848;
 }
 
 .cover-stories .popular-stories md-card-title {
@@ -182,9 +182,13 @@
 
 .cover-stories #showMoreBtn {
     float:right;
-    color:#006699;
-    cursor: pointer;
 }
+.cover-stories #showMoreBtn a {
+    cursor: pointer;
+    text-decoration:none;
+    color:#006699;
+}
+
 
 .cover-stories #user-img {
     border-radius:50%;
@@ -232,16 +236,19 @@
     font-size:16px !important;
 }
 
-.cover-stories .tagcloud p.tag-btn {
+.cover-stories .tagcloud a.tag-btn {
     display: inline-block;
     color: #484848;
     background-color:#f2f2f2;
+    text-decoration:none;
+    cursor:pointer;
 }
 
 .cover-stories .story-tags .story-tag {
     margin:4px 10px;
     font-weight:bold;
     color:#1c8097;
+    text-decoration:none;
 }
 
 .cover-stories .popular-localities md-card-header,

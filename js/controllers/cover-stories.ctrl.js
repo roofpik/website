@@ -5,6 +5,7 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
         url: $location.path()
     }
   UserTokenService.checkToken(urlInfo, timestamp, 1);
+  console.log($stateParams);
     
   $scope.showNoStories = false;
   $scope.featuredStories = [];
@@ -81,7 +82,9 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
   }
 
   $scope.getRelatedStories = function(tag){
+    console.log(tag);
     db.ref('coverStory/hashtags/'+tag+'/stories').once('value', function(snapshot){
+      console.log(snapshot.val());
       $timeout(function(){
         if(snapshot.val()){
           var storyCount = 0;
@@ -114,6 +117,7 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
   }
 
   $scope.getLocalityPosts = function(locality){
+    console.log(locality);
     var count = 0;
     var localityStoryCount = 0;
     angular.forEach($scope.allStories, function(value, key){
@@ -135,10 +139,6 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
     loading(false);
   }
 
-  $scope.goToStoryDetails = function(id){
-    $state.go('story', {id: id});
-  }
-
   $scope.shareonfb = function(story){
     FB.ui({
         method: 'feed',
@@ -149,6 +149,4 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
         description: story.userName
     });
   }
-  loading(false);
-
 })

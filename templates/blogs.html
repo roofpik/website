@@ -11,7 +11,7 @@
                                     <time>{{featuredBlogs[0].createdDate | date:'MMM dd, yy'}}</time>
                                 </div>
                                 <ul class="featured-tags">
-                                    <li ng-repeat="tag in featuredBlogs[0].hashtags"><a href="#">#{{tag.tag}}</a></li>
+                                    <li ng-repeat="tag in featuredBlogs[0].hashtags"><a ng-href="/#/blog/gurgaon/{{cityId}}/2/{{tag.tagId}}">#{{tag.tag}}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -28,7 +28,7 @@
                                     <time>{{featuredBlogs[1].createdDate | date:'MMM dd, yy'}}</time>
                                 </div>
                                 <ul class="featured-tags">
-                                    <li ng-repeat="tag in featuredBlogs[1].hashtags"><a href="#">#{{tag.tag}}</a></li>
+                                    <li ng-repeat="tag in featuredBlogs[1].hashtags"><a ng-href="/#/blog/gurgaon/{{cityId}}/2/{{tag.tagId}}">#{{tag.tag}}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row " layout-align="start center " class="blog-tags ">
-                        <a class="blog-tag " ng-repeat="tag in blog.hashtags " ng-href="/#/blog/gurgaon/{{cityId}}/2/{{tag.tagId}} ">#{{tag.tag}}</a>
+                        <a class="blog-tag " ng-repeat="tag in blog.hashtags " ng-href="/#/blog/gurgaon/{{cityId}}/2/{{tag.tagId}}">#{{tag.tag}}</a>
                     </md-card-actions>
                     <md-card-content>
                         <p ng-bind-html="toTrustedHTML(blog.shortBlog) ">
