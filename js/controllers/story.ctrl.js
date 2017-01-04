@@ -35,7 +35,7 @@ app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $stat
         }, 0);
     })
 
-    db.ref('tagCloud').once('value', function(snapshot) {
+    db.ref('tagCloud/'+$scope.cityId+'/coverStory').once('value', function(snapshot) {
         $timeout(function() {
             if (snapshot.val()) {
                 $scope.tagCloudData = snapshot.val();

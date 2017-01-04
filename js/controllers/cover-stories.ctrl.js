@@ -60,7 +60,7 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
       }
     },0);
   })
-  db.ref('tagCloud').once('value', function(snapshot){
+  db.ref('tagCloud/'+$scope.cityId+'/coverStory').once('value', function(snapshot){
     $timeout(function(){
       if(snapshot.val()){
         $scope.tagCloudData = snapshot.val();
