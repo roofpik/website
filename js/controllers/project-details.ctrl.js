@@ -326,7 +326,6 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
                     example[configs[key].bhk + '2'] = data;
                 }
             } else {
-
                 var data = {
                     unit: configs[key].unit,
                     bhk: configs[key].bhk,
@@ -363,10 +362,9 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
                             data.rentMin = data.rentMax;
                         }
                     }
-                    example[configs[key].bhk] = data;
                 }
+                example[configs[key].bhk] = data;
             }
-            console.log(example);
         }
 
         for(key in example){
@@ -412,7 +410,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
                     imageData.push(newImage);
                 }
             }
-            console.log(imageData);
+            // console.log(imageData);
         }
         $rootScope.$broadcast('initGallery', imageData);
     }
