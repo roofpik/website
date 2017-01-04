@@ -16,7 +16,7 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
             if (data.val()) {
                 angular.forEach(data.val(), function(value, key) {
                     if(value.placeId){
-                        value.redirectionUrl ='/#/blog-detail/gurgaon/'+'/'+convertToHyphenSeparated(value.placeName)+'/'+convertToHyphenSeparated(value.title)+'/'+value.blogId;
+                        value.redirectionUrl ='/#/blog-detail/gurgaon/'+convertToHyphenSeparated(value.placeName)+'/'+convertToHyphenSeparated(value.title)+'/'+value.blogId;
                     } else {
                         value.redirectionUrl ='/#/blog-details/gurgaon/'+convertToHyphenSeparated(value.title)+'/'+value.blogId;
                     }
