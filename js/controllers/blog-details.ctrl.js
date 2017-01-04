@@ -13,7 +13,7 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $stateParams, $sce,
 		$timeout(function(){
 			$scope.blog = snapshot.val();
         	if($scope.blog.placeId){
-				$scope.blog.redirectionUrl ='/#/blog-detail/gurgaon/'+'/'+convertToHyphenSeparated($scope.blog.placeName)+'/'+convertToHyphenSeparated($scope.blog.title)+'/'+$scope.blog.blogId;
+				$scope.blog.redirectionUrl ='/#/blog-detail/gurgaon/'+convertToHyphenSeparated($scope.blog.placeName)+'/'+convertToHyphenSeparated($scope.blog.title)+'/'+$scope.blog.blogId;
         	} else {
 				$scope.blog.redirectionUrl ='/#/blog-details/gurgaon/'+convertToHyphenSeparated($scope.blog.title)+'/'+$scope.blog.blogId;
         	}
@@ -29,7 +29,7 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $stateParams, $sce,
                 var blogData = snapshot.val();
                 for(key in blogData){
                 	if(blogData[key].placeId){
-    					blogData[key].redirectionUrl ='/#/blog-detail/gurgaon/'+'/'+convertToHyphenSeparated(blogData[key].placeName)+'/'+convertToHyphenSeparated(blogData[key].title)+'/'+blogData[key].blogId;
+    					blogData[key].redirectionUrl ='/#/blog-detail/gurgaon/'+convertToHyphenSeparated(blogData[key].placeName)+'/'+convertToHyphenSeparated(blogData[key].title)+'/'+blogData[key].blogId;
                 	} else {
 						blogData[key].redirectionUrl ='/#/blog-details/gurgaon/'+convertToHyphenSeparated(blogData[key].title)+'/'+blogData[key].blogId;
                 	}
