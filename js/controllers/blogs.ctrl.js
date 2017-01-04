@@ -73,7 +73,7 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
         }, 0);
     })
 
-    db.ref('tagCloud').once('value', function(snapshot) {
+    db.ref('tagCloud/'+$scope.cityId+'/blogs').once('value', function(snapshot) {
         $timeout(function() {
             if (snapshot.val()) {
                 $scope.tagCloudData = snapshot.val();

@@ -242,6 +242,7 @@
     background-color:#f2f2f2;
     text-decoration:none;
     cursor:pointer;
+    margin: 4px;
 }
 
 .cover-stories .story-tags .story-tag {

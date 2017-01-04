@@ -234,6 +234,7 @@
     background-color:#f2f2f2;
     text-decoration:none;
     cursor:pointer;
+    margin: 4px;
 }
 
 .blogs .blog-tags .blog-tag {
