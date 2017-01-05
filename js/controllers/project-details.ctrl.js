@@ -1,5 +1,5 @@
 app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $rootScope, $state, $sce, $mdDialog, UserTokenService, $location) {
-
+    console.log('called');
     var timestamp = new Date().getTime();
     var urlInfo = {
         url: $location.path()
@@ -437,7 +437,19 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
         $state.go('home');
     }
 
-    $scope.toTrustedHTML = function(html) {
-        return $sce.trustAsHtml(html);
-    }
+    // $scope.toTrustedHTML = function(html) {
+    //     return $sce.trustAsHtml(html);
+    // }
+});
+
+
+app.controller('basicDetailsCtrl', function($scope, $timeout, $rootScope){
+    console.log(1);
+});
+
+app.controller('ratingDetailsCtrl', function($scope, $timeout, $rootScope){
+    console.log(2);
+});
+app.controller('reviewDetailsCtrl', function($scope, $timeout, $rootScope){
+    console.log(3);
 });

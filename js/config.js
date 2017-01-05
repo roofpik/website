@@ -21,6 +21,30 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             controller: 'projectDetailsCtrl'
         });
 
+    // $stateProvider
+    //     .state('project-details', {
+    //         url: '/project-details/:year/:city/:type/:category/:project/:id',
+    //         // templateUrl: 'templates/project-details/project-details.html',
+    //         // controller: 'projectDetailsCtrl',
+    //         views: {
+    //             '': { templateUrl: 'templates/project-details/project-details.html',
+    //                     controller: 'projectDetailsCtrl' 
+    //             },
+    //             'basic@project-details': {
+    //                 templateUrl: 'templates/project-details/project-basic-details.html',
+    //                 controller: 'basicDetailsCtrl'
+    //             },
+    //             'rating@project-details': {
+    //                 templateUrl: 'templates/project-details/project-rating-details.html',
+    //                 controller: 'ratingDetailsCtrl'
+    //             },
+    //             'review@project-details': {
+    //                 templateUrl: 'templates/project-details/project-review-details.html',
+    //                 controller: 'reviewDetailsCtrl'
+    //             }
+    //         }
+    //     });
+
     $stateProvider
         .state('project-detail', {
             url: '/project-detail/:year/:city/:type/:project/:id',
@@ -59,50 +83,138 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     $stateProvider
         .state('cover-stories', {
             url: '/cover-stories/:city/:cityId/:from',
-            templateUrl: 'templates/cover-stories.html',
-            controller: 'coverStoriesCtrl'
+            views: {
+                '': {
+                    templateUrl: 'templates/cover-story/cover-stories.html',
+                    controller: 'coverStoriesCtrl' 
+                },
+                'featuredStories@cover-stories': {
+                    templateUrl: 'templates/cover-story/featured-stories.html',
+                    controller: 'featuredStoriesCtrl'
+                },
+                'popularNlocalityStories@cover-stories': {
+                    templateUrl: 'templates/cover-story/popular-locality-stories.html',
+                    controller: 'popularNlocalityStoriesCtrl'
+                },
+                'shortStories@cover-stories': {
+                    templateUrl: 'templates/cover-story/short-stories.html',
+                    controller: 'shortStoriesCtrl'
+                }
+            }
         });
 
     $stateProvider
         .state('cover-story', {
             url: '/cover-story/:city/:cityId/:from/:fromId',
-            templateUrl: 'templates/cover-stories.html',
-            controller: 'coverStoriesCtrl'
+            views: {
+                '': {
+                    templateUrl: 'templates/cover-story/cover-stories.html',
+                    controller: 'coverStoriesCtrl' 
+                },
+                'featuredStories@cover-stories': {
+                    templateUrl: 'templates/cover-story/featured-stories.html',
+                    controller: 'featuredStoriesCtrl'
+                },
+                'popularNlocalityStories@cover-stories': {
+                    templateUrl: 'templates/cover-story/popular-locality-stories.html',
+                    controller: 'popularNlocalityStoriesCtrl'
+                },
+                'shortStories@cover-stories': {
+                    templateUrl: 'templates/cover-story/short-stories.html',
+                    controller: 'shortStoriesCtrl'
+                }
+            }
         });
 
     $stateProvider
         .state('story', {
             url: '/story/:city/:place/:title/:id',
-            templateUrl: 'templates/story.html',
-            controller: 'storyCtrl'
+            views: {
+                '': {
+                    templateUrl: 'templates/cover-story/story.html',
+                    controller: 'storyCtrl' 
+                },
+                'popularNlocalityStories@story': {
+                    templateUrl: 'templates/cover-story/popular-locality-stories.html',
+                    controller: 'popularNlocalityStoriesCtrl'
+                }
+            }
         });
 
     $stateProvider
         .state('blogs', {
             url: '/blogs/:city/:cityId/:from',
-            templateUrl: 'templates/blogs.html',
-            controller: 'blogsCtrl'
+            views: {
+                '': {
+                    templateUrl: 'templates/blogs/blogs.html',
+                    controller: 'blogsCtrl' 
+                },
+                'featuredBlogs@blogs': {
+                    templateUrl: 'templates/blogs/featured-blogs.html',
+                    controller: 'featuredBlogsCtrl'
+                },
+                'popularNlocalityBlogs@blogs': {
+                    templateUrl: 'templates/blogs/popular-locality-blogs.html',
+                    controller: 'popularNlocalityCtrl'
+                },
+                'shortBlogs@blogs': {
+                    templateUrl: 'templates/blogs/short-blogs.html',
+                    controller: 'shortBlogsCtrl'
+                }
+            }
         });
 
     $stateProvider
         .state('blog', {
             url: '/blog/:city/:cityId/:from/:fromId',
-            templateUrl: 'templates/blogs.html',
-            controller: 'blogsCtrl'
+            views: {
+                '': { 
+                    templateUrl: 'templates/blogs/blogs.html',
+                    controller: 'blogsCtrl' 
+                },
+                'featuredBlogs@blog': {
+                    templateUrl: 'templates/blogs/featured-blogs.html',
+                    controller: 'featuredStoriesCtrl'
+                },
+                'popularNlocalityBlogs@blog': {
+                    templateUrl: 'templates/blogs/popular-locality-blogs.html',
+                    controller: 'popularNlocalityCtrl'
+                },
+                'shortBlogs@blog': {
+                    templateUrl: 'templates/blogs/short-blogs.html',
+                    controller: 'shortBlogsCtrl'
+                }
+            }
         });
 
     $stateProvider
         .state('blog-details', {
             url: '/blog-details/:city/:title/:id',
-            templateUrl: 'templates/blog-details.html',
-            controller: 'blogDetailsCtrl'
+            views: {
+                '': { 
+                    templateUrl: 'templates/blogs/blog-details.html',
+                    controller: 'blogDetailsCtrl' 
+                },
+                'popularNlocalityBlogs@blog-details': {
+                    templateUrl: 'templates/blogs/popular-locality-blogs.html',
+                    controller: 'popularNlocalityCtrl'
+                }
+            }
         });
 
     $stateProvider
         .state('blog-detail', {
             url: '/blog-detail/:city/:place/:title/:id',
-            templateUrl: 'templates/blog-details.html',
-            controller: 'blogDetailsCtrl'
+            views: {
+                '': { 
+                    templateUrl: 'templates/blogs/blog-detail.html',
+                    controller: 'blogDetailsCtrl' 
+                },
+                'popularNlocality@blog-detail': {
+                    templateUrl: 'templates/blogs/popular-locality-blogs.html',
+                    controller: 'popularNlocalityCtrl'
+                }
+            }
         });
 
     $stateProvider

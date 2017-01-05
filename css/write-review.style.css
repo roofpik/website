@@ -90,6 +90,7 @@
 .write-review-page #show-more {
 	text-align:right;
 	margin-top:35px;
+	cursor:pointer;
 }
 
 

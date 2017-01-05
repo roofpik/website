@@ -7,7 +7,7 @@
     </div>
     <div class="top-projects-loading" flex="80"><img src="images/general/ripple.svg" /></div>
     <div class="projects-wrapper" flex="80">
-        <div class="top-project-details" ng-repeat="project in projectList | orderBy:'overallRating'|limitTo:10">
+        <div class="top-project-details" ng-repeat="project in projectList | orderBy:'-overallRating'|limitTo:10">
             <a ng-href="/#/project-detail/{{year}}/gurgaon/residential-projects/{{project.displayName}}/{{project.projectId}}">
                 <figure>
                     <img ng-src="{{project.imgUrl}}" />
