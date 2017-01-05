@@ -1,1 +1,86 @@
-<div><h2>Ratings</h2></div>
+<div>
+    <div class="all-rating-summary" flex="100">
+        <p class="rating-summary-title">User Ratings</p>
+        <div class="rating-block">
+            Excellent ({{allRatings.fiveStar}})
+            <div class="progress-bar">
+                <span class="my-progress" id="excellentStar"></span>
+            </div>
+        </div>
+        <div class="rating-block">
+            Very Good ({{allRatings.fourStar}})
+            <div class="progress-bar">
+                <span class="my-progress" id="veryGoodStar"></span>
+            </div>
+        </div>
+        <div class="rating-block">
+            Good ({{allRatings.threeStar}})
+            <div class="progress-bar">
+                <span class="my-progress" id="goodStar"></span>
+            </div>
+        </div>
+        <div class="rating-block">
+            Average ({{allRatings.twoStar}})
+            <div class="progress-bar">
+                <span class="my-progress" id="averageStar"></span>
+            </div>
+        </div>
+        <div class="rating-block">
+            Bad ({{allRatings.oneStar}})
+            <div class="progress-bar">
+                <span class="my-progress" id="badStar"></span>
+            </div>
+        </div>
+    </div>
+    <div class="rating-summary" flex="100">
+        <p class="rating-summary-title">Rating Summary</p>
+        <p class="rating-summary-ratings" ng-show="allRatings.amenities">
+            <span>Amenities <span class="roofpikGreen">({{allRatings.amenities}})</span></span>
+            <span class="overall-ratings">
+                <span ng-repeat="rate in [1,2,3,4,5] track by $index" >
+                    <i class="fa fa-star" ng-class="($index<=(allRatings.amenities1-1))?'newGreen':'grey'"></i>
+                </span>
+            </span>
+        </p>
+        <p class="rating-summary-ratings" ng-show="allRatings.security">
+            <span>Security <span class="roofpikGreen">({{allRatings.security}})</span></span>
+            <span class="overall-ratings">
+                <span ng-repeat="rate in [1,2,3,4,5] track by $index" >
+                    <i class="fa fa-star" ng-class="($index<=(allRatings.security1-1))?'newGreen':'grey'"></i>
+                </span>
+            </span>
+        </p>
+        <p class="rating-summary-ratings" ng-show="allRatings.openAndGreenAreas">
+            <span>Open And Green Areas <span class="roofpikGreen">({{allRatings.openAndGreenAreas}})</span></span>
+            <span class="overall-ratings">
+                <span ng-repeat="rate in [1,2,3,4,5] track by $index" >
+                    <i class="fa fa-star" ng-class="($index<=(allRatings.openAndGreenAreas1-1))?'newGreen':'grey'"></i>
+                </span>
+            </span>
+        </p>
+        <p class="rating-summary-ratings" ng-show="allRatings.electricityAndWaterSupply">
+            <span>Electricity And Water Supply <span class="roofpikGreen">({{allRatings.electricityAndWaterSupply}})</span></span>
+            <span class="overall-ratings">
+                <span ng-repeat="rate in [1,2,3,4,5] track by $index" >
+                <i class="fa fa-star" ng-class="($index<=(allRatings.electricityAndWaterSupply1-1))?'newGreen':'grey'"></i>
+                </span>
+            </span>
+        </p>
+        <p class="rating-summary-ratings" ng-show="allRatings.convenienceOfHouseMaids">
+            <span>Convenience Of House Maids <span class="roofpikGreen">({{allRatings.convenienceOfHouseMaids}})</span></span>
+            <span class="overall-ratings">
+                <span ng-repeat="rate in [1,2,3,4,5] track by $index" >
+                    <i class="fa fa-star" ng-class="($index<=(allRatings.convenienceOfHouseMaids1-1))?'newGreen':'grey'"></i>
+                </span>
+            </span>
+        </p>
+        <p class="rating-summary-ratings" ng-show="allRatings.convenienceOfParking">
+            <span>Convenience Of Parking <span class="roofpikGreen">({{allRatings.convenienceOfParking}})</span></span>
+            <span class="overall-ratings">
+                <span ng-repeat="rate in [1,2,3,4,5] track by $index" >
+                    <i class="fa fa-star" ng-class="($index<=(allRatings.convenienceOfParking1-1))?'newGreen':'grey'"></i>
+                </span>
+            </span>
+        </p>
+    </div>
+</div>

@@ -22,6 +22,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
     $scope.showMoreNotClicked = true;
     $scope.amenitiesMoreLess = 'More +';
     $scope.amenities = {};
+    $scope.allRatings = {};
     $scope.allAmenities = {
         'carParking': 'Car Parking',
         'cctv': 'CCTV',
@@ -81,6 +82,21 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
 
     loading(true);
 
+    $rootScope.$watch('allRatings', function() {
+        $scope.allRatings = $rootScope.allRatings;
+    });
+
+    $scope.takeToHome = function() {
+        $state.go('home');
+    }
+
+    // $scope.toTrustedHTML = function(html) {
+    //     return $sce.trustAsHtml(html);
+    // }
+});
+
+
+app.controller('basicDetailsCtrl', function($scope, $timeout, $rootScope, $stateParams){
     String.prototype.capitalize = function() {
         return this.charAt(0).toUpperCase() + this.slice(1);
     }
@@ -109,59 +125,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
             }
             $scope.path.push($scope.projectName);
         }, 100);
-    }).then(function() {
-        db.ref('reviews/-KYJONgh0P98xoyPPYm9/residential/' + $scope.projectId)
-            .orderByChild('wordCount')
-            .once('value', function(snapshot) {
-                if (snapshot.val()) {
-                    var allReviewsCount = Object.keys(snapshot.val()).length;
-                    $timeout(function() {
-                        var reviewCount = 0;
-                        snapshot.forEach(function(childSnapshot) {
-                            reviewCount++;
-                            $scope.reviews.push(childSnapshot.val());
-                            if (reviewCount == allReviewsCount) {
-                                if (reviewCount > 5) {
-                                    $scope.showReviewBtn = true;
-                                }
-                            }
-                        });
-                    }, 0);
-                }
-            }).then(function() {
-                db.ref('ratingReview/-KYJONgh0P98xoyPPYm9/residential/' + $scope.projectId).once('value', function(snapshot) {
-                    $timeout(function() {
-                        if (snapshot.val()) {
-                            $scope.allRatings = snapshot.val();
-                            $("#excellentStar").css("width", ($scope.allRatings.fiveStar / $scope.allRatings.overallRatingNum) * 100 + '%');
-                            $("#veryGoodStar").css("width", ($scope.allRatings.fourStar / $scope.allRatings.overallRatingNum) * 100 + '%');
-                            $("#goodStar").css("width", ($scope.allRatings.threeStar / $scope.allRatings.overallRatingNum) * 100 + '%');
-                            $("#averageStar").css("width", ($scope.allRatings.twoStar / $scope.allRatings.overallRatingNum) * 100 + '%');
-                            $("#badStar").css("width", ($scope.allRatings.oneStar / $scope.allRatings.overallRatingNum) * 100 + '%');
-                            if ($scope.allRatings.amenities) {
-                                $scope.allRatings.amenities1 = Math.round($scope.allRatings.amenities);
-                            }
-                            if ($scope.allRatings.security) {
-                                $scope.allRatings.security1 = Math.round($scope.allRatings.security);
-                            }
-                            if ($scope.allRatings.openAndGreenAreas) {
-                                $scope.allRatings.openAndGreenAreas1 = Math.round($scope.allRatings.openAndGreenAreas);
-                            }
-                            if ($scope.allRatings.electricityAndWaterSupply) {
-                                $scope.allRatings.electricityAndWaterSupply1 = Math.round($scope.allRatings.electricityAndWaterSupply);
-                            }
-                            if ($scope.allRatings.convenienceOfHouseMaids) {
-                                $scope.allRatings.convenienceOfHouseMaids1 = Math.round($scope.allRatings.convenienceOfHouseMaids);
-                            }
-                            if ($scope.allRatings.convenienceOfParking) {
-                                $scope.allRatings.convenienceOfParking1 = Math.round($scope.allRatings.convenienceOfParking);
-                            }
-                            loading(false);
-                        }
-                    }, 50);
-                })
-            })
-    })
+    });
 
     function generateInfo(config) {
         var bhkData = [];
@@ -227,36 +191,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
             }
         }
     }
-
-    function generateConfigurations(configs) {
-        // for (key in configs) {
-        //     var data = {
-        //         unit: configs[key].unit,
-        //         bhk: configs[key].bhk,
-        //         superBuiltArea: configs[key].superBuiltArea
-        //     }
-        //     if (configs[key].pricing.buy.min != 'NA') {
-        //         data.buyMin = convertCurrency(configs[key].pricing.buy.min);
-        //     } else {
-        //         data.buyMin = configs[key].pricing.buy.min;
-        //     }
-        //     if (configs[key].pricing.buy.max != 'NA') {
-        //         data.buyMax = convertCurrency(configs[key].pricing.buy.max);
-        //     } else {
-        //         data.buyMax = configs[key].pricing.buy.max;
-        //     }
-        //     if (configs[key].pricing.rent.min != 'NA') {
-        //         data.rentMin = convertCurrency(configs[key].pricing.rent.min);
-        //     } else {
-        //         data.rentMin = configs[key].pricing.rent.min;
-        //     }
-        //     if (configs[key].pricing.rent.max != 'NA') {
-        //         data.rentMax = convertCurrency(configs[key].pricing.rent.max);
-        //     } else {
-        //         data.rentMax = configs[key].pricing.rent.min;
-        //     }
-        //     $scope.configurations.push(data);
-        // }
+function generateConfigurations(configs) {
         var example = {};
         for (key in configs) {
             if (example[configs[key].bhk]) {
@@ -432,24 +367,63 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
             $scope.showReviewBtn = false;
         }
     }
-
-    $scope.takeToHome = function() {
-        $state.go('home');
-    }
-
-    // $scope.toTrustedHTML = function(html) {
-    //     return $sce.trustAsHtml(html);
-    // }
 });
 
-
-app.controller('basicDetailsCtrl', function($scope, $timeout, $rootScope){
-    console.log(1);
+app.controller('reviewDetailsCtrl', function($scope, $timeout, $rootScope){
+    db.ref('reviews/-KYJONgh0P98xoyPPYm9/residential/' + $scope.projectId)
+        .orderByChild('wordCount')
+        .once('value', function(snapshot) {
+            console.log(snapshot.val());
+            if (snapshot.val()) {
+                var allReviewsCount = Object.keys(snapshot.val()).length;
+                $timeout(function() {
+                    var reviewCount = 0;
+                    snapshot.forEach(function(childSnapshot) {
+                        reviewCount++;
+                        $scope.reviews.push(childSnapshot.val());
+                        if (reviewCount == allReviewsCount) {
+                            if (reviewCount > 5) {
+                                $scope.showReviewBtn = true;
+                            }
+                        }
+                    });
+                }, 0);
+            }
+        })
 });
 
 app.controller('ratingDetailsCtrl', function($scope, $timeout, $rootScope){
-    console.log(2);
-});
-app.controller('reviewDetailsCtrl', function($scope, $timeout, $rootScope){
-    console.log(3);
+    db.ref('ratingReview/-KYJONgh0P98xoyPPYm9/residential/' + $scope.projectId).once('value', function(snapshot) {
+        console.log(snapshot.val());
+        $timeout(function() {
+            if (snapshot.val()) {
+                $rootScope.allRatings = snapshot.val();
+                $scope.allRatings = snapshot.val();
+                $("#excellentStar").css("width", ($scope.allRatings.fiveStar / $scope.allRatings.overallRatingNum) * 100 + '%');
+                $("#veryGoodStar").css("width", ($scope.allRatings.fourStar / $scope.allRatings.overallRatingNum) * 100 + '%');
+                $("#goodStar").css("width", ($scope.allRatings.threeStar / $scope.allRatings.overallRatingNum) * 100 + '%');
+                $("#averageStar").css("width", ($scope.allRatings.twoStar / $scope.allRatings.overallRatingNum) * 100 + '%');
+                $("#badStar").css("width", ($scope.allRatings.oneStar / $scope.allRatings.overallRatingNum) * 100 + '%');
+                if ($scope.allRatings.amenities) {
+                    $scope.allRatings.amenities1 = Math.round($scope.allRatings.amenities);
+                }
+                if ($scope.allRatings.security) {
+                    $scope.allRatings.security1 = Math.round($scope.allRatings.security);
+                }
+                if ($scope.allRatings.openAndGreenAreas) {
+                    $scope.allRatings.openAndGreenAreas1 = Math.round($scope.allRatings.openAndGreenAreas);
+                }
+                if ($scope.allRatings.electricityAndWaterSupply) {
+                    $scope.allRatings.electricityAndWaterSupply1 = Math.round($scope.allRatings.electricityAndWaterSupply);
+                }
+                if ($scope.allRatings.convenienceOfHouseMaids) {
+                    $scope.allRatings.convenienceOfHouseMaids1 = Math.round($scope.allRatings.convenienceOfHouseMaids);
+                }
+                if ($scope.allRatings.convenienceOfParking) {
+                    $scope.allRatings.convenienceOfParking1 = Math.round($scope.allRatings.convenienceOfParking);
+                }
+                loading(false);
+            }
+        }, 50);
+    })
 });

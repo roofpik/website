@@ -17,40 +17,61 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     $stateProvider
         .state('project-details', {
             url: '/project-details/:year/:city/:type/:category/:project/:id',
-            templateUrl: 'templates/project-details.html',
-            controller: 'projectDetailsCtrl'
+            views: {
+                '': { templateUrl: 'templates/project-details/project-details.html',
+                        controller: 'projectDetailsCtrl' 
+                },
+                'gallery@project-details': {
+                    templateUrl: 'templates/project-details/project-gallery.html',
+                    controller: 'basicDetailsCtrl'
+                },
+                'basic@project-details': {
+                    templateUrl: 'templates/project-details/project-basic-details.html',
+                    controller: 'basicDetailsCtrl'
+                },
+                'rating@project-details': {
+                    templateUrl: 'templates/project-details/project-rating-details.html',
+                    controller: 'ratingDetailsCtrl'
+                },
+                'review@project-details': {
+                    templateUrl: 'templates/project-details/project-review-details.html',
+                    controller: 'reviewDetailsCtrl'
+                }
+            }
         });
-
-    // $stateProvider
-    //     .state('project-details', {
-    //         url: '/project-details/:year/:city/:type/:category/:project/:id',
-    //         // templateUrl: 'templates/project-details/project-details.html',
-    //         // controller: 'projectDetailsCtrl',
-    //         views: {
-    //             '': { templateUrl: 'templates/project-details/project-details.html',
-    //                     controller: 'projectDetailsCtrl' 
-    //             },
-    //             'basic@project-details': {
-    //                 templateUrl: 'templates/project-details/project-basic-details.html',
-    //                 controller: 'basicDetailsCtrl'
-    //             },
-    //             'rating@project-details': {
-    //                 templateUrl: 'templates/project-details/project-rating-details.html',
-    //                 controller: 'ratingDetailsCtrl'
-    //             },
-    //             'review@project-details': {
-    //                 templateUrl: 'templates/project-details/project-review-details.html',
-    //                 controller: 'reviewDetailsCtrl'
-    //             }
-    //         }
-    //     });
 
     $stateProvider
         .state('project-detail', {
             url: '/project-detail/:year/:city/:type/:project/:id',
-            templateUrl: 'templates/project-details.html',
-            controller: 'projectDetailsCtrl'
+            views: {
+                '': { templateUrl: 'templates/project-details/project-details.html',
+                        controller: 'projectDetailsCtrl' 
+                },
+                'gallery@project-detail': {
+                    templateUrl: 'templates/project-details/project-gallery.html',
+                    controller: 'basicDetailsCtrl'
+                },
+                'basic@project-detail': {
+                    templateUrl: 'templates/project-details/project-basic-details.html',
+                    controller: 'basicDetailsCtrl'
+                },
+                'rating@project-detail': {
+                    templateUrl: 'templates/project-details/project-rating-details.html',
+                    controller: 'ratingDetailsCtrl'
+                },
+                'review@project-detail': {
+                    templateUrl: 'templates/project-details/project-review-details.html',
+                    controller: 'reviewDetailsCtrl'
+                }
+            }
         });
+
+    // $stateProvider
+    //     .state('project-detail', {
+    //         url: '/project-detail/:year/:city/:type/:project/:id',
+    //         templateUrl: 'templates/project-details.html',
+    //         controller: 'projectDetailsCtrl'
+    //     });
 
     $stateProvider
         .state('profile', {
