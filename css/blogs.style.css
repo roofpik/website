@@ -3,6 +3,11 @@
 .blogs {
     margin-top:60px;
 }
+
+.blogs img {
+    max-width:100%;
+}
+
 .blogs .featured-blog a {
     text-decoration: none;
     transition: all ease .3s;
@@ -173,10 +178,10 @@
     color: #006699;
 }
 
-.blogs #showMoreBtn {
+.blogs .blog-card .showMoreBtn {
     float:right;
 }
-.blogs #showMoreBtn a {
+.blogs .blog-card .showMoreBtn a {
     cursor: pointer;
     text-decoration:none;
     color:#006699;

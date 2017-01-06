@@ -1,0 +1,38 @@
+<md-content class="cover-stories">
+    <div layout="column" flex layout-wrap>
+        <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="header-story">
+            <article flex="100">
+                <div class="featured-story" style="background-image:url({{story.coverPhoto}});">
+                    <div class="featured-caption">
+                        <div class="featured-caption-content">
+                            <h3>{{story.title}}</h3>
+                            <div id="place-name"><span>{{story.placeName}}</span><time>{{story.createdDate | date:'MMM dd, yy'}}</time></div>
+                            <ul class="featured-tags">
+                                <li ng-repeat="tag in story.hashtags"><a ng-href="/#/cover-story/gurgaon/{{cityId}}/2/{{tag.tagId}}">#{{tag.tag}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+        <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="main-board" layout-align="center top">
+            <div flex="50" class="story-board" flex-xs="100" flex-sm="100">
+                <md-card class="story-card">
+                    <md-card-content>
+                        <p ng-bind-html="toTrustedHTML(story.data)"></p>
+                        <span id="facebook-share" ng-click="shareonfb(story)"><i class="fa fa-facebook"></i>&nbsp;&nbsp;&nbsp;Share</span>
+                    </md-card-content>
+                    <md-card-header>
+                        <md-card-header-text layout-align="end center" layout="row">
+                            <md-card-avatar>
+                                <img src="images/general/noImage.png" id="user-img"/>
+                            </md-card-avatar>
+                            <span class="md-title" id="user-name">{{story.userName}}</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                </md-card>
+            </div>
+            <div flex="30" class="story-widget" flex-xs="100" flex-sm="100" ui-view="popularNlocalityStories"></div>
+        </section>
+    </div>
+</md-content>
