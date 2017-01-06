@@ -1,11 +1,27 @@
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-
     $stateProvider
         .state('home', {
             url: '/',
-            templateUrl: 'templates/home.html',
-            controller: 'homeCtrl'
+            views: {
+                '': {
+                    templateUrl: 'templates/home/home.html',
+                    controller: 'homeCtrl'
+                },
+                'search@home': {
+                    templateUrl: 'templates/home/search-box.html',
+                    controller: 'searchCtrl'
+                },
+                'topRatedProjects@home': {
+                    templateUrl: 'templates/home/top-projects.html',
+                    controller: 'topProjectsCtrl'
+                },
+                'writeReviewBox@home': {
+                    templateUrl: 'templates/home/write-review-box.html',
+                    controller: 'writeReviewBoxCtrl'
+                }
+            }
         });
+
 
     $stateProvider
         .state('projects', {
