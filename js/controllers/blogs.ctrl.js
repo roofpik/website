@@ -8,9 +8,12 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
 
     $scope.showNoBlogs = false;
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
-    $scope.featuredBlogs = [];
     $scope.popularBlogs = {};
+    $scope.featuredBlogs = [];
+})
 
+app.controller('featuredBlogsCtrl', function($scope, $timeout, $stateParams){
+    $scope.featuredBlogs = [];
     db.ref('featuredBlogs/' + $scope.cityId).once('value', function(data) {
         $timeout(function() {
             if (data.val()) {
@@ -27,34 +30,10 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
             }
         }, 0);
     })
+});
 
-    db.ref('shortBlogs/' + $scope.cityId).once('value', function(snapshot) {
-        $timeout(function() {
-            if (snapshot.val()) {
-                $scope.allBlogs = snapshot.val();
-                angular.forEach($scope.allBlogs, function(value, key) {
-                    if(value.placeId){
-                        value.redirectionUrl ='/#/blog-detail/gurgaon/'+convertToHyphenSeparated(value.placeName)+'/'+convertToHyphenSeparated(value.title)+'/'+value.blogId;
-                    } else {
-                        value.redirectionUrl ='/#/blog-details/gurgaon/'+convertToHyphenSeparated(value.title)+'/'+value.blogId;
-                    }
-                    value.redirectionUrl = value.redirectionUrl.replace(/[?=]/g, "");
-                    value.coverPhoto = 'http://cdn.roofpik.com/roofpik/blogs/allBlogs/'+$scope.cityId+'/'+value.blogId+'/coverPhoto/'+value.coverPhoto+'-m.jpg';
-                    value.selected = true;
-                })
-            } else {
-                $scope.showNoBlogs = true;
-            }
-            if ($stateParams.from == 3) {
-                $scope.getLocalityBlogs($stateParams.fromId);
-            } else if ($stateParams.from == 2) {
-                $scope.getRelatedBlogs($stateParams.fromId);
-            } else if ($stateParams.from == 1) {
-                $scope.showAllBlogs();
-            }
-        })
-    })
-
+app.controller('popularNlocalityCtrl', function($scope, $timeout, $stateParams){
+    console.log('popular');
     db.ref('popularBlogs/' + $scope.cityId).once('value', function(snapshot) {
         $timeout(function() {
             if (snapshot.val()) {
@@ -86,11 +65,35 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
             $scope.popularLocalities = snapshot.val();
         }, 0)
     })
+});
 
-    $scope.toTrustedHTML = function(html) {
-        return $sce.trustAsHtml(html);
-    }
-
+app.controller('shortBlogsCtrl', function($scope, $timeout, $sce, $stateParams){
+    db.ref('shortBlogs/' + $scope.cityId).once('value', function(snapshot) {
+        $timeout(function() {
+            if (snapshot.val()) {
+                $scope.allBlogs = snapshot.val();
+                angular.forEach($scope.allBlogs, function(value, key) {
+                    if(value.placeId){
+                        value.redirectionUrl ='/#/blog-detail/gurgaon/'+convertToHyphenSeparated(value.placeName)+'/'+convertToHyphenSeparated(value.title)+'/'+value.blogId;
+                    } else {
+                        value.redirectionUrl ='/#/blog-details/gurgaon/'+convertToHyphenSeparated(value.title)+'/'+value.blogId;
+                    }
+                    value.redirectionUrl = value.redirectionUrl.replace(/[?=]/g, "");
+                    value.coverPhoto = 'http://cdn.roofpik.com/roofpik/blogs/allBlogs/'+$scope.cityId+'/'+value.blogId+'/coverPhoto/'+value.coverPhoto+'-m.jpg';
+                    value.selected = true;
+                })
+            } else {
+                $scope.showNoBlogs = true;
+            }
+            if ($stateParams.from == 3) {
+                $scope.getLocalityBlogs($stateParams.fromId);
+            } else if ($stateParams.from == 2) {
+                $scope.getRelatedBlogs($stateParams.fromId);
+            } else if ($stateParams.from == 1) {
+                $scope.showAllBlogs();
+            }
+        })
+    })
     $scope.showAllBlogs = function() {
         angular.forEach($scope.allBlogs, function(value, key) {
             value.selected = true;
@@ -167,5 +170,9 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
             caption: hashtag,
             description: blog.adminName
         });
+    }
+
+    $scope.toTrustedHTML = function(html) {
+        return $sce.trustAsHtml(html);
     }
 })

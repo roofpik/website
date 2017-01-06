@@ -1,0 +1,18 @@
+<md-content class="project-details-page">
+    <div ui-view="gallery"></div>
+    <section layout="row" flex="80" flex-xs="100" flex-sm="95" flex-md="90" class="project-basic-details" layout-wrap>
+        <article flex="70" flex-xs="100"   class="project-basic-details-container">
+            <div ui-view="basic"></div>
+            <div layout="row" layout-wrap>
+                <p flex="100" id="rating">
+                    {{allRatings.overallRatingNum}} Review<span ng-show="allRatings.overallRatingNum > 1"></span>
+                    <span ng-repeat="rate in [1,2,3,4,5] track by $index">
+                        <i class="fa fa-star" ng-class="($index<=(allRatings.overallRating-1))?'newGreen':'grey'"></i>
+                    </span> ({{allRatings.overallRating}})
+                </p>
+                <div class="all-reviews" flex="100" ui-view="review"></div>
+            </div>
+        </article>
+        <article flex="30" flex-xs="100" id="rating-container" ui-view="rating"></article>
+    </section>
+</md-content>

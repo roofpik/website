@@ -1,0 +1,19 @@
+<div>
+    <section layout="row" class="header-story" layout-wrap>
+        <article flex="100">
+            <div flex="100" class="proj-imgfix">
+                <div class="featured-story" style="background-image:url({{coverImage}});">
+                    <div class="gallery-btn">
+                        <gallery></gallery>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <article flex="100" class="md-padding">
+            <div flex="100" class="path-filters">
+                <span class="path-btn" id="home-btn" ng-click="takeToHome()">Home</span>
+                <span class="path-btn" ng-repeat="filter in path track by $index">{{filter}}</span>
+            </div>
+        </article>
+    </section>
+</div>

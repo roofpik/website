@@ -14,36 +14,81 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTok
     }
     UserTokenService.checkToken(urlInfo, timestamp, 1);
     loading(false);
-    db.ref('dataVersions').once('value', function(response) {
-        appLoad.localObjects(response.val())
-        .then(function(result){
-            $scope.projectList = getLocalStorage('projectList').value;
-            $scope.searchList = getLocalStorage('searchList').value;
-            getLocalities($scope.searchList);
-            for(key in $scope.projectList){
-                $scope.projectList[key].displayName = convertToHyphenSeparated($scope.projectList[key].projectName);
-                if($scope.projectList[key].imgUrl.indexOf('http') == -1){
-                    $scope.projectList[key].imgUrl = "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.projectList[key].projectId+'/images/coverPhoto/'+$scope.projectList[key].imgUrl+'-s.jpg';
-                };
-            };
-            $timeout(function(){
-                $scope.makeTopRated();
-            }, 2000);
-            
-
-        });
-    });
 
 
+    // $timeout(function() {
 
-    function getLocalities(list) {
-        for (key in list) {
-            if (list[key].type == 'Locality') {
-                $scope.localities[list[key].name] = list[key].id;
-            }
-        }
-    };
+    //     $('.blogs-wrapper').slick({
+    //         dots: false,
+    //         infinite: true,
+    //         prevArrow: '<button type="button" class="prev-blog arrows"><i class="material-icons">navigate_before</i></button>',
+    //         nextArrow: '<button type="button" class="next-blog arrows"><i class="material-icons">navigate_next</i></button>',
+    //         speed: 300,
+    //         slidesToShow: 4,
+    //         slidesToScroll: 4,
+    //         responsive: [{
+    //                 breakpoint: 1024,
+    //                 settings: {
+    //                     slidesToShow: 3,
+    //                     slidesToScroll: 3
+    //                 }
+    //             }, {
+    //                 breakpoint: 600,
+    //                 settings: {
+    //                     slidesToShow: 2,
+    //                     slidesToScroll: 2
+    //                 }
+    //             }, {
+    //                 breakpoint: 480,
+    //                 settings: {
+    //                     slidesToShow: 1,
+    //                     slidesToScroll: 1
+    //                 }
+    //             }
+    //             // You can unslick at a given breakpoint now by adding:
+    //             // settings: "unslick"
+    //             // instead of a settings object
+    //         ]
+    //     });
 
+    //     // $('.story-wrapper').slick({
+    //     //     dots: false,
+    //     //     infinite: true,
+    //     //     autoplay: true,
+    //     //     arrows: false,
+    //     //     speed: 300,
+    //     //     slidesToShow: 1,
+    //     //     slidesToScroll: 1,
+    //     //     responsive: [{
+    //     //         breakpoint: 1024,
+    //     //         settings: {
+    //     //             slidesToShow: 1,
+    //     //             slidesToScroll: 1
+    //     //         }
+    //     //     }, {
+    //     //         breakpoint: 600,
+    //     //         settings: {
+    //     //             slidesToShow: 1,
+    //     //             slidesToScroll: 1
+    //     //         }
+    //     //     }, {
+    //     //         breakpoint: 480,
+    //     //         settings: {
+    //     //             slidesToShow: 1,
+    //     //             slidesToScroll: 1
+    //     //         }
+    //     //     }]
+    //     // });
+    // }, 2000);
+});
+
+app.controller('writeReviewBoxCtrl', function($scope, $state){
+    $scope.gotoWriteReviews = function() {
+        $state.go('write-review');
+    }
+})
+
+app.controller('searchCtrl', function($scope, $timeout, UserTokenService, $mdDialog){
     $scope.showSearch = function(ev) {
         $mdDialog.show({
                 controller: searchController,
@@ -119,6 +164,47 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTok
             UserTokenService.checkToken(searchData, timestamp, 3);
         }
     }
+    $scope.cityClicked = function(city) {
+        if (city != 'Gurgaon') {
+            swal("Currently we are only present in Gurgaon", "Please stay tuned.")
+        }
+        var timestamp = new Date().getTime();
+        var data = {
+            cityName: city
+        }
+        UserTokenService.checkToken(data, timestamp, 2);
+    }
+})
+
+
+app.controller('topProjectsCtrl', function($scope, $timeout, appLoad){
+    db.ref('dataVersions').once('value', function(response) {
+        appLoad.localObjects(response.val())
+        .then(function(result){
+            $scope.projectList = getLocalStorage('projectList').value;
+            $scope.searchList = getLocalStorage('searchList').value;
+            getLocalities($scope.searchList);
+            for(key in $scope.projectList){
+                $scope.projectList[key].displayName = convertToHyphenSeparated($scope.projectList[key].projectName);
+                if($scope.projectList[key].imgUrl.indexOf('http') == -1){
+                    $scope.projectList[key].imgUrl = "http://cdn.roofpik.com/roofpik/projects/"+$scope.cityId+'/residential/'+$scope.projectList[key].projectId+'/images/coverPhoto/'+$scope.projectList[key].imgUrl+'-s.jpg';
+                };
+            };
+            $timeout(function(){
+                $scope.makeTopRated();
+            }, 2000);
+            
+
+        });
+    });
+
+    function getLocalities(list) {
+        for (key in list) {
+            if (list[key].type == 'Locality') {
+                $scope.localities[list[key].name] = list[key].id;
+            }
+        }
+    };
 
     $scope.makeTopRated = function() {
         $('.projects-wrapper').slick({
@@ -151,88 +237,4 @@ app.controller('homeCtrl', function($scope, $timeout, $mdDialog, $state, UserTok
         });
         $('.top-projects-loading').hide();
     };
-
-    // $timeout(function() {
-
-    //     $('.blogs-wrapper').slick({
-    //         dots: false,
-    //         infinite: true,
-    //         prevArrow: '<button type="button" class="prev-blog arrows"><i class="material-icons">navigate_before</i></button>',
-    //         nextArrow: '<button type="button" class="next-blog arrows"><i class="material-icons">navigate_next</i></button>',
-    //         speed: 300,
-    //         slidesToShow: 4,
-    //         slidesToScroll: 4,
-    //         responsive: [{
-    //                 breakpoint: 1024,
-    //                 settings: {
-    //                     slidesToShow: 3,
-    //                     slidesToScroll: 3
-    //                 }
-    //             }, {
-    //                 breakpoint: 600,
-    //                 settings: {
-    //                     slidesToShow: 2,
-    //                     slidesToScroll: 2
-    //                 }
-    //             }, {
-    //                 breakpoint: 480,
-    //                 settings: {
-    //                     slidesToShow: 1,
-    //                     slidesToScroll: 1
-    //                 }
-    //             }
-    //             // You can unslick at a given breakpoint now by adding:
-    //             // settings: "unslick"
-    //             // instead of a settings object
-    //         ]
-    //     });
-
-    //     // $('.story-wrapper').slick({
-    //     //     dots: false,
-    //     //     infinite: true,
-    //     //     autoplay: true,
-    //     //     arrows: false,
-    //     //     speed: 300,
-    //     //     slidesToShow: 1,
-    //     //     slidesToScroll: 1,
-    //     //     responsive: [{
-    //     //         breakpoint: 1024,
-    //     //         settings: {
-    //     //             slidesToShow: 1,
-    //     //             slidesToScroll: 1
-    //     //         }
-    //     //     }, {
-    //     //         breakpoint: 600,
-    //     //         settings: {
-    //     //             slidesToShow: 1,
-    //     //             slidesToScroll: 1
-    //     //         }
-    //     //     }, {
-    //     //         breakpoint: 480,
-    //     //         settings: {
-    //     //             slidesToShow: 1,
-    //     //             slidesToScroll: 1
-    //     //         }
-    //     //     }]
-    //     // });
-    // }, 2000);
-
-    $scope.gotoWriteReviews = function() {
-        $state.go('write-review');
-    }
-
-    $scope.cityClicked = function(city) {
-        if (city != 'Gurgaon') {
-            swal("Currently we are only present in Gurgaon", "Please stay tuned.")
-        }
-        var timestamp = new Date().getTime();
-        var data = {
-            cityName: city
-        }
-        UserTokenService.checkToken(data, timestamp, 2);
-    }
-
-
-
-
 });

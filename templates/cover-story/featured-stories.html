@@ -1,0 +1,36 @@
+<section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="header-story">
+    <article flex="50" flex-xs="100" flex-sm="100">
+        <div class="featured-story" style="background-image:url({{featuredStories[0].coverPhoto}});">
+            <a ng-href="{{featuredStories[0].redirectionUrl}}">
+                <div class="featured-caption">
+                    <div class="featured-caption-content">
+                        <h3>{{featuredStories[0].title}}</h3>
+                        <div id="place-name"><span>{{featuredStories[0].placeName}}</span>
+                            <time>{{featuredStories[0].createdDate | date:'MMM dd, yy'}}</time>
+                        </div>
+                        <ul class="featured-tags">
+                            <li ng-repeat="tag in featuredStories[0].hashtags"><a ng-href="/#/cover-story/gurgaon/{{cityId}}/2/{{tag.tagId}}">#{{tag.tag}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </article>
+    <article flex="50" flex-xs="100" flex-sm="100">
+        <div class="featured-story" style="background-image:url({{featuredStories[1].coverPhoto}});" ng-click="goToStoryDetails(featuredStories[1].storyId)">
+            <a ng-href="{{featuredStories[0].redirectionUrl}}">
+                <div class="featured-caption">
+                    <div class="featured-caption-content">
+                        <h3>{{featuredStories[1].title}}</h3>
+                        <div id="place-name"><span>{{featuredStories[1].placeName}}</span>
+                            <time>{{featuredStories[1].createdDate | date:'MMM dd, yy'}}</time>
+                        </div>
+                        <ul class="featured-tags">
+                            <li ng-repeat="tag in featuredStories[1].hashtags"><a ng-href="/#/cover-story/gurgaon/{{cityId}}/2/{{tag.tagId}}">#{{tag.tag}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </article>
+</section>
