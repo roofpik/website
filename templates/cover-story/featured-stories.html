@@ -1,5 +1,5 @@
 <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="header-story">
-    <article flex="50" flex-xs="100" flex-sm="100">
+    <article flex="50" flex-xs="100" flex-sm="100" class="over-hidden">
         <div class="featured-story" style="background-image:url({{featuredStories[0].coverPhoto}});">
             <a ng-href="{{featuredStories[0].redirectionUrl}}">
                 <div class="featured-caption">
@@ -16,7 +16,7 @@
             </a>
         </div>
     </article>
-    <article flex="50" flex-xs="100" flex-sm="100">
+    <article flex="50" flex-xs="100" flex-sm="100" class="over-hidden">
         <div class="featured-story" style="background-image:url({{featuredStories[1].coverPhoto}});" ng-click="goToStoryDetails(featuredStories[1].storyId)">
             <a ng-href="{{featuredStories[0].redirectionUrl}}">
                 <div class="featured-caption">

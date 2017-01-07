@@ -34,7 +34,22 @@
 .write-review-page #review-form-title{background-color: #ddd; color: #444;}
 footer{margin-top: 30px}
 .proj-imgfix{overflow: hidden; height: 400px;}
+.over-hidden{overflow: hidden !important;}
 
+.blog-tags{display: inline;}
+.cover-stories .popular-localities a, .blogs .popular-localities a {vertical-align: super;}
+.cover-stories .story-tags .story-tag, .blogs .blog-tags .blog-tag{float: left;}
+.cover-stories .featured-caption, .blogs .featured-caption{ display: block !important; }
+ .cover-stories .featured-caption-content,  .blogs .featured-caption-content{width: calc(100% - 60px); position: absolute !important; bottom:0; padding:30px !important; margin:auto; display: block !important; padding:0px;}
+.cover-stories .featured-tags, .blogs .featured-tags{width:100%; }
+.cover-stories .featured-tags li a, .blogs .featured-tags li a{font-size: 16px;}
+.cover-stories .featured-tags li, .blogs .featured-tags li {float: left; line-height: 16px; margin-bottom: 5px; font-size: 15px;}
+.cover-stories .featured-caption-content h3, .blogs .featured-caption-content h2 { font-size: 29px; line-height: 35px; margin-bottom: 10px; font-weight: 500;}
+.cover-stories .featured-caption-content #place-name span, .blogs .featured-caption-content #place-name span {font-weight: 500;}
+.cover-stories .featured-caption-content #place-name, .blogs .featured-caption-content #place-name{font-weight: 500;}
+.cover-stories .story-widget md-card, .blogs .blog-widget md-card{margin-top: 20px;}
+.md-headline {font-size: 20px; line-height: 27px;}
+.h4{font-size: 21px; margin:0px; padding-left: 15px; padding-top: 10px; font-weight: 300;}
 
 @media (max-width: 480px) {
     .xs_posit {
@@ -125,7 +140,11 @@ footer{margin-top: 30px}
 .fixrtmenu{width: 95px !important; }
 #about-us-description{padding: 20px 0px;}
 
+.cover-stories .featured-caption-content, .blog .featured-caption-content h2 { font-size: 22px; line-height: 25px; padding-bottom: 5px;}
+.cover-stories .featured-caption-content, .blog .featured-caption-content{width: calc(100% - 30px); position: absolute !important; padding:15px !important;}
+.cover-stories .featured-caption-content #place-name span, .blogs .featured-caption-content #place-name span{font-size: 18px;}
 }
+
 @media (min-width: 200px) and (max-width: 359px) {
 .header .main-menu .menu-item{ padding: 0 4px;  }
 .header .logo{padding: 10px 15px}
@@ -191,6 +210,7 @@ footer{margin-top: 30px}
       .project-details-page #project-name{font-size: 24px;}
       .project-details-page #rating{font-size: 21px;}
       .fixrtmenu{width: 125px !important; }
+      .cover-stories .featured-caption-content h3, .blogs .featured-caption-content h3 { font-size: 24px; line-height: 28px; padding-bottom: 15px;}
 }
 
 @media (min-width: 768px) and (max-width: 960px) {
