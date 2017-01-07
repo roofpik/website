@@ -1,5 +1,5 @@
 app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $rootScope, $state, $sce, $mdDialog, UserTokenService, $location) {
-    console.log('called');
+    // console.log('called');
     var timestamp = new Date().getTime();
     var urlInfo = {
         url: $location.path()
@@ -259,6 +259,7 @@ function generateConfigurations(configs) {
                         }
                     }
                     example[configs[key].bhk + '2'] = data;
+                    // console.log(example);
                 }
             } else {
                 var data = {
@@ -299,24 +300,31 @@ function generateConfigurations(configs) {
                     }
                 }
                 example[configs[key].bhk] = data;
+                // console.log(example);
             }
         }
-
-        for(key in example){
-            if(!example[key].buyMin) {
-                example[key].buyMin = 'NA'
+        addNa(example);
+    }
+    function addNa(configs){
+        $scope.configurations = [];
+        for(key in configs){
+            console.log(configs[key]);
+            if(!configs[key].buyMin) {
+                configs[key].buyMin = 'NA'
             }
-            if(!example[key].buyMax) {
-                example[key].buyMax = 'NA'
+            if(!configs[key].buyMax) {
+                configs[key].buyMax = 'NA'
             }
-            if(!example[key].rentMin) {
-                example[key].rentMin = 'NA'
+            if(!configs[key].rentMin) {
+                configs[key].rentMin = 'NA'
             }
-            if(!example[key].rentMax) {
-                example[key].rentMax = 'NA'
+            if(!configs[key].rentMax) {
+                configs[key].rentMax = 'NA'
             }
-            $scope.configurations.push(example[key]);
+            console.log(configs[key]);
+            $scope.configurations.push(configs[key]);
         }
+        console.log($scope.configurations);
     }
 
     function generateImageList(images) {
@@ -358,22 +366,13 @@ function generateConfigurations(configs) {
             $scope.amenitiesMoreLess = 'Less -';
         }
     }
-
-    $scope.showMoreReviews = function() {
-        $scope.viewReviews += 5;
-        if ($scope.reviews.length > $scope.viewReviews) {
-            $scope.showReviewBtn = true;
-        } else {
-            $scope.showReviewBtn = false;
-        }
-    }
 });
 
 app.controller('reviewDetailsCtrl', function($scope, $timeout, $rootScope){
     db.ref('reviews/-KYJONgh0P98xoyPPYm9/residential/' + $scope.projectId)
         .orderByChild('wordCount')
         .once('value', function(snapshot) {
-            console.log(snapshot.val());
+            // console.log(snapshot.val());
             if (snapshot.val()) {
                 var allReviewsCount = Object.keys(snapshot.val()).length;
                 $timeout(function() {
@@ -390,11 +389,19 @@ app.controller('reviewDetailsCtrl', function($scope, $timeout, $rootScope){
                 }, 0);
             }
         })
+    $scope.showMoreReviews = function() {
+        $scope.viewReviews += 5;
+        if ($scope.reviews.length > $scope.viewReviews) {
+            $scope.showReviewBtn = true;
+        } else {
+            $scope.showReviewBtn = false;
+        }
+    }
 });
 
 app.controller('ratingDetailsCtrl', function($scope, $timeout, $rootScope){
     db.ref('ratingReview/-KYJONgh0P98xoyPPYm9/residential/' + $scope.projectId).once('value', function(snapshot) {
-        console.log(snapshot.val());
+        // console.log(snapshot.val());
         $timeout(function() {
             if (snapshot.val()) {
                 $rootScope.allRatings = snapshot.val();
