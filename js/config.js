@@ -244,7 +244,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             url: '/blog-detail/:city/:place/:title/:id',
             views: {
                 '': { 
-                    templateUrl: 'templates/blogs/blog-detail.html',
+                    templateUrl: 'templates/blogs/blog-details.html',
                     controller: 'blogDetailsCtrl' 
                 },
                 'popularNlocality@blog-detail': {
