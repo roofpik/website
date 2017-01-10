@@ -211,7 +211,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
                 },
                 'featuredBlogs@blog': {
                     templateUrl: 'templates/blogs/featured-blogs.html',
-                    controller: 'featuredStoriesCtrl'
+                    controller: 'featuredBlogsCtrl'
                 },
                 'popularNlocalityBlogs@blog': {
                     templateUrl: 'templates/blogs/popular-locality-blogs.html',

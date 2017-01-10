@@ -15,6 +15,7 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav
 
 
 app.controller('featuredStoriesCtrl', function($scope, $timeout,$stateParams) {
+    $scope.featuredStories = [];
     db.ref('featuredStories/' + $scope.cityId).once('value', function(data) {
         $timeout(function() {
             if (data.val()) {
