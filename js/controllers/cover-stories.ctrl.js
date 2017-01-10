@@ -29,7 +29,7 @@ app.controller('featuredStoriesCtrl', function($scope, $timeout,$stateParams) {
     })
 })
 
-app.controller('popularNlocalityStoriesCtrl', function($scope, $timeout, $stateParams) {
+app.controller('popularNlocationStoriesCtrl', function($scope, $timeout, $stateParams) {
     db.ref('popularStories/' + $scope.cityId).once('value', function(snapshot) {
         $timeout(function() {
             if (snapshot.val()) {
@@ -51,14 +51,15 @@ app.controller('popularNlocalityStoriesCtrl', function($scope, $timeout, $stateP
         }, 0);
     })
 
-    db.ref('popularLocalities/' + $scope.cityId).once('value', function(snapshot) {
+    db.ref('popularLocations/' + $scope.cityId).once('value', function(snapshot) {
         $timeout(function() {
-            $scope.popularLocalities = snapshot.val();
+            $scope.popularLocations = snapshot.val();
         }, 0)
     })
 })
 
 app.controller('shortStoriesCtrl', function($scope, $sce, $timeout, $stateParams) {
+    console.log('called');
     db.ref('shortStories/' + $scope.cityId).once('value', function(snapshot) {
         $timeout(function() {
             if (snapshot.val()) {
@@ -73,7 +74,7 @@ app.controller('shortStoriesCtrl', function($scope, $sce, $timeout, $stateParams
                 $scope.showNoStories = true;
             }
             if ($stateParams.from == 3) {
-                $scope.getLocalityPosts($stateParams.fromId);
+                $scope.getLocationPosts($stateParams.fromId);
             } else if ($stateParams.from == 2) {
                 $scope.getRelatedStories($stateParams.fromId);
             } else if ($stateParams.from == 1) {
@@ -129,19 +130,19 @@ app.controller('shortStoriesCtrl', function($scope, $sce, $timeout, $stateParams
         })
     }
 
-    $scope.getLocalityPosts = function(locality) {
+    $scope.getLocationPosts = function(location) {
         var count = 0;
-        var localityStoryCount = 0;
+        var locationStoryCount = 0;
         angular.forEach($scope.allStories, function(value, key) {
             count++;
-            if (value.placeId == locality) {
-                localityStoryCount++;
+            if (value.placeId == location) {
+                locationStoryCount++;
                 value.selected = true;
             } else {
                 value.selected = false;
             }
             if (count == Object.keys($scope.allStories).length) {
-                if (localityStoryCount == 0) {
+                if (locationStoryCount == 0) {
                     $scope.showNoStories = true;
                 } else {
                     $scope.showNoStories = false;
