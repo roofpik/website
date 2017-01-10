@@ -129,9 +129,9 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
                     templateUrl: 'templates/cover-story/featured-stories.html',
                     controller: 'featuredStoriesCtrl'
                 },
-                'popularNlocalityStories@cover-stories': {
-                    templateUrl: 'templates/cover-story/popular-locality-stories.html',
-                    controller: 'popularNlocalityStoriesCtrl'
+                'popularNlocationStories@cover-stories': {
+                    templateUrl: 'templates/cover-story/popular-location-stories.html',
+                    controller: 'popularNlocationStoriesCtrl'
                 },
                 'shortStories@cover-stories': {
                     templateUrl: 'templates/cover-story/short-stories.html',
@@ -148,15 +148,15 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
                     templateUrl: 'templates/cover-story/cover-stories.html',
                     controller: 'coverStoriesCtrl' 
                 },
-                'featuredStories@cover-stories': {
+                'featuredStories@cover-story': {
                     templateUrl: 'templates/cover-story/featured-stories.html',
                     controller: 'featuredStoriesCtrl'
                 },
-                'popularNlocalityStories@cover-stories': {
-                    templateUrl: 'templates/cover-story/popular-locality-stories.html',
-                    controller: 'popularNlocalityStoriesCtrl'
+                'popularNlocationStories@cover-story': {
+                    templateUrl: 'templates/cover-story/popular-location-stories.html',
+                    controller: 'popularNlocationStoriesCtrl'
                 },
-                'shortStories@cover-stories': {
+                'shortStories@cover-story': {
                     templateUrl: 'templates/cover-story/short-stories.html',
                     controller: 'shortStoriesCtrl'
                 }
@@ -171,9 +171,9 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
                     templateUrl: 'templates/cover-story/story.html',
                     controller: 'storyCtrl' 
                 },
-                'popularNlocalityStories@story': {
-                    templateUrl: 'templates/cover-story/popular-locality-stories.html',
-                    controller: 'popularNlocalityStoriesCtrl'
+                'popularNlocationStories@story': {
+                    templateUrl: 'templates/cover-story/popular-location-stories.html',
+                    controller: 'popularNlocationStoriesCtrl'
                 }
             }
         });
