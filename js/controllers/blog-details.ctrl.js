@@ -11,6 +11,7 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $stateParams, $sce,
 	db.ref('blogs/allBlogs/'+$scope.cityId+'/'+$stateParams.id).once('value', function(snapshot){
 		$timeout(function(){
 			$scope.blog = snapshot.val();
+			document.title=$scope.blog.title;
         	if($scope.blog.placeId){
 				$scope.blog.redirectionUrl ='/#/blog-detail/gurgaon/'+convertToHyphenSeparated($scope.blog.placeName)+'/'+convertToHyphenSeparated($scope.blog.title)+'/'+$scope.blog.blogId;
         	} else {

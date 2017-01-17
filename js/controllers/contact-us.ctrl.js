@@ -1,4 +1,5 @@
 app.controller('contactUsCtrl', function($timeout, $scope, UserTokenService,$location) {
+    document.title="Contact Us";
 	$timeout(function() {
         myMap();
     }, 100);

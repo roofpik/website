@@ -1,5 +1,5 @@
 app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $mdSidenav, $sce, $stateParams, UserTokenService, $location) {
-
+    document.title="Cover Stories";
     var timestamp = new Date().getTime();
     var urlInfo = {
         url: $location.path()

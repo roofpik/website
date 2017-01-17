@@ -1,4 +1,5 @@
 app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $mdDialog, $rootScope, UserTokenService, $location) {
+    document.title="Write Review";
     var timestamp = new Date().getTime();
     var urlInfo = {
         url: $location.path()

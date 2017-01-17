@@ -1,4 +1,5 @@
 app.controller('faqCtrl', function($scope, $timeout, UserTokenService, $location){
+	document.title="FAQ's";
     var timestamp = new Date().getTime();
     var urlInfo = {
         url: $location.path()

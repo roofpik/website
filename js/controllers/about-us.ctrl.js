@@ -1,4 +1,5 @@
 app.controller('aboutUsCtrl', function($scope, $timeout, UserTokenService, $location){
+	document.title = 'About Roofpik';
     var timestamp = new Date().getTime();
     var urlInfo = {
         url: $location.path()

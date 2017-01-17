@@ -1,4 +1,5 @@
 app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce, $stateParams, UserTokenService, $location) {
+    document.title="Blogs";
     var timestamp = new Date().getTime();
     var urlInfo = {
         url: $location.path()
