@@ -111,6 +111,13 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         });
 
     $stateProvider
+        .state('write-reviews', {
+            url: '/write-reviews/:id',
+            templateUrl: 'templates/write-review.html',
+            controller: 'writeReviewCtrl'
+        });
+
+    $stateProvider
         .state('edit-review', {
             url: '/edit-review/:city/:type/:typeId/:typeName/:id/:reviewIn',
             templateUrl: 'templates/edit-review.html',

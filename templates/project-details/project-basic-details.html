@@ -1,10 +1,11 @@
 <div>
-    <h1 id="project-name">{{projectName}}&nbsp;&nbsp;<span ng-repeat="rate in [1,2,3,4,5] track by $index">
+    <h1 id="project-name">{{projectName}}&nbsp;&nbsp;<span ng-repeat="rate in [1,2,3,4,5] track by $index" ng-show="allRatings.overallRating">
         <i class="fa fa-star" ng-class="($index<=(allRatings.overallRating-1))?'newGreen':'grey'" id="overall-rating"></i>
         </span>
-        <span id="review-num">({{allRatings.overallRatingNum}} Review<span ng-show="allRatings.overallRatingNum > 1">s</span>)</span>
+        <span id="review-num" ng-show="allRatings.overallRating">({{allRatings.overallRatingNum}} Review<span ng-show="allRatings.overallRatingNum > 1">s</span>)</span>
+        <span ng-hide="allRatings.overallRating" id="overall-rating">(0 Reviews) <a href="/#/write-reviews/{{project.projectId}}" class="newGreen">Be the first one to review.</a></span>
     </h1>
-    <p id="display-address">{{project.projectDetails.address.displayAddress}}</p>
+    <p id="display-address" >{{project.projectDetails.address.displayAddress}}</p>
     <div layout="row" layout-wrap id="status-segment">
         <div flex flex-xs="50" id="status">
             <i class="fa fa-home"></i>

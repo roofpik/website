@@ -66,6 +66,10 @@
     font-size:20px;
 }
 
+.project-details-page a {
+    text-decoration:none;
+}
+
 .project-details-page #review-num {
     font-size:20px;
 }

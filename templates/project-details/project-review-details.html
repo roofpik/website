@@ -1,4 +1,4 @@
-<div>
+<div ng-show="hasReviews">
     <div class="user-review" ng-repeat="review in reviews | orderBy :'-'" layout="row" layout-wrap ng-show="$index < viewReviews">
         <div class="user-img" flex-gt-sm="15" flex-xs="25" flex-sm="20">
             <img src="images/general/noImage.png" alt="User">

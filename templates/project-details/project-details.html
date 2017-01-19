@@ -4,7 +4,7 @@
         <article flex="70" flex-xs="100"   class="project-basic-details-container">
             <div ui-view="basic"></div>
             <div layout="row" layout-wrap>
-                <p flex="100" id="rating">
+                <p flex="100" id="rating" ng-show="allRatings.overallRatingNum">
                     {{allRatings.overallRatingNum}} Review<span ng-show="allRatings.overallRatingNum > 1"></span>
                     <span ng-repeat="rate in [1,2,3,4,5] track by $index">
                         <i class="fa fa-star" ng-class="($index<=(allRatings.overallRating-1))?'newGreen':'grey'"></i>

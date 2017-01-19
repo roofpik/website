@@ -5,10 +5,12 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
         url: $location.path()
     }
     UserTokenService.checkToken(urlInfo, timestamp, 1);
+    $('.project-details-page').hide();
 
     var rates = [1, 2, 3, 4, 5];
     $scope.projectId = $stateParams.id;
     $scope.reviews = [];
+    $scope.hasReviews = false;
     $scope.isActive = '';
     $scope.viewReviews = 5;
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
@@ -309,7 +311,6 @@ function generateConfigurations(configs) {
     function addNa(configs){
         $scope.configurations = [];
         for(key in configs){
-            console.log(configs[key]);
             if(!configs[key].buyMin) {
                 configs[key].buyMin = 'NA'
             }
@@ -322,10 +323,8 @@ function generateConfigurations(configs) {
             if(!configs[key].rentMax) {
                 configs[key].rentMax = 'NA'
             }
-            console.log(configs[key]);
             $scope.configurations.push(configs[key]);
         }
-        console.log($scope.configurations);
     }
 
     function generateImageList(images) {
@@ -375,6 +374,7 @@ app.controller('reviewDetailsCtrl', function($scope, $timeout, $rootScope){
         .once('value', function(snapshot) {
             // console.log(snapshot.val());
             if (snapshot.val()) {
+                $scope.hasReviews = true;
                 var allReviewsCount = Object.keys(snapshot.val()).length;
                 $timeout(function() {
                     var reviewCount = 0;
@@ -430,8 +430,44 @@ app.controller('ratingDetailsCtrl', function($scope, $timeout, $rootScope){
                 if ($scope.allRatings.convenienceOfParking) {
                     $scope.allRatings.convenienceOfParking1 = Math.round($scope.allRatings.convenienceOfParking);
                 }
+                if($scope.allRatings.layoutOfApartment){
+                    $scope.allRatings.layoutOfApartment1 = Math.round($scope.allRatings.layoutOfApartment);
+                }
+                if($scope.allRatings.infrastructure){
+                    $scope.allRatings.infrastructure1 = Math.round($scope.allRatings.infrastructure);
+                }
+                loading(false);
+            } else {
+                $scope.allRatings = {
+                    amenities: 0,
+                    amenities1: 0,
+                    convenienceOfHouseMaids: 0,
+                    convenienceOfHouseMaids1: 0,
+                    convenienceOfParking: 0,
+                    convenienceOfParking1: 0,
+                    electricityAndWaterSupply: 0,
+                    electricityAndWaterSupply1: 0,
+                    infrastructure: 0,
+                    infrastructure1: 0,
+                    openAndGreenAreas: 0,
+                    openAndGreenAreas1: 0,
+                    security: 0,
+                    security1: 0,
+                    layoutOfApartment: 0,
+                    layoutOfApartment1: 0,
+                    oneStar: 0,
+                    twoStar: 0,
+                    threeStar: 0,
+                    fourStar: 0,
+                    fiveStar: 0,
+                    overallRating: 0,
+                    overallRatingNum: 0
+                }
+                $rootScope.allRatings = $scope.allRatings;
+                console.log($scope.allRatings);
                 loading(false);
             }
+            $('.project-details-page').show();
         }, 50);
     })
 });
