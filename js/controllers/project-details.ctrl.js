@@ -369,34 +369,86 @@ function generateConfigurations(configs) {
 });
 
 app.controller('reviewDetailsCtrl', function($scope, $timeout, $rootScope){
+    function dynamicSort(property) {
+        var sortOrder = 1;
+        if(property[0] === "-") {
+            sortOrder = -1;
+            property = property.substr(1);
+        }
+        return function (a,b) {
+            var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+            return result * sortOrder;
+        }
+    }
+
     db.ref('reviews/-KYJONgh0P98xoyPPYm9/residential/' + $scope.projectId)
         .orderByChild('wordCount')
+        .limitToLast(6)
         .once('value', function(snapshot) {
-            // console.log(snapshot.val());
             if (snapshot.val()) {
-                $scope.hasReviews = true;
-                var allReviewsCount = Object.keys(snapshot.val()).length;
                 $timeout(function() {
+                    $scope.hasReviews = true;
                     var reviewCount = 0;
-                    snapshot.forEach(function(childSnapshot) {
+                    var allReviewCount = Object.keys(snapshot.val()).length;
+                    snapshot.forEach(function(childSnapshot){
+                        // console.log(childSnapshot.key, childSnapshot.val().wordCount);
                         reviewCount++;
-                        $scope.reviews.push(childSnapshot.val());
-                        if (reviewCount == allReviewsCount) {
-                            if (reviewCount > 5) {
+                        if(!$scope.lastValue){
+                            $scope.lastValue = childSnapshot.val().wordCount;
+                        } else {
+                            $scope.reviews.push(childSnapshot.val());
+                        }
+                        $scope.reviews.sort(dynamicSort("-wordCount"));
+                        if(reviewCount ==  allReviewCount){
+                            if(reviewCount < 5){
+                                $scope.showReviewBtn = false;
+                            } else {
                                 $scope.showReviewBtn = true;
                             }
                         }
-                    });
+                    })
                 }, 0);
             }
         })
+
     $scope.showMoreReviews = function() {
+        loading(true);
         $scope.viewReviews += 5;
-        if ($scope.reviews.length > $scope.viewReviews) {
-            $scope.showReviewBtn = true;
-        } else {
-            $scope.showReviewBtn = false;
-        }
+        // console.log($scope.lastValue);
+        db.ref('reviews/-KYJONgh0P98xoyPPYm9/residential/' + $scope.projectId)
+            .orderByChild('wordCount')
+            .endAt($scope.lastValue)
+            .limitToLast(6)
+            .once('value', function(snapshot){
+                $timeout(function() {
+                    if (snapshot.val()) {
+                            var reviewCount = 0;
+                            var allReviewCount = Object.keys(snapshot.val()).length;
+                            snapshot.forEach(function(childSnapshot){
+                                // console.log(childSnapshot.key, childSnapshot.val().wordCount);
+                                reviewCount++;
+                                if(reviewCount==1){
+                                    $scope.lastValue = childSnapshot.val().wordCount;
+                                } else {
+                                    $scope.reviews.push(childSnapshot.val());
+                                }
+                                $scope.reviews.sort(dynamicSort("-wordCount"));
+                                if(reviewCount ==  allReviewCount){
+                                    loading(false);
+                                    if(reviewCount < 5){
+                                        $scope.showReviewBtn = false;
+                                    } else {
+                                        $scope.showReviewBtn = true;
+                                    }
+                                }
+                            })
+                        // console.log($scope.showReviewBtn);
+                    } else {
+                        $scope.showReviewBtn = false;
+                        loading(false);
+                    }
+                }, 0);
+            })
     }
 });
 
@@ -464,7 +516,7 @@ app.controller('ratingDetailsCtrl', function($scope, $timeout, $rootScope){
                     overallRatingNum: 0
                 }
                 $rootScope.allRatings = $scope.allRatings;
-                console.log($scope.allRatings);
+                // console.log($scope.allRatings);
                 loading(false);
             }
             $('.project-details-page').show();

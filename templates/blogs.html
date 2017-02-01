@@ -1,7 +1,7 @@
 <md-content class="blogs">
     <div layout="column" flex layout-wrap>
-        <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="header-blog">
-            <article flex="50" flex-xs="100" flex-sm="100">
+        <section layout-sm="column" layout-xs="column" hide-xs layout-gt-sm="row" class="header-blog hide-xs">
+            <article flex="50" flex-xs="100" flex-sm="100" class="over-hidden">
                 <div class="featured-blog" style="background-image:url({{featuredBlogs[0].coverPhoto}});">
                     <a ng-href="{{featuredBlogs[0].redirectionUrl}}">
                         <div class="featured-caption">
@@ -18,7 +18,7 @@
                     </a>
                 </div>
             </article>
-            <article flex="50" flex-xs="100" flex-sm="100">
+            <article flex="50" flex-xs="100" flex-sm="100" class="over-hidden">
                 <div class="featured-blog" style="background-image:url({{featuredBlogs[1].coverPhoto}});">
                     <a ng-href="{{featuredBlogs[1].redirectionUrl}}">
                         <div class="featured-caption">
