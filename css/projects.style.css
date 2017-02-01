@@ -177,7 +177,8 @@
     color: #22a8f4;
 }
 
-.project-list-page #locality-filters {
+.project-list-page #locality-filters .filters{
+    padding: 0 16px;
+    max-height: 215px;
     overflow: scroll;
-    max-height: 220px;
 }
