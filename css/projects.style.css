@@ -176,3 +176,8 @@
 .project-list-page .path-filters span.path-btn:nth-child(odd) {
     color: #22a8f4;
 }
+
+.project-list-page #locality-filters {
+    overflow: scroll;
+    max-height: 220px;
+}

@@ -20,20 +20,20 @@
             <p>{{project.segment}}</p>
         </div>
     </div>
-    <div layout="row" layout-wrap id="detail">
+    <div layout="row" layout-wrap id="detail" ng-show="buyMin != 'NA' && buyMax != 'NA' && rentMin != 'NA' && rentMax != 'NA'">
         <div flex="20" flex-xs="30" id="detail-title">
             <p>Price</p>
         </div>
         <div flex="80" flex-xs="70" layout-wrap layout="row" id="detail-value">
-            <div flex="50" flex-xs="100" flex-sm="100">
+            <div flex="50" flex-xs="100" flex-sm="100" ng-show="buyMin != 'NA' && buyMax != 'NA'">
                 <p><b>Buy:&nbsp;&nbsp;</b>&#8377;{{buyMin}}<span ng-show="buyMin != buyMax"> - &#8377;{{buyMax}}</span></p>
             </div>
-            <div flex="50" flex-xs="100" flex-sm="100">
+            <div flex="50" flex-xs="100" flex-sm="100" ng-show="rentMin != 'NA' && rentMax != 'NA'">
                 <p><b>Rent:&nbsp;&nbsp;</b>&#8377;{{rentMin}}<span ng-show="rentMin != rentMax"> - &#8377;{{rentMax}}</p>
             </div>
         </div>
     </div>
-    <div layout="row" layout-wrap id="detail" ng-show="project.configurations">
+    <div layout="row" layout-wrap id="detail" ng-show="project.configurations" ng-show="minArea != 'NA' && maxArea != 'NA'">
         <div flex="20" flex-xs="30" id="detail-title">
             <p>Area</p>
         </div>
