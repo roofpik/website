@@ -393,19 +393,24 @@ app.controller('reviewDetailsCtrl', function($scope, $timeout, $rootScope){
                     snapshot.forEach(function(childSnapshot){
                         // console.log(childSnapshot.key, childSnapshot.val().wordCount);
                         reviewCount++;
-                        if(!$scope.lastValue){
-                            $scope.lastValue = childSnapshot.val().wordCount;
-                        } else {
+                        if(allReviewCount < 6){
                             $scope.reviews.push(childSnapshot.val());
+                        } else {
+                            if(!$scope.lastValue){
+                                $scope.lastValue = childSnapshot.val().wordCount;
+                            } else {
+                                $scope.reviews.push(childSnapshot.val());
+                            }
                         }
-                        $scope.reviews.sort(dynamicSort("-wordCount"));
                         if(reviewCount ==  allReviewCount){
-                            if(reviewCount < 5){
+                            loading(false);
+                            if(reviewCount < 6){
                                 $scope.showReviewBtn = false;
                             } else {
                                 $scope.showReviewBtn = true;
                             }
                         }
+                        $scope.reviews.sort(dynamicSort("-wordCount"));
                     })
                 }, 0);
             }
@@ -427,20 +432,24 @@ app.controller('reviewDetailsCtrl', function($scope, $timeout, $rootScope){
                             snapshot.forEach(function(childSnapshot){
                                 // console.log(childSnapshot.key, childSnapshot.val().wordCount);
                                 reviewCount++;
-                                if(reviewCount==1){
-                                    $scope.lastValue = childSnapshot.val().wordCount;
-                                } else {
+                                if(allReviewCount < 6){
                                     $scope.reviews.push(childSnapshot.val());
+                                } else {
+                                    if(reviewCount==1){
+                                        $scope.lastValue = childSnapshot.val().wordCount;
+                                    } else {
+                                        $scope.reviews.push(childSnapshot.val());
+                                    }
                                 }
-                                $scope.reviews.sort(dynamicSort("-wordCount"));
                                 if(reviewCount ==  allReviewCount){
                                     loading(false);
-                                    if(reviewCount < 5){
+                                    if(reviewCount < 6){
                                         $scope.showReviewBtn = false;
                                     } else {
                                         $scope.showReviewBtn = true;
                                     }
                                 }
+                                $scope.reviews.sort(dynamicSort("-wordCount"));
                             })
                         // console.log($scope.showReviewBtn);
                     } else {
