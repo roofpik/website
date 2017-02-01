@@ -1,14 +1,16 @@
 app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $rootScope, $state, $sce, $mdDialog, UserTokenService, $location) {
-    console.log('called');
+    // console.log('called');
     var timestamp = new Date().getTime();
     var urlInfo = {
         url: $location.path()
     }
     UserTokenService.checkToken(urlInfo, timestamp, 1);
+    $('.project-details-page').hide();
 
     var rates = [1, 2, 3, 4, 5];
     $scope.projectId = $stateParams.id;
     $scope.reviews = [];
+    $scope.hasReviews = false;
     $scope.isActive = '';
     $scope.viewReviews = 5;
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
@@ -105,6 +107,7 @@ app.controller('basicDetailsCtrl', function($scope, $timeout, $rootScope, $state
         $timeout(function() {
             $scope.project = snapshot.val();
             $scope.projectName = $scope.project.projectName;
+            document.title=$scope.projectName;
             $scope.coverImage = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/residential/' + $scope.project.projectId + '/images/coverPhoto/' + $scope.project.images.coverPhoto.url + '-m.jpg';
             $scope.path = [">", "Gurgaon", ">", "Residential", ">"];
             if ($scope.project.configurations) {
@@ -259,6 +262,7 @@ function generateConfigurations(configs) {
                         }
                     }
                     example[configs[key].bhk + '2'] = data;
+                    // console.log(example);
                 }
             } else {
                 var data = {
@@ -299,23 +303,27 @@ function generateConfigurations(configs) {
                     }
                 }
                 example[configs[key].bhk] = data;
+                // console.log(example);
             }
         }
-
-        for(key in example){
-            if(!example[key].buyMin) {
-                example[key].buyMin = 'NA'
+        addNa(example);
+    }
+    function addNa(configs){
+        $scope.configurations = [];
+        for(key in configs){
+            if(!configs[key].buyMin) {
+                configs[key].buyMin = 'NA'
             }
-            if(!example[key].buyMax) {
-                example[key].buyMax = 'NA'
+            if(!configs[key].buyMax) {
+                configs[key].buyMax = 'NA'
             }
-            if(!example[key].rentMin) {
-                example[key].rentMin = 'NA'
+            if(!configs[key].rentMin) {
+                configs[key].rentMin = 'NA'
             }
-            if(!example[key].rentMax) {
-                example[key].rentMax = 'NA'
+            if(!configs[key].rentMax) {
+                configs[key].rentMax = 'NA'
             }
-            $scope.configurations.push(example[key]);
+            $scope.configurations.push(configs[key]);
         }
     }
 
@@ -358,43 +366,95 @@ function generateConfigurations(configs) {
             $scope.amenitiesMoreLess = 'Less -';
         }
     }
-
-    $scope.showMoreReviews = function() {
-        $scope.viewReviews += 5;
-        if ($scope.reviews.length > $scope.viewReviews) {
-            $scope.showReviewBtn = true;
-        } else {
-            $scope.showReviewBtn = false;
-        }
-    }
 });
 
 app.controller('reviewDetailsCtrl', function($scope, $timeout, $rootScope){
+    function dynamicSort(property) {
+        var sortOrder = 1;
+        if(property[0] === "-") {
+            sortOrder = -1;
+            property = property.substr(1);
+        }
+        return function (a,b) {
+            var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+            return result * sortOrder;
+        }
+    }
+
     db.ref('reviews/-KYJONgh0P98xoyPPYm9/residential/' + $scope.projectId)
         .orderByChild('wordCount')
+        .limitToLast(6)
         .once('value', function(snapshot) {
-            console.log(snapshot.val());
             if (snapshot.val()) {
-                var allReviewsCount = Object.keys(snapshot.val()).length;
                 $timeout(function() {
+                    $scope.hasReviews = true;
                     var reviewCount = 0;
-                    snapshot.forEach(function(childSnapshot) {
+                    var allReviewCount = Object.keys(snapshot.val()).length;
+                    snapshot.forEach(function(childSnapshot){
+                        // console.log(childSnapshot.key, childSnapshot.val().wordCount);
                         reviewCount++;
-                        $scope.reviews.push(childSnapshot.val());
-                        if (reviewCount == allReviewsCount) {
-                            if (reviewCount > 5) {
+                        if(!$scope.lastValue){
+                            $scope.lastValue = childSnapshot.val().wordCount;
+                        } else {
+                            $scope.reviews.push(childSnapshot.val());
+                        }
+                        $scope.reviews.sort(dynamicSort("-wordCount"));
+                        if(reviewCount ==  allReviewCount){
+                            if(reviewCount < 5){
+                                $scope.showReviewBtn = false;
+                            } else {
                                 $scope.showReviewBtn = true;
                             }
                         }
-                    });
+                    })
                 }, 0);
             }
         })
+
+    $scope.showMoreReviews = function() {
+        loading(true);
+        $scope.viewReviews += 5;
+        // console.log($scope.lastValue);
+        db.ref('reviews/-KYJONgh0P98xoyPPYm9/residential/' + $scope.projectId)
+            .orderByChild('wordCount')
+            .endAt($scope.lastValue)
+            .limitToLast(6)
+            .once('value', function(snapshot){
+                $timeout(function() {
+                    if (snapshot.val()) {
+                            var reviewCount = 0;
+                            var allReviewCount = Object.keys(snapshot.val()).length;
+                            snapshot.forEach(function(childSnapshot){
+                                // console.log(childSnapshot.key, childSnapshot.val().wordCount);
+                                reviewCount++;
+                                if(reviewCount==1){
+                                    $scope.lastValue = childSnapshot.val().wordCount;
+                                } else {
+                                    $scope.reviews.push(childSnapshot.val());
+                                }
+                                $scope.reviews.sort(dynamicSort("-wordCount"));
+                                if(reviewCount ==  allReviewCount){
+                                    loading(false);
+                                    if(reviewCount < 5){
+                                        $scope.showReviewBtn = false;
+                                    } else {
+                                        $scope.showReviewBtn = true;
+                                    }
+                                }
+                            })
+                        // console.log($scope.showReviewBtn);
+                    } else {
+                        $scope.showReviewBtn = false;
+                        loading(false);
+                    }
+                }, 0);
+            })
+    }
 });
 
 app.controller('ratingDetailsCtrl', function($scope, $timeout, $rootScope){
     db.ref('ratingReview/-KYJONgh0P98xoyPPYm9/residential/' + $scope.projectId).once('value', function(snapshot) {
-        console.log(snapshot.val());
+        // console.log(snapshot.val());
         $timeout(function() {
             if (snapshot.val()) {
                 $rootScope.allRatings = snapshot.val();
@@ -422,8 +482,44 @@ app.controller('ratingDetailsCtrl', function($scope, $timeout, $rootScope){
                 if ($scope.allRatings.convenienceOfParking) {
                     $scope.allRatings.convenienceOfParking1 = Math.round($scope.allRatings.convenienceOfParking);
                 }
+                if($scope.allRatings.layoutOfApartment){
+                    $scope.allRatings.layoutOfApartment1 = Math.round($scope.allRatings.layoutOfApartment);
+                }
+                if($scope.allRatings.infrastructure){
+                    $scope.allRatings.infrastructure1 = Math.round($scope.allRatings.infrastructure);
+                }
+                loading(false);
+            } else {
+                $scope.allRatings = {
+                    amenities: 0,
+                    amenities1: 0,
+                    convenienceOfHouseMaids: 0,
+                    convenienceOfHouseMaids1: 0,
+                    convenienceOfParking: 0,
+                    convenienceOfParking1: 0,
+                    electricityAndWaterSupply: 0,
+                    electricityAndWaterSupply1: 0,
+                    infrastructure: 0,
+                    infrastructure1: 0,
+                    openAndGreenAreas: 0,
+                    openAndGreenAreas1: 0,
+                    security: 0,
+                    security1: 0,
+                    layoutOfApartment: 0,
+                    layoutOfApartment1: 0,
+                    oneStar: 0,
+                    twoStar: 0,
+                    threeStar: 0,
+                    fourStar: 0,
+                    fiveStar: 0,
+                    overallRating: 0,
+                    overallRatingNum: 0
+                }
+                $rootScope.allRatings = $scope.allRatings;
+                // console.log($scope.allRatings);
                 loading(false);
             }
+            $('.project-details-page').show();
         }, 50);
     })
 });

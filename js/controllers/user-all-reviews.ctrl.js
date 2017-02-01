@@ -1,5 +1,6 @@
 app.controller('userAllReviewsCtrl', function($scope, $timeout, $state, $rootScope, UserTokenService, $location){
 	// var user = firebase.auth().currentUser;
+	document.title="Reviews";
     var timestamp = new Date().getTime();
     var urlInfo = {
         url: $location.path()

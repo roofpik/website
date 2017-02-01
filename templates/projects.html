@@ -36,7 +36,7 @@
                     </p>
                 </div>
             </md-card> -->
-            <md-card flex="100">
+            <md-card flex="100" id="locality-filters">
                 <p id="filter-headings">Locality</p>
                 <div class="filters">
                     <p ng-repeat="item in localities">
@@ -109,10 +109,13 @@
                         <div layout="column" class="md-padding" flex="50" flex-xs="75" flex-sm="85" class="project-data">
                             <h3 id="project-name">{{project.projectName}}</h3>
                             <h4>{{project.displayAddress}}</h4>
-                            <p class="rating">
+                            <p class="rating" ng-show="project.overallRating != 0">
                                 <span ng-repeat="rate in [1,2,3,4,5] track by $index">
                                 <i class="material-icons" ng-class="($index<=(project.overallRating-1))?'roofGreen':'grey'" style="font-size:12px;">grade</i>
                             </span>{{project.overallRatingNum}} Review<span ng-show="project.overallRatingNum>1">s</span>
+                            </p>
+                            <p class="rating" ng-show="project.overallRating == 0">
+                            </span><b>No Reviews Available</b></span>
                             </p>
                             <p class="rank">#{{$index+1}} of {{numProjects}} projects in Gurgaon</p>
                         </div>

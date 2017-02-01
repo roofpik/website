@@ -1,4 +1,5 @@
 app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $http, UserTokenService, $location, $rootScope) {
+    document.title="Profile";
     loading(true);
     ga('set', 'page', '/profile.html');
     ga('send', 'pageview');

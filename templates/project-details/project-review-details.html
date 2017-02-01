@@ -1,5 +1,5 @@
-<div>
-    <div class="user-review" ng-repeat="review in reviews | orderBy :'-'" layout="row" layout-wrap ng-show="$index < viewReviews">
+<div ng-show="hasReviews">
+    <div class="user-review" ng-repeat="review in reviews" layout="row" layout-wrap ng-show="$index < viewReviews">
         <div class="user-img" flex-gt-sm="15" flex-xs="25" flex-sm="20">
             <img src="images/general/noImage.png" alt="User">
         </div>
@@ -14,7 +14,8 @@
                 </h3>
                 <h3 id="review-title">{{review.reviewTitle}}</h3>
             </div>
-            <p id="review-text">{{review.reviewText}}</p>
+            <p id="review-text" ng-show="!review.hide">{{review.reviewText | limitTo:470}}<span ng-show="review.wordCount > 470">...<span style="color: #1ab0d3;font-weight:bold;cursor:pointer;" ng-click="review.hide = !review.hide">Show More</span></span></p>
+            <p id="review-text" ng-hide="!review.hide">{{review.reviewText}}</p>
         </div>
     </div>
     <div class="more-review-btn" ng-show="showReviewBtn">

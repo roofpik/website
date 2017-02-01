@@ -1,4 +1,5 @@
 app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce, $stateParams, UserTokenService, $location) {
+    document.title="Blogs";
     var timestamp = new Date().getTime();
     var urlInfo = {
         url: $location.path()
@@ -24,6 +25,8 @@ app.controller('featuredBlogsCtrl', function($scope, $timeout, $stateParams){
                         value.redirectionUrl ='/#/blog-details/gurgaon/'+convertToHyphenSeparated(value.title)+'/'+value.blogId;
                     }
                     value.redirectionUrl = value.redirectionUrl.replace(/[?=]/g, "");
+                    value.redirectionUrl = value.redirectionUrl.replace(/[!=]/g, "");
+                    value.redirectionUrl = value.redirectionUrl.replace(/[.=]/g, "");
                     value.coverPhoto = 'http://cdn.roofpik.com/roofpik/blogs/allBlogs/'+$scope.cityId+'/'+value.blogId+'/coverPhoto/'+value.coverPhoto+'-m.jpg';
                     $scope.featuredBlogs.push(value);
                 })
@@ -45,6 +48,8 @@ app.controller('popularNlocalityCtrl', function($scope, $timeout, $stateParams){
                         blogData[key].redirectionUrl ='/#/blog-details/gurgaon/'+convertToHyphenSeparated(blogData[key].title)+'/'+blogData[key].blogId;
                     }
                     blogData[key].redirectionUrl = blogData[key].redirectionUrl.replace(/[?=]/g, "");
+                    blogData[key].redirectionUrl = blogData[key].redirectionUrl.replace(/[!=]/g, "");
+                    blogData[key].redirectionUrl = blogData[key].redirectionUrl.replace(/[.=]/g, "");
                     blogData[key].coverPhoto = 'http://cdn.roofpik.com/roofpik/blogs/allBlogs/'+$scope.cityId+'/'+blogData[key].blogId+'/coverPhoto/'+blogData[key].coverPhoto+'-m.jpg';
                     $scope.popularBlogs[key] = blogData[key];
                 }
@@ -79,6 +84,8 @@ app.controller('shortBlogsCtrl', function($scope, $timeout, $sce, $stateParams){
                         value.redirectionUrl ='/#/blog-details/gurgaon/'+convertToHyphenSeparated(value.title)+'/'+value.blogId;
                     }
                     value.redirectionUrl = value.redirectionUrl.replace(/[?=]/g, "");
+                    value.redirectionUrl = value.redirectionUrl.replace(/[!=]/g, "");
+                    value.redirectionUrl = value.redirectionUrl.replace(/[.=]/g, "");
                     value.coverPhoto = 'http://cdn.roofpik.com/roofpik/blogs/allBlogs/'+$scope.cityId+'/'+value.blogId+'/coverPhoto/'+value.coverPhoto+'-m.jpg';
                     value.selected = true;
                 })

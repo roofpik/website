@@ -4,6 +4,7 @@ app.controller('editReviewCtrl', function($scope, $http, $timeout, $mdToast, $st
         url: $location.path()
     }
     UserTokenService.checkToken(urlInfo, timestamp, 1);
+    document.title=$stateParams.typeName+' Review';
     
     $scope.dataloaded = false;
     $scope.reviewName = $stateParams.typeName;

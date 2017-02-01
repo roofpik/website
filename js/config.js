@@ -111,6 +111,13 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         });
 
     $stateProvider
+        .state('write-reviews', {
+            url: '/write-reviews/:id',
+            templateUrl: 'templates/write-review.html',
+            controller: 'writeReviewCtrl'
+        });
+
+    $stateProvider
         .state('edit-review', {
             url: '/edit-review/:city/:type/:typeId/:typeName/:id/:reviewIn',
             templateUrl: 'templates/edit-review.html',
@@ -129,9 +136,9 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
                     templateUrl: 'templates/cover-story/featured-stories.html',
                     controller: 'featuredStoriesCtrl'
                 },
-                'popularNlocalityStories@cover-stories': {
-                    templateUrl: 'templates/cover-story/popular-locality-stories.html',
-                    controller: 'popularNlocalityStoriesCtrl'
+                'popularNlocationStories@cover-stories': {
+                    templateUrl: 'templates/cover-story/popular-location-stories.html',
+                    controller: 'popularNlocationStoriesCtrl'
                 },
                 'shortStories@cover-stories': {
                     templateUrl: 'templates/cover-story/short-stories.html',
@@ -148,15 +155,15 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
                     templateUrl: 'templates/cover-story/cover-stories.html',
                     controller: 'coverStoriesCtrl' 
                 },
-                'featuredStories@cover-stories': {
+                'featuredStories@cover-story': {
                     templateUrl: 'templates/cover-story/featured-stories.html',
                     controller: 'featuredStoriesCtrl'
                 },
-                'popularNlocalityStories@cover-stories': {
-                    templateUrl: 'templates/cover-story/popular-locality-stories.html',
-                    controller: 'popularNlocalityStoriesCtrl'
+                'popularNlocationStories@cover-story': {
+                    templateUrl: 'templates/cover-story/popular-location-stories.html',
+                    controller: 'popularNlocationStoriesCtrl'
                 },
-                'shortStories@cover-stories': {
+                'shortStories@cover-story': {
                     templateUrl: 'templates/cover-story/short-stories.html',
                     controller: 'shortStoriesCtrl'
                 }
@@ -171,9 +178,9 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
                     templateUrl: 'templates/cover-story/story.html',
                     controller: 'storyCtrl' 
                 },
-                'popularNlocalityStories@story': {
-                    templateUrl: 'templates/cover-story/popular-locality-stories.html',
-                    controller: 'popularNlocalityStoriesCtrl'
+                'popularNlocationStories@story': {
+                    templateUrl: 'templates/cover-story/popular-location-stories.html',
+                    controller: 'popularNlocationStoriesCtrl'
                 }
             }
         });
@@ -211,7 +218,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
                 },
                 'featuredBlogs@blog': {
                     templateUrl: 'templates/blogs/featured-blogs.html',
-                    controller: 'featuredStoriesCtrl'
+                    controller: 'featuredBlogsCtrl'
                 },
                 'popularNlocalityBlogs@blog': {
                     templateUrl: 'templates/blogs/popular-locality-blogs.html',
@@ -244,10 +251,10 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             url: '/blog-detail/:city/:place/:title/:id',
             views: {
                 '': { 
-                    templateUrl: 'templates/blogs/blog-detail.html',
+                    templateUrl: 'templates/blogs/blog-details.html',
                     controller: 'blogDetailsCtrl' 
                 },
-                'popularNlocality@blog-detail': {
+                'popularNlocalityBlogs@blog-detail': {
                     templateUrl: 'templates/blogs/popular-locality-blogs.html',
                     controller: 'popularNlocalityCtrl'
                 }

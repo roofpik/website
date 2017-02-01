@@ -1,10 +1,11 @@
 <div>
-    <h1 id="project-name">{{projectName}}&nbsp;&nbsp;<span ng-repeat="rate in [1,2,3,4,5] track by $index">
+    <h1 id="project-name">{{projectName}}&nbsp;&nbsp;<span ng-repeat="rate in [1,2,3,4,5] track by $index" ng-show="allRatings.overallRating">
         <i class="fa fa-star" ng-class="($index<=(allRatings.overallRating-1))?'newGreen':'grey'" id="overall-rating"></i>
         </span>
-        <span id="review-num">({{allRatings.overallRatingNum}} Review<span ng-show="allRatings.overallRatingNum > 1">s</span>)</span>
+        <span id="review-num" ng-show="allRatings.overallRating">({{allRatings.overallRatingNum}} Review<span ng-show="allRatings.overallRatingNum > 1">s</span>)</span>
+        <span ng-hide="allRatings.overallRating" id="overall-rating">(0 Reviews) <a href="/#/write-reviews/{{project.projectId}}" class="newGreen">Be the first one to review.</a></span>
     </h1>
-    <p id="display-address">{{project.projectDetails.address.displayAddress}}</p>
+    <p id="display-address" >{{project.projectDetails.address.displayAddress}}</p>
     <div layout="row" layout-wrap id="status-segment">
         <div flex flex-xs="50" id="status">
             <i class="fa fa-home"></i>
@@ -19,20 +20,20 @@
             <p>{{project.segment}}</p>
         </div>
     </div>
-    <div layout="row" layout-wrap id="detail">
+    <div layout="row" layout-wrap id="detail" ng-hide="buyMin == 'NA' && buyMax == 'NA' && rentMin == 'NA' && rentMax == 'NA'">
         <div flex="20" flex-xs="30" id="detail-title">
             <p>Price</p>
         </div>
         <div flex="80" flex-xs="70" layout-wrap layout="row" id="detail-value">
-            <div flex="50" flex-xs="100" flex-sm="100">
+            <div flex="50" flex-xs="100" flex-sm="100" ng-show="buyMin != 'NA'">
                 <p><b>Buy:&nbsp;&nbsp;</b>&#8377;{{buyMin}}<span ng-show="buyMin != buyMax"> - &#8377;{{buyMax}}</span></p>
             </div>
-            <div flex="50" flex-xs="100" flex-sm="100">
+            <div flex="50" flex-xs="100" flex-sm="100" ng-show="rentMin != 'NA'">
                 <p><b>Rent:&nbsp;&nbsp;</b>&#8377;{{rentMin}}<span ng-show="rentMin != rentMax"> - &#8377;{{rentMax}}</p>
             </div>
         </div>
     </div>
-    <div layout="row" layout-wrap id="detail" ng-show="project.configurations">
+    <div layout="row" layout-wrap id="detail" ng-show="project.configurations" ng-hide="minArea == 'NA' && maxArea == 'NA'">
         <div flex="20" flex-xs="30" id="detail-title">
             <p>Area</p>
         </div>

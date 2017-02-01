@@ -1,4 +1,5 @@
 app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state, UserTokenService,$location){
+    document.title="Projects";
     var timestamp = new Date().getTime();
     var urlInfo = {
         url: $location.path()

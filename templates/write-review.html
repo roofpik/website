@@ -21,7 +21,7 @@
                     <h3>Review</h3>
                 </div>
                 <form name="reviewForm" id="review-form-fields">
-                    <div layout="row" layout-wrap>
+                    <div layout="row" layout-wrap ng-show="showSearch">
                         <input ng-model="selectedItem" placeholder="Select Project/Locality" ng-change="nameEntered()" flex id="project-name" required>
                         <div class="searchList" ng-show="showList" flex="100">
                             <md-list class="review-search-list">
@@ -30,6 +30,9 @@
                                 </md-list-item>
                             </md-list>
                         </div>
+                    </div>
+                    <div layout="row" ng-hide="showSearch">
+                        <h2>{{selectedItem}}</h2>
                     </div>
                     <div layout="row" layout-wrap class="review-param">
                         <div flex="30" flex-xs="100" class="param-title">

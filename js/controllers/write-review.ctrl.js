@@ -1,13 +1,11 @@
-app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $mdDialog, $rootScope, UserTokenService, $location) {
+app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdDialog, $rootScope, UserTokenService, $location, $stateParams) {
+    document.title="Write Review";
     var timestamp = new Date().getTime();
     var urlInfo = {
         url: $location.path()
     }
     UserTokenService.checkToken(urlInfo, timestamp, 1);
     loading(true);
-    $timeout(function(){
-        loading(false);
-    },1000);
 
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.stepsModel = [];
@@ -82,6 +80,11 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
             id: 'goodHospitals'
         }
     ];
+    if($stateParams.id){
+        $scope.showSearch = false;
+    } else {
+        $scope.showSearch = true;
+    }
 
     $rootScope.$watch('loginStatus', function(){
         if($rootScope.loginStatus){
@@ -254,6 +257,7 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
                 $scope.projectLocality.push(data[key]);
             }
         }
+        loading(false);
     }
 
     db.ref('dataVersions').once('value', function(response){
@@ -263,7 +267,19 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
             var searchListVersion = (getLocalStorage('searchList')).version;
             if(searchListVersion == $scope.dataVersions.searchList){
                 $scope.searchList = getLocalStorage('searchList').value;
-                $scope.pushToProjectLocality($scope.searchList);
+                if($stateParams.id){
+                    for(key in $scope.searchList){
+                        if($scope.searchList[key].id == $stateParams.id){
+                            $scope.selectedItem = $scope.searchList[key].name;
+                            $scope.selectedProjectOrLocality = $scope.searchList[key];
+                        }
+                    }
+                    $timeout(function(){
+                        loading(false);
+                    },1000);
+                } else {
+                    $scope.pushToProjectLocality($scope.searchList);
+                }
             } else {
                 getSearchList($scope.dataVersions.searchList);
             }
@@ -279,7 +295,19 @@ app.controller('writeReviewCtrl', function($scope, $http, $timeout, $mdToast, $m
                     $scope.searchList.push(snapshot.val()[key]);
                 }
                 setLocalStorage($scope.searchList, 'searchList', version);
-                $scope.pushToProjectLocality($scope.searchList);
+                if($stateParams.id){
+                    for(key in $scope.searchList){
+                        if($scope.searchList[key].id == $stateParams.id){
+                            $scope.selectedItem = $scope.searchList[key].name;
+                            $scope.selectedProjectOrLocality = $scope.searchList[key];
+                        }
+                    }
+                } else {
+                    $scope.pushToProjectLocality($scope.searchList);
+                }
+                $timeout(function(){
+                    loading(false);
+                },1000);
             },0);
         })  
     }
