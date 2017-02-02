@@ -1,9 +1,10 @@
-  function loginController($scope, $mdDialog, $rootScope, UserTokenService, $location) {
+  function loginController($scope, $mdDialog, $rootScope, UserTokenService, $location, $timeout) {
 
       // Log File Entry
       var timestamp = new Date().getTime();
       var urlInfo = { url: $location.path() };
       var ip;
+      var newUser = false;
       var user = {
           "createdDate": new Date().getTime(),
           "email": {
@@ -65,6 +66,7 @@
           firebase.auth().signInWithPopup(provider).then(function(result) {
               db.ref('users/' + result.user.uid + '/registeredFlag').once('value').then(function(snapshot) {
                   if (snapshot.val() == null) {
+                      newUser = true;
                       updateUser(result, 'google', 'new');
                   } else if (snapshot.val() == false) {
                       updateUser(result, 'google', 'link');
@@ -89,6 +91,7 @@
           firebase.auth().signInWithPopup(provider).then(function(result) {
               db.ref('users/' + result.user.uid + '/registeredFlag').once('value').then(function(snapshot) {
                   if (snapshot.val() == null) {
+                      newUser = true;
                       updateUser(result, 'facebook', 'new');
                   } else if (snapshot.val() == false) {
                       updateUser(result, 'facebook', 'link');
@@ -263,7 +266,30 @@
 
           $mdDialog.hide();
           loading(false, 0);
-          sweetAlert("Welcome", "You have successfully logged in!", "success");
+          if(newUser){
+            swal({
+              title: "Have a referral code ?",
+              type: "input",
+              showCancelButton: true,
+              closeOnConfirm: false,
+              animation: "slide-from-top",
+              inputPlaceholder: "Enter Code"
+            },
+            function(inputValue){
+              if(inputValue.length){
+                db.ref('users/' + user.uid + '/codeUsed').set(inputValue.toUpperCase()).then(function(){
+                  $timeout(function(){
+                    sweetAlert("Welcome", "You have successfully logged in!", "success");
+                  })
+                });
+              } else {
+                sweetAlert("Welcome", "You have successfully logged in!", "success");
+                return true;
+              }
+            });
+          } else {
+            sweetAlert("Welcome", "You have successfully logged in!", "success");
+          }
       }
       loading(false, 0);
   };
