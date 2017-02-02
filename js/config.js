@@ -17,6 +17,11 @@ app.config(function($routeProvider) {
          controller: 'project-details-Ctrl'
         
     })
+     .when("/commercial-datils", {
+        templateUrl : "../templates/commercial-details.htm",
+         controller: 'commercial-details-Ctrl'
+        
+    })
       .when("/write-review", {
         templateUrl : "../templates/write-review.htm"        
         
