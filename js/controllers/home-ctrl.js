@@ -1,4 +1,4 @@
 app.controller('home-ctrl', function($scope){
-	   $('select').material_select();;
+	    $('input#input_text').characterCounter();
 
 })

@@ -150,8 +150,8 @@ hr{border-top:solid 1px #9e9e9e !important; border-left:0; border-right:0; borde
 .tabs .tab a.active{ font-weight: 600}
 .pd5{padding:5px !important;}
 .bod-right{ border-right: 1px solid #ddd;}
-.flor .col{padding:0 5px; min-height: 150px;}
-.flor_co .col{padding:0 5px; min-height: 90px;}
+.flor .col{padding:0 10px; min-height: 150px;  margin-bottom: 20px;}
+.flor_co .col{padding:0 10px; min-height: 90px; margin-bottom: 20px;}
 .pd-tspan{padding:2px 5px 2px 20px !important;}
 .pd-tspan span, .ilpspan span{overflow: hidden; text-overflow: ellipsis;white-space: nowrap; display: block;}
 
@@ -294,6 +294,7 @@ footer.page-footer{padding-top:7px;}
 .htrating{min-height: 200px}
 .bdbtm { border-bottom: solid 1px #ddd;}
 .amncolmg .col{margin-bottom: 20px;}
+.list-dt li{list-style-type: disc !important; margin:0 0 5px 20px}
 
 @media (min-width:0px) and (max-width: 767px) {
 #loginbox{width: 90%;}

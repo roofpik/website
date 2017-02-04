@@ -12,14 +12,24 @@ app.config(function($routeProvider) {
           controller: 'projects-Ctrl'
         
     })
-     .when("/project-datils", {
+     .when("/project-details", {
         templateUrl : "../templates/project-details.htm",
          controller: 'project-details-Ctrl'
         
     })
-     .when("/commercial-datils", {
+     .when("/commercial-details", {
         templateUrl : "../templates/commercial-details.htm",
          controller: 'commercial-details-Ctrl'
+        
+    })
+     .when("/pg-details", {
+        templateUrl : "../templates/pg-details.htm",
+         controller: 'pg-details-Ctrl'
+        
+    })
+     .when("/co-working-details", {
+        templateUrl : "../templates/co-working-details.htm",
+         controller: 'co-working-details-ctrl'
         
     })
       .when("/write-review", {
