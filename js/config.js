@@ -1,13 +1,16 @@
-app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
+app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+    $locationProvider.hashPrefix('');
+    $stateProvider
+        .state('home', {
+            url: '/home',
+            templateUrl: 'templates/home/home.html',
+            controller: 'homeCtrl'
+        })
+        .state('projects', {
+            url: '/projects',
+            templateUrl: 'templates/projects/projects.html',
+            controller: 'projectsCtrl'
+        });
 
-	$stateProvider
-		.state('home', {
-			url: '/home',
-			templateUrl: 'templates/home/home.html',
-			controller: 'homeCtrl'
-		});
-
-		$urlRouterProvider.otherwise('/home');
-
-
+    $urlRouterProvider.otherwise('/projects');
 }]);
