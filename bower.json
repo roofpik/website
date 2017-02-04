@@ -1,12 +1,12 @@
 {
-  "name": "parallax",
+  "name": "roofpik",
+  "homepage": "https://github.com/roofpik/website",
   "authors": [
     "Arpit Mittal <arpit@roofpik.com>"
   ],
-  "description": "",
+  "description": "roofpik website",
   "main": "",
   "license": "MIT",
-  "homepage": "",
   "private": true,
   "ignore": [
     "**/.*",
@@ -16,7 +16,9 @@
     "tests"
   ],
   "dependencies": {
-    "angular-ui-router": "^0.3.2",
-    "angular-socialshare": "angularjs-socialshare#^2.3.3"
+    "angular": "^1.6.1",
+    "angular-ui-router": "^0.4.2",
+    "sweetalert": "^1.1.3",
+    "materialize": "^0.98.0"
   }
 }
