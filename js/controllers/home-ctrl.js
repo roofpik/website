@@ -18,6 +18,7 @@ $('input.autocompletenear').autocomplete({
 	    	getData: function (value, callback) {
 
 	    	};
+	    	
          data:  {
              "Apple Near": null,
              "App": null,
