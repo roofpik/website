@@ -1,4 +1,4 @@
-app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$interval' , function($scope, $http, $timeout, $interval) {
+app.controller('projectsCtrl', ['$scope', '$http', '$timeout', function($scope, $http, $timeout) {
     $('.modal').modal();
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.projectList = [];
@@ -15,8 +15,12 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$interval' , fun
     loading(true);
 	$http({
 		url: 'http://139.162.57.58/api/residential',
-        method : 'GET'
+        method : 'GET',
+        params: {
+        	bhk: '2'
+        }
     }).then(function mySucces(response) {
+    	console.log(response);
         $scope.projects = response.data.details;
         totalProjects = response.data.hits;
         totalProjectsFetched = Object.keys($scope.projects).length;
@@ -49,7 +53,7 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$interval' , fun
 						url: 'http://139.162.57.58/api/residential',
 				        method : 'GET',
 				        params: {
-				        	bhk: 2,
+				        	bhk: 6,
 				        	page_start: totalProjectsFetched-1,
 				        	page_size: fetchCount
 				        }
@@ -125,8 +129,4 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$interval' , fun
 	        loading(false);
 	    });
     }
-
-    // $interval(function() {
-    //     console.log($scope.filters);
-    //   }, 10000);
 }]);
