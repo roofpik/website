@@ -1,3 +1,165 @@
-<div>
-	Hello Hello
+<div class="container">
+    <div class="row mgt70 linkroot">
+        <nav>
+            <div class="nav-wrapper">
+                <div class="col s12">
+                    <a href="#home" class="breadcrumb">Home</a>
+                    <a href="" class="breadcrumb">Projects</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <h5 class="pdt10 pdb10 b">Projects     
+    <a data-target="filterbox" class="right pointer"><i class="material-icons">filter_list</i></a>
+    
+    </h5>
+    <div class="row responsive-md">
+        <div class="col s12 m6" ng-repeat="project in projectList">
+            <div class="card">
+                <div class="cardTitle row mgbn">
+                    <!-- <a href="#project-details" class="col s8 black-text bod-right pd-tspan"> -->
+                    <a href="#project-details" class="col s8 black-text pd-tspan">
+                        <span>{{project.name}}</span>
+                        <span class="ft12 grey-text">{{project.address}}</span>
+                    </a>
+                    <div class="col s2 bod-right card-ict hide">
+                        <a href=""><i class="material-icons grey-text">favorite_border</i></a></div>
+                    <div class="col s2 card-ict hide">
+                        <a href=""><i class="material-icons">phone</i></a>
+                    </div>
+                </div>
+                <div class="card-image  waves-effect waves-light block">
+                    <a href="#project-details"> <img ng-src="{{project.cover}}"></a>
+                </div>
+                <div class="row mg0 ht50">
+                    <div class="col s6 pd5 dis-tab bod-right ht50">
+                        <span class="block ellipsis">Rent Price</span>
+                        <span class="ft12 grey-text block ellipsis">₹{{project.rent.min}}- ₹{{project.rent.max}}</span>
+                    </div>
+                    <div class="col s6 pd5 center ht50" ng-show="project.area.min != 0">
+                        <span class="block ellipsis">{{project.bhks}} BHK</span>
+                        <span class="ft12 grey-text block ellipsis">{{project.area.min}} Sq.Ft.<span ng-show="project.area.max != project.area.min"> - {{project.area.max}} Sq.Ft.</span> </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<div id="filterbox" class="modal white modal-fixed-footer">
+    <form>
+        <div class="modal-content pdb25">
+            <h5 class="ft16b mgtn"> Filter 
+                   <a class="right modal-close grey-text" ><i class="material-icons">close</i> </a>
+                </h5>
+            <hr>
+            <div class="row pdt2 mgbn">
+                <h5 class="ush6">Project Segment</h5>
+                <hr>
+                <p>
+                    <input type="checkbox" class="filled-in" ng-model="filters.segment.economy" id="economy" />
+                    <label for="economy">Economy</label>
+                </p>
+                <p>
+                    <input type="checkbox" class="filled-in" ng-model="filters.segment.highEnd" id="high-end" />
+                    <label for="high-end">High End</label>
+                </p>
+                <p>
+                    <input type="checkbox" class="filled-in" ng-model="filters.segment.luxury" id="luxury" />
+                    <label for="luxury">Luxury</label>
+                </p>
+                <p>
+                    <input type="checkbox" class="filled-in" ng-model="filters.segment.ultraLuxury" id="ultra-luxury" />
+                    <label for="ultra-luxury">Ultra Luxury</label>
+                </p>
+            </div>
+            <div class="row pdt2 mgbn">
+                <h5 class="ush6">Locality</h5>
+                <hr>
+                <p>
+                    <input type="checkbox" class="filled-in" id="loc_sohna" />
+                    <label for="loc_sohna">Sohna Road</label>
+                </p>
+                <p>
+                    <input type="checkbox" class="filled-in" id="loc_golf_extn" />
+                    <label for="loc_golf_extn">Golf Course Road Extn.</label>
+                </p>
+                <p>
+                    <input type="checkbox" class="filled-in" id="loc_nirvana" />
+                    <label for="loc_nirvana">Nirvana Country</label>
+                </p>
+                <p>
+                    <input type="checkbox" class="filled-in" id="loc_golf_road" />
+                    <label for="loc_golf_road">Golf Course Road</label>
+                </p>
+                <p>
+                    <input type="checkbox" class="filled-in" id="loc_mg_road" />
+                    <label for="loc_mg_road">MG Road</label>
+                </p>
+                <p>
+                    <input type="checkbox" class="filled-in" id="loc_gold" />
+                    <label for="loc_gold">Gold Sock</label>
+                </p>
+            </div>
+            <div class="row pdt2 mgbn label_i">
+                <h5 class="ush6">User Rating</h5>
+                <hr>
+                <p>
+                    <input type="checkbox" class="filled-in" id="star1" />
+                    <label for="star1">
+                        <i class="material-icons blue-text">star</i>
+                        <i class="material-icons">star</i>
+                        <i class="material-icons">star</i>
+                        <i class="material-icons">star</i>
+                        <i class="material-icons">star</i>
+                    </label>
+                </p>
+                <p>
+                    <input type="checkbox" class="filled-in" id="star2" />
+                    <label for="star2">
+                        <i class="material-icons blue-text">star</i>
+                        <i class="material-icons blue-text">star</i>
+                        <i class="material-icons">star</i>
+                        <i class="material-icons">star</i>
+                        <i class="material-icons">star</i>
+                    </label>
+                </p>
+                <p>
+                    <input type="checkbox" class="filled-in" id="star3" />
+                    <label for="star3">
+                        <i class="material-icons blue-text">star</i>
+                        <i class="material-icons blue-text">star</i>
+                        <i class="material-icons blue-text">star</i>
+                        <i class="material-icons">star</i>
+                        <i class="material-icons">star</i>
+                    </label>
+                </p>
+                <p>
+                    <input type="checkbox" class="filled-in" id="star4" />
+                    <label for="star4">
+                        <i class="material-icons blue-text">star</i>
+                        <i class="material-icons blue-text">star</i>
+                        <i class="material-icons blue-text">star</i>
+                        <i class="material-icons blue-text">star</i>
+                        <i class="material-icons">star</i>
+                    </label>
+                </p>
+                <p>
+                    <input type="checkbox" class="filled-in" id="star5" />
+                    <label for="star5">
+                        <i class="material-icons blue-text">star</i>
+                        <i class="material-icons blue-text">star</i>
+                        <i class="material-icons blue-text">star</i>
+                        <i class="material-icons blue-text">star</i>
+                        <i class="material-icons blue-text">star</i>
+                    </label>
+                </p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn blue mgr10" ng-click="applyFilters()">Apply</a>
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn teal lighten-1 mgr10">Reset</a>
+        </div>
+    </form>
+</div>
+
+
