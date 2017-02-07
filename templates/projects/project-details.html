@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="col s12 m4 grey-text ft13 text-darken-2 right-align">
-            <div class="ft19 b">₹ 12,500</div>
+            <div class="ft19 b"><span ng-show="rentMin != 'NA'">₹</span>{{rentMin}}<span ng-show="rentMin != rentMax"> - ₹{{rentMax}}</span></div>
             <div class="row mgbn ft12" ng-show="project.configurations">
                 <div class="col s12 mgt5">{{bhk}} BHK</div>
                 <div class="col s12 mgt5">{{minArea}} <span ng-show="minArea != 'NA'">Sq.Ft.</span><span ng-show="minArea != maxArea"> - {{maxArea}} Sq.Ft.</span></div>
