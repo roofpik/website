@@ -276,7 +276,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
             $scope.project = snapshot.val();
             $scope.projectName = $scope.project.projectName;
             document.title=$scope.projectName;
-            $scope.coverImage = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/residential/' + $scope.project.projectId + '/images/coverPhoto/' + $scope.project.images.coverPhoto.url + '-s.jpg';
+            $scope.coverImage = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/residential/' + $scope.project.projectId + '/images/coverPhoto/' + $scope.project.images.coverPhoto.url + '-m.jpg';
             $scope.path = ["Gurgaon", "Residential"];
             if ($scope.project.configurations) {
                 generateInfo($scope.project.configurations);

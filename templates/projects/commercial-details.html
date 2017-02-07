@@ -1,0 +1,270 @@
+<div class="container">
+    <div class="row mgt70 linkroot">
+        <nav>
+            <div class="nav-wrapper">
+                <div class="col s12">
+                    <a href="#home" class="breadcrumb">Home</a>
+                    <a href="#projects" class="breadcrumb" ng-repeat="path in path track by $index">{{path}}</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col s12 m8">
+            <h1 class="hd1 b">{{projectName}}</h1>
+            <div class="row mgbn ft12">
+                <div class="col s12 ft20i vatop mgt5"><i class="material-icons blue-text">location_on</i> {{project.projectDetails.address.displayAddress}} </div>
+                <!-- <div class="col s12 grey-text mgt5 review ft20i vatop">
+                    <i class="material-icons blue-text">star</i>
+                    <i class="material-icons blue-text">star</i>
+                    <i class="material-icons blue-text">star</i>
+                    <i class="material-icons blue-text">star</i>
+                    <i class="material-icons">star</i>
+                    <a href="" class="mgr10">1 Review</a> |
+                    <a href="" class="mgr10"># 4 rating</a>
+                </div> -->
+                <div class="col s12 grey-text mgt5 review ft20i vatop">
+                    <a href="" class="mgr10">Reviews Not Available</a>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m4 grey-text ft13 text-darken-2 right-align">
+            <div class="ft19 b" ng-show="project.projectDetails.rentPerSqFt != 'NA'">₹ {{project.projectDetails.rentPerSqFt}} / Sq.Ft.</div>
+            <div class="row mgbn ft12">
+                <div class="col s12 mgt5">{{project.projectDetails.area.min}} <span ng-show="project.projectDetails.area.min != 'NA'">Sq.Ft.</span><span ng-show="project.projectDetails.area.min != project.projectDetails.area.max"> - {{project.projectDetails.area.max}} Sq.Ft.</span></div>
+                <div class="col s12 mgt5 " ng-show="project.projectDetails.websiteLink != 'NA'"><a ng-href="{{project.projectDetails.websiteLink}}" target="_blank">{{project.projectDetails.websiteLink}}</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="grey lighten-5">
+    <div class="container">
+        <div class="row mgln mgrn mgbn pdtb5">
+            <div class="col pdan s12 m7 waves-effect waves-light img-detail htfixbox">
+                <img ng-src="{{coverImage}}">
+                <div class="img-btn center-align">
+                    <div class="gallery-btn">
+                        <gallery></gallery>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m5 amen-tab htfixbox white">
+                <ul class="tabs">
+                    <li class="tab col m12"><a class="active" href="#interest">Yes I am Interested</a></li>
+                    <!-- <li class="tab col m6"><a href="#pricefinder">Price finder</a></li> -->
+                </ul>
+                <div class="row">
+                    <div id="interest" class="col s12">
+                        <form name="contactForm">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input id="select_project" type="text" class="validate" ng-model="query.userName" required>
+                                <label for="select_project">Name</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">phone</i>
+                                <input id="select_project" type="text" class="validate" ng-minlength="10" ng-maxlength="10" ng-model="query.mobile" required>
+                                <label for="select_project">Phone</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">email</i>
+                                <input id="select_project" type="email" class="validate" ng-model="query.email" required>
+                                <label for="select_project">Email</label>
+                            </div>
+                            <div class="col s12 mgtmn">
+                                <button ng-disabled="contactForm.$invalid" class="waves-effect waves-light btn btn-full blue lighten-2" ng-click="provideDetails(query)"><i class="material-icons left">list</i> Provide Details</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- <div id="pricefinder" class="col s12">
+                        <div class="row valign-wrapper logoprice">
+                            <div class="col m5 pdan center-align"> <img src="images/project/99acres.png" alt=""></div>
+                            <div class="col m4 center-align ft12">
+                                <b>₹ 12,500</b>
+                                <br> 1776 Sq.Ft.
+                            </div>
+                            <div class="col m3 right-align"><a href="" class="btn blue">Details</a></div>
+                        </div>
+                        <div class="row valign-wrapper logoprice">
+                            <div class="col m5 pdan center-align"> <img src="images/project/triplogo.png" alt=""></div>
+                            <div class="col m4 center-align ft12">
+                                <b>₹ 12,500</b>
+                                <br> 1776 Sq.Ft.
+                            </div>
+                            <div class="col m3 right-align"><a href="" class="btn blue">Details</a></div>
+                        </div>
+                        <div class="row valign-wrapper logoprice">
+                            <div class="col m5 pdan center-align"> <img src="images/project/magicbricks.png" alt=""></div>
+                            <div class="col m4 center-align ft12">
+                                <b>₹ 12,500</b>
+                                <br> 1776 Sq.Ft.
+                            </div>
+                            <div class="col m3 right-align"><a href="" class="btn blue">Details</a></div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="row mgln mgrn mgt20">
+        <div class="col s4 center-align pda10 allbd scale">
+            <i class="material-icons small bdcor">build</i>
+            <h5 class="ft15 mgan grey-text">Maintenance Charges</h5>
+            <h4 class="mgan ft19 truncate"><span ng-show="project.projectDetails.maintenanceChargesPerSqFtExcludingTaxes">₹</span>{{project.projectDetails.maintenanceChargesPerSqFtExcludingTaxes}} / Sq. Ft.</h4>
+            <!-- <p class="mgan ft12 grey-text" ng-show="project.projectDetails.maintenanceChargesPerSqFtExcludingTaxes">Per </p> -->
+        </div>
+        <div class="col s4 center-align pda10 allbd scale">
+            <i class="material-icons small bdcor">place</i>
+            <h5 class="ft15 mgan grey-text">Address</h5>
+            <h4 class="mgan ft19 truncate">{{project.projectDetails.address.addressLine1}}, {{project.projectDetails.address.addressLine2}}</h4>
+            <!-- <p class="mgan ft12 grey-text">City: Gurgaon</p> -->
+        </div>
+        <div class="col s4 center-align pda10 allbd scale">
+            <i class="material-icons small bdcor">details</i>
+            <h5 class="ft15 mgan grey-text">Project Details</h5>
+            <h4 class="mgan ft19 truncate">{{project.projectDetails.numFloors}} <span ng-show="project.projectDetails.numFloors != 'NA'">Floors</span></h4>
+            <!-- <p class="mgan ft12 grey-text">Towers 1</p> -->
+        </div>
+        <div class="col s4 center-align pda10 allbd scale">
+            <i class="material-icons small bdcor">local_offer</i>
+            <h5 class="ft15 mgan grey-text">Rent</h5>
+            <h4 class="mgan ft19 truncate">₹{{rentMin}}<span ng-show="rentMin != rentMax"> - ₹{{rentMax}}</span></h4>
+            <!-- <p class="mgan ft12 grey-text">Nov 2015</p> -->
+        </div>
+        <div class="col s4 center-align pda10 allbd scale">
+            <i class="material-icons small bdcor">photo_size_select_small</i>
+            <h5 class="ft15 mgan">Area</h5>
+            <h4 class="mgan ft19 truncate">{{project.projectDetails.area.min}} <span ng-show="project.projectDetails.area.min != 'NA'">Sq.Ft.</span><span ng-show="project.projectDetails.area.min != project.projectDetails.area.max"> - {{project.projectDetails.area.max}} Sq.Ft.</span></h4>
+            <!-- <p class="mgan ft12 grey-text">Nov 2015</p> -->
+        </div>
+        <div class="col s4 center-align pda10 allbd scale">
+            <i class="material-icons small bdcor">power</i>
+            <h5 class="ft15 mgan grey-text">Power Backup</h5>
+            <h4 class="mgan ft19"><span ng-show="project.projectDetails.powerBackupChargesPerUnit != 'NA'">₹</span> {{project.projectDetails.powerBackupChargesPerUnit}} <span ng-show="project.projectDetails.powerBackupChargesPerUnit != 'NA'">/ Unit</span></h4>
+            <!-- <p class="mgan ft12 grey-text">Charges</p> -->
+        </div>
+    </div>
+    <section class="mgt20  pda10 grey lighten-5" ui-view="reviewRating"></section>
+</div>
+<div class="container">
+    <div class="row mgt20 grey-text ft13 text-darken-2" ng-show="project.internet">
+        <div class="col s12 b">
+            <h5 class="ft15 mgtn b mgb10 pdb10 bdbtm">Internet</h5>
+        </div>
+        <div class="col s12">
+            <div class="row row-mgn flor_co">
+                <div class="col s2 imgflor bod-right">
+                    <i class="material-icons gt30 medium">language</i>
+                </div>
+                <div class="col s2 bod-right">
+                    <div class="ft13 b mgb10">Service Providers</div>
+                    <p>{{project.internet.serviceProviders}}</p>
+                </div>
+                <div class="col s2 bod-right">
+                    <div class="ft13 b mgb10">Broadband Speed</div>
+                    <p>{{project.internet.broadbandSpeedMbps}} <span ng-show="project.internet.broadbandSpeedMbps != 'NA'">Mbps</span></p>
+                </div>
+                <div class="col s2">
+                    <div class="ft13 b mgb10">Leased Line Speed </div>
+                    <p>{{project.internet.leasedLineSpeedMbps}} <span ng-show="project.internet.leasedLineSpeedMbps != 'NA'">Mbps</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mgt20 grey-text ft13 text-darken-2" ng-show="project.facilities">
+        <div class="col s12 b">
+            <h5 class="ft15 mgtn b mgb10 pdb10 bdbtm">Facilities</h5>
+        </div>
+        <div class="col s12">
+            <div class="row row-mgn flor_co">
+                <div class="col s2 imgflor bod-right">
+                    <i class="material-icons gt30 medium">done_all</i>
+                </div>
+                <div class="col s2 bod-right">
+                    <div class="ft13 b mgb10">Common Washroom</div>
+                    <p>{{project.facilities.commonWashroom}}</p>
+                </div>
+                <div class="col s2 bod-right">
+                    <div class="ft13 b mgb10">Reception</div>
+                    <p>{{project.facilities.reception}}</p>
+                </div>
+                <div class="col s2 bod-right">
+                    <div class="ft13 b mgb10">Waiting Lounge / Lobby</div>
+                    <p>{{project.facilities.waitingLoungeLobby}}</p>
+                </div>
+                <div class="col s2 bod-right">
+                    <div class="ft13 b mgb10">Air Conditioning</div>
+                    <p>{{project.facilities.airConditioning}}</p>
+                </div>
+                <div class="col s2">
+                    <div class="ft13 b mgb10">Wet Points</div>
+                    <p>{{project.facilities.wetPoints}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mgt20 grey-text ft13 text-darken-2" ng-show="project.security">
+        <div class="col s12 b">
+            <h5 class="ft15 mgtn b mgb10 pdb10 bdbtm">Security</h5>
+        </div>
+        <div class="col s12">
+            <div class="row row-mgn flor_co">
+                <div class="col s2 imgflor bod-right">
+                    <i class="material-icons gt30 medium">security</i>
+                </div>
+                <div class="col s2 bod-right">
+                    <div class="ft13 b mgb10">Boom Barriers</div>
+                    <p>{{project.security.boomBarriers}}</p>
+                </div>
+                <div class="col s3">
+                    <div class="ft13 b mgb10">CCTV </div>
+                    <p>{{project.security.cctv}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mgt20 grey-text ft13 text-darken-2" ng-show="project.parking">
+        <div class="col s12 b">
+            <h5 class="ft15 mgtn b mgb10 pdb10 bdbtm">Parking</h5>
+        </div>
+        <div class="col s12">
+            <div class="row row-mgn flor_co">
+                <div class="col s2 imgflor bod-right">
+                    <i class="material-icons gt30 medium">directions_car</i>
+                </div>
+                <div class="col s5 bod-right">
+                    <div class="ft13 b">Four Wheeler</div>
+                    <div class="row mgan">
+                        <div class="col s6">
+                            <p>Daily Charges <span ng-show="project.parking.fourWheeler.dailyCharges != 'NA'">₹</span>{{project.parking.fourWheeler.dailyCharges}}</p>
+                            <p>Free Car Parks {{project.parking.fourWheeler.freeCarParks}}</p>
+                        </div>
+                        <div class="col s6">
+                            <p>Hourly Charges <span ng-show="project.parking.fourWheeler.hourlyCharges != 'NA'">₹</span>{{project.parking.fourWheeler.hourlyCharges}}</p>
+                            <p>Monthly Charges <span ng-show="project.parking.fourWheeler.monthlyCharges != 'NA'">₹</span>{{project.parking.fourWheeler.monthlyCharges}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s5">
+                    <div class="ft13 b">Two Wheeler </div>
+                    <div class="row mgan">
+                        <div class="col s6">
+                            <p>Daily Charges <span ng-show="project.parking.twoWheeler.dailyCharges != 'NA'">₹</span>{{project.parking.twoWheeler.dailyCharges}}</p>
+                            <p>Monthly Charges <span ng-show="project.parking.twoWheeler.monthlyCharges != 'NA'">₹</span>{{project.parking.twoWheeler.monthlyCharges}}</p>
+                        </div>
+                        <div class="col s6">
+                            <p>Hourly Charges <span ng-show="project.parking.twoWheeler.hourlyCharges != 'NA'">₹</span>{{project.parking.twoWheeler.hourlyCharges}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mgt20">
+        <div class="col s12 b">
+            <h5 class="ft15 b mgtn mgb10 pdb10 bdbtm">Map</h5>
+        </div>
+    </div>
+</div>

@@ -21,18 +21,20 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         		templateUrl: 'templates/projects/project-review-ratings.html',
         		controller: 'projectReviewRatingCtrl'
         	}
-        	// 'projectRatings@project-details': {
-        	// 	templateUrl: 'templates/project-details/project-ratings.html',
-        	// 	controller: 'projectRatingsCtrl'
-        	// },
-        	// 'projectBasics@project-details': {
-        	// 	templateUrl: 'templates/project-details/project-basics.html',
-        	// 	controller: 'projectBasicDetailsCtrl'
-        	// },
-        	// 'gallery@project-details': {
-        	// 	templateUrl: 'templates/project-details/project-gallery.html',
-        	// 	controller: 'projectGalleryCtrl'
-        	// }
+        }
+    })
+
+    $stateProvider.state('commercial-details', {
+        url: '/commercial-details',
+        views: {
+            '': {
+                templateUrl: 'templates/projects/commercial-details.html',
+                controller: 'commercialDetailsCtrl'
+            },
+            'reviewRating@commercial-details' : {
+                templateUrl: 'templates/projects/commercial-review-ratings.html',
+                controller: 'commercialReviewRatingCtrl'
+            }
         }
     })
 
