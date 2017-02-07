@@ -164,16 +164,16 @@
         </div>
         <div class="col s12" id="{{config.hrefLink}}" class="col s12" ng-repeat="config in configurations | orderBy: 'bhk' track by $index" ng-show="config.selected">
             <div class="row row-mgn flor">
-                <div class="col s3 imgflor bod-right">
+                <!-- <div class="col s3 imgflor bod-right">
                     <div class="ft13 b mgb10">Floor Plan</div>
                     <img class="responsive-img" src="images/dummy/flor.jpg">
-                </div>
-                <div class="col s3 bod-right">
+                </div> -->
+                <div class="col s4 bod-right">
                     <div class="ft13 b mgb10">Unit Types</div>
                     <p ng-repeat="item in config.unit">{{config.bhk}} BHK {{item}}</p>
                     <!-- <p>4 BHK Apartments</p> -->
                 </div>
-                <div class="col s3 bod-right">
+                <div class="col s4 bod-right">
                     <div class="ft13 b mgb10">Super Built Area</div>
                     <p ng-repeat="item in config.superBuiltArea">{{item.min}} <span ng-show="item.min != 'NA'">Sq. Ft.</span><span ng-show="item.min != item.max"> - {{item.max}} Sq. Ft.</span></p>
                     <!-- <p>3062 Sq. Ft. - 3939 Sq. Ft.</p> -->

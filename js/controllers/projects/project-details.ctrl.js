@@ -502,7 +502,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
         }
         console.log(data);
         generateConfigurationDisplay(data);
-        $('ul.tabs').tabs();
+        
     }
 
     function generateConfigurationDisplay(data){
@@ -537,6 +537,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     	}
     	$timeout(function(){
             loading(false);
+            $('ul.tabs').tabs();
         },300);
     	console.log($scope.configurations);
     }
