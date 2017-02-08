@@ -22,7 +22,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         		controller: 'projectReviewRatingCtrl'
         	}
         }
-    })
+    });
     $stateProvider.state('commercial-details', {
         url: '/commercial-details',
         views: {
@@ -35,7 +35,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
                 controller: 'commercialReviewRatingCtrl'
             }
         }
-    })
+    });
     $stateProvider.state('co-working-details', {
         url: '/co-working-details',
         views: {
@@ -48,7 +48,21 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
                 controller: 'coWorkingReviewRatingCtrl'
             }
         }
-    })
+    });
 
-    $urlRouterProvider.otherwise('/projects');
+    $stateProvider.state('pg-details', {
+        url: '/pg-details',
+        views: {
+            '': {
+                templateUrl: 'templates/projects/pg-details.html',
+                controller: 'pgDetailsCtrl'
+            },
+            'reviewRating@pg-details' : {
+                templateUrl: 'templates/projects/pg-review-ratings.html',
+                controller: 'pgReviewRatingCtrl'
+            }
+        }
+    });
+
+    $urlRouterProvider.otherwise('/pg-details');
 }]);
