@@ -1,4 +1,5 @@
-app.controller('projectsCtrl', ['$scope', '$http', '$timeout', function($scope, $http, $timeout) {
+app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', function($scope, $http, $timeout, $stateParams) {
+	console.log($stateParams);
     $('.modal').modal();
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.projectList = [];
@@ -17,8 +18,7 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', function($scope, 
 		url: 'http://139.162.57.58/api/residential',
         method : 'GET',
         params: {
-        	bhk: '2'
-        }
+        	        }
     }).then(function mySucces(response) {
     	console.log(response);
         $scope.projects = response.data.details;
@@ -53,7 +53,7 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', function($scope, 
 						url: 'http://139.162.57.58/api/residential',
 				        method : 'GET',
 				        params: {
-				        	bhk: 6,
+				        	
 				        	page_start: totalProjectsFetched-1,
 				        	page_size: fetchCount
 				        }

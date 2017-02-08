@@ -1,4 +1,4 @@
-app.controller('commercialDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', function($scope, $timeout, $stateParams, $rootScope){
+app.controller('commercialDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', '$state', function($scope, $timeout, $stateParams, $rootScope, $state){
 	loading(false, 2000);
 	$('ul.tabs').tabs();
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';

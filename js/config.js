@@ -23,7 +23,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         	}
         }
     })
-
     $stateProvider.state('commercial-details', {
         url: '/commercial-details',
         views: {
@@ -34,6 +33,19 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             'reviewRating@commercial-details' : {
                 templateUrl: 'templates/projects/commercial-review-ratings.html',
                 controller: 'commercialReviewRatingCtrl'
+            }
+        }
+    })
+    $stateProvider.state('co-working-details', {
+        url: '/co-working-details',
+        views: {
+            '': {
+                templateUrl: 'templates/projects/co-working-details.html',
+                controller: 'coWorkingDetailsCtrl'
+            },
+            'reviewRating@co-working-details' : {
+                templateUrl: 'templates/projects/co-working-review-ratings.html',
+                controller: 'coWorkingReviewRatingCtrl'
             }
         }
     })
