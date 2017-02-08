@@ -76,19 +76,19 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
 	        },
 	        'football': {
 	        	name: 'Football',
-	        	img: 'images/icons/court.png'
+	        	img: 'images/icons/basketball.png'
 	        },
 	        'inhouseChemist': {
 	        	name: 'Inhouse Chemist',
-	        	img: 'images/icons/court.png'
+	        	img: 'images/icons/Inhouse-chemist.png'
 	        },
 	        'inhouseGroceryStore': {
 	        	name: 'Inhouse Grocery Store',
-	        	img: 'images/icons/court.png'
+	        	img: 'images/icons/store.png'
 	        },
 	        'inhousePlaySchool': {
 	        	name: 'Inhouse Play School',
-	        	img: 'images/icons/court.png'
+	        	img: 'images/icons/Bookmark.png'
 	        },
 	        'inhouseRestaurants': {
 	        	name: 'Inhouse Restaurants',
@@ -100,45 +100,45 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
 	        },
 	        'squashCourt': {
 	        	name: 'Squash Court',
-	        	img: 'images/icons/court.png'
+	        	img: 'images/icons/balls-snooker.png'
 	        },
 	        'volleyball': {
 	        	name: 'Volleyball',
-	        	img: 'images/icons/court.png'
+	        	img: 'images/icons/Volleyball.png'
 	        }
     	},
     	'entertainment': {
     		'amphitheatre': {
 	        	name: 'Amphitheatre',
-	        	img: 'images/icons/hall.png'
+	        	img: 'images/icons/Amphitheatre.png'
 	        },
 	        'bowling': {
 	        	name: 'Bowling',
-	        	img: 'images/icons/hall.png'
+	        	img: 'images/icons/bowling.png'
 	        },
 	        'cafe': {
 	        	name: 'Cafe',
-	        	img: 'images/icons/hall.png'
+	        	img: 'images/icons/cafe.png'
 	        },
 	        'cardsRoom': {
 	        	name: 'Cards Room',
-	        	img: 'images/icons/hall.png'
+	        	img: 'images/icons/card.png'
 	        },
 	        'indoorGames': {
 	        	name: 'Indoor Games',
-	        	img: 'images/icons/hall.png'
+	        	img: 'images/icons/chess.png'
 	        },
 	        'jacuzzi': {
 	        	name: 'Jacuzzi',
-	        	img: 'images/icons/hall.png'
+	        	img: 'images/icons/Jacuzzi.png'
 	        },
 	        'library': {
 	        	name: 'Library',
-	        	img: 'images/icons/hall.png'
+	        	img: 'images/icons/Library.png'
 	        },
 	        'miniTheatre': {
 	        	name: 'Mini Theatre',
-	        	img: 'images/icons/hall.png'
+	        	img: 'images/icons/Theatre.png'
 	        },
 	        'partyHall': {
 	        	name: 'Party Hall',
@@ -146,15 +146,15 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
 	        },
 	        'spa': {
 	        	name: 'Spa',
-	        	img: 'images/icons/hall.png'
+	        	img: 'images/icons/spa.png'
 	        },
 	        'steam-sauna': {
 	        	name: 'Steam/Sauna',
-	        	img: 'images/icons/hall.png'
+	        	img: 'images/icons/Steam.png'
 	        },
 	        'videoGames': {
 	        	name: 'Video Games',
-	        	img: 'images/icons/hall.png'
+	        	img: 'images/icons/video-games.png'
 	        }
     	},
     	'safety' : {
@@ -204,27 +204,27 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
 	        },
 	        'cricket': {
 	        	name: 'Cricket',
-	        	img: 'images/icons/court.png'
+	        	img: 'images/icons/cricket.png'
 	        },
 	        'golfCourseFacing': {
 	        	name: 'Golf Course Facing',
-	        	img: 'images/icons/court.png'
+	        	img: 'images/icons/1golf.png'
 	        },
 	        'golfPutting': {
 	        	name: 'Golf Putting',
-	        	img: 'images/icons/court.png'
+	        	img: 'images/icons/golf.png'
 	        },
 	        'joggingTrack': {
 	        	name: 'Jogging Track',
-	        	img: 'images/icons/court.png'
+	        	img: 'images/icons/walk.png'
 	        },
 	        'skatingRink': {
 	        	name: 'Skating Rink',
-	        	img: 'images/icons/court.png'
+	        	img: 'images/icons/icon-skate.png'
 	        },
 	        'snookerPool': {
 	        	name: 'Snooker/Pool',
-	        	img: 'images/icons/court.png'
+	        	img: 'images/icons/balls-snooker.png'
 	        },
 	        'tableTennis': {
 	        	name: 'Table Tennis',
@@ -232,7 +232,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
 	        },
 	        'tennisCourt': {
 	        	name: 'Tennis Court',
-	        	img: 'images/icons/court.png'
+	        	img: 'images/icons/Tennis_court.png'
 	        }
     	}
     };
