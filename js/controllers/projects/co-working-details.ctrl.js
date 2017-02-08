@@ -14,18 +14,70 @@ app.controller('coWorkingDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$
             $scope.coverImage = "http://cdn.roofpik.com/test/projects/" + $scope.cityId + '/coWorking/' + $scope.project.projectId + '/images/coverPhoto/' + $scope.project.images.coverPhoto.url + '-m.jpg';
             $scope.path = ["Gurgaon", "Co-Working"];
             generateImageList($scope.project.images);
-            // $scope.buyMin = convertCurrency($scope.project.price.buy.min);
-            // $scope.buyMax = convertCurrency($scope.project.price.buy.max);
-            // $scope.rentMin = parseInt($scope.project.projectDetails.rentPerSqFt) * parseInt($scope.project.projectDetails.area.min);
-            // $scope.rentMax = parseInt($scope.project.projectDetails.rentPerSqFt) * parseInt($scope.project.projectDetails.area.max);
-            // $scope.rentMin = convertCurrency($scope.rentMin);
-            // $scope.rentMax = convertCurrency($scope.rentMax);
+            if($scope.project.projectDetails.website != 'NA'){
+                if($scope.project.projectDetails.website.indexOf("http") == -1){
+                    $scope.project.projectDetails.website = 'http://'+$scope.project.projectDetails.website;
+                }                
+            }
+            $scope.availableOfficeTypes = '';
+            if($scope.project.projectDetails.businessCenter == 'Available'){
+                $scope.availableOfficeTypes += 'Business Center, ';
+            }
+            if($scope.project.projectDetails.coWorking == 'Available'){
+                $scope.availableOfficeTypes += 'Co-Working, ';
+            }
+            if($scope.project.projectDetails.virtualOffice == 'Available'){
+                $scope.availableOfficeTypes += 'Virtual Office';
+            }
+            if($scope.availableOfficeTypes[$scope.availableOfficeTypes.length -1] == ','){
+                $scope.availableOfficeTypes = $scope.availableOfficeTypes.substring(0, $scope.availableOfficeTypes.length -2);
+            }
+            $scope.prices = [];
+            for(key in $scope.project.costing){
+                if($scope.project.costing[key] != 'NA'){
+                    $scope.prices.push($scope.project.costing[key]);
+                }
+            }
+            if($scope.prices.length != 0){
+                $scope.prices = $scope.prices.sort();
+            }
+            console.log($scope.prices);
+            if($scope.prices[0]){
+                $scope.priceMin = convertCurrency($scope.prices[0]);
+            }
+
+            if($scope.prices[$scope.prices.length - 1]){
+                $scope.priceMax = convertCurrency($scope.prices[$scope.prices.length - 1]);
+            }
             if (angular.isDefined($stateParams.category)) {
                 $scope.path.push(($stateParams.category).capitalize());
             }
             $scope.path.push($scope.projectName);
         }, 100);
     })
+
+    function convertCurrency(value) {
+        valueLen = getlength(value);
+        var denomination = '';
+
+        if (valueLen <= 5) {
+            return value;
+        } else if (valueLen > 5 && valueLen <= 7) {
+            denomination = ' L';
+            value = value / 100000;
+            value = parseFloat(Math.round(value * 100) / 100).toFixed(2);
+            return value + denomination;
+        } else if (valueLen > 7 && valueLen <= 9) {
+            denomination = ' Cr';
+            value = value / 10000000;
+            value = parseFloat(Math.round(value * 100) / 100).toFixed(2);
+            return value + denomination;
+        }
+    }
+
+    function getlength(number) {
+        return number.toString().length;
+    }
 
     function generateImageList(images) {
         var imageData = [];

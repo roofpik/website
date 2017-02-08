@@ -29,10 +29,10 @@
             </div>
         </div>
         <div class="col s12 m4 grey-text ft13 text-darken-2 right-align">
-            <div class="ft19 b">₹ 12,500</div>
+            <div class="ft19 b" ng-show="priceMin">₹ {{priceMin}}<span ng-show="priceMin != priceMax"> - ₹ {{priceMax}}</span></div>
             <div class="row mgbn ft12">
-                <div class="col s12 mgt5">2, 3, 4 BHK</div>
-                <div class="col s12 mgt5">1776 Sq.Ft. - 3939 Sq.Ft.</div>
+                <div class="col s12 mgt5" ng-show="availableOfficeTypes">{{availableOfficeTypes}}</div>
+                <div class="col s12 mgt5" ng-show="project.projectDetails.website != 'NA'"><a href = "{{project.projectDetails.website}}" target="_blank">{{project.projectDetails.website}}</a></div>
             </div>
         </div>
     </div>
@@ -124,7 +124,7 @@
             <h5 class="ft15 mgan grey-text">Working Days</h5>
             <h4 class="mgan ft19 truncate">{{project.projectDetails.workingDays}}</h4>
         </div>
-        <div class="col s4 center-align pda10 allbd scale">
+     <!--    <div class="col s4 center-align pda10 allbd scale">
             <i class="material-icons small bdcor">tab_unselected</i>
             <h5 class="ft15 mgan grey-text">Business Center</h5>
             <h4 class="mgan ft19 truncate">{{project.projectDetails.businessCenter}}</h4>
@@ -139,7 +139,7 @@
             <h5 class="ft15 mgan grey-text">Virtual Office</h5>
             <h4 class="mgan ft19">{{project.projectDetails.virtualOffice}}</h4>
         </div>
-    </div>
+     --></div>
     <section class="mgt20  pda10 grey lighten-5" ui-view="reviewRating">
     </section>
 </div>
