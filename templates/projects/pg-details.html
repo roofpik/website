@@ -4,17 +4,17 @@
             <div class="nav-wrapper">
                 <div class="col s12">
                     <a href="#home" class="breadcrumb">Home</a>
-                    <a href="" class="breadcrumb">PG Details</a>
+                    <a href="#projects" class="breadcrumb" ng-repeat="path in path track by $index">{{path}}</a>
                 </div>
             </div>
         </nav>
     </div>
     <div class="row">
         <div class="col s12 m8">
-            <h1 class="hd1 b">Baba Gulabgiri</h1>
+            <h1 class="hd1 b">{{projectName}}</h1>
             <div class="row mgbn ft12">
-                <div class="col s12 ft20i vatop mgt5"><i class="material-icons blue-text">location_on</i> | 211, Defence Colony, Old Gurgaon, Sector 17A, Gurgaon, Haryana </div>
-                <div class="col s12 grey-text mgt5 review ft20i vatop">
+                <div class="col s12 ft20i vatop mgt5"><i class="material-icons blue-text">location_on</i> {{project.projectDetails.address.addressLine1}}, {{project.projectDetails.address.addressLine2}} </div>
+                <!-- <div class="col s12 grey-text mgt5 review ft20i vatop">
                     <i class="material-icons blue-text">star</i>
                     <i class="material-icons blue-text">star</i>
                     <i class="material-icons blue-text">star</i>
@@ -22,14 +22,17 @@
                     <i class="material-icons">star</i>
                     <a href="" class="mgr10">1 Review</a> |
                     <a href="" class="mgr10"># 4 rating</a>
+                </div> -->
+                <div class="col s12 grey-text mgt5 review ft20i vatop">
+                    <a href="" class="mgr10">Reviews Not Available</a>
                 </div>
             </div>
         </div>
         <div class="col s12 m4 grey-text ft13 text-darken-2 right-align">
-            <div class="ft19 b">₹ 12,500</div>
+            <div class="ft19 b" ng-show="minPrice">₹ {{minPrice}}<span ng-show="minPrice != maxPrice"> - ₹ {{maxPrice}}</span></div>
             <div class="row mgbn ft12">
-                <div class="col s12 mgt5">2, 3, 4 BHK</div>
-                <div class="col s12 mgt5">1776 Sq.Ft. - 3939 Sq.Ft.</div>
+                <div class="col s12 mgt5"><span ng-show="project.projectDetails.male == 'Available'">Male</span><span ng-show="project.projectDetails.male == 'Available' && project.projectDetails.female == 'Available'"> and </span><span ng-show="project.projectDetails.female == 'Available'">Female</div>
+                <div class="col s12 mgt5" ng-show="project.projectDetails.lockInPeriod != 'NA'"> Lock-in Period ({{project.projectDetails.lockInPeriod}})</div>
             </div>
         </div>
     </div>
@@ -38,32 +41,34 @@
     <div class="container">
         <div class="row mgln mgrn mgbn">
             <div class="col pdan s12 m7 waves-effect waves-light img-detail htfixbox">
-                <img src="images/home/sohna.jpg">
+                <img ng-src="{{coverImage}}">
                 <div class="img-btn center-align">
-                    <button class="waves-effect waves-light btn white grey-text"><i class="material-icons left">photo_library</i> View Gallery</button>
+                    <div class="gallery-btn">
+                        <gallery></gallery>
+                    </div>
                 </div>
             </div>
             <div class="col s12 m5 amen-tab htfixbox boxsd white">
                 <ul class="tabs">
-                    <li class="tab col m6"><a class="active" href="#interest">Yes I am Interest</a></li>
-                    <li class="tab col m6"><a href="#pricefinder">Price finder</a></li>
+                    <li class="tab col m12"><a class="active" href="#interest">Yes I am Interested</a></li>
+                    <!-- <li class="tab col m6"><a href="#pricefinder">Price finder</a></li> -->
                 </ul>
                 <div class="row">
                     <div id="interest" class="col s12">
-                        <form>
-                            <div class="col input-field s12">
+                        <form name="contactForm">
+                            <div class="input-field col s12">
                                 <i class="material-icons prefix">account_circle</i>
-                                <input placeholder="Name" type="text" class="validate mgb5 ft12">
+                                <input placeholder="Name" type="text" class="validate mgb5 ft12" ng-model="query.userName" required>                              
                             </div>
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">phone</i>
-                                <input placeholder="Phone" type="text" class="validate mgb5 ft12">
+                                <input placeholder="Phone" type="text" class="validate mgb5 ft12" ng-minlength="10" ng-maxlength="10" ng-model="query.mobile" required>                              
                             </div>
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">email</i>
-                                <input placeholder="Email" type="text" class="validate mgb5 ft12">
-                            </div>
-                            <div class="col s12 mgb5 mgt10">
+                                <input placeholder="Email" type="email" class="validate mgb5 ft12" ng-model="query.email" required>
+                                </div>
+                                <div class="col s12 mgb5 mgt10">
                                 <input type="checkbox" id="che1" class="filled-in ft12" />
                                 <label for="che1" class="mgl3r">lorem ipsum</label>
                             </div>
@@ -72,11 +77,11 @@
                                 <label for="che2" class="mgl3r">lorem ipsum</label>
                             </div>
                             <div class="col s12 mgtmn mgt10">
-                                <button class="waves-effect waves-light btn btn-full blue lighten-2"><i class="material-icons left">list</i> Provide Details</button>
+                                <button ng-disabled="contactForm.$invalid" class="waves-effect waves-light btn btn-full blue lighten-2" ng-click="provideDetails(query)"><i class="material-icons left">list</i> Provide Details</button>
                             </div>
                         </form>
                     </div>
-                    <div id="pricefinder" class="col s12">
+                    <!-- <div id="pricefinder" class="col s12">
                         <div class="row valign-wrapper logoprice">
                             <div class="col m5 pdan center-align"> <img src="images/project/99acres.png" alt=""></div>
                             <div class="col m4 center-align ft12">
@@ -101,347 +106,52 @@
                             </div>
                             <div class="col m3 right-align"><a href="" class="btn blue">Details</a></div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
     </div>
 </section>
 <div class="container">
-    <div class="row mglrn mgt20 linehth5">
+    <div class="row mglrn mgt30 linehth5">
         <div class="col s4 pda10">
             <h5 class="ft12 mgan"> <i class="material-icons left teal-text text-accent-4">lock_outline</i> Security Deposit</h5>
-            <h4 class="mgan ft16b pdl34 truncate">30 Days</h4>
+            <h4 class="mgan ft16b pdl34 truncate">{{project.projectDetails.securityDeposit}}</h4>
             <p class="mgan ft11 pdl34"></p>
         </div>
         <div class="col s4 pda10">
             <h5 class="ft12 mgan"> <i class="material-icons left cyan-text text-accent-4">hotel</i> Total Beds</h5>
-            <h4 class="mgan ft16b pdl34 truncate">35</h4>
+            <h4 class="mgan ft16b pdl34 truncate">{{project.projectDetails.totalBeds}}</h4>
             <p class="mgan ft11 pdl34"></p>
         </div>
         <div class="col s4 pda10">
             <h5 class="ft12 mgan"><i class="material-icons left deep-purple-text text-accent-1">place</i> Address</h5>
-            <h4 class="mgan ft16b pdl34 truncate">Sector 61, Gurgaon, Haryana</h4>
+            <h4 class="mgan ft16b pdl34 truncate">{{project.projectDetails.address.displayAddress}}</h4>
             <p class="mgan ft11 pdl34"></p>
         </div>
         <div class="col s4 pda10">
             <h5 class="ft12 mgan"><i class="material-icons left  yellow-text text-accent-4">schedule</i> In/Out Timings</h5>
-            <h4 class="mgan ft16b pdl34 truncate">6am  & 10pm </h4>
+            <h4 class="mgan ft16b pdl34 truncate">{{project.projectDetails.inOutTimings}}</h4>
             <p class="mgan ft11 pdl34"></p>
         </div>
         <div class="col s4 pda10">
-            <h5 class="ft12 mgan"> <i class="material-icons left orange-text text-accent-4">supervisor_account</i> Hosting Guest Allowed</h5>
-            <h4 class="mgan ft16b pdl34 truncate">Allowed</h4>
+            <h5 class="ft12 mgan"> <i class="material-icons left orange-text text-accent-4">supervisor_account</i> Hosting Guest</h5>
+            <h4 class="mgan ft16b pdl34 truncate">{{project.projectDetails.hostingGuestAllowed}}</h4>
             <p class="mgan ft11 pdl34"></p>
         </div>
         <div class="col s4 pda10">
             <h5 class="ft12 mgan"> <i class="material-icons left  red-text text-accent-4">power</i> Power Backup</h5>
-            <h4 class="mgan ft16b pdl34 truncate">Invertor (Partial)</h4>
+            <h4 class="mgan ft16b pdl34 truncate">{{project.projectDetails.powerBackup}}</h4>
             <p class="mgan ft11 pdl34"></p>
         </div>
     </div>
-    <section class="mgt20">
-        <div class="row mgan pda10 allbd">
-            <h4 class="mgan ft22">
-                <span class="left">
-                     <i class="material-icons small">star</i>
-                     <i class="material-icons small">star</i>
-                     <i class="material-icons small">star</i>
-                     <i class="material-icons small">star</i>
-                     <i class="material-icons small">star</i>
-                </span>
-                <span class="mgt5 in-block"> 4.5 Star Rating From 527 Reviews </span>
-            </h4>
-            <div class="row mgt20 center-align">
-                <button class="btn blue"><i class="material-icons left">edit</i> Write Review</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s4 mgt20">
-                <div class="allbd white pda10 htrating">
-                    <h5 class="ft15 mgtn b mgb10">User Rating</h5>
-                    <div class="row mgbn">
-                        <div class="col s6 mgrn">
-                            <input type="checkbox" class="filled-in" id="filled-in-box2" />
-                            <label for="filled-in-box2">Excellent </label>
-                        </div>
-                        <div class="col s3 pdan">
-                            <span class="progress mgbn  ht10 grey lighten-2">
-                        <span class="determinate blue" style="width: 30%"></span>
-                            </span>
-                        </div>
-                        <div class="col s3 grey-text mgt3">1500</div>
-                    </div>
-                    <div class="row mgbn">
-                        <div class="col s6 mgrn">
-                            <input type="checkbox" class="filled-in" id="filled-in-box3" />
-                            <label for="filled-in-box3">Very Good </label>
-                        </div>
-                        <div class="col s3 pdan">
-                            <span class="progress mgbn  ht10 grey lighten-2">
-                        <span class="determinate blue" style="width: 30%"></span>
-                            </span>
-                        </div>
-                        <div class="col s3 grey-text mgt3">500</div>
-                    </div>
-                    <div class="row mgbn">
-                        <div class="col s6 mgrn">
-                            <input type="checkbox" class="filled-in" id="filled-in-box4" />
-                            <label for="filled-in-box4">Good </label>
-                        </div>
-                        <div class="col s3 pdan">
-                            <span class="progress mgbn  ht10 grey lighten-2">
-                        <span class="determinate blue" style="width: 30%"></span>
-                            </span>
-                        </div>
-                        <div class="col s3 grey-text mgt3">450</div>
-                    </div>
-                    <div class="row mgbn">
-                        <div class="col s6 mgrn">
-                            <input type="checkbox" class="filled-in" id="filled-in-box5" />
-                            <label for="filled-in-box5">Average </label>
-                        </div>
-                        <div class="col s3 pdan">
-                            <span class="progress mgbn  ht10 grey lighten-2">
-                        <span class="determinate blue" style="width: 30%"></span>
-                            </span>
-                        </div>
-                        <div class="col s3 grey-text mgt3">150</div>
-                    </div>
-                    <div class="row mgbn">
-                        <div class="col s6 mgrn">
-                            <input type="checkbox" class="filled-in" id="filled-in-box6" />
-                            <label for="filled-in-box6">Bad </label>
-                        </div>
-                        <div class="col s3 pdan">
-                            <span class="progress mgbn  ht10 grey lighten-2">
-                        <span class="determinate blue" style="width: 30%"></span>
-                            </span>
-                        </div>
-                        <div class="col s3 grey-text mgt3">10</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col s2 mgt20">
-                <div class="allbd white pda10 htrating">
-                    <h5 class="ft15 mgtn b mgb10">Resident Type</h5>
-                    <div class="row mgbn">
-                        <div class="col s12 mgrn">
-                            <input type="checkbox" class="filled-in" id="type1" />
-                            <label for="type1">Owners </label>
-                        </div>
-                    </div>
-                    <div class="row mgbn">
-                        <div class="col s12 mgrn">
-                            <input type="checkbox" class="filled-in" id="type2" />
-                            <label for="type2">Tenants </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col s6 mgt20">
-                <div class="allbd white pda10 ft13 htrating">
-                    <h5 class="ft15 mgtn b mgb10">Rating Summary</h5>
-                    <div class="row mgbn">
-                        <div class="col s7">Amenities (4)</div>
-                        <div class="col s5 right-align  grey-text ft20i">
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons">star</i>
-                        </div>
-                    </div>
-                    <div class="row mgbn">
-                        <div class="col s7">Security (4)</div>
-                        <div class="col s5 right-align  grey-text ft20i">
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons">star</i>
-                        </div>
-                    </div>
-                    <div class="row mgbn">
-                        <div class="col s7">Open And Green Areas (4.5)</div>
-                        <div class="col s5 right-align  grey-text ft20i">
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons">star</i>
-                        </div>
-                    </div>
-                    <div class="row mgbn">
-                        <div class="col s7">Electricity And Water Supply (4.5)</div>
-                        <div class="col s5 right-align  grey-text ft20i">
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons">star</i>
-                        </div>
-                    </div>
-                    <div class="row mgbn">
-                        <div class="col s7">Convenience Of House Maids (4)</div>
-                        <div class="col s5 right-align  grey-text ft20i">
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons">star</i>
-                        </div>
-                    </div>
-                    <div class="row mgbn">
-                        <div class="col s7">Convenience Of Parking (5)</div>
-                        <div class="col s5 right-align  grey-text ft20i">
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons">star</i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mgt20">
-            <div class="col s8">
-                <div class="row bdbtm ft13 grey-text text-darken-2 mglrn mgb10 pdb10">
-                    <div class="col b pdb20">
-                        <img class="imgcir mgt10" src="images/general/noImage.png">
-                    </div>
-                    <div class="col">
-                        <p><b> Rajneesh Sharma </b> | Sep 01, 16</p>
-                        <p class="grey-text review ft20i mgbn mgtmn">
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons">star</i>
-                        </p>
-                    </div>
-                    <div class="col s12">
-                        <p><b>Wonderful ambience - greenery all around</b></p>
-                        <p class="justify">One entry and exit point has been constructed so thats a very big advantage and guards are always present. Clubhouse is there and it has a good ambience and is very well maintained. There are wide open green areas. It is spread across the Sohna Road and Golf Course Road Extension. There are some problems with the power backup. Housemaids are easily available. Basement and open parking is maintained and twice a day they have guards around. Here we have high-rise buildings with very good layout, main road connectivity is good which provides for easy transportation. Sohna Road is a problem as service roads are bad if you are coming in or going out of the society it is bad but inside, the ambience is wonderful.</p>
-                    </div>
-                </div>
-                <div class="row bdbtm ft13 grey-text text-darken-2 mglrn mgb10 pdb10">
-                    <div class="col b pdb20">
-                        <img class="imgcir mgt10" src="images/general/noImage.png">
-                    </div>
-                    <div class="col">
-                        <p><b> Rajneesh Sharma </b> | Sep 01, 16</p>
-                        <p class="grey-text review ft20i mgbn mgtmn">
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons">star</i>
-                        </p>
-                    </div>
-                    <div class="col s12">
-                        <p><b>Wonderful ambience - greenery all around</b></p>
-                        <p class="justify">One entry and exit point has been constructed so thats a very big advantage and guards are always present. Clubhouse is there and it has a good ambience and is very well maintained. There are wide open green areas. It is spread across the Sohna Road and Golf Course Road Extension. There are some problems with the power backup. Housemaids are easily available. Basement and open parking is maintained and twice a day they have guards around. Here we have high-rise buildings with very good layout, main road connectivity is good which provides for easy transportation. Sohna Road is a problem as service roads are bad if you are coming in or going out of the society it is bad but inside, the ambience is wonderful.</p>
-                    </div>
-                </div>
-                <div class="row bdbtm ft13 grey-text text-darken-2 mglrn mgb10 pdb10">
-                    <div class="col b pdb20">
-                        <img class="imgcir mgt10" src="images/general/noImage.png">
-                    </div>
-                    <div class="col">
-                        <p><b> Rajneesh Sharma </b> | Sep 01, 16</p>
-                        <p class="grey-text review ft20i mgbn mgtmn">
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons blue-text">star</i>
-                            <i class="material-icons">star</i>
-                        </p>
-                    </div>
-                    <div class="col s12">
-                        <p><b>Wonderful ambience - greenery all around</b></p>
-                        <p class="justify">One entry and exit point has been constructed so thats a very big advantage and guards are always present. Clubhouse is there and it has a good ambience and is very well maintained. There are wide open green areas. It is spread across the Sohna Road and Golf Course Road Extension. There are some problems with the power backup. Housemaids are easily available. Basement and open parking is maintained and twice a day they have guards around. Here we have high-rise buildings with very good layout, main road connectivity is good which provides for easy transportation. Sohna Road is a problem as service roads are bad if you are coming in or going out of the society it is bad but inside, the ambience is wonderful.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col s4">
-                <div class="allbd white pda10 ft13 htrating">
-                    <h5 class="ft15 mgtn b mgb10 pdb10 bdbtm">Nearby Projects</h5>
-                    <div class="row mgbn">
-                        <div class="card shdnone">
-                            <div class="cardTitle row mgb5">
-                                <a href="" class="col s12 black-text ilpspan">
-                                    <span>Bestech Park View City 1Sohna Road, Sector 48 ProjectSohna Road, Sector 48 Project</span>
-                                    <span class="ft11 grey-text">Sohna Road, Sector 48 Project Sohna Road, Sector 48 ProjectSohna Road, Sector 48 Project</span>
-                                </a>
-                            </div>
-                            <div class="card-image  waves-effect waves-light">
-                                <a href=""> <img src="images/home/sohna.jpg"></a>
-                            </div>
-                            <div class="row mgln mgrn mgb10 ht50 allbd">
-                                <div class="col s6 pd5 dis-tab ht50">
-                                    <span class="block ellipsis">Rent Price</span>
-                                    <span class="ft12 grey-text block ellipsis">₹28000 - ₹55000</span>
-                                </div>
-                                <div class="col s6 pd5 center ht50">
-                                    <span class="block ellipsis">2, 3, 4 BHK</span>
-                                    <span class="ft12 grey-text block ellipsis">1776 Sq. Ft. - 2345 Sq. </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card shdnone">
-                            <div class="cardTitle row mgb5">
-                                <a href="" class="col s12 black-text ilpspan">
-                                    <span>Bestech Park View City 1Sohna Road, Sector 48 ProjectSohna Road, Sector 48 Project</span>
-                                    <span class="ft11 grey-text">Sohna Road, Sector 48 Project Sohna Road, Sector 48 ProjectSohna Road, Sector 48 Project</span>
-                                </a>
-                            </div>
-                            <div class="card-image  waves-effect waves-light">
-                                <a href=""> <img src="images/home/sohna.jpg"></a>
-                            </div>
-                            <div class="row mgln mgrn mgb10 ht50 allbd">
-                                <div class="col s6 pd5 dis-tab ht50">
-                                    <span class="block ellipsis">Rent Price</span>
-                                    <span class="ft12 grey-text block ellipsis">₹28000 - ₹55000</span>
-                                </div>
-                                <div class="col s6 pd5 center ht50">
-                                    <span class="block ellipsis">2, 3, 4 BHK</span>
-                                    <span class="ft12 grey-text block ellipsis">1776 Sq. Ft. - 2345 Sq. </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card shdnone">
-                            <div class="cardTitle row mgb5">
-                                <a href="" class="col s12 black-text ilpspan">
-                                    <span>Bestech Park View City 1Sohna Road, Sector 48 ProjectSohna Road, Sector 48 Project</span>
-                                    <span class="ft11 grey-text">Sohna Road, Sector 48 Project Sohna Road, Sector 48 ProjectSohna Road, Sector 48 Project</span>
-                                </a>
-                            </div>
-                            <div class="card-image  waves-effect waves-light">
-                                <a href=""> <img src="images/home/sohna.jpg"></a>
-                            </div>
-                            <div class="row mgln mgrn mgb10 ht50 allbd">
-                                <div class="col s6 pd5 dis-tab  ht50">
-                                    <span class="block ellipsis">Rent Price</span>
-                                    <span class="ft12 grey-text block ellipsis">₹28000 - ₹55000</span>
-                                </div>
-                                <div class="col s6 pd5 center ht50">
-                                    <span class="block ellipsis">2, 3, 4 BHK</span>
-                                    <span class="ft12 grey-text block ellipsis">1776 Sq. Ft. - 2345 Sq. </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <section class="mgt20" ui-view="reviewRating" ng-show="reviews">
     </section>
 </div>
 <div class="container">
     <div class="row mgt20 grey-text ft13 text-darken-2">
         <div class="col s12 b">
-            <h5 class="ft15 mgtn b mgb10 pdb10 bdbtm">Charges Details</h5>
+            <h5 class="ft15 mgtn b mgb10 pdb10 bdbtm">Charges</h5>
         </div>
         <div class="col s12 mgb20 amen-tab reletive">
             <ul class="tabs">
@@ -452,70 +162,49 @@
         </div>
         <div id="Single" class="col s12">
             <div class="row row-mgn flor_co">
-                <div class="col s2 imgflor">
-                    <i class="material-icons medium">perm_identity</i>
-                </div>
                 <div class="col s2">
                     <div class="ft13 b mgb10">Single Cooler</div>
-                    <p>NA</p>
+                    <p><span ng-show="project.charges.singleCooler != 'NA'">₹</span>{{project.charges.singleCooler}}</p>
                 </div>
                 <div class="col s2">
                     <div class="ft13 b mgb10">Single Non/AC</div>
-                    <p>NA</p>
+                    <p><span ng-show="project.charges.singleNonAC != 'NA'">₹</span>{{project.charges.singleNonAC}}</p>
                 </div>
                 <div class="col s2">
                     <div class="ft13 b mgb10">Single AC</div>
-                    <p>NA</p>
-                </div>
-                <div class="col s2">
-                    <div class="ft13 b mgb10">Electricity</div>
-                    <p>8rs/unit</p>
+                    <p><span ng-show="project.charges.singleAC != 'NA'">₹</span>{{project.charges.singleAC}}</p>
                 </div>
             </div>
         </div>
         <div id="Double" class="col s12">
             <div class="row row-mgn flor_co">
-                <div class="col s2 imgflor">
-                    <i class="material-icons medium">perm_identity</i>
-                </div>
                 <div class="col s2">
                     <div class="ft13 b mgb10">Double Cooler</div>
-                    <p>NA</p>
+                    <p><span ng-show="project.charges.doubleCooler != 'NA'">₹</span>{{project.charges.doubleCooler}}</p>
                 </div>
                 <div class="col s2">
                     <div class="ft13 b mgb10">Double Non/AC</div>
-                    <p>NA</p>
+                    <p><span ng-show="project.charges.doubleNonAC != 'NA'">₹</span>{{project.charges.doubleNonAC}}</p>
                 </div>
                 <div class="col s2">
                     <div class="ft13 b mgb10">Double AC</div>
-                    <p>NA</p>
-                </div>
-                <div class="col s2">
-                    <div class="ft13 b mgb10">Electricity</div>
-                    <p>8rs/unit</p>
+                    <p><span ng-show="project.charges.doubleAC != 'NA'">₹</span>{{project.charges.doubleAC}}</p>
                 </div>
             </div>
         </div>
         <div id="Triple" class="col s12">
             <div class="row row-mgn flor_co">
-                <div class="col s2 imgflor">
-                    <i class="material-icons medium">perm_identity</i>
-                </div>
                 <div class="col s2">
                     <div class="ft13 b mgb10">Triple Cooler</div>
-                    <p>NA</p>
+                    <p><span ng-show="project.charges.tripleCooler != 'NA'">₹</span>{{project.charges.tripleCooler}}</p>
                 </div>
                 <div class="col s2">
                     <div class="ft13 b mgb10">Triple Non/AC</div>
-                    <p>₹8000</p>
+                    <p><span ng-show="project.charges.tripleNonAC != 'NA'">₹</span>{{project.charges.tripleNonAC}}</p>
                 </div>
                 <div class="col s2">
                     <div class="ft13 b mgb10">Triple AC</div>
-                    <p>₹7500</p>
-                </div>
-                <div class="col s2">
-                    <div class="ft13 b mgb10">Electricity</div>
-                    <p>8rs/unit</p>
+                    <p><span ng-show="project.charges.tripleAC != 'NA'">₹</span>{{project.charges.tripleAC}}</p>
                 </div>
             </div>
         </div>
@@ -533,32 +222,28 @@
         </div>
         <div id="overview" class="col s12">
             <div class="row row-mgn flor">
-                <div class="col s2 imgflor">
-                    <div class="ft13 b mgb10">Photo</div>
-                    <img class="responsive-img" src="images/dummy/flor.jpg">
-                </div>
                 <div class="col s2">
                     <div class="ft13 b mgb10">Contact Details</div>
-                    <p>Arya</p>
-                    <p>+91-8527585438</p>
+                    <p>{{project.projectDetails.contactName}}</p>
+                    <p>+91-{{project.projectDetails.contactNumber}}</p>
                 </div>
                 <div class="col s2">
                     <div class="ft13 b mgb10">Allowed</div>
-                    <p>Male and Femail</p>
-                    <p>Hosting Guest</p>
-                    <p>Smoking</p>
+                    <p><span ng-show="project.projectDetails.male == 'Available'">Male</span><span ng-show="project.projectDetails.male == 'Available' && project.projectDetails.female == 'Available'"> and </span><span ng-show="project.projectDetails.female == 'Available'">Female</span></p>
+                    <p ng-show="project.projectDetails.hostingGuestAllowed">Hosting Guests {{project.projectDetails.hostingGuestAllowed}}</p>
+                    <p ng-show="project.projectDetails.smoking">Smoking {{project.projectDetails.smoking}}</p>
                 </div>
-                <div class="col s2">
+                <div class="col s2" ng-show="project.projectDetails.buildingType != 'NA'">
                     <div class="ft13 b mgb10">Building Type</div>
-                    <p>NA</p>
+                    <p>{{project.projectDetails.buildingType}}</p>
                 </div>
                 <div class="col s2">
                     <div class="ft13 b mgb10">Lock in Period</div>
-                    <p>30 Days</p>
+                    <p>{{project.projectDetails.lockInPeriod}}</p>
                 </div>
-                <div class="col s2">
+                <div class="col s2" ng-show="project.projectDetails.hostingInformation">
                     <div class="ft13 b mgb10">Hosting Information</div>
-                    <p>only family and friends for 1 or 2 days</p>
+                    <p>{{project.projectDetails.hostingInformation}}</p>
                 </div>
             </div>
         </div>
@@ -566,119 +251,118 @@
             <div class="row amncolmg">
                 <div class="col center-align">
                     <img src="images/icons/Washer.png" alt="Washing Machine">
-                    <p class="mgan ft12">Washing Machine/ Laundry</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.washingMachineLaundry != 'Not Available'">Washing Machine/ Laundry</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.washingMachineLaundry == 'Not Available'"><s>Washing Machine/ Laundry</s></p>
                 </div>
                 <div class="col s2 center-align">
                     <img src="images/icons/Refrigerator.png" alt="Refrigerator">
-                    <p class="mgan ft12">Refrigerator</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.refrigerator != 'Not Available'">Refrigerator</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.refrigerator == 'Not Available'"><s>Refrigerator</s></p>
                 </div>
                 <div class="col s2 center-align">
                     <img src="images/icons/water3.png" alt="RO Water">
-                    <p class="mgan ft12">RO Water</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.rOWater != 'Not Available'">RO Water</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.rOWater == 'Not Available'"><s>RO Water</s></p>
                 </div>
                 <div class="col s2 center-align">
                     <img src="images/icons/cctv.png" alt="CCTV">
-                    <p class="mgan ft12">CCTV</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.cctv != 'Not Available'">CCTV</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.cctv == 'Not Available'"><s>CCTV</s></p>
                 </div>
                 <div class="col s2 center-align">
                     <img src="images/icons/Elevator.png" alt="Guards on Gate">
-                    <p class="mgan ft12">
-                        <s>Guards on Gate</s>
-                    </p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.guardsOnGate != 'Not Available'">Guards on Gate</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.guardsOnGate == 'Not Available'"><s>Guards on Gate</s></p>
                 </div>
                 <div class="col s2 center-align">
                     <img src="images/icons/clubhouse.png" alt="Housekeeping">
-                    <p class="mgan ft12">Housekeeping</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.housekeeping != 'Not Available'">Housekeeping</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.housekeeping == 'Not Available'"><s>Housekeeping</s></p>
                 </div>
                 <div class="col s2 center-align">
                     <img src="images/icons/shower.png" alt="Washrooms">
-                    <p class="mgan ft12">Washrooms</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.washrooms != 'Not Available'">Washrooms ({{project.commonFacilities.washrooms}})</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.washrooms == 'Not Available'"><s>Washrooms</s></p>
                 </div>
                 <div class="col s2 center-align">
                     <img src="images/icons/lift.png" alt="Lifts">
-                    <p class="mgan ft12">
-                        <s>Lifts</s>
-                    </p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.lifts != 'Not Available'">Lifts</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.lifts == 'Not Available'"><s>Lifts</s></p>
                 </div>
                 <div class="col s2 center-align">
-                    <img src="images/icons/parkingp.png" alt="Parking 2 Wheeler">
-                    <p class="mgan ft12">Parking 2 Wheeler</p>
+                    <img src="images/icons/parkingp.png" alt="Parking">
+                    <p class="mgan ft12" ng-show="project.commonFacilities.parking != 'Not Available'">Parking ({{project.commonFacilities.parking}})</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.parking == 'Not Available'"><s>Parking</s></p>
                 </div>
                 <div class="col s2 center-align">
                     <img src="images/icons/wi-fi.png" alt="Wi-Fi">
-                    <p class="mgan ft12">
-                        <s>Wi-Fi</s>
-                    </p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.wifi != 'Not Available'">Wi-Fi ({{project.commonFacilities.wifi}})</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.wifi == 'Not Available'"><s>Wi-Fi</s></p>
                 </div>
                 <div class="col s2 center-align">
                     <img src="images/icons/Television.png" alt="Television">
-                    <p class="mgan ft12">Television</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.television != 'Not Available'">Television ({{project.commonFacilities.television}})</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.television == 'Not Available'"><s>Television</s></p>
                 </div>
                 <div class="col s2 center-align">
                     <img src="images/icons/Living.png" alt="Living Room">
-                    <p class="mgan ft12">
-                        <s>Living Room</s>
-                    </p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.livingRoom != 'Not Available'">Living Room</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.livingRoom == 'Not Available'"><s>Living Room</s></p>
                 </div>
                 <div class="col s2 center-align">
                     <img src="images/icons/Dining.png" alt="Dining Table">
-                    <p class="mgan ft12">
-                        <s>Dining Table</s>
-                    </p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.diningTable != 'Not Available'">Dining Table</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.diningTable == 'Not Available'"><s>Dining Table</s></p>
                 </div>
                 <div class="col s2 center-align">
                     <img src="images/icons/Streamline-18.png" alt="Balcony">
-                    <p class="mgan ft12">Balcony</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.balcony != 'Not Available'">Balcony</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.balcony == 'Not Available'"><s>Balcony</s></p>
                 </div>
                 <div class="col s2 center-align">
                     <img src="images/icons/Geyser.png" alt="Geyser">
-                    <p class="mgan ft12">Geyser</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.geyser != 'Not Available'">Geyser</p>
+                    <p class="mgan ft12" ng-show="project.commonFacilities.geyser == 'Not Available'"><s>Geyser</s></p>
                 </div>
             </div>
         </div>
         <div id="kitchen" class="col s12">
             <div class="row row-mgn flor">
-                <div class="col s2 imgflor">
-                    <div class="ft13 b mgb10">Photo</div>
-                    <img class="responsive-img" src="images/dummy/flor.jpg">
-                </div>
-                <div class="col s2">
+                <div class="col s3">
                     <div class="ft13 b mgb10">Gas Stove</div>
-                    <p>Available</p>
+                    <p>{{project.kitchen.gasStove}}</p>
                 </div>
-                <div class="col s2">
+                <div class="col s3">
                     <div class="ft13 b mgb10">Utensils</div>
-                    <p>Available</p>
+                    <p>{{project.kitchen.utensils}}</p>
                 </div>
-                <div class="col s2">
+                <div class="col s3">
                     <div class="ft13 b mgb10">Microwave</div>
-                    <p>Not Available</p>
+                    <p>{{project.kitchen.microwave}}</p>
                 </div>
-                <div class="col s2">
+                <div class="col s3">
                     <div class="ft13 b mgb10">Meals</div>
-                    <p>BLD</p>
+                    <p>{{project.kitchen.meals}}</p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row mgt20 grey-text ft13 text-darken-2">
+    <div class="row mgt20 grey-text ft13 text-darken-2" ng-show="project.others">
         <div class="col s12 b">
             <h5 class="ft15 mgtn b mgb10 pdb10 bdbtm">Others</h5>
         </div>
         <div class="col s12">
             <div class="row row-mgn flor">
-                <div class="col s5">
+                <div class="col s5" ng-show="project.others.specialRules">
                     <div class="ft13 b mgb10">Special Rules</div>
                     <ul class="list-dt">
-                        <li>No other gender allowed</li>
-                        <li>No parties allowed</li>
+                        <li ng-repeat="rule in project.others.specialRules">{{rule}}</li>
                     </ul>
                 </div>
-                <div class="col s6">
+                <div class="col s6" ng-show="project.others.specialFacilities">
                     <div class="ft13 b mgb10">Special Facilities</div>
                     <ul class="list-dt">
-                        <li>4 sharing @ 6500</li>
-                        <li>5 sharing @ 5500</li>
+                        <li ng-repeat="facility in project.others.specialFacilities">{{facility}}</li>
                     </ul>
                 </div>
             </div>
