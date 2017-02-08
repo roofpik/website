@@ -1,0 +1,331 @@
+<div class="container">
+    <div class="row mgt70 linkroot">
+        <nav>
+            <div class="nav-wrapper">
+                <div class="col s12">
+                    <a href="#home" class="breadcrumb">Home</a>
+                    <a href="#projects" class="breadcrumb" ng-repeat="path in path track by $index">{{path}}</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col s12 m8">
+            <h1 class="hd1 b">{{projectName}}</h1>
+            <div class="row mgbn ft12">
+                <div class="col s12 ft20i vatop mgt5"><i class="material-icons blue-text">location_on</i> {{project.projectDetails.address.displayAddress}} </div>
+                <!-- <div class="col s12 grey-text mgt5 review ft20i vatop">
+                    <i class="material-icons blue-text">star</i>
+                    <i class="material-icons blue-text">star</i>
+                    <i class="material-icons blue-text">star</i>
+                    <i class="material-icons blue-text">star</i>
+                    <i class="material-icons">star</i>
+                    <a href="" class="mgr10">1 Review</a> |
+                    <a href="" class="mgr10"># 4 rating</a>
+                </div> -->
+                <div class="col s12 grey-text mgt5 review ft20i vatop">
+                    <a href="" class="mgr10">Reviews Not Available</a>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m4 grey-text ft13 text-darken-2 right-align">
+            <div class="ft19 b" ng-show="priceMin">₹ {{priceMin}}<span ng-show="priceMin != priceMax"> - ₹ {{priceMax}}</span></div>
+            <div class="row mgbn ft12">
+                <div class="col s12 mgt5" ng-show="availableOfficeTypes">{{availableOfficeTypes}}</div>
+                <div class="col s12 mgt5" ng-show="project.projectDetails.website != 'NA'"><a href = "{{project.projectDetails.website}}" target="_blank">{{project.projectDetails.website}}</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<section>
+    <div class="container">
+        <div class="row mgln mgrn mgbn">
+            <div class="col pdan s12 m7 waves-effect waves-light img-detail htfixbox">
+                <img ng-src="{{coverImage}}">
+                <div class="img-btn center-align">
+                    <div class="gallery-btn">
+                        <gallery></gallery>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m5 amen-tab htfixbox boxsd white">
+                <ul class="tabs">
+                    <li class="tab col m12"><a class="active" href="#interest">Yes I am Interested</a></li>
+                    <!-- <li class="tab col m6"><a href="#pricefinder">Price finder</a></li> -->
+                </ul>
+                <div class="row">
+                    <div id="interest" class="col s12">
+                        <form name="contactForm">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input placeholder="Name" type="text" class="validate mgb5 ft12" ng-model="query.userName" required>                              
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">phone</i>
+                                <input placeholder="Phone" type="text" class="validate mgb5 ft12" ng-minlength="10" ng-maxlength="10" ng-model="query.mobile" required>                                
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">email</i>
+                                <input placeholder="Email" type="email" class="validate mgb5 ft12" ng-model="query.email" required>                               
+                            </div>
+                             <div class="col s12 mgb5 mgt10">
+                                <input type="checkbox" id="che1" class="filled-in ft12" />
+                                <label for="che1" class="mgl3r">lorem ipsum</label>
+                            </div>
+                            <div class="col s12 mgt5">
+                                <input type="checkbox" id="che2" class="filled-in ft12" />
+                                <label for="che2" class="mgl3r">lorem ipsum</label>
+                            </div>
+                            <div class="col s12 mgtmn mgt10">
+                                <button ng-disabled="contactForm.$invalid" class="waves-effect waves-light btn btn-full blue lighten-2" ng-click="provideDetails(query)"><i class="material-icons left">list</i> Provide Details</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- <div id="pricefinder" class="col s12">
+                        <div class="row valign-wrapper logoprice">
+                            <div class="col m5 pdan center-align"> <img src="images/project/99acres.png" alt=""></div>
+                            <div class="col m4 center-align ft12">
+                                <b>₹ 12,500</b>
+                                <br> 1776 Sq.Ft.
+                            </div>
+                            <div class="col m3 right-align"><a href="" class="btn blue">Details</a></div>
+                        </div>
+                        <div class="row valign-wrapper logoprice">
+                            <div class="col m5 pdan center-align"> <img src="images/project/triplogo.png" alt=""></div>
+                            <div class="col m4 center-align ft12">
+                                <b>₹ 12,500</b>
+                                <br> 1776 Sq.Ft.
+                            </div>
+                            <div class="col m3 right-align"><a href="" class="btn blue">Details</a></div>
+                        </div>
+                        <div class="row valign-wrapper logoprice">
+                            <div class="col m5 pdan center-align"> <img src="images/project/magicbricks.png" alt=""></div>
+                            <div class="col m4 center-align ft12">
+                                <b>₹ 12,500</b>
+                                <br> 1776 Sq.Ft.
+                            </div>
+                            <div class="col m3 right-align"><a href="" class="btn blue">Details</a></div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="row mglrn mgt20 linehth5">
+        <div class="col s4 pda10">			
+            <h5 class="ft12 mgan"><i class="material-icons left teal-text text-accent-4">access_time</i> Timings</h5>
+            <h4 class="mgan ft16b pdl34 truncate">{{project.projectDetails.timings}}</h4>
+        </div>
+        <div class="col s4 pda10">            
+            <h5 class="ft12 mgan"><i class="material-icons left cyan-text text-accent-4">place</i> Address</h5>
+            <h4 class="mgan ft16b pdl34 truncate">{{project.projectDetails.address.addressLine1}}, {{project.projectDetails.address.addressLine2}}</h4>
+        </div>
+        <div class="col s4 pda10">            
+            <h5 class="ft12 mgan"><i class="material-icons left deep-purple-text text-accent-1">work</i> Working Days</h5>
+            <h4 class="mgan ft16b pdl34 truncate">{{project.projectDetails.workingDays}}</h4>
+        </div>
+     <!--    <div class="col s4 pda10">
+            <i class="material-icons small bdcor">tab_unselected</i>
+            <h5 class="ft12 mgan">Business Center</h5>
+            <h4 class="mgan ft16b pdl34 truncate">{{project.projectDetails.businessCenter}}</h4>
+        </div>
+       <div class="col s4 pda10">
+            <i class="material-icons small bdcor">play_for_work</i>
+            <h5 class="ft12 mgan">Co-Working</h5>
+            <h4 class="mgan ft16b pdl34 truncate">{{project.projectDetails.coWorking}}</h4>
+        </div>
+       <div class="col s4 pda10">
+            <i class="material-icons small bdcor">tab</i>
+            <h5 class="ft12 mgan">Virtual Office</h5>
+            <h4 class="mgan ft16b pdl34 truncate">{{project.projectDetails.virtualOffice}}</h4>
+        </div>
+     --></div>
+    <section class="mgt20" ui-view="reviewRating">
+    </section>
+</div>
+<div class="container">
+    <div class="row mgt20 grey-text ft13 text-darken-2">
+        <div class="col s12 b">
+            <h5 class="ft15 mgtn b mgb10 pdb10 bdbtm">Services</h5>
+        </div>
+        <div class="col mgt10 s12">
+            <div class="row amncolmg">
+                <div class="col center-align">
+                    <img src="images/icons/Reception.png" alt="Reception">
+                    <p class="mgan ft12" ng-show="project.services.reception == 'Available'">Reception</p>
+                    <p class="mgan ft12" ng-show="project.services.reception != 'Available'"><s>Reception</s></p>
+                </div>
+                <div class="col  center-align">
+                    <img src="images/icons/call.png" alt="Phone Answering services">
+                    <p class="mgan ft12" ng-show="project.services.phoneAnsweringServices == 'Available'">Phone Answering services</p>
+                    <p class="mgan ft12" ng-show="project.services.phoneAnsweringServices != 'Available'"><s>Phone Answering services</s></p>
+                </div>
+                <div class="col s2 center-align">
+                    <img src="images/icons/_waiting_room.png" alt="Waiting Lounge">
+                    <p class="mgan ft12" ng-show="project.services.waitingLounge == 'Available'">Waiting Lounge</p>
+                    <p class="mgan ft12" ng-show="project.services.waitingLounge != 'Available'"><s>Waiting Lounge</s></p>
+                </div>
+                <div class="col s2 center-align">
+                    <img src="images/icons/interior-26.png" alt="Furniture Flexibility">
+                    <p class="mgan ft12" ng-show="project.services.furnitureFlexibility == 'Available'">Furniture Flexibility</p>
+                    <p class="mgan ft12" ng-show="project.services.furnitureFlexibility != 'Available'">Furniture Flexibility</p>
+                </div>
+                <div class="col s2 center-align">
+                    <img src="images/icons/pantry.png" alt="Pantry">
+                    <p class="mgan ft12" ng-show="project.services.pantry == 'Available'">Pantry</p>
+                    <p class="mgan ft12" ng-show="project.services.pantry != 'Available'">Pantry</p>
+                </div>
+                <div class="col s2 center-align">
+                    <img src="images/icons/coffee.png" alt="Cafetaria">
+                    <p class="mgan ft12" ng-show="project.services.cafeteria == 'Available'">Cafetaria</p>
+                    <p class="mgan ft12" ng-show="project.services.cafeteria != 'Available'">Cafetaria</p>
+                </div>
+                <div class="col  center-align">
+                    <img src="images/icons/internet.png" alt="Internet Speed">
+                    <p class="mgan ft12">Internet Speed ({{project.services.internetSpeedMb}} <span ng-show="project.services.internetSpeedMb != 'NA'">Mbps</span>)</p>
+                </div>
+                <div class="col s2 center-align">
+                    <img src="images/icons/Scanner.png" alt="Scanner">
+                    <p class="mgan ft12">Scanner (<span ng-show="project.services.scannerCost != 'NA'">₹ </span>{{project.services.scannerCost}})</p>
+                </div>
+                <div class="col  center-align">
+                    <img src="images/icons/printer.png" alt="printer">
+                    <p class="mgan ft12">Printer B/W (<span ng-show="project.services.printerBWCost != 'NA'">₹ </span>{{project.services.printerBWCost}})</p>
+                </div>
+            </div>
+        </div>
+<!--         <div class="col mgt10 s12">
+            <div class="row amncolmg">
+                <div class="col  center-align">
+                    <img src="images/icons/internet.png" alt="Internet Speed">
+                    <p class="mgan ft12">{{project.services.internetSpeedMb}}</p>
+                </div>
+                <div class="col s2 center-align">
+                    <img src="images/icons/Scanner.png" alt="Scanner">
+                    <p class="mgan ft12">{{project.services.scannerCost}}</p>
+                </div>
+                <div class="col  center-align">
+                    <img src="images/icons/printer.png" alt="printer">
+                    <p class="mgan ft12">{{project.services.printerBWCost}}</p>
+                </div>
+                <div class="col s2 center-align">
+                    <img src="images/icons/pantry.png" alt="Pantry">
+                    <p class="mgan ft12">{{project.services.pantry}}</p>
+                </div>
+                <div class="col s2 center-align">
+                    <img src="images/icons/coffee.png" alt="Cafetaria">
+                    <p class="mgan ft12">{{project.services.cafeteria}}</p>
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <div class="row mgt20 grey-text ft13 text-darken-2">
+        <div class="col s12">
+            <h5 class="ft15 mgtn b mgb10 pdb10 bdbtm">Contact Details</h5>
+        </div>
+        <div class="col s12">
+            <div class="row row-mgn flor_co">
+                <div class="col">
+                    <div class="ft13 b mgb10">Contact Name</div>
+                    <p>{{project.projectDetails.contactName}}</p>
+                </div>
+                <div class="col">
+                    <div class="ft13 b mgb10">Contact Number</div>
+                    <p>+91 {{project.projectDetails.contactNumber}}</p>
+                </div>
+                <div class="col ">
+                    <div class="ft13 b mgb10">Email</div>
+                    <p>{{project.projectDetails.email}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mgt20 grey-text ft13 text-darken-2">
+        <div class="col s12">
+            <h5 class="ft15 mgtn b mgb10 pdb10 bdbtm">Conference Rooms</h5>
+        </div>
+        <div class="col s12">
+            <div class="row row-mgn flor_co">
+                <div class="col s2">
+                    <div class="ft13 b mgb10">Capacity</div>
+                    <p>{{project.conferenceRooms.capacity}}</p>
+                </div>
+                <div class="col s2">
+                    <div class="ft13 b mgb10">Projector</div>
+                    <p>{{project.conferenceRooms.projector}}</p>
+                </div>
+                <div class="col s2">
+                    <div class="ft13 b mgb10">LCD</div>
+                    <p>{{project.conferenceRooms.lcd}}</p>
+                </div>
+                <div class="col s2">
+                    <div class="ft13 b mgb10">Video Conferencing</div>
+                    <p>{{project.conferenceRooms.videoConferencing}}</p>
+                </div>
+                <div class="col s2">
+                    <div class="ft13 b mgb10">Tele Conferencing</div>
+                    <p>{{project.conferenceRooms.teleConferencing}}</p>
+                </div>
+                <div class="col s2">
+                    <div class="ft13 b mgb10">Price/Hour</div>
+                    <p><span ng-show="project.conferenceRooms.pricePerHour">₹ </span>{{project.conferenceRooms.pricePerHour}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mgt20 grey-text ft13 text-darken-2">
+        <div class="col s12">
+            <h5 class="ft15 mgtn b mgb10 pdb10 bdbtm">Meeting Room</h5>
+        </div>
+        <div class="col s12">
+            <div class="row row-mgn flor_co">
+                <div class="col s2">
+                    <div class="ft13 b mgb10">Capacity</div>
+                    <p>{{project.meetingRoom.capacity}}</p>
+                </div>
+                <div class="col s2">
+                    <div class="ft13 b mgb10">Price/Hour</div>
+                    <p><span ng-show="project.meetingRoom.pricePerHour">₹ </span>{{project.meetingRoom.pricePerHour}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mgt20 grey-text ft13 text-darken-2">
+        <div class="col s12">
+            <h5 class="ft15 mgtn b mgb10 pdb10 bdbtm">Costing/Seat</h5>
+        </div>
+        <div class="col s12">
+            <div class="row row-mgn flor_co">
+                <div class="col s2">
+                    <div class="ft13 b mgb10">Co Working</div>
+                    <p><span ng-show="project.costing.coWorking">₹ </span>{{project.costing.coWorking}}</p>
+                </div>
+                <div class="col s2">
+                    <div class="ft13 b mgb10">Dedicated Office</div>
+                    <p><span ng-show="project.costing.dedicatedOffice">₹ </span>{{project.costing.dedicatedOffice}}</p>
+                </div>
+                <div class="col s2">
+                    <div class="ft13 b mgb10">Virtual Office</div>
+                    <p><span ng-show="project.costing.virtualOffice">₹ </span>{{project.costing.virtualOffice}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mgt20 grey-text ft13 text-darken-2">
+        <div class="col s12 b">
+            <h5 class="ft15 mgtn b mgb10 pdb10 bdbtm">Additional Information</h5>
+        </div>
+        <div class="col s12">
+            <div class="row row-mgn">
+                <div class="col s12">
+                    <!-- <div class="ft13 b mgb10">Information</div> -->
+                    <ul class="list-dt">
+                        <li ng-repeat="info in project.additionalInfo">{{info}}</li>
+                    </uls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
