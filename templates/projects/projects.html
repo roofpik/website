@@ -56,110 +56,109 @@
                 <h5 class="ush6">Project Segment</h5>
                 <hr>
                 <p>
-                    <input type="checkbox" class="filled-in" ng-model="filters.segment.economy" id="economy" />
+                    <input type="checkbox" class="filled-in" ng-model="selected.segment.economy" id="economy"/>
                     <label for="economy">Economy</label>
                 </p>
                 <p>
-                    <input type="checkbox" class="filled-in" ng-model="filters.segment.highEnd" id="high-end" />
+                    <input type="checkbox" class="filled-in" ng-model="selected.segment.highEnd" id="high-end" />
                     <label for="high-end">High End</label>
-                </p>
+                </p>    
                 <p>
-                    <input type="checkbox" class="filled-in" ng-model="filters.segment.luxury" id="luxury" />
+                    <input type="checkbox" class="filled-in" ng-model="selected.segment.luxury" id="luxury" />
                     <label for="luxury">Luxury</label>
                 </p>
                 <p>
-                    <input type="checkbox" class="filled-in" ng-model="filters.segment.ultraLuxury" id="ultra-luxury" />
+                    <input type="checkbox" class="filled-in" ng-model="selected.segment.ultraLuxury" id="ultra-luxury" />
                     <label for="ultra-luxury">Ultra Luxury</label>
                 </p>
             </div>
             <div class="row pdt2 mgbn">
-                <h5 class="ush6">Locality</h5>
+                <h5 class="ush6">BHK</h5>
                 <hr>
                 <p>
-                    <input type="checkbox" class="filled-in" id="loc_sohna" />
-                    <label for="loc_sohna">Sohna Road</label>
+                    <input type="checkbox" class="filled-in" ng-model="selected.bhk.one" id="1bhk" />
+                    <label for="1bhk">1</label>
                 </p>
                 <p>
-                    <input type="checkbox" class="filled-in" id="loc_golf_extn" />
-                    <label for="loc_golf_extn">Golf Course Road Extn.</label>
+                    <input type="checkbox" class="filled-in" ng-model="selected.bhk.two" id="2bhk" />
+                    <label for="2bhk">2</label>
+                </p>    
+                <p>
+                    <input type="checkbox" class="filled-in" ng-model="selected.bhk.three" id="3bhk" />
+                    <label for="3bhk">3</label>
                 </p>
                 <p>
-                    <input type="checkbox" class="filled-in" id="loc_nirvana" />
-                    <label for="loc_nirvana">Nirvana Country</label>
+                    <input type="checkbox" class="filled-in" ng-model="selected.bhk.four" id="4bhk" />
+                    <label for="4bhk">4</label>
+                </p>
+                 <p>
+                    <input type="checkbox" class="filled-in" ng-model="selected.bhk.five" id="5bhk" />
+                    <label for="5bhk">5</label>
                 </p>
                 <p>
-                    <input type="checkbox" class="filled-in" id="loc_golf_road" />
-                    <label for="loc_golf_road">Golf Course Road</label>
-                </p>
-                <p>
-                    <input type="checkbox" class="filled-in" id="loc_mg_road" />
-                    <label for="loc_mg_road">MG Road</label>
-                </p>
-                <p>
-                    <input type="checkbox" class="filled-in" id="loc_gold" />
-                    <label for="loc_gold">Gold Sock</label>
+                    <input type="checkbox" class="filled-in" ng-model="selected.bhk.six" id="6bhk" />
+                    <label for="6bhk">6</label>
                 </p>
             </div>
-            <div class="row pdt2 mgbn label_i">
-                <h5 class="ush6">User Rating</h5>
+            <div class="row pdt2 mgbn ">
+                <h5 class="ush6">Locality</h5>
                 <hr>
-                <p>
-                    <input type="checkbox" class="filled-in" id="star1" />
-                    <label for="star1">
-                        <i class="material-icons blue-text">star</i>
-                        <i class="material-icons">star</i>
-                        <i class="material-icons">star</i>
-                        <i class="material-icons">star</i>
-                        <i class="material-icons">star</i>
-                    </label>
-                </p>
-                <p>
-                    <input type="checkbox" class="filled-in" id="star2" />
-                    <label for="star2">
-                        <i class="material-icons blue-text">star</i>
-                        <i class="material-icons blue-text">star</i>
-                        <i class="material-icons">star</i>
-                        <i class="material-icons">star</i>
-                        <i class="material-icons">star</i>
-                    </label>
-                </p>
-                <p>
-                    <input type="checkbox" class="filled-in" id="star3" />
-                    <label for="star3">
-                        <i class="material-icons blue-text">star</i>
-                        <i class="material-icons blue-text">star</i>
-                        <i class="material-icons blue-text">star</i>
-                        <i class="material-icons">star</i>
-                        <i class="material-icons">star</i>
-                    </label>
-                </p>
-                <p>
-                    <input type="checkbox" class="filled-in" id="star4" />
-                    <label for="star4">
-                        <i class="material-icons blue-text">star</i>
-                        <i class="material-icons blue-text">star</i>
-                        <i class="material-icons blue-text">star</i>
-                        <i class="material-icons blue-text">star</i>
-                        <i class="material-icons">star</i>
-                    </label>
-                </p>
-                <p>
-                    <input type="checkbox" class="filled-in" id="star5" />
-                    <label for="star5">
-                        <i class="material-icons blue-text">star</i>
-                        <i class="material-icons blue-text">star</i>
-                        <i class="material-icons blue-text">star</i>
-                        <i class="material-icons blue-text">star</i>
-                        <i class="material-icons blue-text">star</i>
-                    </label>
-                </p>
+                <div class="filterList">
+                    <p ng-repeat="(key,value) in localities">
+                        <input type="checkbox" ng-model = "selected.localities[key]" class="filled-in" id="loc_{{key}}" />
+                        <label for="loc_{{key}}">{{key}}</label>
+                    </p>
+                </div>
+            </div>
+            <div class="row pdt2 mgbn">
+                <h5 class="ush6">Location</h5>
+                <hr>
+                <div class="filterList">
+                    <p ng-repeat="(key,value) in locations">
+                        <input type="checkbox" class="filled-in" ng-model = "selected.locations[key]" id="loc_{{key}}" />
+                        <label for="loc_{{key}}">{{key}}</label>
+                    </p>
+                </div>
+            </div>
+            <div class="row pdt2 mgbn">
+                <h5 class="ush6">Builder</h5>
+                <hr>
+                <div class="filterList">
+                    <p ng-repeat="(key,value) in builders">
+                        <input type="checkbox" class="filled-in" ng-model = "selected.builders[key]" id="bld_{{key}}" />
+                        <label for="bld_{{key}}">{{key}}</label>
+                    </p>
+                </div>
+            </div>
+            <div class="row pdt2 mgbn">
+                <h5 class="ush6">Select Area Range</h5>
+                <hr>
+                <div class="filterList">
+                    <p>
+                        <label for="minArea">Minimum Area:</label>
+                        <input type="number" min="0" max="5000" ng-model="minArea" size="10" id="minArea">
+                        <label for="maxArea">Maximum Area:</label>
+                        <input type="number" min="0" max="5000" ng-model="maxArea" size="10" id="maxArea">       
+                    </p>
+                </div>
+            </div>
+            <div class="row pdt2 mgbn">
+                <h5 class="ush6">Select Price Range</h5>
+                <hr>
+                <div class="filterList">
+                    <p>
+                        <label for="minPrice">Minimum Price:</label>
+                        <input type="number" min="0" max = "1500000" ng-model="minPrice" size="10" id="minPrice">
+                        <label for="maxPrice">Maximum Price:</label>
+                        <input type="number" min="0" max = "1500000" ng-model="maxPrice" size="10" id="maxPrice">       
+                    </p>
+                </div>
             </div>
         </div>
         <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn blue mgr10" ng-click="applyFilters()">Apply</a>
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn teal lighten-1 mgr10">Reset</a>
+            <a href="" class="modal-action modal-close waves-effect waves-green btn blue mgr10" ng-click="applyFilters()">Apply</a>
+            <a href="" class="modal-action modal-close waves-effect waves-green btn teal lighten-1 mgr10">Reset</a>
         </div>
     </form>
 </div>
-
 
