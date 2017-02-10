@@ -538,7 +538,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     	$timeout(function(){
             loading(false);
             $('ul.tabs').tabs();
-        },300);
+        },1000);
     	console.log($scope.configurations);
     }
 
@@ -599,101 +599,106 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
 }]);
 
 // Reviews and Ratings Controller
-app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', function($scope, $timeout, $stateParams, $rootScope){
+app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', '$http', function($scope, $timeout, $stateParams, $rootScope, $http){
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.projectId = '-KYMtlqwTF_W5S0CL6_P';
     $scope.reviews = [];
+    $scope.reviewsAvailable = false;
+    var selectedRating = 0;
+    $scope.reviews = [];
+    var reviewsFetchedNum = 0;
+    var totalReviews = 0;
+    var page_start = 0;
+    var page_size = 5;
+    $scope.reviewsFetched = false;
+    var customerType = null;
+    $scope.hasMoreReviews = true;
+    $scope.ratingSummaryParams = [
+        {id: 'security', id1: 'security1', name: 'Security'},
+        {id: 'amenities', id1: 'amenities1', name: 'Amenities'},
+        {id: 'openAndGreenAreas', id1: 'openAndGreenAreas1', name: 'Open and Green Areas'},
+        {id: 'electricityAndWaterSupply', id1: 'electricityAndWaterSupply1', name: 'Electricity and Water Supply'},
+        {id: 'convenienceOfHouseMaids', id1: 'convenienceOfHouseMaids1', name: 'Convenience of Housemaids'},
+        {id: 'convenienceOfParking', id1: 'convenienceOfParking1', name: 'Convenience of Parking'},
+        {id: 'infrastructure', id1: 'infrastructure1', name: 'Infrastructure'},
+        {id: 'layoutOfApartment', id1: 'layoutOfApartment1', name: 'Layout of Apartments'}
+    ];
 
-    function dynamicSort(property) {
-        var sortOrder = 1;
-        if(property[0] === "-") {
-            sortOrder = -1;
-            property = property.substr(1);
+    $http({
+        url: 'http://35.154.60.19/api/GetReviewSummary_1.0',
+        method : 'GET',
+        params: {
+            id: $scope.projectId
         }
-        return function (a,b) {
-            var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-            return result * sortOrder;
-        }
-    }
-
-    db.ref('reviews/-KYJONgh0P98xoyPPYm9/residential/' + $scope.projectId)
-        .orderByChild('wordCount')
-        .limitToLast(6)
-        .once('value', function(snapshot) {
-        	console.log(snapshot.val());
-            if (snapshot.val()) {
-                $timeout(function() {
-                    $scope.hasReviews = true;
-                    var reviewCount = 0;
-                    var allReviewCount = Object.keys(snapshot.val()).length;
-                    snapshot.forEach(function(childSnapshot){
-                        // console.log(childSnapshot.key, childSnapshot.val().wordCount);
-                        reviewCount++;
-                        if(allReviewCount < 6){
-                            $scope.reviews.push(childSnapshot.val());
-                        } else {
-                            if(!$scope.lastValue){
-                                $scope.lastValue = childSnapshot.val().wordCount;
-                            } else {
-                                $scope.reviews.push(childSnapshot.val());
-                            }
-                        }
-                        if(reviewCount ==  allReviewCount){
-                            loading(false);
-                            if(reviewCount < 6){
-                                $scope.showReviewBtn = false;
-                            } else {
-                                $scope.showReviewBtn = true;
-                            }
-                        }
-                        $scope.reviews.sort(dynamicSort("-wordCount"));
-                    })
-                }, 0);
+    }).then(function mySucces(response) {
+        console.log(response);
+        if(response.status == 200){
+            if(response.data.numberOfReviews != 0){
+                $scope.reviewsAvailable =true;
+                $scope.reviewObject = response.data;
+                for(key in $scope.reviewObject){
+                    $scope.reviewObject[key+'1'] = Math.round($scope.reviewObject[key]);
+                }
+                $("#excellentStar").css("width", ($scope.reviewObject.fiveStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
+                $("#veryGoodStar").css("width", ($scope.reviewObject.fourStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
+                $("#goodStar").css("width", ($scope.reviewObject.threeStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
+                $("#averageStar").css("width", ($scope.reviewObject.twoStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
+                $("#badStar").css("width", ($scope.reviewObject.oneStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
+                console.log($scope.reviewObject);
             }
+        }
+        loading(false);
+    }, function myError(err) {
+        console.log(err);
+    })
+
+
+    getReviews();
+
+    function getReviews(){
+        $http({
+            url: 'http://35.154.60.19/api/GetProjectReviews_1.0',
+            method : 'GET',
+            params: {
+                pid: $scope.projectId,
+                overallRating: selectedRating,
+                customerType: customerType,
+                page_size: page_size,
+                page_start: page_start
+            }
+        }).then(function mySucces(response) {
+            console.log(response);
+            if(response.status == 200){
+                totalReviews = response.data.hits;
+                reviewsFetchedNum += Object.keys(response.data.details).length;
+                console.log(totalReviews, reviewsFetchedNum);
+                if(reviewsFetchedNum == totalReviews){
+                    $scope.hasMoreReviews = false;
+                }
+                console.log($scope.hasMoreReviews);
+                for(key in response.data.details){
+                    if(response.data.details[key].reviewText.length < response.data.details[key].wordCount) {
+                        response.data.details[key].showMore = true;
+                    } else {
+                        response.data.details[key].showMore = false;
+                    }
+                    $scope.reviews.push(response.data.details[key]);
+                }
+            }
+            loading(false);
+        }, function myError(err) {
+            console.log(err);
         })
+    }
 
     $scope.showMoreReviews = function() {
         loading(true);
-        $scope.viewReviews += 5;
-        // console.log($scope.lastValue);
-        db.ref('reviews/-KYJONgh0P98xoyPPYm9/residential/' + $scope.projectId)
-            .orderByChild('wordCount')
-            .endAt($scope.lastValue)
-            .limitToLast(6)
-            .once('value', function(snapshot){
-                $timeout(function() {
-                    if (snapshot.val()) {
-                            var reviewCount = 0;
-                            var allReviewCount = Object.keys(snapshot.val()).length;
-                            snapshot.forEach(function(childSnapshot){
-                                // console.log(childSnapshot.key, childSnapshot.val().wordCount);
-                                reviewCount++;
-                                if(allReviewCount < 6){
-                                    $scope.reviews.push(childSnapshot.val());
-                                } else {
-                                    if(reviewCount==1){
-                                        $scope.lastValue = childSnapshot.val().wordCount;
-                                    } else {
-                                        $scope.reviews.push(childSnapshot.val());
-                                    }
-                                }
-                                if(reviewCount ==  allReviewCount){
-                                    loading(false);
-                                    if(reviewCount < 6){
-                                        $scope.showReviewBtn = false;
-                                    } else {
-                                        $scope.showReviewBtn = true;
-                                    }
-                                }
-                                $scope.reviews.sort(dynamicSort("-wordCount"));
-                            })
-                        // console.log($scope.showReviewBtn);
-                    } else {
-                        $scope.showReviewBtn = false;
-                        loading(false);
-                    }
-                }, 0);
-            })
+        page_start = reviewsFetchedNum;
+        console.log(page_start);
+        if(totalReviews - reviewsFetchedNum < 5){
+            page_size = totalReviews - reviewsFetchedNum
+        }
+        getReviews();
     }
 }]);
 

@@ -635,3 +635,7 @@ i.left{margin-right: 10px;}
         right: 0;
     }
 }
+
+.alignc {
+    text-align:center;
+}
