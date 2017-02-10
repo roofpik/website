@@ -64,5 +64,5 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         }
     });
 
-    $urlRouterProvider.otherwise('/pg-details');
+    $urlRouterProvider.otherwise('/home');
 }]);

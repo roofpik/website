@@ -1,6 +1,7 @@
 app.controller('headerCtrl', function($scope, $state, $rootScope, $timeout) {
    
- Materialize.updateTextFields();
+        Materialize.updateTextFields();
+         $(".dropdown-button").dropdown();
         $('.button-collapse').sideNav({
             menuWidth: 300, // Default is 240
             edge: 'left', // Choose the horizontal origin
@@ -13,7 +14,6 @@ app.controller('headerCtrl', function($scope, $state, $rootScope, $timeout) {
             closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
             draggable: true // Choose whether you can drag to open on touch screens
         });
-        $(".dropdown-button").dropdown();
         $('.modal').modal();
 
     $scope.user = {};
