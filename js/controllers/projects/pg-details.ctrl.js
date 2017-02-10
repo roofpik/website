@@ -116,6 +116,7 @@ app.controller('pgDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$rootSco
 }]);
 
 
+
 app.controller('pgReviewRatingCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', '$state', function($scope, $timeout, $stateParams, $rootScope, $state){
 	console.log('pg 1');
 }]);
