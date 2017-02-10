@@ -1,0 +1,38 @@
+<div>
+    <section>
+        <div class="carousel-item grey darken-4 white-text" href="#one!">
+            <div class="coverstoriesimg overhdn" style="background-image: url({{featuredStories[0].coverPhoto}})">
+                <a ng-href="{{featuredStories[0].redirectionUrl}}">
+                    <div class="cro-text">
+                        <a class="white-text" href="#blog-details">
+                            <h2 class="ellipsis">{{featuredStories[0].title}}</h2>
+                            <p class="pdan spndate"><span ng-show="featuredStories[0].placeName">{{featuredStories[0].placeName}}</span>
+                                <time>{{featuredStories[0].createdDate | date:'MMM dd, yy'}}</time>
+                            </p>
+                        </a>
+                        <div class="cro-text-link">
+                            <a ng-repeat="tag in featuredStories[0].hashtags" class="mgr10" ng-href="/#/cover-story/gurgaon/{{cityId}}/2/{{tag.tagId}}">#{{tag.tag}}</a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="carousel-item grey darken-4 white-text" href="#two!">
+            <div class="coverstoriesimg  overhdn" style="background-image: url({{featuredStories[1].coverPhoto}});" ng-click="goToStoryDetails(featuredStories[1].storyId)">
+                <a ng-href="{{featuredStories[0].redirectionUrl}}">
+                    <div class="cro-text">
+                        <a class="white-text" href="#cover-stories-details">
+                            <h2 class="ellipsis">{{featuredStories[1].title}}</h2>
+                            <p class="pdan spndate"><span>{{featuredStories[1].placeName}}</span>
+                                <time>{{featuredStories[1].createdDate | date:'MMM dd, yy'}}</time>
+                            </p>
+                        </a>
+                        <div class="cro-text-link">
+                            <a ng-repeat="tag in featuredStories[1].hashtags" class="mgr10" ng-href="/#/cover-story/gurgaon/{{cityId}}/2/{{tag.tagId}}">#{{tag.tag}}</a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+</div>

@@ -4,12 +4,12 @@
             <div class="nav-wrapper">
                 <div class="col s12">
                     <a href="#home" class="breadcrumb">Home</a>
-                    <a href="" class="breadcrumb">Projects</a>
+                    <a href="" class="breadcrumb">CGHS</a>
                 </div>
             </div>
         </nav>
     </div>
-    <h5 class="pdt10 pdb10 b">Projects     
+    <h5 class="pdt10 pdb10 b">CGHS     
     <a data-target="filterbox" class="right pointer"><i class="material-icons">filter_list</i></a>
     
     </h5>
@@ -81,26 +81,6 @@
                 </p>
             </div>
             <div class="row pdt2 mgbn">
-                <h5 class="ush6">Project Segment</h5>
-                <hr>
-                <p>
-                    <input type="checkbox" class="filled-in" ng-model="selected.segment.economy" id="economy" />
-                    <label for="economy">Economy</label>
-                </p>
-                <p>
-                    <input type="checkbox" class="filled-in" ng-model="selected.segment.highEnd" id="high-end" />
-                    <label for="high-end">High End</label>
-                </p>
-                <p>
-                    <input type="checkbox" class="filled-in" ng-model="selected.segment.luxury" id="luxury" />
-                    <label for="luxury">Luxury</label>
-                </p>
-                <p>
-                    <input type="checkbox" class="filled-in" ng-model="selected.segment.ultraLuxury" id="ultra-luxury" />
-                    <label for="ultra-luxury">Ultra Luxury</label>
-                </p>
-            </div>
-            <div class="row pdt2 mgbn">
                 <h5 class="ush6">BHK</h5>
                 <hr>
                 <p>
@@ -145,16 +125,6 @@
                     <p ng-repeat="(key,value) in locations">
                         <input type="checkbox" class="filled-in" ng-model="selected.locations[key]" id="loc_{{key}}" />
                         <label for="loc_{{key}}">{{key}}</label>
-                    </p>
-                </div>
-            </div>
-            <div class="row pdt2 mgbn">
-                <h5 class="ush6">Builder</h5>
-                <hr>
-                <div class="filterList">
-                    <p ng-repeat="(key,value) in builders">
-                        <input type="checkbox" class="filled-in" ng-model="selected.builders[key]" id="bld_{{key}}" />
-                        <label for="bld_{{key}}">{{key}}</label>
                     </p>
                 </div>
             </div>

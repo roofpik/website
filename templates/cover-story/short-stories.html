@@ -1,0 +1,29 @@
+<section>
+    <div ng-show="showNoStories">
+        <h4>No stories with this tag</h4>
+    </div>
+    <div class="card mgtn" ng-repeat="story in allStories" ng-show="story.selected && !showNoStoriees">
+        <div class="card-image waves-effect waves-block waves-light">
+            <a href=""><img class="activator" ng-src="{{story.coverPhoto}}"></a>
+        </div>
+        <div class="card-content pda10 ftw3 p-justi">
+        <div>
+            <h3 class="ft19 ftw3 mgt10 mgbn">
+               <a class="grey-text text-darken-4"><span>{{story.title}}</span>
+               </a>
+               </h3>
+            <h5 class="ft14 mgbn mgt10 grey-text text-darken-4" ng-show="blog.placeName">{{story.placeName}}</h5>
+            <h6 class="ft12 ftw3 mgt10 grey-text">By {{story.userName}}</h6>
+            <div class="mgt10 row row-mgn linkah">
+                <a class="mgr10" ng-repeat="tag in story.hashtags" ng-href="/#/cover-story/gurgaon/{{cityId}}/2/{{tag.tagId}}">#{{tag.tag}}</a>
+            </div>
+            <p ng-bind-html="toTrustedHTML(story.shortStory)">
+            </p>
+            <p><span class="showMoreBtn right"><a ng-href="{{story.redirectionUrl}}">Show More</a></span></p>
+            <p>
+                <span class="facebook-share" ng-click="shareonfb(story) "><i class="fa fa-facebook "></i>&nbsp;&nbsp;&nbsp;Share</span>
+            </p>
+        </div>
+        </div>
+    </div>  
+</section>

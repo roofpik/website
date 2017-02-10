@@ -1,0 +1,38 @@
+<div>
+    <section>
+        <div class="carousel-item grey darken-4 white-text" href="#one!">
+            <div class="coverstoriesimg overhdn" style="background-image: url({{featuredBlogs[0].coverPhoto}})">
+                <a ng-href="{{featuredBlogs[0].redirectionUrl}}">
+                    <div class="cro-text">
+                        <a class="white-text" href="#blog-details">
+                            <h2 class="ellipsis">{{featuredBlogs[0].title}}</h2>
+                            <p class="pdan spndate"><span ng-show="featuredBlogs[0].placeName">{{featuredBlogs[0].placeName}}</span>
+                                <time>{{featuredBlogs[0].createdDate | date:'MMM dd, yy'}}</time>
+                            </p>
+                        </a>
+                        <div class="cro-text-link">
+                            <a ng-repeat="tag in featuredBlogs[0].hashtags" class="mgr10" ng-href="/#/blog/gurgaon/{{cityId}}/2/{{tag.tagId}}">#{{tag.tag}}</a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="carousel-item grey darken-4 white-text" href="#two!">
+            <div class="coverstoriesimg  overhdn" style="background-image: url({{featuredBlogs[1].coverPhoto}});">
+                <a ng-href="{{featuredBlogs[1].redirectionUrl}}">
+                    <div class="cro-text">
+                        <a class="white-text" href="#cover-stories-details">
+                            <h2 class="ellipsis">{{featuredBlogs[1].title}}</h2>
+                            <p class="pdan spndate"><span ng-show="featuredBlogs[1].placeName">{{featuredBlogs[1].placeName}}</span>
+                                <time>{{featuredBlogs[1].createdDate | date:'MMM dd, yy'}}</time>
+                            </p>
+                        </a>
+                        <div class="cro-text-link">
+                            <a ng-repeat="tag in featuredBlogs[1].hashtags" class="mgr10" ng-href="/#/blog/gurgaon/{{cityId}}/2/{{tag.tagId}}">#{{tag.tag}}</a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
