@@ -6,7 +6,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         controller: 'homeCtrl'
     });
     $stateProvider.state('projects', {
-        url: '/projects?segment&bhk&price_range&area_range&location&locality&details_builder',
+        url: '/projects?segment&bhk&price_range&area_range&location&locality&details_builder$propertyType',
         templateUrl: 'templates/projects/projects.html',
         controller: 'projectsCtrl'
     });

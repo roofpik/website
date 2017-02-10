@@ -53,16 +53,44 @@
                 </h5>
             <hr>
             <div class="row pdt2 mgbn">
+                <h5 class="ush6">Property Type</h5>
+                <hr>
+                <p>
+                    <input type="checkbox" class="filled-in" ng-model="selected.type.apartments" id="apartments" />
+                    <label for="apartments">Apartments</label>
+                </p>
+                <p>
+                    <input type="checkbox" class="filled-in" ng-model="selected.type.independentFloors" id="independentFloors" />
+                    <label for="independentFloors">Independent Floors</label>
+                </p>
+                <p>
+                    <input type="checkbox" class="filled-in" ng-model="selected.type.penthouses" id="penthouses" />
+                    <label for="penthouses">Penthouses / Duplexes</label>
+                </p>
+                <p>
+                    <input type="checkbox" class="filled-in" ng-model="selected.type.villas" id="villas" />
+                    <label for="villas">Villas / Row-houses</label>
+                </p>
+                <p>
+                    <input type="checkbox" class="filled-in" ng-model="selected.type.servicedApartments" id="servicedApartments" />
+                    <label for="servicedApartments">Serviced Apartments</label>
+                </p>
+                <p>
+                    <input type="checkbox" class="filled-in" ng-model="selected.type.plots" id="plots" />
+                    <label for="plots">Plots</label>
+                </p>
+            </div>
+            <div class="row pdt2 mgbn">
                 <h5 class="ush6">Project Segment</h5>
                 <hr>
                 <p>
-                    <input type="checkbox" class="filled-in" ng-model="selected.segment.economy" id="economy"/>
+                    <input type="checkbox" class="filled-in" ng-model="selected.segment.economy" id="economy" />
                     <label for="economy">Economy</label>
                 </p>
                 <p>
                     <input type="checkbox" class="filled-in" ng-model="selected.segment.highEnd" id="high-end" />
                     <label for="high-end">High End</label>
-                </p>    
+                </p>
                 <p>
                     <input type="checkbox" class="filled-in" ng-model="selected.segment.luxury" id="luxury" />
                     <label for="luxury">Luxury</label>
@@ -82,7 +110,7 @@
                 <p>
                     <input type="checkbox" class="filled-in" ng-model="selected.bhk.two" id="2bhk" />
                     <label for="2bhk">2</label>
-                </p>    
+                </p>
                 <p>
                     <input type="checkbox" class="filled-in" ng-model="selected.bhk.three" id="3bhk" />
                     <label for="3bhk">3</label>
@@ -91,7 +119,7 @@
                     <input type="checkbox" class="filled-in" ng-model="selected.bhk.four" id="4bhk" />
                     <label for="4bhk">4</label>
                 </p>
-                 <p>
+                <p>
                     <input type="checkbox" class="filled-in" ng-model="selected.bhk.five" id="5bhk" />
                     <label for="5bhk">5</label>
                 </p>
@@ -105,7 +133,7 @@
                 <hr>
                 <div class="filterList">
                     <p ng-repeat="(key,value) in localities">
-                        <input type="checkbox" ng-model = "selected.localities[key]" class="filled-in" id="loc_{{key}}" />
+                        <input type="checkbox" ng-model="selected.localities[key]" class="filled-in" id="loc_{{key}}" />
                         <label for="loc_{{key}}">{{key}}</label>
                     </p>
                 </div>
@@ -115,7 +143,7 @@
                 <hr>
                 <div class="filterList">
                     <p ng-repeat="(key,value) in locations">
-                        <input type="checkbox" class="filled-in" ng-model = "selected.locations[key]" id="loc_{{key}}" />
+                        <input type="checkbox" class="filled-in" ng-model="selected.locations[key]" id="loc_{{key}}" />
                         <label for="loc_{{key}}">{{key}}</label>
                     </p>
                 </div>
@@ -125,7 +153,7 @@
                 <hr>
                 <div class="filterList">
                     <p ng-repeat="(key,value) in builders">
-                        <input type="checkbox" class="filled-in" ng-model = "selected.builders[key]" id="bld_{{key}}" />
+                        <input type="checkbox" class="filled-in" ng-model="selected.builders[key]" id="bld_{{key}}" />
                         <label for="bld_{{key}}">{{key}}</label>
                     </p>
                 </div>
@@ -133,26 +161,28 @@
             <div class="row pdt2 mgbn">
                 <h5 class="ush6">Select Area Range</h5>
                 <hr>
-                <div class="filterList">
-                    <p>
-                        <label for="minArea">Minimum Area:</label>
-                        <input type="number" min="0" max="5000" ng-model="minArea" size="10" id="minArea">
-                        <label for="maxArea">Maximum Area:</label>
-                        <input type="number" min="0" max="5000" ng-model="maxArea" size="10" id="maxArea">       
-                    </p>
+                <div class="col s6">
+                    <label for="minArea">Minimum Area:</label>
+                    <input type="number" min="0" max="5000" ng-model="minArea" size="10" id="minArea">
                 </div>
+                <div class="col s6">
+                    <label for="maxArea">Maximum Area:</label>
+                    <input type="number" min="0" max="5000" ng-model="maxArea" size="10" id="maxArea">
+                </div>
+                <hr>
             </div>
             <div class="row pdt2 mgbn">
                 <h5 class="ush6">Select Price Range</h5>
                 <hr>
-                <div class="filterList">
-                    <p>
-                        <label for="minPrice">Minimum Price:</label>
-                        <input type="number" min="0" max = "1500000" ng-model="minPrice" size="10" id="minPrice">
-                        <label for="maxPrice">Maximum Price:</label>
-                        <input type="number" min="0" max = "1500000" ng-model="maxPrice" size="10" id="maxPrice">       
-                    </p>
+                <div class="col s6">
+                    <label for="minPrice">Minimum Price:</label>
+                    <input type="number" min="0" max="5000" ng-model="minPrice" size="10" id="minPrice">
                 </div>
+                <div class="col s6">
+                    <label for="maxPrice">Maximum Price:</label>
+                    <input type="number" min="0" max="5000" ng-model="maxPrice" size="10" id="maxPrice">
+                </div>
+                <hr>
             </div>
         </div>
         <div class="modal-footer">
@@ -161,4 +191,3 @@
         </div>
     </form>
 </div>
-

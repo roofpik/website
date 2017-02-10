@@ -10,6 +10,7 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
     $scope.dataFetched = false;
     $scope.selected = {
         segment: {},
+        type : {},
         builders: {},
         locations: {},
         localities: {},
@@ -26,16 +27,9 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
     $scope.locations = {};
     $scope.localities = {};
     $scope.builders2 = {}; //needed for reverse binding
-    $scope.locations2 = {};
-    $scope.localities2 = {};
+    $scope.locations2 = {}; //needed for reverse binding
+    $scope.localities2 = {}; //needed for reverse binding
 
-
-    // $scope.segments = [
-    //  {name:'Economy', id:'economy'},
-    //  {name:'High End', id:'highEnd'},
-    //  {name:'Luxury', id:'luxury'},
-    //  {name:'Ultra Luxury', id:'ultraLuxury'}
-    // ];
     $scope.filters = {
         style: null,
         bhk: null,
@@ -43,6 +37,7 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
         area_range: null,
         locationId: null,
         details_builder: null,
+        propertyType : null,
         page_size: null,
         page_start: null
     }
@@ -101,14 +96,6 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
         })
     }
 
-    // $interval(function(){
-    //     //console.log(Object.keys($scope.localities).length, Object.keys($scope.locations).length, Object.keys($scope.builders2).length)
-    //     if($scope.localitiesExist && $scope.locationsExist && $scope.buildersExist) {
-    //         console.log('called')
-    //         reverseBindCheckboxes();
-    //     }
-    // },500);
-
     mapParameters();
 
     function mapParameters() {
@@ -138,6 +125,9 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
         if ($stateParams.details_builder) {
             $scope.filters.details_builder = $stateParams.details_builder;
         }
+        if($stateParams.propertyType){
+            $scope.filters.propertyType = $stateParams.propertyType;
+        }
         console.log($scope.filters);
         loading(false);
         fetchProjects();
@@ -155,6 +145,7 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
                 area_range: $scope.filters.area_range,
                 locationId: $scope.filters.locationId,
                 details_builder: $scope.filters.details_builder,
+                // propertyType : $scope.filters.propertyType,
                 page_start: page_start,
                 page_size: page_size
             }
@@ -192,10 +183,26 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
                 $scope.selected.segment[key] = true;
             }
         }
+            
+        if($stateParams.propertyType){
+            var type = $stateParams.propertyType.split("$");
+            for (i=0; i<type.length; i++){
+                var key = type[i];
+                if (key == "Villas / Row-houses"){
+                    $scope.selected.type['villas'] = true;
+                }
+                else if(key == "Penthouses / Duplexes"){
+                    $scope.selected.type['penthouses'] = true;
+                 }
+                else {
+                    $scope.selected.type[toCamelCase(key)] = true;
+                }
+            }
+        }
         if ($stateParams.bhk) {
             var bhk = $stateParams.bhk.split("$");
-            var key;
-            // console.log(bhk);
+            var key
+;            // console.log(bhk);
             for (i = 0; i < bhk.length; i++) {
                 if (bhk[i] == 1) {
                     key = "one"
@@ -292,6 +299,26 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
             delete $scope.locality;
         }
 
+        $scope.type = "";
+        if(Object.keys($scope.selected.type).length != 0){
+           
+            for (key in $scope.selected.type){
+                console.log(key);
+                if(key == "penthouses"){
+                    key = "Penthouses / Duplexes"
+                    $scope.type += key + "$"
+                }
+                else if(key == "villas"){
+                    key = "Villas / Row-houses"
+                    $scope.type += key + "$"
+                }
+                else {
+                    $scope.type += reverseCamelCase(key) + "$"
+                }
+            }
+        }
+        console.log($scope.type);
+
         $scope.location = "";
         if (Object.keys($scope.selected.locations).length != 0) {
             for (key in $scope.selected.locations) {
@@ -361,6 +388,10 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
             $scope.bhk = $scope.bhk.substring(0, $scope.bhk.length - 1);
         }
 
+        if($scope.type){
+            $scope.type = $scope.type.substring(0, $scope.type.length - 1);
+        }
+
         $scope.areaRange = $scope.minArea + '$' + $scope.maxArea
         $scope.priceRange = $scope.minPrice + '$' + $scope.maxPrice;
 
@@ -401,8 +432,11 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
         if (!$scope.locality) {
             $scope.locality = null;
         }
+        if(!$scope.type){
+            $scope.type = null;
+        }
 
-        $state.go('projects', { segment: $scope.style, bhk: $scope.bhk, price_range: $scope.priceRange, area_range: $scope.areaRange, location: $scope.location, locality: $scope.locality, details_builder: $scope.builder });
+        $state.go('projects', { segment: $scope.style, bhk: $scope.bhk, price_range: $scope.priceRange, area_range: $scope.areaRange, location: $scope.location, locality: $scope.locality, details_builder: $scope.builder, propertyType: $scope.type });
     }
 
     function reverseCamelCase(str) {

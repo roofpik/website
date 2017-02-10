@@ -326,7 +326,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 
 .filterList {
   overflow-y: auto;
-  height: 30%;
+  height: 35%;
 }
 
 .inputBox {
