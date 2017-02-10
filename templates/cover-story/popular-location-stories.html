@@ -1,0 +1,26 @@
+<div class="card rt_card">
+    <h3 class="ft19 ftw3 pda10 grey lighten-5 mg0">Popular Stories</h3>
+    <div class="row row-mgn box-h waves-effect waves-block waves-light" ng-repeat="story in popularStories">
+        <a ng-href="{{story.redirectionUrl}}">
+            <img class="responsive-img" src="{{story.coverPhoto}}">
+            <div class="col m12">
+                <h5 class="grey-text text-darken-4">{{story.title}}</h5>
+                <p>{{story.placeName}}</p>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="card rt_card">
+    <h3 class="ft19 ftw3 pda10 grey lighten-5 mg0">Popular Locations</h3>
+    <div class="col m12">
+        <ul class="rt_loc">
+            <li ng-repeat="location in popularLocations"><a ng-href="/#/cover-story/gurgaon/{{cityId}}/3/{{location.locationId}}">{{location.locationName}}</a></li>
+        </ul>
+    </div>
+</div>
+<div class="card rt_card">
+    <h3 class="ft19 ftw3 pda10 grey lighten-5 mg0">Tag Cloud</h3>
+    <div class="col m12 hslink">
+        <a ng-href="/#/cover-story/gurgaon/{{cityId}}/2/{{tag.tagId}}" ng-repeat="tag in tagCloudData">#{{tag.tag}}</a>
+    </div>
+</div>
