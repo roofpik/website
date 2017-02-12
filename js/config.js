@@ -70,5 +70,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         }
     });
 
-    $urlRouterProvider.otherwise('/pg-details');
+    $stateProvider.state('write-review', {
+        url: '/write-review?id',
+        templateUrl: 'templates/review/write-review.html',
+        controller: 'writeReviewCtrl'
+    })
+
+    $urlRouterProvider.otherwise('/write-review');
 }]);

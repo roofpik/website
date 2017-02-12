@@ -599,7 +599,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
 }]);
 
 // Reviews and Ratings Controller
-app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', '$http', function($scope, $timeout, $stateParams, $rootScope, $http){
+app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', '$http', '$state', function($scope, $timeout, $stateParams, $rootScope, $http, $state){
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.projectId = '-KYMtlqwTF_W5S0CL6_P';
     $scope.reviews = [];
@@ -699,6 +699,10 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
             page_size = totalReviews - reviewsFetchedNum
         }
         getReviews();
+    }
+
+    $scope.takeToWriteReview = function(){
+        $state.go('write-review', {id: $scope.projectId});
     }
 }]);
 

@@ -1,0 +1,167 @@
+<div class="container">
+    <div class="row mgt70 linkroot">
+        <nav>
+            <div class="nav-wrapper">
+                <div class="col s12">
+                    <a href="#home" class="breadcrumb">Home</a>
+                    <a href="" class="breadcrumb">Write Review</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col s12 m4 justify ftw3">
+            <h5 class="pdt10 b">Reviewing Tips</h5>
+            <hr> Your review can directly impact someone’s decision to buy or rent property. So make it count by using these reviewing tips:
+            <p>
+                <b>Remain Relevant:</b> A review with the relevant details garners more ratings and trust. Avoid excessive complaints or compliments, provide specific details where possible, and be objective about your views. The best reviews state both pros and cons.
+            </p>
+            <p>
+                <b>Honesty Helps:</b> Although this is a neutral platform for users to openly share their views, reviews with discriminatory, libellous, or profane content will not pass the verification stage. Share your own experiences and not what you’ve heard about the property or neighbourhood you’re reviewing.
+            </p>
+            <p>
+                <b>Add Photos:</b> You may not be able to write a thousand words, so post a picture! Photos of the property, project, and locality help garner more readers for your review besides making it credible.
+            </p>
+            <p>
+                <b>Review Anonymously:</b> Our hawk-eyed moderators have a thing against reviews with personal information such as names, phone numbers, emails, or other contact details. Make sure your review doesn’t include such information.</p>
+        </div>
+        <div class="col s12 m8 pdleft50">
+            <h5 class="pdt10 b">Write Review</h5>
+            <hr>
+            <form name="reviewForm">
+                <div class="row mgbn" ng-show="showSearch">
+                    <div class="input-field col s12">
+                        <input id="select_project" ng-model="selectedItem" ng-change="nameEntered()" type="text" class="validate" required>
+                        <label for="select_project">Select Project</label>
+                    </div>
+                    <div class="searchList" ng-show="showList">
+                        <ul>
+                            <li class="poabs libor" ng-repeat="item in projectList" ng-click="selectProject(item)">
+                                {{item.name}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row" ng-hide="showSearch">
+                    <div class="col s12 pdb10">
+                        <h4 class="ft19">{{selectedItem}}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 pdb10">Are you a *</div>
+                    <div class="col s4">
+                        <input class="with-gap" name="group1" type="radio" id="owner" ng-model="review.userType" value="Owner" />
+                        <label for="owner">Owner</label>
+                    </div>
+                    <div class="col s4">
+                        <input class="with-gap" name="group1" type="radio" id="tenant" ng-model="review.userType" value="Tenant" />
+                        <label for="tenant">Tenant</label>
+                    </div>
+                    <div class="col s4">
+                        <input class="with-gap" name="group1" type="radio" id="visitor" ng-model="review.userType" value="Visitor" />
+                        <label for="visitor">Visitor</label>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mgt20">
+                    <div class="col s12 pdb10">Overall rating *</div>
+                    <div class="col s12">
+                        <review-ratings ratingsobj='ratingsObject' index='1'></review-ratings>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mgbn mgt20">
+                    <div class="col s12 pdb10">Review Title *</div>
+                    <div class="input-field col s12">
+                        <input id="select_project" type="text" class="validate" ng-model="review.reviewTitle" required>
+                        <label for="select_project">Type your review title</label>
+                    </div>
+                </div>
+                <div class="row mgbn">
+                    <div class="col s12 pdb10">Review text *</div>
+                    <div class="input-field col s12">
+                        <textarea id="textarea1" type="text" class="materialize-textarea validate" ng-model="review.reviewText" required></textarea>
+                        <label for="textarea1">Type your review</label>
+                    </div>
+                </div>
+                <p ng-click="showMoreFn()" class="alignc" ng-class="showMore?'roofGrey': 'roofGreen'"><b>{{showMoreLess}}</b></p>
+                <div ng-show="showMore" class="mgt20">
+                    <div class="row mgbn" ng-repeat="item in ratingParams">
+                        <div class="col left ft13 pdb10">{{item.name}}</div>
+                        <div class="col right ft20i pdl0 grey-text">
+                            <review-ratings ratingsobj='ratingsObject' index='item.id'></review-ratings>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mgb10">
+                        <div class="col left ft13 pdb10">Is the project conveniently located ?</div>
+                        <div class="col s12 grey-text">
+                            <div class="col right">
+                                <input class="with-gap" name="group2" type="radio" id="pcln" ng-model="review.projectConvenientlyLocated" value="No" />
+                                <label for="pcln">No</label>
+                            </div>
+                            <div class="col right">
+                                <input class="with-gap" name="group2" type="radio" id="pcly" ng-model="review.projectConvenientlyLocated" value="Yes" />
+                                <label for="pcly">Yes</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mgb10">
+                        <div class="col left ft13 pdb10">Do you have easy access to public transport ?</div>
+                        <div class="col s12 grey-text">
+                            <div class="col right">
+                                <input class="with-gap" name="group3" type="radio" id="eaptn" ng-model="review.easyAccessToPublicTransport" value="No" />
+                                <label for="eaptn">No</label>
+                            </div>
+                            <div class="col right">
+                                <input class="with-gap" name="group3" type="radio" id="eapty" ng-model="review.easyAccessToPublicTransport" value="Yes" />
+                                <label for="eapty">Yes</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mgb10">
+                        <div class="col left ft13 pdb10">Do you have good schools nearby ?</div>
+                        <div class="col s12 grey-text">
+                            <div class="col right">
+                                <input class="with-gap" name="group4" type="radio" id="gsn" ng-model="review.goodSchools" value="No" />
+                                <label for="gsn">No</label>
+                            </div>
+                            <div class="col right">
+                                <input class="with-gap" name="group4" type="radio" id="gsy" ng-model="review.goodSchools" value="Yes" />
+                                <label for="gsy">Yes</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mgb10">
+                        <div class="col left ft13 pdb10">Do you have markets nearby ?</div>
+                        <div class="col s12 grey-text">
+                            <div class="col right">
+                                <input class="with-gap" name="group5" type="radio" id="mn" ng-model="review.markets" value="No" />
+                                <label for="mn">No</label>
+                            </div>
+                            <div class="col right">
+                                <input class="with-gap" name="group5" type="radio" id="my" ng-model="review.markets" value="Yes" />
+                                <label for="my">Yes</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mgb10">
+                        <div class="col left ft13 pdb10">Do you have good hospitals nearby ?</div>
+                        <div class="col s12 grey-text">
+                            <div class="col right">
+                                <input class="with-gap" name="group6" type="radio" id="ghn" ng-model="review.goodHospitals" value="No" />
+                                <label for="ghn">No</label>
+                            </div>
+                            <div class="col right">
+                                <input class="with-gap" name="group6" type="radio" id="ghy" ng-model="review.goodHospitals" value="Yes" />
+                                <label for="ghy">Yes</label>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <a href="" ng-click="submitReview()" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating || !projectSelected || !loginStatus)?'disabled':'normal'" class="waves-effect waves-light blue lighten-1 btn block mgt20">Submit</a>
+                <p ng-hide="loginStatus" id="loginSignup">Please login/signup to submit review *</p>
+            </form>
+        </div>
+

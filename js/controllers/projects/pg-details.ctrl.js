@@ -1,7 +1,6 @@
 app.controller('pgDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', '$state', '$http', function($scope, $timeout, $stateParams, $rootScope, $state, $http){
 	console.log('pg');
 	loading(false, 2000);
-	console.log($stateParams);
 
 	$('ul.tabs').tabs();
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';

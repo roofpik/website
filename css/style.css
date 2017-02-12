@@ -351,3 +351,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
   display: inline-block;
   float: right;
 }
+.roofGreen {
+    color:#54C3DD;;
+}
+
+.roofGrey {
+    color: #a6a6a6;
+}
+
+.searchList{
+    overflow-y: auto;
+    min-height: 0; width: 100%; position: relative;;
+    max-height:300px; margin-bottom: 30px;
+
+}
+
+
+
