@@ -1,4 +1,4 @@
-app.controller('homeCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
+app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', function($scope, $http, $state, $timeout) {
 
 
     console.log('called')
@@ -24,10 +24,13 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', function($scope, $http,
         page_size: $scope.page_size
     }
 
+    $timeout(function(){
+        loading(false);
+    },1000);
+
 
     $scope.showResults = function() {
-        console.log('called')
-        console.log($scope.searched)
+        loading(true);
         if ($scope.searched.length >= 2) {
             $http({
                 url: 'http://35.154.60.19/api/GetResidential_1.0',
@@ -36,7 +39,6 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', function($scope, $http,
                     details_name: $scope.searched
                 }
             }).then(function mySucces(response) {
-                console.log(response);
                 totalProjects = response.data.hits;
                 totalProjectsFetched += Object.keys(response.data.details).length;
                 $scope.dataFetched = true;
@@ -49,12 +51,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', function($scope, $http,
                     $scope.projectList1[$scope.projects[key].name.toString()] = $scope.projects[key].cover;
                     $scope.projectList2[$scope.projects[key].name.toString()] = $scope.projects[key].id;
                 }
-                console.log($scope.projectList1)
-                console.log($scope.projectList2)
-
                 bindValues();
-
-                loading(true);
             }, function myError(err) {
                 console.log(err);
             })
@@ -74,6 +71,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', function($scope, $http,
                 }
             });
         }
+        loading(false);
 
     }
 

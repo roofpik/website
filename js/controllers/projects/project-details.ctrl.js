@@ -1,14 +1,13 @@
 app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', function($scope, $timeout, $stateParams, $rootScope){
 	$('ul.tabs').tabs();
-
-    console.log('called')
+    loading(true);
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
-    console.log($stateParams.projectId);
     $scope.projectId = $stateParams.projectId;
     $scope.propertyTypes = [];
     $scope.bhk = '';
     $scope.configurations = [];
     $scope.minBhk = 0;
+    $scope.projectDataFetched = false;
 	$scope.allAmenities = {
     	'basic': {
 	        'carParking': {
@@ -272,7 +271,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     		'hrefLink': '#sports'
     	}
     };
-    loading(false);
+
     db.ref('projects/-KYJONgh0P98xoyPPYm9/residential/' + $scope.projectId).once('value', function(snapshot) {
         $timeout(function() {
         	// console.log(snapshot.val());
@@ -540,8 +539,9 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     	}
     	$timeout(function(){
             loading(false);
+            $scope.projectDataFetched = true;
             $('ul.tabs').tabs();
-        },1000);
+        },500);
     	// console.log($scope.configurations);
     }
 
@@ -557,9 +557,8 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
 
 	$scope.provideDetails = function(data){
 		loading(true);
-		// console.log(data);
 		db.ref('queries/'+$scope.cityId+'/residential/'+$scope.projectId).push(data).then(function(){
-			loading(false);
+            loading(false);
 			swal('Request Logged', 'You will recieve the details in your mail', 'success');
 			$timeout(function(){
 				$scope.query = {};
@@ -598,7 +597,6 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
         }
         $rootScope.$broadcast('initGallery', imageData);
     }
-
 }]);
 
 // Reviews and Ratings Controller
@@ -656,7 +654,6 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
                 // console.log($scope.reviewObject);
             }
         }
-        loading(false);
     }, function myError(err) {
         console.log(err);
     })
@@ -665,7 +662,6 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
     getReviews();
 
     function getReviews(){
-        console.log(customerType);
         $http({
             url: 'http://35.154.60.19/api/GetProjectReviews_1.0',
             method : 'GET',
@@ -677,16 +673,12 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
                 page_start: page_start
             }
         }).then(function mySucces(response) {
-            console.log(response);
             if(response.data){
                 totalReviews = response.data.hits;
-                console.log(Object.keys(response.data.details).length);
                 reviewsFetchedNum += Object.keys(response.data.details).length;
-                console.log(totalReviews, reviewsFetchedNum);
                 if(reviewsFetchedNum == totalReviews){
                     $scope.hasMoreReviews = false;
                 }
-                console.log($scope.hasMoreReviews);
                 for(key in response.data.details){
                     if(response.data.details[key].reviewText.length < response.data.details[key].wordCount) {
                         response.data.details[key].showMore = true;
@@ -701,7 +693,9 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
             } else {
                 $scope.hasMoreReviews = false;
             }
-            loading(false);
+            if($scope.projectDataFetched){
+                loading(false);    
+            }
         }, function myError(err) {
             console.log(err);
         })
@@ -740,7 +734,6 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
     $scope.filterReview = function(index){
         var count = 0;
         count = $scope.allRatings[index];
-        console.log(count);
         if($scope.ratingSelected[index]){
             for(var i = count-1; i < 5; i++){
                 $scope.ratingSelected[$scope.ratingIndex[i]] = true;
