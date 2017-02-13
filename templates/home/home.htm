@@ -1,19 +1,31 @@
 <section>
-    <div class="parallax-container posabs_img waves-effect waves-light grey darken-3 htv100">
-        <div class="btn-mid-box center">
-            <h3 class="white-text ft24 pdlr text-shd">Power Your Property Search with Genuine User Reviews </h3>
-            <div class="row pdlrb">
+    <div class="parallax-container white htv100">
+        <video class="videohome" loop="loop" autoplay="autoplay" preload="auto">
+            <source src="video/home-background-video.mp4" type="video/mp4">
+        </video>
+        <div class="home-search">
+        <h3 class="white-text ft24 center textsd b">Power Your Property Search with Genuine User Reviews </h3>
+         <div class="row mgbn">
+         <ul class="tabs tabs-fixed-width tabs-transparent hometabs">
+         <li class="tab bgblk-trn radiust2"><a class="active white-text" href="#searchboxhome">Residential</a></li>
+         <li class="tab bgblk-trn"><a class="white-text" href="#searchboxhome">Commercial</a></li>
+         <li class="tab bgblk-trn radiusr2"><a class="white-text" href="#searchboxhome">PG</a></li>
+         </ul>
+        
+         </div>
+
+            <div id="searchboxhome" class="row bgblk-trn radius2 pdr10 cardmg">
                 <div class="col m5 s12">
-                    <div class="input-field input-box-h card col s12 ht45 pdan">
+                    <div class="input-field card col s12 ht45 pdan">
                         <span class="inpspn">Find :</span>
-                        <input type="text" placeholder="Apartments, Commercials, PG" class="autocomplete inp_pdw" id="location" ng-model="searched" ng-change="showResults()">
+                        <input type="text" placeholder="Apartments, Commercials, PG" class="autocomplete inp_pdw mgbn" id="location" ng-model="searched" ng-change="showResults()">
                         <div class="search-results"></div>
                     </div>
                 </div>
                 <div class="col m5 s12 pdln">
-                    <div class="input-field input-box-h card col s12 ht45 pdan">
+                    <div class="input-field card col s12 ht45 pdan">
                         <span class="inpspn">Near :</span>
-                        <input placeholder="Enter a Destination" class="autocompletenear inp_pdw" id="searched" ng-model="locality" ng-change="showLocalities()">
+                        <input placeholder="Enter a Destination" class="autocompletenear inp_pdw mgbn" id="searched" ng-model="locality" ng-change="showLocalities()">
                         <div class="search-results"></div>
                     </div>
                 </div>
@@ -21,7 +33,8 @@
                     <button class="btn col m12  waves-effect waves-light red lighten-1 ht45" id="">
                         <i class="material-icons left">search</i>Search</i>
                 </div>
-            </div>
+            </div></div>
+        <div class="btn-mid-box center">            
             <div class="row bgblk-trn mgbn pdt25 pdb10 white-text">
                 <div class="col s12 m4">
                     <div class="col s3 m2 mgt5">
@@ -52,5 +65,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row black lighten-1 center pda20">        
+<h4 class="capitalize white-text">write a review and claim your goody bag.</h4>
+<button class="btn blue">Review Now</button>
     </div>
 </section>

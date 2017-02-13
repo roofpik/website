@@ -1,6 +1,6 @@
 app.controller('homeCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
 
-
+$('ul.tabs').tabs();
     console.log('called')
     var page_size = 10;
     var page_start = 0;

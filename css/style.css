@@ -197,7 +197,7 @@ footer.page-footer{margin-top: 0px;}
 footer.page-footer a{display: inline !important; padding: 0 3px; line-height: 20px;}
 .htv100{height: 100vh !important; display: block;}
 .htvcontact{height: 100vh !important; display: block; overflow-y: auto; background-attachment: fixed;}
-.bgblk-trn{background-color: rgba(0, 0, 0, 0.5);}
+.bgblk-trn{background-color: rgba(0, 0, 0, 0.7);}
 header{position: absolute; left: 0; top: 0;  width: 100%;}
 footer.page-footer{padding-top:7px;}
 .pdleftright{padding:0 7px;}
@@ -621,7 +621,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
         right: 0;
     }
 }
-
-
-
->>>>>>> aa53c8a609cf99649eecbb8d4e2c791a5692dbbc
+/*new design css home page start*/
+.home-search{width:80%; position: absolute; left: 50%; top: 40%; z-index: 9; transform: translate(-50%, -50%);}
+.homebgtrn{background-color: rgba(255,255,255, 0.2) !important;}
+.videohome{width: 100%;}
+.shadow_n{box-shadow:none !important;}
+i.left{margin-right: 10px;}
+.pdr10{padding-right: 10px;}
+.radius2{border-radius:2px;} 
+.radiust2{border-radius:2px 0 0 0;} 
+.radiusr2{border-radius:0 2px 0 0;}
+#searchboxhome{display: block !important; margin:-1px 0 0 0;}
+.textsd{text-shadow: 1px 1px 1px #080808;}
+.hometabs{ width: 50% !important; }
+.cardmg{margin:10px 0;}
+/*new design css home page end*/
