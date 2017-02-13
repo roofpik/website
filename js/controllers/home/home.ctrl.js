@@ -1,4 +1,4 @@
-app.controller('homeCtrl', ['$scope', '$http', '$state' , function($scope, $http, $state) {
+app.controller('homeCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
 
 
     console.log('called')
@@ -8,6 +8,8 @@ app.controller('homeCtrl', ['$scope', '$http', '$state' , function($scope, $http
     var totalProjectsFetched = 0;
     $scope.projectList1 = {};
     $scope.projectList2 = {};
+    $scope.localities = {};
+    $scope.localities2 = {};
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.projectList = [];
     $scope.dataFetched = false;
@@ -67,12 +69,62 @@ app.controller('homeCtrl', ['$scope', '$http', '$state' , function($scope, $http
                 limit: 10,
                 onAutocomplete: function(value, data) {
                     $scope.projectId = $scope.projectList2[value];
-                    $state.go('project-details', {projectId: $scope.projectId});
-                    
+                    $state.go('project-details', { projectId: $scope.projectId });
+
                 }
             });
         }
 
     }
 
+    $scope.showLocalities = function() {
+        if ($scope.locality.length >= 2) {
+            console.log('called')
+            var searchedLocality = encodeURIComponent($scope.locality);
+            var param = btoa('id=' + searchedLocality);
+            $http({
+                url: 'http://35.154.60.19/api/GetLocality_1.0',
+                method: 'GET',
+                params: {
+                    id: param
+                }
+            }).then(function mySucces(response) {
+                console.log(response);
+                $scope.total = response.data.details;
+                for (key in $scope.total) {
+                    console.log(key);
+                    if ($scope.total[key].name) {
+                        $scope.localities[$scope.total[key].name.toString()] = $scope.total[key].id;
+                        $scope.localities2[$scope.total[key].name.toString()] = null;
+
+                    }
+
+                }
+                console.log($scope.localities);
+
+                setList();
+
+                // loading(true);
+            }, function myError(err) {
+                console.log(err);
+            })
+        }
+    }
+
+    function setList() {
+       
+        $('#searched').autocomplete({
+            data: $scope.localities2,
+            limit: 10,
+            onAutocomplete: function(value, data) {
+                console.log(value);
+                console.log($scope.localities)
+                var localityId = $scope.localities[value];
+                console.log(localityId);
+                $state.go('projects', {locality: localityId});
+            }
+
+        });
+       
+    }
 }]);
