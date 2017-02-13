@@ -1,7 +1,5 @@
 app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', function($scope, $http, $state, $timeout) {
     document.title = "Home";
-
-    console.log('called')
     var page_size = 10;
     var page_start = 0;
     var totalProjects = 0;
@@ -43,7 +41,6 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', function($s
                 totalProjectsFetched += Object.keys(response.data.details).length;
                 $scope.dataFetched = true;
                 $scope.projects = response.data.details;
-                console.log($scope.projects);
                 for (key in $scope.projects) {
                     if ($scope.projects[key].cover.indexOf('http') == -1) {
                         $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/residential/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-xs.jpg';
@@ -77,7 +74,6 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', function($s
 
     $scope.showLocalities = function() {
         if ($scope.locality.length >= 2) {
-            console.log('called')
             var searchedLocality = encodeURIComponent($scope.locality);
             var param = btoa('id=' + searchedLocality);
             $http({
@@ -87,10 +83,8 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', function($s
                     id: param
                 }
             }).then(function mySucces(response) {
-                console.log(response);
                 $scope.total = response.data.details;
                 for (key in $scope.total) {
-                    console.log(key);
                     if ($scope.total[key].name) {
                         $scope.localities[$scope.total[key].name.toString()] = $scope.total[key].id;
                         $scope.localities2[$scope.total[key].name.toString()] = null;
@@ -98,11 +92,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', function($s
                     }
 
                 }
-                console.log($scope.localities);
-
                 setList();
-
-                // loading(true);
             }, function myError(err) {
                 console.log(err);
             })
@@ -110,16 +100,13 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', function($s
     }
 
     function setList() {
-       
         $('#searched').autocomplete({
             data: $scope.localities2,
             limit: 10,
             onAutocomplete: function(value, data) {
                 var localityId = $scope.localities[value];
-                console.log(localityId);
                 $state.go('projects', {locality: localityId});
             }
-
         });
        
     }

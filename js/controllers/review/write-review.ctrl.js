@@ -123,12 +123,15 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $rootScope, $locati
                         $scope.selectedProject = response.data.details[key];
                         $scope.selectedItem = $scope.selectedProject.name;
                         $scope.projectSelected = true;
-                        console.log($scope.selectedItem);
                     }
                 }
                 loading(false);
             }, 500)
         }, function myError(err) {})
+    } else {
+        $timeout(function(){
+            loading(false);
+        },1000);
     }
 
     $scope.nameEntered = function() {
@@ -143,13 +146,11 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $rootScope, $locati
                         details_name: $scope.selectedItem
                     }
                 }).then(function mySucces(response) {
-                    loading(false);
                     $timeout(function() {
                         if (response.data.details) {
                             $scope.projectList = response.data.details;
                             // $scope.showList = true;
-                            console.log($scope.projectList)
-                            for (key in $scope.projectList) {   
+                            for (key in $scope.projectList) {
                                 $scope.projects1[$scope.projectList[key].name.toString()] = $scope.projectList[key].id;
                                 $scope.projects2[$scope.projectList[key].name.toString()] = null;
                             }
@@ -163,25 +164,18 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $rootScope, $locati
 
     function bindList() {
         // console.log('bindValues called')
-        
-            $('#select_project').autocomplete({
-                data: $scope.projects2,
-                limit: 10,
-                onAutocomplete: function(value, data) {
-                    $scope.selectedItem = value;
+        $('#select_project').autocomplete({
+            data: $scope.projects2,
+            limit: 10,
+            onAutocomplete: function(value, data) {
+                $scope.selectedItem = value;
+                $scope.projectSelected = true;
+                $scope.selectedProject.name = $scope.selectedItem;
+                $scope.selectedProject.id = $scope.projects1[$scope.selectedItem];
 
-                }
-            });
-            $scope.selectedProject.name = $scope.selectedItem;
-            $scope.selectedProject.id = $scope.projects1[$scope.selectedItem];
-            console.log($scope.selectedProject);
-    }
-
-    $scope.selectProject = function(val) {
-        $scope.selectedItem = val.name;
-        $scope.selectedProject = val;
-        $scope.showList = false;
-        $scope.projectSelected = true;
+            }
+        });
+        loading(false);
     }
 
     $scope.showMoreFn = function() {
@@ -210,9 +204,7 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $rootScope, $locati
         var userReviewPath = '';
         var key = '';
         $scope.review.userName = user.displayName;
-        // $scope.review.userName = 'Anu Porwal';
         $scope.review.userId = user.uid;
-        // $scope.review.userId = '2cQ2XQ7w7pdT9WGq2nyGJhrPSOo2';
         $scope.review.blocked = false;
         $scope.review.createdDate = new Date().getTime();
         $scope.review.dataFormat = 1;
@@ -238,7 +230,6 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $rootScope, $locati
         }
         updates[reviewPath] = $scope.review;
         updates[userReviewPath] = $scope.userReviewData;
-        console.log(updates);
         db.ref().update(updates).then(function() {
             $timeout(function() {
                 swal({
