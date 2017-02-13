@@ -1,5 +1,5 @@
 app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', function($scope, $http, $state, $timeout) {
-
+    document.title = "Home";
 
     console.log('called')
     var page_size = 10;
@@ -115,8 +115,6 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', function($s
             data: $scope.localities2,
             limit: 10,
             onAutocomplete: function(value, data) {
-                console.log(value);
-                console.log($scope.localities)
                 var localityId = $scope.localities[value];
                 console.log(localityId);
                 $state.go('projects', {locality: localityId});

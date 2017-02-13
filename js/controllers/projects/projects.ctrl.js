@@ -1,5 +1,6 @@
 app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$state', '$interval', function($scope, $http, $timeout, $stateParams, $state, $interval) {
     console.log($stateParams);
+    document.title = "Projects"
     $('.modal').modal();
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.projectList = [];
