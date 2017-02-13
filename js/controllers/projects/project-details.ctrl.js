@@ -275,7 +275,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     loading(false);
     db.ref('projects/-KYJONgh0P98xoyPPYm9/residential/' + $scope.projectId).once('value', function(snapshot) {
         $timeout(function() {
-        	console.log(snapshot.val());
+        	// console.log(snapshot.val());
             $scope.project = snapshot.val();
             $scope.projectName = $scope.project.projectName;
             document.title=$scope.projectName;
@@ -314,7 +314,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     			$scope.showAmenities = true;
     		}
     	}
-    	console.log($scope.amenitiesPresent);
+    	// console.log($scope.amenitiesPresent);
     }
 
     function generateInfo(config) {
@@ -503,7 +503,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
             configs[key].hrefLink = '#bhk'+configs[key].bhk;
             data.push(configs[key]);
         }
-        console.log(data);
+        // console.log(data);
         generateConfigurationDisplay(data);
         
     }
@@ -542,7 +542,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
             loading(false);
             $('ul.tabs').tabs();
         },1000);
-    	console.log($scope.configurations);
+    	// console.log($scope.configurations);
     }
 
 	$scope.selectConfig = function(config){
@@ -557,7 +557,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
 
 	$scope.provideDetails = function(data){
 		loading(true);
-		console.log(data);
+		// console.log(data);
 		db.ref('queries/'+$scope.cityId+'/residential/'+$scope.projectId).push(data).then(function(){
 			loading(false);
 			swal('Request Logged', 'You will recieve the details in your mail', 'success');
@@ -616,6 +616,8 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
     $scope.reviewsFetched = false;
     var customerType = null;
     $scope.hasMoreReviews = true;
+    $scope.hasReviews = false;
+    $scope.reviewAvailable = false;
     $scope.ratingSummaryParams = [
         {id: 'security', id1: 'security1', name: 'Security'},
         {id: 'amenities', id1: 'amenities1', name: 'Amenities'},
@@ -635,10 +637,13 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
             id: $scope.projectId
         }
     }).then(function mySucces(response) {
-        console.log(response);
+        // console.log(response);
         if(response.status == 200){
             if(response.data.numberOfReviews != 0){
                 $scope.reviewsAvailable =true;
+                if(response.data.numberOfReviews > 0){
+                    $scope.reviewAvailable = true;
+                }
                 $scope.reviewObject = response.data;
                 for(key in $scope.reviewObject){
                     $scope.reviewObject[key+'1'] = Math.round($scope.reviewObject[key]);
@@ -648,7 +653,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
                 $("#goodStar").css("width", ($scope.reviewObject.threeStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
                 $("#averageStar").css("width", ($scope.reviewObject.twoStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
                 $("#badStar").css("width", ($scope.reviewObject.oneStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
-                console.log($scope.reviewObject);
+                // console.log($scope.reviewObject);
             }
         }
         loading(false);
@@ -660,6 +665,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
     getReviews();
 
     function getReviews(){
+        console.log(customerType);
         $http({
             url: 'http://35.154.60.19/api/GetProjectReviews_1.0',
             method : 'GET',
@@ -672,8 +678,9 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
             }
         }).then(function mySucces(response) {
             console.log(response);
-            if(response.status == 200){
+            if(response.data){
                 totalReviews = response.data.hits;
+                console.log(Object.keys(response.data.details).length);
                 reviewsFetchedNum += Object.keys(response.data.details).length;
                 console.log(totalReviews, reviewsFetchedNum);
                 if(reviewsFetchedNum == totalReviews){
@@ -688,6 +695,11 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
                     }
                     $scope.reviews.push(response.data.details[key]);
                 }
+                if($scope.reviews.length > 0){
+                    $scope.hasReviews = true;
+                }
+            } else {
+                $scope.hasMoreReviews = false;
             }
             loading(false);
         }, function myError(err) {
@@ -695,10 +707,92 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
         })
     }
 
+    $scope.showReviewText = function(index){
+        // console.log($scope.reviews[index]);
+        loading(true);
+        $http({
+            url: 'http://35.154.60.19/api/GetReviewDetails_1.0',
+            method: 'GET',
+            params: {
+                id: $scope.reviews[index].reviewId
+            }
+        }).then(function mySucces(response) {
+            // console.log(response);
+            if(response.status == 200){
+                $scope.reviews[index].reviewText = response.data.reviewText;
+                $scope.reviews[index].showMore = false;
+            } 
+            loading(false, 1000);
+        }, function myError(err) {
+            console.log(err);
+        })
+    }
+
+    $scope.allRatings = {
+        'one': 1,
+        'two': 2,
+        'three': 3,
+        'four': 4,
+        'five': 5
+    };
+    $scope.ratingIndex = ['one', 'two', 'three', 'four', 'five'];
+
+    $scope.filterReview = function(index){
+        var count = 0;
+        count = $scope.allRatings[index];
+        console.log(count);
+        if($scope.ratingSelected[index]){
+            for(var i = count-1; i < 5; i++){
+                $scope.ratingSelected[$scope.ratingIndex[i]] = true;
+            }
+            selectedRating = count;
+        } else {
+            // console.log(count);
+            for(var i = 4; i > count-1 ; i--){
+                $scope.ratingSelected[$scope.ratingIndex[i]] = false;
+            }
+            selectedRating = count -1;
+        }
+        $scope.reviews = [];
+        reviewsFetchedNum = 0;
+        totalReviews = 0;
+        page_start = 0;
+        page_size = 5;
+        $scope.reviewsFetched = false;
+        $scope.hasMoreReviews = true;
+        $scope.hasReviews = false;
+        $scope.reviewAvailable = false;
+        getReviews();
+    }
+
+    $scope.filterReviewByCustomerType = function(index){
+        if($scope.selectedCustomerType[index]){
+            if(index == 'tenant'){
+                customerType = 'tenant';
+                $scope.selectedCustomerType.owner = false;
+            } else {
+                customerType = 'owner';
+                $scope.selectedCustomerType.tenant = false;
+            }
+        } else {
+            customerType = null;
+        }
+        $scope.reviews = [];
+        reviewsFetchedNum = 0;
+        totalReviews = 0;
+        page_start = 0;
+        page_size = 5;
+        $scope.reviewsFetched = false;
+        $scope.hasMoreReviews = true;
+        $scope.hasReviews = false;
+        $scope.reviewAvailable = false;
+        getReviews(); 
+    }
+
     $scope.showMoreReviews = function() {
         loading(true);
         page_start = reviewsFetchedNum;
-        console.log(page_start);
+        // console.log(page_start);
         if(totalReviews - reviewsFetchedNum < 5){
             page_size = totalReviews - reviewsFetchedNum
         }
@@ -726,7 +820,7 @@ app.controller('galleryCtrl', ['$scope', '$timeout', function($scope, $timeout) 
             });
 
             $('.trigger_gallery').on('click', function() {
-            	console.log('clicked');
+            	// console.log('clicked');
                 gallery.startImageLightbox();
             });
             $scope.showGallery = true;

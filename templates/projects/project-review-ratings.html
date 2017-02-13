@@ -16,7 +16,7 @@
                 <h5 class="ft15 mgtn b mgb10">User Rating</h5>
                 <div class="row mgbn">
                     <div class="col s6 mgrn">
-                        <input type="checkbox" class="filled-in" id="filled-in-box2" />
+                        <input type="checkbox" class="filled-in" ng-change="filterReview('five')" ng-model="ratingSelected.five" id="filled-in-box2" />
                         <label for="filled-in-box2">Excellent </label>
                     </div>
                     <div class="col s3 pdan">
@@ -28,7 +28,7 @@
                 </div>
                 <div class="row mgbn">
                     <div class="col s6 mgrn">
-                        <input type="checkbox" class="filled-in" id="filled-in-box3" />
+                        <input type="checkbox" class="filled-in" ng-change="filterReview('four')" ng-model="ratingSelected.four" id="filled-in-box3" />
                         <label for="filled-in-box3">Very Good </label>
                     </div>
                     <div class="col s3 pdan">
@@ -40,7 +40,7 @@
                 </div>
                 <div class="row mgbn">
                     <div class="col s6 mgrn">
-                        <input type="checkbox" class="filled-in" id="filled-in-box4" />
+                        <input type="checkbox" class="filled-in" ng-change="filterReview('three')" ng-model="ratingSelected.three" id="filled-in-box4" />
                         <label for="filled-in-box4">Good </label>
                     </div>
                     <div class="col s3 pdan">
@@ -52,7 +52,7 @@
                 </div>
                 <div class="row mgbn">
                     <div class="col s6 mgrn">
-                        <input type="checkbox" class="filled-in" id="filled-in-box5" />
+                        <input type="checkbox" class="filled-in" ng-change="filterReview('two')" ng-model="ratingSelected.two" id="filled-in-box5" />
                         <label for="filled-in-box5">Average </label>
                     </div>
                     <div class="col s3 pdan">
@@ -64,7 +64,7 @@
                 </div>
                 <div class="row mgbn">
                     <div class="col s6 mgrn">
-                        <input type="checkbox" class="filled-in" id="filled-in-box6" />
+                        <input type="checkbox" class="filled-in" ng-change="filterReview('one')" ng-model="ratingSelected.one" id="filled-in-box6" />
                         <label for="filled-in-box6">Bad </label>
                     </div>
                     <div class="col s3 pdan">
@@ -81,13 +81,13 @@
                 <h5 class="ft15 mgtn b mgb10">Resident Type</h5>
                 <div class="row mgbn">
                     <div class="col s12 mgrn">
-                        <input type="checkbox" class="filled-in" id="type1" />
+                        <input type="checkbox" class="filled-in" ng-model="selectedCustomerType.owner" ng-change="filterReviewByCustomerType('owner')" id="type1" />
                         <label for="type1">Owners </label>
                     </div>
                 </div>
                 <div class="row mgbn">
                     <div class="col s12 mgrn">
-                        <input type="checkbox" class="filled-in" id="type2" />
+                        <input type="checkbox" class="filled-in" ng-model="selectedCustomerType.tenant" ng-change="filterReviewByCustomerType('tenant')" id="type2" />
                         <label for="type2">Tenants </label>
                     </div>
                 </div>
@@ -105,7 +105,10 @@
             </div>
         </div>
     </div>
-    <div class="row mgt20">
+    <div class="row mgt20" ng-hide = "hasReviews">
+        <h3>No Reviews</h3>
+    </div>
+    <div class="row mgt20" ng-show="hasReviews">
         <div class="col s12">
             <div class="row bdbtm ft13 grey-text text-darken-2 mglrn mgb10 pdb10" ng-repeat="review in reviews">
                 <div class="col b pdb20">
@@ -119,7 +122,7 @@
                 </div>
                 <div class="col s12">
                     <p><b>{{review.reviewTitle}}</b></p>
-                    <p class="justify">{{review.reviewText}}<span ng-show="review.showMore">Show More</span></p>
+                    <p class="justify">{{review.reviewText}}<span ng-show="review.showMore" class="roofGreen" ng-click="showReviewText($index)">...Show More</span></p>
                 </div>
             </div>
         </div>
