@@ -69,6 +69,16 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             }
         }
     });
+    $stateProvider.state('filter', {
+        url: '/filter',
+        views: {
+            '': {
+                templateUrl: 'templates/projects/filter.html',
+                controller: 'projectsCtrl'
+            }
+            
+        }
+    });
 
     $urlRouterProvider.otherwise('/pg-details');
 }]);

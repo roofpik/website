@@ -248,7 +248,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 .input-field .prefix { width: 2rem;font-size: 1.7rem; padding-top:7px; color:#9e9e9e;}
 .mapfix{margin: -19px -19px 30px; border-radius: 10px;}
 .pdln{padding-left: 0px !important;}
-
+.pdrn{padding-right: 0px !important;}
+.pdl15{padding-left: 13px !important;}
 
 #bodyContent .roofpik-logo img { width: 99px; }
 #bodyContent h3{font-size: 12px; margin:0px; line-height: 20px}
@@ -307,7 +308,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 .inpspn{position: absolute;left: 10px; top: 0px; z-index: 11; line-height: 44px; font-weight: bold;}
 .inp_pdw{padding-left: 60px !important; padding-right: 10px !important; width: calc(100% - 70px) !important;}
 .autocomplete-content li img{z-index: 1}
-
+.searchfix-footer {
+  position: absolute;
+  height: calc(100% - 56px);
+  max-height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+.inpfilter{    background-color: rgba(255,255,255,0.9);
+    width: 100%;    
+    border: 1px solid #f2f2f2 !important;
+    border-radius: 2px !important;
+    height: 2.9rem !important;}
 @media (min-width:0px) and (max-width: 767px) {
 #loginbox{width: 90%;}
 .wd-sm{width: 43px !important;}
