@@ -1,11 +1,14 @@
 app.controller('writeReviewCtrl', function($scope, $timeout, $rootScope, $location, $stateParams, $http) {
-    document.title="Write Review";
+    document.title = "Write Review";
     var timestamp = new Date().getTime();
     var urlInfo = {
         url: $location.path()
     }
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     loading(true);
+    $scope.projects1 = {};
+    $scope.projects2 = {};
+    $scope.selectedProject = {};
     $scope.review = {
         ratings: {}
     }
@@ -35,25 +38,25 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $rootScope, $locati
         id: 9
     }];
     var user;
-    if($stateParams.id){
+    if ($stateParams.id) {
         $scope.showSearch = false;
     } else {
         $scope.showSearch = true;
     }
 
-    $rootScope.$watch('loginStatus', function(){
-        if($rootScope.loginStatus){
+    $rootScope.$watch('loginStatus', function() {
+        if ($rootScope.loginStatus) {
             $scope.loginStatus = true;
             user = firebase.auth().currentUser;
         } else {
             $scope.loginStatus = false;
         }
     });
-    if(checkLocalStorage('loginStatus')){
+    if (checkLocalStorage('loginStatus')) {
         $scope.loginStatus = JSON.parse(localStorage.getItem('loginStatus'));
-        if(JSON.parse(localStorage.getItem('loginStatus'))){
+        if (JSON.parse(localStorage.getItem('loginStatus'))) {
             user = firebase.auth().currentUser;
-        } else{
+        } else {
             loading(false);
             $rootScope.$emit("callShowLogin", {});
         }
@@ -102,7 +105,7 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $rootScope, $locati
 
     $('#textarea1').trigger('autoresize');
 
-    if($stateParams.id){
+    if ($stateParams.id) {
         loading(true);
         $scope.showList = false;
         $scope.showSearch = false;
@@ -115,8 +118,8 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $rootScope, $locati
             }
         }).then(function mySucces(response) {
             $timeout(function() {
-                for(key in response.data.details){
-                    if(response.data.details[key].id == $stateParams.id){
+                for (key in response.data.details) {
+                    if (response.data.details[key].id == $stateParams.id) {
                         $scope.selectedProject = response.data.details[key];
                         $scope.selectedItem = $scope.selectedProject.name;
                         $scope.projectSelected = true;
@@ -125,15 +128,14 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $rootScope, $locati
                 }
                 loading(false);
             }, 500)
-        }, function myError(err) {
-        })
+        }, function myError(err) {})
     }
 
     $scope.nameEntered = function() {
         if ($scope.selectedItem) {
-            if ($scope.selectedItem.length > 2) {
+            if ($scope.selectedItem.length >= 2) {
                 loading(true);
-                $scope.showList = true;
+                // $scope.showList = true;
                 $http({
                     url: 'http://35.154.60.19/api/GetResidential_1.0',
                     method: 'GET',
@@ -143,19 +145,36 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $rootScope, $locati
                 }).then(function mySucces(response) {
                     loading(false);
                     $timeout(function() {
-                        if(response.data.details){
+                        if (response.data.details) {
                             $scope.projectList = response.data.details;
-                            $scope.showList = true;
-                        } else {
-                            $scope.showList = false;
+                            // $scope.showList = true;
+                            console.log($scope.projectList)
+                            for (key in $scope.projectList) {   
+                                $scope.projects1[$scope.projectList[key].name.toString()] = $scope.projectList[key].id;
+                                $scope.projects2[$scope.projectList[key].name.toString()] = null;
+                            }
                         }
+                        bindList();
                     }, 500)
-                }, function myError(err) {
-                })
-            } else {
-                $scope.showList = false;
+                }, function myError(err) {})
             }
         }
+    }
+
+    function bindList() {
+        // console.log('bindValues called')
+        
+            $('#select_project').autocomplete({
+                data: $scope.projects2,
+                limit: 10,
+                onAutocomplete: function(value, data) {
+                    $scope.selectedItem = value;
+
+                }
+            });
+            $scope.selectedProject.name = $scope.selectedItem;
+            $scope.selectedProject.id = $scope.projects1[$scope.selectedItem];
+            console.log($scope.selectedProject);
     }
 
     $scope.selectProject = function(val) {
@@ -165,27 +184,27 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $rootScope, $locati
         $scope.projectSelected = true;
     }
 
-    $scope.showMoreFn = function(){
+    $scope.showMoreFn = function() {
         $scope.showMore = !$scope.showMore;
-        if($scope.showMore){
+        if ($scope.showMore) {
             $scope.showMoreLess = 'Show Less -';
         } else {
             $scope.showMoreLess = 'Show More +';
         }
     }
 
-    $( "#select_project" ).blur(function() {
-        $timeout(function(){
+    $("#select_project").blur(function() {
+        $timeout(function() {
             $scope.showList = false;
         }, 100);
     });
 
     $scope.submitReview = function() {
         swal({
-          title: "Submitting Review",
-          text: "Please wait...",
-          imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
-          showConfirmButton: false
+            title: "Submitting Review",
+            text: "Please wait...",
+            imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
+            showConfirmButton: false
         });
         var reviewPath = '';
         var userReviewPath = '';
@@ -208,19 +227,20 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $rootScope, $locati
             status: $scope.review.status,
             createdDate: $scope.review.createdDate
         }
-        newKey = db.ref('websiteReviews/'+$scope.cityId+'/residential/' + $scope.selectedProject.id).push().key;
+        newKey = db.ref('websiteReviews/' + $scope.cityId + '/residential/' + $scope.selectedProject.id).push().key;
         $scope.userReviewData.projectId = $scope.selectedProject.id;
-        $scope.userReviewData.projectName =  $scope.selectedProject.name;
-        reviewPath = 'websiteReviews/'+$scope.cityId+'/residential/' + $scope.selectedProject.id + '/' + newKey;
+        $scope.userReviewData.projectName = $scope.selectedProject.name;
+        reviewPath = 'websiteReviews/' + $scope.cityId + '/residential/' + $scope.selectedProject.id + '/' + newKey;
         userReviewPath = 'userReviews/' + $scope.review.userId + '/residential/' + newKey;
-    
-        if(Object.keys($scope.review.ratings).length == 0){
+
+        if (Object.keys($scope.review.ratings).length == 0) {
             delete $scope.review.ratings;
         }
         updates[reviewPath] = $scope.review;
         updates[userReviewPath] = $scope.userReviewData;
-        db.ref().update(updates).then(function(){
-            $timeout(function(){
+        console.log(updates);
+        db.ref().update(updates).then(function() {
+            $timeout(function() {
                 swal({
                     title: "Done",
                     text: "Your review was successfully submitted!",

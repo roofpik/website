@@ -1,4 +1,4 @@
-app.controller('headerCtrl', ['$scope', '$state', '$http', function($scope, $state, $http) {
+app.controller('headerCtrl', ['$scope', '$state', '$http', '$stateParams', function($scope, $state, $http,$stateParams) {
 
     $(document).ready(function() {
         Materialize.updateTextFields();
@@ -17,6 +17,8 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', function($scope, $sta
         $(".dropdown-button").dropdown();
         $('.modal').modal();
     })
+
+    console.log($stateParams);
 
     var page_size = 10;
     $scope.enteredText = "";
@@ -216,9 +218,9 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', function($scope, $sta
     //     $state.go('blogs', { city: 'gurgaon', cityId: $scope.cityId, from: 1 })
     // }
 
-    // $scope.gotoWriteReviews = function() {
-    //     $state.go('write-review');
-    // }
+    $scope.gotoReview = function() {
+        $state.go('write-review');
+    }
 
 
 
