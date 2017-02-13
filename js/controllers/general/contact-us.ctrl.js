@@ -5,6 +5,8 @@ app.controller('contactUsCtrl', ['$scope', '$timeout', function($scope, $timeout
     
     $scope.user = {};
 
+    document.title = "Contact Us"
+
 
  function myMap() {
         var bounds = new google.maps.LatLngBounds();

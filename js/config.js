@@ -17,7 +17,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     }); 
     $stateProvider.state('about-us', {
         url: '/about-us',
-        templateUrl: 'templates/general/about-us.htm'
+        templateUrl: 'templates/general/about-us.htm',
+        controller: 'aboutUsCtrl'
     });
     $stateProvider.state('projects', {
         url: '/projects?segment&bhk&price_range&area_range&location&locality&details_builder$propertyType',

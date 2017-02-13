@@ -1,6 +1,8 @@
 app.controller('homeCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
 
 
+    document.title = "Home";
+
     console.log('called')
     var page_size = 10;
     var page_start = 0;
