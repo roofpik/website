@@ -7,8 +7,17 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     });
     $stateProvider.state('contact-us', {
         url: '/contact-us',
-        templateUrl: 'templates/contact-us.html',
+        templateUrl: 'templates/general/contact-us.html',
         controller: 'contactUsCtrl'
+    });
+    $stateProvider.state('faq', {
+        url: '/faq',
+        templateUrl: 'templates/general/faq.htm',
+        controller: 'faq-ctrl'
+    }); 
+    $stateProvider.state('about-us', {
+        url: '/about-us',
+        templateUrl: 'templates/general/about-us.htm'
     });
     $stateProvider.state('projects', {
         url: '/projects?segment&bhk&price_range&area_range&location&locality&details_builder$propertyType',
