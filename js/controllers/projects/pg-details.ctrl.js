@@ -1,7 +1,7 @@
-app.controller('pgDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', '$state', function($scope, $timeout, $stateParams, $rootScope, $state){
+app.controller('pgDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', '$state', '$http', function($scope, $timeout, $stateParams, $rootScope, $state, $http){
 	console.log('pg');
 	loading(false, 2000);
-	console.log($stateParams);
+
 	$('ul.tabs').tabs();
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.projectId = '-KcS0Di7QyRqVUwVu6fQ';
@@ -112,11 +112,8 @@ app.controller('pgDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$rootSco
 		})
 	}
 
-	$scope.goToState = function(){
-		$state.go('pg-details', {name: 'abc', place: 'gurgaon'});
-	}
-
 }]);
+
 
 
 app.controller('pgReviewRatingCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', '$state', function($scope, $timeout, $stateParams, $rootScope, $state){
