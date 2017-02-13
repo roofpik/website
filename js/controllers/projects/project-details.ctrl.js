@@ -1,7 +1,10 @@
 app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', function($scope, $timeout, $stateParams, $rootScope){
 	$('ul.tabs').tabs();
+
+    console.log('called')
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
-    $scope.projectId = '-KYMtlqwTF_W5S0CL6_P';
+    console.log($stateParams.projectId);
+    $scope.projectId = $stateParams.projectId;
     $scope.propertyTypes = [];
     $scope.bhk = '';
     $scope.configurations = [];
@@ -601,8 +604,10 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
 // Reviews and Ratings Controller
 app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', function($scope, $timeout, $stateParams, $rootScope){
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
-    $scope.projectId = '-KYMtlqwTF_W5S0CL6_P';
+    $scope.projectId = $stateParams.projectId;
     $scope.reviews = [];
+
+    console.log($stateParams)
 
     function dynamicSort(property) {
         var sortOrder = 1;

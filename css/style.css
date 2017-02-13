@@ -339,3 +339,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
   display: inline-block;
   float: right;
 }
+.searchImg {
+  width: 100% !important; 
+}

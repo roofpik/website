@@ -5,7 +5,10 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $stateParams, $sce,
     // }
     // UserTokenService.checkToken(urlInfo, timestamp, 1);
     // console.log($stateParams);
+    $scope.showNoBlogs = false;
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
+    $scope.city = 'gurgaon';
+        $scope.from = 1;
     $scope.popularBlogs = {};
     loading(true);
     db.ref('blogs/allBlogs/' + $scope.cityId + '/' + $stateParams.id).once('value', function(snapshot) {

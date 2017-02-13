@@ -8,7 +8,7 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $sce, $stateParam
     loading(true);
     $scope.showNoBlogs = false;
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
-    $scope.city = 'gurgaon',
+    $scope.city = 'gurgaon';
         $scope.from = 1;
     $scope.popularBlogs = {};
     $scope.featuredBlogs = [];

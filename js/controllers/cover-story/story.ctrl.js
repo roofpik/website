@@ -8,8 +8,10 @@ app.controller('storyCtrl', function($scope, $timeout, $stateParams, $sce, $stat
     // }
     // UserTokenService.checkToken(urlInfo, timestamp, 1);
     loading(true);
-    $scope.featuredStories = [];
+    $scope.featuredStories = [];$scope.showNoBlogs = false;
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
+    $scope.city = 'gurgaon';
+        $scope.from = 1;$scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.popularStories = {};
     db.ref('coverStory/stories/' + $scope.cityId + '/' + $stateParams.id).once('value', function(snapshot) {
         $timeout(function() {
