@@ -342,6 +342,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
   display: inline-block;
   float: right;
 }
+.searchImg {
+  width: 100% !important; 
+}
 .roofGreen {
     color:#54C3DD;;
 }
@@ -621,3 +624,4 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 
 
 
+>>>>>>> aa53c8a609cf99649eecbb8d4e2c791a5692dbbc

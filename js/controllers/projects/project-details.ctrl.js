@@ -1,7 +1,10 @@
 app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', function($scope, $timeout, $stateParams, $rootScope){
 	$('ul.tabs').tabs();
+
+    console.log('called')
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
-    $scope.projectId = '-KYMtlqwTF_W5S0CL6_P';
+    console.log($stateParams.projectId);
+    $scope.projectId = $stateParams.projectId;
     $scope.propertyTypes = [];
     $scope.bhk = '';
     $scope.configurations = [];
@@ -601,7 +604,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
 // Reviews and Ratings Controller
 app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', '$http', '$state', function($scope, $timeout, $stateParams, $rootScope, $http, $state){
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
-    $scope.projectId = '-KYMtlqwTF_W5S0CL6_P';
+    $scope.projectId = $stateParams.projectId;
     $scope.reviews = [];
     $scope.reviewsAvailable = false;
     var selectedRating = 0;
@@ -625,6 +628,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
         {id: 'infrastructure', id1: 'infrastructure1', name: 'Infrastructure'},
         {id: 'layoutOfApartment', id1: 'layoutOfApartment1', name: 'Layout of Apartments'}
     ];
+
 
     $http({
         url: 'http://35.154.60.19/api/GetReviewSummary_1.0',

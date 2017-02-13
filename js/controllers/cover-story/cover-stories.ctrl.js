@@ -9,7 +9,10 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $sce, $sta
 
     $scope.showNoStories = false;
     $scope.featuredStories = [];
-    $scope.cityId = '-KYJONgh0P98xoyPPYm9';;
+    $scope.showNoBlogs = false;
+    $scope.cityId = '-KYJONgh0P98xoyPPYm9';
+    $scope.city = 'gurgaon';
+    $scope.from = 1;
     $scope.popularStories = {};
     loading(true);
 })

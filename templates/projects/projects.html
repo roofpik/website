@@ -18,18 +18,18 @@
             <div class="card">
                 <div class="cardTitle row mgbn">
                     <!-- <a href="#project-details" class="col s8 black-text bod-right pd-tspan"> -->
-                    <a href="#project-details" class="col s8 black-text pd-tspan">
+                    <a ng-href="/#/project-details/{{project.id}}" class="col s8 black-text pd-tspan">
                         <span>{{project.name}}</span>
                         <span class="ft12 grey-text">{{project.address}}</span>
                     </a>
                     <div class="col s2 bod-right card-ict hide">
-                        <a href=""><i class="material-icons grey-text">favorite_border</i></a></div>
+                        <a ng-href="/#/project-details/{{project.id}}"><i class="material-icons grey-text">favorite_border</i></a></div>
                     <div class="col s2 card-ict hide">
-                        <a href=""><i class="material-icons">phone</i></a>
+                        <a ng-href="/#/project-details/{{project.id}}"><i class="material-icons">phone</i></a>
                     </div>
                 </div>
                 <div class="card-image  waves-effect waves-light block">
-                    <a href="#project-details"> <img ng-src="{{project.cover}}"></a>
+                    <a ng-href="/#/project-details/{{project.id}}"> <img ng-src="{{project.cover}}"></a>
                 </div>
                 <div class="row mg0 ht50">
                     <div class="col s6 pd5 dis-tab bod-right ht50">

@@ -80,13 +80,13 @@
                 </h5>
                 <h6 class="grey-text pdlrn ft15 ftw3">Browse through 1,000+ verified property reviews. Or share one today.</h6>
                 <div class="search-wrapper card">
-                    <input id="search" placeholder="search"><i class="material-icons search_i">search</i>
+                    <input id="search" placeholder="search" ng-change = "callFunction()" ng-model = "enteredText"><i class="material-icons search_i">search</i>
                     <div class="search-results"></div>
                 </div>
-                <div class="card horizontal" ng-repeat = "item in projectList">
+                <div class="card horizontal" ng-repeat = "item in projectList" ng-click = "openProject()">
                     <a href="">
                         <div class="card-image fix40 left">
-                            <img ng-src="{{item.cover}}" class="responsive-img">
+                            <img ng-src="{{item.cover}}" class="responsive-img searchImg">
                         </div>
                         <div class="cardpdt span_block fix60 left">
                             <span class="black-text ft13 ellipsis">{{item.name}}</span>

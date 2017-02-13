@@ -1,5 +1,5 @@
-app.controller('headerCtrl', function($scope, $state, $rootScope, $timeout, $http) {
-    
+app.controller('headerCtrl', ['$scope', '$state', '$http', function($scope, $state, $http) {
+
     $(document).ready(function() {
         Materialize.updateTextFields();
         $('.button-collapse').sideNav({
@@ -18,7 +18,8 @@ app.controller('headerCtrl', function($scope, $state, $rootScope, $timeout, $htt
         $('.modal').modal();
     })
 
-     var page_size = 10;
+    var page_size = 10;
+    $scope.enteredText = "";
     var page_start = 0;
     var totalProjects = 0;
     var totalProjectsFetched = 0;
@@ -37,9 +38,7 @@ app.controller('headerCtrl', function($scope, $state, $rootScope, $timeout, $htt
         page_size: $scope.page_size
     }
 
-    $timeout(function() {
-        console.log('working');
-    }, 1000)
+
 
     fetchProjects()
 
@@ -60,7 +59,41 @@ app.controller('headerCtrl', function($scope, $state, $rootScope, $timeout, $htt
             }
         }).then(function mySucces(response) {
             console.log(response);
-            $timeout(function() {
+
+            totalProjects = response.data.hits;
+            totalProjectsFetched += Object.keys(response.data.details).length;
+            $scope.dataFetched = true;
+            $scope.projects = response.data.details;
+            console.log($scope.projects);
+            for (key in $scope.projects) {
+                if ($scope.projects[key].cover.indexOf('http') == -1) {
+                    $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/residential/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-s.jpg';
+                }
+                $scope.projectList.push($scope.projects[key]);
+            }
+            console.log($scope.projectList)
+
+            loading(true);
+        }, function myError(err) {
+            console.log(err);
+        })
+
+    }
+
+    $scope.callFunction = function() {
+        console.log($scope.enteredText.length)
+
+        $scope.projectList = [];
+        if ($scope.enteredText.length >= 2) {
+            $http({
+                url: 'http://35.154.60.19/api/GetResidential_1.0',
+                method: 'GET',
+                params: {
+                    details_name: $scope.enteredText
+                }
+            }).then(function mySucces(response) {
+                console.log(response);
+
                 totalProjects = response.data.hits;
                 totalProjectsFetched += Object.keys(response.data.details).length;
                 $scope.dataFetched = true;
@@ -73,16 +106,21 @@ app.controller('headerCtrl', function($scope, $state, $rootScope, $timeout, $htt
                     $scope.projectList.push($scope.projects[key]);
                 }
                 console.log($scope.projectList)
-            }, 500)
-            loading(true);
-        }, function myError(err) {
-            console.log(err);
-        })
 
+                loading(true);
+            }, function myError(err) {
+                console.log(err);
+            })
+        }
+
+        else {
+            fetchProjects();
+        }
     }
 
-
-
+    $scope.openProject = function(){
+        console.log($scope.item.name)
+    }
 
     // $scope.gotoHome = function() {
     //     $state.go('home');
@@ -182,6 +220,6 @@ app.controller('headerCtrl', function($scope, $state, $rootScope, $timeout, $htt
     //     $state.go('write-review');
     // }
 
-    
 
-});
+
+}]);
