@@ -1,0 +1,27 @@
+<div id="mapContainer">
+    <div id="mapCanvas" class="ht600"></div>
+    <div class="map-search">
+        <div id="search_map" class="row bgblk-trn radius2 pdr10 cardmg">
+            <div class="col s9">
+                <div class="input-field card ht45 pdan reletive">
+                    <span class="inpspn">Find :</span>
+                    <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompletenear inp_pdw mgbn">
+                    <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" />
+                    <div class="search-results" ng-show="showSearch">
+                        <ul class="collection homecoll">
+                            <li ng-repeat="item in search| filter: searched" class=" collection-item avatar" ng-click="selectType(item)">
+                                <img ng-src="{{item.icon}}" class="circle" />
+                                <span class="title ft13">{{item.name}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="input-field col s3 pdan">
+                <button class="btn btn-full red lighten-1 ht45">
+                    <i class="material-icons left">search</i>Search
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
