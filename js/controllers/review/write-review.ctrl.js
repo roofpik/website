@@ -52,6 +52,7 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $rootScope, $locati
             $scope.loginStatus = false;
         }
     });
+
     if (checkLocalStorage('loginStatus')) {
         $scope.loginStatus = JSON.parse(localStorage.getItem('loginStatus'));
         if (JSON.parse(localStorage.getItem('loginStatus'))) {
@@ -126,7 +127,7 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $rootScope, $locati
                     }
                 }
                 loading(false);
-            }, 500)
+            }, 100)
         }, function myError(err) {})
     } else {
         $timeout(function(){
@@ -137,7 +138,7 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $rootScope, $locati
     $scope.nameEntered = function() {
         if ($scope.selectedItem) {
             if ($scope.selectedItem.length >= 2) {
-                loading(true);
+                $scope.showLoading = true;
                 // $scope.showList = true;
                 $http({
                     url: 'http://35.154.60.19/api/GetResidential_1.0',
@@ -175,7 +176,9 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $rootScope, $locati
 
             }
         });
-        loading(false);
+        $timeout(function(){
+            $scope.showLoading = false;
+        }, 200);
     }
 
     $scope.showMoreFn = function() {
@@ -187,7 +190,7 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $rootScope, $locati
         }
     }
 
-    $("#select_project").blur(function() {
+    $("#select_project").focusout(function() {
         $timeout(function() {
             $scope.showList = false;
         }, 100);

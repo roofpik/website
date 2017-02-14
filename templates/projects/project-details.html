@@ -13,15 +13,11 @@
         <div class="col s12 m8">
             <h1 class="hd1 b">{{projectName}}</h1>
             <div class="row mgbn ft12">
-                <div class="col s12 ft20i vatop mgt5"><i class="material-icons blue-text">location_on</i>{{project.projectDetails.address.addressLine1}}, {{project.projectDetails.address.addressLine2}}</div>
+                <div class="col s12 ft20i vatop mgt5"><i class="material-icons blue-text">location_on</i>{{project.projectDetails.address.addressLine1}}, {{project.projectDetails.address.addressLine2}}
+                </div>
                 <div class="col s12 grey-text mgt5 review ft20i vatop">
-                    <i class="material-icons blue-text">star</i>
-                    <i class="material-icons blue-text">star</i>
-                    <i class="material-icons blue-text">star</i>
-                    <i class="material-icons blue-text">star</i>
-                    <i class="material-icons">star</i>
-                    <a href="" class="mgr10">1 Review</a> |
-                    <a href="" class="mgr10"># 4 rating</a>
+                    <span><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < allRatings.averageRating1 ? 'blue-text':'normal'">star</i></span><span>({{allRatings.averageRating}})</span>
+                    <a href="" class="mgr10"><span>{{allRatings.numberOfReviews}} Review</span><span ng-show="allRatings.numberOfReviews > 1">s</span></a>
                 </div>
             </div>
         </div>

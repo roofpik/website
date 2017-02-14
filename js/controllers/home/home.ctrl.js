@@ -28,7 +28,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', function($s
 
 
     $scope.showResults = function() {
-        loading(true);
+        $scope.showLoading1 = true;
         if ($scope.searched.length >= 2) {
             $http({
                 url: 'http://35.154.60.19/api/GetResidential_1.0',
@@ -68,12 +68,15 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', function($s
                 }
             });
         }
-        loading(false);
+        $timeout(function(){
+            $scope.showLoading1 = false;
+        }, 200);
 
     }
 
     $scope.showLocalities = function() {
         if ($scope.locality.length >= 2) {
+            $scope.showLoading2 = true;
             var searchedLocality = encodeURIComponent($scope.locality);
             var param = btoa('id=' + searchedLocality);
             $http({
@@ -108,6 +111,9 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', function($s
                 $state.go('projects', {locality: localityId});
             }
         });
+        $timeout(function(){
+            $scope.showLoading2 = false;
+        }, 200);
        
     }
 }]);

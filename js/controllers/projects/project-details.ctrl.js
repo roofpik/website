@@ -597,6 +597,12 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
         }
         $rootScope.$broadcast('initGallery', imageData);
     }
+
+    $rootScope.$watch('allRatings', function() {
+        $scope.allRatings = $rootScope.allRatings;
+        console.log($scope.allRatings);
+    });
+
 }]);
 
 // Reviews and Ratings Controller
@@ -638,6 +644,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
         // console.log(response);
         if(response.status == 200){
             if(response.data.numberOfReviews != 0){
+                $rootScope.allRatings = response.data;
                 $scope.reviewsAvailable =true;
                 if(response.data.numberOfReviews > 0){
                     $scope.reviewAvailable = true;

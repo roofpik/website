@@ -669,3 +669,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
   max-height:200px;
   overflow-y: auto;
 }
+
+
+.loading-icon {
+    position: absolute !important;
+    right: 5px;
+    top: 8px;
+    z-index: 9 !important;
+    width: 30px;
+    height: 30px;
+}
+
+.display-img{
+  height: 36px;
+  width:36px;
+  margin-right:10px;
+  border-radius:50%;
+}
+
