@@ -1,15 +1,37 @@
-app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope', function($scope, $http, $state, $timeout, $rootScope) { << << << < HEAD
+app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope', function($scope, $http, $state, $timeout, $rootScope) {
 
-    $scope.selectedVertical = 'commercial';
-    $scope.search = searchObject[$scope.selectedVertical]; //Stores the search object for different verticals
-    $scope.searched = '';
+    $scope.selectedVertical = 'residential';
+    $scope.categorySearch = searchObject[$scope.selectedVertical]; //Stores the search object for different verticals
+    $scope.categorySearched = '';
     $scope.locationSearched = '';
     $scope.showSearch = false;
     var parameter = '';
     $scope.uid = '';
     $scope.locations = [];
+    $scope.searchByName = false;
+    $scope.showSearchTitle = 'Search by Name';
+    $scope.toggleIcon = 'arrow_drop_down_circle';
+    $scope.locationDataLoaded = false;
+    $scope.searchingName = false;
 
     $('ul.tabs').tabs();
+
+    // to change verttical and category options
+    $scope.selectVertical = function(val){
+        $scope.selectedVertical = val;
+        $scope.categorySearch = searchObject[$scope.selectedVertical];
+    }
+
+    $scope.toggleSearchType = function(){
+        $scope.searchByName = !$scope.searchByName;
+        if($scope.searchByName){
+            $scope.showSearchTitle = 'Guided Search';
+            $scope.toggleIcon = 'arrow_drop_up';
+        } else {
+            $scope.showSearchTitle = 'Search by Name';
+            $scope.toggleIcon = 'arrow_drop_down_circle';
+        }
+    }
 
     // if user is logged in, appen uid to params
     if (checkLocalStorage('uid')) {
@@ -27,12 +49,12 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     }
 
     // called when user selects a type
-    $scope.selectType = function(val) {
+    $scope.selectCategory = function(val) {
         if (val.name == 'Explore Locality') {
             // if selected type is search locality then shift focus to locality search
             $('#locality-search').focus();
         }
-        $scope.searched = val.name;
+        $scope.categorySearched = val.name;
         $scope.selectedType = val;
         $scope.showSearch = false;
     }
@@ -102,19 +124,33 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     }
 
     function getLocations() {
-        parameter = btoa(parameter);
+        // parameter += "&name="+encodeURIComponent('Sector 48');
+        console.log(parameter);
+        finalParam = btoa(parameter);
         $http({
             url: 'http://35.154.60.19/api/GetLocations_1.0',
             method: 'GET',
             params: {
-                args: parameter
+                args: finalParam
             }
         }).then(function(response) {
             console.log(response);
+            $scope.locations = [];
             for (key in response.data.details) {
+                console.log(response.data.details[key].name);
                 $scope.locations.push(response.data.details[key]);
             }
+            $scope.locationDataLoaded = true;
         })
+    }
+
+    $scope.searchLocation = function(){
+        if($scope.locationSearched) {
+            if($scope.locationSearched.length > 2){
+                parameter += "&name="+encodeURIComponent($scope.locationSearched);
+                getLocations();
+            }
+        }
     }
 
     $scope.selectLocation = function(loc) {
@@ -123,77 +159,5 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         $scope.showSearch1 = false;
         $scope.selectedLocation = loc;
     }
-
-    
-    // $scope.selectedVertical = 'commercial';
-
-    // $scope.search = searchObject[$scope.selectedVertical]; //Stores the search object for different verticals
-
-    // $scope.searched = '';
-
-    // $scope.showSearch = false;
-
-    // console.log($rootScope.loginStatus);
-
-    // // $scope.uid = firebase.auth().currentUser();
-
-    // $scope.uid = 'u6MrWFAjdaXAiHnBaAVBoA6wWjc2';
-
-    // // called when user selects a type
-
-    // $scope.selectType = function(val) {
-
-    //     if (val.name == 'Explore Locality') {
-
-    //         // if selected type is search locality then shift focus to locality search
-    //         $('#locality-search').focus();
-
-    //     }
-
-    //     $scope.searched = val.name;
-
-    //     $scope.selectedType = val;
-
-    //     $scope.showSearch = false;
-
-    // }
-
-    // // show type search when clicked on input for searching types for a particular vertical
-
-    // $("#type-selection").focusin(function() {
-
-    //     $timeout(function() {
-
-    //         $scope.showSearch = true;
-
-    //     }, 100);
-
-    // });
-
-    // // hide search list when input for searching types is out of focus
-
-    // $("#type-selection").focusout(function() {
-
-    //     $scope.showSearch = false;
-
-    // });
-
-    // $("#locality-search").focusin(function() {
-
-    //     $timeout(function() {
-
-    //         $scope.showSearch1 = true;
-
-    //     }, 100);
-
-    // });
-
-    // // hide search list when input for searching types is out of focus
-
-    // $("#locality-search").focusout(function() {
-
-    //     $scope.showSearch1 = false;
-
-    // });
 
 }]);
