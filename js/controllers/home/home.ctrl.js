@@ -3,6 +3,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     $scope.selectedVertical = 'commercial';
     $scope.search = searchObject[$scope.selectedVertical]; //Stores the search object for different verticals
     $scope.searched = '';
+    $scope.locationSearched = '';
     $scope.showSearch = false;
     var parameter = '';
     $scope.uid = '';
@@ -42,9 +43,22 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         },100);
     });
 
-    // hide search list when input for searching types is out of focus
+    // hide type search list when input for searching types is out of focus
     $( "#type-selection" ).focusout(function() {
         $scope.showSearch = false;
+    });
+
+    // show locality search when clicked on input for searching types for a particular vertical
+    $( "#locality-search" ).focusin(function() {
+        console.log('called');
+        $timeout(function(){
+            $scope.showSearch1 = true;
+        },100);
+    });
+
+    // hide locality search list when input for searching types is out of focus
+    $( "#locality-search" ).focusout(function() {
+        $scope.showSearch1 = false;
     });
 
     // Code to get current location of user
@@ -100,6 +114,13 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
                 $scope.locations.push(response.data.details[key]);
             }
         })
+    }
+
+    $scope.selectLocation = function(loc){
+        console.log(loc);
+        $scope.locationSearched = loc.name;
+        $scope.showSearch1 = false;
+        $scope.selectedLocation = loc;
     }
 
     // var vertical = 'residential';
