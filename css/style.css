@@ -643,6 +643,30 @@ i.left{margin-right: 10px;}
 .homecoll .collection-item {padding:5px; border:0;}
 .homecoll .collection-item:hover { background-color: #eee;}
 .homecoll .collection-item.avatar .title{color: #2c2c2c;}
+.btn-sm{height: 30px; line-height: 30px;}
+.ht600{height: 600px}
+.gm-style-iw{left: 2px !important; top:2px !important; overflow: visible !important;}
+.gm-style-iw > div{
+  
+  margin-right: 0px !important; float: left; display: block !important;
+    padding-right: 0px !important; max-height:275px !important;
+    right: 0px !important; overflow: visible !important; max-width: 251px !important;
+}
+.gm-style-iw > div > div{
+  float: left; 
+  margin-right: 0px !important;
+    padding-right: 0px !important; 
+    right: 0px !important; overflow: visible !important;
+}
+.gm-style-iw .card{box-shadow: none; overflow: hidden;}
+.mg0{margin:0 !important;}
+.gm-style-iw + div { right: 7px !important;}
+.info_content{ width: 300px;}
+.info_content h3{ font-size: 19px;}
+.pd-tspanmap span{overflow: hidden; text-overflow: ellipsis;white-space: nowrap; display: block;}
+.ft12i i {font-size: 14px !important;}
+.absbtn{position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+.map-search{width:50%; position: absolute; left: 50%; top: 10%; z-index: 9; transform: translate(-50%, -50%);}
 /*new design css home page end*/
 .loading-icon {
    position: absolute !important;
@@ -652,4 +676,4 @@ i.left{margin-right: 10px;}
    width: 30px;
    height: 30px;
 }
-.btn-sm{height: 30px; line-height: 30px;}
+
