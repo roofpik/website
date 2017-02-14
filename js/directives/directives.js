@@ -113,7 +113,7 @@ app.controller('loginCtrl', function($scope, $timeout, $rootScope, $location, $h
             } else {
                 loading(false, 0);
                 $('.modal').modal('close');
-                sweetAlert("Alert", error.message, "error");
+                sweetAlert("Alert", error.mesasge, "error");
             }
         });
     };

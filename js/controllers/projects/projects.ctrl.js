@@ -440,6 +440,10 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
         $state.go('projects', { segment: $scope.style, bhk: $scope.bhk, price_range: $scope.priceRange, area_range: $scope.areaRange, location: $scope.location, locality: $scope.locality, details_builder: $scope.builder, propertyType: $scope.type });
     }
 
+    $scope.resetFilters = function(){
+        $state.go('projects', { segment: null, bhk: null, price_range: null, area_range: null, location: null, locality: null, details_builder: null, propertyType: null })
+    }
+
     function reverseCamelCase(str) {
         return str
             // insert a space between lower & upper
