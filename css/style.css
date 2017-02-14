@@ -631,10 +631,25 @@ i.left{margin-right: 10px;}
 .radius2{border-radius:2px;} 
 .radiust2{border-radius:2px 0 0 0;} 
 .radiusr2{border-radius:0 2px 0 0;}
-#searchboxhome{display: block !important; margin:-1px 0 0 0;}
+.searchfix{display: block !important; margin:-1px 0 0 0 !important;}
 .textsd{text-shadow: 1px 1px 1px #080808;}
 .hometabs{ width: 50% !important; }
 .cardmg{margin:10px 0;}
 .uppercase{text-transform: uppercase;}
 .pda50{padding:50px;}
+.homecoll .collection-item.avatar .circle{ width: 24px; height: 24px; left: 10px }
+
+.homecoll .collection-item.avatar{min-height: 32px; padding-left: 55px;}
+.homecoll .collection-item {padding:5px; border:0;}
+.homecoll .collection-item:hover { background-color: #eee;}
+.homecoll .collection-item.avatar .title{color: #2c2c2c;}
 /*new design css home page end*/
+.loading-icon {
+   position: absolute !important;
+   right: 5px;
+   top: 8px;
+   z-index: 9 !important;
+   width: 30px;
+   height: 30px;
+}
+.btn-sm{height: 30px; line-height: 30px;}
