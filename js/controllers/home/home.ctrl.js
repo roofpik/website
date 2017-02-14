@@ -4,9 +4,16 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     $scope.search = searchObject[$scope.selectedVertical]; //Stores the search object for different verticals
     $scope.searched = '';
     $scope.showSearch = false;
-    console.log($rootScope.loginStatus);
-    // $scope.uid = firebase.auth().currentUser();
-    $scope.uid = 'u6MrWFAjdaXAiHnBaAVBoA6wWjc2';
+    var parameter = '';
+    $scope.uid = '';
+
+    if(checkLocalStorage('loginStatus')){
+        console.log(getLocalStorage('loginStatus'));
+        if(getLocalStorage('loginStatus')){
+            $scope.uid = firebase.auth().currentUser;
+            parameter = "uid="+encodeURIComponent($scope.uid);
+        }
+    }
 
     // called when user selects a type
     $scope.selectType = function(val){
@@ -31,20 +38,74 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         $scope.showSearch = false;
     });
 
+    getCurrentLocation();
     // Code to get current location of user
-    navigator.geolocation.getCurrentPosition(function(location) {
-      var parameter = btoa('lat='+location.coords.latitude+'&lon='+location.coords.longitude+'&uid='+$scope.uid);
-      console.log(parameter);
-      $http({
-        url: 'http://35.154.60.19/api/GetLocations_1.0',
-        method: 'GET'
-        // params: {
-        //     args: parameter
-        // }
-      }).then(function(response){
-        console.log(response);
-      })
-    });
+    function getCurrentLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else { 
+            // console.log("Geolocation is not supported by this browser.");
+            getLocations();
+        }
+    }
+
+    // called when location of user is successfully obtained
+    function showPosition(position) {
+        console.log("Latitude: " + position.coords.latitude + "Longitude: " + position.coords.longitude);
+        if(parameter.length != 0){
+            parameter += "&"
+        }
+
+        parameter += "lat="+ position.coords.latitude+"&lon="+ position.coords.longitude;
+    }
+
+    // called when location not found or no permission
+    function showError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                // console.log("User denied the request for Geolocation.");
+                break;
+            case error.POSITION_UNAVAILABLE:
+                // console.log("Location information is unavailable.");
+                break;
+            case error.TIMEOUT:
+                // console.log("The request to get user location timed out.");
+                break;
+            case error.UNKNOWN_ERROR:
+                // console.log("An unknown error occurred.");
+                break;
+        }
+        getLocations();
+    }
+
+    function getLocations(){
+        parameter = btoa(parameter);
+        $http({
+            url: 'http://35.154.60.19/api/GetLocations_1.0',
+            method: 'GET',
+            params: {
+                args: parameter
+            }
+          }).then(function(response){
+            console.log(response);
+          })
+    }
+
+    // var vertical = 'residential';
+    // var category = 'Apartments';
+
+    // var parameter = btoa("vertical="+encodeURIComponent(vertical)+"&category="+encodeURIComponent(category));
+    // console.log(parameter);
+    // $http({
+    //     url:'http://35.154.60.19/api/GetCghs_1.0',
+    //     method: 'GET',
+    //     params: {
+    //         args: parameter
+    //     }
+    // }).then(function(response){
+    //     console.log(response);
+    // })
+
     // console.log('called')
     // var page_size = 10;
     // var page_start = 0;
