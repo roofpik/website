@@ -1,4 +1,6 @@
-app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$state', '$interval', function($scope, $http, $timeout, $stateParams, $state, $interval) {
+
+app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$state', '$interval', '$window', function($scope, $http, $timeout, $stateParams, $state, $interval, $window) {
+    console.log($stateParams);
     document.title = "Projects"
     $('.modal').modal();
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
@@ -408,7 +410,17 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
             $scope.type = null;
         }
 
+
+        // $window.location.href = "http://127.0.0.1:37210/#/projects?segment=Economy&price_range=0$1500000&area_range=0$5000&propertyType=Independent%20Floors";
+
         $state.go('projects', { segment: $scope.style, bhk: $scope.bhk, price_range: $scope.priceRange, area_range: $scope.areaRange, location: $scope.location, locality: $scope.locality, details_builder: $scope.builder, propertyType: $scope.type });
+        $window.location.reload();
+
+    }
+
+    $scope.resetFilters = function(){
+        $state.go('projects', { segment: null, bhk: null, price_range: null, area_range: null, location: null, locality: null, details_builder: null, propertyType: null });
+        $window.location.reload();
     }
 
     function reverseCamelCase(str) {
