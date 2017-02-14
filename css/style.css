@@ -637,10 +637,10 @@ i.left{margin-right: 10px;}
 .cardmg{margin:10px 0;}
 .uppercase{text-transform: uppercase;}
 .pda50{padding:50px;}
+.homecoll{background-color: #fff;}
 .homecoll .collection-item.avatar .circle{ width: 24px; height: 24px; left: 10px }
-
 .homecoll .collection-item.avatar{min-height: 32px; padding-left: 55px;}
-.homecoll .collection-item {padding:5px; border:0;}
+.homecoll .collection-item {padding:5px; border:0; cursor: pointer;}
 .homecoll .collection-item:hover { background-color: #eee;}
 .homecoll .collection-item.avatar .title{color: #2c2c2c;}
 .btn-sm{height: 30px; line-height: 30px;}
@@ -667,6 +667,10 @@ i.left{margin-right: 10px;}
 .ft12i i {font-size: 14px !important;}
 .absbtn{position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}
 .map-search{width:50%; position: absolute; left: 50%; top: 10%; z-index: 9; transform: translate(-50%, -50%);}
+.pdl30{padding-left: 30px;}
+.coverfixbox{height:300px; width: calc(25% - 10px); margin:10px 0 0 10px; float: left; }
+.coverfixbox img{height:100%; }
+.coverfixbox .overlay{position: absolute; bottom: 0; left: 0; z-index: 9; height: 60px; width: 100%; cursor: pointer; background-color: rgba(0,0,0, 0.8); color:#eee;}
 /*new design css home page end*/
 .loading-icon {
    position: absolute !important;

@@ -1,6 +1,6 @@
  app.controller('MapCtrl', function() {
 
-    console.log('Working');
+
 $('.draggable').attr('draggable', true);
      $('.collapsible').collapsible();
      $('input.autocomplete').autocomplete({
