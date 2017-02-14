@@ -8,11 +8,13 @@
                 <ul class="right mgr10">
                     <li> <a href="#write-review" class="wd-sm waves-effect waves-light btn light-blue lighten-2 capitalize"><i class="material-icons left bticont" ng-click = "gotoReview()">create</i> Write Review</a></li>
                     <li>
-                        <a data-target="loginbox" class="btn wd-sm waves-effect waves-light text-lo white lighten-5 grey-text mgln capitalize">
-                            <i class="material-icons left bticont">lock_outline</i> Login/Sign Up</a>
+                        <a data-target="loginbox" ng-hide="loginStatus" id="open-login" class="btn wd-sm waves-effect waves-light text-lo white lighten-5 grey-text mgln capitalize">
+                            <i class="material-icons left bticont">lock_outline</i> Login/Sign Up
+                        </a>
+                        <a href="" ng-show="loginStatus" class="btn w-sm btn-flat text-lo black-text darken-4 mgln capitalize"><img ng-src="{{user.photoURL}}" class="display-img left"/>{{user.displayName}}</a>
                     </li>
-                    <li><a data-target="searchbox"><i class="material-icons grey-text">search</i></a></li>
-                    <li><a data-activates="slide-out-right" href="#" class="button-heart show-on-large"><i class="material-icons grey-text">favorite_border</i></a></li>
+                    <!-- <li><a data-target="searchbox"><i class="material-icons grey-text">search</i></a></li> -->
+                    <!-- <li><a data-activates="slide-out-right" href="#" class="button-heart show-on-large"><i class="material-icons grey-text">favorite_border</i></a></li> -->
                 </ul>
             </div>
         </nav>
@@ -45,6 +47,7 @@
                 <li><a href="#write-review">Write Review</a></li>
                 <li><a href="#faq"> FAQs </a></li>
                 <li><a href="#contact-us">Contact us</a></li>
+                <li ng-show="loginStatus" ng-click="logout()"><a href="">Logout</a></li>
                 <!-- <li><a href="#!">Terms & Privacy</a></li> -->
             </ul>
         </div>

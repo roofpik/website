@@ -67,14 +67,14 @@
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">email</i>
                                 <input placeholder="Email" type="email" class="validate mgb5 ft12" ng-model="query.email" required>
-                                </div>
-                                <div class="col s12 mgb5 mgt10">
-                                <input type="checkbox" id="che1" class="filled-in ft12" />
-                                <label for="che1" class="mgl3r">lorem ipsum</label>
+                            </div>
+                            <div class="col s12 mgb5 mgt10">
+                                <input type="checkbox" id="che1" ng-model="need.moverPacker" class="filled-in ft12" />
+                                <label for="che1" class="mgl3r">Need Movers and Packers</label>
                             </div>
                             <div class="col s12 mgt5">
-                                <input type="checkbox" id="che2" class="filled-in ft12" />
-                                <label for="che2" class="mgl3r">lorem ipsum</label>
+                                <input type="checkbox" id="che2" ng-model="need.interiorDesigner" class="filled-in ft12" />
+                                <label for="che2" class="mgl3r">Need Interior Designer</label>
                             </div>
                             <div class="col s12 mgtmn mgt10">
                                 <button ng-disabled="contactForm.$invalid" class="waves-effect waves-light btn btn-full blue lighten-2" ng-click="provideDetails(query)"><i class="material-icons left">list</i> Provide Details</button>

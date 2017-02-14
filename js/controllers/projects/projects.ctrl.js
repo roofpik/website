@@ -1,8 +1,10 @@
+
 app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$state', '$interval', '$window', function($scope, $http, $timeout, $stateParams, $state, $interval, $window) {
     console.log($stateParams);
     document.title = "Projects"
     $('.modal').modal();
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
+    loading(true);
     $scope.projectList = [];
     var page_start = 0;
     var page_size = 10;
@@ -11,7 +13,7 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
     $scope.dataFetched = false;
     $scope.selected = {
         segment: {},
-        type : {},
+        type: {},
         builders: {},
         locations: {},
         localities: {},
@@ -38,28 +40,21 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
         area_range: null,
         locationId: null,
         details_builder: null,
-        propertyType : null,
+        propertyType: null,
         page_size: null,
         page_start: null
     }
 
     getLocality();
-
-
-
     function getLocality() {
         db.ref('locality/' + $scope.cityId).once('value', function(snapshot) {
             $timeout(function() {
-
                 for (key in snapshot.val()) {
                     $scope.localities[snapshot.val()[key].localityName] = snapshot.val()[key].localityId;
                     $scope.localities2[snapshot.val()[key].localityId] = snapshot.val()[key].localityName;
-
                 }
                 getLocation();
                 // console.log($scope.localities);
-
-
             }, 0)
         });
     }
@@ -67,16 +62,11 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
     function getLocation() {
         db.ref('locations/' + $scope.cityId).once('value', function(snapshot) {
             $timeout(function() {
-
                 for (key in snapshot.val()) {
-
                     $scope.locations[snapshot.val()[key].locationName] = snapshot.val()[key].locationId;
                     $scope.locations2[snapshot.val()[key].locationId] = snapshot.val()[key].locationName;
-
                 }
-
                 getBuilders();
-
             }, 0)
         });
     }
@@ -85,12 +75,10 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
         db.ref('builders').once('value', function(snapshot) {
             $timeout(function() {
                 if (snapshot.val()) {
-
                     for (key in snapshot.val()) {
                         $scope.builders[snapshot.val()[key].builderName] = snapshot.val()[key].builderId;
                         $scope.builders2[snapshot.val()[key].builderId] = snapshot.val()[key].builderName;
                     }
-                    // console.log($scope.builders);
                     reverseBindCheckboxes();
                 }
             }, 0);
@@ -100,8 +88,6 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
     mapParameters();
 
     function mapParameters() {
-
-        console.log($stateParams);
         if ($stateParams.segment) {
             $scope.filters.style = $stateParams.segment;
         }
@@ -126,11 +112,9 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
         if ($stateParams.details_builder) {
             $scope.filters.details_builder = $stateParams.details_builder;
         }
-        if($stateParams.propertyType){
+        if ($stateParams.propertyType) {
             $scope.filters.propertyType = $stateParams.propertyType;
         }
-        console.log($scope.filters);
-        loading(false);
         fetchProjects();
     }
 
@@ -146,12 +130,11 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
                 area_range: $scope.filters.area_range,
                 locationId: $scope.filters.locationId,
                 details_builder: $scope.filters.details_builder,
-                // propertyType : $scope.filters.propertyType,
+                propertyType : $scope.filters.propertyType,
                 page_start: page_start,
                 page_size: page_size
             }
         }).then(function mySucces(response) {
-            console.log(response);
             totalProjects = response.data.hits;
             // if(totalProjects == 0){
             //  swal('No Projects To Display!');
@@ -166,7 +149,7 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
                 }
                 $scope.projectList.push($scope.projects[key]);
             }
-            loading(true);
+            loading(false);
         }, function myError(err) {
             console.log(err);
         })
@@ -184,26 +167,23 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
                 $scope.selected.segment[key] = true;
             }
         }
-            
-        if($stateParams.propertyType){
+
+        if ($stateParams.propertyType) {
             var type = $stateParams.propertyType.split("$");
-            for (i=0; i<type.length; i++){
+            for (i = 0; i < type.length; i++) {
                 var key = type[i];
-                if (key == "Villas / Row-houses"){
+                if (key == "Villas / Row-houses") {
                     $scope.selected.type['villas'] = true;
-                }
-                else if(key == "Penthouses / Duplexes"){
+                } else if (key == "Penthouses / Duplexes") {
                     $scope.selected.type['penthouses'] = true;
-                 }
-                else {
+                } else {
                     $scope.selected.type[toCamelCase(key)] = true;
                 }
             }
         }
         if ($stateParams.bhk) {
             var bhk = $stateParams.bhk.split("$");
-            var key
-;            // console.log(bhk);
+            var key; // console.log(bhk);
             for (i = 0; i < bhk.length; i++) {
                 if (bhk[i] == 1) {
                     key = "one"
@@ -250,9 +230,7 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
 
             for (i = 0; i < key.length; i++) {
                 var bId = key[i];
-                console.log(bId);
                 var bldr = $scope.builders2[bId];
-                console.log(bldr);
                 $scope.selected.builders[bldr] = true;
 
             }
@@ -278,7 +256,6 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
     }
 
     $scope.applyFilters = function() {
-
         $scope.style = ""
         if (Object.keys($scope.selected.segment).length != 0) {
             for (key in $scope.selected.segment) {
@@ -301,24 +278,20 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
         }
 
         $scope.type = "";
-        if(Object.keys($scope.selected.type).length != 0){
-           
-            for (key in $scope.selected.type){
-                console.log(key);
-                if(key == "penthouses"){
+        if (Object.keys($scope.selected.type).length != 0) {
+
+            for (key in $scope.selected.type) {
+                if (key == "penthouses") {
                     key = "Penthouses / Duplexes"
                     $scope.type += key + "$"
-                }
-                else if(key == "villas"){
+                } else if (key == "villas") {
                     key = "Villas / Row-houses"
                     $scope.type += key + "$"
-                }
-                else {
+                } else {
                     $scope.type += reverseCamelCase(key) + "$"
                 }
             }
         }
-        console.log($scope.type);
 
         $scope.location = "";
         if (Object.keys($scope.selected.locations).length != 0) {
@@ -389,7 +362,7 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
             $scope.bhk = $scope.bhk.substring(0, $scope.bhk.length - 1);
         }
 
-        if($scope.type){
+        if ($scope.type) {
             $scope.type = $scope.type.substring(0, $scope.type.length - 1);
         }
 
@@ -433,7 +406,7 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
         if (!$scope.locality) {
             $scope.locality = null;
         }
-        if(!$scope.type){
+        if (!$scope.type) {
             $scope.type = null;
         }
 
@@ -464,7 +437,6 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
 
 
     window.onscroll = function(ev) {
-        console.log('called');
         if ($scope.dataFetched) {
             if (totalProjectsFetched < totalProjects) {
                 if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {

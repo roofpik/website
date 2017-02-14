@@ -40,7 +40,6 @@ app.directive('login', function() {
 });
 
 app.controller('loginCtrl', function($scope, $timeout, $rootScope, $location, $http) {
-    console.log('called');
     var timestamp = new Date().getTime();
     var urlInfo = { url: $location.path() };
     var ip = '';
@@ -317,7 +316,6 @@ app.controller('loginCtrl', function($scope, $timeout, $rootScope, $location, $h
             var name = encodeURIComponent(userDetails.displayName);
             var config = 1;
             var parameter = btoa('email=' + email + '&name=' + name + '&config=' + config);
-            console.log(parameter);
                 $http({
                     url: 'http://35.154.60.19/api/SendMail_1.0',
                     method: 'GET',
@@ -325,7 +323,6 @@ app.controller('loginCtrl', function($scope, $timeout, $rootScope, $location, $h
                         args: parameter
                     }
                 }).then(function(response) {
-                    console.log(response);
                     swal({
                         title: "Signup Successful",
                         text: "Have a code ?",
