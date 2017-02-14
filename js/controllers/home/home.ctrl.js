@@ -6,13 +6,22 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     $scope.showSearch = false;
     var parameter = '';
     $scope.uid = '';
+    $scope.locations = [];
 
-    if(checkLocalStorage('loginStatus')){
-        console.log(getLocalStorage('loginStatus'));
-        if(getLocalStorage('loginStatus')){
-            $scope.uid = firebase.auth().currentUser;
+    // if user is logged in, appen uid to params
+    console.log(checkLocalStorage('uid'));
+    if(checkLocalStorage('uid')){
+        $timeout(function(){
+            console.log(JSON.parse(localStorage.getItem('uid')));
+            $scope.uid = JSON.parse(localStorage.getItem('uid'));
+            if(parameter.length != 0){
+                parameter += "&"
+            }
             parameter = "uid="+encodeURIComponent($scope.uid);
-        }
+            getCurrentLocation();
+        }, 0);
+    } else {
+        getCurrentLocation();
     }
 
     // called when user selects a type
@@ -38,7 +47,6 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         $scope.showSearch = false;
     });
 
-    getCurrentLocation();
     // Code to get current location of user
     function getCurrentLocation() {
         if (navigator.geolocation) {
@@ -51,12 +59,12 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
 
     // called when location of user is successfully obtained
     function showPosition(position) {
-        console.log("Latitude: " + position.coords.latitude + "Longitude: " + position.coords.longitude);
         if(parameter.length != 0){
             parameter += "&"
         }
 
         parameter += "lat="+ position.coords.latitude+"&lon="+ position.coords.longitude;
+        getLocations();
     }
 
     // called when location not found or no permission
@@ -86,9 +94,12 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
             params: {
                 args: parameter
             }
-          }).then(function(response){
+        }).then(function(response){
             console.log(response);
-          })
+            for(key in response.data.details){
+                $scope.locations.push(response.data.details[key]);
+            }
+        })
     }
 
     // var vertical = 'residential';

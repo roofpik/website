@@ -21,7 +21,12 @@
                     <div class="input-field input-box-h card col s12 ht45 pdan">
                         <span class="inpspn">Near :</span>
                         <input placeholder="Enter a Destination" class="autocompletenear inp_pdw" id="locality-search" ng-model="locality" ng-change="showLocalities()">
-                        <div class="search-results"></div>
+                        <ul>
+                            <li ng-repeat="item in locations| filter: searched" class="pda10 whiteb" ng-click="selectLocation(item)">
+                                <!-- <img ng-src="{{item.icon}}" class="list-icon"/> -->
+                                <span>{{item.name}}</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="input-field col m2 s12 pdan">
