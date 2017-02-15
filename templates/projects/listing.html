@@ -1,0 +1,185 @@
+<div class="container">
+    <div class="row mgt70 linkroot mgbn">
+        <nav>
+            <div class="nav-wrapper">
+                <div class="col s12">
+                    <a href="#home" class="breadcrumb">Home</a>
+                    <a href="" class="breadcrumb">Filter</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!--  <h5 class="pdt10 pdb10 b">Search </h5> -->
+    <div class="row mgbn">
+        <div class="col s12">
+            <a class="waves-effect waves-light blue btn">Residential</a>
+            <a class="waves-effect waves-light blue btn">Commercial</a>
+            <a class="waves-effect waves-light blue btn">Co Working</a>
+            <a class="waves-effect waves-light blue btn">PG</a>
+        </div>
+        <div class="col s12">
+            <h6 class="grey-text pdlrn ft15 ftw3">Browse through 1,000+ verified property reviews. Or share one today.</h6>
+        </div>
+        <div class="row mgan">
+            <div class="col m5 s12">
+                <div class="input-field input-box-h card col s12 ht45 pdan">
+                    <span class="inpspn">Find :</span>
+                    <input type="text" placeholder="Apartments, Commercials, PG" class="autocompletefind inp_pdw" id="location">
+                    <div class="search-results"></div>
+                </div>
+            </div>
+            <div class="col m5 s12 pdln">
+                <div class="input-field input-box-h card col s12 ht45 pdan">
+                    <span class="inpspn">Near :</span>
+                    <input id="search" placeholder="Enter a Destination" class="autocompletenear inp_pdw">
+                    <div class="search-results"></div>
+                </div>
+            </div>
+            <div class="input-field col m2 s12 pdln">
+                <button class="btn col m12  waves-effect waves-light red lighten-1 ht45">
+                    <i class="material-icons left">search</i>Search</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mgan">
+        <div class="col s4">
+            <form>
+                <div class="row mgan">
+                    <div class="row pdt2 mgbn">
+                        <h5 class="ush6">Project Status</h5>
+                        <hr>
+                        <p>
+                            <input type="checkbox" class="filled-in" id="pro_redy" />
+                            <label for="pro_redy">Redy To Move</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" class="filled-in" id="pro_under" />
+                            <label for="pro_under">Under Construction</label>
+                        </p>
+                    </div>
+                    <div class="row pdt2 mgbn">
+                        <h5 class="ush6">Locality</h5>
+                        <hr>
+                        <p>
+                            <input type="checkbox" class="filled-in" id="loc_sohna" />
+                            <label for="loc_sohna">Sohna Road</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" class="filled-in" id="loc_golf_extn" />
+                            <label for="loc_golf_extn">Golf Course Road Extn.</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" class="filled-in" id="loc_nirvana" />
+                            <label for="loc_nirvana">Nirvana Country</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" class="filled-in" id="loc_golf_road" />
+                            <label for="loc_golf_road">Golf Course Road</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" class="filled-in" id="loc_mg_road" />
+                            <label for="loc_mg_road">MG Road</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" class="filled-in" id="loc_gold" />
+                            <label for="loc_gold">Gold Sock</label>
+                        </p>
+                    </div>
+                    <div class="row pdt2 mgbn label_i">
+                        <h5 class="ush6">User Rating</h5>
+                        <hr>
+                        <p>
+                            <input type="checkbox" class="filled-in" id="star1" />
+                            <label for="star1">
+                                <i class="material-icons blue-text" ng-repeat="i in [1,2,3,4,5]">star</i>
+                            </label>
+                        </p>
+                        <p>
+                            <input type="checkbox" class="filled-in" id="star2" />
+                            <label for="star2">
+                                <i class="material-icons blue-text" ng-repeat="i in [1,2,3,4,5]">star</i>
+                            </label>
+                        </p>
+                        <p>
+                            <input type="checkbox" class="filled-in" id="star3" />
+                            <label for="star3">
+                                <i class="material-icons blue-text" ng-repeat="i in [1,2,3,4,5]">star</i>
+                            </label>
+                        </p>
+                        <p>
+                            <input type="checkbox" class="filled-in" id="star4" />
+                            <label for="star4">
+                                <i class="material-icons blue-text" ng-repeat="i in [1,2,3,4,5]">star</i>
+                            </label>
+                        </p>
+                        <p>
+                            <input type="checkbox" class="filled-in" id="star5" />
+                            <label for="star5">
+                                <i class="material-icons blue-text" ng-repeat="i in [1,2,3,4,5]">star</i>
+                            </label>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col s8 pdl30">
+            <div class="row mgb10">
+                <div class="col s2 pdan">
+                    <select class="browser-default">
+                        <option value="" disabled selected>Select</option>
+                        <option value="1">10</option>
+                        <option value="2">20</option>
+                        <option value="3">30</option>
+                        <option value="3">40</option>
+                    </select>
+                </div>
+                <div class="col s3">
+                    <select class="browser-default">
+                        <option value="" disabled selected>Select</option>
+                        <option value="1">10</option>
+                        <option value="2">20</option>
+                        <option value="3">30</option>
+                        <option value="3">40</option>
+                    </select>
+                </div>
+                <div class="col s4 pdan">
+                    <div class="input-field mgtn">
+                        <input class="inpfilter" id="search" placeholder="search"><i class="material-icons search_i">search</i>
+                        <div class="search-results"></div>
+                    </div>
+                </div>
+                <div class="col s3 pdl15 pdrn">
+                    <select class="browser-default">
+                        <option value="" disabled selected>Select</option>
+                        <option value="1">10</option>
+                        <option value="2">20</option>
+                        <option value="3">30</option>
+                        <option value="3">40</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card horizontal" ng-repeat="project in projectList">
+                    <a href="">
+                        <div class="card-image fix40 left">
+                            <img ng-src="{{project.cover}}" class="responsive-img">
+                        </div>
+                        <div class="cardpdt span_block fix60 left">
+                            <span class="black-text ft13 ellipsis">{{project.name}}</span>
+                            <span class="ft12 grey-text ellipsis">{{project.address}}</span>
+                        </div>
+                    </a>
+                </div>
+                <ul class="pagination">
+                    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                    <li ng-class="page == currentPage? 'active' : 'waves-effect'" ng-repeat="page in pages" ng-click="goToPage()"><a href="">{{page}}</a></li>
+<!--                     <li class="waves-effect"><a href="#!">2</a></li>
+                    <li class="waves-effect"><a href="#!">3</a></li>
+                    <li class="waves-effect"><a href="#!">4</a></li>
+                    <li class="waves-effect"><a href="#!">5</a></li> -->
+                    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

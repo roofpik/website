@@ -38,6 +38,34 @@ function getLocalStorage(name){
 }
 
 
+// encode parameters to base64
+function encodeParams(param){
+  var parameter = '';
+  for(key in param){
+    if(typeof(param[key]) == 'string'){
+      param[key] =  encodeURIComponent(param[key]);
+    }
+    if(parameter.length != 0){
+      parameter += '&';
+    }
+    parameter += key+'='+param[key];
+  }
+  return btoa(parameter);
+}
+
+// decode parameters from base64
+function decodeParams(param){
+  var parameter = {};
+  param = atob(param);
+  param = param.split('&');
+  for(key in param){
+    var field = param[key].split('=');
+    parameter[field[0]] = decodeURIComponent(field[1]);
+  }
+  return parameter;
+}
+
+
 // Search variable
 
 var searchObject = {

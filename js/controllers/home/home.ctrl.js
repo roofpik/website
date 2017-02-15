@@ -36,7 +36,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     // if user is logged in, appen uid to params
     if (checkLocalStorage('uid')) {
         $timeout(function() {
-            console.log(JSON.parse(localStorage.getItem('uid')));
+            // console.log(JSON.parse(localStorage.getItem('uid')));
             $scope.uid = JSON.parse(localStorage.getItem('uid'));
             if (parameter.length != 0) {
                 parameter += "&"
@@ -101,6 +101,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         }
 
         parameter += "lat=" + position.coords.latitude + "&lon=" + position.coords.longitude;
+        getMapData(position.coords.latitude, position.coords.longitude);
         getLocations();
     }
 
@@ -123,9 +124,26 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         getLocations();
     }
 
+    function getMapData(lat, lon){
+        var data = {
+            lat: lat,
+            lon: lon
+        }
+        $http({
+            url: 'http://35.154.60.19/api/GetMapData_1.0',
+            method: 'GET',
+            params: {
+                args: encodeParams(data)
+            }
+        }).then(function(response){
+            console.log(response);
+        })      
+    }
+
+
     function getLocations() {
         // parameter += "&name="+encodeURIComponent('Sector 48');
-        console.log(parameter);
+        // console.log(parameter);
         finalParam = btoa(parameter);
         $http({
             url: 'http://35.154.60.19/api/GetLocations_1.0',
@@ -137,9 +155,9 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
             console.log(response);
             $scope.locations = [];
             for (key in response.data.details) {
-                console.log(response.data.details[key].name);
                 $scope.locations.push(response.data.details[key]);
             }
+            console.log($scope.locations);
             $scope.locationDataLoaded = true;
         })
     }
@@ -154,10 +172,26 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     }
 
     $scope.selectLocation = function(loc) {
-        console.log(loc);
+        // console.log(loc);
         $scope.locationSearched = loc.name;
         $scope.showSearch1 = false;
         $scope.selectedLocation = loc;
+    }
+
+    $scope.search = function(){
+        // If person is searching by name take to details view else take to list view
+        if($scope.searchByName){
+
+        } else {
+            var param = {
+                'vertical': $scope.selectedVertical,
+                'category': 'Apartments',
+                'location': '-KYJOldHpi16DEUK0pXn'
+            }
+            var parameter = encodeParams(param);
+            // console.log(parameter);
+            $state.go('list', {p: parameter});
+        }
     }
 
 }]);
