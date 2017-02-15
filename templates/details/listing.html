@@ -1,0 +1,42 @@
+<div class="row mgt70 linkroot">
+    <h3 align="center"> {{projectName}} </h3>
+    <div><img src="images/dummy/dummy.jpg" style="width: 100%">
+        <div class="col s12 m5 amen-tab htfixbox boxsd white">
+            <ul class="tabs">
+                <li class="tab col m12"><a class="active" href="#interest">Yes I am Interested</a></li>
+                <!-- <li class="tab col m6"><a href="#pricefinder">Price finder</a></li> -->
+            </ul>
+            <div class="row">
+                <div id="interest" class="col s12">
+                    <form name="contactForm">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input placeholder="Name" type="text" class="validate mgb5 ft12" required>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">phone</i>
+                            <input placeholder="Phone" type="text" class="validate mgb5 ft12" ng-minlength="10" ng-maxlength="10" required>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">email</i>
+                            <input placeholder="Email" type="email" class="validate mgb5 ft12"  required>
+                        </div>
+                        <div class="col s12 mgtmn mgt10">
+                            <button ng-disabled="contactForm.$invalid" class="waves-effect waves-light btn btn-full blue lighten-2"><i class="material-icons left">list</i> Provide Details</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <h4>Amenities:</h4>
+        <div class="col m2" ng-repeat="(key, value) in projectDetails">
+            <h5>{{key | uppercase}}:</h5 ><div ng-repeat= "(a,b) in value">{{a}} : {{b}}</div>
+   	</div>
+</div>
+
+<!-- <div class = "row mgt70 linkroot">
+   		<h4>Reviews:</h4>
+   	 <div class="col m2" ng-repeat="(key, value) in projectDetails">
+        <h5>{{key | uppercase}}:</h5 ><div ng-repeat= "(a,b) in value">{{a}} : {{b}}</div>
+   	</div>
+</div> -->

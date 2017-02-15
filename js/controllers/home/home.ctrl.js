@@ -28,14 +28,15 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', function($scope, $http,
     $scope.showResults = function() {
         console.log('called')
         console.log($scope.searched)
-        if ($scope.searched.length >= 2) {
+        if ($scope.searched.length = 2) {
+            console.log($scope.searched);
             $http({
                 url: 'http://35.154.60.19/api/GetResidential_1.0',
                 method: 'GET',
                 params: {
                     details_name: $scope.searched
                 }
-            }).then(function mySucces(response) {
+            }).then(function mySuccess(response) {
                 console.log(response);
                 totalProjects = response.data.hits;
                 totalProjectsFetched += Object.keys(response.data.details).length;
@@ -78,7 +79,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', function($scope, $http,
     }
 
     $scope.showLocalities = function() {
-        if ($scope.locality.length >= 2) {
+        if ($scope.locality.length = 2) {
             console.log('called')
             var searchedLocality = encodeURIComponent($scope.locality);
             var param = btoa('id=' + searchedLocality);
@@ -101,10 +102,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', function($scope, $http,
 
                 }
                 console.log($scope.localities);
-
                 setList();
-
-                // loading(true);
             }, function myError(err) {
                 console.log(err);
             })
