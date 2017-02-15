@@ -2,7 +2,10 @@
     <div class="navbar-fixed">
         <nav class="homebgtrn shadow_n">
             <div class="nav-wrapper">
-                <a href="#" data-activates="slide-out" class="button-collapse show-on-large black-text left">
+           <!--  $("#starter_box").click(function () {
+                $(this).css('display', 'none');
+            }); -->
+                <a href="" onmouseover="$('#slide-out-top').css('top', '65px');" class="mgleftrt black-text left topmenu">
                     <i class="material-icons">menu</i></a>
                 <a href="#home" class="rooflogo left"><img src="images/general/logo.png"></a>
               <span class="ft12 pdl30">Location</span>
@@ -18,59 +21,17 @@
             </div>
         </nav>
     </div>
-    <div id="slide-out" class="side-nav overhdn">
-        <div class="row slidelogofixed mgbn">
-            <a href="#home" class=" ahoverncol s9 pdan rooflogoslide">
-                <img src="images/general/logo.png"></a>
-        </div>
-        <div class="row overfy mgbn ulli-side">
-            <ul>
-                <li><a href="#about-us" class="waves-effect waves-light">About</a></li>
+    <div id="slide-out-top" class="row overhdn" onmouseleave="$('#slide-out-top').css('top', '-300px');">       
+        <div class="col s12  bgblk-trn center pda10">
+            <ul class="hdr_list center">
+                <li><a href="#about-us" class="">About</a></li>
                 <li><a href="#cover-stories/gurgaon/-KYJONgh0P98xoyPPYm9/1">Cover Stories</a></li>
-                <li><a href="#blogs/gurgaon/-KYJONgh0P98xoyPPYm9/1">Blogs</a></li>
-                <!-- <li class="no-padding">
-                    <ul class="collapsible collapsible-accordion">
-                        <li>
-                            <a class="collapsible-header waves-effect waves-light">Localities<i class="material-icons right">arrow_drop_down</i></a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li><a href="#projects">Sohna Road</a></li>
-                                    <li><a href="#!">Golf Course Extn Road</a></li>
-                                    <li><a href="#!">Dwarka Expressway</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul> -->
-                </li>
+                <li><a href="#blogs/gurgaon/-KYJONgh0P98xoyPPYm9/1">Blogs</a></li>               
                 <li><a href="#write-review">Write Review</a></li>
                 <li><a href="#faq"> FAQ's </a></li>
-                <li><a href="#contact-us">Contact us</a></li>
-                <!-- <li><a href="#!">Terms & Privacy</a></li> -->
+                <li><a href="#contact-us">Contact us</a></li>              
             </ul>
-        </div>
-        <footer class="page-footer  grey lighten-4">
-            <div class="row mgbn pdleftright">
-                <div class="col left pdt10 left-align">
-                    <h6 class="grey-text mgtn">Follow us</h6>
-                </div>
-                <div class="col right right-align">
-                    <a href="https://www.facebook.com/roofpik" target="_blank">
-                        <img src="images/general/facebook.png">
-                    </a>
-                    <a href="https://www.linkedin.com/company/roofpik?trk=job_view_topcard_company_name" target="_blank">
-                        <img src="images/general/linked-in.png">
-                    </a>
-                    <a href="https://www.twitter.com/roofpik" target="_blank">
-                        <img src="images/general/twitter.png">
-                    </a>
-                </div>
-            </div>
-            <div class="footer-copyright center">
-                <div class="container grey-text">
-                    © AlphaBinary Technologies Pvt Ltd
-                </div>
-            </div>
-        </footer>
+        </div>       
     </div>
 
     <div id="searchbox" class="modal white modal-fixed-footer">
