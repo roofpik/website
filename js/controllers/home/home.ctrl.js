@@ -1,5 +1,6 @@
 app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope', function($scope, $http, $state, $timeout, $rootScope) {
  $('ul.tabs').tabs();
+  $('select').material_select();
     $scope.selectedVertical = 'commercial';
 
     $scope.search = searchObject[$scope.selectedVertical]; //Stores the search object for different verticals
