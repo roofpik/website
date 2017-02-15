@@ -673,6 +673,7 @@ i.left{margin-right: 10px;}
 .coverfixbox .overlay{position: absolute; transition: all 0.1s ease-in-out 0.2s; overflow:hidden; bottom: 0; left: 0; z-index: 9; height: 55px; padding-right: 10px !important; width: 100%; cursor: pointer; background-color: rgba(0,0,0, 0.8); color:#eee;}
 .coverfixbox:hover .overlay{height: 100px;}
 .coverfixbox .overlay button:hover{color: #fff !important;}
+
 .sele_list .select-dropdown{margin-bottom: 0 !important;}
 .sele_list .select-wrapper ul li{min-height: 30px !important;}
 .sele_list .select-wrapper ul li span{padding:8px 10px !important; font-size: 14px;}
@@ -690,6 +691,7 @@ i.left{margin-right: 10px;}
   background: #DDD;   cursor: pointer; 
   background-color: #000; color: #fff; 
 } 
+.pdr70{padding-right: 70px !important;}
 .container2{width: 90%;}
 /*new design css home page end*/
 .loading-icon {
