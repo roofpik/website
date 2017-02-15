@@ -138,6 +138,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
             }
         }).then(function(response){
             console.log(response);
+            console.log(Object.keys(response.data).length);
         })      
     }
 
