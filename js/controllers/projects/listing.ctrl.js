@@ -67,14 +67,14 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', funct
     		'category': parameters.category,
     		// 'style': 'Economy',
             // 'style': $scope.filters.style,
-            // 'bhk': $scope.filters.bhk,
+            'bhk': '2$6',
             // 'price_range': $scope.filters.price_range,
             // 'area_range': $scope.filters.area_range,
             // 'locationId': $scope.filters.locationId
             // 'details_builder': $scope.filters.details_builder,
             // // propertyType : $scope.filters.propertyType,
-            'page_start': page_start,
-            'page_size': page_size
+            // 'page_start': page_start,
+            // 'page_size': page_size
     	}
 
     	data = encodeParams(data);
