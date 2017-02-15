@@ -81,7 +81,7 @@
              $scope.mapData = response.data;
              for (key in $scope.mapData) {
                  if ($scope.mapData[key].type == 'residential') {
-                    var data = [$scope.mapData[key].name, $scope.mapData[key].location.lat, $scope.mapData[key].lng, 'images/home/marker1.png'];
+                    var data = [$scope.mapData[key].name, $scope.mapData[key].location.lat, $scope.mapData[key].location.lon, 'images/home/marker1.png'];
                     projectMarkers.push(data);
                     var content = ['<div class="info_content">' +
                                      '<div class="card info_content mg0">' +
@@ -95,16 +95,16 @@
                                      '<span class="ft12">Sohna Road, Sector 48 Gurgaon</span>' +
                                      '</a>' +
                                      '<div class="col m4 right-align pd5 ft12i">' +
-                                     '<span class="block b">5 Reviews</span>' +
+                                     '<span class="block b">'+$scope.mapData[key].rating +' Reviews</span>' +
                                      '<span class="block">' +
-                                     '<i class="material-icons blue-text">star</i><i class="material-icons blue-text">star</i><i class="material-icons blue-text">star</i><i class="material-icons blue-text">star</i><i class="material-icons blue-text">star</i>' +
+                                     '<i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index <'+$scope.mapData[key].rating+' "blue-text":"normal"">star</i>' +
                                      '</span>' +
                                      '</div>' +
                                      '</div>' +
                                      '<div class="row mg0 ht50">' +
                                      '<div class="col m6 pd5 dis-tab center ht50">' +
                                      '<span class="block b ellipsis">Rent Price</span>' +
-                                     '<span class="ft12 block ellipsis">₹28000 - ₹55000</span>' +
+                                     '<span class="ft12 block ellipsis">₹'+$scope.mapData[key].rent.min+' - ₹'+$scope.mapData[key].rent.max+'</span>' +
                                      '</div>' +
                                      '<div class="col m6 pd5 center ht50">' +
                                      '<span class="block b ellipsis">2, 3, 4 BHK</span>' +
@@ -117,7 +117,8 @@
                     projectInfoWindow.push(content);
                  }
              }
-             console.log(projectMarkers, projectInfoWindow);
+
+            console.log(projectMarkers, projectInfoWindow);
              $timeout(function() {
                  // google.maps.event.addDomListener(window, 'load', initMap);
                  initMap();
@@ -188,14 +189,14 @@
              marker, i;
 
          // Place each marker on the map  
-         for (i = 0; i < markers.length; i++) {
-             var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+         for (i = 0; i < projectMarkers.length; i++) {
+             var position = new google.maps.LatLng(projectMarkers[i][1], projectMarkers[i][2]);
              bounds.extend(position);
              marker = new google.maps.Marker({
                  position: position,
                  map: map,
-                 title: markers[i][0],
-                 icon: markers[i][3],
+                 title: projectMarkers[i][0],
+                 icon: projectMarkers[i][3],
                  animation: google.maps.Animation.DROP
 
              });
@@ -205,7 +206,7 @@
              // Add info window to marker    
              google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
                  return function() {
-                     infoWindow.setContent(infoWindowContent[i][0]);
+                     infoWindow.setContent(projectInfoWindow[i][0]);
                      infoWindow.open(map, marker);
                      $('.LeftBox').css('left', '-500px');
                  }
