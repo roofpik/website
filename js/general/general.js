@@ -61,11 +61,6 @@ var searchObject = {
            icon: 'images/homeicon/Lowrise.png',
            name: 'Low Rise / Independent Floors',
            id: 4
-       },
-       {
-           icon: 'images/homeicon/Commercial.png',
-           name: 'Explore Locality',
-           id: 5
        }
    ],
    'commercial':[
@@ -93,11 +88,6 @@ var searchObject = {
            icon: 'images/homeicon/Commercial.png',
            name: 'Co-work',
            id: 3
-       },
-       {
-           icon: 'images/homeicon/Commercial.png',
-           name: 'Explore Locality',
-           id: 6
        }
    ],
    'pg': [
@@ -115,11 +105,6 @@ var searchObject = {
            icon: 'images/homeicon/Commercial.png',
            name: 'Co-host',
            id: 3
-       },
-       {
-           icon: 'images/homeicon/Commercial.png',
-           name: 'Explore Locality',
-           id: 4
        }
    ]
 };

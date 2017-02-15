@@ -27,6 +27,10 @@
                                             <span class="title ft13">{{item.name}}</span>
                                         </li>
                                     </ul>
+                                    <div class="pd5 grey lighten-4 ft12">More Options</div>
+                                    <ul class="collection homecoll">
+                                        <li class=" collection-item avatar"><img ng-src="images/homeicon/Commercial.png" class="circle" /> Explore Locality</li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -108,15 +112,24 @@
         </div>
     </div>
     <div class="row red lighten-1 center pda50 mgbn">
-    <i class="material-icons medium white-text">card_giftcard</i> 
+        <i class="material-icons medium white-text">card_giftcard</i>
         <h4 class="uppercase white-text">
         write a review and claim your goody bag.</h4>
         <button class="btn white black-text mgt20"><i class="material-icons left" ng-click="">create</i>Review Now</button>
     </div>
-    <div class="row mgbn reletive"> 
-    <div maphome></div>       
+    <div class="row mgbn reletive">
+        <div maphome></div>
     </div>
-
-    <div class="row mgbn reletive"> 
+    <div class="row mgb10 reletive pdr10">
+        <h5 class="center b">Cover Stories</h5>
+        <div class="coverfixbox card pdan" ng-repeat='i in [1,2,3,4,5,6,7,8]'>
+            <div class="card-image reletive">
+                <img src="images/home/mg-road.jpg">
+                <div class="overlay pda10">
+                    <h5 class="mg0 ft13 b">Heading lorem ipsum</h5>
+                    <p class="mg0 ft12">Sub heading lorem ipsum</p>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
