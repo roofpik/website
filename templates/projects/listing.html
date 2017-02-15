@@ -167,17 +167,16 @@
                         <div class="cardpdt span_block fix60 left">
                             <span class="black-text ft13 ellipsis">{{project.name}}</span>
                             <span class="ft12 grey-text ellipsis">{{project.address}}</span>
+                            <span class="ft12 grey-text ellipsis"><i class="material-icons blue-text" ng-repeat="i in [1,2,3,4,5]">star</i>(5) 8 Reviews</span>
+                            <span class="ft12 grey-text ellipsis" ng-show="project.bhks">{{project.bhks}} BHK Available</span>
+                            <p class="ft12 grey-text ellipsis" ng-show="project.area">{{project.area.min}} <span ng-show="project.area.min != project.area.max">- {{project.area.max}}</span> Sq.ft.</p>
                         </div>
                     </a>
                 </div>
                 <ul class="pagination">
-                    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                    <li ng-class="page == currentPage? 'active' : 'waves-effect'" ng-repeat="page in pages" ng-click="goToPage()"><a href="">{{page}}</a></li>
-<!--                     <li class="waves-effect"><a href="#!">2</a></li>
-                    <li class="waves-effect"><a href="#!">3</a></li>
-                    <li class="waves-effect"><a href="#!">4</a></li>
-                    <li class="waves-effect"><a href="#!">5</a></li> -->
-                    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                    <li ng-class="currentPage == 1? 'disabled' : 'waves-effect'" ng-click="changePage(1)"><a href=""><i class="material-icons">chevron_left</i></a></li>
+                    <li ng-class="page == currentPage? 'active' : 'waves-effect'" ng-repeat="page in pages" ng-click="goToPage(page)"><a href="">{{page}}</a></li>
+                    <li ng-class="currentPage == lastPage? 'disabled' : 'waves-effect'" ng-click="changePage(2)"><a href=""><i class="material-icons">chevron_right</i></a></li>
                 </ul>
             </div>
         </div>

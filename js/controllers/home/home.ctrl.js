@@ -129,6 +129,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
             lat: lat,
             lon: lon
         }
+        console.log(encodeParams(data));
         $http({
             url: 'http://35.154.60.19/api/GetMapData_1.0',
             method: 'GET',
