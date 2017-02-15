@@ -7,22 +7,22 @@
             <h3 class="white-text ft24 center textsd b">Power Your Property Search with Genuine User Reviews </h3>
             <div class="row mgbn">
                 <ul class="tabs tabs-fixed-width tabs-transparent hometabs">
-                    <li class="tab bgblk-trn radiust2"><a class="active white-text" href="#searchboxhome">Residential</a></li>
-                    <li class="tab bgblk-trn"><a class="white-text" href="#searchboxhome">Commercial</a></li>
-                    <li class="tab bgblk-trn radiusr2"><a class="white-text" href="#searchboxhome">PG</a></li>
+                    <li class="tab bgblk-trn radiust2" ng-click="selectVertical('residential')"><a class="active white-text" href="#searchboxhome">Residential</a></li>
+                    <li class="tab bgblk-trn" ng-click="selectVertical('commercial')"><a class="white-text" href="#searchboxhome">Commercial</a></li>
+                    <li class="tab bgblk-trn radiusr2" ng-click="selectVertical('pg')"><a class="white-text" href="#searchboxhome">PG</a></li>
                 </ul>
             </div>
             <div id="searchboxhome" class="row bgblk-trn radius2 pdr10 cardmg searchfix">
                 <div class="col s10 pdan">
-                    <div class="row mgbn">
+                    <div class="row mgbn" ng-hide="searchByName">
                         <div class="col s6">
                             <div class="input-field card col s12 ht45 pdan reletive">
                                 <span class="inpspn">Find :</span>
-                                <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompletenear inp_pdw mgbn" ng-model="searched" ng-change="showResults()">
-                                <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" />
+                                <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompletenear inp_pdw mgbn" ng-model="categorySearched" ng-change="showResults()">
+                                <!-- <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" /> -->
                                 <div class="search-results" ng-show="showSearch">
                                     <ul class="collection homecoll">
-                                        <li ng-repeat="item in search| filter: searched" class=" collection-item avatar" ng-click="selectType(item)">
+                                        <li ng-repeat="item in categorySearch| filter: categorySearched" class=" collection-item avatar" ng-click="selectCategory(item)">
                                             <img ng-src="{{item.icon}}" class="circle" />
                                             <span class="title ft13">{{item.name}}</span>
                                         </li>
@@ -37,11 +37,12 @@
                         <div class="col s6 pdln">
                             <div class="input-field card col s12 ht45 pdan">
                                 <span class="inpspn">Near :</span>
-                                <input placeholder="Enter a Destination" class="autocompletenear inp_pdw mgbn" id="locality-search" ng-model="locality" ng-change="showLocalities()">
+                                <input placeholder="Enter a Destination" class="autocompletenear inp_pdw mgbn" id="locality-search" ng-model="locationSearched" ng-change="searchLocation()">
+                                <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" ng-show="searchingLocation" />
                                 <div class="search-results" ng-show="showSearch1">
                                     <ul class="collection homecoll">
-                                        <li ng-repeat="item in search| filter: locationSearched" class=" collection-item avatar" ng-click="selectType(item)">
-                                            <img ng-src="{{item.icon}}" class="circle" />
+                                        <li ng-repeat="item in locations| filter: locationSearched" class=" collection-item avatar" ng-click="selectLocation(item)">
+                                            <!-- <img ng-src="{{item.icon}}" class="circle" /> -->
                                             <span class="title ft13">{{item.name}}</span>
                                         </li>
                                     </ul>
@@ -49,15 +50,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mgbn" style="display: none;">
+                    <div class="row mgbn" ng-show="searchByName">
                         <div class="col s12">
                             <div class="input-field card col s12 ht45 pdan reletive">
                                 <span class="inpspn">Find :</span>
                                 <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompletenear inp_pdw mgbn">
-                                <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" />
+                                <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" ng-show="searchingName" />
                                 <div class="search-results" ng-show="showSearch">
                                     <ul class="collection homecoll">
-                                        <li ng-repeat="item in search| filter: searched" class=" collection-item avatar" ng-click="selectType(item)">
+                                        <li ng-repeat="item in categorySearch| filter: searched" class=" collection-item avatar" ng-click="selectType(item)">
                                             <img ng-src="{{item.icon}}" class="circle" />
                                             <span class="title ft13">{{item.name}}</span>
                                         </li>
@@ -68,14 +69,14 @@
                     </div>
                 </div>
                 <div class="input-field col m2 s12 pdan">
-                    <button class="btn col m12  waves-effect waves-light red lighten-1 ht45">
+                    <button class="btn col m12  waves-effect waves-light red lighten-1 ht45" ng-click="search()">
                         <i class="material-icons left">search</i>Search
                     </button>
                 </div>
             </div>
             <div class="row mgt5">
                 <button class="btn-flat white-text bgblk-trn capitalize btn-sm"><i class="material-icons left">delete</i> Clear</button>
-                <button class="btn-flat white-text right bgblk-trn capitalize btn-sm"><i class="material-icons left">arrow_drop_down_circle</i> Search by Name</button>
+                <button class="btn-flat white-text right bgblk-trn capitalize btn-sm" ng-click="toggleSearchType()"><i class="material-icons left">{{toggleIcon}}</i>{{showSearchTitle}}</button>
             </div>
         </div>
         <div class="btn-mid-box center">
