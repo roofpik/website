@@ -1,5 +1,4 @@
 app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope', function($scope, $http, $state, $timeout, $rootScope) {
-
     $scope.selectedVertical = 'residential';
     $scope.categorySearch = searchObject[$scope.selectedVertical]; //Stores the search object for different verticals
     $scope.categorySearched = '';
