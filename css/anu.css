@@ -12,7 +12,9 @@
     float: left;
     z-index: 1 !important;
 }
-/*
-.waves-effect img {
 
-}*/
+.map-radio{width:50%; position: absolute; left: 30%; bottom: 0%; z-index: 9; transform: translate(-50%, -50%); color:#000;}
+
+.map-radio label {
+	color: #000;
+}

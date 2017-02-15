@@ -41,7 +41,7 @@
                                 <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" ng-show="searchingLocation" />
                                 <div class="search-results" ng-show="showSearch1">
                                     <ul class="collection homecoll">
-                                        <li ng-repeat="item in locations| filter: locationSearched" class=" collection-item avatar" ng-click="selectLocation(item)">
+                                        <li ng-repeat="item in locations" class=" collection-item avatar" ng-click="selectLocation(item)">
                                             <!-- <img ng-src="{{item.icon}}" class="circle" /> -->
                                             <span class="title ft13">{{item.name}}</span>
                                         </li>

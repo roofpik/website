@@ -45,7 +45,7 @@ app.directive('maphome', function() {
         replace: true,
         scope: { user: '=' }, // This is one of the cool things :). Will be explained in post.
         templateUrl: "/js/directives/map.html",
-        controller: 'MapCtrl'
+        controller: 'mapCtrl'
     }
 });
 

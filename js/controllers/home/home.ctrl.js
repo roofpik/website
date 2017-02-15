@@ -100,7 +100,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         }
 
         parameter += "lat=" + position.coords.latitude + "&lon=" + position.coords.longitude;
-        getMapData(position.coords.latitude, position.coords.longitude);
+        // getMapData(position.coords.latitude, position.coords.longitude);
         getLocations();
     }
 
@@ -122,25 +122,6 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         }
         getLocations();
     }
-
-    function getMapData(lat, lon){
-        var data = {
-            lat: lat,
-            lon: lon
-        }
-        console.log(encodeParams(data));
-        $http({
-            url: 'http://35.154.60.19/api/GetMapData_1.0',
-            method: 'GET',
-            params: {
-                args: encodeParams(data)
-            }
-        }).then(function(response){
-            console.log(response);
-            console.log(Object.keys(response.data).length);
-        })      
-    }
-
 
     function getLocations() {
         // parameter += "&name="+encodeURIComponent('Sector 48');
