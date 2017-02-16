@@ -138,6 +138,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
             }
         }).then(function(response){
             console.log(response);
+            console.log(Object.keys(response.data).length);
         })      
     }
 
@@ -190,9 +191,28 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
                 'location': '-KYJOldHpi16DEUK0pXn'
             }
             var parameter = encodeParams(param);
-            // console.log(parameter);
             $state.go('list', {p: parameter});
         }
     }
 
+}]);
+
+
+app.controller('coverStoryHomeCtrl', ['$scope', '$timeout', function($scope, $timeout){
+    $scope.cityId = '-KYJONgh0P98xoyPPYm9';
+    $scope.coverStoriesFetched = false;
+    db.ref('shortStories/-KYJONgh0P98xoyPPYm9')
+        .limitToFirst(8)
+        .once('value', function(response){
+            console.log(response.val());
+            $timeout(function(){
+                $scope.stories = response.val();
+                angular.forEach($scope.stories, function(value, key) {
+                    // value.redirectionUrl = '/#/story/gurgaon/' + convertToHyphenSeparated(value.placeName) + '/' + convertToHyphenSeparated(value.title) + '/' + value.storyId;
+                    // value.redirectionUrl = value.redirectionUrl.replace(/[?=]/g, "");
+                    value.coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/' + $scope.cityId + '/' + value.storyId + '/coverPhoto/' + value.coverPhoto + '-m.jpg';
+                })
+                $scope.coverStoriesFetched = true;
+            }, 0);
+        })
 }]);

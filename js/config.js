@@ -2,8 +2,16 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     $locationProvider.hashPrefix('');
     $stateProvider.state('home', {
         url: '/home',
-        templateUrl: 'templates/home/home.htm',
-        controller: 'homeCtrl'
+        views: {
+            '': {
+                templateUrl: 'templates/home/home.htm',
+                controller: 'homeCtrl'
+            },
+            'coverStories@home': {
+                templateUrl: 'templates/home/cover-story.html',
+                controller: 'coverStoryHomeCtrl'
+            }
+        }
     });
 
     $stateProvider.state('contact-us', {
