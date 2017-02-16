@@ -142,7 +142,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             }
         }
     });
-
     $stateProvider.state('blog-details', {
         url: '/blog-details/:city/:title/:id',
         views: {
@@ -214,7 +213,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             }
         }
     });
-
     $stateProvider.state('story', {
         url: '/story/:city/:place/:title/:id',
         views: {
@@ -229,17 +227,23 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         }
     });
 
-    $stateProvider.state('write-review', {
-        url: '/write-review?id',
-        templateUrl: 'templates/review/write-review.html',
-        controller: 'writeReviewCtrl'
-    });
+$stateProvider.state('write-review', {
+    url: '/write-review?id',
+    templateUrl: 'templates/review/write-review.html',
+    controller: 'writeReviewCtrl'
+});
+
 
     $stateProvider.state('list', {
         url: '/list?p',
         templateUrl: 'templates/projects/listing.html',
         controller: 'listCtrl'
     })
+    $stateProvider.state('listing', {
+        url: '/listing?parameters',
+        templateUrl: 'templates/details/listing.html',
+        controller: 'listingCtrl'
+    })
 
-    $urlRouterProvider.otherwise('/home');
+$urlRouterProvider.otherwise('/home');
 }]);

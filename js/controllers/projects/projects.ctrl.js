@@ -436,6 +436,9 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
             $scope.type = null;
         }
 
+        $(".modal-close").click(function(){ $("div.lean-overlay").remove(); });
+
+
         $state.go('projects', { segment: $scope.style, bhk: $scope.bhk, price_range: $scope.priceRange, area_range: $scope.areaRange, location: $scope.location, locality: $scope.locality, details_builder: $scope.builder, propertyType: $scope.type });
     }
 
