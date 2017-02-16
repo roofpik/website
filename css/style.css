@@ -1,6 +1,14 @@
 body{font-size: 14px; color:#2c2c2c;}
 .rooflogo{width: 99px;}
 .rooflogo img{width: 100%; padding-top: 17px;}
+.hdr_list li{display: inline;}
+.hdr_list li a{display:inline-block;
+ background-image: linear-gradient(to left, transparent, transparent 50%, #EF5350 50%, #EF5350);
+background-position: 100% 0; background-size: 200% 100%; transition: all .25s ease-in;
+color: #fff; line-height: 65px; padding:0 20px;}
+#slide-out-top{ transition: all .3s ease; position: fixed; z-index: 9999; top: -300px; left: 0; width: 100%; }
+
+.hdr_list li a:hover{color: #fff; background-position: 0 0;}
 .pdan{padding: 0px !important;}
 .pdatn{padding: 0 10px 10px 10px}
 .pdlrn{padding: 0 0 5px 0;}
@@ -76,7 +84,7 @@ ul, .mg0 {margin:0px !important;}
     top: -300px; width: 90%; height: 145px;
     background-color: rgba(0, 0, 0, .4);
     padding:20px 10px; margin:auto;
-    z-index: 995; transition: all 0.1s ease-in-out 0.2s;
+    z-index: 995;  transition: all .3s ease; 
 }
 .search .search-wrapper {margin: 0 12px; }
 .text-shadow{text-shadow: 1px 1px 2px #000;}
@@ -644,7 +652,7 @@ i.left{margin-right: 10px;}
 .homecoll .collection-item:hover { background-color: #eee;}
 .homecoll .collection-item.avatar .title{color: #2c2c2c;}
 .btn-sm{height: 30px; line-height: 30px;}
-.ht600{height: 630px}
+.ht600{height: 622px}
 .gm-style-iw{left: 2px !important; top:2px !important; overflow: visible !important;}
 .gm-style-iw > div{
   
@@ -670,9 +678,10 @@ i.left{margin-right: 10px;}
 .pdl30{padding-left: 30px;}
 .coverfixbox{height:300px; width: calc(25% - 10px); margin:10px 0 0 10px; float: left; }
 .coverfixbox img{height:100%; }
-.coverfixbox .overlay{position: absolute; transition: all 0.1s ease-in-out 0.2s; overflow:hidden; bottom: 0; left: 0; z-index: 9; height: 55px; padding-right: 10px !important; width: 100%; cursor: pointer; background-color: rgba(0,0,0, 0.8); color:#eee;}
+.coverfixbox .overlay{position: absolute;  transition: all .3s ease;  overflow:hidden; bottom: 0; left: 0; z-index: 9; height: 55px; padding-right: 10px !important; width: 100%; cursor: pointer; background-color: rgba(0,0,0, 0.8); color:#eee;}
 .coverfixbox:hover .overlay{height: 100px;}
 .coverfixbox .overlay button:hover{color: #fff !important;}
+
 .sele_list .select-dropdown{margin-bottom: 0 !important;}
 .sele_list .select-wrapper ul li{min-height: 30px !important;}
 .sele_list .select-wrapper ul li span{padding:8px 10px !important; font-size: 14px;}
@@ -680,6 +689,7 @@ i.left{margin-right: 10px;}
 .fixb4{width: calc(33% - 10px); background-color: #f7f7f7}
 .mgr5{margin-right: 5px;}
 .bgf7{background-color: #f7f7f7;}
+
 .back-to-top {
   position: fixed;
   bottom: 20px;
@@ -690,7 +700,23 @@ i.left{margin-right: 10px;}
   background: #DDD;   cursor: pointer; 
   background-color: #000; color: #fff; 
 } 
+.pdr70{padding-right: 70px !important;}
 .container2{width: 90%;}
+.parallax video {
+  z-index: -999;
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+.redtran{background-color: rgba(239, 83, 80, 0.76) !important}
+.greytran{background-color: rgba(33, 33, 33, 0.89) !important}
+.whitetran{background-color: rgba(255, 255, 255, 0.75) !important}
 /*new design css home page end*/
 .loading-icon {
    position: absolute !important;
