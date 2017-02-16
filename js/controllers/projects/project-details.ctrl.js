@@ -631,7 +631,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
 
 
     $http({
-        url: 'http://35.154.60.19/api/GetReviewSummary_1.0',
+        url: 'http://107.23.243.89/api/GetReviewSummary_1.0',
         method : 'GET',
         params: {
             id: $scope.projectId
@@ -667,7 +667,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
     function getReviews(){
         console.log(customerType);
         $http({
-            url: 'http://35.154.60.19/api/GetProjectReviews_1.0',
+            url: 'http://107.23.243.89/api/GetProjectReviews_1.0',
             method : 'GET',
             params: {
                 pid: $scope.projectId,
@@ -711,7 +711,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
         // console.log($scope.reviews[index]);
         loading(true);
         $http({
-            url: 'http://35.154.60.19/api/GetReviewDetails_1.0',
+            url: 'http://107.23.243.89/api/GetReviewDetails_1.0',
             method: 'GET',
             params: {
                 id: $scope.reviews[index].reviewId

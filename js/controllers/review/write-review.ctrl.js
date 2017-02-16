@@ -107,7 +107,7 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $rootScope, $locati
         $scope.showList = false;
         $scope.showSearch = false;
         $http({
-            url: 'http://35.154.60.19/api/GetResidential_1.0',
+            url: 'http://107.23.243.89/api/GetResidential_1.0',
             method: 'GET',
             params: {
                 details_name: $scope.selectedItem,
@@ -135,7 +135,7 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $rootScope, $locati
                 loading(true);
                 $scope.showList = true;
                 $http({
-                    url: 'http://35.154.60.19/api/GetResidential_1.0',
+                    url: 'http://107.23.243.89/api/GetResidential_1.0',
                     method: 'GET',
                     params: {
                         details_name: $scope.selectedItem

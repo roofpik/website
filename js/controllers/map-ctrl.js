@@ -31,19 +31,12 @@
              navigator.geolocation.getCurrentPosition(showPosition, showError);
          } else {
              // console.log("Geolocation is not supported by this browser.");
-             // getLocations();
          }
      }
 
      // called when location of user is successfully obtained
      function showPosition(position) {
-         // if (parameter.length != 0) {
-         //     parameter += "&"
-         // }
-
-         // parameter += "lat=" + position.coords.latitude + "&lon=" + position.coords.longitude;
          getMapData(position.coords.latitude, position.coords.longitude);
-         // getLocations();
      }
 
      // called when location not found or no permission
@@ -67,17 +60,16 @@
 
 
      function getMapData(lat, lon) {
-         console.log('called');
          var data = {
              lat: lat,
              lon: lon
          }
          console.log(encodeParams(data));
          $http({
-             url: 'http://35.154.60.19/api/GetMapData_1.0',
+             url: 'http://107.23.243.89/api/GetMapData_1.0',
              method: 'GET',
              params: {
-                 args: encodeParams(data)
+                 args: 'bGF0PTI4LjQwNjg5NzI5OTk5OTk5NyZsb249NzcuMDQzMDg4MQ=='
              }
          }).then(function(response) {
              console.log(response);

@@ -14,8 +14,8 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     $scope.searchingName = false;
 
     $('ul.tabs').tabs();
- $('select').material_select();
-   $('.parallax').parallax();
+    $('select').material_select();
+    $('.parallax').parallax();
     // to change verttical and category options
     $scope.selectVertical = function(val){
         $scope.selectedVertical = val;
@@ -121,15 +121,24 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
                 // console.log("An unknown error occurred.");
                 break;
         }
+        if (parameter.length != 0) {
+            parameter += "&"
+        }
+
+        parameter += "lat=" + 28.4594965 + "&lon=" + 77.02663830000006;
         getLocations();
     }
 
-    function getLocations() {
+    function getLocations(name) {
         // parameter += "&name="+encodeURIComponent('Sector 48');
         // console.log(parameter);
-        finalParam = btoa(parameter);
+        if(!name) {
+            name = '';
+        }
+        finalParam = btoa(parameter+ name);
+        console.log(atob(finalParam));
         $http({
-            url: 'http://35.154.60.19/api/GetLocations_1.0',
+            url: 'http://107.23.243.89/api/GetLocations_1.0',
             method: 'GET',
             params: {
                 args: finalParam
@@ -146,10 +155,11 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     }
 
     $scope.searchLocation = function(){
+        // console.log($scope.locationSearched);
         if($scope.locationSearched) {
             if($scope.locationSearched.length > 2){
-                parameter += "&name="+encodeURIComponent($scope.locationSearched);
-                getLocations();
+                name = "&name="+encodeURIComponent($scope.locationSearched);
+                getLocations(name);
             }
         }
     }
@@ -168,9 +178,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         } else {
             var param = {
                 'vertical': $scope.selectedVertical,
-                'category': 'Apartments',
-                'location': '-KYJOldHpi16DEUK0pXn'
-            }
+                'category': 'Apartments'            }
             var parameter = encodeParams(param);
             $state.go('list', {p: parameter});
         }

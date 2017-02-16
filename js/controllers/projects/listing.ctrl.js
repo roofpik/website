@@ -1,6 +1,6 @@
-app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', function($scope, $http, $timeout, $stateParams){
-	var parameters = decodeParams($stateParams.p);
-	// console.log(parameters);
+app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$state', function($scope, $http, $timeout, $stateParams, $state) {
+    var parameters = decodeParams($stateParams.p);
+    console.log(parameters);
     $scope.filters = {
         style: null,
         bhk: null,
@@ -8,11 +8,10 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', funct
         area_range: null,
         locationId: null,
         details_builder: null,
-        propertyType : null,
+        propertyType: null,
         page_size: null,
         page_start: null
     }
-
     var page_start = 0;
     var page_size = 10;
     var totalProjects = 0;
@@ -23,21 +22,98 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', funct
     $scope.currentPage = 1;
     $scope.lastPage = 0;
     $scope.pages = [];
+    $scope.localities = [];
+    $scope.locations = [];
+    $scope.builders = [];
+    $scope.segments = [
+        { name: 'Economy', id: 'economy' },
+        { name: 'High End', id: 'highEnd' },
+        { name: 'Luxury', id: 'luxury' },
+        { name: 'Ultra Luxury', id: 'ultraLuxury' }
+    ];
+    $scope.selected = {};
+    $scope.price = {};
+    $scope.area = {};
+    getLocality();
 
-    mapParameters();
+    function getLocality() {
+        db.ref('locality/' + $scope.cityId).once('value', function(snapshot) {
+            $timeout(function() {
+                for (key in snapshot.val()) {
+                    $scope.localities.push(snapshot.val()[key]);
+                }
+                getLocation();;
+            }, 0)
+        });
+    }
+
+    function getLocation() {
+        db.ref('locations/' + $scope.cityId).once('value', function(snapshot) {
+            $timeout(function() {
+                for (key in snapshot.val()) {
+                    $scope.locations.push(snapshot.val()[key]);
+                }
+                getBuilders();
+            }, 0)
+        });
+    }
+
+    function getBuilders() {
+        db.ref('builders').once('value', function(snapshot) {
+            $timeout(function() {
+                if (snapshot.val()) {
+                    for (key in snapshot.val()) {
+                        $scope.builders.push(snapshot.val()[key]);
+                    }
+                }
+                mapParameters();
+            }, 0);
+        })
+    }
+
+    function reverseBindParams(value, index){
+        var temp = value.split('$');
+        for (key in temp) {
+            if (!$scope.selected[index]) {
+                $scope.selected[index] = {};
+            }
+            $scope.selected[index][temp[key]] = true;
+        }
+    }
 
     function mapParameters() {
         if (parameters.segment) {
             $scope.filters.style = parameters.segment;
+            reverseBindParams(parameters.segment, 'segment');
         }
         if (parameters.bhk) {
             $scope.filters.bhk = parameters.bhk;
+            reverseBindParams(parameters.bhk, 'bhk');
         }
         if (parameters.price_range) {
             $scope.filters.price_range = parameters.price_range;
+            var temp = parameters[key].split('$');
+            if (key == 'price_range') {
+                if (temp[0] < temp[1]) {
+                    $scope.price.min = temp[0];
+                    $scope.price.max = temp[1];
+                } else {
+                    $scope.price.min = temp[1];
+                    $scope.price.max = temp[0];
+                }
+            }
         }
         if (parameters.area_range) {
             $scope.filters.area_range = parameters.area_range;
+            if(key == 'area_range'){
+                if(temp[0] < temp[1]){
+                    $scope.area.min = temp[0];
+                    $scope.area.max = temp[1];
+                } else {
+                    $scope.area.min = temp[1];
+                    $scope.area.max = temp[0];   
+                }
+            }
         }
         if (parameters.location && parameters.locality) {
             $scope.filters.locationId = parameters.location + "$" + parameters.locality;
@@ -48,59 +124,58 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', funct
         if (parameters.locality && !parameters.location) {
             $scope.filters.locationId = parameters.locality;
         }
+        if(parameters.location){
+            reverseBindParams(parameters.location, 'location');
+        }
+        if(parameters.locality){
+            reverseBindParams(parameters.locality, 'locality');
+        }
         if (parameters.details_builder) {
             $scope.filters.details_builder = parameters.details_builder;
+            console.log(parameters.details_builder);
+            reverseBindParams(parameters.details_builder, 'details_builder');
         }
-        if(parameters.propertyType){
+        if (parameters.propertyType) {
             $scope.filters.propertyType = parameters.propertyType;
         }
-        console.log($scope.filters);
-        if(parameters.vertical == 'residential' || parameters.vertical == 'commercial' || parameters.vertical == 'pg'){
-        	fetchProjects();
+        if (parameters.vertical) {
+            $scope.filters.vertical = parameters.vertical;
         }
+        if (parameters.category) {
+            $scope.filters.category = parameters.category;
+        }
+        fetchProjects();
     }
 
     function fetchProjects() {
-    	console.log(parameters);
-    	var data = {
-    		'vertical': parameters.vertical,
-    		'category': parameters.category,
-    		// 'style': 'Economy',
-            // 'style': $scope.filters.style,
-            'bhk': '2$6',
-            // 'price_range': $scope.filters.price_range,
-            // 'area_range': $scope.filters.area_range,
-            // 'locationId': $scope.filters.locationId
-            // 'details_builder': $scope.filters.details_builder,
-            // // propertyType : $scope.filters.propertyType,
-            // 'page_start': page_start,
-            // 'page_size': page_size
-    	}
-
-    	data = encodeParams(data);
-    	console.log(data);
-    	console.log(decodeParams(data));
+        var data = {};
+        for (key in $scope.filters) {
+            if ($scope.filters[key]) {
+                data[key] = $scope.filters[key];
+            }
+        }
+        console.log(data);
         $http({
-            url: 'http://35.154.60.19/api/GetListing_1.0',
+            url: 'http://107.23.243.89/api/GetListing_1.0',
             method: 'GET',
             params: {
-            	args: data
+                args: encodeParams(data)
             }
         }).then(function mySucces(response) {
             console.log(response);
             $scope.projectList = [];
             totalProjects = response.data.hits;
-            if($scope.pages.length == 0){
-            	var max = 0;
-            	if(totalProjects/page_size  > parseInt(totalProjects/10)){
-            		max = parseInt(totalProjects/10)+1;
-            	} else {
-            		max = parseInt(totalProjects/10);
-            	}
-            	for(var i = 1; i <= max; i++){
-            		$scope.pages.push(i);
-            	}
-            	$scope.lastPage = $scope.pages[$scope.pages.length - 1];
+            if ($scope.pages.length == 0) {
+                var max = 0;
+                if (totalProjects / page_size > parseInt(totalProjects / 10)) {
+                    max = parseInt(totalProjects / 10) + 1;
+                } else {
+                    max = parseInt(totalProjects / 10);
+                }
+                for (var i = 1; i <= max; i++) {
+                    $scope.pages.push(i);
+                }
+                $scope.lastPage = $scope.pages[$scope.pages.length - 1];
             }
             totalProjectsFetched += Object.keys(response.data.details).length;
             $scope.dataFetched = true;
@@ -117,27 +192,52 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', funct
         })
     }
 
-    $scope.goToPage = function(pageNum){
-        console.log('called');
-        page_start = (pageNum-1)*10;
+    $scope.goToPage = function(pageNum) {
+        page_start = (pageNum - 1) * 10;
         $scope.currentPage = pageNum;
-        if(pageNum == $scope.pages[$scope.pages.length - 1]){
-        	page_size = totalProjects - page_start;
+        if (pageNum == $scope.pages[$scope.pages.length - 1]) {
+            page_size = totalProjects - page_start;
         }
         fetchProjects();
     }
 
-    $scope.changePage = function(val){
-    	console.log(val);
-    	if(val == 1){
-    		if($scope.currentPage > 1){
-    			$scope.goToPage($scope.currentPage - 1);
-    		}
-    	} else {
-    		if(val != $scope.lastPage){
-    			$scope.goToPage($scope.currentPage + 1);
-    		}
-    	}
+    $scope.changePage = function(val) {
+        if (val == 1) {
+            if ($scope.currentPage > 1) {
+                $scope.goToPage($scope.currentPage - 1);
+            }
+        } else {
+            if (val != $scope.lastPage) {
+                $scope.goToPage($scope.currentPage + 1);
+            }
+        }
     }
 
+    $scope.applyFilters = function() {
+        for (key in $scope.selected) {
+            if ($scope.selected[key]) {
+                parameters[key] = '';
+                for (key1 in $scope.selected[key]) {
+                    if ($scope.selected[key][key1]) {
+                        if (parameters[key].length != 0) {
+                            parameters[key] += '$'
+                        }
+                        parameters[key] += key1;
+                    }
+                }
+            }
+        }
+        if ($scope.price) {
+            if ($scope.price.min && $scope.price.max) {
+                parameters.price_range = $scope.price.min + '$' + $scope.price.max;
+            }
+        }
+        if ($scope.area) {
+            if ($scope.area.min && $scope.area.max) {
+                parameters.area = $scope.area.min + '$' + $scope.area.max;
+            }
+        }
+        console.log(parameters);
+        $state.go('list', { p: encodeParams(parameters) }, {reload:true});
+    }
 }]);

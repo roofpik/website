@@ -136,7 +136,7 @@ app.controller('projectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '
 
     function fetchProjects() {
         $http({
-            url: 'http://35.154.60.19/api/GetResidential_1.0',
+            url: 'http://107.23.243.89/api/GetResidential_1.0',
             method: 'GET',
             params: {
                 style: $scope.filters.style,
