@@ -211,7 +211,8 @@
                              $timeout(function() {
                                  initMap(projectMarkers, projectInfoWindow);
                              }, 100);
-                         }
+                         })
+                    }
 
                          function initMap(markers, infowindow) {
                              var map;
