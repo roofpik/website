@@ -19,6 +19,10 @@
      var projectInfoWindow = [];
      var localityInfoWindow = [];
      var locationInfoWindow = [];
+     var data = [];
+     var image = '';
+     var content = [];
+     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
 
      getCurrentLocation();
      // Code to get current location of user
@@ -58,7 +62,7 @@
                  // console.log("An unknown error occurred.");
                  break;
          }
-         // getLocations();
+         getMapData(28.4594965, 77.02663830000006);
      }
 
 
@@ -80,53 +84,135 @@
              console.log(Object.keys(response.data).length);
              $scope.mapData = response.data;
              for (key in $scope.mapData) {
-                 if ($scope.mapData[key].type == 'residential') {
-                    var data = [$scope.mapData[key].name, $scope.mapData[key].location.lat, $scope.mapData[key].location.lon, 'images/home/marker1.png'];
-                    projectMarkers.push(data);
-                    var content = ['<div class="info_content">' +
-                                     '<div class="card info_content mg0">' +
-                                     '<div class="card-image">' +
-                                     '<img src="images/sohna.jpg">' +
-                                     '<a href="" class="btn red absbtn"><i class="material-icons left">details</i>See Details</a>' +
-                                     '</div>' +
-                                     '<div class="cardTitle row mgbn bdbtm">' +
-                                     '<a class="col m8 black-text text-lighten-4 pd5 pd-tspanmap">' +
-                                     '<span class="b">'+$scope.mapData[key].name+'</span>' +
-                                     '<span class="ft12">Sohna Road, Sector 48 Gurgaon</span>' +
-                                     '</a>' +
-                                     '<div class="col m4 right-align pd5 ft12i">' +
-                                     '<span class="block b">'+$scope.mapData[key].rating +' Reviews</span>' +
-                                     '<span class="block">' +
-                                     '<i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index <'+$scope.mapData[key].rating+' "blue-text":"normal"">star</i>' +
-                                     '</span>' +
-                                     '</div>' +
-                                     '</div>' +
-                                     '<div class="row mg0 ht50">' +
-                                     '<div class="col m6 pd5 dis-tab center ht50">' +
-                                     '<span class="block b ellipsis">Rent Price</span>' +
-                                     '<span class="ft12 block ellipsis">₹'+$scope.mapData[key].rent.min+' - ₹'+$scope.mapData[key].rent.max+'</span>' +
-                                     '</div>' +
-                                     '<div class="col m6 pd5 center ht50">' +
-                                     '<span class="block b ellipsis">2, 3, 4 BHK</span>' +
-                                     '<span class="ft12 block ellipsis">1776 Sq. Ft. - 2345 Sq. </span>' +
-                                     '</div>' +
-                                     '</div>' +
-                                     '</div>' +
-                                     '</div>'
-                                  ]
-                    projectInfoWindow.push(content);
+                 if ($scope.mapData[key].type == 'residential' || $scope.mapData[key].type == 'cghs') {
+                     data = [$scope.mapData[key].name, $scope.mapData[key].location.lat, $scope.mapData[key].location.lon, 'images/home/marker1.png'];
+                     projectMarkers.push(data);
+                     if ($scope.mapData[key].cover == 'NA') {
+                         image = 'images/sohna.jpg';
+                     } else {
+                         image = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/residential/' + $scope.mapData[key].id + '/images/coverPhoto/' + $scope.mapData[key].cover + '-s.jpg'
+                     }
+                     content = ['<div class="info_content">' +
+                                 '<div class="card info_content mg0">' +
+                                 '<div class="card-image">' +
+                                 '<img src="' + image + '">' +
+                                 '<a href="" class="btn red absbtn"><i class="material-icons left">details</i>See Details</a>' +
+                                 '</div>' +
+                                 '<div class="cardTitle row mgbn bdbtm">' +
+                                 '<a class="col m8 black-text text-lighten-4 pd5 pd-tspanmap">' +
+                                 '<span class="b">' + $scope.mapData[key].name + '</span>' +
+                                 '<span class="ft12">Sohna Road, Sector 48 Gurgaon</span>' +
+                                 '</a>' +
+                                 '<div class="col m4 right-align pd5 ft12i" ng-show="' + $scope.mapData[key].rating + ' != 0">' +
+                                 '<span class="block b">' + $scope.mapData[key].rating + ' Reviews</span>' +
+                                 '<span class="block">' +
+                                 '<i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index <' + $scope.mapData[key].rating + ' "blue-text":"normal"">star</i>' +
+                                 '</span>' +
+                                 '</div>' +
+                                 '</div>' +
+                                 '<div class="row mg0 ht50">' +
+                                 '<div class="col m6 pd5 dis-tab center ht50" ng-show="' + $scope.mapData[key].rent + '">' +
+                                 '<span class="block b ellipsis">Rent Price</span>' +
+                                 '<span class="ft12 block ellipsis">₹' + $scope.mapData[key].rent.min + ' - ₹' + $scope.mapData[key].rent.max + '</span>' +
+                                 '</div>' +
+                                 '<div class="col m6 pd5 center ht50">' +
+                                 '<span class="block b ellipsis">2, 3, 4 BHK</span>' +
+                                 '<span class="ft12 block ellipsis">1776 Sq. Ft. - 2345 Sq. </span>' +
+                                 '</div>' +
+                                 '</div>' +
+                                 '</div>' +
+                                 '</div>'
+                             ]
+                     projectInfoWindow.push(content);
+                 } else if ($scope.mapData[key].type == 'locality') {
+                     data = [$scope.mapData[key].name, $scope.mapData[key].location.lat, $scope.mapData[key].location.lon, 'images/home/marker2.png'];
+                     localityMarkers.push(data);
+                     if ($scope.mapData[key].cover == 'NA') {
+                         image = 'images/sohna.jpg';
+                     } else {
+                         image = "http://cdn.roofpik.com/roofpik/locality/" + $scope.cityId + '/' + $scope.mapData[key].id + '/images/coverPhoto/' + $scope.mapData[key].cover + '-s.jpg'
+                     }
+                     content = ['<div class="info_content">' +
+                                 '<div class="card info_content mg0">' +
+                                 '<div class="card-image">' +
+                                 '<img src="' + image + '">' +
+                                 '<a href="" class="btn red absbtn"><i class="material-icons left">details</i>See Details</a>' +
+                                 '</div>' +
+                                 '<div class="cardTitle row mgbn bdbtm">' +
+                                 '<a class="col m8 black-text text-lighten-4 pd5 pd-tspanmap">' +
+                                 '<span class="b">' + $scope.mapData[key].name + '</span>' +
+                                 '<span class="ft12">Sohna Road, Sector 48 Gurgaon</span>' +
+                                 '</a>' +
+                                 '<div class="col m4 right-align pd5 ft12i" ng-show="' + $scope.mapData[key].rating + ' != 0">' +
+                                 '<span class="block b">' + $scope.mapData[key].rating + ' Reviews</span>' +
+                                 '<span class="block">' +
+                                 '<i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index <' + $scope.mapData[key].rating + ' "blue-text":"normal"">star</i>' +
+                                 '</span>' +
+                                 '</div>' +
+                                 '</div>' +
+                                 '<div class="row mg0 ht50">' +
+                                 '<div class="col m6 pd5 dis-tab center ht50" ng-show="' + $scope.mapData[key].rent + '">' +
+                                 '<span class="block b ellipsis">Rent Price</span>' +
+                                 '<span class="ft12 block ellipsis">₹' + $scope.mapData[key].rent.min + ' - ₹' + $scope.mapData[key].rent.max + '</span>' +
+                                 '</div>' +
+                                 '<div class="col m6 pd5 center ht50">' +
+                                 '<span class="block b ellipsis">2, 3, 4 BHK</span>' +
+                                 '<span class="ft12 block ellipsis">1776 Sq. Ft. - 2345 Sq. </span>' +
+                                 '</div>' +
+                                 '</div>' +
+                                 '</div>' +
+                                 '</div>'
+                             ]
+                     localityInfoWindow.push(content);
+                 } else {
+                     data = [$scope.mapData[key].name, $scope.mapData[key].location.lat, $scope.mapData[key].location.lon, 'images/home/marker3.png'];
+                     locationMarkers.push(data);
+                     if ($scope.mapData[key].cover == 'NA') {
+                         image = 'images/sohna.jpg';
+                     } else {
+                         image = "http://cdn.roofpik.com/roofpik/locations/" + $scope.cityId + '/' + $scope.mapData[key].id + '/images/coverPhoto/' + $scope.mapData[key].cover + '-s.jpg'
+                     }
+                     content = ['<div class="info_content">' +
+                                 '<div class="card info_content mg0">' +
+                                 '<div class="card-image">' +
+                                 '<img src="' + image + '">' +
+                                 '<a href="" class="btn red absbtn"><i class="material-icons left">details</i>See Details</a>' +
+                                 '</div>' +
+                                 '<div class="cardTitle row mgbn bdbtm">' +
+                                 '<a class="col m8 black-text text-lighten-4 pd5 pd-tspanmap">' +
+                                 '<span class="b">' + $scope.mapData[key].name + '</span>' +
+                                 '<span class="ft12">Sohna Road, Sector 48 Gurgaon</span>' +
+                                 '</a>' +
+                                 '<div class="col m4 right-align pd5 ft12i" ng-show="' + $scope.mapData[key].rating + ' != 0">' +
+                                 '<span class="block b">' + $scope.mapData[key].rating + ' Reviews</span>' +
+                                 '<span class="block">' +
+                                 '<i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index <' + $scope.mapData[key].rating + ' "blue-text":"normal"">star</i>' +
+                                 '</span>' +
+                                 '</div>' +
+                                 '</div>' +
+                                 '<div class="row mg0 ht50">' +
+                                 '<div class="col m6 pd5 dis-tab center ht50" ng-show="' + $scope.mapData[key].rent + '">' +
+                                 '<span class="block b ellipsis">Rent Price</span>' +
+                                 '<span class="ft12 block ellipsis">₹' + $scope.mapData[key].rent.min + ' - ₹' + $scope.mapData[key].rent.max + '</span>' +
+                                 '</div>' +
+                                 '<div class="col m6 pd5 center ht50">' +
+                                 '<span class="block b ellipsis">2, 3, 4 BHK</span>' +
+                                 '<span class="ft12 block ellipsis">1776 Sq. Ft. - 2345 Sq. </span>' +
+                                 '</div>' +
+                                 '</div>' +
+                                 '</div>' +
+                                 '</div>'
+                             ]
+                     locationInfoWindow.push(content);
                  }
              }
-
-            console.log(projectMarkers, projectInfoWindow);
              $timeout(function() {
-                 // google.maps.event.addDomListener(window, 'load', initMap);
-                 initMap();
+                 initMap(projectMarkers, projectInfoWindow);
              }, 100);
          })
      }
 
-     function initMap() {
+     function initMap(markers, infowindow) {
          var map;
          var bounds = new google.maps.LatLngBounds();
          var mapOptions = {
@@ -138,65 +224,24 @@
 
          // Multiple markers location, latitude, and longitude
 
-         var markers = [
-
-             ['Vipul Trade Center, NY', 28.406909, 77.042623],
-             ['Shona Road, NY', 28.416920, 77.042746, 'images/home/marker1.png'],
-             ['IFFCO Chowk Metro Station, NY', 28.471623, 77.072390, 'images/home/marker2.png'],
-             ['Huda Metro Station, NY', 28.459552, 77.072430, 'images/home/marker3.png']
-
-         ];
+         var markers = markers;
 
          // Info window content
-         var infoWindowContent = [
-
-             ['<div class="info_content">' +
-                 '<div class="card info_content mg0">' +
-                 '<div class="card-image">' +
-                 '<img src="images/sohna.jpg">' +
-                 '<a href="" class="btn red absbtn"><i class="material-icons left">details</i>See Details</a>' +
-                 '</div>' +
-                 '<div class="cardTitle row mgbn bdbtm">' +
-                 '<a class="col m8 black-text text-lighten-4 pd5 pd-tspanmap">' +
-                 '<span class="b">Bestech Park View City 1</span>' +
-                 '<span class="ft12">Sohna Road, Sector 48 Gurgaon</span>' +
-                 '</a>' +
-                 '<div class="col m4 right-align pd5 ft12i">' +
-                 '<span class="block b">5 Reviews</span>' +
-                 '<span class="block">' +
-                 '<i class="material-icons blue-text">star</i><i class="material-icons blue-text">star</i><i class="material-icons blue-text">star</i><i class="material-icons blue-text">star</i><i class="material-icons blue-text">star</i>' +
-                 '</span>' +
-                 '</div>' +
-                 '</div>' +
-                 '<div class="row mg0 ht50">' +
-                 '<div class="col m6 pd5 dis-tab center ht50">' +
-                 '<span class="block b ellipsis">Rent Price</span>' +
-                 '<span class="ft12 block ellipsis">₹28000 - ₹55000</span>' +
-                 '</div>' +
-                 '<div class="col m6 pd5 center ht50">' +
-                 '<span class="block b ellipsis">2, 3, 4 BHK</span>' +
-                 '<span class="ft12 block ellipsis">1776 Sq. Ft. - 2345 Sq. </span>' +
-                 '</div>' +
-                 '</div>' +
-                 '</div>' +
-                 '</div>'
-             ]
-
-         ];
+         var infoWindowContent = infowindow;
 
          // Add multiple markers to map
          var infoWindow = new google.maps.InfoWindow({}),
              marker, i;
 
          // Place each marker on the map  
-         for (i = 0; i < projectMarkers.length; i++) {
-             var position = new google.maps.LatLng(projectMarkers[i][1], projectMarkers[i][2]);
+         for (i = 0; i < markers.length; i++) {
+             var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
              bounds.extend(position);
              marker = new google.maps.Marker({
                  position: position,
                  map: map,
-                 title: projectMarkers[i][0],
-                 icon: projectMarkers[i][3],
+                 title: markers[i][0],
+                 icon: markers[i][3],
                  animation: google.maps.Animation.DROP
 
              });
@@ -206,7 +251,7 @@
              // Add info window to marker    
              google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
                  return function() {
-                     infoWindow.setContent(projectInfoWindow[i][0]);
+                     infoWindow.setContent(infoWindowContent[i][0]);
                      infoWindow.open(map, marker);
                      $('.LeftBox').css('left', '-500px');
                  }
@@ -241,11 +286,11 @@
 
      $scope.selectType = function() {
          if ($scope.selectedType == 'projects') {
-
+            initMap(projectMarkers, projectInfoWindow);
          } else if ($scope.selectedType == 'localities') {
-
+            initMap(localityMarkers, localityInfoWindow);
          } else {
-
+            initMap(locationMarkers, locationInfoWindow);
          }
      }
 
