@@ -1,27 +1,85 @@
 <section>
-    <div class="parallax-container posabs_img waves-effect waves-light grey darken-3 htv100">
-        <div class="btn-mid-box center">
-            <h3 class="white-text ft24 pdlr text-shd">Power Your Property Search with Genuine User Reviews </h3>
-            <div class="row pdlrb">
-                <div class="col m5 s12">
-                    <div class="input-field input-box-h card col s12 ht45 pdan">
-                        <span class="inpspn">Find :</span>
-                        <input type="text" placeholder="Apartments, Commercials, PG" class="autocomplete inp_pdw" id="location" ng-model="searched" ng-change="showResults()">
-                        <div class="search-results"></div>
+    <div class="parallax-container white htv100">
+        <video class="videohome" loop="loop" autoplay="autoplay" preload="auto">
+            <source src="video/home-background-video.mp4" type="video/mp4">
+        </video>
+        <div class="home-search">
+            <h3 class="white-text ft24 center textsd b">Power Your Property Search with Genuine User Reviews </h3>
+            <div class="row mgbn">
+                <ul class="tabs tabs-fixed-width tabs-transparent hometabs">
+                    <li class="tab bgblk-trn radiust2" ng-click="selectVertical('residential')"><a class="active white-text" href="#searchboxhome">Residential</a></li>
+                    <li class="tab bgblk-trn" ng-click="selectVertical('commercial')"><a class="white-text" href="#searchboxhome">Commercial</a></li>
+                    <li class="tab bgblk-trn radiusr2" ng-click="selectVertical('pg')"><a class="white-text" href="#searchboxhome">PG</a></li>
+                </ul>
+            </div>
+            <div id="searchboxhome" class="row bgblk-trn radius2 pdr10 cardmg searchfix">
+                <div class="col s10 pdan">
+                    <div class="row mgbn" ng-hide="searchByName">
+                        <div class="col s6">
+                            <div class="input-field card col s12 ht45 pdan reletive">
+                                <span class="inpspn">Find :</span>
+                                <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompletenear inp_pdw mgbn" ng-model="categorySearched" ng-change="showResults()">
+                                <!-- <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" /> -->
+                                <div class="search-results" ng-show="showSearch">
+                                    <ul class="collection homecoll">
+                                        <li ng-repeat="item in categorySearch| filter: categorySearched" class=" collection-item avatar" ng-click="selectCategory(item)">
+                                            <img ng-src="{{item.icon}}" class="circle" />
+                                            <span class="title ft13">{{item.name}}</span>
+                                        </li>
+                                    </ul>
+                                    <div class="pd5 grey lighten-4 ft12">More Options</div>
+                                    <ul class="collection homecoll">
+                                        <li class=" collection-item avatar"><img ng-src="images/homeicon/Commercial.png" class="circle" /> Explore Locality</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s6 pdln">
+                            <div class="input-field card col s12 ht45 pdan">
+                                <span class="inpspn">Near :</span>
+                                <input placeholder="Enter a Destination" class="autocompletenear inp_pdw mgbn" id="locality-search" ng-model="locationSearched" ng-change="searchLocation()">
+                                <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" ng-show="searchingLocation" />
+                                <div class="search-results" ng-show="showSearch1">
+                                    <ul class="collection homecoll">
+                                        <li ng-repeat="item in locations| filter: locationSearched" class=" collection-item avatar" ng-click="selectLocation(item)">
+                                            <!-- <img ng-src="{{item.icon}}" class="circle" /> -->
+                                            <span class="title ft13">{{item.name}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col m5 s12 pdln">
-                    <div class="input-field input-box-h card col s12 ht45 pdan">
-                        <span class="inpspn">Near :</span>
-                        <input placeholder="Enter a Destination" class="autocompletenear inp_pdw" id="searched" ng-model="locality" ng-change="showLocalities()">
-                        <div class="search-results"></div>
+                    <div class="row mgbn" ng-show="searchByName">
+                        <div class="col s12">
+                            <div class="input-field card col s12 ht45 pdan reletive">
+                                <span class="inpspn">Find :</span>
+                                <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompletenear inp_pdw mgbn">
+                                <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" ng-show="searchingName" />
+                                <div class="search-results" ng-show="showSearch">
+                                    <ul class="collection homecoll">
+                                        <li ng-repeat="item in categorySearch| filter: searched" class=" collection-item avatar" ng-click="selectType(item)">
+                                            <img ng-src="{{item.icon}}" class="circle" />
+                                            <span class="title ft13">{{item.name}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="input-field col m2 s12 pdan">
-                    <button class="btn col m12  waves-effect waves-light red lighten-1 ht45" id="">
-                        <i class="material-icons left">search</i>Search</i>
+                    <button class="btn col m12  waves-effect waves-light red lighten-1 ht45" ng-click="search()">
+                        <i class="material-icons left">search</i>Search
+                    </button>
                 </div>
             </div>
+            <div class="row mgt5">
+                <button class="btn-flat white-text bgblk-trn capitalize btn-sm" ng-click = "testListPage()"><i class="material-icons left">delete</i> Clear</button>
+                <button class="btn-flat white-text right bgblk-trn capitalize btn-sm" ng-click="toggleSearchType()"><i class="material-icons left">{{toggleIcon}}</i>{{showSearchTitle}}</button>
+            </div>
+        </div>
+        <div class="btn-mid-box center">
             <div class="row bgblk-trn mgbn pdt25 pdb10 white-text">
                 <div class="col s12 m4">
                     <div class="col s3 m2 mgt5">
@@ -49,6 +107,27 @@
                         <h5>Analytical Comparison </h5>
                         <p class="grey-text">We work magic with complex technologies to create detailed property comparisons.</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row red lighten-1 center pda50 mgbn">
+        <i class="material-icons medium white-text">card_giftcard</i>
+        <h4 class="uppercase white-text">
+        write a review and claim your goody bag.</h4>
+        <button class="btn white black-text mgt20"><i class="material-icons left">create</i>Review Now</button>
+    </div>
+    <div class="row mgbn reletive">
+        <div maphome></div>
+    </div>
+    <div class="row mgb10 reletive pdr10">
+        <h5 class="center b">Cover Stories</h5>
+        <div class="coverfixbox card pdan" ng-repeat='i in [1,2,3,4,5,6,7,8]'>
+            <div class="card-image reletive">
+                <img src="images/home/mg-road.jpg">
+                <div class="overlay pda10">
+                    <h5 class="mg0 ft13 b">Heading lorem ipsum</h5>
+                    <p class="mg0 ft12">Sub heading lorem ipsum</p>
                 </div>
             </div>
         </div>

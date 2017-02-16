@@ -5,30 +5,30 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         templateUrl: 'templates/home/home.htm',
         controller: 'homeCtrl'
     });
+
     $stateProvider.state('contact-us', {
         url: '/contact-us',
         templateUrl: 'templates/general/contact-us.html',
         controller: 'contactUsCtrl'
     });
+
     $stateProvider.state('faq', {
         url: '/faq',
         templateUrl: 'templates/general/faq.htm',
         controller: 'faq-ctrl'
     });
+
     $stateProvider.state('about-us', {
         url: '/about-us',
         templateUrl: 'templates/general/about-us.htm'
     });
+
     $stateProvider.state('projects', {
         url: '/projects?segment&bhk&price_range&area_range&location&locality&details_builder$propertyType',
         templateUrl: 'templates/projects/projects.html',
         controller: 'projectsCtrl'
     });
-    $stateProvider.state('listing', {
-            url: '/listing?type&vertical&id',
-            templateUrl: 'templates/details/listing.html',
-            controller: 'listingCtrl'
-    });
+
     $stateProvider.state('project-details', {
         url: '/project-details/:projectId',
         views: {
@@ -42,6 +42,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             }
         }
     });
+
     $stateProvider.state('cghs', {
         url: '/cghs?bhk&price_range&area_range&location&locality&propertyType',
         templateUrl: 'templates/projects/cghs.html',
@@ -61,6 +62,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             }
         }
     });
+
     $stateProvider.state('co-working-details', {
         url: '/co-working-details',
         views: {
@@ -88,6 +90,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             }
         }
     });
+
     $stateProvider.state('blogs', {
         url: '/blogs/:city/:cityId/:from',
         views: {
@@ -109,6 +112,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             }
         }
     });
+
     $stateProvider.state('blog', {
         url: '/blog/:city/:cityId/:from/:fromId',
         views: {
@@ -143,6 +147,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             }
         }
     });
+
     $stateProvider.state('blog-detail', {
         url: '/blog-detail/:city/:place/:title/:id',
         views: {
@@ -156,6 +161,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             }
         }
     });
+
     $stateProvider.state('cover-stories', {
         url: '/cover-stories/:city/:cityId/:from',
         views: {
@@ -177,6 +183,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             }
         }
     });
+
     $stateProvider.state('cover-story', {
         url: '/cover-story/:city/:cityId/:from/:fromId',
         views: {
@@ -212,12 +219,23 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         }
     });
 
-
 $stateProvider.state('write-review', {
     url: '/write-review?id',
     templateUrl: 'templates/review/write-review.html',
     controller: 'writeReviewCtrl'
 });
+
+
+    $stateProvider.state('list', {
+        url: '/list?p',
+        templateUrl: 'templates/projects/listing.html',
+        controller: 'listCtrl'
+    })
+    $stateProvider.state('listing', {
+        url: '/listing?parameters',
+        templateUrl: 'templates/details/listing.html',
+        controller: 'listingCtrl'
+    })
 
 $urlRouterProvider.otherwise('/home');
 }]);

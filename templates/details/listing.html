@@ -1,9 +1,10 @@
 <div class="row mgt70 linkroot">
     <h3 align="center"> {{projectName}} </h3>
-    <div><img src="images/dummy/dummy.jpg" style="width: 100%">
+    <div><img ng-src="{{coverPhoto}}" style="width: 100%">
+    <div>Thumbnail Image: <img ng-src="{{thumbnailPhoto}}" style="width: 20%">
         <div class="col s12 m5 amen-tab htfixbox boxsd white">
             <ul class="tabs">
-                <li class="tab col m12"><a class="active" href="#interest">Yes I am Interested</a></li>
+                <li class="tab col m12"><a class="active">Yes I am Interested</a></li>
                 <!-- <li class="tab col m6"><a href="#pricefinder">Price finder</a></li> -->
             </ul>
             <div class="row">
@@ -19,7 +20,7 @@
                         </div>
                         <div class="input-field col s12">
                             <i class="material-icons prefix">email</i>
-                            <input placeholder="Email" type="email" class="validate mgb5 ft12"  required>
+                            <input placeholder="Email" type="email" class="validate mgb5 ft12" required>
                         </div>
                         <div class="col s12 mgtmn mgt10">
                             <button ng-disabled="contactForm.$invalid" class="waves-effect waves-light btn btn-full blue lighten-2"><i class="material-icons left">list</i> Provide Details</button>
@@ -29,14 +30,49 @@
             </div>
         </div>
         <h4>Amenities:</h4>
-        <div class="col m2" ng-repeat="(key, value) in projectDetails">
-            <h5>{{key | uppercase}}:</h5 ><div ng-repeat= "(a,b) in value">{{a}} : {{b}}</div>
+        <div class="col m2" ng-repeat="(key, value) in projDetails.amenities">
+            <h5>{{key | uppercase}}:</h5 ><div ng-repeat= "(a,b) in value">{{a | lowercase}} : {{b}}</div>
    	</div>
 </div>
 
-<!-- <div class = "row mgt70 linkroot">
-   		<h4>Reviews:</h4>
-   	 <div class="col m2" ng-repeat="(key, value) in projectDetails">
-        <h5>{{key | uppercase}}:</h5 ><div ng-repeat= "(a,b) in value">{{a}} : {{b}}</div>
+<div ng-hide = "hidePropertyTypes">
+ <h4>Available Property Types: </h4>
+        <ul ng-repeat = "type in propertyTypes track by $index">
+        	<li>{{type}}</li>
+        </ul>
+</div><br>
+<div class = "row mgt70 linkroot" ng-hide = "hidePriceRange">
+<h4>Price Ranges: </h4>
+  <div class = "col m2">
+  2BHK Apartments: <br>Min: {{priceRange['2A'].min}}<br>Max: {{priceRange['2A'].max}}<br>
+  3BHK Apartments: <br>Min: {{priceRange['3A'].min}}<br>Max: {{priceRange['3A'].max}}<br>
+  4BHK Apartments: <br>Min: {{priceRange['4A'].min}}<br>Max: {{priceRange['4A'].max}}<br>
+  5BHK Apartments: <br>Min: {{priceRange['5A'].min}}<br>Max: {{priceRange['5A'].max}}<br>
+  3BHK Penthouses/Duplexes: <br>Min: {{priceRange['3P'].min}}<br>Max: {{priceRange['3P'].max}}<br>
+  4BHK Penthouses/Duplexes: <br>Min: {{priceRange['4P'].min}}<br>Max: {{priceRange['4P'].max}}<br>
+  5BHK Penthouses/Duplexes: <br>Min: {{priceRange['5P'].min}}<br>Max: {{priceRange['5P'].max}}<br>
+  </div>
+  </div>
+<div class = "row mgt70 linkroot" ng-hide = "hideReviewsAndRatings">
+   		<h4>Reviews and Ratings:</h4>
+   	 <div class="col m2" ng-repeat="key in totalReviews.reviews">
+        <h5>Title: {{key.reviewTitle}}</h5 >
+        <div>{{key.reviewText}} <br> <h6>- By {{key.userName}}</h6></div>
+        <h6>Ratings: </h6><br>
+        <h5>Overall Rating: {{key.overallRating}}<br>
+        <div ng-repeat = "(key, value) in key.ratings"> {{key}} : {{value}}</div>
+       <!--  Ratings: <br><div ng-repeat = "(key,value) in key.rating"> {{key}} : {{value}} -->
    	</div>
-</div> -->
+</div>
+<br><br>
+<div ng-hide = "hideGallery"> <h4>Gallery</h4></div>
+<br>
+<div ng-repeat = "pic in otherImages"><img ng-src = "{{pic}}"><br><br></div>
+<div><h3>Related Cover Stories</h3></div>
+<div ng-hide = "hideStories">No Stories To Show</div>
+<div ng-show = "showStories"> 
+	<div ng-repeat = "value in coverStories"> <h3>Title: {{value.title}}</h3> <br>
+	{{value.story}} <br>
+	-By {{value.userName}}
+</div>
+</div>

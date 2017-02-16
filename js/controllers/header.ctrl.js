@@ -58,31 +58,24 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', function($scope, $sta
                 page_size: page_size
             }
         }).then(function mySucces(response) {
-            console.log(response);
-
             totalProjects = response.data.hits;
             totalProjectsFetched += Object.keys(response.data.details).length;
             $scope.dataFetched = true;
             $scope.projects = response.data.details;
-            console.log($scope.projects);
             for (key in $scope.projects) {
                 if ($scope.projects[key].cover.indexOf('http') == -1) {
                     $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/residential/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-s.jpg';
                 }
                 $scope.projectList.push($scope.projects[key]);
             }
-            console.log($scope.projectList)
-
             loading(true);
         }, function myError(err) {
-            console.log(err);
+            // console.log(err);
         })
 
     }
 
     $scope.callFunction = function() {
-        console.log($scope.enteredText.length)
-
         $scope.projectList = [];
         if ($scope.enteredText.length >= 2) {
             $http({
@@ -92,24 +85,19 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', function($scope, $sta
                     details_name: $scope.enteredText
                 }
             }).then(function mySucces(response) {
-                console.log(response);
-
                 totalProjects = response.data.hits;
                 totalProjectsFetched += Object.keys(response.data.details).length;
                 $scope.dataFetched = true;
                 $scope.projects = response.data.details;
-                console.log($scope.projects);
                 for (key in $scope.projects) {
                     if ($scope.projects[key].cover.indexOf('http') == -1) {
                         $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/residential/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-s.jpg';
                     }
                     $scope.projectList.push($scope.projects[key]);
                 }
-                console.log($scope.projectList)
-
                 loading(true);
             }, function myError(err) {
-                console.log(err);
+                // console.log(err);
             })
         }
 

@@ -36,3 +36,103 @@ function deleteLocalStorage(name){
 function getLocalStorage(name){
     return JSON.parse(localStorage.getItem(name));
 }
+
+
+// encode parameters to base64
+function encodeParams(param){
+  var parameter = '';
+  for(key in param){
+    if(typeof(param[key]) == 'string'){
+      param[key] =  encodeURIComponent(param[key]);
+    }
+    if(parameter.length != 0){
+      parameter += '&';
+    }
+    parameter += key+'='+param[key];
+  }
+  return btoa(parameter);
+}
+
+// decode parameters from base64
+function decodeParams(param){
+  var parameter = {};
+  param = atob(param);
+  param = param.split('&');
+  for(key in param){
+    var field = param[key].split('=');
+    parameter[field[0]] = decodeURIComponent(field[1]);
+  }
+  return parameter;
+}
+
+
+// Search variable
+
+var searchObject = {
+   'residential': [
+       {
+           icon: 'images/homeicon/CGHS.png',
+           name: 'CGHS',
+           id: 1
+       },
+       {
+           icon: 'images/homeicon/Apartment.png',
+           name: 'Apartment',
+           id: 2
+       },
+       {
+           icon: 'images/homeicon/Villa-penthouse.png',
+           name: 'Penthouse / Villas',
+           id: 3
+       },
+       {
+           icon: 'images/homeicon/Lowrise.png',
+           name: 'Low Rise / Independent Floors',
+           id: 4
+       }
+   ],
+   'commercial':[
+       {
+           icon: 'images/homeicon/Malls.png',
+           name: 'Malls',
+           id: 1
+       },
+       {
+           icon: 'images/homeicon/OpenMarkets.png',
+           name: 'Open Markets',
+           id: 2
+       },
+       {
+           icon: 'images/homeicon/Business Center.png',
+           name: 'Business Centers',
+           id: 3
+       },
+       {
+           icon: 'images/homeicon/ITParks.png',
+           name: 'IT Parks',
+           id: 3
+       },
+       {
+           icon: 'images/homeicon/Commercial.png',
+           name: 'Co-work',
+           id: 3
+       }
+   ],
+   'pg': [
+       {
+           icon: 'images/homeicon/Commercial.png',
+           name: 'Girls Hostels',
+           id: 1
+       },
+       {
+           icon: 'images/homeicon/Commercial.png',
+           name: 'Boys Hostels',
+           id: 2
+       },
+       {
+           icon: 'images/homeicon/Commercial.png',
+           name: 'Co-host',
+           id: 3
+       }
+   ]
+};
