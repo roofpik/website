@@ -154,6 +154,8 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
                 data[key] = $scope.filters[key];
             }
         }
+        data.page_start = page_start;
+        data.page_size = page_size;
         console.log(data);
         $http({
             url: 'http://107.23.243.89/api/GetListing_1.0',

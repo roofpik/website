@@ -13,18 +13,19 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     $scope.locationDataLoaded = false;
     $scope.searchingName = false;
 
+
     $('ul.tabs').tabs();
     $('select').material_select();
     $('.parallax').parallax();
     // to change verttical and category options
-    $scope.selectVertical = function(val){
+    $scope.selectVertical = function(val) {
         $scope.selectedVertical = val;
         $scope.categorySearch = searchObject[$scope.selectedVertical];
     }
 
-    $scope.toggleSearchType = function(){
+    $scope.toggleSearchType = function() {
         $scope.searchByName = !$scope.searchByName;
-        if($scope.searchByName){
+        if ($scope.searchByName) {
             $scope.showSearchTitle = 'Guided Search';
             $scope.toggleIcon = 'arrow_drop_up';
         } else {
@@ -33,19 +34,57 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         }
     }
 
-    // if user is logged in, appen uid to params
-    if (checkLocalStorage('uid')) {
-        $timeout(function() {
-            // console.log(JSON.parse(localStorage.getItem('uid')));
-            $scope.uid = JSON.parse(localStorage.getItem('uid'));
-            if (parameter.length != 0) {
-                parameter += "&"
-            }
-            parameter = "uid=" + encodeURIComponent($scope.uid);
+
+    $scope.showResults = function() {
+        console.log('called')
+        console.log($scope.searched)
+        if ($scope.searched.length = 2) {
+            console.log($scope.searched);
+            $http({
+                url: 'http://35.154.60.19/api/GetResidential_1.0',
+                method: 'GET',
+                params: {
+                    details_name: $scope.searched
+                }
+            }).then(function mySuccess(response) {
+                console.log(response);
+                totalProjects = response.data.hits;
+                totalProjectsFetched += Object.keys(response.data.details).length;
+                $scope.dataFetched = true;
+                $scope.projects = response.data.details;
+                console.log($scope.projects);
+                for (key in $scope.projects) {
+                    if ($scope.projects[key].cover.indexOf('http') == -1) {
+                        $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/residential/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-xs.jpg';
+                    }
+                    $scope.projectList1[$scope.projects[key].name.toString()] = $scope.projects[key].cover;
+                    $scope.projectList2[$scope.projects[key].name.toString()] = $scope.projects[key].id;
+                }
+                console.log($scope.projectList1)
+                console.log($scope.projectList2)
+
+                bindValues();
+
+                loading(true);
+            }, function myError(err) {
+                console.log(err);
+            })
+        }
+
+        // if user is logged in, appen uid to params
+        if (checkLocalStorage('uid')) {
+            $timeout(function() {
+                // console.log(JSON.parse(localStorage.getItem('uid')));
+                $scope.uid = JSON.parse(localStorage.getItem('uid'));
+                if (parameter.length != 0) {
+                    parameter += "&"
+                }
+                parameter = "uid=" + encodeURIComponent($scope.uid);
+                getCurrentLocation();
+            }, 0);
+        } else {
             getCurrentLocation();
-        }, 0);
-    } else {
-        getCurrentLocation();
+        }
     }
 
     // called when user selects a type
@@ -53,6 +92,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         if (val.name == 'Explore Locality') {
             // if selected type is search locality then shift focus to locality search
             $('#locality-search').focus();
+
         }
         $scope.categorySearched = val.name;
         $scope.selectedType = val;
@@ -105,6 +145,37 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         getLocations();
     }
 
+    $scope.showLocalities = function() {
+        if ($scope.locality.length = 2) {
+            console.log('called')
+            var searchedLocality = encodeURIComponent($scope.locality);
+            var param = btoa('id=' + searchedLocality);
+            $http({
+                url: 'http://35.154.60.19/api/GetLocality_1.0',
+                method: 'GET',
+                params: {
+                    id: param
+                }
+            }).then(function mySucces(response) {
+                console.log(response);
+                $scope.total = response.data.details;
+                for (key in $scope.total) {
+                    console.log(key);
+                    if ($scope.total[key].name) {
+                        $scope.localities[$scope.total[key].name.toString()] = $scope.total[key].id;
+                        $scope.localities2[$scope.total[key].name.toString()] = null;
+
+                    }
+
+                }
+                console.log($scope.localities);
+                setList();
+            }, function myError(err) {
+                console.log(err);
+            })
+        }
+    }
+
     // called when location not found or no permission
     function showError(error) {
         switch (error.code) {
@@ -120,6 +191,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
             case error.UNKNOWN_ERROR:
                 // console.log("An unknown error occurred.");
                 break;
+
         }
         if (parameter.length != 0) {
             parameter += "&"
@@ -132,10 +204,10 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     function getLocations(name) {
         // parameter += "&name="+encodeURIComponent('Sector 48');
         // console.log(parameter);
-        if(!name) {
+        if (!name) {
             name = '';
         }
-        finalParam = btoa(parameter+ name);
+        finalParam = btoa(parameter + name);
         console.log(atob(finalParam));
         $http({
             url: 'http://107.23.243.89/api/GetLocations_1.0',
@@ -154,11 +226,11 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         })
     }
 
-    $scope.searchLocation = function(){
+    $scope.searchLocation = function() {
         // console.log($scope.locationSearched);
-        if($scope.locationSearched) {
-            if($scope.locationSearched.length > 2){
-                name = "&name="+encodeURIComponent($scope.locationSearched);
+        if ($scope.locationSearched) {
+            if ($scope.locationSearched.length > 2) {
+                name = "&name=" + encodeURIComponent($scope.locationSearched);
                 getLocations(name);
             }
         }
@@ -171,30 +243,45 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         $scope.selectedLocation = loc;
     }
 
-    $scope.search = function(){
+    $scope.search = function() {
         // If person is searching by name take to details view else take to list view
-        if($scope.searchByName){
+        if ($scope.searchByName) {
 
         } else {
             var param = {
                 'vertical': $scope.selectedVertical,
-                'category': 'Apartments'            }
+                'category': 'Apartments'
+            }
             var parameter = encodeParams(param);
-            $state.go('list', {p: parameter});
+
+            // console.log(parameter);
+            $state.go('list', { p: parameter });
+
         }
+
     }
 
+    //demo function attached to delete button to test the projects/locations/localities details page
+    $scope.testListPage = function() {
+        var params = {
+            'vertical': 'residential',
+            'id': '-KYMt4pSYjIUsknqZ6Qr',
+            'type': 'project'
+        }
+        var parameter = encodeParams(params);
+        $state.go('listing', { parameters: parameter });
+    }
 }]);
 
 
-app.controller('coverStoryHomeCtrl', ['$scope', '$timeout', function($scope, $timeout){
+app.controller('coverStoryHomeCtrl', ['$scope', '$timeout', function($scope, $timeout) {
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.coverStoriesFetched = false;
     db.ref('shortStories/-KYJONgh0P98xoyPPYm9')
         .limitToFirst(8)
-        .once('value', function(response){
+        .once('value', function(response) {
             console.log(response.val());
-            $timeout(function(){
+            $timeout(function() {
                 $scope.stories = response.val();
                 angular.forEach($scope.stories, function(value, key) {
                     // value.redirectionUrl = '/#/story/gurgaon/' + convertToHyphenSeparated(value.placeName) + '/' + convertToHyphenSeparated(value.title) + '/' + value.storyId;

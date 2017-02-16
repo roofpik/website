@@ -1,43 +1,130 @@
-<div id="mapContainer">
-    <div id="mapCanvas" class="ht600"></div>
-    <div class="map-search">
-        <div id="search_map" class="row radius2 pdr10 cardmg">
-            <div class="col s9">
-                <div class="input-field card ht45 pdan reletive">
-                    <span class="inpspn">Find :</span>
-                    <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompletenear inp_pdw mgbn">
-                    <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" />
-                    <div class="search-results" ng-show="showSearch">
-                        <ul class="collection homecoll">
-                            <li ng-repeat="item in search| filter: searched" class=" collection-item avatar" ng-click="selectType(item)">
-                                <img ng-src="{{item.icon}}" class="circle" />
-                                <span class="title ft13">{{item.name}}</span>
-                            </li>
-                        </ul>
+<div class="row mgbn">
+    <div class="col m8 reletive">
+        <div id="mapContainer">
+            <div id="mapCanvas" class="ht600"></div>
+            <div class="map-search">
+                <div id="search_map" class="row radius2 pdr10 cardmg">
+                    <div class="col s9">
+                        <div class="input-field card ht45 pdan reletive">
+                            <span class="inpspn">Find :</span>
+                            <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompletenear inp_pdw mgbn">
+                            <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" />
+                            <div class="search-results" ng-show="showSearch">
+                                <ul class="collection homecoll">
+                                    <li ng-repeat="item in search| filter: searched" class=" collection-item avatar" ng-click="selectType(item)">
+                                        <img ng-src="{{item.icon}}" class="circle" />
+                                        <span class="title ft13">{{item.name}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-field col s3 pdan">
+                        <button class="btn btn-full red lighten-1 ht45" ng-click="selectType()">
+                            <i class="material-icons left">search</i>Search
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="input-field col s3 pdan">
-                <button class="btn btn-full red lighten-1 ht45" ng-click="selectType()">
-                    <i class="material-icons left">search</i>Search
-                </button>
-            </div>
         </div>
     </div>
-    <div class="map-radio">
-        <form>
-            <p>
-                <input name="displayMap" type="radio" id="projects" ng-change="selectType()" ng-model="selectedType" value="projects"/>
-                <label for="projects">Projects</label>
-            </p>
-            <p>
-                <input name="displayMap" type="radio" id="localities" ng-change="selectType()" ng-model="selectedType" value="localities"/>
-                <label for="localities">Localities</label>
-            </p>
-            <p>
-                <input name="displayMap" type="radio" id="locations" ng-change="selectType()" ng-model="selectedType" value="locations"/>
-                <label for="locations">Locations</label>
-            </p>
-        </form>
+    <div class="col m4 greytran pda10">
+        <div class="row mgbn">
+            <div class="col s8">
+                <h5 class="b white-text"><i class="material-icons left">list</i> Explore Localities</h5>
+            </div>
+            <div class="col s4 right-align">
+                <div class="">
+                    <button class="dropdown-button btn-flat white-text b"
+                    data-activates="radiolist">
+                        <i class="material-icons right">filter_list</i>
+                    </button>
+                    <form>
+                        <ul id="radiolist" class="dropdown-content wd150">
+                            <li class="pda10">
+                                <input name="displayMap" class="with-gap" type="radio" id="projects" ng-change="selectType()" ng-model="selectedType" value="projects" />
+                                <label for="projects">Projects</label>
+                            </li>
+                            <li class="pda10">
+                                <input name="displayMap" class="with-gap" type="radio" id="localities" ng-change="selectType()" ng-model="selectedType" value="localities" />
+                                <label for="localities">Localities</label>
+                            </li>
+                            <li class="pda10">
+                                <input name="displayMap" class="with-gap" type="radio" id="locations" ng-change="selectType()" ng-model="selectedType" value="locations" />
+                                <label for="locations">Locations</label>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row mgbn">       
+            <ul class="collapsible ht-auto fixh-aco" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>First lorem ipsum</div>
+                    <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>First lorem ipsum</div>
+                    <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>First lorem ipsum</div>
+                    <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>First lorem ipsum</div>
+                    <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>First lorem ipsum</div>
+                    <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>First lorem ipsum</div>
+                    <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>First lorem ipsum</div>
+                    <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>First lorem ipsum</div>
+                    <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>First lorem ipsum</div>
+                    <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>First lorem ipsum</div>
+                    <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    </div>
+                </li>
+            </ul>
+         
+        </div>
+        
+        <div class="row mgt10 mgbn center">
+            <ul class="pagination">
+                <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a>
+                </li>
+                <li class="active"><a href="#!">1</a></li>
+                <li class="waves-effect"><a href="#!">2</a></li>
+                <li class="waves-effect"><a href="#!">3</a></li>
+                <li class="waves-effect"><a href="#!">4</a></li>
+                <li class="waves-effect"><a href="#!">5</a></li>
+                <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+            </ul>
+        </div>
     </div>
 </div>
