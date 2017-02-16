@@ -1,8 +1,10 @@
  app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
      $scope.selectedType = 'projects';
      console.log('called');
+     $('.collapsible').collapsible();  
      $('.draggable').attr('draggable', true);
-     $('.collapsible').collapsible();
+
+     $('.dropdown-button').dropdown();
      $('input.autocomplete').autocomplete({
          data: {
              "Apple": null,
@@ -58,7 +60,7 @@
                  // console.log("An unknown error occurred.");
                  break;
          }
-         // getLocations();
+         getMapData(28.4594965, 77.02663830000006);
      }
 
 
@@ -87,9 +89,9 @@
                                      '<div class="card info_content mg0">' +
                                      '<div class="card-image">' +
                                      '<img src="images/sohna.jpg">' +
-                                     '<a href="" class="btn red absbtn"><i class="material-icons left">details</i>See Details</a>' +
+                                     '<a href="" class="btn grey darken-4 absbtn"><i class="material-icons left">details</i>See Details</a>' +
                                      '</div>' +
-                                     '<div class="cardTitle row mgbn bdbtm">' +
+                                     '<div class="cardTitle row mgan bdbtm">' +
                                      '<a class="col m8 black-text text-lighten-4 pd5 pd-tspanmap">' +
                                      '<span class="b">'+$scope.mapData[key].name+'</span>' +
                                      '<span class="ft12">Sohna Road, Sector 48 Gurgaon</span>' +
@@ -248,5 +250,7 @@
 
          }
      }
+
+     $scope.listNum = [1,2,3,4,5];
 
  }]);

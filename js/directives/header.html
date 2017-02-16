@@ -2,38 +2,53 @@
     <div class="navbar-fixed">
         <nav class="homebgtrn shadow_n">
             <div class="nav-wrapper">
-           <!--  $("#starter_box").click(function () {
+                <!--  $("#starter_box").click(function () {
                 $(this).css('display', 'none');
             }); -->
                 <a href="" onmouseover="$('#slide-out-top').css('top', '65px');" class="mgleftrt black-text left topmenu">
                     <i class="material-icons">menu</i></a>
                 <a href="#home" class="rooflogo left"><img src="images/general/logo.png"></a>
-              <span class="ft12 pdl30">Location</span>
+                <span class="ft12 pdl30">Location</span>
                 <ul class="right mgr10">
                     <li> <a href="#write-review" class="wd-sm btn-flat capitalize"><i class="material-icons left bticont" ng-click = "">create</i> Write Review</a></li>
-                  
                     <li>
                         <a data-target="loginbox" class="btn-flat wd-sm mgln capitalize">
                             <i class="material-icons left bticont">lock_outline</i> Login/Sign Up</a>
-                    </li>                   
-                   <!--  <li><a data-activates="slide-out-right" href="#" class="button-heart show-on-large"><i class="material-icons grey-text">favorite_border</i></a></li> -->
+                    </li>
+                    <!--  <li><a data-activates="slide-out-right" href="#" class="button-heart show-on-large"><i class="material-icons grey-text">favorite_border</i></a></li> -->
                 </ul>
             </div>
         </nav>
     </div>
-    <div id="slide-out-top" class="row overhdn" onmouseleave="$('#slide-out-top').css('top', '-300px');">       
+    <div id="slide-out-top" class="row overhdn" onmouseleave="$('#slide-out-top').css('top', '-300px');">
         <div class="col s12  bgblk-trn center pda10">
             <ul class="hdr_list center">
                 <li><a href="#about-us" class="">About</a></li>
                 <li><a href="#cover-stories/gurgaon/-KYJONgh0P98xoyPPYm9/1">Cover Stories</a></li>
-                <li><a href="#blogs/gurgaon/-KYJONgh0P98xoyPPYm9/1">Blogs</a></li>               
+                <li><a href="#blogs/gurgaon/-KYJONgh0P98xoyPPYm9/1">Blogs</a></li>
                 <li><a href="#write-review">Write Review</a></li>
                 <li><a href="#faq"> FAQ's </a></li>
-                <li><a href="#contact-us">Contact us</a></li>              
+                <li><a href="#contact-us">Contact us</a></li>
             </ul>
-        </div>       
+            <div class="socialicon">
+                <a href="https://www.facebook.com/roofpik" target="_blank">
+                    <img src="images/homeicon/facebook-32.png">
+                </a>
+                <a href="https://www.linkedin.com/company/roofpik?trk=job_view_topcard_company_name" target="_blank">
+                    <img src="images/homeicon/linkedin-6-32.png">
+                </a>
+                <a href="https://www.twitter.com/roofpik" target="_blank">
+                    <img src="images/homeicon/twitter-32.png">
+                </a>
+                <a href="">
+                    <img src="images/homeicon/google-plus-5-32.png">
+                </a>
+                <a href="">
+                    <img src="images/homeicon/instagram-32.png">
+                </a>
+            </div>
+        </div>
     </div>
-
     <div id="searchbox" class="modal white modal-fixed-footer">
         <form>
             <div class="modal-content pdb25">
@@ -42,10 +57,10 @@
                 </h5>
                 <h6 class="grey-text pdlrn ft15 ftw3">Browse through 1,000+ verified property reviews. Or share one today.</h6>
                 <div class="search-wrapper card">
-                    <input id="search" placeholder="search" ng-change = "callFunction()" ng-model = "enteredText"><i class="material-icons search_i">search</i>
+                    <input id="search" placeholder="search" ng-change="callFunction()" ng-model="enteredText"><i class="material-icons search_i">search</i>
                     <div class="search-results"></div>
                 </div>
-                <div class="card horizontal" ng-repeat = "item in projectList" ng-click = "openProject()">
+                <div class="card horizontal" ng-repeat="item in projectList" ng-click="openProject()">
                     <a href="">
                         <div class="card-image fix40 left">
                             <img ng-src="{{item.cover}}" class="responsive-img searchImg">

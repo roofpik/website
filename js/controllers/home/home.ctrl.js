@@ -12,10 +12,12 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     $scope.toggleIcon = 'arrow_drop_down_circle';
     $scope.locationDataLoaded = false;
     $scope.searchingName = false;
+    
 
     $('ul.tabs').tabs();
  $('select').material_select();
    $('.parallax').parallax();
+
     // to change verttical and category options
     $scope.selectVertical = function(val){
         $scope.selectedVertical = val;
