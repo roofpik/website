@@ -1,0 +1,14 @@
+<div ng-show="coverStoriesFetched">
+    <h4 class="center b white-text">Cover Stories</h4>
+    <div class="coverfixbox card pdan" ng-repeat='story in stories'>
+        <div class="card-image reletive">
+            <img ng-src="{{story.coverPhoto}}">
+            <div class="overlay pda10">
+                <h5 class="mg0 ft13 b truncate">{{story.title}}</h5>
+                <p class="mg0 ft12 truncate grey-text">{{story.userName}}</p>
+                <p class="mg0 ft12 truncate grey-text">{{story.placeName}}</p>
+                <p class="mg0 ft12 truncate grey-text">{{story.createdDate | date:'MMM dd, yy'}}</p>
+            </div>
+        </div>
+    </div>
+</div>

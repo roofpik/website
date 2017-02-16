@@ -1,8 +1,11 @@
 <section>
-    <div class="parallax-container white htv100">
-        <video class="videohome" loop="loop" autoplay="autoplay" preload="auto">
-            <source src="video/home-background-video.mp4" type="video/mp4">
-        </video>
+    <div class="parallax-container htv100">
+        <div class="parallax">
+            <video class="videohome" loop="loop" autoplay="autoplay" preload="auto">
+                <source src="video/home-background-video.mp4" type="video/mp4">
+            </video>
+            <!-- <img src="images/home/bg1.jpg"> -->
+        </div>
         <div class="home-search">
             <h3 class="white-text ft24 center textsd b">Power Your Property Search with Genuine User Reviews </h3>
             <div class="row mgbn">
@@ -41,7 +44,7 @@
                                 <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" ng-show="searchingLocation" />
                                 <div class="search-results" ng-show="showSearch1">
                                     <ul class="collection homecoll">
-                                        <li ng-repeat="item in locations| filter: locationSearched" class=" collection-item avatar" ng-click="selectLocation(item)">
+                                        <li ng-repeat="item in locations" class=" collection-item avatar" ng-click="selectLocation(item)">
                                             <!-- <img ng-src="{{item.icon}}" class="circle" /> -->
                                             <span class="title ft13">{{item.name}}</span>
                                         </li>
@@ -111,25 +114,21 @@
             </div>
         </div>
     </div>
-    <div class="row red lighten-1 center pda50 mgbn">
+    <div class="row redtran center pda50 mgbn">
         <i class="material-icons medium white-text">card_giftcard</i>
         <h4 class="uppercase white-text">
         write a review and claim your goody bag.</h4>
         <button class="btn white black-text mgt20"><i class="material-icons left">create</i>Review Now</button>
     </div>
-    <div class="row mgbn reletive">
-        <div maphome></div>
-    </div>
-    <div class="row mgb10 reletive pdr10">
-        <h5 class="center b">Cover Stories</h5>
-        <div class="coverfixbox card pdan" ng-repeat='i in [1,2,3,4,5,6,7,8]'>
-            <div class="card-image reletive">
-                <img src="images/home/mg-road.jpg">
-                <div class="overlay pda10">
-                    <h5 class="mg0 ft13 b">Heading lorem ipsum</h5>
-                    <p class="mg0 ft12">Sub heading lorem ipsum</p>
+    <div class="row mgbn">
+        <div class="container container2">
+            <div class="row mgbn">
+                <div class="col m12 pda10">
+                    <div maphome></div>
                 </div>
+               
             </div>
         </div>
     </div>
+    <div class="row pdb10 pdt10 mgbn reletive redtran  pdr10" ui-view="coverStories"></div>
 </section>

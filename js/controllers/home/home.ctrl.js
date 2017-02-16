@@ -1,5 +1,4 @@
 app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope', function($scope, $http, $state, $timeout, $rootScope) {
-
     $scope.selectedVertical = 'residential';
     $scope.categorySearch = searchObject[$scope.selectedVertical]; //Stores the search object for different verticals
     $scope.categorySearched = '';
@@ -13,8 +12,11 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     $scope.toggleIcon = 'arrow_drop_down_circle';
     $scope.locationDataLoaded = false;
     $scope.searchingName = false;
+    
 
     $('ul.tabs').tabs();
+ $('select').material_select();
+   $('.parallax').parallax();
 
     // to change verttical and category options
     $scope.selectVertical = function(val) {
@@ -140,7 +142,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         }
 
         parameter += "lat=" + position.coords.latitude + "&lon=" + position.coords.longitude;
-        getMapData(position.coords.latitude, position.coords.longitude);
+        // getMapData(position.coords.latitude, position.coords.longitude);
         getLocations();
     }
 
@@ -195,6 +197,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         getLocations();
     }
 
+<<<<<<< HEAD
     function getMapData(lat, lon) {
         var data = {
             lat: lat,
@@ -212,6 +215,8 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     }
 
 
+=======
+>>>>>>> e989e40a820fa375e87ec1cdb26b45593c0a3620
     function getLocations() {
         // parameter += "&name="+encodeURIComponent('Sector 48');
         // console.log(parameter);
@@ -260,8 +265,10 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
                 'location': '-KYJOldHpi16DEUK0pXn'
             }
             var parameter = encodeParams(param);
+
             // console.log(parameter);
             $state.go('list', { p: parameter });
+
         }
 
     }
@@ -276,4 +283,24 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         var parameter = encodeParams(params);
         $state.go('listing', { parameters: parameter });
     }
+}]);
+
+
+app.controller('coverStoryHomeCtrl', ['$scope', '$timeout', function($scope, $timeout){
+    $scope.cityId = '-KYJONgh0P98xoyPPYm9';
+    $scope.coverStoriesFetched = false;
+    db.ref('shortStories/-KYJONgh0P98xoyPPYm9')
+        .limitToFirst(8)
+        .once('value', function(response){
+            console.log(response.val());
+            $timeout(function(){
+                $scope.stories = response.val();
+                angular.forEach($scope.stories, function(value, key) {
+                    // value.redirectionUrl = '/#/story/gurgaon/' + convertToHyphenSeparated(value.placeName) + '/' + convertToHyphenSeparated(value.title) + '/' + value.storyId;
+                    // value.redirectionUrl = value.redirectionUrl.replace(/[?=]/g, "");
+                    value.coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/' + $scope.cityId + '/' + value.storyId + '/coverPhoto/' + value.coverPhoto + '-m.jpg';
+                })
+                $scope.coverStoriesFetched = true;
+            }, 0);
+        })
 }]);

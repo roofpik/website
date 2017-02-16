@@ -21,6 +21,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', funct
     $scope.projectList = [];
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.currentPage = 1;
+    $scope.lastPage = 0;
     $scope.pages = [];
 
     mapParameters();
@@ -66,7 +67,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', funct
     		'category': parameters.category,
     		// 'style': 'Economy',
             // 'style': $scope.filters.style,
-            // 'bhk': $scope.filters.bhk,
+            'bhk': '2$6',
             // 'price_range': $scope.filters.price_range,
             // 'area_range': $scope.filters.area_range,
             // 'locationId': $scope.filters.locationId
@@ -87,13 +88,19 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', funct
             }
         }).then(function mySucces(response) {
             console.log(response);
+            $scope.projectList = [];
             totalProjects = response.data.hits;
             if($scope.pages.length == 0){
-	            if(totalProjects/page_size  > parseInt(totalProjects/10)){
-	            	for(var i = 1; i <= (parseInt(totalProjects/10)+1); i++){
-	            		$scope.pages.push(i);
-	            	}
-	            }
+            	var max = 0;
+            	if(totalProjects/page_size  > parseInt(totalProjects/10)){
+            		max = parseInt(totalProjects/10)+1;
+            	} else {
+            		max = parseInt(totalProjects/10);
+            	}
+            	for(var i = 1; i <= max; i++){
+            		$scope.pages.push(i);
+            	}
+            	$scope.lastPage = $scope.pages[$scope.pages.length - 1];
             }
             totalProjectsFetched += Object.keys(response.data.details).length;
             $scope.dataFetched = true;
@@ -110,20 +117,27 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', funct
         })
     }
 
-    // window.onscroll = function(ev) {
+    $scope.goToPage = function(pageNum){
         console.log('called');
-        if ($scope.dataFetched) {
-            if (totalProjectsFetched < totalProjects) {
-                if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
-                    if (totalProjects - totalProjectsFetched < 10) {
-                        page_size = totalProjects - totalProjectsFetched;
-                    }
-                    page_start = totalProjectsFetched;
-                    loading(true);
-                    fetchProjects();
-                }
-            }
+        page_start = (pageNum-1)*10;
+        $scope.currentPage = pageNum;
+        if(pageNum == $scope.pages[$scope.pages.length - 1]){
+        	page_size = totalProjects - page_start;
         }
-    // }
+        fetchProjects();
+    }
+
+    $scope.changePage = function(val){
+    	console.log(val);
+    	if(val == 1){
+    		if($scope.currentPage > 1){
+    			$scope.goToPage($scope.currentPage - 1);
+    		}
+    	} else {
+    		if(val != $scope.lastPage){
+    			$scope.goToPage($scope.currentPage + 1);
+    		}
+    	}
+    }
 
 }]);
