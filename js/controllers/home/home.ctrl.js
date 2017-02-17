@@ -12,11 +12,11 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     $scope.toggleIcon = 'arrow_drop_down_circle';
     $scope.locationDataLoaded = false;
     $scope.searchingName = false;
-    
+
 
     $('ul.tabs').tabs();
- $('select').material_select();
-   $('.parallax').parallax();
+    $('select').material_select();
+    $('.parallax').parallax();
 
     // to change verttical and category options
     $scope.selectVertical = function(val) {
@@ -197,7 +197,6 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         getLocations();
     }
 
-<<<<<<< HEAD
     function getMapData(lat, lon) {
         var data = {
             lat: lat,
@@ -214,9 +213,6 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         })
     }
 
-
-=======
->>>>>>> e989e40a820fa375e87ec1cdb26b45593c0a3620
     function getLocations() {
         // parameter += "&name="+encodeURIComponent('Sector 48');
         // console.log(parameter);
@@ -255,45 +251,49 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     }
 
     $scope.search = function() {
-        // If person is searching by name take to details view else take to list view
-        if ($scope.searchByName) {
+            // If person is searching by name take to details view else take to list view
+            if ($scope.searchByName) {
 
-        } else {
-            var param = {
-                'vertical': $scope.selectedVertical,
-                'category': 'Apartments',
-                'location': '-KYJOldHpi16DEUK0pXn'
+            } else {
+                var param = {
+                    'vertical': $scope.selectedVertical,
+                    'category': 'Apartments',
+                    'location': '-KYJOldHpi16DEUK0pXn'
+                }
+                var parameter = encodeParams(param);
+
+                // console.log(parameter);
+                $state.go('list', { p: parameter });
+
             }
-            var parameter = encodeParams(param);
-
-            // console.log(parameter);
-            $state.go('list', { p: parameter });
 
         }
-
-    }
-
-    //demo function attached to delete button to test the projects/locations/localities details page
+        //demo function attached to delete button to test the projects/locations/localities details page
     $scope.testListPage = function() {
-        var params = {
-            'vertical': 'residential',
-            'id': '-KYMt4pSYjIUsknqZ6Qr',
-            'type': 'project'
+            var params = {
+                id: "-KYY51110zIdChgwOHSb",
+                name: "Bestech Park View Spa",
+                type: "residential"
+
+            }
+            var param = encodeParams(params);
+            $state.go('write-review', { id: param });
         }
-        var parameter = encodeParams(params);
-        $state.go('listing', { parameters: parameter });
+        //demo function attached to test the working of write review
+    function test() {
+
     }
 }]);
 
 
-app.controller('coverStoryHomeCtrl', ['$scope', '$timeout', function($scope, $timeout){
+app.controller('coverStoryHomeCtrl', ['$scope', '$timeout', function($scope, $timeout) {
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.coverStoriesFetched = false;
     db.ref('shortStories/-KYJONgh0P98xoyPPYm9')
         .limitToFirst(8)
-        .once('value', function(response){
+        .once('value', function(response) {
             console.log(response.val());
-            $timeout(function(){
+            $timeout(function() {
                 $scope.stories = response.val();
                 angular.forEach($scope.stories, function(value, key) {
                     // value.redirectionUrl = '/#/story/gurgaon/' + convertToHyphenSeparated(value.placeName) + '/' + convertToHyphenSeparated(value.title) + '/' + value.storyId;

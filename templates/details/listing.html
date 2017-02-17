@@ -31,7 +31,7 @@
         </div>
         <h4>Amenities:</h4>
         <div class="col m2" ng-repeat="(key, value) in projDetails.amenities">
-            <h5>{{key | uppercase}}:</h5 ><div ng-repeat= "(a,b) in value">{{a | lowercase}} : {{b}}</div>
+            <h5>{{key | uppercase}}:</h5 ><div ng-repeat= "(a,b) in value">{{a | titleCase}} : {{b}}</div>
    	</div>
 </div>
 
