@@ -2,12 +2,13 @@
      $scope.selectedType = 'projects';
      $('.collapsible').collapsible();
      $('.draggable').attr('draggable', true);
-     var projectMarkers = [];
-     var localityMarkers = [];
-     var locationMarkers = [];
-     var projectInfoWindow = [];
-     var localityInfoWindow = [];
-     var locationInfoWindow = [];
+     $('.dropdown-button').dropdown();
+     $scope.projectMarkers = [];
+     $scope.localityMarkers = [];
+     $scope.locationMarkers = [];
+     $scope.projectInfoWindow = [];
+     $scope.localityInfoWindow = [];
+     $scope.locationInfoWindow = [];
      var data = [];
      var image = '';
      var content = [];
@@ -54,7 +55,7 @@
          }
          console.log(encodeParams(data));
          $http({
-             url: 'http://35.154.60.19/api/GetMapData_1.0',
+             url: 'http://107.23.243.89/api/GetMapData_1.0',
              method: 'GET',
              params: {
                  args: encodeParams(data)
@@ -65,8 +66,8 @@
              $scope.mapData = response.data;
              for (key in $scope.mapData) {
                  if ($scope.mapData[key].type == 'residential' || $scope.mapData[key].type == 'cghs') {
-                     data = [$scope.mapData[key].name, $scope.mapData[key].location.lat, $scope.mapData[key].location.lon, 'images/home/marker1.png'];
-                     projectMarkers.push(data);
+                     data = [$scope.mapData[key].name, $scope.mapData[key].location.lat, $scope.mapData[key].location.lon, 'images/home/marker1.png', $scope.mapData[key].id];
+                     $scope.projectMarkers.push(data);
                      if ($scope.mapData[key].cover == 'NA') {
                          image = 'images/sohna.jpg';
                      } else {
@@ -103,10 +104,10 @@
                          '</div>' +
                          '</div>'
                      ]
-                     projectInfoWindow.push(content);
+                     $scope.projectInfoWindow.push(content);
                  } else if ($scope.mapData[key].type == 'locality') {
-                     data = [$scope.mapData[key].name, $scope.mapData[key].location.lat, $scope.mapData[key].location.lon, 'images/home/marker2.png'];
-                     localityMarkers.push(data);
+                     data = [$scope.mapData[key].name, $scope.mapData[key].location.lat, $scope.mapData[key].location.lon, 'images/home/marker2.png', $scope.mapData[key].id];
+                     $scope.localityMarkers.push(data);
                      if ($scope.mapData[key].cover == 'NA') {
                          image = 'images/sohna.jpg';
                      } else {
@@ -143,10 +144,10 @@
                          '</div>' +
                          '</div>'
                      ]
-                     localityInfoWindow.push(content);
+                     $scope.localityInfoWindow.push(content);
                  } else {
-                     data = [$scope.mapData[key].name, $scope.mapData[key].location.lat, $scope.mapData[key].location.lon, 'images/home/marker3.png'];
-                     locationMarkers.push(data);
+                     data = [$scope.mapData[key].name, $scope.mapData[key].location.lat, $scope.mapData[key].location.lon, 'images/home/marker3.png', $scope.mapData[key].id];
+                     $scope.locationMarkers.push(data);
                      if ($scope.mapData[key].cover == 'NA') {
                          image = 'images/sohna.jpg';
                      } else {
@@ -183,11 +184,13 @@
                          '</div>' +
                          '</div>'
                      ]
-                     locationInfoWindow.push(content);
+                     $scope.locationInfoWindow.push(content);
                  }
              }
              $timeout(function() {
-                 initMap(projectMarkers, projectInfoWindow);
+                $scope.listMenu = $scope.projectMarkers;
+                $scope.menuTitle = 'Projects';
+                 initMap($scope.projectMarkers, $scope.projectInfoWindow);
              }, 100);
          })
      }
@@ -265,15 +268,25 @@
      // Load initialize function
 
      $scope.selectType = function() {
+        console.log($scope.selectedType);
          if ($scope.selectedType == 'projects') {
-             initMap(projectMarkers, projectInfoWindow);
+            $scope.listMenu = $scope.projectMarkers;
+            $scope.menuTitle = 'Projects';
+             initMap($scope.projectMarkers, $scope.projectInfoWindow);
          } else if ($scope.selectedType == 'localities') {
-             initMap(localityMarkers, localityInfoWindow);
+            $scope.listMenu = $scope.localityMarkers;
+            $scope.menuTitle = 'Localities';
+             initMap($scope.localityMarkers, $scope.localityInfoWindow);
          } else {
-             initMap(locationMarkers, locationInfoWindow);
+            $scope.listMenu = $scope.locationMarkers;
+            $scope.menuTitle = 'Locations';
+             initMap($scope.locationMarkers, $scope.locationInfoWindow);
          }
+         $scope.showList();
      }
 
-     $scope.listNum = [1, 2, 3, 4, 5];
+     $scope.showList = function(){
+        $scope.finalShow = !$scope.finalShow;
+     }
 
  }]);

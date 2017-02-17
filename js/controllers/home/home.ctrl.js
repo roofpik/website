@@ -41,7 +41,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         if ($scope.searched.length = 2) {
             console.log($scope.searched);
             $http({
-                url: 'http://35.154.60.19/api/GetResidential_1.0',
+                url: 'http://107.23.243.89/api/GetResidential_1.0',
                 method: 'GET',
                 params: {
                     details_name: $scope.searched
@@ -151,7 +151,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
             var searchedLocality = encodeURIComponent($scope.locality);
             var param = btoa('id=' + searchedLocality);
             $http({
-                url: 'http://35.154.60.19/api/GetLocality_1.0',
+                url: 'http://107.23.243.89/api/GetLocality_1.0',
                 method: 'GET',
                 params: {
                     id: param
