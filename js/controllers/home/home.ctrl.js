@@ -197,7 +197,6 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         getLocations();
     }
 
-<<<<<<< HEAD
     function getMapData(lat, lon) {
         var data = {
             lat: lat,
@@ -214,9 +213,6 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         })
     }
 
-
-=======
->>>>>>> e989e40a820fa375e87ec1cdb26b45593c0a3620
     function getLocations() {
         // parameter += "&name="+encodeURIComponent('Sector 48');
         // console.log(parameter);
