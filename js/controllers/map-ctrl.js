@@ -13,6 +13,10 @@
      var image = '';
      var content = [];
      $scope.cityId = '-KYJONgh0P98xoyPPYm9';
+     var markers = [];
+     $scope.searchedText = '';
+     $scope.searchByNameResults = {};
+     var map;
 
      getCurrentLocation();
      // Code to get current location of user
@@ -20,6 +24,7 @@
          if (navigator.geolocation) {
              navigator.geolocation.getCurrentPosition(showPosition, showError);
          } else {
+             getMapData(28.4594965, 77.02663830000006);
              // console.log("Geolocation is not supported by this browser.");
          }
      }
@@ -48,14 +53,14 @@
      }
 
      function getMapData(lat, lon) {
-         console.log('called');
          var data = {
              lat: lat,
              lon: lon
          }
          console.log(encodeParams(data));
          $http({
-             url: 'http://107.23.243.89/api/GetMapData_1.0',
+             // url: 'http://107.23.243.89/api/GetMapData_1.0',
+             url: 'http://35.154.60.19/api/GetMapData_1.0',
              method: 'GET',
              params: {
                  args: encodeParams(data)
@@ -188,15 +193,26 @@
                  }
              }
              $timeout(function() {
-                $scope.listMenu = $scope.projectMarkers;
-                $scope.menuTitle = 'Projects';
-                 initMap($scope.projectMarkers, $scope.projectInfoWindow);
+                 console.log($scope.selectedType)
+                 if ($scope.selectedType == 'projects') {
+                     $scope.listMenu = $scope.projectMarkers;
+                     $scope.menuTitle = 'Projects';
+                     initMap($scope.projectMarkers, $scope.projectInfoWindow);
+                 } else if ($scope.selectedType == 'localities') {
+                     $scope.listMenu = $scope.localityMarkers;
+                     $scope.menuTitle = 'Localities';
+                     initMap($scope.localityMarkers, $scope.localityInfoWindow);
+                 } else if ($scope.selectedType == 'locations') {
+                     $scope.listMenu = $scope.locationMarkers;
+                     $scope.menuTitle = 'Locations';
+                     initMap($scope.locationMarkers, $scope.locationInfoWindow);
+                 }
              }, 100);
          })
      }
 
-     function initMap(markers, infowindow) {
-         var map;
+     function initMap(m, infowindow) {
+         // var map;
          var bounds = new google.maps.LatLngBounds();
          var mapOptions = {
              mapTypeId: 'roadmap'
@@ -207,7 +223,7 @@
 
          // Multiple markers location, latitude, and longitude
 
-         var markers = markers;
+         markers = m;
 
          // Info window content
          var infoWindowContent = infowindow;
@@ -231,8 +247,10 @@
              google.maps.event.addListener(infoWindow, 'closeclick', function() {
                  $('.LeftBox').css('left', '10px');
              });
+             // $('#map-list').append('<a class="greytran white-text pda10 marker-link" data-markerid="' + i + '">' + markers[i][0] + '</a>');
+
              // Add info window to marker    
-             google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
+             google.maps.event.addListener(marker, 'click', (function(marker, i) {
                  return function() {
                      infoWindow.setContent(infoWindowContent[i][0]);
                      infoWindow.open(map, marker);
@@ -242,6 +260,18 @@
              // Center the map to fit all markers on the screen
              map.fitBounds(bounds);
          }
+
+
+
+         google.maps.event.addListener(map, 'click', function(event) {
+             $scope.projectMarkers = [];
+             $scope.localityMarkers = [];
+             $scope.locationMarkers = [];
+             $scope.projectInfoWindow = [];
+             $scope.localityInfoWindow = [];
+             $scope.locationInfoWindow = [];
+             getMapData(event.latLng.lat(), event.latLng.lng());
+         });
 
          google.maps.event.addListener(infowindow, 'domready', function() {
              // Reference to the DIV which receives the contents of the infowindow using jQuery
@@ -263,30 +293,79 @@
              google.maps.event.removeListener(boundsListener);
 
          });
+
+         // $('.marker-link').on('click', function() {
+         //     // console.log(markers[$(this).data('markerid')]);
+         //     // console.log($(this).data('markerid'));
+         //     // console.log(infoWindowContent[$(this).data('markerid')][0]);
+         //     // console.log(infoWindowContent[markers[$(this).data('markerid')]][0]);
+         //     // return function() {
+         //            // console.log(infoWindowContent[markers[$(this).data('markerid')]][0]);
+         //            debugger;
+         //             infoWindow.setContent(infoWindowContent[$(this).data('markerid')][0]);
+
+         //             infoWindow.open(map, markers[$(this).data('markerid')]);
+         //             $('.LeftBox').css('left', '-500px');
+         //         // }
+         //     // google.maps.event.trigger(markers[$(this).data('markerid')], 'click');
+         // });
      }
 
-     // Load initialize function
-
+     // Select the list of items to be displayed on map and the list beside it
      $scope.selectType = function() {
-        console.log($scope.selectedType);
+         console.log($scope.selectedType);
          if ($scope.selectedType == 'projects') {
-            $scope.listMenu = $scope.projectMarkers;
-            $scope.menuTitle = 'Projects';
+             $scope.listMenu = $scope.projectMarkers;
+             $scope.menuTitle = 'Projects';
              initMap($scope.projectMarkers, $scope.projectInfoWindow);
          } else if ($scope.selectedType == 'localities') {
-            $scope.listMenu = $scope.localityMarkers;
-            $scope.menuTitle = 'Localities';
+             $scope.listMenu = $scope.localityMarkers;
+             $scope.menuTitle = 'Localities';
              initMap($scope.localityMarkers, $scope.localityInfoWindow);
          } else {
-            $scope.listMenu = $scope.locationMarkers;
-            $scope.menuTitle = 'Locations';
+             $scope.listMenu = $scope.locationMarkers;
+             $scope.menuTitle = 'Locations';
              initMap($scope.locationMarkers, $scope.locationInfoWindow);
          }
          $scope.showList();
      }
 
-     $scope.showList = function(){
-        $scope.finalShow = !$scope.finalShow;
+     $scope.showList = function() {
+         $scope.finalShow = !$scope.finalShow;
      }
 
+     // get search results based on the string in input box
+     $scope.getSearchData = function() {
+         console.log($scope.searchedText);
+         if ($scope.searchedText.length > 2) {
+             var data = {
+                 name: $scope.searchedText
+             }
+             console.log(data);
+             $http({
+                 url: 'http://107.23.243.89/api/GetByName_1.0',
+                 method: 'GET',
+                 params: {
+                     args: encodeParams(data)
+                 }
+             }).then(function mySucces(response) {
+                 console.log(response);
+                 if(Object.keys(response.data).length > 0){
+                    console.log(response.data);
+                    $scope.searchByNameResults = response.data;
+                    $scope.showSearch = true;
+                 }
+                 console.log($scope.searchByNameResults);
+             }, function myError(err) {
+                 console.log(err);
+             })
+         }
+     }
+
+     $scope.selectResult = function(val){
+        $scope.searchedText = val.name;
+        $scope.showSearch = false;
+
+        // redirect to a view or show on map after selection
+     }
  }]);

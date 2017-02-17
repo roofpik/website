@@ -258,8 +258,9 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
             $state.go('list', { p: parameter });
 
         }
-
     }
+
+    // $scope.searchByName = function
 
     //demo function attached to delete button to test the projects/locations/localities details page
     $scope.testListPage = function() {

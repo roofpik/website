@@ -7,11 +7,11 @@
                     <div class="col s9">
                         <div class="input-field card ht45 pdan reletive">
                             <span class="inpspn">Find :</span>
-                            <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompletenear inp_pdw mgbn">
+                            <input type="text" placeholder="Search" id="type-selection" class="autocompletenear inp_pdw mgbn" ng-change="getSearchData()" ng-model="searchedText">
                             <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" />
                             <div class="search-results" ng-show="showSearch">
                                 <ul class="collection homecoll">
-                                    <li ng-repeat="item in search| filter: searched" class=" collection-item avatar" ng-click="selectType(item)">
+                                    <li ng-repeat="item in searchByNameResults" class=" collection-item avatar" ng-click="selectResult(item)">
                                         <img ng-src="{{item.icon}}" class="circle" />
                                         <span class="title ft13">{{item.name}}</span>
                                     </li>
@@ -81,12 +81,12 @@
             </ul> -->
         </div>
         <div class="row mgbn">       
-            <ul class="collapsible ht-auto fixh-aco" data-collapsible="accordion">
-                <li ng-repeat="item in listMenu" ng-click="showOnMap(item)">
-                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>{{item[0]}}</div>
-                    <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-                    </div>
-                </li>
+            <ul class="ht-auto fixh-aco" id="map-list">
+                <!-- <li ng-repeat="item in listMenu" id="{{item[4]}}" ng-click="showOnMap(item, $index)"> -->
+                    <div class=" greytran white-text pda10" ng-repeat="item in listMenu"><i class="material-icons" >place</i>{{item[0]}}</div>
+                    <!-- <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    </div> -->
+                <!-- </li> -->
             </ul>
          
         </div>
