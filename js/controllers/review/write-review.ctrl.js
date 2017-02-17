@@ -108,10 +108,39 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     $scope.showMoreLess = 'Show More +';
     $scope.projectSelected = false;
     $('#textarea1').trigger('autoresize');
+
     if (params) {
         if (params.name) {
             $scope.selectedItem = params.name;
         }
+
+
+    if($stateParams.id){
+        loading(true);
+        $scope.showList = false;
+        $scope.showSearch = false;
+        $http({
+            url: 'http://107.23.243.89/api/GetResidential_1.0',
+            method: 'GET',
+            params: {
+                details_name: $scope.selectedItem,
+                page_size: 92
+            }
+        }).then(function mySucces(response) {
+            $timeout(function() {
+                for(key in response.data.details){
+                    if(response.data.details[key].id == $stateParams.id){
+                        $scope.selectedProject = response.data.details[key];
+                        $scope.selectedItem = $scope.selectedProject.name;
+                        $scope.projectSelected = true;
+                        console.log($scope.selectedItem);
+                    }
+                }
+                loading(false);
+            }, 500)
+        }, function myError(err) {
+        })
+
     }
     $scope.nameEntered = function() {
         if ($scope.selectedItem) {
@@ -123,6 +152,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                 console.log(args);
                 loading(true);
                 $http({
+
                     url: 'http://107.23.243.89/api/GetByName_1.0',
                     method: 'GET',
                     params: {

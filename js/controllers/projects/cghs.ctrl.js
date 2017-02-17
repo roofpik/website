@@ -113,7 +113,7 @@ app.controller('cghsCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
 
     function fetchProjects() {
         $http({
-            url: 'http://35.154.60.19/api/GetCghs_1.0',
+            url: 'http://107.23.243.89/api/GetCghs_1.0',
             method: 'GET',
             params: {
                 bhk: $scope.filters.bhk,
