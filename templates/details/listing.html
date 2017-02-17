@@ -1,78 +1,173 @@
-<div class="row mgt70 linkroot">
-    <h3 align="center"> {{projectName}} </h3>
-    <div><img ng-src="{{coverPhoto}}" style="width: 100%">
-    <div>Thumbnail Image: <img ng-src="{{thumbnailPhoto}}" style="width: 20%">
-        <div class="col s12 m5 amen-tab htfixbox boxsd white">
-            <ul class="tabs">
-                <li class="tab col m12"><a class="active">Yes I am Interested</a></li>
-                <!-- <li class="tab col m6"><a href="#pricefinder">Price finder</a></li> -->
-            </ul>
-            <div class="row">
-                <div id="interest" class="col s12">
-                    <form name="contactForm">
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input placeholder="Name" type="text" class="validate mgb5 ft12" required>
-                        </div>
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix">phone</i>
-                            <input placeholder="Phone" type="text" class="validate mgb5 ft12" ng-minlength="10" ng-maxlength="10" required>
-                        </div>
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix">email</i>
-                            <input placeholder="Email" type="email" class="validate mgb5 ft12" required>
-                        </div>
-                        <div class="col s12 mgtmn mgt10">
-                            <button ng-disabled="contactForm.$invalid" class="waves-effect waves-light btn btn-full blue lighten-2"><i class="material-icons left">list</i> Provide Details</button>
-                        </div>
-                    </form>
+<main>
+    <div class="container  container2 mgt70">
+        <!--  <div class="row mgln mgrn  linkroot">
+            <nav>
+                <div class="nav-wrapper">
+                    <div class="col s12">
+                        <a href="#home" class="breadcrumb">Home</a>
+                        <a href="#projects" class="breadcrumb" ng-repeat="path in path track by $index">{{path}}</a>
+                    </div>
+                </div>
+            </nav>
+        </div>  -->
+        <div class="row radius2  cardmg">
+            <div class="col s6 offset-s2 pdrn">
+                <div class="input-field card col s12 ht45 pdan reletive">
+                    <span class="inpspn">Find :</span>
+                    <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompletenear inp_pdw mgbn">
+                    <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" ng-show="searchingName" />
+                    <div class="search-results" ng-show="showSearch">
+                        <ul class="collection homecoll">
+                            <li ng-repeat="item in categorySearch| filter: searched" class=" collection-item avatar" ng-click="selectType(item)">
+                                <img ng-src="{{item.icon}}" class="circle" />
+                                <span class="title ft13">{{item.name}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="input-field col m2 pdln">
+                <button class="btn btn-full  waves-effect waves-light red lighten-1 ht45" ng-click="search()">
+                    <i class="material-icons left">search</i>Search
+                </button>
+            </div>
+        </div>
+        <div class="row mgbn grey lighten-4">
+            <div class="col m8 img-detail htfixbox reletive pdln pdrn">
+                <img ng-src="{{coverPhoto}}" alt="">
+                <div class="boxabs">
+                    <div class="img_thumb">
+                        <img class="radius2" ng-src="{{thumbnailPhoto}}">
+                    </div>
+                </div>
+                <div class="hdboxabs boxabs_bt">
+                    <h5 class="b white-text mgbn ellipsis">{{projectName}}</h5>
+                    <div class="col s12 pdln grey-text mgt5 review ft20i vatop">
+                        <i class="material-icons amber-text text-darken-2" ng-repeat="i in [1,2,3,4,5]">star</i>
+                        <a href="" class="mgr10 white-text">1 Review</a> |
+                        <a href="" class="mgr10 white-text"># 4 rating</a>
+                    </div>
+                </div>
+                <div class="fixed-action-btn horizontal boxabs_bt">
+                    <button class="stand"><i class="material-icons left ft14">thumb_up</i>Like</button>
+                    <button class="stand"><i class="material-icons ft14 left">edit</i> Write Review</button>
+                    <button class="stand"><i class="material-icons ft14 left">book</i>Bookmark</button>
+                </div>
+            </div>
+            <div class="col m4 amen-tab htfixbox">
+                <div class="row mgan center bdbtm">
+                    <h5 class="mgbn"> Yes I am Interested</h5>
+                    <p class="mgan grey-text ft12 pdlrn letter1">Please fill in the details</p>
+                </div>
+                <div class="row">
+                    <div id="interest" class="col s12">
+                        <form name="contactForm">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input placeholder="Name" type="text" class="validate mgb5 ft12" required>
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">phone</i>
+                                <input placeholder="Phone" type="text" class="validate mgb5 ft12" ng-minlength="10" ng-maxlength="10" required>
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">email</i>
+                                <input placeholder="Email" type="email" class="validate mgb5 ft12" required>
+                            </div>
+                            <div class="col s12 mgb5 mgt10">
+                                <input type="checkbox" id="che1" class="filled-in ft12" />
+                                <label for="che1" class="mgl3r">lorem ipsum</label>
+                            </div>
+                            <div class="col s12 mgt5">
+                                <input type="checkbox" id="che2" class="filled-in ft12" />
+                                <label for="che2" class="mgl3r">lorem ipsum</label>
+                            </div>
+                            <div class="col s12 mgtmn mgt10">
+                                <button ng-disabled="contactForm.$invalid" class="waves-effect waves-light btn btn-full blue lighten-1"><i class="material-icons left">list</i> Provide Details</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-        <h4>Amenities:</h4>
-        <div class="col m2" ng-repeat="(key, value) in projDetails.amenities">
-            <h5>{{key | uppercase}}:</h5 ><div ng-repeat= "(a,b) in value">{{a | lowercase}} : {{b}}</div>
-   	</div>
-</div>
-
-<div ng-hide = "hidePropertyTypes">
- <h4>Available Property Types: </h4>
-        <ul ng-repeat = "type in propertyTypes track by $index">
-        	<li>{{type}}</li>
-        </ul>
-</div><br>
-<div class = "row mgt70 linkroot" ng-hide = "hidePriceRange">
-<h4>Price Ranges: </h4>
-  <div class = "col m2">
-  2BHK Apartments: <br>Min: {{priceRange['2A'].min}}<br>Max: {{priceRange['2A'].max}}<br>
-  3BHK Apartments: <br>Min: {{priceRange['3A'].min}}<br>Max: {{priceRange['3A'].max}}<br>
-  4BHK Apartments: <br>Min: {{priceRange['4A'].min}}<br>Max: {{priceRange['4A'].max}}<br>
-  5BHK Apartments: <br>Min: {{priceRange['5A'].min}}<br>Max: {{priceRange['5A'].max}}<br>
-  3BHK Penthouses/Duplexes: <br>Min: {{priceRange['3P'].min}}<br>Max: {{priceRange['3P'].max}}<br>
-  4BHK Penthouses/Duplexes: <br>Min: {{priceRange['4P'].min}}<br>Max: {{priceRange['4P'].max}}<br>
-  5BHK Penthouses/Duplexes: <br>Min: {{priceRange['5P'].min}}<br>Max: {{priceRange['5P'].max}}<br>
-  </div>
-  </div>
-<div class = "row mgt70 linkroot" ng-hide = "hideReviewsAndRatings">
-   		<h4>Reviews and Ratings:</h4>
-   	 <div class="col m2" ng-repeat="key in totalReviews.reviews">
-        <h5>Title: {{key.reviewTitle}}</h5 >
-        <div>{{key.reviewText}} <br> <h6>- By {{key.userName}}</h6></div>
-        <h6>Ratings: </h6><br>
-        <h5>Overall Rating: {{key.overallRating}}<br>
-        <div ng-repeat = "(key, value) in key.ratings"> {{key}} : {{value}}</div>
-       <!--  Ratings: <br><div ng-repeat = "(key,value) in key.rating"> {{key}} : {{value}} -->
-   	</div>
-</div>
-<br><br>
-<div ng-hide = "hideGallery"> <h4>Gallery</h4></div>
-<br>
-<div ng-repeat = "pic in otherImages"><img ng-src = "{{pic}}"><br><br></div>
-<div><h3>Related Cover Stories</h3></div>
-<div ng-hide = "hideStories">No Stories To Show</div>
-<div ng-show = "showStories"> 
-	<div ng-repeat = "value in coverStories"> <h3>Title: {{value.title}}</h3> <br>
-	{{value.story}} <br>
-	-By {{value.userName}}
-</div>
-</div>
+        <div class="row mgt5 pdleftbig">
+            <a href="" class="stand_amn"><i class="material-icons left ft14">list</i>Amenities</a>
+            <a href="" class="stand_amn"><i class="material-icons left ft14">location_city</i>Available Property Types</a>
+            <a href="" class="stand_amn"><i class="material-icons left ft14">done</i>Price Ranges</a>
+            <a href="" class="stand_amn"><i class="material-icons left ft14">edit</i>Reviews</a>
+            <a href="" class="stand_amn"><i class="material-icons left ft14">star_border</i>Ratings</a>
+            <a href="" class="stand_amn"><i class="material-icons left ft14">photo_library</i>Gallery</a>
+            <a href="" class="stand_amn"><i class="material-icons left ft14">wallpaper</i> Related Cover Stories</a>
+        </div>
+        <div class="row">
+            <h4>Amenities:</h4>
+            <div class="row mgln mgrn" ng-repeat="(key, value) in projDetails.amenities">
+                <h5>{{key | uppercase}}:</h5>
+                <div class="col s4 capitalize" ng-repeat="(a,b) in value">{{a | lowercase}} : {{b}}</div>
+            </div>
+        </div>
+        <div class="row" ng-hide="hidePropertyTypes">
+            <h4>Available Property Types: </h4>
+            <ul ng-repeat="type in propertyTypes track by $index">
+                <li>{{type}}</li>
+            </ul>
+        </div>
+        <div class="row" ng-hide="hidePriceRange">
+            <h4>Price Ranges: </h4>
+            <div class="col m2">
+                2BHK Apartments:
+                <br>Min: {{priceRange['2A'].min}}
+                <br>Max: {{priceRange['2A'].max}}
+                <br> 3BHK Apartments:
+                <br>Min: {{priceRange['3A'].min}}
+                <br>Max: {{priceRange['3A'].max}}
+                <br> 4BHK Apartments:
+                <br>Min: {{priceRange['4A'].min}}
+                <br>Max: {{priceRange['4A'].max}}
+                <br> 5BHK Apartments:
+                <br>Min: {{priceRange['5A'].min}}
+                <br>Max: {{priceRange['5A'].max}}
+                <br> 3BHK Penthouses/Duplexes:
+                <br>Min: {{priceRange['3P'].min}}
+                <br>Max: {{priceRange['3P'].max}}
+                <br> 4BHK Penthouses/Duplexes:
+                <br>Min: {{priceRange['4P'].min}}
+                <br>Max: {{priceRange['4P'].max}}
+                <br> 5BHK Penthouses/Duplexes:
+                <br>Min: {{priceRange['5P'].min}}
+                <br>Max: {{priceRange['5P'].max}}
+                <br>
+            </div>
+        </div>
+        <div class="row" ng-hide="hideReviewsAndRatings">
+            <h4>Reviews and Ratings:</h4>
+            <div class="col m2" ng-repeat="key in totalReviews.reviews">
+                <h5>Title: {{key.reviewTitle}}</h5>
+                <div>{{key.reviewText}}
+                    <br>
+                    <h6>- By {{key.userName}}</h6></div>
+                <h6>Ratings: </h6>
+                <h5>Overall Rating: {{key.overallRating}}</h5>
+                <div ng-repeat="(key, value) in key.ratings"> {{key}} : {{value}}</div>
+                <!--  Ratings: <br><div ng-repeat = "(key,value) in key.rating"> {{key}} : {{value}} -->
+            </div>
+        </div>
+        <div class="row" ng-hide="hideGallery">
+            <h4>Gallery</h4>
+            <div class="col 12" ng-repeat="pic in otherImages">
+                <img ng-src="{{pic}}" alt="">
+            </div>
+        </div>
+        <div class="row">
+            <h4>Related Cover Stories</h4>
+            <div class="col s12" ng-hide="hideStories">No Stories To Show</div>
+            <div class="col s12" ng-show="showStories">
+                <div ng-repeat="value in coverStories">
+                    <h3>Title: {{value.title}}</h3>
+                    <br> {{value.story}}
+                    <br> -By {{value.userName}}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

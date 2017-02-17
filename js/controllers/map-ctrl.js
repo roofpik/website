@@ -1,4 +1,4 @@
- app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
+app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
      $scope.selectedType = 'projects';
      $('.collapsible').collapsible();
      $('.draggable').attr('draggable', true);
