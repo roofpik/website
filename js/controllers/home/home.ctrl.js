@@ -457,7 +457,6 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
             $state.go('list', { p: parameter });
 
         }
-
     }
 
     // $scope.searchByName = function
