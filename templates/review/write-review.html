@@ -30,16 +30,9 @@
             <hr>
             <form name="reviewForm">
                 <div class="row mgbn" ng-show="showSearch">
-                    <div class="input-field col s12">
-                        <input id="select_project" ng-model="selectedItem" ng-change="nameEntered()" type="text" class="validate" required>
+                    <div class="input-field col s12 reletive">
+                        <input id="select_project" ng-model="selectedItem" ng-change="nameEntered()" type="text" class="validate mgbn" required><img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" ng-show="showLoading" class="loading-icon" />
                         <label for="select_project">Select Project</label>
-                    </div>
-                    <div class="searchList" ng-show="showList">
-                        <ul>
-                            <li class="poabs libor" ng-repeat="item in projectList" ng-click="selectProject(item)">
-                                {{item.name}}
-                            </li>
-                        </ul>
                     </div>
                 </div>
                 <div class="row" ng-hide="showSearch">
@@ -47,7 +40,7 @@
                         <h4 class="ft19">{{selectedItem}}</h4>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mgt20">
                     <div class="col s12 pdb10">Are you a *</div>
                     <div class="col s4">
                         <input class="with-gap" name="group1" type="radio" id="owner" ng-model="review.userType" value="Owner" />
@@ -73,8 +66,8 @@
                 <div class="row mgbn mgt20">
                     <div class="col s12 pdb10">Review Title *</div>
                     <div class="input-field col s12">
-                        <input id="select_project" type="text" class="validate" ng-model="review.reviewTitle" required>
-                        <label for="select_project">Type your review title</label>
+                        <input id="review-title" type="text" class="validate" ng-model="review.reviewTitle" required>
+                        <label for="review-title">Type your review title</label>
                     </div>
                 </div>
                 <div class="row mgbn">
@@ -164,4 +157,3 @@
                 <p ng-hide="loginStatus" id="loginSignup">Please login/signup to submit review *</p>
             </form>
         </div>
-

@@ -31,17 +31,17 @@
     <div class="col m4 greytran pda10">
         <div class="row mgbn">
             <div class="col s8">
-                <h5 class="b white-text"><i class="material-icons left">list</i> Explore Localities</h5>
+                <h5 class="b white-text"><i class="material-icons left">list</i> Explore {{menuTitle}}</h5>
             </div>
             <div class="col s4 right-align">
                 <div class="">
-                    <button class="dropdown-button btn-flat white-text b"
+                    <!-- <button class="dropdown-button btn-flat white-text b"
                     data-activates="radiolist">
                         <i class="material-icons right">filter_list</i>
                     </button>
                     <form>
                         <ul id="radiolist" class="dropdown-content wd150">
-                            <li class="pda10">
+                            <li class="pda10" ng-click="selectType()">
                                 <input name="displayMap" class="with-gap" type="radio" id="projects" ng-change="selectType()" ng-model="selectedType" value="projects" />
                                 <label for="projects">Projects</label>
                             </li>
@@ -54,59 +54,36 @@
                                 <label for="locations">Locations</label>
                             </li>
                         </ul>
-                    </form>
+                    </form> -->
                 </div>
             </div>
         </div>
+        <div class="row mgbn">
+<!--             <ul id="radiolist" >
+                <li class="pda10" ng-click="selectType()"> -->
+                <div class="col s4 pda10">
+                    <input name="displayMap" class="with-gap" type="radio" id="projects" ng-change="selectType()" ng-model="selectedType" value="projects" />
+                    <label for="projects">Projects</label>
+                </div>
+<!--                 </li>
+                <li class="pda10"> -->
+                <div class="col s4 pda10">
+                    <input name="displayMap" class="with-gap" type="radio" id="localities" ng-change="selectType()" ng-model="selectedType" value="localities" />
+                    <label for="localities">Localities</label>
+                </div>
+<!--                 </li>
+                <li class="pda10"> -->
+                <div class="col s4 pda10">
+                    <input name="displayMap" class="with-gap" type="radio" id="locations" ng-change="selectType()" ng-model="selectedType" value="locations" />
+                    <label for="locations">Locations</label>
+                </div>
+<!--                 </li>
+            </ul> -->
+        </div>
         <div class="row mgbn">       
             <ul class="collapsible ht-auto fixh-aco" data-collapsible="accordion">
-                <li>
-                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>First lorem ipsum</div>
-                    <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>First lorem ipsum</div>
-                    <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>First lorem ipsum</div>
-                    <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>First lorem ipsum</div>
-                    <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>First lorem ipsum</div>
-                    <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>First lorem ipsum</div>
-                    <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>First lorem ipsum</div>
-                    <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>First lorem ipsum</div>
-                    <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>First lorem ipsum</div>
-                    <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>First lorem ipsum</div>
+                <li ng-repeat="item in listMenu" ng-click="showOnMap(item)">
+                    <div class="collapsible-header greytran white-text"><i class="material-icons">place</i>{{item[0]}}</div>
                     <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
                     </div>
                 </li>
