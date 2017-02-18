@@ -113,7 +113,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         if (params.name) {
             $scope.selectedItem = params.name;
         }
-
+    }
 
     if($stateParams.id){
         loading(true);
