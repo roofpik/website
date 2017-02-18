@@ -1,0 +1,133 @@
+<div ng-show="reviewsAvailable">
+    <div class="row mgan pda10 allbd">
+        <h4 class="mgan ft22">
+                <span class="left">
+                     <i class="material-icons small" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < reviewObject.averageRating1? 'blue-text': 'normal'">star</i>
+                </span>
+                <span class="mgt5 in-block"> {{reviewObject.averageRating}}/5 From {{reviewObject.numberOfReviews}} Review<span ng-show="reviewObject.numberOfReviews > 1">s</span> </span>
+            </h4>
+        <div class="row mgt20 center-align">
+            <button class="btn blue" ng-click="takeToWriteReview()"><i class="material-icons left">edit</i> Write Review</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s4 mgt20">
+            <div class="allbd white pda10 htrating">
+                <h5 class="ft15 mgtn b mgb10">User Rating</h5>
+                <div class="row mgbn">
+                    <div class="col s6 mgrn">
+                        <input type="checkbox" class="filled-in" ng-change="filterReview('five')" ng-model="ratingSelected.five" id="filled-in-box2" />
+                        <label for="filled-in-box2">Excellent </label>
+                    </div>
+                    <div class="col s3 pdan">
+                        <span class="progress mgbn  ht10 grey lighten-2">
+                        <span class="determinate blue" id="excellentStar"></span>
+                        </span>
+                    </div>
+                    <div class="col s3 grey-text mgt3">{{reviewObject.fiveStar}}</div>
+                </div>
+                <div class="row mgbn">
+                    <div class="col s6 mgrn">
+                        <input type="checkbox" class="filled-in" ng-change="filterReview('four')" ng-model="ratingSelected.four" id="filled-in-box3" />
+                        <label for="filled-in-box3">Very Good </label>
+                    </div>
+                    <div class="col s3 pdan">
+                        <span class="progress mgbn  ht10 grey lighten-2">
+                        <span class="determinate blue" id="veryGoodStar"></span>
+                        </span>
+                    </div>
+                    <div class="col s3 grey-text mgt3">{{reviewObject.fourStar}}</div>
+                </div>
+                <div class="row mgbn">
+                    <div class="col s6 mgrn">
+                        <input type="checkbox" class="filled-in" ng-change="filterReview('three')" ng-model="ratingSelected.three" id="filled-in-box4" />
+                        <label for="filled-in-box4">Good </label>
+                    </div>
+                    <div class="col s3 pdan">
+                        <span class="progress mgbn  ht10 grey lighten-2">
+                        <span class="determinate blue" id="goodStar"></span>
+                        </span>
+                    </div>
+                    <div class="col s3 grey-text mgt3">{{reviewObject.threeStar}}</div>
+                </div>
+                <div class="row mgbn">
+                    <div class="col s6 mgrn">
+                        <input type="checkbox" class="filled-in" ng-change="filterReview('two')" ng-model="ratingSelected.two" id="filled-in-box5" />
+                        <label for="filled-in-box5">Average </label>
+                    </div>
+                    <div class="col s3 pdan">
+                        <span class="progress mgbn  ht10 grey lighten-2">
+                        <span class="determinate blue" id="averageStar"></span>
+                        </span>
+                    </div>
+                    <div class="col s3 grey-text mgt3">{{reviewObject.twoStar}}</div>
+                </div>
+                <div class="row mgbn">
+                    <div class="col s6 mgrn">
+                        <input type="checkbox" class="filled-in" ng-change="filterReview('one')" ng-model="ratingSelected.one" id="filled-in-box6" />
+                        <label for="filled-in-box6">Bad </label>
+                    </div>
+                    <div class="col s3 pdan">
+                        <span class="progress mgbn  ht10 grey lighten-2">
+                        <span class="determinate blue" id="badStar"></span>
+                        </span>
+                    </div>
+                    <div class="col s3 grey-text mgt3">{{reviewObject.oneStar}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col s2 mgt20">
+            <div class="allbd white pda10 htrating">
+                <h5 class="ft15 mgtn b mgb10">Resident Type</h5>
+                <div class="row mgbn">
+                    <div class="col s12 mgrn">
+                        <input type="checkbox" class="filled-in" ng-model="selectedCustomerType.owner" ng-change="filterReviewByCustomerType('owner')" id="type1" />
+                        <label for="type1">Owners </label>
+                    </div>
+                </div>
+                <div class="row mgbn">
+                    <div class="col s12 mgrn">
+                        <input type="checkbox" class="filled-in" ng-model="selectedCustomerType.tenant" ng-change="filterReviewByCustomerType('tenant')" id="type2" />
+                        <label for="type2">Tenants </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s6 mgt20">
+            <div class="allbd white pda10 ft13 htrating">
+                <h5 class="ft15 mgtn b mgb10">Rating Summary</h5>
+                <div class="row mgbn" ng-repeat="item in ratingSummaryParams">
+                    <div class="col s7">{{item.name}} ({{reviewObject[item.id]}})</div>
+                    <div class="col s5 right-align  grey-text ft20i">
+                        <i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < reviewObject[item.id1]? 'blue-text': 'normal'">star</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mgt20" ng-hide = "hasReviews">
+        <h3>No Reviews</h3>
+    </div>
+    <div class="row mgt20" ng-show="hasReviews">
+        <div class="col s12">
+            <div class="row bdbtm ft13 grey-text text-darken-2 mglrn mgb10 pdb10" ng-repeat="review in reviews">
+                <div class="col b pdb20">
+                    <img class="imgcir mgt10" src="images/general/noImage.png">
+                </div>
+                <div class="col">
+                    <p><b> {{review.userName}}</b> | {{review.createdDate | date:'MMM dd, yy'}}</p>
+                    <p class="grey-text review ft20i mgbn mgtmn">
+                        <i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < review.overallRating? 'blue-text':'normal'">star</i>
+                    </p>
+                </div>
+                <div class="col s12">
+                    <p><b>{{review.reviewTitle}}</b></p>
+                    <p class="justify">{{review.reviewText}}<span ng-show="review.showMore" class="roofGreen" ng-click="showReviewText($index)">...Show More</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col s12">
+            <a href="" class="modal-action modal-close waves-effect waves-green btn blue mgr10" ng-click="showMoreReviews()" ng-show="hasMoreReviews">View More</a>
+        </div>
+    </div>
+</div>

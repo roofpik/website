@@ -38,16 +38,30 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     });
 
     $stateProvider.state('project-details', {
-        url: '/project-details/:projectId',
+        url: '/project-details/:projectId?category',
         views: {
             '': {
-                templateUrl: 'templates/projects/project-details.html',
+                templateUrl: 'templates/details1/project-details.html',
                 controller: 'projectDetailsCtrl'
             },
             'reviewRating@project-details': {
-                templateUrl: 'templates/projects/project-review-ratings.html',
+                templateUrl: 'templates/details1/project-review-ratings.html',
                 controller: 'projectReviewRatingCtrl'
             }
+        }
+    });
+
+    $stateProvider.state('location-details', {
+        url: '/location-details/:id?category',
+        views: {
+            '': {
+                templateUrl: 'templates/details1/location-details.html',
+                controller: 'locationDetailsCtrl'
+            }
+            // 'reviewRating@location-details': {
+            //     templateUrl: 'templates/details1/location-review-ratings.html',
+            //     controller: 'locationReviewRatingCtrl'
+            // }
         }
     });
 
