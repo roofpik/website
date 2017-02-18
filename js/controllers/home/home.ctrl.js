@@ -60,7 +60,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         $scope.showSearch = false;
     });
 
-    // show locality search when clicked on input for searching types for a particular vertical
+    // show locality search when clicked on input for searching locations or localities
 
     $("#locality-search").focusin(function() {
         console.log('called');
@@ -69,10 +69,25 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         }, 100);
     });
 
-    // hide locality search list when input for searching types is out of focus
+    // hide locality search list when input is out of focus
 
     $("#locality-search").focusout(function() {
         $scope.showSearch1 = false;
+    });
+
+    // show search by name when clicked on input for searching by name
+
+    $("#name-search").focusin(function() {
+        console.log('called');
+        $timeout(function() {
+            $scope.showSearch2 = true;
+        }, 100);
+    });
+
+    // hide search by name list when input for searching by name
+
+    $("#name-search").focusout(function() {
+        $scope.showSearch2 = false;
     });
 
     getCurrentLocation();
@@ -158,6 +173,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         }
     }
 
+    // Select a location when clicked on it
     $scope.selectLocation = function(loc) {
         // console.log(loc);
         $scope.locationSearched = loc.name;
@@ -165,9 +181,43 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         $scope.selectedLocation = loc;
     }
 
+    $scope.selectSearchByName = function(val){
+        $scope.searchedText = val.name;
+        $scope.searchedValue = val;
+        $scope.showSearch2 = false;
+        console.log($scope.searchedValue);
+    }
+
     $scope.search = function() {
         // If person is searching by name take to details view else take to list view
+        var param = {};
         if ($scope.searchByName) {
+            if($scope.searchedValue.type == 'residential'){
+                param = {
+                    projectId : $scope.searchedValue.id
+                }
+                console.log(encodeParams(param));
+                console.log(decodeParams(encodeParams(param)));
+                $state.go('project-details', {p: encodeParams(param)});
+            } else if($scope.searchedValue.type == 'cghs') {
+                param = {
+                    projectId : $scope.searchedValue.id,
+                    category: 'CGHS'
+                }
+                $state.go('project-details', {p: encodeParams(param)});
+            } else if($scope.searchedValue.type == 'locality'){
+                param = {
+                    id: $scope.searchedValue.id,
+                    category: 'locality'
+                }
+                $state.go('location-details', {p: encodeParams(param)});
+            } else if($scope.searchedValue.type == 'location'){
+                param = {
+                    id: $scope.searchedValue.id,
+                    category: 'locations'
+                }
+                $state.go('location-details', {p: encodeParams(param)});
+            }
         } else {
             var param = {
                 'vertical': $scope.selectedVertical,
@@ -196,7 +246,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
                  console.log(response);
                  if(Object.keys(response.data).length > 0){
                     $scope.searchByName = response.data;
-                    $scope.showSearch = true;
+                    $scope.showSearch2 = true;
                  }
              }, function myError(err) {
                  console.log(err);

@@ -2,9 +2,10 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
 	$('ul.tabs').tabs();
     // loading(true);
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
-    $scope.projectId = $stateParams.projectId;
-    if($stateParams.category){
-        if($stateParams.category == 'CGHS'){
+    var parameters = decodeParams($stateParams.p);
+    $scope.projectId = parameters.projectId;
+    if(parameters.category){
+        if(parameters.category == 'CGHS'){
             $scope.category = 'cghs';
         } else {
             $scope.category = 'residential';
@@ -618,7 +619,8 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
 // Reviews and Ratings Controller
 app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', '$http', '$state', function($scope, $timeout, $stateParams, $rootScope, $http, $state){
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
-    $scope.projectId = $stateParams.projectId;
+    var parameters = decodeParams($stateParams.p);
+    $scope.projectId = parameters.projectId;
     $scope.reviews = [];
     $scope.reviewsAvailable = false;
     var selectedRating = 0;

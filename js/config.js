@@ -38,7 +38,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     });
 
     $stateProvider.state('project-details', {
-        url: '/project-details/:projectId?category',
+        url: '/project-details/:p',
         views: {
             '': {
                 templateUrl: 'templates/details1/project-details.html',
@@ -52,7 +52,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     });
 
     $stateProvider.state('location-details', {
-        url: '/location-details/:id?category',
+        url: '/location-details/:p',
         views: {
             '': {
                 templateUrl: 'templates/details1/location-details.html',
