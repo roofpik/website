@@ -79,7 +79,7 @@
         <div class="row mgbn">
             <ul class="ht-auto fixh-aco" id="map-list">
                 <!-- <li ng-repeat="item in listMenu" id="{{item[4]}}" ng-click="showOnMap(item, $index)"> -->
-                <div class="pda10 ellipsis" ng-repeat="item in listMenu">
+                <div class="pda10 ellipsis" ng-repeat="item in listMenu" ng-show="$index >= min && $index < max">
                 <i class="material-icons left">place</i>{{item[0]}}</div>
                 <!-- <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
                     </div> -->
