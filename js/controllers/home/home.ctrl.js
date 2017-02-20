@@ -98,7 +98,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
             navigator.geolocation.getCurrentPosition(showPosition, showError);
         } else {
             console.log("Geolocation is not supported by this browser.");
-            parameter += "lat=" + 28.4594965 + "&lon=" + 77.02663830000006;
+            parameter += "lat=" + 28.406730 + "&lon=" + 77.042633;
             getLocations();
         }
     }

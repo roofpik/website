@@ -17,6 +17,9 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
      $scope.searchedText = '';
      $scope.searchByNameResults = {};
      var map;
+     $scope.min = 0;
+     $scope.max = 10;
+     $scope.numPages = 1;
 
      getCurrentLocation();
      // Code to get current location of user
@@ -24,14 +27,15 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
          if (navigator.geolocation) {
              navigator.geolocation.getCurrentPosition(showPosition, showError);
          } else {
-             getMapData(28.4594965, 77.02663830000006);
+             getMapData(28.406730, 77.042633);
              // console.log("Geolocation is not supported by this browser.");
          }
      }
 
      // called when location of user is successfully obtained
      function showPosition(position) {
-         getMapData(position.coords.latitude, position.coords.longitude);
+         // getMapData(position.coords.latitude, position.coords.longitude);
+         getMapData(28.406730, 77.042633);
      }
 
      function showError(error) {
@@ -49,10 +53,11 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                  // console.log("An unknown error occurred.");
                  break;
          }
-         getMapData(28.4594965, 77.02663830000006);
+         getMapData(28.406730, 77.042633);
      }
 
      function getMapData(lat, lon) {
+        console.log(lat, lon);
          var data = {
              lat: lat,
              lon: lon
@@ -313,9 +318,12 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
 
      // Select the list of items to be displayed on map and the list beside it
      $scope.selectType = function() {
+         $scope.min = 0;
+         $scope.max = 10;
          console.log($scope.selectedType);
          if ($scope.selectedType == 'projects') {
              $scope.listMenu = $scope.projectMarkers;
+             // if($scope.projectMarkers.length/10 >)
              $scope.menuTitle = 'Projects';
              initMap($scope.projectMarkers, $scope.projectInfoWindow);
          } else if ($scope.selectedType == 'localities') {
