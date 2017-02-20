@@ -24,6 +24,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
      getCurrentLocation();
      // Code to get current location of user
      function getCurrentLocation() {
+        console.log(btoa("lat="+28.4594965+"&lon="+77.02663830000006));
          if (navigator.geolocation) {
              navigator.geolocation.getCurrentPosition(showPosition, showError);
          } else {
@@ -89,7 +90,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                          '<img src="' + image + '">' +
                          '<a href="" class="btn red absbtn"><i class="material-icons left">details</i>See Details</a>' +
                          '</div>' +
-                         '<div class="cardTitle row mgbn bdbtm">' +
+                         '<div class="cardTitle row mgan bdbtm">' +
                          '<a class="col m8 black-text text-lighten-4 pd5 pd-tspanmap">' +
                          '<span class="b">' + $scope.mapData[key].name + '</span>' +
                          '<span class="ft12">Sohna Road, Sector 48 Gurgaon</span>' +
@@ -129,7 +130,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                          '<img src="' + image + '">' +
                          '<a href="" class="btn red absbtn"><i class="material-icons left">details</i>See Details</a>' +
                          '</div>' +
-                         '<div class="cardTitle row mgbn bdbtm">' +
+                         '<div class="cardTitle row mgan bdbtm">' +
                          '<a class="col m8 black-text text-lighten-4 pd5 pd-tspanmap">' +
                          '<span class="b">' + $scope.mapData[key].name + '</span>' +
                          '<span class="ft12">Sohna Road, Sector 48 Gurgaon</span>' +
@@ -169,7 +170,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                          '<img src="' + image + '">' +
                          '<a href="" class="btn red absbtn"><i class="material-icons left">details</i>See Details</a>' +
                          '</div>' +
-                         '<div class="cardTitle row mgbn bdbtm">' +
+                         '<div class="cardTitle row mgan bdbtm">' +
                          '<a class="col m8 black-text text-lighten-4 pd5 pd-tspanmap">' +
                          '<span class="b">' + $scope.mapData[key].name + '</span>' +
                          '<span class="ft12">Sohna Road, Sector 48 Gurgaon</span>' +
