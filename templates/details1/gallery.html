@@ -1,0 +1,10 @@
+<div class="project-gallery">
+    <!-- <button class="trigger_gallery" ng-show="showGallery">View Photos</button> -->
+    <button class="waves-effect waves-light btn white grey-text trigger_gallery" ng-show="showGallery"><i class="material-icons left">photo_library</i> View Gallery</button>
+    <ul class="demo_activity" ng-repeat="image in images">
+    	<!-- {{image}} -->
+        <li ng-show="image.display">
+            <a href="{{image.src}}" data-imagelightbox="a"><img ng-src="{{image.thumb}}" alt="{{image.caption}}"></a>
+        </li>
+    </ul>
+</div>

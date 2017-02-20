@@ -153,7 +153,7 @@
                     </div>
                     <hr>
                 </div>
-                <a href="" ng-click="submitReview()" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating || !projectSelected || !loginStatus)?'disabled':'normal'" class="waves-effect waves-light blue lighten-1 btn block mgt20">Submit</a>
+                <a href="" ng-click="submitReview()" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating || !projectSelected )?'disabled':'normal'" class="waves-effect waves-light blue lighten-1 btn block mgt20">Submit</a>
                 <p ng-hide="loginStatus" id="loginSignup">Please login/signup to submit review *</p>
             </form>
         </div>
