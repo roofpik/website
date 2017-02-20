@@ -776,3 +776,8 @@ footer.page-footer .footer-copyright{line-height: 20px; height: 20px}
    height: 30px;
 }
 
+.autocomplete-content {
+    max-height: 200px;
+    overflow-y: scroll;
+}
+

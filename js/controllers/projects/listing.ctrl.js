@@ -42,7 +42,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
                 for (key in snapshot.val()) {
                     $scope.localities.push(snapshot.val()[key]);
                 }
-                getLocation();;
+                getLocation();
             }, 0)
         });
     }

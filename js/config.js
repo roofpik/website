@@ -19,6 +19,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         templateUrl: 'templates/general/contact-us.html',
         controller: 'contactUsCtrl'
     });
+    $stateProvider.state('profile', {
+        url: '/profile',
+        templateUrl: 'templates/profile/profile.html',
+        controller: 'profileCtrl'
+    });
 
     $stateProvider.state('faq', {
         url: '/faq',
