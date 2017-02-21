@@ -63,7 +63,6 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     // show locality search when clicked on input for searching locations or localities
 
     $("#locality-search").focusin(function() {
-        console.log('called');
         $timeout(function() {
             $scope.showSearch1 = true;
         }, 100);
@@ -78,7 +77,6 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     // show search by name when clicked on input for searching by name
 
     $("#name-search").focusin(function() {
-        console.log('called');
         $timeout(function() {
             $scope.showSearch2 = true;
         }, 100);
@@ -97,7 +95,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition, showError);
         } else {
-            console.log("Geolocation is not supported by this browser.");
+            // console.log("Geolocation is not supported by this browser.");
             parameter += "lat=" + 28.406730 + "&lon=" + 77.042633;
             getLocations();
         }
@@ -119,16 +117,16 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     function showError(error) {
         switch (error.code) {
             case error.PERMISSION_DENIED:
-                console.log("User denied the request for Geolocation.");
+                // console.log("User denied the request for Geolocation.");
                 break;
             case error.POSITION_UNAVAILABLE:
-                console.log("Location information is unavailable.");
+                // console.log("Location information is unavailable.");
                 break;
             case error.TIMEOUT:
-                console.log("The request to get user location timed out.");
+                // console.log("The request to get user location timed out.");
                 break;
             case error.UNKNOWN_ERROR:
-                console.log("An unknown error occurred.");
+                // console.log("An unknown error occurred.");
                 break;
         }
         if (parameter.length != 0) {
@@ -145,7 +143,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
             name = '';
         }
         finalParam = btoa(parameter + name);
-        console.log(atob(finalParam));
+        // console.log(atob(finalParam));
         $http({
             url: 'http://107.23.243.89/api/GetLocations_1.0',
             method: 'GET',
@@ -153,12 +151,12 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
                 args: finalParam
             }
         }).then(function(response) {
-            console.log(response);
+            // console.log(response);
             $scope.locations = [];
             for (key in response.data.details) {
                 $scope.locations.push(response.data.details[key]);
             }
-            console.log($scope.locations);
+            // console.log($scope.locations);
             $scope.locationDataLoaded = true;
         })
     }
@@ -185,7 +183,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         $scope.searchedText = val.name;
         $scope.searchedValue = val;
         $scope.showSearch2 = false;
-        console.log($scope.searchedValue);
+        // console.log($scope.searchedValue);
     }
 
     $scope.search = function() {
@@ -196,8 +194,8 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
                 param = {
                     projectId : $scope.searchedValue.id
                 }
-                console.log(encodeParams(param));
-                console.log(decodeParams(encodeParams(param)));
+                // console.log(encodeParams(param));
+                // console.log(decodeParams(encodeParams(param)));
                 $state.go('project-details', {p: encodeParams(param)});
             } else if($scope.searchedValue.type == 'cghs') {
                 param = {
@@ -231,7 +229,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
 
      // get search results based on the string in input box
      $scope.getSearchData = function() {
-         console.log($scope.searchedText);
+         // console.log($scope.searchedText);
          if ($scope.searchedText.length > 2) {
              var data = {
                  name: $scope.searchedText
@@ -243,13 +241,13 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
                      args: encodeParams(data)
                  }
              }).then(function mySucces(response) {
-                 console.log(response);
+                 // console.log(response);
                  if(Object.keys(response.data).length > 0){
                     $scope.searchByName = response.data;
                     $scope.showSearch2 = true;
                  }
              }, function myError(err) {
-                 console.log(err);
+                 // console.log(err);
              })
          }
      }
@@ -281,17 +279,22 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
 app.controller('coverStoryHomeCtrl', ['$scope', '$timeout', function($scope, $timeout) {
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.coverStoriesFetched = false;
+    $scope.stories = [];
     db.ref('shortStories/-KYJONgh0P98xoyPPYm9')
         .limitToFirst(8)
         .once('value', function(response) {
-            console.log(response.val());
             $timeout(function() {
-                $scope.stories = response.val();
-                angular.forEach($scope.stories, function(value, key) {
-                    // value.redirectionUrl = '/#/story/gurgaon/' + convertToHyphenSeparated(value.placeName) + '/' + convertToHyphenSeparated(value.title) + '/' + value.storyId;
-                    // value.redirectionUrl = value.redirectionUrl.replace(/[?=]/g, "");
-                    value.coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/' + $scope.cityId + '/' + value.storyId + '/coverPhoto/' + value.coverPhoto + '-m.jpg';
-                })
+                // $scope.stories = response.val();
+                // angular.forEach(response.val(), function(value, key) {
+                //     // value.redirectionUrl = '/#/story/gurgaon/' + convertToHyphenSeparated(value.placeName) + '/' + convertToHyphenSeparated(value.title) + '/' + value.storyId;
+                //     // value.redirectionUrl = value.redirectionUrl.replace(/[?=]/g, "");
+                //     value.coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/' + $scope.cityId + '/' + value.storyId + '/coverPhoto/' + value.coverPhoto + '-m.jpg';
+                // })
+                for(key in response.val()){
+                    var data = response.val()[key];
+                    data.coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/' + $scope.cityId + '/' + data.storyId + '/coverPhoto/' + data.coverPhoto + '-m.jpg';
+                    $scope.stories.push(data);
+                }
                 $scope.coverStoriesFetched = true;
             }, 0);
         })
