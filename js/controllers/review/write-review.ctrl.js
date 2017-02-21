@@ -10,9 +10,11 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     $scope.review = {
         ratings: {}
     }
-    if ($stateParams.id) {
+    // console.log($stateParams);
+    if ($stateParams.id){
         var params = decodeParams($stateParams.id);
     }
+    console.log(params);
     $scope.projects1 = {}; //bind project name with project ID
     $scope.projects2 = {}; //bind project name with null for autocomplete
     $scope.projects3 = {}; //bind project name with project type

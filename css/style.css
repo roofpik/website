@@ -786,3 +786,10 @@ footer.page-footer .footer-copyright{line-height: 20px; height: 20px}
     overflow-y: scroll;
 }
 
+.display-img{
+  height: 36px;
+  width:36px;
+  margin-right:10px;
+  border-radius:50%;
+}
+

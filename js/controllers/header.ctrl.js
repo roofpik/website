@@ -1,4 +1,4 @@
-app.controller('headerCtrl', ['$scope', '$state', '$http', function($scope, $state, $http) {
+app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', function($scope, $state, $http, $rootScope) {
 
     $(document).ready(function() {
         Materialize.updateTextFields();
@@ -110,44 +110,48 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', function($scope, $sta
         console.log($scope.item.name)
     }
 
-    // $scope.gotoHome = function() {
-    //     $state.go('home');
-    // }
+    $scope.gotoHome = function() {
+        $state.go('home');
+    }
 
-    // $rootScope.$watch('loginStatus', function() {
-    //     $scope.loginStatus = $rootScope.loginStatus;
+    $rootScope.$watch('loginStatus', function() {
+        $scope.loginStatus = $rootScope.loginStatus;
 
-    //     if($rootScope.loginStatus){
-    //         $scope.user.photo = $rootScope.photoURL;
-    //         $scope.user.name = $rootScope.displayName;
-    //     }
-    //     else{
-    //         $scope.user.photo = null;
-    //         $scope.user.name = null;
-    //     }
-    // });
+        if($rootScope.loginStatus){
+            $scope.user = {};
+            $scope.user.photoURL = $rootScope.photoURL;
+            $scope.user.firstName = $rootScope.displayName;
+            $scope.user.uid = $rootScope.uid;
+        }
+        else{
+            $scope.user = {};   
+            $scope.user.photoURL = null;
+            $scope.user.firstName = null;
+        }
+        console.log($scope.user);
+    });
 
-    // $rootScope.$on("callShowLogin", function() {
-    //     $timeout(function() {
-    //         $scope.showLogin();
-    //     }, 0);
-    // });
+    $rootScope.$on("callShowLogin", function() {
+        $timeout(function() {
+            $scope.showLogin();
+        }, 0);
+    });
 
-    // $scope.showLogin = function(ev) {
-    //     $mdDialog.show({
-    //             controller: loginController,
-    //             templateUrl: '/templates/dialogs/auth.html',
-    //             parent: angular.element(document.body),
-    //             targetEvent: ev,
-    //             clickOutsideToClose: true,
-    //             fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-    //         })
-    //         .then(function(answer) {
-    //             $scope.status = 'You said the information was "' + answer + '".';
-    //         }, function() {
-    //             $scope.status = 'You cancelled the dialog.';
-    //         });
-    // };
+    $scope.showLogin = function(ev) {
+        $mdDialog.show({
+                controller: loginController,
+                templateUrl: '/templates/dialogs/auth.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+            })
+            .then(function(answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+            }, function() {
+                $scope.status = 'You cancelled the dialog.';
+            });
+    };
 
     // $scope.logout = function() {
 
@@ -172,27 +176,31 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', function($scope, $sta
     // };
 
 
-    // $scope.showSignUp = function(ev) {
-    //     $mdDialog.show({
-    //             controller: DialogController,
-    //             templateUrl: '/templates/dialogs/auth.html',
-    //             parent: angular.element(document.body),
-    //             targetEvent: ev,
-    //             clickOutsideToClose: true,
-    //             fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-    //         })
-    //         .then(function(answer) {
-    //             $scope.status = 'You said the information was "' + answer + '".';
-    //         }, function() {
-    //             $scope.status = 'You cancelled the dialog.';
-    //         });
-    // }
+    $scope.showSignUp = function(ev) {
+        $mdDialog.show({
+                controller: DialogController,
+                templateUrl: '/templates/dialogs/auth.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+            })
+            .then(function(answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+            }, function() {
+                $scope.status = 'You cancelled the dialog.';
+            });
+    }
 
-    // $scope.takeToProfile = function() {
-    //     $state.go('profile');
-    // };
+    $scope.goToProfile = function() {
+        var params = {
+            userId : $scope.user.uid
+        }
+        $state.go('profile', {id: encodeParams(params)});
+    };
 
     // $scope.takeToMyReviews = function() {
+
     //     $state.go('user-all-reviews');
     // };
 
@@ -207,7 +215,5 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', function($scope, $sta
     // $scope.gotoWriteReviews = function() {
     //     $state.go('write-review');
     // }
-
-
 
 }]);
