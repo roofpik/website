@@ -1,4 +1,4 @@
-app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', function($scope, $state, $http, $rootScope) {
+app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeout', function($scope, $state, $http, $rootScope, $timeout) {
 
     $(document).ready(function() {
         Materialize.updateTextFields();
@@ -138,20 +138,8 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', functio
     });
 
     $scope.showLogin = function(ev) {
-        $mdDialog.show({
-                controller: loginController,
-                templateUrl: '/templates/dialogs/auth.html',
-                parent: angular.element(document.body),
-                targetEvent: ev,
-                clickOutsideToClose: true,
-                fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-            })
-            .then(function(answer) {
-                $scope.status = 'You said the information was "' + answer + '".';
-            }, function() {
-                $scope.status = 'You cancelled the dialog.';
-            });
-    };
+      $("#open-login").click();
+    }
 
     // $scope.logout = function() {
 
