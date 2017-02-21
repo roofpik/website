@@ -1,8 +1,8 @@
 <div ng-show="reviewsAvailable">
-    <div class="row mgan pda10 allbd">
+    <div class="row pda10 mgan allbd">
         <h4 class="mgan ft22">
                 <span class="left">
-                     <i class="material-icons small" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < reviewObject.averageRating1? 'blue-text': 'normal'">star</i>
+                     <i class="material-icons small" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < reviewObject.averageRating1? 'amber-text text-darken-2': 'normal'">star</i>
                 </span>
                 <span class="mgt5 in-block"> {{reviewObject.averageRating}}/5 From {{reviewObject.numberOfReviews}} Review<span ng-show="reviewObject.numberOfReviews > 1">s</span> </span>
             </h4>
@@ -99,16 +99,16 @@
                 <div class="row mgbn" ng-repeat="item in ratingSummaryParams">
                     <div class="col s7">{{item.name}} ({{reviewObject[item.id]}})</div>
                     <div class="col s5 right-align  grey-text ft20i">
-                        <i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < reviewObject[item.id1]? 'blue-text': 'normal'">star</i>
+                        <i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < reviewObject[item.id1]? 'amber-text text-darken-2': 'normal'">star</i>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row mgt20" ng-hide = "hasReviews">
+    <div class="row mgt20 mgan" ng-hide = "hasReviews">
         <h3>No Reviews</h3>
     </div>
-    <div class="row mgt20" ng-show="hasReviews">
+    <div class="row mgt20 mgan" ng-show="hasReviews">
         <div class="col s12">
             <div class="row bdbtm ft13 grey-text text-darken-2 mglrn mgb10 pdb10" ng-repeat="review in reviews">
                 <div class="col b pdb20">
@@ -117,7 +117,7 @@
                 <div class="col">
                     <p><b> {{review.userName}}</b> | {{review.createdDate | date:'MMM dd, yy'}}</p>
                     <p class="grey-text review ft20i mgbn mgtmn">
-                        <i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < review.overallRating? 'blue-text':'normal'">star</i>
+                        <i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < review.overallRating? 'amber-text text-darken-2':'normal'">star</i>
                     </p>
                 </div>
                 <div class="col s12">
@@ -126,8 +126,8 @@
                 </div>
             </div>
         </div>
-        <div class="col s12">
-            <a href="" class="modal-action modal-close waves-effect waves-green btn blue mgr10" ng-click="showMoreReviews()" ng-show="hasMoreReviews">View More</a>
+        <div class="col s12 right-align">
+            <a href="" class="modal-action modal-close btn blue mgr10" ng-click="showMoreReviews()" ng-show="hasMoreReviews"><i class="material-icons left">visibility</i>View More</a>
         </div>
     </div>
 </div>

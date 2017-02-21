@@ -4,23 +4,23 @@
         <div class="col s4">
             <div class="coverfixbox card pdan mgb20 ht450">
                 <div class="card-image reletive">
-                    <img ng-src="images/home/golf-extn.jpg">
+                    <img ng-src="{{stories[0].coverPhoto}}">
                     <div class="overlay pda10">
-                        <h5 class="mg0 ft13 b truncate">Title</h5>
-                        <p class="mg0 ft12 truncate grey-text">userName</p>
-                        <p class="mg0 ft12 truncate grey-text">placeName</p>
-                        <p class="mg0 ft12 truncate grey-text">date:'MMM dd, yy</p>
+                        <h5 class="mg0 ft13 b truncate">{{stories[0].title}}</h5>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[0].userName}}</p>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[0].placeName}}</p>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[0].createdDate | date:'MMM dd, yy'}}</p>
                     </div>
                 </div>
             </div>
             <div class="coverfixbox card pdan mgb20 ht350">
                 <div class="card-image reletive">
-                    <img ng-src="images/home/write-bg.jpg">
+                    <img ng-src="{{stories[1].coverPhoto}}">
                     <div class="overlay pda10">
-                        <h5 class="mg0 ft13 b truncate">Title</h5>
-                        <p class="mg0 ft12 truncate grey-text">userName</p>
-                        <p class="mg0 ft12 truncate grey-text">placeName</p>
-                        <p class="mg0 ft12 truncate grey-text">date:'MMM dd, yy</p>
+                        <h5 class="mg0 ft13 b truncate">{{stories[1].title}}</h5>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[1].userName}}</p>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[1].placeName}}</p>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[1].createdDate | date:'MMM dd, yy'}}</p>
                     </div>
                 </div>
             </div>
@@ -28,23 +28,23 @@
        <div class="col s4">
          <div class="coverfixbox card pdan mgb20 ht350">
                 <div class="card-image reletive">
-                    <img ng-src="images/home/write-bg.jpg">
+                    <img ng-src="{{stories[2].coverPhoto}}">
                     <div class="overlay pda10">
-                        <h5 class="mg0 ft13 b truncate">Title</h5>
-                        <p class="mg0 ft12 truncate grey-text">userName</p>
-                        <p class="mg0 ft12 truncate grey-text">placeName</p>
-                        <p class="mg0 ft12 truncate grey-text">date:'MMM dd, yy</p>
+                        <h5 class="mg0 ft13 b truncate">{{stories[2].title}}</h5>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[2].userName}}</p>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[2].placeName}}</p>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[2].createdDate | date:'MMM dd, yy'}}</p>
                     </div>
                 </div>
             </div>
             <div class="coverfixbox card pdan mgb20 ht450">
                 <div class="card-image reletive">
-                    <img ng-src="images/home/golf-extn.jpg">
+                    <img ng-src="{{stories[3].coverPhoto}}">
                     <div class="overlay pda10">
-                        <h5 class="mg0 ft13 b truncate">Title</h5>
-                        <p class="mg0 ft12 truncate grey-text">userName</p>
-                        <p class="mg0 ft12 truncate grey-text">placeName</p>
-                        <p class="mg0 ft12 truncate grey-text">date:'MMM dd, yy</p>
+                        <h5 class="mg0 ft13 b truncate">{{stories[3].title}}</h5>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[3].userName}}</p>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[3].placeName}}</p>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[3].createdDate | date:'MMM dd, yy'}}</p>
                     </div>
                 </div>
             </div>
@@ -53,48 +53,37 @@
       <div class="col s4">
             <div class="coverfixbox card pdan mgb20 ht266">
                 <div class="card-image reletive">
-                    <img ng-src="images/home/golf-extn.jpg">
+                    <img ng-src="{{stories[4].coverPhoto}}">
                     <div class="overlay pda10">
-                        <h5 class="mg0 ft13 b truncate">Title</h5>
-                        <p class="mg0 ft12 truncate grey-text">userName</p>
-                        <p class="mg0 ft12 truncate grey-text">placeName</p>
-                        <p class="mg0 ft12 truncate grey-text">date:'MMM dd, yy</p>
+                        <h5 class="mg0 ft13 b truncate">{{stories[4].title}}</h5>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[4].userName}}</p>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[4].placeName}}</p>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[4].createdDate | date:'MMM dd, yy'}}</p>
                     </div>
                 </div>
             </div>
             <div class="coverfixbox card pdan mgb20 ht266">
                 <div class="card-image reletive">
-                    <img ng-src="images/home/write-bg.jpg">
+                    <img ng-src="{{stories[5].coverPhoto}}">
                     <div class="overlay pda10">
-                        <h5 class="mg0 ft13 b truncate">Title</h5>
-                        <p class="mg0 ft12 truncate grey-text">userName</p>
-                        <p class="mg0 ft12 truncate grey-text">placeName</p>
-                        <p class="mg0 ft12 truncate grey-text">date:'MMM dd, yy</p>
+                        <h5 class="mg0 ft13 b truncate">{{stories[5].title}}</h5>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[5].userName}}</p>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[5].placeName}}</p>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[5].createdDate | date:'MMM dd, yy'}}</p>
                     </div>
                 </div>
             </div>
             <div class="coverfixbox card pdan mgb20 ht266">
                 <div class="card-image reletive">
-                    <img ng-src="images/home/write-bg.jpg">
+                    <img ng-src="{{stories[6].coverPhoto}}">
                     <div class="overlay pda10">
-                        <h5 class="mg0 ft13 b truncate">Title</h5>
-                        <p class="mg0 ft12 truncate grey-text">userName</p>
-                        <p class="mg0 ft12 truncate grey-text">placeName</p>
-                        <p class="mg0 ft12 truncate grey-text">date:'MMM dd, yy</p>
+                        <h5 class="mg0 ft13 b truncate">{{stories[6].title}}</h5>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[6].userName}}</p>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[6].placeName}}</p>
+                        <p class="mg0 ft12 truncate grey-text">{{stories[6].createdDate | date:'MMM dd, yy'}}</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-   <!--  <div class="coverfixbox card pdan" ng-repeat='story in stories'>
-        <div class="card-image reletive">
-            <img ng-src="{{story.coverPhoto}}">
-            <div class="overlay pda10">
-                <h5 class="mg0 ft13 b truncate">{{story.title}}</h5>
-                <p class="mg0 ft12 truncate grey-text">{{story.userName}}</p>
-                <p class="mg0 ft12 truncate grey-text">{{story.placeName}}</p>
-                <p class="mg0 ft12 truncate grey-text">{{story.createdDate | date:'MMM dd, yy'}}</p>
-            </div>
-        </div>
-    </div> -->
 </div>

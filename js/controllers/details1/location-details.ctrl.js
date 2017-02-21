@@ -1,12 +1,13 @@
 app.controller('locationDetailsCtrl', function($scope, $stateParams, $rootScope){
 	console.log($stateParams);
+    var parameters = decodeParams($stateParams.p);
 	$scope.cityId = '-KYJONgh0P98xoyPPYm9';
-	if($stateParams.category == 'locations'){
-		db.ref('locations/'+$scope.cityId+ '/'+$stateParams.id).once('value', function(response){
+	if(parameters.category == 'locations'){
+		db.ref('locations/'+$scope.cityId+ '/'+parameters.id).once('value', function(response){
 			console.log(response);
 		})
 	} else {
-		db.ref('locality/'+$scope.cityId+ '/'+$stateParams.id).once('value', function(response){
+		db.ref('locality/'+$scope.cityId+ '/'+parameters.id).once('value', function(response){
 			console.log(response.val());
 			$scope.location = response.val();
 			$scope.name = $scope.location.localityName;
