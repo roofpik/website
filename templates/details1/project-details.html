@@ -1,19 +1,42 @@
-<div class="container">
+<div class="container container2">
     <div class="row mgt70 linkroot">
-        <!-- <nav>
+        <nav>
             <div class="nav-wrapper">
                 <div class="col s12">
                     <a href="#home" class="breadcrumb">Home</a>
                     <a href="#projects" class="breadcrumb" ng-repeat="path in path track by $index">{{path}}</a>
                 </div>
             </div>
-        </nav> -->
+        </nav>
     </div>
-    <div class="row">
+    <div class="row radius2 mgan cardmg">
+            <div class="col s6 offset-s2 pdrn">
+                <div class="input-field card col s12 ht45 pdan reletive">
+                    <span class="inpspn">Find :</span>
+                    <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompletenear inp_pdw mgbn">
+                    <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" ng-show="searchingName" />
+                    <div class="search-results" ng-show="showSearch">
+                        <ul class="collection homecoll">
+                            <li ng-repeat="item in categorySearch| filter: searched" class=" collection-item avatar" ng-click="selectType(item)">
+                                <img ng-src="{{item.icon}}" class="circle" />
+                                <span class="title ft13">{{item.name}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="input-field col m2 pdln">
+                <button class="btn btn-full  blue ht45" ng-click="search()">
+                    <i class="material-icons left">search</i>Search
+                </button>
+            </div>
+        </div>
+   <!--  <div class="row">
         <div class="col s12 m8">
             <h1 class="hd1 b">{{projectName}}</h1>
             <div class="row mgbn ft12">
-                <div class="col s12 ft20i vatop mgt5"><i class="material-icons blue-text">location_on</i>{{project.projectDetails.address.addressLine1}}, {{project.projectDetails.address.addressLine2}}
+                <div class="col s12 ft20i vatop mgt5">
+                    <i class="material-icons blue-text">location_on</i>{{project.projectDetails.address.addressLine1}}, {{project.projectDetails.address.addressLine2}}
                 </div>
                 <div class="col s12 grey-text mgt5 review ft20i vatop" ng-show="allRatings">
                     <span><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < allRatings.averageRating1 ? 'blue-text':'normal'">star</i></span><span>({{allRatings.averageRating}})</span>
@@ -28,38 +51,55 @@
                 <div class="col s12 mgt5">{{minArea}} <span ng-show="minArea != 'NA'">Sq.Ft.</span><span ng-show="minArea != maxArea"> - {{maxArea}} Sq.Ft.</span></div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 <section>
-    <div class="container">
-        <div class="row mgln mgrn mgbn">
-            <div class="col pdan s12 m7 waves-effect waves-light img-detail htfixbox">
+    <div class="container container2">
+        <div class="row mgan grey lighten-4">
+            <div class="col m8 img-detail htfixbox reletive pdln pdrn">
                 <img ng-src="{{coverImage}}">
-                <div class="img-btn center-align">
+                <div class="boxabs">
+                    <div class="img_thumb">
+                        <img class="radius2" ng-src="{{coverImage}}">
+                    </div>
+                </div>
+                <div class="hdboxabs boxabs_bt">
+                    <h5 class="b white-text mgbn ellipsis">{{projectName}}</h5>                   
+                    <div class="col s12 white-text mgt5 review ft20i vatop" ng-show="allRatings">
+                        <span><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < allRatings.averageRating1 ? 'amber-text text-darken-2':'normal'">star</i></span><span>({{allRatings.averageRating}})</span>
+                        <a href="" class="mgr10"><span>{{allRatings.numberOfReviews}} Review</span><span ng-show="allRatings.numberOfReviews > 1">s</span></a>
+                    </div>
+                </div>
+                <div class="fixed-action-btn horizontal boxabs_bt">
+                    <button class="stand"><i class="material-icons left ft14">thumb_up</i>Like</button>
+                    <button class="stand"><i class="material-icons ft14 left">edit</i> Write Review</button>
+                    <button class="stand"><i class="material-icons ft14 left">book</i>Bookmark</button>
+                </div>
+                <!-- <div class="img-btn center-align">
                     <div class="gallery-btn">
                         <gallery></gallery>
                     </div>
-                </div>
+                </div> -->
             </div>
-            <div class="col s12 m5 amen-tab htfixbox boxsd white">
-                <ul class="tabs">
-                    <li class="tab col m12"><a class="active" href="#interest">Yes I am Interested</a></li>
-                    <!-- <li class="tab col m6"><a href="#pricefinder">Price finder</a></li> -->
-                </ul>
+            <div class="col s4 m4 amen-tab htfixbox">
+                <div class="row mgan center bdbtm">
+                    <h5 class="mgbn"> Yes I am Interested</h5>
+                    <p class="mgan grey-text ft12 pdlrn letter1">Please fill in the details</p>
+                </div>
                 <div class="row">
                     <div id="interest" class="col s12">
                         <form name="contactForm">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">account_circle</i>
-                                <input placeholder="Name" type="text" class="validate mgb5 ft12" ng-model="query.userName" required>                               
+                                <input placeholder="Name" type="text" class="validate mgb5 ft12" ng-model="query.userName" required>
                             </div>
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">phone</i>
-                                <input placeholder="Phone" type="text" class="validate mgb5 ft12" ng-minlength="10" ng-maxlength="10" ng-model="query.mobile" required>                                
+                                <input placeholder="Phone" type="text" class="validate mgb5 ft12" ng-minlength="10" ng-maxlength="10" ng-model="query.mobile" required>
                             </div>
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">email</i>
-                                <input placeholder="Email" type="email" class="validate mgb5 ft12" ng-model="query.email" required>                               
+                                <input placeholder="Email" type="email" class="validate mgb5 ft12" ng-model="query.email" required>
                             </div>
                             <div class="col s12 mgb5 mgt10">
                                 <input type="checkbox" id="che1" ng-model="query.moverPacker" class="filled-in ft12" />
@@ -74,45 +114,27 @@
                             </div>
                         </form>
                     </div>
-                    <!-- <div id="pricefinder" class="col s12">
-                        <div class="row valign-wrapper logoprice">
-                            <div class="col m5 pdan center-align"> <img src="images/project/99acres.png" alt=""></div>
-                            <div class="col m4 center-align ft12">
-                                <b>₹ 12,500</b>
-                                <br> 1776 Sq.Ft.
-                            </div>
-                            <div class="col m3 right-align"><a href="" class="btn blue">Details</a></div>
-                        </div>
-                        <div class="row valign-wrapper logoprice">
-                            <div class="col m5 pdan center-align"> <img src="images/project/triplogo.png" alt=""></div>
-                            <div class="col m4 center-align ft12">
-                                <b>₹ 12,500</b>
-                                <br> 1776 Sq.Ft.
-                            </div>
-                            <div class="col m3 right-align"><a href="" class="btn blue">Details</a></div>
-                        </div>
-                        <div class="row valign-wrapper logoprice">
-                            <div class="col m5 pdan center-align"> <img src="images/project/magicbricks.png" alt=""></div>
-                            <div class="col m4 center-align ft12">
-                                <b>₹ 12,500</b>
-                                <br> 1776 Sq.Ft.
-                            </div>
-                            <div class="col m3 right-align"><a href="" class="btn blue">Details</a></div>
-                        </div>
-                    </div> -->
-                    <!-- </div> -->
                 </div>
             </div>
         </div>
+        <div class="row mgt5 mgan pdleftbig">
+            <a href="" ng-click="scrollToDiv('amenities')" class="stand_amn"><i class="material-icons left ft14">list</i>Amenities</a>
+            <a href="" ng-click="scrollToDiv('property')" class="stand_amn"><i class="material-icons left ft14">location_city</i>Available Property Types</a>
+            <a href="" ng-click="scrollToDiv('price_ranges')" class="stand_amn"><i class="material-icons left ft14">done</i>Price Ranges</a>
+            <a href="" ng-click="scrollToDiv('reviews')" class="stand_amn"><i class="material-icons left ft14">edit</i>Reviews</a>
+            <a href="" ng-click="scrollToDiv('ratings')" class="stand_amn"><i class="material-icons left ft14">star_border</i>Ratings</a>
+            <a href="" ng-click="scrollToDiv('gallery')" class="stand_amn"><i class="material-icons left ft14">photo_library</i>Gallery</a>
+            <a href="" ng-click="scrollToDiv('cover_stories')" class="stand_amn"><i class="material-icons left ft14">wallpaper</i> Related Cover Stories</a>
+        </div>
     </div>
 </section>
-<div class="container">
-    <div class="row mgt5" ng-show="project.standoutFeatures">
+<div class="container container2">
+    <div class="row mgt20" ng-show="project.standoutFeatures">
         <div class="col">
             <span class="stand" ng-repeat="feature in project.standoutFeatures">{{feature.featureName}}</span>
         </div>
     </div>
-    <div class="row mgan linehth5">
+    <div class="row linehth5">
         <div class="col s4 pda10">
             <h5 class="ft12 mgan"><i class="material-icons left teal-text text-accent-4">vpn_key</i> Possession</h5>
             <h4 class="mgan ft16b pdl34 truncate">{{project.projectStatus}}</h4>
@@ -139,15 +161,14 @@
             <!-- <p class="mgan ft12 pdl34">Nov 2015</p> -->
         </div>
         <div class="col s4 pda10">
-           <h5 class="ft12 mgan"> <i class="material-icons left  red-text text-accent-4">account_balance</i> Segment</h5>
+            <h5 class="ft12 mgan"> <i class="material-icons left  red-text text-accent-4">account_balance</i> Segment</h5>
             <h4 class="mgan ft16b pdl34 truncate">{{project.segment}}</h4>
             <!-- <p class="mgan ft12 pdl34">Nov 2015</p> -->
         </div>
     </div>
-    <section class="mgt20" ui-view="reviewRating"></section>
+    <section class="mgt20 reviews" ui-view="reviewRating"></section>
 </div>
-
-<div class="container">
+<div class="container container2">
     <div class="row mgt20 grey-text ft13 text-darken-2">
         <div class="col s12 b">
             <h5 class="ft15 mgtn b mgb10 pdb10 bdbtm">Unit Details & Floor Plans</h5>
@@ -185,7 +206,7 @@
             </div>
         </div>
     </div>
-    <div class="row mgt20 grey-text ft13 text-darken-2">
+    <div class="row mgt20 grey-text ft13 text-darken-2 amenities">
         <div class="col s12 b">
             <h5 class="ft15 b mgtn mgb10 pdb10 bdbtm">Amenities</h5>
         </div>
@@ -206,8 +227,7 @@
             </div>
         </div>
     </div>
-
-<!-- <div class="row mgt20">
+    <!-- <div class="row mgt20">
     <div class="col s12 b">
         <h5 class="ft15 b mgtn mgb10 pdb10 bdbtm">Map</h5>
     </div>

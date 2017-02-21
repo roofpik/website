@@ -264,16 +264,16 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     //demo function attached to delete button to test the projects/locations/localities details page
 
     $scope.testListPage = function() {
-        $state.go('location-details', {id: '-KYJOduA3Aiy5b0FEiis', category: 'locality'});
+        // $state.go('location-details', {id: '-KYJOduA3Aiy5b0FEiis', category: 'locality'});
         // $state.go('project-details', {projectId: '-KbT8haHPqV7gTy55f-x', category: 'CGHS'});
-        // var params = {
-        //     'vertical': 'residential',
-        //     'id': '-KYMt4pSYjIUsknqZ6Qr',
-        //     'type': 'project'
-        // }
+        var params = {
+            'vertical': 'residential',
+            'id': '-KYMt4pSYjIUsknqZ6Qr',
+            'type': 'project'
+        }
 
-        // var parameter = encodeParams(params);
-        // $state.go('listing', { parameters: parameter });
+        var parameter = encodeParams(params);
+        $state.go('listing', { parameters: parameter });
     }
 
 }]);
