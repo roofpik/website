@@ -99,6 +99,16 @@
                         </div>
                     </div>
                     <div class="row pdt2 mgbn">
+                        <h5 class="ush6">Rating</h5>
+                        <hr>
+                        <div class="filterList">
+                            <p ng-repeat="i in [1,2,3,4,5]">
+                                <input type="checkbox" class="filled-in" id="{{5-i+1}}+'star'" ng-model="selected.rating[6-i]" />
+                                <label for="{{5-i+1}}+'star'"><span class="block ft12 grey-text ellipsis"><i class="material-icons ft14 text-darken-2" ng-repeat="j in [1,2,3,4,5] track by $index" ng-class="$index < (5-i+1) ? 'amber-text':'normal'">star</i></span></label>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row pdt2 mgbn">
                         <h5 class="ush6">Price</h5>
                         <hr>
                         <div class="filterList row">
@@ -127,7 +137,7 @@
         </div>
         <div class="col s8 m8 l9 pdl30">
             <div class="row mgb10">
-                <div class="col s2 pdan">
+               <!--  <div class="col s2 pdan">
                     <select class="browser-default">
                         <option value="" disabled selected>Select</option>
                         <option value="1">10</option>
@@ -144,20 +154,20 @@
                         <option value="3">30</option>
                         <option value="3">40</option>
                     </select>
-                </div>
-                <div class="col s4 pdan">
+                </div> -->
+                <div class="col s8 pdan">
                     <div class="input-field mgtn bodinp">
                         <input class="inpfilter" id="search" placeholder="search"><i class="material-icons search_i">search</i>
                         <div class="search-results"></div>
                     </div>
                 </div>
                 <div class="col s2 pdl15 pdrn">
-                    <select class="browser-default">
+                    <select class="browser-default" ng-change="changeNumberOfProjects()" ng-model="showProjects">
                         <option value="" disabled selected>Select</option>
-                        <option value="1">10</option>
-                        <option value="2">20</option>
-                        <option value="3">30</option>
-                        <option value="3">40</option>
+                        <option value="10" >10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <!-- <option value="3">40</option> -->
                     </select>
                 </div>
                 <div class="col s2 pdl15 right-align pdrn">
@@ -168,7 +178,7 @@
                 </div>
             </div>
             <div class="row mgbn mgrtmns10">
-                <div class="card horizontal imgfx project-item boxone" ng-repeat="project in projectList">
+                <div class="card horizontal imgfx" ng-class="displayType" ng-repeat="project in projectList">
                     <a href="">
                         <div class="card-image fix40 left">
                             <img ng-src="{{project.cover}}" class="responsive-img">
@@ -176,7 +186,7 @@
                         <div class="cardpdt fix60 left">
                             <span class="block black-text ft13 ellipsis">{{project.name}}</span>
                             <span class="block ft12 grey-text ellipsis">{{project.address}}</span>
-                            <span class="block ft12 grey-text ellipsis"><i class="material-icons ft14 amber-text text-darken-2" ng-repeat="i in [1,2,3,4,5]">star</i>(5) 8 Reviews</span>
+                            <span class="block ft12 grey-text ellipsis"><i class="material-icons ft14 text-darken-2" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < project.rating ? 'amber-text':'normal'">star</i>({{project.rating}}) {{project.numberOfReviews}} Reviews</span>
                             <span class="block ft12 grey-text ellipsis" ng-show="project.bhks">{{project.bhks}} BHK Available</span>
                             <span class="block ft12 grey-text ellipsis" ng-show="project.area">{{project.area.min}} <span ng-show="project.area.min != project.area.max">- {{project.area.max}}</span> Sq.ft.</span>
                         </div>
