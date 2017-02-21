@@ -38,8 +38,6 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
         page_size: $scope.page_size
     }
 
-
-
     fetchProjects()
 
     function fetchProjects() {

@@ -19,6 +19,9 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     $scope.projects2 = {}; //bind project name with null for autocomplete
     $scope.projects3 = {}; //bind project name with project type
     $scope.selectedProject = {};
+     $scope.review = {
+        ratings: {}
+    }
     $scope.ratingParams = [{
         name: 'Security',
         id: 2
