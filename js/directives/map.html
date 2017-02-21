@@ -79,7 +79,7 @@
         <div class="row mgbn">
             <ul class="ht-auto fixh-aco" id="map-list">
                 <!-- <li ng-repeat="item in listMenu" id="{{item[4]}}" ng-click="showOnMap(item, $index)"> -->
-                <div class="pda10 ellipsis" ng-repeat="item in listMenu">
+                <div class="pda10 ellipsis" ng-repeat="item in listMenu" ng-show="$index >= min && $index < max">
                 <i class="material-icons left">place</i>{{item[0]}}</div>
                 <!-- <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
                     </div> -->
@@ -88,14 +88,10 @@
         </div>
         <div class="row mgt10 mgbn center">
             <ul class="pagination">
-                <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a>
+                <li ng-class="currentPage == 1? 'disabled' : 'normal'" ng-click="changePage(1)"><a href="#!"><i class="material-icons">chevron_left</i></a>
                 </li>
-                <li class="active"><a href="#!">1</a></li>
-                <li class="waves-effect"><a href="#!">2</a></li>
-                <li class="waves-effect"><a href="#!">3</a></li>
-                <li class="waves-effect"><a href="#!">4</a></li>
-                <li class="waves-effect"><a href="#!">5</a></li>
-                <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                <li ng-class="i== currentPage?'active': 'normal'" ng-repeat="i in pages track by $index" ng-click="goToPage(i)"><a href="">{{i}}</a></li>
+                <li ng-class="currentPage == lastPage? 'disabled' : 'normal'" ng-click="changePage(2)"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
             </ul>
         </div>
     </div>
