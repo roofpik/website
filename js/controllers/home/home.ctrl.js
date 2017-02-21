@@ -18,8 +18,11 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     // to change verttical and category options
 
     $scope.selectVertical = function(val) {
-        $scope.selectedVertical = val;
-        $scope.categorySearch = searchObject[$scope.selectedVertical];
+        $timeout(function(){
+            $scope.categorySearched = '';
+            $scope.selectedVertical = val;
+            $scope.categorySearch = searchObject[$scope.selectedVertical];
+        },0);
     }
 
     $scope.toggleSearchType = function() {
@@ -36,10 +39,10 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     // called when user selects a type
 
     $scope.selectCategory = function(val) {
-        if (val.name == 'Explore Locality') {
+        // if (val.name == 'Explore Locality') {
             // if selected type is search locality then shift focus to locality search
             $('#locality-search').focus();
-        }
+        // }
         $scope.categorySearched = val.name;
         $scope.selectedType = val;
         $scope.showSearch = false;
