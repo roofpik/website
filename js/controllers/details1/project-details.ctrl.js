@@ -155,7 +155,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
 	        },
 	        'partyHall': {
 	        	name: 'Party Hall',
-	        	img: 'images/icons/hall.png'
+                img: 'images/icons/hall.png'
 	        },
 	        'spa': {
 	        	name: 'Spa',
@@ -282,6 +282,12 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     		'hrefLink': '#sports'
     	}
     };
+
+     $scope.scrollToDiv = function(value){      
+        $('html,body').animate({
+            scrollTop: $("."+value).offset().top - 80},
+        'slow');
+    }
 
     db.ref('projects/-KYJONgh0P98xoyPPYm9/'+$scope.category+'/' + $scope.projectId).once('value', function(snapshot) {
         $timeout(function() {

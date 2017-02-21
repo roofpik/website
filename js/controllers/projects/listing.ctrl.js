@@ -34,6 +34,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
     $scope.selected = {};
     $scope.price = {};
     $scope.area = {};
+    $scope.selectedView="list";
     getLocality();
 
     function getLocality() {
@@ -241,5 +242,24 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
         }
         console.log(parameters);
         $state.go('list', { p: encodeParams(parameters) }, {reload:true});
+    }
+     $scope.changeView = function(val){
+        console.log(val);
+        if(val == 1){
+            $scope.selectedView = 'list';
+            $('.project-item').addClass('boxone');
+            $('.project-item').removeClass('boxtwo');
+            $('.project-item').removeClass('boxthree');
+        } else if(val == 2){
+            $scope.selectedView = 'grid1';
+            $('.project-item').removeClass('boxone');
+            $('.project-item').addClass('boxtwo');
+            $('.project-item').removeClass('boxthree');
+        } else {
+            $scope.selectedView = 'grid2';
+            $('.project-item').removeClass('boxone');
+            $('.project-item').removeClass('boxtwo');
+            $('.project-item').addClass('boxthree');
+        }
     }
 }]);
