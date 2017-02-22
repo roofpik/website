@@ -18,6 +18,17 @@ app.directive('gallery', function() {
         }
     }
 });
+app.directive('gallerynew', function() {
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'templates/details1/gallery.html',
+        controller: 'galleryCtrl',
+        scope: {
+            galleryResponse: '='
+        }
+    }
+});
 
 app.directive('header', function() {
     return {

@@ -553,13 +553,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 
 .imagelightbox-arrow {
     cursor: pointer;
-    width: 3.75em; /* 60 */
-    height: 7.5em; /* 120 */
-    background-color: #444;
-    background-color: rgba( 0, 0, 0, .5 );
+    width: 50px; border-radius: 50%;
+    height: 50px;   border:solid 1px #ccc;
+    background-color: rgba( 0, 0, 0, .3 );
     vertical-align: middle;
     display: none;
-    position: fixed;
+    position: fixed;  
     z-index: 10001;
     top: 50%;
     margin-top: -3.75em; /* 60 */
@@ -581,7 +580,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 .imagelightbox-arrow:before {
     width: 0;
     height: 0;
-    border: 1em solid transparent;
+    border: 10px solid transparent;
     content: '';
     display: inline-block;
     margin-bottom: -0.125em; /* 2 */
@@ -782,6 +781,8 @@ footer.page-footer .footer-copyright{line-height: 20px; height: 20px}
 .boxone a, .boxtwo a, .boxthree a{ width: 100%; float: left; display: block; }
 .boxone, .boxtwo, .boxthree {transition: all .25s ease-in; float: left; margin-right: 10px;}
 .boxone{width: calc(100% - 10px) !important;} .boxtwo{width:calc(50% - 10px)!important;} .boxthree{width: calc(33.3% - 10px) !important; }
+.gallerynew a img{width: 218px; height: 180px; margin:20px 0 0 20px;}
+
 /*new design css home page end*/
 .loading-icon {
    position: absolute !important;

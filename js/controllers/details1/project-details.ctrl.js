@@ -283,8 +283,8 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     	}
     };
 
-     $scope.scrollToDiv = function(value){      
-        $('html,body').animate({
+     $scope.scrollToDiv = function(value){
+              $('html,body').animate({
             scrollTop: $("."+value).offset().top - 80},
         'slow');
     }
@@ -826,6 +826,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
 app.controller('galleryCtrl', ['$scope', '$timeout', function($scope, $timeout) {
     $scope.showGallery = true;
     $scope.$on('initGallery', function(event, data) {
+        console.log(data);
         $scope.images = data;
         $timeout(function() {
             var gallery = $('a[data-imagelightbox="a"]').imageLightbox({
