@@ -1,6 +1,6 @@
 app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$state', function($scope, $http, $timeout, $stateParams, $state) {
     var parameters = decodeParams($stateParams.p);
-    // console.log(parameters);
+    console.log(parameters);
     $scope.filters = {
         style: null,
         bhk: null,
@@ -195,16 +195,30 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
             totalProjectsFetched += Object.keys(response.data.details).length;
             $scope.dataFetched = true;
             $scope.projects = response.data.details;
-
             for (key in $scope.projects) {
                 if ($scope.projects[key].cover.indexOf('http') == -1) {
-                    $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/residential/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-s.jpg';
+                    if(parameters.category == 'CGHS'){
+                        $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/cghs/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-s.jpg';   
+                    } else {
+                        $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/residential/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-s.jpg';    
+                    }
                 }
                 $scope.projectList.push($scope.projects[key]);
             }
+            console.log($scope.projectList);
         }, function myError(err) {
             console.log(err);
         })
+    }
+
+    $scope.getRedirectionString= function(id){
+        var data = {
+            projectId : id
+        }
+        if(parameters.category == 'CGHS'){
+            data.category = 'cghs';
+        }
+        return '/#/project-details/'+ encodeParams(data);
     }
 
     $scope.goToPage = function(pageNum) {

@@ -178,8 +178,9 @@
                 </div>
             </div>
             <div class="row mgbn mgrtmns10">
-                <div class="card horizontal imgfx" ng-class="displayType" ng-repeat="project in projectList">
-                    <a href="">
+                <!-- <div class="card horizontal imgfx" ng-class="displayType" ng-repeat="project in projectList" ng-click="takeToProject(project)"> -->
+                <div class="card horizontal imgfx" ng-class="displayType" ng-repeat="project in projectList track by $index">
+                    <a ng-href="{{getRedirectionString(project.id)}}">
                         <div class="card-image fix40 left">
                             <img ng-src="{{project.cover}}" class="responsive-img">
                         </div>

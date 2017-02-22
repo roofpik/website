@@ -198,13 +198,11 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
                 param = {
                     projectId : $scope.searchedValue.id
                 }
-                // console.log(encodeParams(param));
-                // console.log(decodeParams(encodeParams(param)));
                 $state.go('project-details', {p: encodeParams(param)});
             } else if($scope.searchedValue.type == 'cghs') {
                 param = {
                     projectId : $scope.searchedValue.id,
-                    category: 'CGHS'
+                    category: 'cghs'
                 }
                 $state.go('project-details', {p: encodeParams(param)});
             } else if($scope.searchedValue.type == 'locality'){
@@ -222,12 +220,29 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
             }
         } else {
             var param = {
-                'vertical': $scope.selectedVertical,
-                'category': 'Apartments'
+                'vertical': $scope.selectedVertical
             }
+            if($scope.categorySearched == 'Penthouse / Villas'){
+                param.category = 'Penthouses / Duplexes$Villas / Row-houses';
+            } else if($scope.categorySearched =='Low Rise / Independent Floors'){
+                param.category = 'Independent Floors';
+            } else if($scope.categorySearched == 'CGHS'){
+                param.category = 'CGHS';
+            } else {
+                param.category = 'Apartments';
+            }
+
+            if($scope.selectedLocation){
+                if($scope.selectedLocation.type == 'location'){
+                    param.location = $scope.selectedLocation.id;
+                } else {
+                    param.locality= $scope.selectedLocation.id;
+                }
+            }
+
             var parameter = encodeParams(param);
             // console.log(parameter);
-            $state.go('list', { p: parameter });
+            $state.go('list', { p: parameter});
         }
     }
 
