@@ -18,6 +18,7 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
         $('.modal').modal();
     })
 
+
     var page_size = 10;
     $scope.enteredText = "";
     var page_start = 0;
@@ -110,24 +111,24 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
 
     $rootScope.$watch('loginStatus', function() {
         $scope.loginStatus = $rootScope.loginStatus;
-
         if ($rootScope.loginStatus) {
             $scope.user = {};
             $scope.user.photoURL = $rootScope.photoURL;
-            $scope.user.firstName = $rootScope.displayName;
+            $scope.user.displayName = $rootScope.displayName;
             $scope.user.uid = $rootScope.uid;
         } else {
             $scope.user = {};
             $scope.user.photoURL = null;
-            $scope.user.firstName = null;
+            $scope.user.displayName = null;
             $scope.user.uid = null;
         }
+
         console.log($scope.user);
     });
 
     $rootScope.$on("callShowLogin", function() {
         $timeout(function() {
-            $scope.showLogin();
+            showLogin();
         }, 0);
     });
 
@@ -135,27 +136,38 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
         $("#open-login").click();
     }
 
-    // $scope.logout = function() {
+    $scope.logout = function() {
+        swal({
+                title: "Logout!",
+                text: "Are You Sure You Want To Logout?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, log me out!",
+                closeOnConfirm: false
+            },
+            function() {
+                var timestamp = new Date().getTime();
+                firebase.auth().signOut().then(function() {
+                    // Sign-out successful.
+                    $timeout(function() {
+                        $rootScope.uid = null;
+                        $timeout(function() {
+                            $rootScope.loginStatus = false;
+                        }, 0);
+                        localStorage.setItem('loginStatus', false);
+                        $('.modal').modal('close');
+                        sweetAlert("Logout Successful", "You have successfully logged out!", "success");
+                    }, 100);
 
-    //     var timestamp = new Date().getTime();
-    //     UserTokenService.checkToken($rootScope.uid, timestamp, 5);
-    //     firebase.auth().signOut().then(function() {
-    //         // Sign-out successful.
-    //         $timeout(function() {
-    //             $rootScope.uid = null;
-    //             $rootScope.loginStatus = false;
-    //             localStorage.setItem('loginStatus', false);
-    //             $mdDialog.hide();
-    //             sweetAlert("Logout Successful", "You have successfully logged out!", "success");
-    //         }, 100);
+                }, function(error) {
+                    // An error happened.
+                    var timestamp = new Date().getTime();
+                });
 
-    //     }, function(error) {
-    //         // An error happened.
-    //         var timestamp = new Date().getTime();
-    //         UserTokenService.checkToken($rootScope.uid, timestamp, 4);
-    //     });
+            });
 
-    // };
+    };
 
 
     $scope.showSignUp = function(ev) {
@@ -175,10 +187,12 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
     }
 
     $scope.goToProfile = function() {
+        console.log($scope.user.uid)
         var params = {
-            userId: $scope.user.uid
+            id: $scope.user.uid
         }
-        $state.go('profile', { id: encodeParams(params) });
+        var parameter = encodeParams(params)
+        $state.go('profile', {id: parameter});
     };
 
     // $scope.takeToMyReviews = function() {

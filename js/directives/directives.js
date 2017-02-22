@@ -243,7 +243,7 @@ app.controller('loginCtrl', function($scope, $timeout, $rootScope, $location, $h
         user.registration.device = navigator.userAgent.toLowerCase();
         user.registration.platform = 'website';
         user.registration.regType = 'online';
-        if(ip){
+        if (ip) {
             user.registration.signupIp = JSON.parse(ip);
         }
         if (source == 'google') {
@@ -349,15 +349,15 @@ app.controller('loginCtrl', function($scope, $timeout, $rootScope, $location, $h
             var config = 1;
             var parameter = btoa('email=' + email + '&name=' + name + '&config=' + config);
             console.log(parameter);
-                $http({
-                    url: 'http://107.23.243.89/api/SendMail_1.0',
-                    method: 'GET',
-                    params: {
-                        args: parameter
-                    }
-                }).then(function(response) {
-                    console.log(response);
-                    swal({
+            $http({
+                url: 'http://107.23.243.89/api/SendMail_1.0',
+                method: 'GET',
+                params: {
+                    args: parameter
+                }
+            }).then(function(response) {
+                console.log(response);
+                swal({
                         title: "Signup Successful",
                         text: "Have a code ?",
                         type: "input",
@@ -378,7 +378,7 @@ app.controller('loginCtrl', function($scope, $timeout, $rootScope, $location, $h
                             return true;
                         }
                     });
-                });
+            });
         } else {
             sweetAlert("Welcome", "You have successfully logged in!", "success");
         }
@@ -473,4 +473,3 @@ function reviewRatings() {
         }
     };
 }
-

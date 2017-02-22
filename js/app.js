@@ -1,6 +1,6 @@
 var app = angular.module('roofpikWeb', ['ui.router']);
 
-app.run(function($rootScope, $timeout) {
+app.run(function($rootScope, $timeout, $window) {
     $rootScope.loginStatus = false;
     $rootScope.uid = null;
     firebase.auth().onAuthStateChanged(function(user) {
@@ -17,12 +17,14 @@ app.run(function($rootScope, $timeout) {
             $('.modal').modal('close');
             $rootScope.photoURL = user.photoURL;
             $rootScope.displayName = user.displayName;
+            
             // User is signed in.
         } else {
             $rootScope.uid = null;
             $rootScope.loginStatus = false;
             localStorage.setItem('loginStatus', false);
             deleteLocalStorage('uid');
+            
             // No user is signed in.
         }
     });
