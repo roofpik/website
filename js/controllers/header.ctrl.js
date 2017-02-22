@@ -111,24 +111,23 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
 
     $rootScope.$watch('loginStatus', function() {
         $scope.loginStatus = $rootScope.loginStatus;
-        if ($rootScope.loginStatus) {
-            $scope.user = {};
-            $scope.user.photoURL = $rootScope.photoURL;
-            $scope.user.displayName = $rootScope.displayName;
-            $scope.user.uid = $rootScope.uid;
-        } else {
+        if($rootScope.loginStatus){
+          $timeout(function(){
+              $scope.user = firebase.auth().currentUser;
+              console.log($scope.user)
+          }, 0);
+        }
+        else{
             $scope.user = {};
             $scope.user.photoURL = null;
             $scope.user.displayName = null;
-            $scope.user.uid = null;
         }
-
         console.log($scope.user);
     });
 
     $rootScope.$on("callShowLogin", function() {
         $timeout(function() {
-            showLogin();
+            $scope.showLogin();
         }, 0);
     });
 
@@ -144,7 +143,7 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, log me out!",
-                closeOnConfirm: false
+                closeOnConfirm: true,
             },
             function() {
                 var timestamp = new Date().getTime();
@@ -157,7 +156,7 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
                         }, 0);
                         localStorage.setItem('loginStatus', false);
                         $('.modal').modal('close');
-                        sweetAlert("Logout Successful", "You have successfully logged out!", "success");
+                        // sweetAlert("Logout Successful", "You have successfully logged out!", "success");
                     }, 100);
 
                 }, function(error) {
@@ -192,7 +191,7 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
             id: $scope.user.uid
         }
         var parameter = encodeParams(params)
-        $state.go('profile', {id: parameter});
+        $state.go('profile', {id: parameter})
     };
 
     // $scope.takeToMyReviews = function() {
