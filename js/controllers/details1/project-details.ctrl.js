@@ -5,7 +5,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     var parameters = decodeParams($stateParams.p);
     $scope.projectId = parameters.projectId;
     if(parameters.category){
-        if(parameters.category == 'CGHS'){
+        if(parameters.category == 'cghs'){
             $scope.category = 'cghs';
         } else {
             $scope.category = 'residential';
