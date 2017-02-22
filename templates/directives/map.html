@@ -8,7 +8,7 @@
                         <div class="input-field card ht45 pdan reletive">
                             <span class="inpspn">Find :</span>
                             <input type="text" placeholder="Search" id="type-selection" class="autocompletenear inp_pdw mgbn" ng-change="getSearchData()" ng-model="searchedText">
-                            <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" />
+                            <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" ng-show="fetchingResults"/>
                             <div class="search-results" ng-show="showSearch">
                                 <ul class="collection homecoll">
                                     <li ng-repeat="item in searchByNameResults" class=" collection-item avatar" ng-click="selectResult(item)">
@@ -33,30 +33,6 @@
             <div class="col s12">
                 <h5 class="b truncate"><i class="material-icons left">list</i> Explore {{menuTitle}}</h5>
             </div>
-            <div class="col s4 right-align">
-                <div class="">
-                    <!-- <button class="dropdown-button btn-flat white-text b"
-                    data-activates="radiolist">
-                        <i class="material-icons right">filter_list</i>
-                    </button>
-                    <form>
-                        <ul id="radiolist" class="dropdown-content wd150">
-                            <li class="pda10" ng-click="selectType()">
-                                <input name="displayMap" class="with-gap" type="radio" id="projects" ng-change="selectType()" ng-model="selectedType" value="projects" />
-                                <label for="projects">Projects</label>
-                            </li>
-                            <li class="pda10">
-                                <input name="displayMap" class="with-gap" type="radio" id="localities" ng-change="selectType()" ng-model="selectedType" value="localities" />
-                                <label for="localities">Localities</label>
-                            </li>
-                            <li class="pda10">
-                                <input name="displayMap" class="with-gap" type="radio" id="locations" ng-change="selectType()" ng-model="selectedType" value="locations" />
-                                <label for="locations">Locations</label>
-                            </li>
-                        </ul>
-                    </form> -->
-                </div>
-            </div>
         </div>
         <div class="row mgbn">
           
@@ -78,12 +54,8 @@
         </div>
         <div class="row mgbn">
             <ul class="ht-auto fixh-aco" id="map-list">
-                <!-- <li ng-repeat="item in listMenu" id="{{item[4]}}" ng-click="showOnMap(item, $index)"> -->
-                <div class="pda10 ellipsis" ng-repeat="item in listMenu" ng-show="$index >= min && $index < max">
-                <i class="material-icons left">place</i>{{item[0]}}</div>
-                <!-- <div class="collapsible-body pda20 grey-text lighten-1"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-                    </div> -->
-                <!-- </li> -->
+                <li class="pda10 ellipsis" ng-repeat="item in listMenu" ng-show="$index >= min && $index < max" class="marker-link" data-markerid="{{$index}}" ng-click="openInfoWindow($index, 'list')">
+                <i class="material-icons left">place</i>{{item[0]}}</li>
             </ul>
         </div>
         <div class="row mgt10 mgbn center">

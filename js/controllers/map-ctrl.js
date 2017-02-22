@@ -9,6 +9,9 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
      $scope.projectInfoWindow = [];
      $scope.localityInfoWindow = [];
      $scope.locationInfoWindow = [];
+     $scope.fetchingResults = false;
+     var finalMarkers = [];
+
      var data = [];
      var image = '';
      var content = [];
@@ -68,14 +71,12 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
          console.log(encodeParams(data));
          $http({
              // url: 'http://107.23.243.89/api/GetMapData_1.0',
-             url: 'http://107.23.243.89/api/GetMapData_1.0',
+             url: 'http://35.154.60.19/api/GetMapData_1.0',
              method: 'GET',
              params: {
                  args: encodeParams(data)
              }
          }).then(function(response) {
-             console.log(response);
-             console.log(Object.keys(response.data).length);
              $scope.mapData = response.data;
              for (key in $scope.mapData) {
                  if ($scope.mapData[key].type == 'residential' || $scope.mapData[key].type == 'cghs') {
@@ -201,21 +202,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                  }
              }
              $timeout(function() {
-                 console.log($scope.selectedType)
                  getMapList();
-                 // if ($scope.selectedType == 'projects') {
-                 //     $scope.listMenu = $scope.projectMarkers;
-                 //     $scope.menuTitle = 'Projects';
-                 //     initMap($scope.projectMarkers, $scope.projectInfoWindow);
-                 // } else if ($scope.selectedType == 'localities') {
-                 //     $scope.listMenu = $scope.localityMarkers;
-                 //     $scope.menuTitle = 'Localities';
-                 //     initMap($scope.localityMarkers, $scope.localityInfoWindow);
-                 // } else if ($scope.selectedType == 'locations') {
-                 //     $scope.listMenu = $scope.locationMarkers;
-                 //     $scope.menuTitle = 'Locations';
-                 //     initMap($scope.locationMarkers, $scope.locationInfoWindow);
-                 // }
              }, 100);
          })
      }
@@ -241,7 +228,8 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
          var infoWindow = new google.maps.InfoWindow({}),
              marker, i;
 
-         // Place each marker on the map  
+         // Place each marker on the map 
+         finalMarkers = []; 
          for (i = 0; i < markers.length; i++) {
              var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
              bounds.extend(position);
@@ -253,10 +241,10 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                  animation: google.maps.Animation.DROP
 
              });
+             finalMarkers.push(marker);
              google.maps.event.addListener(infoWindow, 'closeclick', function() {
                  $('.LeftBox').css('left', '10px');
              });
-             // $('#map-list').append('<a class="greytran white-text pda10 marker-link" data-markerid="' + i + '">' + markers[i][0] + '</a>');
 
              // Add info window to marker    
              google.maps.event.addListener(marker, 'click', (function(marker, i) {
@@ -302,23 +290,17 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
              google.maps.event.removeListener(boundsListener);
 
          });
-
-         // $('.marker-link').on('click', function() {
-         //     // console.log(markers[$(this).data('markerid')]);
-         //     // console.log($(this).data('markerid'));
-         //     // console.log(infoWindowContent[$(this).data('markerid')][0]);
-         //     // console.log(infoWindowContent[markers[$(this).data('markerid')]][0]);
-         //     // return function() {
-         //            // console.log(infoWindowContent[markers[$(this).data('markerid')]][0]);
-         //            debugger;
-         //             infoWindow.setContent(infoWindowContent[$(this).data('markerid')][0]);
-
-         //             infoWindow.open(map, markers[$(this).data('markerid')]);
-         //             $('.LeftBox').css('left', '-500px');
-         //         // }
-         //     // google.maps.event.trigger(markers[$(this).data('markerid')], 'click');
-         // });
      }
+
+     $scope.openInfoWindow = function(index, from) {
+        if(from == 'list'){
+            $scope.searchedText= '';
+            if(finalMarkers.length ==1){
+                getMapList();
+            }
+        }
+        google.maps.event.trigger(finalMarkers[index], 'click');
+    }
 
      // Select the list of items to be displayed on map and the list beside it
      $scope.selectType = function() {
@@ -391,7 +373,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
              var data = {
                  name: $scope.searchedText
              }
-             console.log(data);
+             $scope.fetchingResults = true;
              $http({
                  url: 'http://107.23.243.89/api/GetByName_1.0',
                  method: 'GET',
@@ -405,17 +387,63 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                     $scope.searchByNameResults = response.data;
                     $scope.showSearch = true;
                  }
+                $scope.fetchingResults = false;
                  console.log($scope.searchByNameResults);
              }, function myError(err) {
                  console.log(err);
+                 $scope.fetchingResults = false;
              })
          }
      }
 
      $scope.selectResult = function(val){
+        var soloMarker = [];
+        var soloInfoWindow = [];
         $scope.searchedText = val.name;
-        $scope.showSearch = false;
-
         // redirect to a view or show on map after selection
+         var data = [$scope.mapData[val.id].name, $scope.mapData[val.id].location.lat, $scope.mapData[val.id].location.lon, 'images/home/marker1.png', $scope.mapData[val.id].id];
+        soloMarker.push(data);
+         if ($scope.mapData[val.id].cover == 'NA') {
+             image = 'images/sohna.jpg';
+         } else {
+             image = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/'+$scope.mapData[val.id].type+'/' + $scope.mapData[val.id].id + '/images/coverPhoto/' + $scope.mapData[val.id].cover + '-s.jpg'
+         }
+         content = ['<div class="info_content">' +
+             '<div class="card info_content mg0">' +
+             '<div class="card-image">' +
+             '<img src="' + image + '">' +
+             '<a href="" class="btn red absbtn"><i class="material-icons left">details</i>See Details</a>' +
+             '</div>' +
+             '<div class="cardTitle row mgan bdbtm">' +
+             '<a class="col m8 black-text text-lighten-4 pd5 pd-tspanmap">' +
+             '<span class="b">' + $scope.mapData[val.id].name + '</span>' +
+             '<span class="ft12">Sohna Road, Sector 48 Gurgaon</span>' +
+             '</a>' +
+             '<div class="col m4 right-align pd5 ft12i" ng-show="' + $scope.mapData[val.id].rating + ' != 0">' +
+             '<span class="block b">' + $scope.mapData[val.id].rating + ' Reviews</span>' +
+             '<span class="block">' +
+             '<i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index <' + $scope.mapData[val.id].rating + ' "blue-text":"normal"">star</i>' +
+             '</span>' +
+             '</div>' +
+             '</div>' +
+             '<div class="row mg0 ht50">' +
+             '<div class="col m6 pd5 dis-tab center ht50" ng-show="' + $scope.mapData[val.id].rent + '">' +
+             '<span class="block b ellipsis">Rent Price</span>' +
+             '<span class="ft12 block ellipsis">₹' + $scope.mapData[val.id].rent.min + ' - ₹' + $scope.mapData[val.id].rent.max + '</span>' +
+             '</div>' +
+             '<div class="col m6 pd5 center ht50">' +
+             '<span class="block b ellipsis">2, 3, 4 BHK</span>' +
+             '<span class="ft12 block ellipsis">1776 Sq. Ft. - 2345 Sq. </span>' +
+             '</div>' +
+             '</div>' +
+             '</div>' +
+             '</div>'
+         ]
+         soloInfoWindow.push(content);
+         initMap(soloMarker, soloInfoWindow);
+         $scope.openInfoWindow(0, 'search');
+         $timeout(function(){
+            $scope.showSearch = false;
+         },200);
      }
  }]);
