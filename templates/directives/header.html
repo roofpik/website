@@ -2,13 +2,13 @@
     <div class="navbar-fixed">
         <nav class="homebgtrn shadow_n">
             <div class="nav-wrapper">
-                <!--  $("#starter_box").click(function () {
-                $(this).css('display', 'none');
-            }); -->
-                <a href="" onmouseover="$('#slide-out-top').css('display', 'block');" class="mgleftrt black-text left topmenu">
+              
+             <!--   <a href="" onmouseover="$('#slide-out-top').css('display', 'block');" class="mgleftrt black-text left topmenu">
+                    <i class="material-icons">menu</i></a> -->
+                <a href="" onclick="$('#slide-out-top').toggle()" class="mgleftrt black-text left topmenu">
                     <i class="material-icons">menu</i></a>
                 <a href="#home" class="rooflogo left"><img src="images/general/logo.png"></a>
-                <div id="slide-out-top" onmouseleave="$('#slide-out-top').css('display', 'none');">
+                <div id="slide-out-top" class="responsive_m" onmouseleave="$('#slide-out-top').css('display', 'none');">
                     <ul class="hdr_list center">
                         <li><a href="#about-us" class="">About</a></li>
                         <li><a href="#cover-stories/gurgaon/-KYJONgh0P98xoyPPYm9/1">Cover Stories</a></li>
@@ -18,13 +18,23 @@
                         <li><a href="#contact-us">Contact us</a></li>
                     </ul>
                 </div>
-                <ul class="right mgr10">
-                    <li> <a href="#write-review" class="wd-sm btn-flat capitalize"><i class="material-icons left bticont" ng-click = "">create</i> Write Review</a></li>
+<
+                <ul class="right mgr10 toprtbtn">
+                    <li> <a href="#write-review" class="btn-flat capitalize"><i class="material-icons left bticont" ng-click = "">create</i> Write Review</a></li>
                     <li>
-                        <a data-target="loginbox" ng-hide="loginStatus" id="open-login" class="wd-sm btn-flat capitalize">
+                        <a data-target="loginbox" ng-hide="loginStatus" id="open-login" class="btn-flat capitalize">
                             <i class="material-icons left bticont">lock_outline</i> Login/Sign Up
                         </a>
-                        <a href="" ng-show="loginStatus" class="wd-sm btn-flat capitalize" ng-click = "goToProfile()"><img ng-src="{{user.photoURL}}" class="display-img left"/>{{user.firstName}}</a>
+                    </li>
+                    <li ng-show="loginStatus">
+                        <a href="" class="dropdown-button btn wd-sm btn-flat capitalize" data-activates='dropdown1'><img ng-src="{{user.photoURL}}" class="display-img left " />{{user.displayName}}</a>
+                        <ul id='dropdown1' class='dropdown-content myClass'>
+                            <li><a href="#!" ng-click = "goToProfile()">My Profile</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#!">Settings</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#!" ng-click = "logout()">Logout</a></li>
+                        </ul>
                     </li>
                     <!--  <li><a data-activates="slide-out-right" href="#" class="button-heart show-on-large"><i class="material-icons grey-text">favorite_border</i></a></li> -->
                 </ul>
