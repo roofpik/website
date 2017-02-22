@@ -1,0 +1,88 @@
+<div>
+    <div class="navbar-fixed">
+        <nav class="homebgtrn shadow_n">
+            <div class="nav-wrapper">
+                <!--  $("#starter_box").click(function () {
+                $(this).css('display', 'none');
+            }); -->
+                <a href="" onmouseover="$('#slide-out-top').css('display', 'block');" class="mgleftrt black-text left topmenu">
+                    <i class="material-icons">menu</i></a>
+                <a href="#home" class="rooflogo left"><img src="images/general/logo.png"></a>
+                <div id="slide-out-top" onmouseleave="$('#slide-out-top').css('display', 'none');">
+                    <ul class="hdr_list center">
+                        <li><a href="#about-us" class="">About</a></li>
+                        <li><a href="#cover-stories/gurgaon/-KYJONgh0P98xoyPPYm9/1">Cover Stories</a></li>
+                        <li><a href="#blogs/gurgaon/-KYJONgh0P98xoyPPYm9/1">Blogs</a></li>
+                        <li><a href="#write-review">Write Review</a></li>
+                        <li><a href="#faq"> FAQ's </a></li>
+                        <li><a href="#contact-us">Contact us</a></li>
+                    </ul>
+                </div>
+                <ul class="right mgr10">
+                    <li> <a href="#write-review" class="wd-sm btn-flat capitalize"><i class="material-icons left bticont" ng-click = "">create</i> Write Review</a></li>
+                    <li>
+                        <a data-target="loginbox" ng-hide="loginStatus" id="open-login" class="wd-sm btn-flat capitalize">
+                            <i class="material-icons left bticont">lock_outline</i> Login/Sign Up
+                        </a>
+                        <a href="" ng-show="loginStatus" class="wd-sm btn-flat capitalize" ng-click="goToProfile()"><img ng-src="{{user.photoURL}}" class="display-img left" />{{user.firstName}}</a>
+                    </li>
+                    <!--  <li><a data-activates="slide-out-right" href="#" class="button-heart show-on-large"><i class="material-icons grey-text">favorite_border</i></a></li> -->
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!--  <div  class="row overhdn" style="display: none">
+        <div class="col s12  center pda10">
+            <ul id="slide-out-top" class="hdr_list center">
+                <li><a href="#about-us" class="">About</a></li>
+                <li><a href="#cover-stories/gurgaon/-KYJONgh0P98xoyPPYm9/1">Cover Stories</a></li>
+                <li><a href="#blogs/gurgaon/-KYJONgh0P98xoyPPYm9/1">Blogs</a></li>
+                <li><a href="#write-review">Write Review</a></li>
+                <li><a href="#faq"> FAQ's </a></li>
+                <li><a href="#contact-us">Contact us</a></li>
+            </ul>
+            <div class="socialicon">
+                <a href="https://www.facebook.com/roofpik" target="_blank">
+                    <img src="images/homeicon/facebook-32.png">
+                </a>
+                <a href="https://www.linkedin.com/company/roofpik?trk=job_view_topcard_company_name" target="_blank">
+                    <img src="images/homeicon/linkedin-6-32.png">
+                </a>
+                <a href="https://www.twitter.com/roofpik" target="_blank">
+                    <img src="images/homeicon/twitter-32.png">
+                </a>
+                <a href="">
+                    <img src="images/homeicon/google-plus-5-32.png">
+                </a>
+                <a href="">
+                    <img src="images/homeicon/instagram-32.png">
+                </a>
+            </div>
+        </div> -->
+</div>
+<div id="searchbox" class="modal white modal-fixed-footer">
+    <form>
+        <div class="modal-content pdb25">
+            <h5 class="ft16b mgtn"> Search 
+                   <a class="right modal-close grey-text" ><i class="material-icons">close</i> </a>
+                </h5>
+            <h6 class="grey-text pdlrn ft15 ftw3">Browse through 1,000+ verified property reviews. Or share one today.</h6>
+            <div class="search-wrapper card">
+                <input id="search" placeholder="search" ng-change="callFunction()" ng-model="enteredText"><i class="material-icons search_i">search</i>
+                <div class="search-results"></div>
+            </div>
+            <div class="card horizontal" ng-repeat="item in projectList" ng-click="openProject()">
+                <a href="">
+                    <div class="card-image fix40 left">
+                        <img ng-src="{{item.cover}}" class="responsive-img searchImg">
+                    </div>
+                    <div class="cardpdt span_block fix60 left">
+                        <span class="black-text ft13 ellipsis">{{item.name}}</span>
+                        <span class="ft12 grey-text ellipsis">{{item.address}}</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+</div>

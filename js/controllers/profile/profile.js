@@ -12,8 +12,8 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
     $scope.newPasswordVerification = '';
     $scope.user.userId = $scope.userId;
     $scope.disableFirstName = true;
-    $scope.disablePwd = true;
-    $scope.disableRePwd = true;
+    // $scope.disablePwd = true;
+    // $scope.disableRePwd = true;
     $scope.disableLastName = true;
     $scope.disablePhoneNumber = true;
     $scope.disableAddress = true;
@@ -113,18 +113,18 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
                 category: 'locations'
             }
             $state.go('location-details', { p: encodeParams(param) });
-        }
+        } else {}
     }
 
     $scope.enableFirstName = function() {
         $scope.disableFirstName = false;
     }
-    $scope.enablePwd = function() {
-        $scope.disablePwd = false;
-    }
-    $scope.enableRePwd = function() {
-        $scope.disableRePwd = false;
-    }
+    // $scope.enablePwd = function() {
+    //     $scope.disablePwd = false;
+    // }
+    // $scope.enableRePwd = function() {
+    //     $scope.disableRePwd = false;
+    // }
     $scope.enableLastName = function() {
         $scope.disableLastName = false;
     }
@@ -150,39 +150,39 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
         $scope.disableAddress = true;
         db.ref('users/' + $scope.userId + '/' + 'address/addressLine1').set($scope.user.address);
     }
-    $scope.blurPwd = function() {
-        $scope.disablePwd = true;
-        if ($scope.newPassword == $scope.user.password) {
-            swal("New Password Must Be Different From The Old Password", "Try Again");
-        }
-        if ($scope.newPassword.length < 8) {
-            swal("The Password Must Be Atleast 8 Characters Long", "Try Again");
-        } else {
-            swal("Are You Sure You Want To Change Your Password?")
-        }
-    }
-    $scope.blurRePwd = function() {
-        $scope.disableRePwd = true;
-        if ($scope.newPasswordVerification.length != 0) {
-            if ($scope.newPassword != $scope.newPasswordVerification) {
-                swal("Passwords Don't Match", "Try Again");
-            } else {
-                db.ref('users/' + $scope.userId + '/' + 'tempPassword').set($scope.newPassword)
-                swal("Password Successfully Changed", "Congratulations!", "success")
-            }
-        } else {
-            if ($scope.newPassword) {
-                swal('Cannot Leave This Field Blank');
-            }
-        }
-    }
+    // $scope.blurPwd = function() {
+    //     $scope.disablePwd = true;
+    //     if ($scope.newPassword == $scope.user.password) {
+    //         swal("New Password Must Be Different From The Old Password", "Try Again");
+    //     }
+    //     if ($scope.newPassword.length < 8) {
+    //         swal("The Password Must Be Atleast 8 Characters Long", "Try Again");
+    //     } else {
+    //         swal("Are You Sure You Want To Change Your Password?")
+    //     }
+    // }
+    // $scope.blurRePwd = function() {
+    //     $scope.disableRePwd = true;
+    //     if ($scope.newPasswordVerification.length != 0) {
+    //         if ($scope.newPassword != $scope.newPasswordVerification) {
+    //             swal("Passwords Don't Match", "Try Again");
+    //         } else {
+    //             db.ref('users/' + $scope.userId + '/' + 'tempPassword').set($scope.newPassword)
+    //             swal("Password Successfully Changed", "Congratulations!", "success")
+    //         }
+    //     } else {
+    //         if ($scope.newPassword) {
+    //             swal('Cannot Leave This Field Blank');
+    //         }
+    //     }
+    // }
 
     $scope.getFileDetails = function(file) {
         console.log(file);
         var file = file.files[0];
         console.log(file)
-        var image = "https://getuikit.com/v2/docs/images/" + file.name;
-        // changeImage(image);
+        var image = "https://getuikit.com/v2/docs/images/" + file.name; //To Rectify
+        changeImage(image);
     }
 
     function changeImage(image) {
