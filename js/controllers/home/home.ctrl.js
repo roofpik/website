@@ -3,6 +3,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     $scope.categorySearch = searchObject[$scope.selectedVertical]; //Stores the search object for different verticals
     $scope.categorySearched = '';
     $scope.locationSearched = '';
+    document.title = "Home"
     $scope.showSearch = false;
     var parameter = '';
     $scope.uid = '';

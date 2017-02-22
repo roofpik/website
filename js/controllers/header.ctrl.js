@@ -94,17 +94,13 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
                     $scope.projectList.push($scope.projects[key]);
                 }
                 loading(true);
-            }, function myError(err) {
-                // console.log(err);
-            })
-        }
-
-        else {
+            }, function myError(err) {})
+        } else {
             fetchProjects();
         }
     }
 
-    $scope.openProject = function(){
+    $scope.openProject = function() {
         console.log($scope.item.name)
     }
 
@@ -115,16 +111,16 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
     $rootScope.$watch('loginStatus', function() {
         $scope.loginStatus = $rootScope.loginStatus;
 
-        if($rootScope.loginStatus){
+        if ($rootScope.loginStatus) {
             $scope.user = {};
             $scope.user.photoURL = $rootScope.photoURL;
             $scope.user.firstName = $rootScope.displayName;
             $scope.user.uid = $rootScope.uid;
-        }
-        else{
-            $scope.user = {};   
+        } else {
+            $scope.user = {};
             $scope.user.photoURL = null;
             $scope.user.firstName = null;
+            $scope.user.uid = null;
         }
         console.log($scope.user);
     });
@@ -136,7 +132,7 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
     });
 
     $scope.showLogin = function(ev) {
-      $("#open-login").click();
+        $("#open-login").click();
     }
 
     // $scope.logout = function() {
@@ -180,9 +176,9 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
 
     $scope.goToProfile = function() {
         var params = {
-            userId : $scope.user.uid
+            userId: $scope.user.uid
         }
-        $state.go('profile', {id: encodeParams(params)});
+        $state.go('profile', { id: encodeParams(params) });
     };
 
     // $scope.takeToMyReviews = function() {
