@@ -1,6 +1,6 @@
 <div class="container container2 mgt70">
     <ul class="tabs">
-        <li class="tab col m12"><a class="active">Profile Details</a></li>
+        <li class="tab col m12"><a class="active">My Profile</a></li>
         <!-- <li class="tab col m6"><a href="#pricefinder">Price finder</a></li> -->
     </ul>
     <div class="row">
@@ -8,7 +8,7 @@
         <div class="file-field input-field">
             <div class="btn">
                 <span>Change Image</span>
-                <input type="file" onchange="angular.element(this).scope().getFileDetails(this)">
+                <input type="file" onchange="angular.element(this).scope().getFileDetails(this)" accept="image/*">
             </div>
         </div>
         <div id="interest" class="col s12">
@@ -37,17 +37,40 @@
                         </div>
                         <div class="input-field col s12">
                             <i class="material-icons prefix">location_city</i>
-                            <input placeholder="City" type="text" class="validate mgb5 ft12" ng-model="user.city" ng-disabled=true >
+                            <input placeholder="City" type="text" class="validate mgb5 ft12" ng-model="user.city" ng-disabled=true>
                         </div>
-                        <div class="input-field col s12" ng-click="enablePwd()">
+                        <!-- <div class="input-field col s12" ng-click="enablePwd()">
                             <i class="material-icons prefix">vpn_key</i>
                             <input placeholder="Change Password" type="password" class="validate mgb5 ft12" ng-model="newPassword" ng-disabled="disablePwd" ng-blur="blurPwd()">
                         </div>
                         <div class="input-field col s12" ng-click="enableRePwd()">
                             <i class="material-icons prefix">vpn_key</i>
                             <input placeholder="Re-enter New Password" type="password" class="validate mgb5 ft12" ng-model="newPasswordVerification" ng-disabled="disableRePwd" ng-blur="blurRePwd()">
-                        </div>
+                        </div> -->
                     </form>
+                </div>
+                <br>
+                <br>
+                <div class="row mgt10" ng-show="showReviews">
+                    <br>
+                    <br>
+                    <h4>My Reviews: </h4>
+                    <br>
+                    <ul>
+                        <li ng-repeat="type in userReviews">
+                            <div ng-repeat="id in type">
+                                <b>"{{id.reviewTitle}}"</b><i ng-show="id.projectName" ng-click="goToProjectPage(id)"><a style = "cursor: pointer">- {{id.projectName}}</a>, {{id.type}}</i> ({{id.createdDate | date:'MMM dd, yy'}})
+                            </div>
+                        </li>
+                        <br>
+                    </ul>
+                </div>
+                <div class="row mgt10" ng-show="noReviewsToShow">
+                    <h4>My Reviews: </h4>
+                    <br>
+                    <ul>
+                        <li>No Review To Show</li>
+                    </ul>
                 </div>
             </div>
         </div>

@@ -20,7 +20,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         controller: 'contactUsCtrl'
     });
     $stateProvider.state('profile', {
-        url: '/profile',
+        url: '/profile?id',
         templateUrl: 'templates/profile/profile.html',
         controller: 'profileCtrl'
     });

@@ -8,15 +8,20 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     loading(true);
     $scope.review = {
-        ratings: {}
-    }
+            ratings: {}
+        }
+        // console.log($stateParams);
     if ($stateParams.id) {
         var params = decodeParams($stateParams.id);
     }
+    console.log(params);
     $scope.projects1 = {}; //bind project name with project ID
     $scope.projects2 = {}; //bind project name with null for autocomplete
     $scope.projects3 = {}; //bind project name with project type
     $scope.selectedProject = {};
+     $scope.review = {
+        ratings: {}
+    }
     $scope.ratingParams = [{
         name: 'Security',
         id: 2
@@ -59,6 +64,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
             $scope.loginStatus = false;
         }
     });
+
     if (checkLocalStorage('loginStatus')) {
         $scope.loginStatus = JSON.parse(localStorage.getItem('loginStatus'));
         if (JSON.parse(localStorage.getItem('loginStatus'))) {
@@ -115,7 +121,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         }
     }
 
-    if($stateParams.id){
+    if ($stateParams.id) {
         loading(true);
         $scope.showList = false;
         $scope.showSearch = false;
@@ -128,8 +134,8 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
             }
         }).then(function mySucces(response) {
             $timeout(function() {
-                for(key in response.data.details){
-                    if(response.data.details[key].id == $stateParams.id){
+                for (key in response.data.details) {
+                    if (response.data.details[key].id == $stateParams.id) {
                         $scope.selectedProject = response.data.details[key];
                         $scope.selectedItem = $scope.selectedProject.name;
                         $scope.projectSelected = true;
@@ -138,8 +144,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                 }
                 loading(false);
             }, 500)
-        }, function myError(err) {
-        })
+        }, function myError(err) {})
 
     }
     $scope.nameEntered = function() {

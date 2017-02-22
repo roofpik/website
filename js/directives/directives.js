@@ -33,9 +33,9 @@ app.directive('gallerynew', function() {
 app.directive('header', function() {
     return {
         restrict: 'A', //This menas that it will be used as an attribute and NOT as an element. I don't like creating custom HTML elements
-        replace: true,
+        replace: false,
         scope: { user: '=' }, // This is one of the cool things :). Will be explained in post.
-        templateUrl: "/js/directives/header.html",
+        templateUrl: "templates/directives/header.html",
         controller: 'headerCtrl'
     }
 });
@@ -43,9 +43,9 @@ app.directive('header', function() {
 app.directive('footer', function() {
     return {
         restrict: 'A', //This menas that it will be used as an attribute and NOT as an element. I don't like creating custom HTML elements
-        replace: true,
-        scope: { user: '=' }, // This is one of the cool things :). Will be explained in post.
-        templateUrl: "/js/directives/footer.html",
+        replace: false,
+        scope: { user: '=?' }, // This is one of the cool things :). Will be explained in post
+        templateUrl: "templates/directives/footer.html",
         controller: 'headerCtrl'
     }
 });
@@ -55,7 +55,7 @@ app.directive('maphome', function() {
         restrict: 'A', //This menas that it will be used as an attribute and NOT as an element. I don't like creating custom HTML elements
         replace: true,
         scope: { user: '=' }, // This is one of the cool things :). Will be explained in post.
-        templateUrl: "/js/directives/map.html",
+        templateUrl: "templates/directives/map.html",
         controller: 'mapCtrl'
     }
 });

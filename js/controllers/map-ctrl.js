@@ -84,7 +84,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                      if ($scope.mapData[key].cover == 'NA') {
                          image = 'images/sohna.jpg';
                      } else {
-                         image = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/residential/' + $scope.mapData[key].id + '/images/coverPhoto/' + $scope.mapData[key].cover + '-s.jpg'
+                         image = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/'+$scope.mapData[key].type+'/' + $scope.mapData[key].id + '/images/coverPhoto/' + $scope.mapData[key].cover + '-s.jpg'
                      }
                      content = ['<div class="info_content">' +
                          '<div class="card info_content mg0">' +

@@ -1,6 +1,6 @@
 app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$state', function($scope, $http, $timeout, $stateParams, $state) {
     var parameters = decodeParams($stateParams.p);
-    console.log(parameters);
+    // console.log(parameters);
     $scope.filters = {
         style: null,
         bhk: null,
@@ -34,7 +34,8 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
     $scope.selected = {};
     $scope.price = {};
     $scope.area = {};
-    $scope.selectedView="list";
+    $scope.selectedView= "list";
+    $scope.displayType = 'boxone';
     getLocality();
 
     function getLocality() {
@@ -90,6 +91,16 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
         if (parameters.bhk) {
             $scope.filters.bhk = parameters.bhk;
             reverseBindParams(parameters.bhk, 'bhk');
+        }
+        if(parameters.rating){
+            $scope.filters.rating = parameters.rating;
+            $scope.selected.rating = {};
+            for(var i=5; i >0; i--){
+                if(i>=parameters.rating){
+                    $scope.selected.rating[i] = true;
+                }
+            }
+            console.log($scope.selected.rating);
         }
         if (parameters.price_range) {
             $scope.filters.price_range = parameters.price_range;
@@ -170,11 +181,12 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
             totalProjects = response.data.hits;
             if ($scope.pages.length == 0) {
                 var max = 0;
-                if (totalProjects / page_size > parseInt(totalProjects / 10)) {
-                    max = parseInt(totalProjects / 10) + 1;
+                if (totalProjects / page_size > parseInt(totalProjects / page_size)) {
+                    max = parseInt(totalProjects / page_size) + 1;
                 } else {
-                    max = parseInt(totalProjects / 10);
+                    max = parseInt(totalProjects / page_size);
                 }
+                console.log(max);
                 for (var i = 1; i <= max; i++) {
                     $scope.pages.push(i);
                 }
@@ -196,7 +208,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
     }
 
     $scope.goToPage = function(pageNum) {
-        page_start = (pageNum - 1) * 10;
+        page_start = (pageNum - 1) * page_size;
         $scope.currentPage = pageNum;
         if (pageNum == $scope.pages[$scope.pages.length - 1]) {
             page_size = totalProjects - page_start;
@@ -216,6 +228,19 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
         }
     }
 
+    $scope.changeNumberOfProjects = function(){
+        console.log($scope.showProjects);
+        if($scope.showProjects){
+            if(page_size != $scope.showProjects){
+                page_size = $scope.showProjects;
+                page_start = 0;
+                $scope.pages = [];
+                $scope.currentPage = 1;
+                fetchProjects();
+            }
+        }
+    }
+
     $scope.applyFilters = function() {
         for (key in $scope.selected) {
             if ($scope.selected[key]) {
@@ -230,6 +255,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
                 }
             }
         }
+        console.log(parameters);
         if ($scope.price) {
             if ($scope.price.min && $scope.price.max) {
                 parameters.price_range = $scope.price.min + '$' + $scope.price.max;
@@ -243,23 +269,18 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
         console.log(parameters);
         $state.go('list', { p: encodeParams(parameters) }, {reload:true});
     }
+
      $scope.changeView = function(val){
         console.log(val);
         if(val == 1){
             $scope.selectedView = 'list';
-            $('.project-item').addClass('boxone');
-            $('.project-item').removeClass('boxtwo');
-            $('.project-item').removeClass('boxthree');
+            $scope.displayType = 'boxone';
         } else if(val == 2){
             $scope.selectedView = 'grid1';
-            $('.project-item').removeClass('boxone');
-            $('.project-item').addClass('boxtwo');
-            $('.project-item').removeClass('boxthree');
+            $scope.displayType = 'boxtwo';
         } else {
             $scope.selectedView = 'grid2';
-            $('.project-item').removeClass('boxone');
-            $('.project-item').removeClass('boxtwo');
-            $('.project-item').addClass('boxthree');
+            $scope.displayType = 'boxthree';
         }
     }
 }]);
