@@ -5,7 +5,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
     // $scope.userId = 'yx8HmzhhTWgxwNH7G2GY9TlLB3O2';
     // console.log($stateParams.id)
     var uid = decodeParams($stateParams.id)
-    $scope.userId = uid.userId;
+    $scope.userId = uid.id;
     // console.log(auth);
     $scope.user = {};
     $scope.newPassword = '';
@@ -24,8 +24,8 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
     getUserData();
 
     function getUserData() {
-        $timeout(function() {
-            db.ref('users/' + $scope.userId).once('value', function(snapshot) {
+        db.ref('users/' + $scope.userId).once('value', function(snapshot) {
+            $timeout(function() {
                 if (snapshot.val().fname) {
                     $scope.user.firstName = snapshot.val().fname;
                 }
@@ -62,7 +62,6 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
     function getUserReviews() {
         db.ref('userReviews/' + $scope.userId).once('value', function(snapshot) {
             $timeout(function() {
-                console.log(snapshot.val());
                 for (key in snapshot.val()) {
                     $scope.userReviews[key] = {};
                     for (key1 in snapshot.val()[key]) {
@@ -117,14 +116,14 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
     }
 
     $scope.enableFirstName = function() {
-        $scope.disableFirstName = false;
-    }
-    // $scope.enablePwd = function() {
-    //     $scope.disablePwd = false;
-    // }
-    // $scope.enableRePwd = function() {
-    //     $scope.disableRePwd = false;
-    // }
+            $scope.disableFirstName = false;
+        }
+        // $scope.enablePwd = function() {
+        //     $scope.disablePwd = false;
+        // }
+        // $scope.enableRePwd = function() {
+        //     $scope.disableRePwd = false;
+        // }
     $scope.enableLastName = function() {
         $scope.disableLastName = false;
     }
@@ -147,35 +146,35 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
         db.ref('users/' + $scope.userId + '/' + 'mobile/mobileNum').set($scope.user.phoneNumber);
     }
     $scope.blurAddress = function() {
-        $scope.disableAddress = true;
-        db.ref('users/' + $scope.userId + '/' + 'address/addressLine1').set($scope.user.address);
-    }
-    // $scope.blurPwd = function() {
-    //     $scope.disablePwd = true;
-    //     if ($scope.newPassword == $scope.user.password) {
-    //         swal("New Password Must Be Different From The Old Password", "Try Again");
-    //     }
-    //     if ($scope.newPassword.length < 8) {
-    //         swal("The Password Must Be Atleast 8 Characters Long", "Try Again");
-    //     } else {
-    //         swal("Are You Sure You Want To Change Your Password?")
-    //     }
-    // }
-    // $scope.blurRePwd = function() {
-    //     $scope.disableRePwd = true;
-    //     if ($scope.newPasswordVerification.length != 0) {
-    //         if ($scope.newPassword != $scope.newPasswordVerification) {
-    //             swal("Passwords Don't Match", "Try Again");
-    //         } else {
-    //             db.ref('users/' + $scope.userId + '/' + 'tempPassword').set($scope.newPassword)
-    //             swal("Password Successfully Changed", "Congratulations!", "success")
-    //         }
-    //     } else {
-    //         if ($scope.newPassword) {
-    //             swal('Cannot Leave This Field Blank');
-    //         }
-    //     }
-    // }
+            $scope.disableAddress = true;
+            db.ref('users/' + $scope.userId + '/' + 'address/addressLine1').set($scope.user.address);
+        }
+        // $scope.blurPwd = function() {
+        //     $scope.disablePwd = true;
+        //     if ($scope.newPassword == $scope.user.password) {
+        //         swal("New Password Must Be Different From The Old Password", "Try Again");
+        //     }
+        //     if ($scope.newPassword.length < 8) {
+        //         swal("The Password Must Be Atleast 8 Characters Long", "Try Again");
+        //     } else {
+        //         swal("Are You Sure You Want To Change Your Password?")
+        //     }
+        // }
+        // $scope.blurRePwd = function() {
+        //     $scope.disableRePwd = true;
+        //     if ($scope.newPasswordVerification.length != 0) {
+        //         if ($scope.newPassword != $scope.newPasswordVerification) {
+        //             swal("Passwords Don't Match", "Try Again");
+        //         } else {
+        //             db.ref('users/' + $scope.userId + '/' + 'tempPassword').set($scope.newPassword)
+        //             swal("Password Successfully Changed", "Congratulations!", "success")
+        //         }
+        //     } else {
+        //         if ($scope.newPassword) {
+        //             swal('Cannot Leave This Field Blank');
+        //         }
+        //     }
+        // }
 
     $scope.getFileDetails = function(file) {
         console.log(file);

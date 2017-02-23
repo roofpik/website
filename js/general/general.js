@@ -77,7 +77,7 @@ var searchObject = {
        },
        {
            icon: 'images/homeicon/Apartment.png',
-           name: 'Apartment',
+           name: 'Apartments',
            id: 2
        },
        {
