@@ -11,9 +11,9 @@
                             <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" ng-show="fetchingResults"/>
                             <div class="search-results" ng-show="showSearch">
                                 <ul class="collection homecoll">
-                                    <li ng-repeat="item in searchByNameResults" class=" collection-item avatar" ng-click="selectResult(item)">
-                                        <img ng-src="{{item.icon}}" class="circle" />
-                                        <span class="title ft13">{{item.name}}</span>
+                                    <li ng-repeat="item in searchByNameResults | filter:searchedText" class=" collection-item avatar" ng-click="selectResult(item)">
+                                        <!-- <img ng-src="{{item.icon}}" class="circle" /> -->
+                                        <span class="title ft13" ng-bind-html="item.name | highlight:searchedText"></span>
                                     </li>
                                 </ul>
                             </div>

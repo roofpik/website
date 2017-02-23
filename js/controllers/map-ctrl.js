@@ -9,6 +9,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
      $scope.projectInfoWindow = [];
      $scope.localityInfoWindow = [];
      $scope.locationInfoWindow = [];
+     $scope.searchByNameResults = [];
      $scope.fetchingResults = false;
      var finalMarkers = [];
 
@@ -18,7 +19,6 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
      $scope.cityId = '-KYJONgh0P98xoyPPYm9';
      var markers = [];
      $scope.searchedText = '';
-     $scope.searchByNameResults = {};
      var map;
      $scope.min = 0;
      $scope.max = 10;
@@ -381,10 +381,12 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                      args: encodeParams(data)
                  }
              }).then(function mySucces(response) {
-                 console.log(response);
+                 // console.log(response);
                  if(Object.keys(response.data).length > 0){
-                    console.log(response.data);
-                    $scope.searchByNameResults = response.data;
+                    // console.log(response.data);
+                    for(key in response.data){
+                        $scope.searchByNameResults.push(response.data[key]);
+                    }
                     $scope.showSearch = true;
                  }
                 $scope.fetchingResults = false;

@@ -1,4 +1,4 @@
-app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope', function($scope, $http, $state, $timeout, $rootScope) {
+app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope', '$sce', function($scope, $http, $state, $timeout, $rootScope, $sce) {
     $scope.selectedVertical = 'residential';
     $scope.categorySearch = searchObject[$scope.selectedVertical]; //Stores the search object for different verticals
     $scope.categorySearched = '';
@@ -9,10 +9,11 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     $scope.uid = '';
     $scope.locations = [];
     $scope.searchByName = false;
+    $scope.searchByNameData = [];
     $scope.showSearchTitle = 'Search by Name';
     $scope.toggleIcon = 'arrow_drop_down_circle';
-    $scope.locationDataLoaded = false;
     $scope.searchingName = false;
+    $scope.searchingLocation= false;
     $('ul.tabs').tabs();
     $('select').material_select();
     $('.parallax').parallax();
@@ -147,7 +148,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
             name = '';
         }
         finalParam = btoa(parameter + name);
-        // console.log(atob(finalParam));
+        console.log(atob(finalParam));
         $http({
             url: 'http://107.23.243.89/api/GetLocations_1.0',
             method: 'GET',
@@ -160,8 +161,11 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
             for (key in response.data.details) {
                 $scope.locations.push(response.data.details[key]);
             }
+            $timeout(function(){
+                $scope.searchingLocation = false;
+                console.log('now false');  
+            }, 0);
             // console.log($scope.locations);
-            $scope.locationDataLoaded = true;
         })
     }
 
@@ -169,6 +173,8 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         // console.log($scope.locationSearched);
         if ($scope.locationSearched) {
             if ($scope.locationSearched.length > 2) {
+                $scope.searchingLocation = true;
+                console.log('now false');
                 name = "&name=" + encodeURIComponent($scope.locationSearched);
                 getLocations(name);
             }
@@ -250,6 +256,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
      $scope.getSearchData = function() {
          // console.log($scope.searchedText);
          if ($scope.searchedText.length > 2) {
+            $scope.searchingName = true;
              var data = {
                  name: $scope.searchedText
              }
@@ -262,10 +269,14 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
              }).then(function mySucces(response) {
                  // console.log(response);
                  if(Object.keys(response.data).length > 0){
-                    $scope.searchByName = response.data;
+                    for(key in response.data){
+                        $scope.searchByNameData.push(response.data[key]);
+                    }
                     $scope.showSearch2 = true;
                  }
+                 $scope.searchingName = false;
              }, function myError(err) {
+                $scope.searchingName = false;
                  // console.log(err);
              })
          }
@@ -292,6 +303,14 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         var parameter = encodeParams(params);
         $state.go('listing', { parameters: parameter });
     }
+
+    $scope.highlight = function(text, search) {
+    console.log('called');
+    if (!search) {
+        return $sce.trustAsHtml(text);
+    }
+    return $sce.trustAsHtml(text.replace(new RegExp(search, 'gi'), '<span class="highlightedText">$&</span>'));
+};
 
 }]);
 
