@@ -218,7 +218,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
         if(parameters.category == 'CGHS'){
             data.category = 'cghs';
         }
-        return '/#/project-details/'+ encodeParams(data);
+        return '../#/project-details/'+ encodeParams(data);
     }
 
     $scope.goToPage = function(pageNum) {
