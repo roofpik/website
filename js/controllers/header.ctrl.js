@@ -17,8 +17,6 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
         $(".dropdown-button").dropdown();
         $('.modal').modal();
     })
-
-
     var page_size = 10;
     $scope.enteredText = "";
     var page_start = 0;
@@ -71,7 +69,6 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
         }, function myError(err) {
             // console.log(err);
         })
-
     }
 
     $scope.callFunction = function() {
@@ -102,7 +99,7 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
     }
 
     $scope.openProject = function() {
-        console.log($scope.item.name)
+        // console.log($scope.item.name)
     }
 
     $scope.gotoHome = function() {
@@ -113,8 +110,15 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
         $scope.loginStatus = $rootScope.loginStatus;
         if($rootScope.loginStatus){
           $timeout(function(){
-              $scope.user = firebase.auth().currentUser;
-              console.log($scope.user)
+              $scope.userId= firebase.auth().currentUser.uid;
+              console.log(firebase.auth().currentUser)
+              db.ref('users/' + $scope.userId).once('value', function(snapshot){
+                $scope.user = {};
+                // console.log(snapshot.val())
+                $scope.user.displayName = snapshot.val().fname + " " + snapshot.val().lname;
+                $scope.user.photoURL = firebase.auth().currentUser.photoURL;
+              })
+              console.log($scope.user);
           }, 0);
         }
         else{
@@ -122,7 +126,6 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
             $scope.user.photoURL = null;
             $scope.user.displayName = null;
         }
-        console.log($scope.user);
     });
 
     $rootScope.$on("callShowLogin", function() {
@@ -163,11 +166,9 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
                     // An error happened.
                     var timestamp = new Date().getTime();
                 });
-
+                 $state.go('home');
             });
-
     };
-
 
     $scope.showSignUp = function(ev) {
         $mdDialog.show({
@@ -186,10 +187,10 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
     }
 
     $scope.goToProfile = function() {
-        console.log($scope.user.uid)
         var params = {
-            id: $scope.user.uid
+            id: $scope.userId
         }
+        console.log(params);
         var parameter = encodeParams(params)
         $state.go('profile', {id: parameter})
     };

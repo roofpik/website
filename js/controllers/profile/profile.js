@@ -1,10 +1,10 @@
 app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', function($scope, $stateParams, $state, $timeout) {
     document.title = "My Profile";
-
     // $scope.userId = 'GqQf2JcNJ0SJ4r3yCDStobBysSj1';
     // $scope.userId = 'yx8HmzhhTWgxwNH7G2GY9TlLB3O2';
     // console.log($stateParams.id)
     var uid = decodeParams($stateParams.id)
+    console.log(uid)
     $scope.userId = uid.id;
     // console.log(auth);
     $scope.user = {};
@@ -20,12 +20,12 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
     $scope.showReviews = false;
     $scope.noReviewsToShow = false;
     $scope.userReviews = {};
-    console.log($scope.userId)
     getUserData();
 
     function getUserData() {
         db.ref('users/' + $scope.userId).once('value', function(snapshot) {
             $timeout(function() {
+                console.log($scope.userId)
                 if (snapshot.val().fname) {
                     $scope.user.firstName = snapshot.val().fname;
                 }
@@ -55,8 +55,6 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
             }, 0);
         })
     }
-    console.log($scope.user);
-
     getUserReviews();
 
     function getUserReviews() {
@@ -73,7 +71,6 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
                         $scope.userReviews[key][key1].type = key;
                     }
                 }
-                console.log($scope.userReviews);
                 bindReviews();
             }, 0);
         })
@@ -88,7 +85,6 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
     }
 
     $scope.goToProjectPage = function(id) {
-        console.log(id.projectId);
         if (id.type == 'residential') {
             param = {
                 projectId: id.projectId
@@ -177,11 +173,9 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
         // }
 
     $scope.getFileDetails = function(file) {
-        console.log(file);
         var file = file.files[0];
-        console.log(file)
         var image = "https://getuikit.com/v2/docs/images/" + file.name; //To Rectify
-        changeImage(image);
+        // changeImage(image); //To Rectify
     }
 
     function changeImage(image) {
