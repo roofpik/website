@@ -17,13 +17,13 @@
             <div class="col s6 m4 pdr70 xs12 bodxs">
                 <div class="row mgln mgrn">
                     <h5 class="grey-text">Join Our Newsletter</h5>
-                      <p>You can use rows and columns here to organize your footer content.</p>
+                      <p>Subscribe now for the latest in your local real estate market.</p>
                     <div class="input-field col s12 pdln mgtn">
                         <i class="material-icons prefix">email</i>
-                        <input placeholder="Email" type="Email" class="validate mgbn ft12" required>
+                        <input placeholder="Email" type="email" ng-model = "mail" class="validate mgbn ft12" required>
                     </div>
                     <div class="col s12 mgt10 pdln">
-                        <button class="btn btn-full blue"><i class="material-icons left">send</i> Join</button>
+                        <button class="btn btn-full blue" ng-click="addSubscriber(mail)" ng-disabled="mail"><i class="material-icons left">send</i> Join</button>
                     </div>
                 </div>
                 <div class="row mgt30 mgln mgrn">
@@ -41,39 +41,39 @@
             </div>
             <div class="col s6 m5 xs12">
                 <h5>Contact US</h5>
-                <p>You can use rows and columns here to organize your footer content.</p>
+                <p>Can't find what you're looking for? Drop us a note and our team will get in touch with you.</p>
                 <div>
-                    <form>
+                    <form name="contactUs">
                         <div class="input-field col s12 pdln mgtn">
                             <i class="material-icons prefix">account_circle</i>
-                            <input placeholder="Name" type="text" class="validate mgbn ft12" required>
+                            <input placeholder="Name" type="text" class="validate mgbn ft12" ng-model="user.name" required>
                         </div>
                         <div class="row mgan">
                             <div class="input-field col s12 m6 pdln mgtn">
                                 <i class="material-icons prefix">phone</i>
-                                <input placeholder="Phone" type="text" class="validate mgbn ft12" required>
+                                <input placeholder="Phone" type="text" class="validate mgbn ft12" ng-model="user.mobile" ng-minlength="10" ng-maxlength="10" required>
                             </div>
                             <div class="input-field col s12 m6 pdln mgtn">
                                 <i class="material-icons prefix">email</i>
-                                <input placeholder="Email" type="email" class="validate mgbn ft12" required>
+                                <input placeholder="Email" type="email" class="validate mgbn ft12" ng-model="user.email" required>
                             </div>
                         </div>
                         <div class="input-field col s12 pdln mgtn sele_list">
                             <i class="material-icons prefix">list</i>
-                            <select class="mgbn">
+                            <select class="mgbn" ng-model="user.userType" required>
                                 <option value="" disabled selected>Choose your option</option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
+                                <option value="1">Partner</option>
+                                <option value="2">Investor</option>
+                                <option value="3">Career</option>
                             </select>                    
                         </div>
 
                         <div class="input-field col s12 pdln mgtn">
                             <i class="material-icons prefix">mode_edit</i>
-                            <textarea id="icon_prefix2" placeholder="Type your text" class="materialize-textarea mgbn"></textarea>
+                            <textarea id="icon_prefix2" placeholder="Type your text" ng-model="user.message" class="materialize-textarea mgbn" required></textarea>
                         </div>
                         <div class="col s12 mgt10 pdln">
-                            <button class="btn btn-full blue"><i class="material-icons left">list</i> Submit</button>
+                            <button class="btn btn-full blue" ng-disabled="contactUs.$invalid" ng-click="submitQuery(user)"><i class="material-icons left">list</i> Submit</button>
                         </div>
                     </form>
                 </div>
