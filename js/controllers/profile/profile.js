@@ -4,9 +4,11 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
         // console.log(uid)
     $scope.userId = uid.id;
     // console.log(auth);
-    if(firebase.auth().currentUser == null){
+
+    //if no user is logged in, take the user back to home page
+     if(firebase.auth().currentUser == null){
         $state.go('home');
-    }
+     }
     $scope.user = {};
     $scope.newPassword = '';
     $scope.newPasswordVerification = '';
