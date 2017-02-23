@@ -5,6 +5,8 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
         // console.log(uid)
     $scope.userId = uid.id;
     // console.log(auth);
+    $scope.textReviews = 0;
+    $scope.nonTextReviews = 0;
 
     //if no user is logged in, take the user back to home page
     if (firebase.auth().currentUser == null) {
@@ -14,10 +16,10 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
     $scope.newPassword = '';
     $scope.newPasswordVerification = '';
     $scope.user.userId = $scope.userId;
-    $scope.disableFirstName = true;
+    $scope.disableFullName = true;
     // $scope.disablePwd = true;
     // $scope.disableRePwd = true;
-    $scope.disableLastName = true;
+    // $scope.disableLastName = true;
     $scope.disablePhoneNumber = true;
     $scope.disableAddress = true;
     $scope.showReviews = false;
@@ -35,6 +37,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
                 if (snapshot.val().lname) {
                     $scope.user.lastName = snapshot.val().lname;
                 }
+                $scope.user.fullName = $scope.user.firstName + " " + $scope.user.lastName
                 $scope.user.password = snapshot.val().tempPassword;
                 if (snapshot.val().address) {
                     if (snapshot.val().address.addressLine1) {
@@ -50,8 +53,8 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
                         $scope.user.phoneNumber = snapshot.val().mobile.mobileNum;
                     }
                 }
-                if (snapshot.val().profileImage) {
-                    $scope.image = snapshot.val().profileImage;
+                if (firebase.auth().currentUser.photoURL) {
+                    $scope.image = firebase.auth().currentUser.photoURL;
                 } else {
                     $scope.image = "https://getuikit.com/v2/docs/images/placeholder_600x400.svg" //Dummy Image
                 }
@@ -124,8 +127,8 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
         } else {}
     }
 
-    $scope.enableFirstName = function() {
-            $scope.disableFirstName = false;
+    $scope.enableFullName = function() {
+            $scope.disableFullName = false;
         }
         // $scope.enablePwd = function() {
         //     $scope.disablePwd = false;
@@ -133,22 +136,18 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
         // $scope.enableRePwd = function() {
         //     $scope.disableRePwd = false;
         // }
-    $scope.enableLastName = function() {
-        $scope.disableLastName = false;
-    }
     $scope.enablePhoneNumber = function() {
         $scope.disablePhoneNumber = false;
     }
     $scope.enableAddress = function() {
         $scope.disableAddress = false;
     }
-    $scope.blurFirstName = function() {
-        $scope.disableFirstName = true;
-        db.ref('users/' + $scope.userId + '/' + 'fname').set($scope.user.firstName);
-    }
-    $scope.blurLastName = function() {
-        $scope.disableLastName = true;
-        db.ref('users/' + $scope.userId + '/' + 'lname').set($scope.user.lastName);
+    $scope.blurFullName = function() {
+        $scope.disableFullName = true;
+        $scope.name = $scope.user.fullName.split(" ");
+        // console.log($scope.name);
+        db.ref('users/' + $scope.userId + '/' + 'fname').set($scope.name[0]);
+        db.ref('users/' + $scope.userId + '/' + 'lname').set($scope.name[1]);
     }
     $scope.blurPhoneNumber = function() {
         $scope.disablePhoneNumber = true;

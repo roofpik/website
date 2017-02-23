@@ -15,13 +15,9 @@
             <div class="row">
                 <div id="interest" class="col s12">
                     <form name="profileForm">
-                        <div class="input-field col s12" ng-click="enableFirstName()">
+                        <div class="input-field col s12" ng-click="enableFullName()">
                             <i class="material-icons prefix">account_circle</i>
-                            <input placeholder="First Name" type="text" class="validate mgb5 ft12" ng-disabled="disableFirstName" ng-model="user.firstName" ng-blur="blurFirstName()">
-                        </div>
-                        <div class="input-field col s12" ng-click="enableLastName()">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input placeholder="Last Name" type="text" class="validate mgb5 ft12" ng-disabled="disableLastName" ng-model="user.lastName" ng-blur="blurLastName()">
+                            <input placeholder="Full Name" type="text" class="validate mgb5 ft12" ng-disabled="disableFullName" ng-model="user.fullName" ng-blur="blurFullName()">
                         </div>
                         <div class="input-field col s12">
                             <i class="material-icons prefix">email</i>
@@ -29,7 +25,7 @@
                         </div>
                         <div class="input-field col s12" ng-click="enablePhoneNumber()">
                             <i class="material-icons prefix">phone</i>
-                            <input placeholder="Phone Number" type="text" class="validate mgb5 ft12" ng-model="user.phoneNumber" ng-disabled="disablePhoneNumber" ng-blur="blurPhoneNumber()">
+                            <input placeholder="Phone Number" type="tel" class="validate mgb5 ft12" ng-model="user.phoneNumber" ng-disabled="disablePhoneNumber" ng-blur="blurPhoneNumber()">
                         </div>
                         <div class="input-field col s12" ng-click="enableAddress()">
                             <i class="material-icons prefix">account_balance</i>
