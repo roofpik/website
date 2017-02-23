@@ -736,7 +736,7 @@ footer.page-footer .footer-copyright{line-height: 20px; height: 20px}
    width: 30px;
    height: 30px;
 }
-
+.coverimg{overflow: hidden; background-size: cover; background-position: center center; background-repeat: no-repeat;}
 .autocomplete-content {
     max-height: 200px;
     overflow-y: scroll;
@@ -801,10 +801,27 @@ footer.page-footer .footer-copyright{line-height: 20px; height: 20px}
 
 @media screen and (min-width:0px) and (max-width: 500px) {
 .toprtbtn li a{width: 45px; overflow: hidden; margin-right: 10px !important;}
+.smpd40{padding-left:10px !important; padding-right: 10px !important;}
+.ht350, .ht450, .ht266{height: 300px;}
+.pda50{padding: 20px !important;}
+h4{font-size: 20px !important;}
+}
+@media screen and (min-width:0px) and (max-width: 600px) {
+  .smpd40{padding-left:40px; padding-right: 40px;}
+  .bodft{border-bottom: solid 1px #ddd; padding-bottom: 5px !important}
+.footer-link li{ display: inline-block } .pdr70{padding-right: 20px !important;}
+.bgxs{background-color: #666;}
+
+}
+@media screen and (min-width:0px) and (max-width: 400px) {
+.xs12{width: 100% !important;}
+.bodxs{border-bottom: solid 1px #ddd;}
 }
 
+
+
 @media screen and (min-width:0px) and (max-width: 767px) {
-#loginbox{width: 90%;}
+#loginbox{width: 90%;} body{font-size: 13px} h5{font-size: 15px}
 .wd-sm{width: 43px !important;}
 .hidden_sm{display: none !important;} 
 .mpdt5{padding-top: 5px !important;}
@@ -813,25 +830,36 @@ footer.page-footer .footer-copyright{line-height: 20px; height: 20px}
 
 }
 @media screen and (min-width: 601px) and (max-width: 767px) {
-.hidden_sm{display: none !important;} 
 .ht350{height: 200px;}
 .ht450{height: 250px;}
 .ht266{height: 143px;}
 
 }
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-.ht350{height: 250px;}
+.ht350{height: 250px;} .mpdbt5{padding-top: 5px !important;}
 .ht450{height: 350px;}
 .ht266{height: 193px;}
 .container2{width: 97%;}
-
+.wdhd, .smwdfix{width: 45px}
+.mapft{font-size: 11px}
+[type="radio"]:not(:checked) + label, [type="radio"]:checked + label{padding-left: 25px;}
 }
 
 @media screen and (min-width: 0px) and (max-width: 1023px) {
 h4{font-size: 2rem}
 .ft24{font-size: 19px}
 .home-search{width: 90%;}
-#slide-out-top.responsive_m{width: 200px !important; display: none; background-color:#fff; margin:0 !important; left: 0; top: 55px;}
+#slide-out-top.responsive_m:after{ content: "";
+    width: 0px; z-index: -1;
+    height: 0px;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 21px solid #fff;
+    position: absolute;
+    top: -13px;
+    left: 27px;
+    margin-left: -12px;}
+#slide-out-top.responsive_m{width: 200px !important; display: none; background-color:#fff; margin:0 !important; left: 0; top: 60px;}
 #slide-out-top.responsive_m ul li {display: block; margin:0; width: 100%; border-right:none; border-bottom: solid 1px #f2f2f2; text-align: left;}
 #slide-out-top.responsive_m ul li a{padding:10px 25px; display: block; line-height: 30px;}
 
