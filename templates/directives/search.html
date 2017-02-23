@@ -1,0 +1,78 @@
+<div class="row">    
+ <div class="home-search">            
+            <div class="row mgbn" ng-hide="searchByName">
+                <ul class="tabs tabs-fixed-width tabs-transparent hometabs">
+                    <li class="tab bgblk-trn radiust2" ng-click="selectVertical('residential')"><a class="active white-text reletive" href="#searchboxhome">Residential</a></li>
+                    <li class="tab bgblk-trn" ng-click="selectVertical('commercial')"><a class="white-text reletive" href="#searchboxhome">Commercial</a></li>
+                    <li class="tab bgblk-trn radiusr2" ng-click="selectVertical('pg')"><a class="white-text reletive" href="#searchboxhome">PG</a></li>
+                </ul>
+            </div>
+            <div id="searchboxhome" class="row bgblk-trn radius2 pdr10 cardmg searchfix">
+                <div class="col s12 m10 pdan">
+                    <div class="row mgbn" ng-hide="searchByName">
+                        <div class="col s12 m6 pdrn ">
+                            <div class="input-field card col s12 ht45 pdan bod-right rdsan reletive">
+                                <span class="inpspn">Find :</span>
+                                <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompletenear inp_pdw mgbn" ng-model="categorySearched">
+                                <!-- <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" /> -->
+                                <div class="search-results" ng-show="showSearch">
+                                    <ul class="collection homecoll">
+                                        <li ng-repeat="item in categorySearch| filter: categorySearched" class=" collection-item avatar" ng-click="selectCategory(item)">
+                                            <img ng-src="{{item.icon}}" class="circle" />
+                                            <span class="title ft13" ng-bind-html="item.name | highlight:categorySearched"></span>
+                                        </li>
+                                    </ul>
+                                    <div class="pd5 grey lighten-4 ft12">More Options</div>
+                                    <ul class="collection homecoll">
+                                        <li class=" collection-item avatar"><img ng-src="images/homeicon/Commercial.png" class="circle" /> Explore Locality</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 m6 pdln res-xs">
+                            <div class="input-field card col s12 ht45 pdan rdsan">
+                                <span class="inpspn">Near :</span>
+                                <input placeholder="Enter a Destination" class="autocompletenear inp_pdw mgbn" id="locality-search" ng-model="locationSearched" ng-change="searchLocation()">
+                                <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" ng-show="searchingLocation" />
+                                <div class="search-results" ng-show="showSearch1">
+                                    <ul class="collection homecoll">
+                                        <li ng-repeat="item in locations | filter:locationSearched" class=" collection-item avatar" ng-click="selectLocation(item)">
+                                            <!-- <img ng-src="{{item.icon}}" class="circle" /> -->
+                                            <span class="title ft13" ng-bind-html="item.name | highlight:locationSearched"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mgbn" ng-show="searchByName">
+                        <div class="col s12 res-xsip2">
+                            <div class="input-field card col s12 ht45 pdan reletive rdsan">
+                                <span class="inpspn">Find :</span>
+                                <input type="text" placeholder="Apartments, Commercials, PG" id="name-search" class="autocompletenear inp_pdw mgbn" ng-model="searchedText" ng-change="getSearchData()">
+                                <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" ng-show="searchingName" />
+                                <div class="search-results" ng-show="showSearch2">
+                                    <ul class="collection homecoll">
+                                        <li ng-repeat="item in searchByNameData |filter:searchedText" class=" collection-item avatar" ng-click="selectSearchByName(item)">
+                                            <!-- <img ng-src="{{item.icon}}" class="circle" /> -->
+                                            <span class="title ft13" ng-bind-html="item.name | highlight:searchedText"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-field col m2 s12 pdan res-xsb">
+                    <button class="btn btn-full resbtn blue ht45 wd-sm overhidden mpdt5" ng-click="search()">
+                        <i class="material-icons left">search</i>Search
+                    </button>
+                </div>
+            </div>
+            <div class="row mgt5">
+                <button class="btn-flat white-text bgblk-trn capitalize btn-sm" ng-click="testListPage()"><i class="material-icons left">delete</i> Clear</button>
+                <button class="btn-flat white-text right bgblk-trn capitalize btn-sm" ng-click="toggleSearchType()"><i class="material-icons left">{{toggleIcon}}</i>{{showSearchTitle}}</button>
+            </div>
+        </div>
+
+</div>

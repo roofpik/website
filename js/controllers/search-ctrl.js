@@ -1,4 +1,4 @@
-app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope', '$sce', function($scope, $http, $state, $timeout, $rootScope, $sce) {
+app.controller('searchCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope', '$sce', function($scope, $http, $state, $timeout, $rootScope, $sce) {
     $scope.selectedVertical = 'residential';
     $scope.categorySearch = searchObject[$scope.selectedVertical]; //Stores the search object for different verticals
     $scope.categorySearched = '';
@@ -268,7 +268,6 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
                  }
              }).then(function mySucces(response) {
                  // console.log(response);
-                 $scope.searchByNameData = [];
                  if(Object.keys(response.data).length > 0){
                     for(key in response.data){
                         $scope.searchByNameData.push(response.data[key]);
@@ -313,28 +312,4 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     return $sce.trustAsHtml(text.replace(new RegExp(search, 'gi'), '<span class="highlightedText">$&</span>'));
 };
 
-}]);
-
-app.controller('coverStoryHomeCtrl', ['$scope', '$timeout', function($scope, $timeout) {
-    $scope.cityId = '-KYJONgh0P98xoyPPYm9';
-    $scope.coverStoriesFetched = false;
-    $scope.stories = [];
-    db.ref('shortStories/-KYJONgh0P98xoyPPYm9')
-        .limitToFirst(8)
-        .once('value', function(response) {
-            $timeout(function() {
-                // $scope.stories = response.val();
-                // angular.forEach(response.val(), function(value, key) {
-                //     // value.redirectionUrl = '/#/story/gurgaon/' + convertToHyphenSeparated(value.placeName) + '/' + convertToHyphenSeparated(value.title) + '/' + value.storyId;
-                //     // value.redirectionUrl = value.redirectionUrl.replace(/[?=]/g, "");
-                //     value.coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/' + $scope.cityId + '/' + value.storyId + '/coverPhoto/' + value.coverPhoto + '-m.jpg';
-                // })
-                for(key in response.val()){
-                    var data = response.val()[key];
-                    data.coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/' + $scope.cityId + '/' + data.storyId + '/coverPhoto/' + data.coverPhoto + '-m.jpg';
-                    $scope.stories.push(data);
-                }
-                $scope.coverStoriesFetched = true;
-            }, 0);
-        })
 }]);

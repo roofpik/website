@@ -749,6 +749,8 @@ footer.page-footer .footer-copyright{line-height: 20px; height: 20px}
   border-radius:50%;
 }
 
+.search_allpage{}
+
 @keyframes fade-in {
     from    { opacity: 0; }
     to      { opacity: 1; }

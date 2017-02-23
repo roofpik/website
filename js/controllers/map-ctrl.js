@@ -382,6 +382,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                  }
              }).then(function mySucces(response) {
                  // console.log(response);
+                 $scope.searchByNameResults = [];
                  if(Object.keys(response.data).length > 0){
                     // console.log(response.data);
                     for(key in response.data){

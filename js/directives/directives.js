@@ -30,6 +30,16 @@ app.directive('gallerynew', function() {
     }
 });
 
+app.directive('searchall', function() {
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'templates/directives/search.html',
+        controller: 'searchCtrl'
+        
+    }
+});
+
 app.directive('header', function() {
     return {
         restrict: 'A', //This menas that it will be used as an attribute and NOT as an element. I don't like creating custom HTML elements
