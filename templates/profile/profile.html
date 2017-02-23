@@ -1,45 +1,66 @@
-<div class="container container2 mgt70">
-    <ul class="tabs">
-        <li class="tab col m12"><a class="active">My Profile</a></li>
-        <!-- <li class="tab col m6"><a href="#pricefinder">Price finder</a></li> -->
-    </ul>
-    <div class="row">
-        <img ng-src="{{image}}">
-        <div class="file-field input-field">
-            <div class="btn">
-                <span>Change Image</span>
-                <input type="file" onchange="angular.element(this).scope().getFileDetails(this)" accept="image/*">
+<div class="row mgt70">
+    <div class="row blue bx_proht reletive">
+        <div class="container container2">
+            <div class="prof_img">
+                <img ng-src="{{image}}">
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>Change Image</span>
+                        <input type="file" onchange="angular.element(this).scope().getFileDetails(this)" accept="image/*">
+                    </div>
+                </div>
+            </div>
+            <div class="row white-text proflink">
+                <div class="col s3">
+                    <h4 class="mgan">700</h4>
+                    <p class="mgan">lorem ipsum</p>
+                </div>
+                <div class="col s3">
+                    <h4 class="mgan">700</h4>
+                    <p class="mgan">lorem ipsum</p>
+                </div>
+                <div class="col s3">
+                    <h4 class="mgan">700</h4>
+                    <p class="mgan">lorem ipsum</p>
+                </div>
+                <div class="col s3">
+                    <h4 class="mgan">700</h4>
+                    <p class="mgan">lorem ipsum</p>
+                </div>
             </div>
         </div>
-        <div id="interest" class="col s12">
-            <div class="row">
-                <div id="interest" class="col s12">
-                    <form name="profileForm">
-                        <div class="input-field col s12" ng-click="enableFirstName()">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input placeholder="First Name" type="text" class="validate mgb5 ft12" ng-disabled="disableFirstName" ng-model="user.firstName" ng-blur="blurFirstName()">
-                        </div>
-                        <div class="input-field col s12" ng-click="enableLastName()">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input placeholder="Last Name" type="text" class="validate mgb5 ft12" ng-disabled="disableLastName" ng-model="user.lastName" ng-blur="blurLastName()">
-                        </div>
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix">email</i>
-                            <input placeholder="Email" type="email" class="validate mgb5 ft12" ng-model="user.emailId" ng-disabled=true>
-                        </div>
-                        <div class="input-field col s12" ng-click="enablePhoneNumber()">
-                            <i class="material-icons prefix">phone</i>
-                            <input placeholder="Phone Number" type="text" class="validate mgb5 ft12" ng-model="user.phoneNumber" ng-disabled="disablePhoneNumber" ng-blur="blurPhoneNumber()">
-                        </div>
-                        <div class="input-field col s12" ng-click="enableAddress()">
-                            <i class="material-icons prefix">account_balance</i>
-                            <input placeholder="Address" type="text" class="validate mgb5 ft12" ng-model="user.address" ng-disabled="disableAddress" ng-blur="blurAddress()">
-                        </div>
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix">location_city</i>
-                            <input placeholder="City" type="text" class="validate mgb5 ft12" ng-model="user.city" ng-disabled=true>
-                        </div>
-                        <!-- <div class="input-field col s12" ng-click="enablePwd()">
+    </div>
+    <div class="container container2">
+        <div class="row">
+            <div class="col s12">
+                <div class="row">
+                    <div class="col s12">
+                        <form name="profileForm">
+                            <div class="input-field col s12" ng-click="enableFirstName()">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input placeholder="First Name" type="text" class="validate mgb5 ft12" ng-disabled="disableFirstName" ng-model="user.firstName" ng-blur="blurFirstName()">
+                            </div>
+                            <div class="input-field col s12" ng-click="enableLastName()">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input placeholder="Last Name" type="text" class="validate mgb5 ft12" ng-disabled="disableLastName" ng-model="user.lastName" ng-blur="blurLastName()">
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">email</i>
+                                <input placeholder="Email" type="email" class="validate mgb5 ft12" ng-model="user.emailId" ng-disabled=true>
+                            </div>
+                            <div class="input-field col s12" ng-click="enablePhoneNumber()">
+                                <i class="material-icons prefix">phone</i>
+                                <input placeholder="Phone Number" type="tel" class="validate mgb5 ft12" ng-model="user.phoneNumber" ng-disabled="disablePhoneNumber" ng-blur="blurPhoneNumber()">
+                            </div>
+                            <div class="input-field col s12" ng-click="enableAddress()">
+                                <i class="material-icons prefix">account_balance</i>
+                                <input placeholder="Address" type="text" class="validate mgb5 ft12" ng-model="user.address" ng-disabled="disableAddress" ng-blur="blurAddress()">
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">location_city</i>
+                                <input placeholder="City" type="text" class="validate mgb5 ft12" ng-model="user.city" ng-disabled=true>
+                            </div>
+                            <!-- <div class="input-field col s12" ng-click="enablePwd()">
                             <i class="material-icons prefix">vpn_key</i>
                             <input placeholder="Change Password" type="password" class="validate mgb5 ft12" ng-model="newPassword" ng-disabled="disablePwd" ng-blur="blurPwd()">
                         </div>
@@ -47,25 +68,26 @@
                             <i class="material-icons prefix">vpn_key</i>
                             <input placeholder="Re-enter New Password" type="password" class="validate mgb5 ft12" ng-model="newPasswordVerification" ng-disabled="disableRePwd" ng-blur="blurRePwd()">
                         </div> -->
-                    </form>
-                </div>
-                <br>
-                <br>
-                <h4>My Reviews: </h4>
-                <div class="row mgt10" ng-show="showReviews">
-                    <ul>
-                        <li ng-repeat="type in userReviews">
-                            <div ng-repeat="id in type">
-                                <b>"{{id.reviewTitle}}"</b><i ng-show="id.projectName" ng-click="goToProjectPage(id)"><a style = "cursor: pointer">- {{id.projectName}}</a>, {{id.type}}</i> ({{id.createdDate | date:'MMM dd, yy'}})
-                            </div>
-                        </li>
-                        <br>
-                    </ul>
-                </div>
-                <div class="row mgt10" ng-show="noReviewsToShow">
-                    <ul>
-                        <li>No Review To Show</li>
-                    </ul>
+                        </form>
+                    </div>
+                    <br>
+                    <br>
+                    <h4>My Reviews: </h4>
+                    <div class="row mgt10" ng-show="showReviews">
+                        <ul>
+                            <li ng-repeat="type in userReviews">
+                                <div ng-repeat="id in type">
+                                    <b>"{{id.reviewTitle}}"</b><i ng-show="id.projectName" ng-click="goToProjectPage(id)"><a style = "cursor: pointer">- {{id.projectName}}</a>, {{id.type}}</i> ({{id.createdDate | date:'MMM dd, yy'}})
+                                </div>
+                            </li>
+                            <br>
+                        </ul>
+                    </div>
+                    <div class="row mgt10" ng-show="noReviewsToShow">
+                        <ul>
+                            <li>No Review To Show</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
