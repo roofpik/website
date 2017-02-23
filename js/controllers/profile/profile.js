@@ -1,12 +1,12 @@
 app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', function($scope, $stateParams, $state, $timeout) {
     document.title = "My Profile";
-    // $scope.userId = 'GqQf2JcNJ0SJ4r3yCDStobBysSj1';
-    // $scope.userId = 'yx8HmzhhTWgxwNH7G2GY9TlLB3O2';
-    // console.log($stateParams.id)
     var uid = decodeParams($stateParams.id)
-    console.log(uid)
+        // console.log(uid)
     $scope.userId = uid.id;
     // console.log(auth);
+    if(firebase.auth().currentUser == null){
+        $state.go('home');
+    }
     $scope.user = {};
     $scope.newPassword = '';
     $scope.newPasswordVerification = '';
@@ -25,7 +25,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
     function getUserData() {
         db.ref('users/' + $scope.userId).once('value', function(snapshot) {
             $timeout(function() {
-                console.log($scope.userId)
+                // console.log($scope.userId)
                 if (snapshot.val().fname) {
                     $scope.user.firstName = snapshot.val().fname;
                 }
@@ -83,6 +83,8 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
             $scope.noReviewsToShow = true;
         }
     }
+
+    //Function to redirect to the project page from user's reviews
 
     $scope.goToProjectPage = function(id) {
         if (id.type == 'residential') {
@@ -172,12 +174,13 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
         //     }
         // }
 
+    //Image Uploader (Not fully correct)
     $scope.getFileDetails = function(file) {
-        var file = file.files[0];
-        var image = "https://getuikit.com/v2/docs/images/" + file.name; //To Rectify
-        // changeImage(image); //To Rectify
-    }
-
+            var file = file.files[0];
+            var image = "https://getuikit.com/v2/docs/images/" + file.name; //To Rectify
+            // changeImage(image); //To Rectify
+        }
+        //To Rectify this function (Image Uploading)
     function changeImage(image) {
         db.ref('users/' + $scope.userId + '/' + 'profileImage').set(image);
         $scope.image = image;

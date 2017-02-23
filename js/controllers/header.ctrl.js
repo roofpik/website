@@ -108,20 +108,19 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
 
     $rootScope.$watch('loginStatus', function() {
         $scope.loginStatus = $rootScope.loginStatus;
-        if($rootScope.loginStatus){
-          $timeout(function(){
-              $scope.userId= firebase.auth().currentUser.uid;
-              console.log(firebase.auth().currentUser)
-              db.ref('users/' + $scope.userId).once('value', function(snapshot){
-                $scope.user = {};
-                // console.log(snapshot.val())
-                $scope.user.displayName = snapshot.val().fname + " " + snapshot.val().lname;
-                $scope.user.photoURL = firebase.auth().currentUser.photoURL;
-              })
-              console.log($scope.user);
-          }, 0);
-        }
-        else{
+        if ($rootScope.loginStatus) {
+            $scope.userId = firebase.auth().currentUser.uid;
+            // console.log(firebase.auth().currentUser)
+            db.ref('users/' + $scope.userId).once('value', function(snapshot) {
+                $timeout(function() {
+                        $scope.user = {};
+                        // console.log(snapshot.val())
+                        $scope.user.displayName = snapshot.val().fname + " " + snapshot.val().lname;
+                        $scope.user.photoURL = firebase.auth().currentUser.photoURL;
+                    })
+                    // console.log($scope.user);
+            }, 0);
+        } else {
             $scope.user = {};
             $scope.user.photoURL = null;
             $scope.user.displayName = null;
@@ -166,7 +165,9 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
                     // An error happened.
                     var timestamp = new Date().getTime();
                 });
-                 $state.go('home');
+                if (document.title == 'Write Review' || document.title == 'My Profile') {
+                    $state.go('home');
+                }
             });
     };
 
@@ -188,11 +189,11 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
 
     $scope.goToProfile = function() {
         var params = {
-            id: $scope.userId
-        }
-        console.log(params);
+                id: $scope.userId
+            }
+            // console.log(params);
         var parameter = encodeParams(params)
-        $state.go('profile', {id: parameter})
+        $state.go('profile', { id: parameter })
     };
 
     // $scope.takeToMyReviews = function() {
