@@ -6,7 +6,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         url: $location.path()
     }
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
-    loading(true);
+    $scope.showLoading = false;
     $scope.review = {
             ratings: {}
         }
@@ -19,7 +19,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     $scope.projects2 = {}; //bind project name with null for autocomplete
     $scope.projects3 = {}; //bind project name with project type
     $scope.selectedProject = {};
-     $scope.review = {
+    $scope.review = {
         ratings: {}
     }
     $scope.ratingParams = [{
@@ -70,11 +70,11 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         if (JSON.parse(localStorage.getItem('loginStatus'))) {
             user = firebase.auth().currentUser;
         } else {
-            loading(false);
+
             $rootScope.$emit("callShowLogin", {});
         }
     } else {
-        loading(false);
+
         $rootScope.$emit("callShowLogin", {});
     }
     $scope.ratingsObject = {
@@ -122,7 +122,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     }
 
     if ($stateParams.id) {
-        loading(true);
+        $scope.showLoading = true;
         $scope.showList = false;
         $scope.showSearch = false;
         $http({
@@ -142,12 +142,13 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                         console.log($scope.selectedItem);
                     }
                 }
-                loading(false);
+                $scope.showLoading = false;
             }, 500)
         }, function myError(err) {})
 
     }
     $scope.nameEntered = function() {
+        $scope.showLoading = true;
         if ($scope.selectedItem) {
             if ($scope.selectedItem.length = 2) {
                 var data = {
@@ -155,7 +156,6 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                 }
                 var args = encodeParams(data);
                 console.log(args);
-                loading(true);
                 $http({
 
                     url: 'http://107.23.243.89/api/GetByName_1.0',
@@ -164,7 +164,6 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                         args: args
                     }
                 }).then(function mySucces(response) {
-                    loading(false);
                     $timeout(function() {
                         console.log(response)
                         if (response.data) {
@@ -175,6 +174,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                             $scope.projects2[$scope.projectList[key].name.toString()] = null;
                             $scope.projects3[$scope.projectList[key].name.toString()] = $scope.projectList[key].type;
                         }
+                        $scope.showLoading = false;
                         bindList();
                     }, 500)
                 }, function myError(err) {})

@@ -20,9 +20,8 @@
         <div class="col s12">
             <h6 class="grey-text pdlrn ft15 ftw3">Browse through 1,000+ verified property reviews. Or share one today.</h6>
         </div>
-        <div class="row mgan search_allpage">           
-    <!--       <searchall></searchall> -->
-
+        <div class="row mgan search_allpage">
+            <!--       <searchall></searchall> -->
             <div class="col m5 s12">
                 <div class="input-field input-box-h card col s12 ht45 pdan">
                     <span class="inpspn">Find :</span>
@@ -39,10 +38,8 @@
             </div>
             <div class="input-field col m2 s12 pdln">
                 <button class="btn col m12 blue ht45">
-                    <i class="material-icons left">search</i>Search</button>          
+                    <i class="material-icons left">search</i>Search</button>
             </div>
-
-
         </div>
     </div>
     <div class="row mgan">
@@ -141,7 +138,7 @@
         </div>
         <div class="col s8 m8 l9 pdl30">
             <div class="row mgb10">
-               <!--  <div class="col s2 pdan">
+                <!--  <div class="col s2 pdan">
                     <select class="browser-default">
                         <option value="" disabled selected>Select</option>
                         <option value="1">10</option>
@@ -168,7 +165,7 @@
                 <div class="col s2 pdl15 pdrn">
                     <select class="browser-default" ng-change="changeNumberOfProjects()" ng-model="showProjects">
                         <option value="" disabled selected>Select</option>
-                        <option value="10" >10</option>
+                        <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="50">50</option>
                         <!-- <option value="3">40</option> -->
@@ -181,9 +178,24 @@
                         <i class="material-icons small">apps</i></a>
                 </div>
             </div>
-            <div class="row mgbn mgrtmns10">
+            <div class="row mgbn mgrtmns10 reletive">
                 <!-- <div class="card horizontal imgfx" ng-class="displayType" ng-repeat="project in projectList" ng-click="takeToProject(project)"> -->
-                <div class="card horizontal imgfx" ng-class="displayType" ng-repeat="project in projectList track by $index">
+
+                <div ng-show = "loading" class="preloader-wrapper big active loaderPosition">
+                    <div class="spinner-layer spinner-blue-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div ng-hide = "loading" class="card horizontal imgfx" ng-class="displayType" ng-repeat="project in projectList track by $index">
                     <a ng-href="{{getRedirectionString(project.id)}}">
                         <div class="card-image fix40 left">
                             <img ng-src="{{project.cover}}" class="responsive-img">
@@ -198,7 +210,7 @@
                     </a>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" ng-hide = "loading">
                 <ul class="pagination">
                     <li ng-class="currentPage == 1? 'disabled' : 'waves-effect'" ng-click="changePage(1)"><a href=""><i class="material-icons">chevron_left</i></a></li>
                     <li ng-class="page == currentPage? 'active' : 'waves-effect'" ng-repeat="page in pages" ng-click="goToPage(page)"><a href="">{{page}}</a></li>

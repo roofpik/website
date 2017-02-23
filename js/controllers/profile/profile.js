@@ -1,17 +1,20 @@
-//YET TO IMPROVE THE CHANGE IMAGE FEATURE
+//YET TO INCLUDE THE CHANGE IMAGE FEATURE
 app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', function($scope, $stateParams, $state, $timeout) {
     document.title = "My Profile";
     var uid = decodeParams($stateParams.id)
         // console.log(uid)
     $scope.userId = uid.id;
-    // console.log(auth);
+
+    //if user is not signed in, take him to the home page
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            // User is signed in.
+        } else {
+            $state.go('home');
+        }
+    });
     $scope.textReviews = 0;
     $scope.nonTextReviews = 0;
-
-    //if no user is logged in, take the user back to home page
-    if (firebase.auth().currentUser == null) {
-        $state.go('home');
-    }
     $scope.user = {};
     $scope.newPassword = '';
     $scope.newPasswordVerification = '';
@@ -59,9 +62,10 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
                     $scope.image = "https://getuikit.com/v2/docs/images/placeholder_600x400.svg" //Dummy Image
                 }
             }, 0);
+             getUserReviews();
         })
     }
-    getUserReviews();
+   
 
     function getUserReviews() {
         db.ref('userReviews/' + $scope.userId).once('value', function(snapshot) {
@@ -72,6 +76,9 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
                         $scope.userReviews[key][key1] = {};
                         if (snapshot.val()[key][key1].reviewTitle) {
                             $scope.userReviews[key][key1].reviewTitle = snapshot.val()[key][key1].reviewTitle;
+                            $scope.textReviews++;
+                        } else {
+                            $scope.nonTextReviews++;
                         }
                         if (snapshot.val()[key][key1].projectName) {
                             $scope.userReviews[key][key1].projectName = snapshot.val()[key][key1].projectName;

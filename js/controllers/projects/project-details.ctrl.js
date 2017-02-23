@@ -607,6 +607,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
     $scope.projectId = $stateParams.projectId;
     $scope.reviews = [];
     $scope.reviewsAvailable = false;
+    $scope.loading = true;
     var selectedRating = 0;
     $scope.reviews = [];
     var reviewsFetchedNum = 0;

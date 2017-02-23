@@ -1,6 +1,7 @@
 app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', function($scope, $timeout, $stateParams, $rootScope){
 	$('ul.tabs').tabs();
     // loading(true);
+    $scope.loading = true;
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     var parameters = decodeParams($stateParams.p);
     $scope.projectId = parameters.projectId;
@@ -312,6 +313,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
             if (angular.isDefined($stateParams.category)) {
                 $scope.path.push(($stateParams.category).capitalize());
             }
+            $scope.loading = false;
             $scope.path.push($scope.projectName);
         }, 100);
     })
