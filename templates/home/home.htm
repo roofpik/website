@@ -1,7 +1,7 @@
 <section>
     <div class="parallax-container htv100">
         <div class="parallax">
-            <img src="images/home/bg1.jpg">
+            <img src="images/home/home-bg.jpg">
         </div>
         <div class="home-search">
             <h3 class="white-text ft24 center textsd b">Power Your Property Search with Genuine User Reviews </h3>
@@ -13,9 +13,9 @@
                 </ul>
             </div>
             <div id="searchboxhome" class="row bgblk-trn radius2 pdr10 cardmg searchfix">
-                <div class="col s11 m10 pdan">
+                <div class="col s12 m10 pdan">
                     <div class="row mgbn" ng-hide="searchByName">
-                        <div class="col s6 pdrn ">
+                        <div class="col s12 m6 pdrn ">
                             <div class="input-field card col s12 ht45 pdan bod-right rdsan reletive">
                                 <span class="inpspn">Find :</span>
                                 <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompletenear inp_pdw mgbn" ng-model="categorySearched">
@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col s6 pdln">
+                        <div class="col s12 m6 pdln res-xs">
                             <div class="input-field card col s12 ht45 pdan rdsan">
                                 <span class="inpspn">Near :</span>
                                 <input placeholder="Enter a Destination" class="autocompletenear inp_pdw mgbn" id="locality-search" ng-model="locationSearched" ng-change="searchLocation()">
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <div class="row mgbn" ng-show="searchByName">
-                        <div class="col s12">
+                        <div class="col s12 res-xsip2">
                             <div class="input-field card col s12 ht45 pdan reletive rdsan">
                                 <span class="inpspn">Find :</span>
                                 <input type="text" placeholder="Apartments, Commercials, PG" id="name-search" class="autocompletenear inp_pdw mgbn" ng-model="searchedText" ng-change="getSearchData()">
@@ -68,7 +68,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="input-field col m2 s1 pdan">
+                <div class="input-field col m2 s12 pdan res-xsb">
                     <button class="btn btn-full resbtn blue ht45 wd-sm overhidden mpdt5" ng-click="search()">
                         <i class="material-icons left">search</i>Search
                     </button>
