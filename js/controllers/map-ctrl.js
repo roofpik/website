@@ -77,9 +77,11 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                  args: encodeParams(data)
              }
          }).then(function(response) {
+            console.log(response);
              $scope.mapData = response.data;
              for (key in $scope.mapData) {
                  if ($scope.mapData[key].type == 'residential' || $scope.mapData[key].type == 'cghs') {
+                    $scope.mapData[key].name;
                      data = [$scope.mapData[key].name, $scope.mapData[key].location.lat, $scope.mapData[key].location.lon, 'images/home/marker1.png', $scope.mapData[key].id];
                      $scope.projectMarkers.push(data);
                      if ($scope.mapData[key].cover == 'NA') {
@@ -315,6 +317,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
      function getMapList(){
         if ($scope.selectedType == 'projects') {
              $scope.listMenu = $scope.projectMarkers;
+             console.log($scope.projectMarkers.length);
              getPages($scope.projectMarkers);
              $scope.menuTitle = 'Projects';
              initMap($scope.projectMarkers, $scope.projectInfoWindow);
@@ -400,53 +403,21 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
      }
 
      $scope.selectResult = function(val){
-        var soloMarker = [];
-        var soloInfoWindow = [];
         $scope.searchedText = val.name;
-        // redirect to a view or show on map after selection
-         var data = [$scope.mapData[val.id].name, $scope.mapData[val.id].location.lat, $scope.mapData[val.id].location.lon, 'images/home/marker1.png', $scope.mapData[val.id].id];
-        soloMarker.push(data);
-         if ($scope.mapData[val.id].cover == 'NA') {
-             image = 'images/sohna.jpg';
-         } else {
-             image = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/'+$scope.mapData[val.id].type+'/' + $scope.mapData[val.id].id + '/images/coverPhoto/' + $scope.mapData[val.id].cover + '-s.jpg'
-         }
-         content = ['<div class="info_content">' +
-             '<div class="card info_content mg0">' +
-             '<div class="card-image">' +
-             '<img src="' + image + '">' +
-             '<a href="" class="btn red absbtn"><i class="material-icons left">details</i>See Details</a>' +
-             '</div>' +
-             '<div class="cardTitle row mgan bdbtm">' +
-             '<a class="col m8 black-text text-lighten-4 pd5 pd-tspanmap">' +
-             '<span class="b">' + $scope.mapData[val.id].name + '</span>' +
-             '<span class="ft12">Sohna Road, Sector 48 Gurgaon</span>' +
-             '</a>' +
-             '<div class="col m4 right-align pd5 ft12i" ng-show="' + $scope.mapData[val.id].rating + ' != 0">' +
-             '<span class="block b">' + $scope.mapData[val.id].rating + ' Reviews</span>' +
-             '<span class="block">' +
-             '<i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index <' + $scope.mapData[val.id].rating + ' "blue-text":"normal"">star</i>' +
-             '</span>' +
-             '</div>' +
-             '</div>' +
-             '<div class="row mg0 ht50">' +
-             '<div class="col m6 pd5 dis-tab center ht50" ng-show="' + $scope.mapData[val.id].rent + '">' +
-             '<span class="block b ellipsis">Rent Price</span>' +
-             '<span class="ft12 block ellipsis">₹' + $scope.mapData[val.id].rent.min + ' - ₹' + $scope.mapData[val.id].rent.max + '</span>' +
-             '</div>' +
-             '<div class="col m6 pd5 center ht50">' +
-             '<span class="block b ellipsis">2, 3, 4 BHK</span>' +
-             '<span class="ft12 block ellipsis">1776 Sq. Ft. - 2345 Sq. </span>' +
-             '</div>' +
-             '</div>' +
-             '</div>' +
-             '</div>'
-         ]
-         soloInfoWindow.push(content);
-         initMap(soloMarker, soloInfoWindow);
-         $scope.openInfoWindow(0, 'search');
+        $scope.mapSearched = val;
          $timeout(function(){
             $scope.showSearch = false;
          },200);
+     }
+
+     $scope.fetchData = function(){
+         $scope.projectMarkers = [];
+         $scope.localityMarkers = [];
+         $scope.locationMarkers = [];
+         $scope.projectInfoWindow = [];
+         $scope.localityInfoWindow = [];
+         $scope.locationInfoWindow = [];
+        // console.log($scope.mapSearched.location.lat,$scope.mapSearched.location.lon);
+        getMapData($scope.mapSearched.location.lat,$scope.mapSearched.location.lon);
      }
  }]);

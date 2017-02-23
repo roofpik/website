@@ -56,7 +56,7 @@ app.directive('footer', function() {
         replace: false,
         scope: { user: '=?' }, // This is one of the cool things :). Will be explained in post
         templateUrl: "templates/directives/footer.html",
-        controller: 'headerCtrl'
+        controller: 'footerCtrl'
     }
 });
 
