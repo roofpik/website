@@ -1,3 +1,4 @@
+//YET TO IMPROVE THE CHANGE IMAGE FEATURE
 app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', function($scope, $stateParams, $state, $timeout) {
     document.title = "My Profile";
     var uid = decodeParams($stateParams.id)
@@ -6,9 +7,9 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
     // console.log(auth);
 
     //if no user is logged in, take the user back to home page
-     if(firebase.auth().currentUser == null){
+    if (firebase.auth().currentUser == null) {
         $state.go('home');
-     }
+    }
     $scope.user = {};
     $scope.newPassword = '';
     $scope.newPasswordVerification = '';
@@ -66,10 +67,18 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
                     $scope.userReviews[key] = {};
                     for (key1 in snapshot.val()[key]) {
                         $scope.userReviews[key][key1] = {};
-                        $scope.userReviews[key][key1].reviewTitle = snapshot.val()[key][key1].reviewTitle;
-                        $scope.userReviews[key][key1].projectName = snapshot.val()[key][key1].projectName;
-                        $scope.userReviews[key][key1].createdDate = snapshot.val()[key][key1].createdDate;
-                        $scope.userReviews[key][key1].projectId = snapshot.val()[key][key1].projectId;
+                        if (snapshot.val()[key][key1].reviewTitle) {
+                            $scope.userReviews[key][key1].reviewTitle = snapshot.val()[key][key1].reviewTitle;
+                        }
+                        if (snapshot.val()[key][key1].projectName) {
+                            $scope.userReviews[key][key1].projectName = snapshot.val()[key][key1].projectName;
+                        }
+                        if (snapshot.val()[key][key1].createdDate) {
+                            $scope.userReviews[key][key1].createdDate = snapshot.val()[key][key1].createdDate;
+                        }
+                        if (snapshot.val()[key][key1].projectId) {
+                            $scope.userReviews[key][key1].projectId = snapshot.val()[key][key1].projectId;
+                        }
                         $scope.userReviews[key][key1].type = key;
                     }
                 }
