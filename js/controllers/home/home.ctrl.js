@@ -268,6 +268,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
                  }
              }).then(function mySucces(response) {
                  // console.log(response);
+                 $scope.searchByNameData = [];
                  if(Object.keys(response.data).length > 0){
                     for(key in response.data){
                         $scope.searchByNameData.push(response.data[key]);
