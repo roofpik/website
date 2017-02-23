@@ -380,17 +380,17 @@ app.controller('loginCtrl', function($scope, $timeout, $rootScope, $location, $h
                         if (inputValue.length) {
                             db.ref('users/' + user.uid + '/codeUsed').set(inputValue.toUpperCase()).then(function() {
                                 $timeout(function() {
-                                    sweetAlert("Welcome", "You have successfully logged in!", "success");
+                                    Materialize.toast("You have successfully logged in!", 2000, 'rounded');
                                 })
                             });
                         } else {
-                            sweetAlert("Welcome", "You have successfully logged in!", "success");
+                            Materialize.toast("You have successfully logged in!", 2000, 'rounded');
                             return true;
                         }
                     });
             });
         } else {
-            sweetAlert("Welcome", "You have successfully logged in!", "success");
+            Materialize.toast("You have successfully logged in!", 2000, 'rounded');
         }
     }
 })
