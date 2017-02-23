@@ -158,6 +158,8 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
                         }, 0);
                         localStorage.setItem('loginStatus', false);
                         $('.modal').modal('close');
+                        Materialize.toast("You have successfully logged out!", 2000, 'rounded');
+
                         // sweetAlert("Logout Successful", "You have successfully logged out!", "success");
                     }, 100);
 
@@ -165,6 +167,7 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
                     // An error happened.
                     var timestamp = new Date().getTime();
                 });
+                //If the user logs out from the write review, or my profile page, redirect him to home page
                 if (document.title == 'Write Review' || document.title == 'My Profile') {
                     $state.go('home');
                 }
