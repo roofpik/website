@@ -12,19 +12,15 @@
                 <div class="row white-text proflink mgbn">
                     <div class="col s3">
                         <h4 class="mgan">700</h4>
-                        <p class="mgan">lorem ipsum</p>
+                        <p class="mgan">Reviews</p>
                     </div>
                     <div class="col s3">
-                        <h4 class="mgan">700</h4>
-                        <p class="mgan">lorem ipsum</p>
+                        <h4 class="mgan">0</h4>
+                        <p class="mgan">Ratings</p>
                     </div>
                     <div class="col s3">
-                        <h4 class="mgan">700</h4>
-                        <p class="mgan">lorem ipsum</p>
-                    </div>
-                    <div class="col s3">
-                        <h4 class="mgan">700</h4>
-                        <p class="mgan">lorem ipsum</p>
+                        <h4 class="mgan">0</h4>
+                        <p class="mgan">Score</p>
                     </div>
                 </div>
             </div>
@@ -50,7 +46,6 @@
                     <!-- <i class="material-icons prefix">email</i> -->
                     <input placeholder="Email" type="email" class="validate grey-text mgb5 ht2rem bodn ft14" ng-model="user.emailId" ng-disabled=true>
                 </div>
-              
                 <div class="input-field col s3 mgtn">
                     <!-- <i class="material-icons prefix">location_city</i> -->
                     <input placeholder="City" type="text" class="validate grey-text mgb5 ht2rem bodn ft14" ng-model="user.city" ng-disabled=true>
@@ -61,7 +56,7 @@
         <div class="row">
             <div class="col s12">
                 <ul class="timeline">
-                    <li>
+                    <li ng-repeat = "type in userReviews" ng-class-even = "timeline-inverted" ng-class-odd = "timeline">
                         <div class="timeline-badge blue"><i class="material-icons">edit</i></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
@@ -74,21 +69,30 @@
                         </div>
                     </li>
                     <li class="timeline-inverted">
-                        <div class="timeline-badge orange"><i class="material-icons">star</i></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h5 class="mgan">Mussum ipsum cacilds</h5>
-                                 <p class="mgan grey-text"><small> 11 hours ago via Twitter</small></p>
-                            </div>                          
-                        </div>
-                    </li>
-                      <li>
                         <div class="timeline-badge green"><i class="material-icons">thumb_up</i></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h5 class="mgan">Mussum ipsum cacilds</h5>
-                                 <p class="mgan grey-text"><small> 11 hours ago via Twitter</small></p>
-                            </div>                          
+                                <p class="mgan grey-text"><small> 11 hours ago via Twitter</small></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-badge orange"><i class="material-icons">star</i></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h5 class="mgan">Mussum ipsum cacilds</h5>
+                                <p class="mgan grey-text"><small> 11 hours ago via Twitter</small></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-badge black"><i class="material-icons">visibility</i></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h5 class="mgan">View</h5>
+                                <p class="mgan grey-text"><small> 11 hours ago via Twitter</small></p>
+                            </div>
                         </div>
                     </li>
                 </ul>

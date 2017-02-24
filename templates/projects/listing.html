@@ -20,128 +20,132 @@
         <div class="col s12">
             <h6 class="grey-text pdlrn ft15 ftw3">Browse through 1,000+ verified property reviews. Or share one today.</h6>
         </div>
-        <div class="row mgan search_allpage">           
-    <!--       <searchall></searchall> -->
-
-            <div class="col m5 s12">
-                <div class="input-field input-box-h card col s12 ht45 pdan">
-                    <span class="inpspn">Find :</span>
-                    <input type="text" placeholder="Apartments, Commercials, PG" class="autocompletefind inp_pdw" id="location">
-                    <div class="search-results"></div>
-                </div>
+        <!-- <div class="row mgan search_allpage"> -->
+            <!--       <searchall></searchall> -->
+            <!-- <div class="col m5 s12"> -->
+                <!-- <div class="row mgan search_allpage"> -->
+                    <!-- <searchall></searchall> -->
+                    <!-- old search -->
+                   <!--  <div class="col m5 s12">
+                        <div class="input-field input-box-h card col s12 ht45 pdan">
+                            <span class="inpspn">Find :</span>
+                            <input type="text" placeholder="Apartments, Commercials, PG" class="autocompletefind inp_pdw" id="location">
+                            <div class="search-results"></div>
+                        </div>
+                    </div>
+                    <div class="col m5 s12 pdln">
+                        <div class="input-field input-box-h card col s12 ht45 pdan">
+                            <span class="inpspn">Near :</span>
+                            <input id="search" placeholder="Enter a Destination" class="autocompletenear inp_pdw">
+                            <div class="search-results"></div>
+                        </div>
+                    </div>
+                    <div class="input-field col m2 s12 pdln">
+                        <button class="btn col m12 blue ht45">
+                            <i class="material-icons left">search</i>Search</button>
+                    </div>
+                    <i class="material-icons left">search</i>Se -->arch</button>
+                <!-- </div> -->
+                <!-- old search end -->
+            <!-- </div>
+        </div> -->
+        <div class="row mgan">
+            <div class="col s4 m4 l3">
+                <form>
+                    <div class="row mgan">
+                        <div class="row pdt2 mgbn">
+                            <button class="btn col m4 blue ht45" ng-click="applyFilters()">
+                                Apply
+                            </button>
+                        </div>
+                        <div class="row pdt2 mgbn">
+                            <h5 class="ush6">Project Segment</h5>
+                            <hr>
+                            <p ng-repeat="item in segments">
+                                <input type="checkbox" class="filled-in" ng-model="selected.segment[item.name]" id="{{item.id}}" />
+                                <label for="{{item.id}}">{{item.name}}</label>
+                            </p>
+                        </div>
+                        <div class="row pdt2 mgbn">
+                            <h5 class="ush6">BHK</h5>
+                            <hr>
+                            <div class="filterList">
+                                <p ng-repeat="item in [1, 2, 3, 4, 5, 6]">
+                                    <input type="checkbox" class="filled-in" ng-model="selected.bhk[item]" id="{{item}}" />
+                                    <label for="{{item}}">{{item}}</label>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row pdt2 mgbn">
+                            <h5 class="ush6">Locality</h5>
+                            <hr>
+                            <div class="filterList">
+                                <p ng-repeat="locality in localities">
+                                    <input type="checkbox" class="filled-in" id="{{locality.localityId}}" ng-model="selected.locality[locality.localityId]" />
+                                    <label for="{{locality.localityId}}">{{locality.localityName}}</label>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row pdt2 mgbn">
+                            <h5 class="ush6">Location</h5>
+                            <hr>
+                            <div class="filterList">
+                                <p ng-repeat="location in locations">
+                                    <input type="checkbox" class="filled-in" id="{{location.locationId}}" ng-model="selected.location[location.locationId]" />
+                                    <label for="{{location.locationId}}">{{location.locationName}}</label>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row pdt2 mgbn">
+                            <h5 class="ush6">Builders</h5>
+                            <hr>
+                            <div class="filterList">
+                                <p ng-repeat="builder in builders">
+                                    <input type="checkbox" class="filled-in" id="{{builder.builderId}}" ng-model="selected.details_builder[builder.builderId]" />
+                                    <label for="{{builder.builderId}}">{{builder.builderName}}</label>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row pdt2 mgbn">
+                            <h5 class="ush6">Rating</h5>
+                            <hr>
+                            <div class="filterList">
+                                <p ng-repeat="i in [1,2,3,4,5]">
+                                    <input type="checkbox" class="filled-in" id="{{5-i+1}}+'star'" ng-model="selected.rating[6-i]" />
+                                    <label for="{{5-i+1}}+'star'"><span class="block ft12 grey-text ellipsis"><i class="material-icons ft14 text-darken-2" ng-repeat="j in [1,2,3,4,5] track by $index" ng-class="$index < (5-i+1) ? 'amber-text':'normal'">star</i></span></label>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row pdt2 mgbn">
+                            <h5 class="ush6">Price</h5>
+                            <hr>
+                            <div class="filterList row">
+                                <div class="col s6">
+                                    <input type="text" placeholder="Min" class="filled-in" id="min-price" ng-model="price.min" />
+                                </div>
+                                <div class="col s6">
+                                    <input type="text" placeholder="Max" class="filled-in" id="max-price" ng-model="price.max" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pdt2 mgbn">
+                            <h5 class="ush6">Area</h5>
+                            <hr>
+                            <div class="filterList row">
+                                <div class="col s6">
+                                    <input type="text" placeholder="Min" class="filled-in" id="min-area" ng-model="area.min" />
+                                </div>
+                                <div class="col s6">
+                                    <input type="text" placeholder="Max" class="filled-in" id="max-area" ng-model="area.max" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="col m5 s12 pdln">
-                <div class="input-field input-box-h card col s12 ht45 pdan">
-                    <span class="inpspn">Near :</span>
-                    <input id="search" placeholder="Enter a Destination" class="autocompletenear inp_pdw">
-                    <div class="search-results"></div>
-                </div>
-            </div>
-            <div class="input-field col m2 s12 pdln">
-                <button class="btn col m12 blue ht45">
-                    <i class="material-icons left">search</i>Search</button>          
-            </div>
-
-
-        </div>
-    </div>
-    <div class="row mgan">
-        <div class="col s4 m4 l3">
-            <form>
-                <div class="row mgan">
-                    <div class="row pdt2 mgbn">
-                        <button class="btn col m4 blue ht45" ng-click="applyFilters()">
-                            Apply
-                        </button>
-                    </div>
-                    <div class="row pdt2 mgbn">
-                        <h5 class="ush6">Project Segment</h5>
-                        <hr>
-                        <p ng-repeat="item in segments">
-                            <input type="checkbox" class="filled-in" ng-model="selected.segment[item.name]" id="{{item.id}}" />
-                            <label for="{{item.id}}">{{item.name}}</label>
-                        </p>
-                    </div>
-                    <div class="row pdt2 mgbn">
-                        <h5 class="ush6">BHK</h5>
-                        <hr>
-                        <div class="filterList">
-                            <p ng-repeat="item in [1, 2, 3, 4, 5, 6]">
-                                <input type="checkbox" class="filled-in" ng-model="selected.bhk[item]" id="{{item}}" />
-                                <label for="{{item}}">{{item}}</label>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row pdt2 mgbn">
-                        <h5 class="ush6">Locality</h5>
-                        <hr>
-                        <div class="filterList">
-                            <p ng-repeat="locality in localities">
-                                <input type="checkbox" class="filled-in" id="{{locality.localityId}}" ng-model="selected.locality[locality.localityId]" />
-                                <label for="{{locality.localityId}}">{{locality.localityName}}</label>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row pdt2 mgbn">
-                        <h5 class="ush6">Location</h5>
-                        <hr>
-                        <div class="filterList">
-                            <p ng-repeat="location in locations">
-                                <input type="checkbox" class="filled-in" id="{{location.locationId}}" ng-model="selected.location[location.locationId]" />
-                                <label for="{{location.locationId}}">{{location.locationName}}</label>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row pdt2 mgbn">
-                        <h5 class="ush6">Builders</h5>
-                        <hr>
-                        <div class="filterList">
-                            <p ng-repeat="builder in builders">
-                                <input type="checkbox" class="filled-in" id="{{builder.builderId}}" ng-model="selected.details_builder[builder.builderId]" />
-                                <label for="{{builder.builderId}}">{{builder.builderName}}</label>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row pdt2 mgbn">
-                        <h5 class="ush6">Rating</h5>
-                        <hr>
-                        <div class="filterList">
-                            <p ng-repeat="i in [1,2,3,4,5]">
-                                <input type="checkbox" class="filled-in" id="{{5-i+1}}+'star'" ng-model="selected.rating[6-i]" />
-                                <label for="{{5-i+1}}+'star'"><span class="block ft12 grey-text ellipsis"><i class="material-icons ft14 text-darken-2" ng-repeat="j in [1,2,3,4,5] track by $index" ng-class="$index < (5-i+1) ? 'amber-text':'normal'">star</i></span></label>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row pdt2 mgbn">
-                        <h5 class="ush6">Price</h5>
-                        <hr>
-                        <div class="filterList row">
-                            <div class="col s6">
-                                <input type="text" placeholder="Min" class="filled-in" id="min-price" ng-model="price.min" />
-                            </div>
-                            <div class="col s6">
-                                <input type="text" placeholder="Max" class="filled-in" id="max-price" ng-model="price.max" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row pdt2 mgbn">
-                        <h5 class="ush6">Area</h5>
-                        <hr>
-                        <div class="filterList row">
-                            <div class="col s6">
-                                <input type="text" placeholder="Min" class="filled-in" id="min-area" ng-model="area.min" />
-                            </div>
-                            <div class="col s6">
-                                <input type="text" placeholder="Max" class="filled-in" id="max-area" ng-model="area.max" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="col s8 m8 l9 pdl30">
-            <div class="row mgb10">
-               <!--  <div class="col s2 pdan">
+            <div class="col s8 m8 l9 pdl30">
+                <div class="row mgb10">
+                    <!--  <div class="col s2 pdan">
                     <select class="browser-default">
                         <option value="" disabled selected>Select</option>
                         <option value="1">10</option>
@@ -159,52 +163,65 @@
                         <option value="3">40</option>
                     </select>
                 </div> -->
-                <div class="col s8 pdan">
-                    <div class="input-field mgtn bodinp">
-                        <input class="inpfilter" id="search" placeholder="search"><i class="material-icons search_i">search</i>
-                        <div class="search-results"></div>
+                    <div class="col s7 pdan">
+                        <div class="input-field mgtn bodinp">
+                            <input class="inpfilter" id="search" placeholder="search"><i class="material-icons search_i">search</i>
+                            <div class="search-results"></div>
+                        </div>
+                    </div>
+                    <div class="col s2 pdl15 pdrn">
+                        <select class="browser-default" ng-change="changeNumberOfProjects()" ng-model="showProjects">
+                            <option value="" disabled selected>Select</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <!-- <option value="3">40</option> -->
+                        </select>
+                    </div>
+                    <div class="col s3 pdl15 right-align pdrn">
+                        <a href="" ng-class="selectedView == 'list'? 'blue-text':'black-text'" ng-click="changeView(1)"><i class="material-icons small">view_list</i></a>
+                        <a href="" ng-class="selectedView == 'grid1'? 'blue-text':'black-text'" ng-click="changeView(2)"><i class="material-icons small">border_all</i></a>
+                        <a href="" ng-class="selectedView == 'grid2'? 'blue-text':'black-text'" ng-click="changeView(3)">
+                            <i class="material-icons small">apps</i></a>
                     </div>
                 </div>
-                <div class="col s2 pdl15 pdrn">
-                    <select class="browser-default" ng-change="changeNumberOfProjects()" ng-model="showProjects">
-                        <option value="" disabled selected>Select</option>
-                        <option value="10" >10</option>
-                        <option value="20">20</option>
-                        <option value="50">50</option>
-                        <!-- <option value="3">40</option> -->
-                    </select>
-                </div>
-                <div class="col s2 pdl15 right-align pdrn">
-                    <a href="" ng-class="selectedView == 'list'? 'blue-text':'black-text'" ng-click="changeView(1)"><i class="material-icons small">view_list</i></a>
-                    <a href="" ng-class="selectedView == 'grid1'? 'blue-text':'black-text'" ng-click="changeView(2)"><i class="material-icons small">border_all</i></a>
-                    <a href="" ng-class="selectedView == 'grid2'? 'blue-text':'black-text'" ng-click="changeView(3)">
-                        <i class="material-icons small">apps</i></a>
-                </div>
-            </div>
-            <div class="row mgbn mgrtmns10">
-                <!-- <div class="card horizontal imgfx" ng-class="displayType" ng-repeat="project in projectList" ng-click="takeToProject(project)"> -->
-                <div class="card horizontal imgfx" ng-class="displayType" ng-repeat="project in projectList track by $index">
-                    <a ng-href="{{getRedirectionString(project.id)}}">
-                        <div class="card-image fix40 left">
-                            <img ng-src="{{project.cover}}" class="responsive-img">
+                <div class="row mgbn mgrtmns10 reletive">
+                    <!-- <div class="card horizontal imgfx" ng-class="displayType" ng-repeat="project in projectList" ng-click="takeToProject(project)"> -->
+                    <div ng-show="loading" class="preloader-wrapper big active loaderPosition">
+                        <div class="spinner-layer spinner-blue-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
                         </div>
-                        <div class="cardpdt fix60 left">
-                            <span class="block black-text ft13 ellipsis">{{project.name}}</span>
-                            <span class="block ft12 grey-text ellipsis">{{project.address}}</span>
-                            <span class="block ft12 grey-text ellipsis"><i class="material-icons ft14 text-darken-2" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < project.rating ? 'amber-text':'normal'">star</i>({{project.rating}}) {{project.numberOfReviews}} Reviews</span>
-                            <span class="block ft12 grey-text ellipsis" ng-show="project.bhks">{{project.bhks}} BHK Available</span>
-                            <span class="block ft12 grey-text ellipsis" ng-show="project.area">{{project.area.min}} <span ng-show="project.area.min != project.area.max">- {{project.area.max}}</span> Sq.ft.</span>
-                        </div>
-                    </a>
+                    </div>
+                    <div ng-hide="loading" class="card horizontal imgfx" ng-class="displayType" ng-repeat="project in projectList track by $index">
+                        <a ng-href="{{getRedirectionString(project.id)}}">
+                            <div class="card-image fix40 left">
+                                <img ng-src="{{project.cover}}" class="responsive-img">
+                            </div>
+                            <div class="cardpdt fix60 left">
+                                <span class="block black-text ft13 ellipsis">{{project.name}}</span>
+                                <span class="block ft12 grey-text ellipsis">{{project.address}}</span>
+                                <span class="block ft12 grey-text ellipsis"><i class="material-icons ft14 text-darken-2" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < project.rating ? 'amber-text':'normal'">star</i>({{project.rating}}) {{project.numberOfReviews}} Reviews</span>
+                                <span class="block ft12 grey-text ellipsis" ng-show="project.bhks">{{project.bhks}} BHK Available</span>
+                                <span class="block ft12 grey-text ellipsis" ng-show="project.area">{{project.area.min}} <span ng-show="project.area.min != project.area.max">- {{project.area.max}}</span> Sq.ft.</span>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <ul class="pagination">
-                    <li ng-class="currentPage == 1? 'disabled' : 'waves-effect'" ng-click="changePage(1)"><a href=""><i class="material-icons">chevron_left</i></a></li>
-                    <li ng-class="page == currentPage? 'active' : 'waves-effect'" ng-repeat="page in pages" ng-click="goToPage(page)"><a href="">{{page}}</a></li>
-                    <li ng-class="currentPage == lastPage? 'disabled' : 'waves-effect'" ng-click="changePage(2)"><a href=""><i class="material-icons">chevron_right</i></a></li>
-                </ul>
+                <div class="row" ng-hide="loading">
+                    <ul class="pagination">
+                        <li ng-class="currentPage == 1? 'disabled' : 'waves-effect'" ng-click="changePage(1)"><a href=""><i class="material-icons">chevron_left</i></a></li>
+                        <li ng-class="page == currentPage? 'active' : 'waves-effect'" ng-repeat="page in pages" ng-click="goToPage(page)"><a href="">{{page}}</a></li>
+                        <li ng-class="currentPage == lastPage? 'disabled' : 'waves-effect'" ng-click="changePage(2)"><a href=""><i class="material-icons">chevron_right</i></a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>

@@ -1,11 +1,38 @@
-.myClass{
-  top: 55px !important; 
-  right: 0px !important;
+.myClass {
+    top: 55px !important;
+    right: 0px !important;
 }
 
 #toast-container {
-  top: auto !important;
-  right: auto !important;
-  bottom: 70%;
-  left: 37%;  
+    top: auto !important;
+    right: auto !important;
+    bottom: 70%;
+    left: 37%;
+}
+
+.loaderPosition {
+    position: absolute;
+    left: 50%;
+    top: 200px;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
+
+.loaderPositionMap {
+    position: absolute;
+    left: 50%;
+    top: 1100px;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
+
+.loaderPositionCoverStories {
+    position: absolute;
+    left: 50%;
+    top: 1500px;
+    width: 100px;
+    height: 100px;
+    margin: auto;
 }

@@ -733,11 +733,11 @@ footer.page-footer .footer-copyright{line-height: 20px; height: 20px}
 /*new design css home page end*/
 .loading-icon {
    position: absolute !important;
-   right: 5px;
-   top: 8px;
+   right: 10px;
+   top: 10px;
    z-index: 9 !important;
-   width: 30px;
-   height: 30px;
+   width: 20px;
+   height: 20px;
 }
 .coverimg{overflow: hidden; background-size: cover; background-position: center center; background-repeat: no-repeat;}
 .autocomplete-content {
@@ -872,21 +872,7 @@ padding-left:90px;
   left: -14px;
   right: auto;
 }
-.timeline-badge.primary {
-  background-color: #2e6da4 !important;
-}
-.timeline-badge.success {
-  background-color: #3f903f !important;
-}
-.timeline-badge.warning {
-  background-color: #f0ad4e !important;
-}
-.timeline-badge.danger {
-  background-color: #d9534f !important;
-}
-.timeline-badge.info {
-  background-color: #5bc0de !important;
-}
+
 .timeline-title {
   margin-top: 0;
   color: inherit;

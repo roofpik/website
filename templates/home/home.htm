@@ -38,7 +38,7 @@
                             <div class="input-field card col s12 ht45 pdan rdsan">
                                 <span class="inpspn">Near :</span>
                                 <input placeholder="Enter a Destination" class="autocompletenear inp_pdw mgbn" id="locality-search" ng-model="locationSearched" ng-change="searchLocation()">
-                                <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" ng-show="searchingLocation" />
+                                <img src="http://www.ladbrokes.com/bingo/christmas-cracker/images/loadingAnimation.gif" class="loading-icon" ng-show="searchingLocation" />
                                 <div class="search-results" ng-show="showSearch1">
                                     <ul class="collection homecoll">
                                         <li ng-repeat="item in locations | filter:locationSearched" class=" collection-item avatar" ng-click="selectLocation(item)">
@@ -55,7 +55,7 @@
                             <div class="input-field card col s12 ht45 pdan reletive rdsan">
                                 <span class="inpspn">Find :</span>
                                 <input type="text" placeholder="Apartments, Commercials, PG" id="name-search" class="autocompletenear inp_pdw mgbn" ng-model="searchedText" ng-change="getSearchData()">
-                                <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" ng-show="searchingName" />
+                                <img src="http://www.ladbrokes.com/bingo/christmas-cracker/images/loadingAnimation.gif" class="loading-icon" ng-show="searchingName" />
                                 <div class="search-results" ng-show="showSearch2">
                                     <ul class="collection homecoll">
                                         <li ng-repeat="item in searchByNameData |filter:searchedText" class=" collection-item avatar" ng-click="selectSearchByName(item)">
@@ -120,6 +120,19 @@
     <div class="row mgbn white hidden_sm">
         <div class="container container2">
             <div class="row mgbn">
+                <div ng-show="loading" class="preloader-wrapper big active loaderPositionMap">
+                    <div class="spinner-layer spinner-blue-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col m12 pda10">
                     <div maphome></div>
                 </div>
@@ -128,34 +141,32 @@
     </div>
     <div class="row blue lighten-1 center white-text mgbn pda50">
         <div class="col s12 m4 pda10">
-        <div class="allbd block pda10">
-            <i class="material-icons medium">edit</i>
-            <h4 class="uppercase white-text">
+            <div class="allbd block pda10">
+                <i class="material-icons medium">edit</i>
+                <h4 class="uppercase white-text">
          4000+</h4>
-        <h5>Reviews</h5>
-        </div>
-           
+                <h5>Reviews</h5>
+            </div>
         </div>
         <div class="col s12 m4 pda10">
-        <div class="allbd block pda10">
-            <i class="material-icons medium">home</i>
-            <h4 class="uppercase white-text">700+
+            <div class="allbd block pda10">
+                <i class="material-icons medium">home</i>
+                <h4 class="uppercase white-text">700+
        </h4>
-        <h5> Properties</h5>
-        </div>
-           
-
+                <h5> Properties</h5>
+            </div>
         </div>
         <div class="col s12 m4 pda10">
-        <div class="allbd block pda10">
-            <i class="material-icons medium">location_on</i>
-            <h4 class="uppercase white-text">
+            <div class="allbd block pda10">
+                <i class="material-icons medium">location_on</i>
+                <h4 class="uppercase white-text">
             75+
        </h4>
-           <h5>Localities</h5>
-           </div>
-
+                <h5>Localities</h5>
+            </div>
         </div>
     </div>
-    <div class="row pda10 mgbn reletive white" ui-view="coverStories"></div>
+    <div class="row pda10 mgbn reletive white">
+        <div ui-view="coverStories"></div>
+    </div>
 </section>
