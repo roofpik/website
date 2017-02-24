@@ -5,6 +5,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     $scope.locationSearched = '';
     document.title = "Home"
     $scope.showSearch = false;
+    $scope.loading = true;
     var parameter = '';
     $scope.uid = '';
     $scope.locations = [];
@@ -165,6 +166,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
                 $scope.searchingLocation = false;
                 console.log('now false');  
             }, 0);
+            $scope.loading = false;
             // console.log($scope.locations);
         })
     }
@@ -318,6 +320,8 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
 app.controller('coverStoryHomeCtrl', ['$scope', '$timeout', function($scope, $timeout) {
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.coverStoriesFetched = false;
+    // $scope.loading = true;
+    // $scope.loading = true;
     $scope.stories = [];
     db.ref('shortStories/-KYJONgh0P98xoyPPYm9')
         .limitToFirst(8)
@@ -335,6 +339,8 @@ app.controller('coverStoryHomeCtrl', ['$scope', '$timeout', function($scope, $ti
                     $scope.stories.push(data);
                 }
                 $scope.coverStoriesFetched = true;
+                // $scope.loading = false;
+                // // $scope.loading = false;
             }, 0);
         })
 }]);

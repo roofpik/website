@@ -1,23 +1,21 @@
-//YET TO IMPROVE THE CHANGE IMAGE FEATURE
-app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', function($scope, $stateParams, $state, $timeout) {
+//YET TO INCLUDE THE CHANGE IMAGE FEATURE
+app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '$http', function($scope, $stateParams, $state, $timeout, $http) {
     document.title = "My Profile";
     var uid = decodeParams($stateParams.id)
         // console.log(uid)
     $scope.userId = uid.id;
-    // console.log(auth);
+    // $scope.userId = 'yx8HmzhhTWgxwNH7G2GY9TlLB3O2'
+
+    //if user is not signed in, take him to the home page
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            // User is signed in.
+        } else {
+            $state.go('home');
+        }
+    });
     $scope.textReviews = 0;
     $scope.nonTextReviews = 0;
-
-    //if no user is logged in, take the user back to home page
-   
-   firebase.auth().onAuthStateChanged(function(user) {
-       if (user) {
-           // User is signed in.
-       } else {
-           $state.go('home');
-       }
-   });
-
     $scope.user = {};
     $scope.newPassword = '';
     $scope.newPasswordVerification = '';
@@ -65,9 +63,10 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
                     $scope.image = "https://getuikit.com/v2/docs/images/placeholder_600x400.svg" //Dummy Image
                 }
             }, 0);
+            getUserReviews();
         })
     }
-    getUserReviews();
+
 
     function getUserReviews() {
         db.ref('userReviews/' + $scope.userId).once('value', function(snapshot) {
@@ -75,9 +74,13 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
                 for (key in snapshot.val()) {
                     $scope.userReviews[key] = {};
                     for (key1 in snapshot.val()[key]) {
+                        console.log(key, key1)
                         $scope.userReviews[key][key1] = {};
                         if (snapshot.val()[key][key1].reviewTitle) {
                             $scope.userReviews[key][key1].reviewTitle = snapshot.val()[key][key1].reviewTitle;
+                            $scope.textReviews++;
+                        } else {
+                            $scope.nonTextReviews++;
                         }
                         if (snapshot.val()[key][key1].projectName) {
                             $scope.userReviews[key][key1].projectName = snapshot.val()[key][key1].projectName;
@@ -89,19 +92,61 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', f
                             $scope.userReviews[key][key1].projectId = snapshot.val()[key][key1].projectId;
                         }
                         $scope.userReviews[key][key1].type = key;
+                        $scope.userReviews[key][key1].reviewId = key1;
+                        $scope.reqId = $scope.userReviews[key][key1].reviewId;
+                        getReviewData(key, key1);
                     }
                 }
+                console.log($scope.userReviews);
+                console.log($scope.userId)
                 bindReviews();
             }, 0);
+
+        })
+    }
+
+    function getReviewData(type, projId){
+        $http({
+            url: 'http://107.23.243.89/api/GetReviewDetails_1.0',
+            method: 'GET',
+            params: {
+                id: projId
+            }
+        }).then(function mySucces(response) {
+            console.log(response);
+            // if(response.status == 200){
+            //     $scope.reviews[index].reviewText = response.data.reviewText;
+            //     $scope.reviews[index].showMore = false;
+            // } 
+            loading(false, 1000);
+        }, function myError(err) {
+            console.log(err);
         })
     }
 
     function bindReviews() {
+        $scope.totalRatings = $scope.textReviews + $scope.nonTextReviews;
         if (Object.keys($scope.userReviews).length) {
             $scope.showReviews = true;
         } else {
             $scope.noReviewsToShow = true;
         }
+        // $http({
+        //     url: 'http://107.23.243.89/api/GetReviewDetails_1.0',
+        //     method: 'GET',
+        //     params: {
+        //         id: $scope.reviews[index].reviewId
+        //     }
+        // }).then(function mySucces(response) {
+        //     // console.log(response);
+        //     if(response.status == 200){
+        //         $scope.reviews[index].reviewText = response.data.reviewText;
+        //         $scope.reviews[index].showMore = false;
+        //     } 
+        //     loading(false, 1000);
+        // }, function myError(err) {
+        //     console.log(err);
+        // })
     }
 
     //Function to redirect to the project page from user's reviews

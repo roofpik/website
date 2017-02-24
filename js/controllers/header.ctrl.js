@@ -36,6 +36,7 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
         page_start: $scope.page_start,
         page_size: $scope.page_size
     }
+    
 
     fetchProjects()
 

@@ -1,6 +1,7 @@
 app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$state', function($scope, $http, $timeout, $stateParams, $state) {
     var parameters = decodeParams($stateParams.p);
     console.log(parameters);
+    $scope.loading = true;
     $scope.filters = {
         style: null,
         bhk: null,
@@ -204,6 +205,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
                     }
                 }
                 $scope.projectList.push($scope.projects[key]);
+                $scope.loading = false;
             }
             console.log($scope.projectList);
         }, function myError(err) {
