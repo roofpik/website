@@ -3,8 +3,8 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     document.title = "My Profile";
     var uid = decodeParams($stateParams.id)
         // console.log(uid)
-    $scope.userId = uid.id;
-    // $scope.userId = 'yx8HmzhhTWgxwNH7G2GY9TlLB3O2'
+    // $scope.userId = uid.id;
+    $scope.userId = 'yx8HmzhhTWgxwNH7G2GY9TlLB3O2'
 
     //if user is not signed in, take him to the home page
     firebase.auth().onAuthStateChanged(function(user) {
@@ -17,6 +17,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     $scope.textReviews = 0;
     $scope.nonTextReviews = 0;
     $scope.user = {};
+    $scope.i = 0;
     $scope.newPassword = '';
     $scope.newPasswordVerification = '';
     $scope.user.userId = $scope.userId;
@@ -29,6 +30,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     $scope.showReviews = false;
     $scope.noReviewsToShow = false;
     $scope.userReviews = {};
+    $scope.userReviews[$scope.i] = 0;
     getUserData();
 
     function getUserData() {
@@ -72,33 +74,33 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         db.ref('userReviews/' + $scope.userId).once('value', function(snapshot) {
             $timeout(function() {
                 for (key in snapshot.val()) {
-                    $scope.userReviews[key] = {};
                     for (key1 in snapshot.val()[key]) {
+                        $scope.userReviews[$scope.i] = {};
                         console.log(key, key1)
-                        $scope.userReviews[key][key1] = {};
                         if (snapshot.val()[key][key1].reviewTitle) {
-                            $scope.userReviews[key][key1].reviewTitle = snapshot.val()[key][key1].reviewTitle;
+                            $scope.userReviews[$scope.i].reviewTitle = snapshot.val()[key][key1].reviewTitle;
                             $scope.textReviews++;
                         } else {
                             $scope.nonTextReviews++;
                         }
                         if (snapshot.val()[key][key1].projectName) {
-                            $scope.userReviews[key][key1].projectName = snapshot.val()[key][key1].projectName;
+                            $scope.userReviews[$scope.i].projectName = snapshot.val()[key][key1].projectName;
                         }
                         if (snapshot.val()[key][key1].createdDate) {
-                            $scope.userReviews[key][key1].createdDate = snapshot.val()[key][key1].createdDate;
+                            $scope.userReviews[$scope.i].createdDate = snapshot.val()[key][key1].createdDate;
                         }
                         if (snapshot.val()[key][key1].projectId) {
-                            $scope.userReviews[key][key1].projectId = snapshot.val()[key][key1].projectId;
+                            $scope.userReviews[$scope.i].projectId = snapshot.val()[key][key1].projectId;
                         }
-                        $scope.userReviews[key][key1].type = key;
-                        $scope.userReviews[key][key1].reviewId = key1;
-                        $scope.reqId = $scope.userReviews[key][key1].reviewId;
+                        $scope.userReviews[$scope.i].type = key;
+                        $scope.userReviews[$scope.i].reviewId = key1;
+                        // $scope.reqId = $scope.userReviews[key][key1].reviewId;
+                        $scope.i++;
                         getReviewData(key, key1);
                     }
                 }
                 console.log($scope.userReviews);
-                console.log($scope.userId)
+                // console.log($scope.userId)
                 bindReviews();
             }, 0);
 
