@@ -1,70 +1,81 @@
-<div class="row mgbn" ng-hide = "loading">
-    <div class="col m7 l8 reletive">
-        <div id="mapContainer">
-            <div id="mapCanvas" class="ht600"></div>
-            <div class="map-search">
-                <div id="search_map" class="row radius2 pdr10 cardmg">
-                    <div class="col s9">
-                        <div class="input-field card ht45 pdan reletive">
-                            <span class="inpspn">Find :</span>
-                            <input type="text" placeholder="Search" id="type-selection" class="autocompletenear inp_pdw mgbn" ng-change="getSearchData()" ng-model="searchedText">
-                            <img src="http://www.ladbrokes.com/bingo/christmas-cracker/images/loadingAnimation.gif" class="loading-icon" ng-show="fetchingResults"/>
-                            <div class="search-results" ng-show="showSearch">
-                                <ul class="collection homecoll">
-                                    <li ng-repeat="item in searchByNameResults | filter:searchedText" class=" collection-item avatar" ng-click="selectResult(item)">
-                                        <!-- <img ng-src="{{item.icon}}" class="circle" /> -->
-                                        <span class="title ft13" ng-bind-html="item.name | highlight:searchedText"></span>
-                                    </li>
-                                </ul>
+<div>
+    <div ng-show="loading" class="preloader-wrapper small active loaderPositionMap">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row mgbn">
+        <div class="col m7 l8 reletive">
+            <div id="mapContainer">
+                <div id="mapCanvas" class="ht600"></div>
+                <div class="map-search">
+                    <div id="search_map" class="row radius2 pdr10 cardmg">
+                        <div class="col s9">
+                            <div class="input-field card ht45 pdan reletive">
+                                <span class="inpspn">Find :</span>
+                                <input type="text" placeholder="Search" id="type-selection" class="autocompletenear inp_pdw mgbn" ng-change="getSearchData()" ng-model="searchedText">
+                                <img src="http://www.ladbrokes.com/bingo/christmas-cracker/images/loadingAnimation.gif" class="loading-icon" ng-show="fetchingResults" />
+                                <div class="search-results" ng-show="showSearch">
+                                    <ul class="collection homecoll">
+                                        <li ng-repeat="item in searchByNameResults | filter:searchedText" class=" collection-item avatar" ng-click="selectResult(item)">
+                                            <!-- <img ng-src="{{item.icon}}" class="circle" /> -->
+                                            <span class="title ft13" ng-bind-html="item.name | highlight:searchedText"></span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="input-field col s3 pdan">
-                        <button class="btn btn-full blue ft13 lighten-1 ht45 smwdfix overhdn" ng-click="fetchData()">
-                            <i class="material-icons left mpdbt5">search</i>Search
-                        </button>
+                        <div class="input-field col s3 pdan">
+                            <button class="btn btn-full blue ft13 lighten-1 ht45 smwdfix overhdn" ng-click="fetchData()">
+                                <i class="material-icons left mpdbt5">search</i>Search
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col m5 l4 white pda10">
-        <div class="row mgbn">
-            <div class="col s12">
-                <h5 class="b truncate"><i class="material-icons left">list</i> Explore {{menuTitle}}</h5>
+        <div class="col m5 l4 white pda10">
+            <div class="row mgbn">
+                <div class="col s12">
+                    <h5 class="b truncate"><i class="material-icons left">list</i> Explore {{menuTitle}}</h5>
+                </div>
             </div>
-        </div>
-        <div class="row mgbn">
-          
-            <div class="col s4 pda10">
-                <input name="displayMap" class="with-gap" type="radio" id="projects" ng-change="selectType()" ng-model="selectedType" value="projects" />
-                <label class="ft13 mapft" for="projects">Projects</label>
+            <div class="row mgbn">
+                <div class="col s4 pda10">
+                    <input name="displayMap" class="with-gap" type="radio" id="projects" ng-change="selectType()" ng-model="selectedType" value="projects" />
+                    <label class="ft13 mapft" for="projects">Projects</label>
+                </div>
+                <div class="col s4 pda10">
+                    <input name="displayMap" class="with-gap" type="radio" id="localities" ng-change="selectType()" ng-model="selectedType" value="localities" />
+                    <label class="ft13 mapft" for="localities">Localities</label>
+                </div>
+                <div class="col s4 pda10">
+                    <input name="displayMap" class="with-gap" type="radio" id="locations" ng-change="selectType()" ng-model="selectedType" value="locations" />
+                    <label class="ft13 mapft" for="locations">Locations</label>
+                </div>
             </div>
-           
-            <div class="col s4 pda10">
-                <input name="displayMap" class="with-gap" type="radio" id="localities" ng-change="selectType()" ng-model="selectedType" value="localities" />
-                <label class="ft13 mapft" for="localities">Localities</label>
+            <div class="row mgbn">
+                <ul class="ht-auto fixh-aco" id="map-list">
+                    <li class="pda10 ellipsis" ng-repeat="item in listMenu" ng-show="$index >= min && $index < max" class="marker-link" data-markerid="{{$index}}" ng-click="openInfoWindow($index, 'list')">
+                        <i class="material-icons left">place</i>{{item[0]}}</li>
+                </ul>
             </div>
-           
-            <div class="col s4 pda10">
-                <input name="displayMap" class="with-gap" type="radio" id="locations" ng-change="selectType()" ng-model="selectedType" value="locations" />
-                <label class="ft13 mapft" for="locations">Locations</label>
+            <div class="row mgt10 mgbn center">
+                <ul class="pagination">
+                    <li ng-class="currentPage == 1? 'disabled' : 'normal'" ng-click="changePage(1)"><a href="#!"><i class="material-icons">chevron_left</i></a>
+                    </li>
+                    <li ng-class="i== currentPage?'active': 'normal'" ng-repeat="i in pages track by $index" ng-click="goToPage(i)"><a href="">{{i}}</a></li>
+                    <li ng-class="currentPage == lastPage? 'disabled' : 'normal'" ng-click="changePage(2)"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                </ul>
             </div>
-          
-        </div>
-        <div class="row mgbn">
-            <ul class="ht-auto fixh-aco" id="map-list">
-                <li class="pda10 ellipsis" ng-repeat="item in listMenu" ng-show="$index >= min && $index < max" class="marker-link" data-markerid="{{$index}}" ng-click="openInfoWindow($index, 'list')">
-                <i class="material-icons left">place</i>{{item[0]}}</li>
-            </ul>
-        </div>
-        <div class="row mgt10 mgbn center">
-            <ul class="pagination">
-                <li ng-class="currentPage == 1? 'disabled' : 'normal'" ng-click="changePage(1)"><a href="#!"><i class="material-icons">chevron_left</i></a>
-                </li>
-                <li ng-class="i== currentPage?'active': 'normal'" ng-repeat="i in pages track by $index" ng-click="goToPage(i)"><a href="">{{i}}</a></li>
-                <li ng-class="currentPage == lastPage? 'disabled' : 'normal'" ng-click="changePage(2)"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-            </ul>
         </div>
     </div>
 </div>

@@ -10,6 +10,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
      $scope.localityInfoWindow = [];
      $scope.locationInfoWindow = [];
      $scope.searchByNameResults = [];
+     $scope.loading = true;
      $scope.fetchingResults = false;
      var finalMarkers = [];
 
@@ -100,11 +101,22 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                          '<span class="b">' + $scope.mapData[key].name + '</span>' +
                          '<span class="ft12">Sohna Road, Sector 48 Gurgaon</span>' +
                          '</a>' +
-                         '<div class="col m4 right-align pd5 ft12i" ng-show="' + $scope.mapData[key].rating + ' != 0">' +
-                         '<span class="block b">' + $scope.mapData[key].rating + ' Reviews</span>' +
-                         '<span class="block">' +
-                         '<i class="material-icons" ng-class="1 <=' + $scope.mapData[key].rating + ' "blue-text":"normal"">star</i>' +
-                         '</span>' +
+                         '<div class="col m4 right-align pd5 ft12i" ng-show="' + $scope.mapData[key].rating + ' != 0">'
+                         // '<span class="block b">' + $scope.mapData[key].rating + ' Reviews</span>' +
+                         // '<span class="block">' +
+                     ]
+                     var starRating = '';
+                     var thisClass = '';
+                    for (var k = 0; k < 5; k++ ) {
+                        if(k < $scope.mapData[key].rating){
+                            thisClass = 'blue-text'
+                        } else {
+                            thisClass = 'grey-text'
+                        }
+                        starRating+='<i class="material-icons blue-text '+thisClass+'">star</i>'
+                     }
+                     content[0] += starRating;
+                     content[0] += '</span>' +
                          '</div>' +
                          '</div>' +
                          '<div class="row mg0 ht50">' +
@@ -113,13 +125,12 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                          '<span class="ft12 block ellipsis">₹' + $scope.mapData[key].rent.min + ' - ₹' + $scope.mapData[key].rent.max + '</span>' +
                          '</div>' +
                          '<div class="col m6 pd5 center ht50">' +
-                         '<span class="block b ellipsis">2, 3, 4 BHK</span>' +
-                         '<span class="ft12 block ellipsis">1776 Sq. Ft. - 2345 Sq. </span>' +
+                         '<span class="block b ellipsis">'+$scope.mapData[key].bhks+' BHK</span>' +
+                         // '<span class="ft12 block ellipsis">1776 Sq. Ft. - 2345 Sq. </span>' +
                          '</div>' +
                          '</div>' +
                          '</div>' +
                          '</div>'
-                     ]
                      $scope.projectInfoWindow.push(content);
                  } else if ($scope.mapData[key].type == 'locality') {
                      data = [$scope.mapData[key].name, $scope.mapData[key].location.lat, $scope.mapData[key].location.lon, 'images/home/marker2.png', $scope.mapData[key].id];
@@ -138,26 +149,26 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                          '<div class="cardTitle row mgan bdbtm">' +
                          '<a class="col m8 black-text text-lighten-4 pd5 pd-tspanmap">' +
                          '<span class="b">' + $scope.mapData[key].name + '</span>' +
-                         '<span class="ft12">Sohna Road, Sector 48 Gurgaon</span>' +
+                         // '<span class="ft12">Sohna Road, Sector 48 Gurgaon</span>' +
                          '</a>' +
-                         '<div class="col m4 right-align pd5 ft12i" ng-show="' + $scope.mapData[key].rating + ' != 0">' +
-                         '<span class="block b">' + $scope.mapData[key].rating + ' Reviews</span>' +
-                         '<span class="block">' +
-                         '<i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index <' + $scope.mapData[key].rating + ' "blue-text":"normal"">star</i>' +
-                         '</span>' +
+                         // '<div class="col m4 right-align pd5 ft12i" ng-show="' + $scope.mapData[key].rating + ' != 0">' +
+                         // '<span class="block b">' + $scope.mapData[key].rating + ' Reviews</span>' +
+                         // '<span class="block">' +
+                         // '<i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index <' + $scope.mapData[key].rating + ' "blue-text":"normal"">star</i>' +
+                         // '</span>' +
+                         // '</div>' +
                          '</div>' +
-                         '</div>' +
-                         '<div class="row mg0 ht50">' +
-                         '<div class="col m6 pd5 dis-tab center ht50" ng-show="' + $scope.mapData[key].rent + '">' +
-                         '<span class="block b ellipsis">Rent Price</span>' +
-                         '<span class="ft12 block ellipsis">₹' + $scope.mapData[key].rent.min + ' - ₹' + $scope.mapData[key].rent.max + '</span>' +
-                         '</div>' +
-                         '<div class="col m6 pd5 center ht50">' +
-                         '<span class="block b ellipsis">2, 3, 4 BHK</span>' +
-                         '<span class="ft12 block ellipsis">1776 Sq. Ft. - 2345 Sq. </span>' +
-                         '</div>' +
-                         '</div>' +
-                         '</div>' +
+                         // '<div class="row mg0 ht50">' +
+                         // '<div class="col m6 pd5 dis-tab center ht50" ng-show="' + $scope.mapData[key].rent + '">' +
+                         // '<span class="block b ellipsis">Rent Price</span>' +
+                         // '<span class="ft12 block ellipsis">₹' + $scope.mapData[key].rent.min + ' - ₹' + $scope.mapData[key].rent.max + '</span>' +
+                         // '</div>' +
+                         // '<div class="col m6 pd5 center ht50">' +
+                         // '<span class="block b ellipsis">2, 3, 4 BHK</span>' +
+                         // '<span class="ft12 block ellipsis">1776 Sq. Ft. - 2345 Sq. </span>' +
+                         // '</div>' +
+                         // '</div>' +
+                         // '</div>' +
                          '</div>'
                      ]
                      $scope.localityInfoWindow.push(content);
@@ -178,26 +189,26 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                          '<div class="cardTitle row mgan bdbtm">' +
                          '<a class="col m8 black-text text-lighten-4 pd5 pd-tspanmap">' +
                          '<span class="b">' + $scope.mapData[key].name + '</span>' +
-                         '<span class="ft12">Sohna Road, Sector 48 Gurgaon</span>' +
+                         // '<span class="ft12">Sohna Road, Sector 48 Gurgaon</span>' +
                          '</a>' +
-                         '<div class="col m4 right-align pd5 ft12i" ng-show="' + $scope.mapData[key].rating + ' != 0">' +
-                         '<span class="block b">' + $scope.mapData[key].rating + ' Reviews</span>' +
-                         '<span class="block">' +
-                         '<i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index <' + $scope.mapData[key].rating + ' "blue-text":"normal"">star</i>' +
-                         '</span>' +
+                         // '<div class="col m4 right-align pd5 ft12i" ng-show="' + $scope.mapData[key].rating + ' != 0">' +
+                         // '<span class="block b">' + $scope.mapData[key].rating + ' Reviews</span>' +
+                         // '<span class="block">' +
+                         // '<i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index <' + $scope.mapData[key].rating + ' "blue-text":"normal"">star</i>' +
+                         // '</span>' +
+                         // '</div>' +
                          '</div>' +
-                         '</div>' +
-                         '<div class="row mg0 ht50">' +
-                         '<div class="col m6 pd5 dis-tab center ht50" ng-show="' + $scope.mapData[key].rent + '">' +
-                         '<span class="block b ellipsis">Rent Price</span>' +
-                         '<span class="ft12 block ellipsis">₹' + $scope.mapData[key].rent.min + ' - ₹' + $scope.mapData[key].rent.max + '</span>' +
-                         '</div>' +
-                         '<div class="col m6 pd5 center ht50">' +
-                         '<span class="block b ellipsis">2, 3, 4 BHK</span>' +
-                         '<span class="ft12 block ellipsis">1776 Sq. Ft. - 2345 Sq. </span>' +
-                         '</div>' +
-                         '</div>' +
-                         '</div>' +
+                         // '<div class="row mg0 ht50">' +
+                         // '<div class="col m6 pd5 dis-tab center ht50" ng-show="' + $scope.mapData[key].rent + '">' +
+                         // '<span class="block b ellipsis">Rent Price</span>' +
+                         // '<span class="ft12 block ellipsis">₹' + $scope.mapData[key].rent.min + ' - ₹' + $scope.mapData[key].rent.max + '</span>' +
+                         // '</div>' +
+                         // '<div class="col m6 pd5 center ht50">' +
+                         // '<span class="block b ellipsis">2, 3, 4 BHK</span>' +
+                         // '<span class="ft12 block ellipsis">1776 Sq. Ft. - 2345 Sq. </span>' +
+                         // '</div>' +
+                         // '</div>' +
+                         // '</div>' +
                          '</div>'
                      ]
                      $scope.locationInfoWindow.push(content);
@@ -292,6 +303,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
              google.maps.event.removeListener(boundsListener);
 
          });
+          $scope.loading = false;
      }
 
      $scope.openInfoWindow = function(index, from) {
