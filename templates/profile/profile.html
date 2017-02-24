@@ -56,15 +56,26 @@
         <div class="row">
             <div class="col s12">
                 <ul class="timeline">
-                    <li ng-repeat="id in userReviews" ng-class="$index%2==0 ? 'timeline' : 'timeline-inverted'">
+                    <li ng-show="noReviews" class="timeline">
                         <div class="timeline-badge blue"><i class="material-icons">edit</i></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h5 class="mgan">{{id.reviewTitle}}, <i ng-show="id.projectName" ng-click="goToProjectPage(id)"><a style = "cursor: pointer">- {{id.projectName}}</a></i></h5>
+                                <h5 class="mgan">No Reviews! </h5>
+                            </div>
+                            <div class="timeline-body">
+                                <p>You haven't reviewed yet.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li ng-hide="noReviews" ng-repeat="id in userReviews" ng-class="$index%2==0 ? 'timeline' : 'timeline-inverted'">
+                        <div class="timeline-badge blue"><i class="material-icons">edit</i></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h5 class="mgan">{{id.reviewTitle}} <i ng-show="id.projectName" ng-click="goToProjectPage(id)"><a style = "cursor: pointer">- {{id.projectName}}</a></i></h5>
                                 <p class="mgan grey-text"><small>{{id.createdDate | date:'MMM dd, yy'}}</small></p>
                             </div>
                             <div class="timeline-body">
-                                <p>Review Text</p>
+                                <p>{{id.reviewText}}</p>
                             </div>
                         </div>
                     </li>
