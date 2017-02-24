@@ -14,18 +14,22 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     $scope.showSearchTitle = 'Search by Name';
     $scope.toggleIcon = 'arrow_drop_down_circle';
     $scope.searchingName = false;
-    $scope.searchingLocation= false;
+    $scope.searchingLocation = false;
     $('ul.tabs').tabs();
     $('select').material_select();
     $('.parallax').parallax();
     // to change verttical and category options
 
     $scope.selectVertical = function(val) {
-        $timeout(function(){
+        $timeout(function() {
+
             $scope.categorySearched = '';
             $scope.selectedVertical = val;
             $scope.categorySearch = searchObject[$scope.selectedVertical];
-        },0);
+            if (val != 'residential') {
+                Materialize.toast('Coming Soon!', 3000);
+            }
+        }, 0);
     }
 
     $scope.toggleSearchType = function() {
@@ -43,8 +47,8 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
 
     $scope.selectCategory = function(val) {
         // if (val.name == 'Explore Locality') {
-            // if selected type is search locality then shift focus to locality search
-            $('#locality-search').focus();
+        // if selected type is search locality then shift focus to locality search
+        $('#locality-search').focus();
         // }
         $scope.categorySearched = val.name;
         $scope.selectedType = val;
@@ -162,9 +166,9 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
             for (key in response.data.details) {
                 $scope.locations.push(response.data.details[key]);
             }
-            $timeout(function(){
+            $timeout(function() {
                 $scope.searchingLocation = false;
-                console.log('now false');  
+                console.log('now false');
             }, 0);
             $scope.loading = false;
             // console.log($scope.locations);
@@ -191,7 +195,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         $scope.selectedLocation = loc;
     }
 
-    $scope.selectSearchByName = function(val){
+    $scope.selectSearchByName = function(val) {
         $scope.searchedText = val.name;
         $scope.searchedValue = val;
         $scope.showSearch2 = false;
@@ -202,95 +206,99 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         // If person is searching by name take to details view else take to list view
         var param = {};
         if ($scope.searchByName) {
-            if($scope.searchedValue.type == 'residential'){
+            if ($scope.searchedValue.type == 'residential') {
                 param = {
-                    projectId : $scope.searchedValue.id
+                    projectId: $scope.searchedValue.id
                 }
-                $state.go('project-details', {p: encodeParams(param)});
-            } else if($scope.searchedValue.type == 'cghs') {
+                $state.go('project-details', { p: encodeParams(param) });
+            } else if ($scope.searchedValue.type == 'cghs') {
                 param = {
-                    projectId : $scope.searchedValue.id,
+                    projectId: $scope.searchedValue.id,
                     category: 'cghs'
                 }
-                $state.go('project-details', {p: encodeParams(param)});
-            } else if($scope.searchedValue.type == 'locality'){
+                $state.go('project-details', { p: encodeParams(param) });
+            } else if ($scope.searchedValue.type == 'locality') {
                 param = {
                     id: $scope.searchedValue.id,
                     category: 'locality'
                 }
-                $state.go('location-details', {p: encodeParams(param)});
-            } else if($scope.searchedValue.type == 'location'){
+                $state.go('location-details', { p: encodeParams(param) });
+            } else if ($scope.searchedValue.type == 'location') {
                 param = {
                     id: $scope.searchedValue.id,
                     category: 'locations'
                 }
-                $state.go('location-details', {p: encodeParams(param)});
+                $state.go('location-details', { p: encodeParams(param) });
             }
         } else {
-            var param = {
-                'vertical': $scope.selectedVertical
-            }
-            if($scope.categorySearched == 'Penthouse / Villas'){
-                param.category = 'Penthouses / Duplexes$Villas / Row-houses';
-            } else if($scope.categorySearched =='Low Rise / Independent Floors'){
-                param.category = 'Independent Floors';
-            } else if($scope.categorySearched == 'CGHS'){
-                param.category = 'CGHS';
-            } else {
-                param.category = 'Apartments';
-            }
-
-            if($scope.selectedLocation){
-                if($scope.selectedLocation.type == 'location'){
-                    param.location = $scope.selectedLocation.id;
-                } else {
-                    param.locality= $scope.selectedLocation.id;
+            if ($scope.selectedVertical == 'residential') {
+                var param = {
+                    'vertical': $scope.selectedVertical
                 }
-            }
+                if ($scope.categorySearched == 'Penthouse / Villas') {
+                    param.category = 'Penthouses / Duplexes$Villas / Row-houses';
+                } else if ($scope.categorySearched == 'Low Rise / Independent Floors') {
+                    param.category = 'Independent Floors';
+                } else if ($scope.categorySearched == 'CGHS') {
+                    param.category = 'CGHS';
+                } else {
+                    param.category = 'Apartments';
+                }
 
-            var parameter = encodeParams(param);
-            // console.log(parameter);
-            $state.go('list', { p: parameter});
+                if ($scope.selectedLocation) {
+                    if ($scope.selectedLocation.type == 'location') {
+                        param.location = $scope.selectedLocation.id;
+                    } else {
+                        param.locality = $scope.selectedLocation.id;
+                    }
+                }
+
+                var parameter = encodeParams(param);
+                // console.log(parameter);
+                $state.go('list', { p: parameter });
+            } else {
+                Materialize.toast('Coming Soon!', 3000);
+            }
         }
     }
 
-     // get search results based on the string in input box
-     $scope.getSearchData = function() {
-         // console.log($scope.searchedText);
-         if ($scope.searchedText.length > 2) {
+    // get search results based on the string in input box
+    $scope.getSearchData = function() {
+        // console.log($scope.searchedText);
+        if ($scope.searchedText.length > 2) {
             $scope.searchingName = true;
-             var data = {
-                 name: $scope.searchedText
-             }
-             $http({
-                 url: 'http://107.23.243.89/api/GetByName_1.0',
-                 method: 'GET',
-                 params: {
-                     args: encodeParams(data)
-                 }
-             }).then(function mySucces(response) {
-                 // console.log(response);
-                 $scope.searchByNameData = [];
-                 if(Object.keys(response.data).length > 0){
-                    for(key in response.data){
+            var data = {
+                name: $scope.searchedText
+            }
+            $http({
+                url: 'http://107.23.243.89/api/GetByName_1.0',
+                method: 'GET',
+                params: {
+                    args: encodeParams(data)
+                }
+            }).then(function mySucces(response) {
+                // console.log(response);
+                $scope.searchByNameData = [];
+                if (Object.keys(response.data).length > 0) {
+                    for (key in response.data) {
                         $scope.searchByNameData.push(response.data[key]);
                     }
                     $scope.showSearch2 = true;
-                 }
-                 $scope.searchingName = false;
-             }, function myError(err) {
+                }
                 $scope.searchingName = false;
-                 // console.log(err);
-             })
-         }
-     }
+            }, function myError(err) {
+                $scope.searchingName = false;
+                // console.log(err);
+            })
+        }
+    }
 
-     $scope.selectResult = function(val){
+    $scope.selectResult = function(val) {
         $scope.searchedText = val.name;
         $scope.showSearch = false;
 
         // redirect to a view or show on map after selection
-     }
+    }
 
     //demo function attached to delete button to test the projects/locations/localities details page
 
@@ -308,39 +316,31 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     }
 
     $scope.highlight = function(text, search) {
-    console.log('called');
-    if (!search) {
-        return $sce.trustAsHtml(text);
-    }
-    return $sce.trustAsHtml(text.replace(new RegExp(search, 'gi'), '<span class="highlightedText">$&</span>'));
-};
+        console.log('called');
+        if (!search) {
+            return $sce.trustAsHtml(text);
+        }
+        return $sce.trustAsHtml(text.replace(new RegExp(search, 'gi'), '<span class="highlightedText">$&</span>'));
+    };
 
 }]);
 
 app.controller('coverStoryHomeCtrl', ['$scope', '$timeout', function($scope, $timeout) {
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.coverStoriesFetched = false;
-    // $scope.loading = true;
-    // $scope.loading = true;
     $scope.stories = [];
     db.ref('shortStories/-KYJONgh0P98xoyPPYm9')
         .limitToFirst(8)
         .once('value', function(response) {
             $timeout(function() {
-                // $scope.stories = response.val();
-                // angular.forEach(response.val(), function(value, key) {
-                //     // value.redirectionUrl = '/#/story/gurgaon/' + convertToHyphenSeparated(value.placeName) + '/' + convertToHyphenSeparated(value.title) + '/' + value.storyId;
-                //     // value.redirectionUrl = value.redirectionUrl.replace(/[?=]/g, "");
-                //     value.coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/' + $scope.cityId + '/' + value.storyId + '/coverPhoto/' + value.coverPhoto + '-m.jpg';
-                // })
-                for(key in response.val()){
+                for (key in response.val()) {
                     var data = response.val()[key];
+                    data.redirectionUrl = '/#/story/gurgaon/' + convertToHyphenSeparated(data.placeName) + '/' + convertToHyphenSeparated(data.title) + '/' + data.storyId;
+                    data.redirectionUrl = data.redirectionUrl.replace(/[?=]/g, "");
                     data.coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/' + $scope.cityId + '/' + data.storyId + '/coverPhoto/' + data.coverPhoto + '-m.jpg';
                     $scope.stories.push(data);
                 }
                 $scope.coverStoriesFetched = true;
-                // $scope.loading = false;
-                // // $scope.loading = false;
             }, 0);
         })
 }]);

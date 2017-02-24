@@ -65,6 +65,15 @@ function decodeParams(param) {
     return parameter;
 }
 
+function convertToHyphenSeparated(data) {
+    if (data == null || data == "") {
+        return data;
+    }
+
+    data = data.trim();
+    return data.split(" ").join("-").toLowerCase();
+}
+
 
 // Search variable
 
