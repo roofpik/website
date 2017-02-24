@@ -3,10 +3,10 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     document.title = "My Profile";
     var uid = decodeParams($stateParams.id)
         // console.log(uid)
-    // $scope.userId = uid.id;
-    $scope.userId = 'yx8HmzhhTWgxwNH7G2GY9TlLB3O2'
+        // $scope.userId = uid.id;
+    // $scope.userId = '8LoX0ojlVCPc4OtsQR5FPHT8Vgk2'
 
-    //if user is not signed in, take him to the home page
+    // if user is not signed in, take him to the home page
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
@@ -16,6 +16,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     });
     $scope.textReviews = 0;
     $scope.nonTextReviews = 0;
+    $scope.noReviews = true;
     $scope.user = {};
     $scope.i = 0;
     $scope.newPassword = '';
@@ -69,11 +70,15 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         })
     }
 
+    if(Object.keys($scope.userReviews).length > 1){
+        $scope.noReviews = false;
+    }
+    console.log(Object.keys($scope.userReviews).length)
 
     function getUserReviews() {
         db.ref('userReviews/' + $scope.userId).once('value', function(snapshot) {
-            $timeout(function() {
                 for (key in snapshot.val()) {
+                    console.log('called')
                     for (key1 in snapshot.val()[key]) {
                         $scope.userReviews[$scope.i] = {};
                         console.log(key, key1)
@@ -94,39 +99,41 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
                         }
                         $scope.userReviews[$scope.i].type = key;
                         $scope.userReviews[$scope.i].reviewId = key1;
-                        // $scope.reqId = $scope.userReviews[key][key1].reviewId;
+                        getReviewData($scope.i, key1);
                         $scope.i++;
-                        getReviewData(key, key1);
                     }
                 }
                 console.log($scope.userReviews);
                 // console.log($scope.userId)
                 bindReviews();
-            }, 0);
-
         })
     }
 
-    function getReviewData(type, projId){
-        $http({
-            url: 'http://107.23.243.89/api/GetReviewDetails_1.0',
-            method: 'GET',
-            params: {
-                id: projId
-            }
-        }).then(function mySucces(response) {
-            console.log(response);
-            // if(response.status == 200){
-            //     $scope.reviews[index].reviewText = response.data.reviewText;
-            //     $scope.reviews[index].showMore = false;
-            // } 
-            loading(false, 1000);
-        }, function myError(err) {
-            console.log(err);
-        })
+    function getReviewData(i, projId) {
+                $http({
+                    url: 'http://107.23.243.89/api/GetReviewDetails_1.0',
+                    method: 'GET',
+                    params: {
+                        id: projId
+                    }
+                }).then(function mySucces(response) {
+                    console.log(response);
+                    if (response.status == 200) {
+                        $scope.text = response.data.reviewText;
+                        setReviewText($scope.text, i)
+                    }
+                    loading(false, 1000);
+                }, function myError(err) {
+                    console.log(err);
+                });
+    }
+
+    function setReviewText(text, i){
+            $scope.userReviews[i].reviewText = text;
     }
 
     function bindReviews() {
+
         $scope.totalRatings = $scope.textReviews + $scope.nonTextReviews;
         if (Object.keys($scope.userReviews).length) {
             $scope.showReviews = true;
@@ -247,5 +254,9 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     function changeImage(image) {
         db.ref('users/' + $scope.userId + '/' + 'profileImage').set(image);
         $scope.image = image;
+    }
+
+    function goToWriteReviews (){
+        state.go('write-review', {id: $scope.userId});
     }
 }])
