@@ -43,7 +43,7 @@
                 <h5>Contact US</h5>
                 <p>Can't find what you're looking for? Drop us a note and our team will get in touch with you.</p>
                 <div>
-                    <form name="contactUs">
+                    <form name="contactUs" ng-submit="submitQuery(user)">
                         <div class="input-field col s12 pdln mgtn">
                             <i class="material-icons prefix">account_circle</i>
                             <input placeholder="Name" type="text" class="validate mgbn ft12" ng-model="user.name" required>
@@ -72,8 +72,13 @@
                             <i class="material-icons prefix">mode_edit</i>
                             <textarea id="icon_prefix2" placeholder="Type your text" ng-model="user.message" class="materialize-textarea mgbn" required></textarea>
                         </div>
+                        <div
+                    vc-recaptcha theme="'light'" key="model.key" on-create="setWidgetId(widgetId)" on-success="setResponse(response)" on-expire="cbExpiration()" >
+                        </div>
+
+                        <!-- <div class="g-recaptcha" data-sitekey="6LfkohYUAAAAADwVTV8HDQMM6r9Yxl-xz5Wns63C" on-success="setResponse(response)"></div> -->
                         <div class="col s12 mgt10 pdln">
-                            <button class="btn btn-full blue" ng-disabled="contactUs.$invalid" ng-click="submitQuery(user)"><i class="material-icons left">list</i> Submit</button>
+                            <button class="btn btn-full blue" ng-disabled="contactUs.$invalid" type="submit"><i class="material-icons left">list</i> Submit</button>
                         </div>
                     </form>
                 </div>
