@@ -6,14 +6,14 @@ app.controller('footerCtrl', ['$scope', '$timeout', 'vcRecaptchaService', functi
 
     $scope.submitQuery = function(user) {
         console.log(user);
-        // db.ref('contactUs').push($scope.user).then(function() {
-        //     $timeout(function() {
-        //         $scope.user = {};
-        //         $scope.contactUs.$setUntouched();
-        //         $scope.contactUs.$setPristine();
-        //     }, 100);
-        //     Materialize.toast('Request successfully submitted', 4000)
-        // })
+        db.ref('contactUs').push($scope.user).then(function() {
+            $timeout(function() {
+                $scope.user = {};
+                $scope.contactUs.$setUntouched();
+                $scope.contactUs.$setPristine();
+            }, 100);
+            Materialize.toast('Request successfully submitted', 4000)
+        })
     }
 
     $scope.addSubscriber = function(emailAddress) {
@@ -37,6 +37,7 @@ app.controller('footerCtrl', ['$scope', '$timeout', 'vcRecaptchaService', functi
     };
 
     $scope.setResponse = function(response) {
+        console.log(response);
         console.info('Response available');
 
         $scope.response = response;

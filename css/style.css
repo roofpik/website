@@ -593,7 +593,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
  top: 0 ; z-index: 9; transform: none !important;}
 
 
-.homebgtrn{background-color: rgba(206,220,250, 0.7) !important;}
+.homebgtrn{background-color: rgba(255,255,255, 0.9) !important;}
 .videohome{width: 100%;}
 .shadow_n{box-shadow:none !important;}
 i.left{margin-right: 10px;}

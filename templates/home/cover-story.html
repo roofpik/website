@@ -1,66 +1,95 @@
-<div ng-show="coverStoriesFetched">
-    <h4 class="center b uppercase ltspacing">Cover Stories</h4>
-    <div class="row mgln smpd40">
-        <div class="col s12 m4">
-            <div class="coverfixbox card pdan mgb20 ht450 coverimg" style="background-image: url({{stories[0].coverPhoto}})">
-                <div class="overlay pda10">
-                    <h5 class="mg0 ft13 b truncate">{{stories[0].title}}</h5>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[0].userName}}</p>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[0].placeName}}</p>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[0].createdDate | date:'MMM dd, yy'}}</p>
-                </div>
+<div>
+    <div ng-hide="coverStoriesFetched" class="preloader-wrapper small active loaderPositionCoverStories">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
             </div>
-            <div class="coverfixbox card pdan mgb20 ht350 coverimg" style="background-image: url({{stories[1].coverPhoto}})">
-                <div class="overlay pda10">
-                    <h5 class="mg0 ft13 b truncate">{{stories[1].title}}</h5>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[1].userName}}</p>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[1].placeName}}</p>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[1].createdDate | date:'MMM dd, yy'}}</p>
-                </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
             </div>
         </div>
-        <div class="col s12 m4">
-            <div class="coverfixbox card pdan mgb20 ht350 coverimg" style="background-image: url({{stories[2].coverPhoto}})">
-                <div class="overlay pda10">
-                    <h5 class="mg0 ft13 b truncate">{{stories[2].title}}</h5>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[2].userName}}</p>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[2].placeName}}</p>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[2].createdDate | date:'MMM dd, yy'}}</p>
-                </div>
+    </div>
+    <div>
+        <h4 class="center b uppercase ltspacing">Cover Stories</h4>
+        <div class="row mgln smpd40">
+            <div class="col s12 m4">
+                <a ng-href="{{stories[0].redirectionUrl}}">
+                    <div class="coverfixbox card pdan mgb20 ht450 coverimg" style="background-image: url({{stories[0].coverPhoto}})">
+                        <div class="overlay pda10">
+                            <h5 class="mg0 ft13 b truncate">{{stories[0].title}}</h5>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[0].userName}}</p>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[0].placeName}}</p>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[0].createdDate | date:'MMM dd, yy'}}</p>
+                        </div>
+                    </div>
+                </a>
+                <a ng-href="{{stories[1].redirectionUrl}}">
+                    <div class="coverfixbox card pdan mgb20 ht350 coverimg" style="background-image: url({{stories[1].coverPhoto}})">
+                        <div class="overlay pda10">
+                            <h5 class="mg0 ft13 b truncate">{{stories[1].title}}</h5>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[1].userName}}</p>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[1].placeName}}</p>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[1].createdDate | date:'MMM dd, yy'}}</p>
+                        </div>
+                    </div>
+                </a>
             </div>
-            <div class="coverfixbox card pdan mgb20 ht450 coverimg" style="background-image: url({{stories[3].coverPhoto}})">
-                <div class="overlay pda10">
-                    <h5 class="mg0 ft13 b truncate">{{stories[3].title}}</h5>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[3].userName}}</p>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[3].placeName}}</p>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[3].createdDate | date:'MMM dd, yy'}}</p>
-                </div>
+            <div class="col s12 m4">
+                <a ng-href="{{stories[2].redirectionUrl}}">
+                    <div class="coverfixbox card pdan mgb20 ht350 coverimg" style="background-image: url({{stories[2].coverPhoto}})">
+                        <div class="overlay pda10">
+                            <h5 class="mg0 ft13 b truncate">{{stories[2].title}}</h5>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[2].userName}}</p>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[2].placeName}}</p>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[2].createdDate | date:'MMM dd, yy'}}</p>
+                        </div>
+                    </div>
+                </a>
+                <a ng-href="{{stories[4].redirectionUrl}}">
+                    <div class="coverfixbox card pdan mgb20 ht450 coverimg" style="background-image: url({{stories[3].coverPhoto}})">
+                        <div class="overlay pda10">
+                            <h5 class="mg0 ft13 b truncate">{{stories[3].title}}</h5>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[3].userName}}</p>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[3].placeName}}</p>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[3].createdDate | date:'MMM dd, yy'}}</p>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </div>
-        <div class="col s12 m4">
-            <div class="coverfixbox card pdan mgb20 ht266 coverimg" style="background-image: url({{stories[4].coverPhoto}})">
-                <div class="overlay pda10">
-                    <h5 class="mg0 ft13 b truncate">{{stories[4].title}}</h5>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[4].userName}}</p>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[4].placeName}}</p>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[4].createdDate | date:'MMM dd, yy'}}</p>
-                </div>
-            </div>
-            <div class="coverfixbox card pdan mgb20 ht266 coverimg" style="background-image: url({{stories[5].coverPhoto}})">
-                <div class="overlay pda10">
-                    <h5 class="mg0 ft13 b truncate">{{stories[5].title}}</h5>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[5].userName}}</p>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[5].placeName}}</p>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[5].createdDate | date:'MMM dd, yy'}}</p>
-                </div>
-            </div>
-            <div class="coverfixbox card pdan mgb20 ht266 coverimg" style="background-image: url({{stories[6].coverPhoto}})">
-                <div class="overlay pda10">
-                    <h5 class="mg0 ft13 b truncate">{{stories[6].title}}</h5>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[6].userName}}</p>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[6].placeName}}</p>
-                    <p class="mg0 ft12 truncate grey-text">{{stories[6].createdDate | date:'MMM dd, yy'}}</p>
-                </div>
+            <div class="col s12 m4">
+                <a ng-href="{{stories[4].redirectionUrl}}">
+                    <div class="coverfixbox card pdan mgb20 ht266 coverimg" style="background-image: url({{stories[4].coverPhoto}})">
+                        <div class="overlay pda10">
+                            <h5 class="mg0 ft13 b truncate">{{stories[4].title}}</h5>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[4].userName}}</p>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[4].placeName}}</p>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[4].createdDate | date:'MMM dd, yy'}}</p>
+                        </div>
+                    </div>
+                </a>
+                <a ng-href="{{stories[5].redirectionUrl}}">
+                    <div class="coverfixbox card pdan mgb20 ht266 coverimg" style="background-image: url({{stories[5].coverPhoto}})">
+                        <div class="overlay pda10">
+                            <h5 class="mg0 ft13 b truncate">{{stories[5].title}}</h5>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[5].userName}}</p>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[5].placeName}}</p>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[5].createdDate | date:'MMM dd, yy'}}</p>
+                        </div>
+                    </div>
+                </a>
+                <a ng-href="{{stories[6].redirectionUrl}}">
+                    <div class="coverfixbox card pdan mgb20 ht266 coverimg" style="background-image: url({{stories[6].coverPhoto}})">
+                        <div class="overlay pda10">
+                            <h5 class="mg0 ft13 b truncate">{{stories[6].title}}</h5>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[6].userName}}</p>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[6].placeName}}</p>
+                            <p class="mg0 ft12 truncate grey-text">{{stories[6].createdDate | date:'MMM dd, yy'}}</p>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>

@@ -17,14 +17,16 @@
             <div class="col s6 m4 pdr70 xs12 bodxs">
                 <div class="row mgln mgrn">
                     <h5 class="grey-text">Join Our Newsletter</h5>
-                      <p>Subscribe now for the latest in your local real estate market.</p>
-                    <div class="input-field col s12 pdln mgtn">
-                        <i class="material-icons prefix">email</i>
-                        <input placeholder="Email" type="email" ng-model = "mail" class="validate mgbn ft12" required>
-                    </div>
-                    <div class="col s12 mgt10 pdln">
-                        <button class="btn btn-full blue" ng-click="addSubscriber(mail)" ng-disabled="mail"><i class="material-icons left">send</i> Join</button>
-                    </div>
+                    <p>Subscribe now for the latest in your local real estate market.</p>
+                    <form name="newsletter">
+                        <div class="input-field col s12 pdln mgtn">
+                            <i class="material-icons prefix">email</i>
+                            <input placeholder="Email" type="email" ng-model="mail" class="validate mgbn ft12" required>
+                        </div>
+                        <div class="col s12 mgt10 pdln">
+                            <button class="btn btn-full blue" ng-click="addSubscriber(mail)" ng-disabled="newsletter.$invalid"><i class="material-icons left">send</i> Join</button>
+                        </div>
+                    </form>
                 </div>
                 <div class="row mgt30 mgln mgrn">
                     <h5 class="grey-text">Connect with us</h5>
@@ -62,12 +64,11 @@
                             <i class="material-icons prefix">list</i>
                             <select class="mgbn" ng-model="user.userType" required>
                                 <option value="" disabled selected>Choose your option</option>
-                                <option value="1">Partner</option>
-                                <option value="2">Investor</option>
-                                <option value="3">Career</option>
-                            </select>                    
+                                <option value="partner">Partner</option>
+                                <option value="investor">Investor</option>
+                                <option value="career">Career</option>
+                            </select>
                         </div>
-
                         <div class="input-field col s12 pdln mgtn">
                             <i class="material-icons prefix">mode_edit</i>
                             <textarea id="icon_prefix2" placeholder="Type your text" ng-model="user.message" class="materialize-textarea mgbn" required></textarea>
@@ -77,6 +78,8 @@
                         </div> -->
 
                         <!-- <div class="g-recaptcha" data-sitekey="6LfkohYUAAAAADwVTV8HDQMM6r9Yxl-xz5Wns63C" on-success="setResponse(response)"></div> -->
+                        <div vc-recaptcha theme="'dark'" key="model.key" on-create="setWidgetId(widgetId)" on-success="setResponse(response)" on-expire="cbExpiration()">
+                        </div>
                         <div class="col s12 mgt10 pdln">
                             <button class="btn btn-full blue" ng-disabled="contactUs.$invalid" type="submit"><i class="material-icons left">list</i> Submit</button>
                         </div>

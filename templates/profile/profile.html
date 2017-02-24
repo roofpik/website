@@ -11,11 +11,11 @@
                 </div>
                 <div class="row white-text proflink mgbn">
                     <div class="col s3">
-                        <h4 class="mgan">700</h4>
+                        <h4 class="mgan">{{textReviews}}</h4>
                         <p class="mgan">Reviews</p>
                     </div>
                     <div class="col s3">
-                        <h4 class="mgan">0</h4>
+                        <h4 class="mgan">{{totalRatings}}</h4>
                         <p class="mgan">Ratings</p>
                     </div>
                     <div class="col s3">
@@ -56,15 +56,26 @@
         <div class="row">
             <div class="col s12">
                 <ul class="timeline">
-                    <li ng-repeat = "type in userReviews" ng-class-even = "timeline-inverted" ng-class-odd = "timeline">
+                    <li ng-show="noReviews" class="timeline">
                         <div class="timeline-badge blue"><i class="material-icons">edit</i></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h5 class="mgan">Mussum ipsum cacilds</h5>
-                                <p class="mgan grey-text"><small> 11 hours ago via Twitter</small></p>
+                                <h5 class="mgan">No Reviews! </h5>
                             </div>
                             <div class="timeline-body">
-                                <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
+                                <p>You haven't reviewed yet.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li ng-hide="noReviews" ng-repeat="id in userReviews" ng-class="$index%2==0 ? 'timeline' : 'timeline-inverted'">
+                        <div class="timeline-badge blue"><i class="material-icons">edit</i></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h5 class="mgan">{{id.reviewTitle}} <i ng-show="id.projectName" ng-click="goToProjectPage(id)"><a style = "cursor: pointer">- {{id.projectName}}</a></i></h5>
+                                <p class="mgan grey-text"><small>{{id.createdDate | date:'MMM dd, yy'}}</small></p>
+                            </div>
+                            <div class="timeline-body">
+                                <p>{{id.reviewText}}</p>
                             </div>
                         </div>
                     </li>
@@ -97,22 +108,6 @@
                     </li>
                 </ul>
             </div>
-        </div>
-        <h4>My Reviews: </h4>
-        <div class="row mgt10" ng-show="showReviews">
-            <ul>
-                <li ng-repeat="type in userReviews">
-                    <div ng-repeat="id in type">
-                        <b>"{{id.reviewTitle}}"</b><i ng-show="id.projectName" ng-click="goToProjectPage(id)"><a style = "cursor: pointer">- {{id.projectName}}</a>, {{id.type}}</i> ({{id.createdDate | date:'MMM dd, yy'}})
-                    </div>
-                </li>
-                <br>
-            </ul>
-        </div>
-        <div class="row mgt10" ng-show="noReviewsToShow">
-            <ul>
-                <li>No Review To Show</li>
-            </ul>
         </div>
     </div>
 </div>
