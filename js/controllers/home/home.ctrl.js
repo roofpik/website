@@ -9,7 +9,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     var parameter = '';
     $scope.uid = '';
     $scope.locations = [];
-    $scope.searchByName = false;
+    $scope.searchByName = true;
     $scope.searchByNameData = [];
     $scope.showSearchTitle = 'Search by Name';
     $scope.toggleIcon = 'arrow_drop_down_circle';
@@ -199,6 +199,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         $scope.searchedText = val.name;
         $scope.searchedValue = val;
         $scope.showSearch2 = false;
+        $scope.search();
         // console.log($scope.searchedValue);
     }
 

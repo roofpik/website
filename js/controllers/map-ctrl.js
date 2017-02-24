@@ -30,7 +30,6 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', '$state', function($sc
      getCurrentLocation();
      // Code to get current location of user
      function getCurrentLocation() {
-        console.log(btoa("lat="+28.4594965+"&lon="+77.02663830000006));
          if (navigator.geolocation) {
              navigator.geolocation.getCurrentPosition(showPosition, showError);
          } else {
@@ -64,21 +63,21 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', '$state', function($sc
      }
 
      function getMapData(lat, lon) {
-        console.log(lat, lon);
+        // console.log(lat, lon);
          var data = {
              lat: lat,
              lon: lon
          }
-         console.log(encodeParams(data));
+         // console.log(encodeParams(data));
          $http({
-             url: 'http://107.23.243.89/api/GetMapData_1.0',
-             // url: 'http://35.154.60.19/api/GetMapData_1.0',
+             // url: 'http://107.23.243.89/api/GetMapData_1.0',
+             url: 'http://35.154.60.19/api/GetMapData_1.0',
              method: 'GET',
              params: {
                  args: encodeParams(data)
              }
          }).then(function(response) {
-            console.log(response);
+            // console.log(response);
              $scope.mapData = response.data;
              for (key in $scope.mapData) {
                  if ($scope.mapData[key].type == 'residential' || $scope.mapData[key].type == 'cghs') {
@@ -324,7 +323,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', '$state', function($sc
          $scope.min = 0;
          $scope.max = 10;
          $scope.currentPage = 1;
-         console.log($scope.selectedType);
+         // console.log($scope.selectedType);
          getMapList();
          $scope.showList();
      }
@@ -332,7 +331,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', '$state', function($sc
      function getMapList(){
         if ($scope.selectedType == 'projects') {
              $scope.listMenu = $scope.projectMarkers;
-             console.log($scope.projectMarkers.length);
+             // console.log($scope.projectMarkers.length);
              getPages($scope.projectMarkers);
              $scope.menuTitle = 'Projects';
              initMap($scope.projectMarkers, $scope.projectInfoWindow);
@@ -386,7 +385,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', '$state', function($sc
 
      // get search results based on the string in input box
      $scope.getSearchData = function() {
-         console.log($scope.searchedText);
+         // console.log($scope.searchedText);
          if ($scope.searchedText.length > 2) {
              var data = {
                  name: $scope.searchedText
@@ -409,9 +408,9 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', '$state', function($sc
                     $scope.showSearch = true;
                  }
                 $scope.fetchingResults = false;
-                 console.log($scope.searchByNameResults);
+                 // console.log($scope.searchByNameResults);
              }, function myError(err) {
-                 console.log(err);
+                 // console.log(err);
                  $scope.fetchingResults = false;
              })
          }
@@ -455,6 +454,6 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', '$state', function($sc
             }
             $state.go('project-details', { p: encodeParams(param) });
        }
-       console.log($scope.mapData[clickedBtnID]);
+       // console.log($scope.mapData[clickedBtnID]);
     });
  }]);
