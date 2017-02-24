@@ -73,6 +73,11 @@
                             <i class="material-icons prefix">mode_edit</i>
                             <textarea id="icon_prefix2" placeholder="Type your text" ng-model="user.message" class="materialize-textarea mgbn" required></textarea>
                         </div>
+                      <!--   <div
+                    vc-recaptcha theme="'light'" key="model.key" on-create="setWidgetId(widgetId)" on-success="setResponse(response)" on-expire="cbExpiration()" >
+                        </div> -->
+
+                        <!-- <div class="g-recaptcha" data-sitekey="6LfkohYUAAAAADwVTV8HDQMM6r9Yxl-xz5Wns63C" on-success="setResponse(response)"></div> -->
                         <div vc-recaptcha theme="'dark'" key="model.key" on-create="setWidgetId(widgetId)" on-success="setResponse(response)" on-expire="cbExpiration()">
                         </div>
                         <div class="col s12 mgt10 pdln">
