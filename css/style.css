@@ -101,7 +101,7 @@ ul, .mg0 {margin:0px !important;}
     font-size: 16px;
     font-weight: 300;
     width: 82%; padding-left: 35px;
-    height: 45px;
+    height: 43px;
     margin: 0;
     border: 0; 
 }
@@ -194,6 +194,7 @@ hr{border-top:solid 1px #9e9e9e !important; border-left:0; border-right:0; borde
     overflow: hidden;
     border-radius: 50%;
 }
+a, a i{cursor: pointer !important;}
 .ht2rem{height: 1.5rem !important;}
 
 .dh2{font-size: 24px; margin:0; padding-top:15px; font-weight: 500; ine-height: 32px;}
@@ -651,7 +652,6 @@ i.left{margin-right: 10px;}
 .ft12i i {font-size: 14px !important;}
 .absbtn{position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}
 .map-search{width:80%; position: absolute; left: 50%; top: 10%; z-index: 9; transform: translate(-50%, -50%);}
-.pdl30{padding-left: 30px;}
 .coverfixbox{height:100%; width: 100%}
 .coverfixbox img{height:100%; }
 .coverfixbox .overlay{position: absolute;  transition: all .3s ease;  overflow:hidden; bottom: 0; left: 0; z-index: 9; height: 50px; padding-right: 10px !important; width: 100%; cursor: pointer; background-color: rgba(0,0,0, 0.8); color:#eee;}
@@ -733,7 +733,9 @@ footer.page-footer .footer-copyright{line-height: 20px; height: 20px}
 .boxthree .fix40 img {height: 110px;}
 .boxone a, .boxtwo a, .boxthree a{ width: 100%; float: left; display: block; }
 .boxone, .boxtwo, .boxthree {transition: all .25s ease-in; float: left; margin-right: 10px;}
-.boxone{width: calc(100% - 10px) !important;} .boxtwo{width:calc(50% - 10px)!important;} .boxthree{width: calc(33.3% - 10px) !important; }
+.boxone{width: calc(100% - 10px) !important;}
+ .boxtwo{width:calc(50% - 10px)!important;} 
+.boxthree{width: calc(33.3% - 10px) !important; }
 .gallerynew a img{width: 218px; height: 180px; margin:20px 0 0 20px;}
 
 /*new design css home page end*/
@@ -765,7 +767,6 @@ footer.page-footer .footer-copyright{line-height: 20px; height: 20px}
 .prof_camera i{cursor: pointer;}
 
 .search_allpage{}
-
 
 
 /*timeline start*/
@@ -891,9 +892,8 @@ padding-left:90px;
   margin-top: 5px;
 }
 /*timeline end*/
-
-
-
+.list_searchicon{display: none;}
+.closeabsbtn{display: none;}
 
 @keyframes fade-in {
     from    { opacity: 0; }
@@ -946,13 +946,20 @@ padding-left:90px;
 }
 
 @media screen and (min-width:0px) and (max-width: 500px) {
-.toprtbtn li a{width: 45px; overflow: hidden; margin-right: 10px !important;}
 .smpd40{padding-left:10px !important; padding-right: 10px !important;}
 .ht350, .ht450, .ht266{height: 300px;}
 .pda50{padding: 20px !important;}
 h4{font-size: 20px !important;}
+.boxtwo{width: calc(100% - 10px) !important; }
+.boxthree{width: calc(100% - 10px) !important; }
+.boxone .fix40 { width: 38% !important; max-width: 38% !important; }
+.twoxshdn{display: none;}
+
 }
 @media screen and (min-width:0px) and (max-width: 600px) {
+  .boxthree{width: calc(100% - 10px) !important;}
+  .list_searchicon{right:27% !important;}
+  .toprtbtn li a{width: 45px; overflow: hidden; margin-right: 10px !important;}
   .smpd40{padding-left:40px; padding-right: 40px;}
   .bodft{border-bottom: solid 1px #ddd; padding-bottom: 5px !important}
 .footer-link li{ display: inline-block } .pdr70{padding-right: 20px !important;}
@@ -972,26 +979,51 @@ width: 100%;
 .res-xsip2{padding-right: 0px !important; padding-top: 10px !important;}
 }
 @media screen and (min-width:0px) and (max-width: 400px) {
+  .toprtbtn li a{ margin-right: 0px !important;}
 .xs12{width: 100% !important;}
 .bodxs{border-bottom: solid 1px #ddd;}
 .hometabs a.active:after{left: 39%;}
 }
-
-
 
 @media screen and (min-width:0px) and (max-width: 767px) {
 #loginbox{width: 90%;} body{font-size: 13px} h5{font-size: 15px}
 .wd-sm{width: 43px !important;}
 .hidden_sm{display: none !important;} 
 .mpdt5{padding-top: 5px !important;}
-
+#list_search{width: 90% !important;}
 }
+
 @media screen and (min-width: 601px) and (max-width: 767px) {
+  .list_searchicon{right:50% !important;}
+.boxthree{width: calc(50% - 10px) !important;}
 .ht350{height: 200px;}
 .ht450{height: 250px;}
 .ht266{height: 143px;}
 #searchboxhome .m10{width: calc(100% - 45px);}
 #searchboxhome .m2{ width: 45px !important; }
+}
+
+.closeabssearch, .btnclsml {display: none !important;}
+
+
+@media screen and (min-width: 0px) and (max-width: 992px) {
+
+  .btnclsml{display: block !important;}
+.list_searchicon{position: fixed; z-index: 9999; top: 14px; right: 40%; display: block;}
+.list_searchicon i {font-size: 700; font-size: 28px;}
+#list_search {position:fixed; width: 97%; top: -200%; z-index: 99;}
+.closeabsbtn{position: fixed; right: 0px; top: 0; display: block !important; border-radius: 50%; background-color: #fff; 
+  box-shadow: 0 0 3px #ccc;}
+.closeabssearch{position: absolute; display: block !important; border:none; box-shadow: 0 0 3px #ccc; left: -10px; top: -14px; border:none; border-radius: 50%; overflow: hidden; background-color: #fff; width: 25px; height: 25px; padding:5px;  z-index: 99;}
+.closeabssearch i {font-size: 17px;}
+.listhide_xm{display: none;}
+#boxfilterlist{position: fixed; overflow-y: auto; height: 100vh; transition: all .55s ease-in; 
+ background-color: rgba(0, 0, 0, 0.1); width: 100%; z-index: 9999; right: 200%; top: 0; display: block !important;}
+
+#boxfilterlist form > div {width:300px !important; margin-right: -10px !important; background-color: #fff !important; padding:10px 25px !important;
+ box-shadow: 0 0 3px #ccc; float: right; right: -10px; }
+.pdl30{padding-left: 10px !important;}
+
 }
 @media screen and (min-width: 768px) and (max-width: 1023px) {
 .ht350{height: 250px;} .mpdbt5{padding-top: 5px !important;}
