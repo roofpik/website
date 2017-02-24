@@ -135,11 +135,11 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     function bindReviews() {
 
         $scope.totalRatings = $scope.textReviews + $scope.nonTextReviews;
-        if (Object.keys($scope.userReviews).length) {
-            $scope.showReviews = true;
-        } else {
-            $scope.noReviewsToShow = true;
-        }
+        // if (Object.keys($scope.userReviews).length) {
+        //     $scope.showReviews = true;
+        // } else {
+        //     $scope.noReviewsToShow = true;
+        // }
         // $http({
         //     url: 'http://107.23.243.89/api/GetReviewDetails_1.0',
         //     method: 'GET',
@@ -256,7 +256,4 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         $scope.image = image;
     }
 
-    function goToWriteReviews (){
-        state.go('write-review', {id: $scope.userId});
-    }
 }])
