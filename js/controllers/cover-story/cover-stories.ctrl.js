@@ -41,15 +41,6 @@ app.controller('featuredStoriesCtrl', function($scope, $timeout, $stateParams) {
                 $('.carousel.carousel-slider').carousel({ full_width: true });
             }
         }, 0);
-
-        function convertToHyphenSeparated(data) {
-            if (data == null || data == "") {
-                return data;
-            }
-
-            data = data.trim();
-            return data.split(" ").join("-").toLowerCase();
-        }
     })
 })
 
@@ -67,14 +58,6 @@ app.controller('popularLocationStoriesCtrl', function($scope, $timeout, $statePa
             }
         }, 0);
 
-        function convertToHyphenSeparated(data) {
-            if (data == null || data == "") {
-                return data;
-            }
-
-            data = data.trim();
-            return data.split(" ").join("-").toLowerCase();
-        }
     })
     db.ref('tagCloud/' + $scope.cityId + '/coverStory').once('value', function(snapshot) {
         $timeout(function() {
@@ -114,15 +97,6 @@ app.controller('shortStoriesCtrl', function($scope, $sce, $timeout, $stateParams
                 $scope.showAllStories();
             }
         }, 0);
-
-        function convertToHyphenSeparated(data) {
-            if (data == null || data == "") {
-                return data;
-            }
-
-            data = data.trim();
-            return data.split(" ").join("-").toLowerCase();
-        }
     })
 
 
