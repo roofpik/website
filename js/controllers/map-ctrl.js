@@ -70,8 +70,8 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
          }
          console.log(encodeParams(data));
          $http({
-             // url: 'http://107.23.243.89/api/GetMapData_1.0',
-             url: 'http://35.154.60.19/api/GetMapData_1.0',
+             url: 'http://107.23.243.89/api/GetMapData_1.0',
+             // url: 'http://35.154.60.19/api/GetMapData_1.0',
              method: 'GET',
              params: {
                  args: encodeParams(data)
@@ -85,7 +85,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                      data = [$scope.mapData[key].name, $scope.mapData[key].location.lat, $scope.mapData[key].location.lon, 'images/home/marker1.png', $scope.mapData[key].id];
                      $scope.projectMarkers.push(data);
                      if ($scope.mapData[key].cover == 'NA') {
-                         image = 'images/sohna.jpg';
+                         image = 'images/general/default-image.jpg';
                      } else {
                          image = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/'+$scope.mapData[key].type+'/' + $scope.mapData[key].id + '/images/coverPhoto/' + $scope.mapData[key].cover + '-s.jpg'
                      }
@@ -103,7 +103,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                          '<div class="col m4 right-align pd5 ft12i" ng-show="' + $scope.mapData[key].rating + ' != 0">' +
                          '<span class="block b">' + $scope.mapData[key].rating + ' Reviews</span>' +
                          '<span class="block">' +
-                         '<i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index <' + $scope.mapData[key].rating + ' "blue-text":"normal"">star</i>' +
+                         '<i class="material-icons" ng-class="1 <=' + $scope.mapData[key].rating + ' "blue-text":"normal"">star</i>' +
                          '</span>' +
                          '</div>' +
                          '</div>' +
@@ -125,7 +125,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                      data = [$scope.mapData[key].name, $scope.mapData[key].location.lat, $scope.mapData[key].location.lon, 'images/home/marker2.png', $scope.mapData[key].id];
                      $scope.localityMarkers.push(data);
                      if ($scope.mapData[key].cover == 'NA') {
-                         image = 'images/sohna.jpg';
+                         image = 'images/general/default-image.jpg';
                      } else {
                          image = "http://cdn.roofpik.com/roofpik/locality/" + $scope.cityId + '/' + $scope.mapData[key].id + '/images/coverPhoto/' + $scope.mapData[key].cover + '-s.jpg'
                      }
@@ -165,7 +165,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                      data = [$scope.mapData[key].name, $scope.mapData[key].location.lat, $scope.mapData[key].location.lon, 'images/home/marker3.png', $scope.mapData[key].id];
                      $scope.locationMarkers.push(data);
                      if ($scope.mapData[key].cover == 'NA') {
-                         image = 'images/sohna.jpg';
+                         image = 'images/general/default-image.jpg';
                      } else {
                          image = "http://cdn.roofpik.com/roofpik/locations/" + $scope.cityId + '/' + $scope.mapData[key].id + '/images/coverPhoto/' + $scope.mapData[key].cover + '-s.jpg'
                      }
