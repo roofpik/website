@@ -222,13 +222,15 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
                     id: $scope.searchedValue.id,
                     category: 'locality'
                 }
-                $state.go('location-details', { p: encodeParams(param) });
+                Materialize.toast('Coming Soon!', 2000);
+                // $state.go('location-details', { p: encodeParams(param) });
             } else if ($scope.searchedValue.type == 'location') {
                 param = {
                     id: $scope.searchedValue.id,
                     category: 'locations'
                 }
-                $state.go('location-details', { p: encodeParams(param) });
+                Materialize.toast('Coming Soon!', 2000);
+                // $state.go('location-details', { p: encodeParams(param) });
             }
         } else {
             if ($scope.selectedVertical == 'residential') {
