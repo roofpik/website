@@ -3,7 +3,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     document.title = "My Profile";
     var uid = decodeParams($stateParams.id)
         // console.log(uid)
-    $scope.userId = uid.id;
+        $scope.userId = uid.id;
     // $scope.userId = '2xxTzX4G6rPgB8SRiW8jYFjgTOm2'
 
     // if user is not signed in, take him to the home page
@@ -35,7 +35,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     // $scope.disableLastName = true;
     $scope.disablePhoneNumber = true;
     $scope.disableAddress = true;
-    $scope.showReviews = false;
+    $scope.showReviews = true;
     $scope.noReviewsToShow = false;
     $scope.userReviews = {};
     $scope.userReviews[$scope.i] = 0;
@@ -116,16 +116,28 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
                 }
                 console.log($scope.userReviews);
                 // console.log($scope.userId)
-                if ($scope.amenitiesExists && $scope.houseMaidsExists && $scope.electricityExists && $scope.greenAreasExists && $scope.securityExists) {} else {
-                    $scope.showRatings = false;
-                }
-                if ($scope.userReviews[0] == 0) {
-                    $scope.showReviews = true;
-                }
-                $scope.loading = false;
+
                 bindReviews();
+                $scope.loading = false;
             })
         })
+        console.log($scope.amenitiesExists)
+
+    }
+
+    function showHideReviewRating(amenities, maids, electricity, greenAreas, security) {
+        if (amenities && maids && electricity && greenAreas && security) {
+            $scope.showRatings = false;
+        } else {
+            // console.log('in')
+            $scope.showRatings = true;
+        }
+        if ($scope.userReviews[0] == 0) {
+            $scope.showReviews = true;
+        } else {
+            $scope.showReviews = false;
+        }
+        
     }
 
     function getReviewData(i, projId) {
@@ -140,10 +152,12 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
             if (response.status == 200) {
                 $scope.text = response.data.reviewText;
                 setReviewText($scope.text, i, response)
+                showHideReviewRating($scope.amenitiesExists, $scope.houseMaidsExists, $scope.electricityExists, $scope.greenAreasExists, $scope.securityExists);
+
 
             }
 
-            loading(false, 1000);
+            // loading(false, 1000);
         }, function myError(err) {
             console.log(err);
         });
@@ -177,6 +191,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
                 $scope.userReviews[i].securityRating = response.data.ratings.security;
                 $scope.securityExists = true;
             }
+            // console.log($scope.amenitiesExists)
 
         }
         // console.log($scope.amenitiesExists)

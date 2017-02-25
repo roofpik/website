@@ -107,7 +107,7 @@
                             </div>
                         </div>
                     </li>
-                    <li ng-hide="showRatings" class="timeline-inverted">
+                    <li ng-show="showRatings" class="timeline-inverted">
                         <div class="timeline-badge green"><i class="material-icons">star</i></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
@@ -118,7 +118,7 @@
                             </div>
                         </div>
                     </li>
-                    <li ng-show = "showRatings" ng-repeat="id in userReviews" ng-class="$index%2==0? 'timeline-inverted' : 'timeline'">
+                    <li ng-hide = "showRatings" ng-repeat="id in userReviews" ng-class="$index%2==0? 'timeline-inverted' : 'timeline'">
                         <div class="timeline-badge green"><i class="material-icons">star</i></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
