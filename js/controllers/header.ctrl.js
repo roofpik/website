@@ -1,4 +1,4 @@
-app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeout', function($scope, $state, $http, $rootScope, $timeout) {
+app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeout', '$stateParams', function($scope, $state, $http, $rootScope, $timeout, $stateParams) {
 
     $(document).ready(function() {
         Materialize.updateTextFields();
