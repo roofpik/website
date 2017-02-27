@@ -333,6 +333,11 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         }
         return $sce.trustAsHtml(text.replace(new RegExp(search, 'gi'), '<span class="highlightedText">$&</span>'));
     };
+    
+
+    $(document).on("click",".searchByNameItem", function () {
+        console.log(this);
+    });
 
 }]);
 
