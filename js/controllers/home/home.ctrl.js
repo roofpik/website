@@ -218,19 +218,27 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
                     category: 'cghs'
                 }
                 $state.go('project-details', { p: encodeParams(param) });
-            } else if ($scope.searchedValue.type == 'locality') {
+            } else if ($scope.searchedValue.type == 'locality') {            
                 param = {
-                    id: $scope.searchedValue.id,
-                    category: 'locality'
+                    vertical: 'residential',
+                    category: 'all',
+                    locality: $scope.searchedValue.id
                 }
-                Materialize.toast('Coming Soon!', 2000);
+                var parameter = encodeParams(param);
+                console.log(parameter);
+                $state.go('list', { p: parameter });
+                // Materialize.toast('Coming Soon!', 2000);
                 // $state.go('location-details', { p: encodeParams(param) });
             } else if ($scope.searchedValue.type == 'location') {
                 param = {
-                    id: $scope.searchedValue.id,
-                    category: 'locations'
+                    vertical: 'residential',
+                    category: 'all',
+                    location: $scope.searchedValue.id
                 }
-                Materialize.toast('Coming Soon!', 2000);
+                var parameter = encodeParams(param);
+                console.log(parameter);
+                $state.go('list', { p: parameter });
+                // Materialize.toast('Coming Soon!', 2000);
                 // $state.go('location-details', { p: encodeParams(param) });
             }
         } else {
