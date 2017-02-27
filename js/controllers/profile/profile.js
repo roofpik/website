@@ -3,6 +3,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     document.title = "My Profile";
     var uid = decodeParams($stateParams.id)
     console.log(uid)
+        // $scope.userId = 'vyEaEOyjGgUl8OvOVRZek8twcpk1'
     $scope.userId = uid.id;
     // if user is not signed in, take him to the home page
     firebase.auth().onAuthStateChanged(function(user) {
@@ -13,18 +14,14 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         }
     });
     $scope.textReviews = 0;
-    $scope.overallExists = false;
+    // $scope.overallExists = false;
     $scope.showRatings = true;
     $scope.loading = true;
     $scope.nonTextReviews = 0;
     $scope.user = {};
     $scope.i = 0;
-    $scope.amenitiesExists = false;
-    $scope.houseMaidsExists = false;
-    $scope.electricityExists = false;
-    $scope.greenAreasExists = false;
-    $scope.securityExists = false;
-    $scope.infraExists = false;
+    // $scope.amenitiesExists = false;
+
     $scope.newPassword = '';
     $scope.newPasswordVerification = '';
     $scope.user.userId = $scope.userId;
@@ -45,6 +42,8 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
             $timeout(function() {
                 if (snapshot.val().fname) {
                     $scope.user.firstName = snapshot.val().fname;
+                } else {
+                    $scope.user.firstName = '';
                 }
                 if (snapshot.val().lname) {
                     $scope.user.lastName = snapshot.val().lname;
@@ -82,6 +81,13 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
             $timeout(function() {
                 for (key in snapshot.val()) {
                     for (key1 in snapshot.val()[key]) {
+                        $scope.userReviews[$scope.i].houseMaidsExists = false;
+                        $scope.userReviews[$scope.i].electricityExists = false;
+                        $scope.userReviews[$scope.i].greenAreasExists = false;
+                        $scope.userReviews[$scope.i].securityExists = false;
+                        $scope.userReviews[$scope.i].infraExists = false;
+                        $scope.userReviews[$scope.i].parkingExists = false;
+                        $scope.userReviews[$scope.i].overallExists = false;
                         if (snapshot.val()[key]) {
                             $scope.userReviews[$scope.i] = {};
                             if (snapshot.val()[key][key1].reviewTitle) {
@@ -113,8 +119,8 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         })
     }
 
-    function showHideReviewRating(amenities, maids, electricity, greenAreas, security) {
-        if (amenities && maids && electricity && greenAreas && security) {
+    function showHideReviewRating(amenities, maids, electricity, greenAreas, security, infra, parking) {
+        if (amenities || maids|| electricity ||greenAreas || security || infra || parking) {
             $scope.showRatings = false;
         } else {
             $scope.showRatings = true;
@@ -139,8 +145,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
                 console.log(response);
                 $scope.text = response.data.reviewText;
                 setReviewText($scope.text, i, response)
-                // console.log($scope.overallExists)
-                showHideReviewRating($scope.amenitiesExists, $scope.houseMaidsExists, $scope.electricityExists, $scope.greenAreasExists, $scope.securityExists);
+                showHideReviewRating($scope.userReviews[i].amenitiesExists, $scope.userReviews[i].houseMaidsExists, $scope.userReviews[i].electricityExists, $scope.userReviews[i].greenAreasExists, $scope.userReviews[i].securityExists, $scope.userReviews[i].infraExists, $scope.userReviews[i].parkingExists);
             }
             // loading(false, 1000);
         }, function myError(err) {
@@ -152,33 +157,38 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         $scope.userReviews[i].reviewText = text;
         if (response.data.overallRating) {
             $scope.userReviews[i].overallRatings = response.data.overallRating;
-            $scope.overallExists = true;
+            $scope.userReviews[i].overallExists = true;
             $scope.nonTextReviews++;
         }
         if (response.data.ratings) {
             if (response.data.ratings.amenities) {
                 $scope.userReviews[i].amenitiesRatings = response.data.ratings.amenities;
-                $scope.amenitiesExists = true;
+                $scope.userReviews[i].amenitiesExists = true;
+                // console.log('amenitiesWorking')
             }
             if (response.data.ratings.convenienceOfHouseMaids) {
                 $scope.userReviews[i].convenienceOfHouseMaidRating = response.data.ratings.convenienceOfHouseMaids;
-                $scope.houseMaidsExists = true;
+                $scope.userReviews[i].houseMaidsExists = true;
             }
             if (response.data.ratings.electricityAndWaterSupply) {
                 $scope.userReviews[i].electricityAndWaterSupplyRating = response.data.ratings.electricityAndWaterSupply;
-                $scope.electricityExists = true;
+                $scope.userReviews[i].electricityExists = true;
             }
             if (response.data.ratings.openAndGreenAreas) {
                 $scope.userReviews[i].openAndGreenAreasRating = response.data.ratings.openAndGreenAreas;
-                $scope.greenAreasExists = true;
+                $scope.userReviews[i].greenAreasExists = true;
             }
             if (response.data.ratings.security) {
                 $scope.userReviews[i].securityRating = response.data.ratings.security;
-                $scope.securityExists = true;
+                $scope.userReviews[i].securityExists = true;
             }
-            if(response.data.ratings.infrasctructure){
+            if (response.data.ratings.infrasctructure) {
                 $scope.userReviews[i].infrastructureRating = response.data.ratings.infrastructure;
-                $scope.infraExists = true;
+                $scope.userReviews[i].infraExists = true;
+            }
+            if (response.data.ratings.convenienceOfParking) {
+                $scope.userReviews[i].parkingRating = response.data.ratings.convenienceOfParking;
+                $scope.userReviews[i].parkingExists = true;
             }
         }
     }
