@@ -4,6 +4,16 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     $scope.loading = true;
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     var parameters = decodeParams($stateParams.p);
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            // User is signed in.
+            console.log(user);
+            $scope.userId = user.uid;
+            $scope.userName = user.displayName;
+        } else {
+            // $state.go('home');
+        }
+    });
     $scope.projectId = parameters.projectId;
     if (parameters.category) {
         if (parameters.category == 'cghs') {
