@@ -53,10 +53,36 @@
             </form>
         </div>
         <div class="clearfix"></div>
+        <div ng-show="loading" class="preloader-wrapper big active loaderPositionProfile">
+            <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col s12">
-                <ul class="timeline">
-                    <li ng-show="noReviews" class="timeline">
+                <!-- <div ng-show="loading" class="preloader-wrapper big active loaderPosition">
+                    <div class="spinner-layer spinner-blue-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div> -->
+                <ul ng-hide = "loading" class="timeline">
+                    <li ng-show="showReviews" class="timeline">
                         <div class="timeline-badge blue"><i class="material-icons">edit</i></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
@@ -67,7 +93,7 @@
                             </div>
                         </div>
                     </li>
-                    <li ng-hide="noReviews" ng-repeat="id in userReviews" ng-class="$index%2==0 ? 'timeline' : 'timeline-inverted'">
+                    <li ng-hide="showReviews" ng-repeat="id in userReviews" ng-class="$index%2==0 ? 'timeline' : 'timeline-inverted'">
                         <div class="timeline-badge blue"><i class="material-icons">edit</i></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
@@ -76,20 +102,43 @@
                             </div>
                             <div class="timeline-body">
                                 <p>{{id.reviewText}}</p>
+                                <br>
+                                <span  ng-show = "id.overallExists"> <p><b>Overall Rating: </b></p><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < id.overallRatings? 'blue-text': 'normal'">star</i></span>
                             </div>
                         </div>
                     </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-badge green"><i class="material-icons">thumb_up</i></div>
+                    <li ng-show="showRatings" class="timeline-inverted">
+                        <div class="timeline-badge green"><i class="material-icons">star</i></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h5 class="mgan">Mussum ipsum cacilds</h5>
-                                <p class="mgan grey-text"><small> 11 hours ago via Twitter</small></p>
+                                <h5 class="mgan">No Ratings! </h5>
+                            </div>
+                            <div class="timeline-body">
+                                <p>You haven't rated yet.</p>
                             </div>
                         </div>
                     </li>
-                    <li>
-                        <div class="timeline-badge orange"><i class="material-icons">star</i></div>
+                    <li ng-hide = "showRatings" ng-repeat="id in userReviews" ng-class="$index%2==0? 'timeline-inverted' : 'timeline'">
+                        <div class="timeline-badge green"><i class="material-icons">star</i></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h5 class="mgan">{{id.projectName}} (Rating Summary)</h5>
+                                <p class="mgan grey-text"><small>{{id.createdDate | date:'MMM dd, yy'}}</small></p>
+                            </div>
+                            <div class="timeline-body">
+                                <br>
+                                <span ng-show = "id.amenitiesExists"><p>Amenities: </p><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < id.amenitiesRatings? 'blue-text': 'normal'">star</i><hr></span>
+                                
+                                <span ng-show = "id.houseMaidsExists"><p>Convenience Of House Maids: </p><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < id.convenienceOfHouseMaidRating? 'blue-text': 'normal'">star</i><hr></span>
+                                <span ng-show = "id.electricityExists"><p>Electricity And Water Supply: </p><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < id.electricityAndWaterSupplyRating? 'blue-text': 'normal'">star</i><hr></span>
+                                <span ng-show = "id.greenAreasExists"><p>Open And Green Areas: </p><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < id.openAndGreenAreasRating? 'blue-text': 'normal'">star</i><hr></span>
+                                <span ng-show = "id.securityExists"><p>Security: </p><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < id.securityRating? 'blue-text': 'normal'">star</i><hr></span>
+                                 <span ng-show = "id.infraExists"><p>Infrastructure: </p><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < id.infrastructureRating? 'blue-text': 'normal'">star</i><hr></span>
+                                 <span ng-show = "id.parkingExists"><p>Convenience Of Parking: </p><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < id.parkingRating? 'blue-text': 'normal'">star</i><hr></span>
+                            </div>
+                    </li>
+                    <!-- <li>
+                        <div class="timeline-badge orange"><i class="material-icons">thumb_up</i></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h5 class="mgan">Mussum ipsum cacilds</h5>
@@ -105,9 +154,9 @@
                                 <p class="mgan grey-text"><small> 11 hours ago via Twitter</small></p>
                             </div>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>

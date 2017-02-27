@@ -45,10 +45,11 @@
         <div class="col m5 l4 white pda10">
             <div class="row mgbn">
                 <div class="col s12">
-                    <h5 class="b truncate"><i class="material-icons left">list</i> Explore {{menuTitle}}</h5>
+                    <h5 class="b truncate"><i class="material-icons left">list</i> Explore Projects</h5>
+                    <!-- <h5 class="b truncate"><i class="material-icons left">list</i> Explore {{menuTitle}}</h5> -->
                 </div>
             </div>
-            <div class="row mgbn">
+<!--             <div class="row mgbn">
                 <div class="col s4 pda10">
                     <input name="displayMap" class="with-gap" type="radio" id="projects" ng-change="selectType()" ng-model="selectedType" value="projects" />
                     <label class="ft13 mapft" for="projects">Projects</label>
@@ -61,7 +62,7 @@
                     <input name="displayMap" class="with-gap" type="radio" id="locations" ng-change="selectType()" ng-model="selectedType" value="locations" />
                     <label class="ft13 mapft" for="locations">Locations</label>
                 </div>
-            </div>
+            </div> -->
             <div class="row mgbn">
                 <ul class="ht-auto fixh-aco" id="map-list">
                     <li class="pda10 ellipsis" ng-repeat="item in listMenu" ng-show="$index >= min && $index < max" class="marker-link" data-markerid="{{$index}}" ng-click="openInfoWindow($index, 'list')">

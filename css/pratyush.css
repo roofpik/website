@@ -31,8 +31,14 @@
 .loaderPositionCoverStories {
     position: absolute;
     left: 50%;
-    top: 1500px;
+    top: 2500px;
     width: 100px;
     height: 100px;
     margin: auto;
 }
+
+.loaderPositionProfile{
+    position: absolute;
+    left: 50%;
+}
+

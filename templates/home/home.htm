@@ -5,13 +5,13 @@
         </div>
         <div class="home-search">
             <h3 class="white-text ft24 center textsd b">Power Your Property Search with Genuine User Reviews </h3>
-            <div class="row mgbn" ng-hide="searchByName">
+            <!-- <div class="row mgbn" ng-hide="searchByName">
                 <ul class="tabs tabs-fixed-width tabs-transparent hometabs">
                     <li class="tab bgblk-trn radiust2" ng-click="selectVertical('residential')"><a class="active white-text reletive" href="#searchboxhome">Residential</a></li>
                     <li class="tab bgblk-trn" ng-click="selectVertical('commercial')"><a class="white-text reletive" href="#searchboxhome">Commercial</a></li>
                     <li class="tab bgblk-trn radiusr2" ng-click="selectVertical('pg')"><a class="white-text reletive" href="#searchboxhome">PG</a></li>
                 </ul>
-            </div>
+            </div> -->
             <div id="searchboxhome" class="row bgblk-trn radius2 pdr10 cardmg searchfix">
                 <div class="col s12 m10 pdan">
                     <div class="row mgbn" ng-hide="searchByName">
@@ -19,7 +19,6 @@
                             <div class="input-field card col s12 ht45 pdan bod-right rdsan reletive">
                                 <span class="inpspn">Find :</span>
                                 <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompletenear inp_pdw mgbn" ng-model="categorySearched">
-                                <!-- <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" /> -->
                                 <div class="search-results" ng-show="showSearch">
                                     <ul class="collection homecoll">
                                         <li ng-repeat="item in categorySearch| filter: categorySearched" class=" collection-item avatar" ng-click="selectCategory(item)">
@@ -27,10 +26,10 @@
                                             <span class="title ft13" ng-bind-html="item.name | highlight:categorySearched"></span>
                                         </li>
                                     </ul>
-                                    <!-- <div class="pd5 grey lighten-4 ft12">More Options</div> -->
-                                    <!-- <ul class="collection homecoll">
+                                    <div class="pd5 grey lighten-4 ft12">More Options</div>
+                                    <ul class="collection homecoll">
                                         <li class=" collection-item avatar"><img ng-src="images/homeicon/Commercial.png" class="circle" /> Explore Locality</li>
-                                    </ul> -->
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +41,6 @@
                                 <div class="search-results" ng-show="showSearch1">
                                     <ul class="collection homecoll">
                                         <li ng-repeat="item in locations | filter:locationSearched" class=" collection-item avatar" ng-click="selectLocation(item)">
-                                            <!-- <img ng-src="{{item.icon}}" class="circle" /> -->
                                             <span class="title ft13" ng-bind-html="item.name | highlight:locationSearched"></span>
                                         </li>
                                     </ul>
@@ -74,10 +72,10 @@
                     </button>
                 </div>
             </div>
-            <div class="row mgt5">
+            <!-- <div class="row mgt5">
                 <button class="btn-flat white-text bgblk-trn capitalize btn-sm" ng-click="testListPage()"><i class="material-icons left">delete</i> Clear</button>
                 <button class="btn-flat white-text right bgblk-trn capitalize btn-sm" ng-click="toggleSearchType()"><i class="material-icons left">{{toggleIcon}}</i>{{showSearchTitle}}</button>
-            </div>
+            </div> -->
         </div>
         <div class="btn-mid-box center hide-on-small-only">
             <div class="row bgblk-trn mgbn pdt25 pdb10 white-text">

@@ -3,9 +3,8 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     document.title = "My Profile";
     var uid = decodeParams($stateParams.id)
     // console.log(uid)
+        // $scope.userId = 'vyEaEOyjGgUl8OvOVRZek8twcpk1'
     $scope.userId = uid.id;
-    // $scope.userId = '8LoX0ojlVCPc4OtsQR5FPHT8Vgk2'
-
     // if user is not signed in, take him to the home page
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
@@ -15,10 +14,14 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         }
     });
     $scope.textReviews = 0;
+    // $scope.overallExists = false;
+    $scope.showRatings = true;
+    $scope.loading = true;
     $scope.nonTextReviews = 0;
-    $scope.noReviews = true;
     $scope.user = {};
     $scope.i = 0;
+    // $scope.amenitiesExists = false;
+
     $scope.newPassword = '';
     $scope.newPasswordVerification = '';
     $scope.user.userId = $scope.userId;
@@ -28,7 +31,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     // $scope.disableLastName = true;
     $scope.disablePhoneNumber = true;
     $scope.disableAddress = true;
-    $scope.showReviews = false;
+    $scope.showReviews = true;
     $scope.noReviewsToShow = false;
     $scope.userReviews = {};
     $scope.userReviews[$scope.i] = 0;
@@ -37,12 +40,15 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     function getUserData() {
         db.ref('users/' + $scope.userId).once('value', function(snapshot) {
             $timeout(function() {
-                // console.log($scope.userId)
                 if (snapshot.val().fname) {
                     $scope.user.firstName = snapshot.val().fname;
+                } else {
+                    $scope.user.firstName = '';
                 }
                 if (snapshot.val().lname) {
                     $scope.user.lastName = snapshot.val().lname;
+                } else {
+                    $scope.user.lastName = '';
                 }
                 $scope.user.fullName = $scope.user.firstName + " " + $scope.user.lastName
                 $scope.user.password = snapshot.val().tempPassword;
@@ -70,45 +76,61 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         })
     }
 
-
-    // console.log(Object.keys($scope.userReviews).length)
-
     function getUserReviews() {
         db.ref('userReviews/' + $scope.userId).once('value', function(snapshot) {
-            for (key in snapshot.val()) {
-                console.log('called')
-                for (key1 in snapshot.val()[key]) {
-                    if(snapshot.val()[key].reviewTitle){
-                    $scope.userReviews[$scope.i] = {};
-                    console.log(key, key1)
-                    if (snapshot.val()[key][key1].reviewTitle) {
-                        $scope.userReviews[$scope.i].reviewTitle = snapshot.val()[key][key1].reviewTitle;
-                        $scope.textReviews++;
-                    } else {
-                        $scope.nonTextReviews++;
+            $timeout(function() {
+                for (key in snapshot.val()) {
+                    for (key1 in snapshot.val()[key]) {
+                        $scope.userReviews[$scope.i].houseMaidsExists = false;
+                        $scope.userReviews[$scope.i].electricityExists = false;
+                        $scope.userReviews[$scope.i].greenAreasExists = false;
+                        $scope.userReviews[$scope.i].securityExists = false;
+                        $scope.userReviews[$scope.i].infraExists = false;
+                        $scope.userReviews[$scope.i].parkingExists = false;
+                        $scope.userReviews[$scope.i].overallExists = false;
+                        if (snapshot.val()[key]) {
+                            $scope.userReviews[$scope.i] = {};
+                            if (snapshot.val()[key][key1].reviewTitle) {
+                                $scope.userReviews[$scope.i].reviewTitle = snapshot.val()[key][key1].reviewTitle;
+                                $scope.textReviews++;
+                            }
+                            if (snapshot.val()[key][key1].projectName) {
+                                $scope.userReviews[$scope.i].projectName = snapshot.val()[key][key1].projectName;
+                            }
+                            if (snapshot.val()[key][key1].createdDate) {
+                                $scope.userReviews[$scope.i].createdDate = snapshot.val()[key][key1].createdDate;
+                            }
+                            if (snapshot.val()[key][key1].projectId) {
+                                $scope.userReviews[$scope.i].projectId = snapshot.val()[key][key1].projectId;
+                            }
+                            $scope.userReviews[$scope.i].type = key;
+                            $scope.userReviews[$scope.i].reviewId = key1;
+                            getReviewData($scope.i, key1);
+                            $scope.i++;
+                            // $scope.noReviews = false;
+                        } else {
+                            // $scope.noReviews = true;
+                        }
                     }
-                    if (snapshot.val()[key][key1].projectName) {
-                        $scope.userReviews[$scope.i].projectName = snapshot.val()[key][key1].projectName;
-                    }
-                    if (snapshot.val()[key][key1].createdDate) {
-                        $scope.userReviews[$scope.i].createdDate = snapshot.val()[key][key1].createdDate;
-                    }
-                    if (snapshot.val()[key][key1].projectId) {
-                        $scope.userReviews[$scope.i].projectId = snapshot.val()[key][key1].projectId;
-                    }
-                    $scope.userReviews[$scope.i].type = key;
-                    $scope.userReviews[$scope.i].reviewId = key1;
-                    getReviewData($scope.i, key1);
-                    $scope.i++;
-                }else {
-                    $scope.noReviews = false;
                 }
-                }
-            }
-            console.log($scope.userReviews);
-            // console.log($scope.userId)
-            bindReviews();
+                bindReviews();
+                $scope.loading = false;
+            })
         })
+    }
+
+    function showHideReviewRating(i, amenities, maids, electricity, greenAreas, security, infra, parking) {
+        if (amenities || maids || electricity || greenAreasExistsnAreas || security || infra || parking) {
+            $scope.showRatings = false;
+        } else {
+            $scope.showRatings = true;
+        }
+        if ($scope.userReviews[0] == 0) {
+            $scope.showReviews = true;
+        } else {
+            $scope.showReviews = false;
+        }
+
     }
 
     function getReviewData(i, projId) {
@@ -119,25 +141,63 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
                 id: projId
             }
         }).then(function mySucces(response) {
-            console.log(response);
             if (response.status == 200) {
+                console.log(response);
                 $scope.text = response.data.reviewText;
-                setReviewText($scope.text, i)
+                setReviewText($scope.text, i, response)
+                showHideReviewRating(i, $scope.userReviews[i].amenitiesExists, $scope.userReviews[i].houseMaidsExists, $scope.userReviews[i].electricityExists, $scope.userReviews[i].greenAreasExists, $scope.userReviews[i].securityExists, $scope.userReviews[i].infraExists, $scope.userReviews[i].parkingExists);
             }
-            loading(false, 1000);
+            // loading(false, 1000);
         }, function myError(err) {
             console.log(err);
         });
     }
 
-    function setReviewText(text, i) {
+    function setReviewText(text, i, response) {
         $scope.userReviews[i].reviewText = text;
+        if (response.data.overallRating) {
+            $scope.userReviews[i].overallRatings = response.data.overallRating;
+            $scope.userReviews[i].overallExists = true;
+            $scope.nonTextReviews++;
+        }
+        if (response.data.ratings) {
+            if (response.data.ratings.amenities) {
+                $scope.userReviews[i].amenitiesRatings = response.data.ratings.amenities;
+                $scope.userReviews[i].amenitiesExists = true;
+                // console.log('amenitiesWorking')
+            }
+            if (response.data.ratings.convenienceOfHouseMaids) {
+                $scope.userReviews[i].convenienceOfHouseMaidRating = response.data.ratings.convenienceOfHouseMaids;
+                $scope.userReviews[i].houseMaidsExists = true;
+            }
+            if (response.data.ratings.electricityAndWaterSupply) {
+                $scope.userReviews[i].electricityAndWaterSupplyRating = response.data.ratings.electricityAndWaterSupply;
+                $scope.userReviews[i].electricityExists = true;
+            }
+            if (response.data.ratings.openAndGreenAreas) {
+                $scope.userReviews[i].openAndGreenAreasRating = response.data.ratings.openAndGreenAreas;
+                $scope.userReviews[i].greenAreasExists = true;
+            }
+            if (response.data.ratings.security) {
+                $scope.userReviews[i].securityRating = response.data.ratings.security;
+                $scope.userReviews[i].securityExists = true;
+            }
+            if (response.data.ratings.infrasctructure) {
+                $scope.userReviews[i].infrastructureRating = response.data.ratings.infrastructure;
+                $scope.userReviews[i].infraExists = true;
+            }
+            if (response.data.ratings.convenienceOfParking) {
+                $scope.userReviews[i].parkingRating = response.data.ratings.convenienceOfParking;
+                $scope.userReviews[i].parkingExists = true;
+            }
+        }
     }
 
     function bindReviews() {
 
         $scope.totalRatings = $scope.textReviews + $scope.nonTextReviews;
-    
+        // $scope.loading = false;
+
         // if (Object.keys($scope.userReviews).length) {
         //     $scope.showReviews = true;
         // } else {
@@ -160,6 +220,8 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         //     console.log(err);
         // })
     }
+
+
 
     //Function to redirect to the project page from user's reviews
 

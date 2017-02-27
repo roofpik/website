@@ -1,4 +1,4 @@
-app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
+app.controller('mapCtrl', ['$scope', '$timeout', '$http', '$state', function($scope, $timeout, $http, $state) {
      $scope.selectedType = 'projects';
      $('.collapsible').collapsible();
      $('.draggable').attr('draggable', true);
@@ -30,7 +30,6 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
      getCurrentLocation();
      // Code to get current location of user
      function getCurrentLocation() {
-        console.log(btoa("lat="+28.4594965+"&lon="+77.02663830000006));
          if (navigator.geolocation) {
              navigator.geolocation.getCurrentPosition(showPosition, showError);
          } else {
@@ -64,21 +63,21 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
      }
 
      function getMapData(lat, lon) {
-        console.log(lat, lon);
+        // console.log(lat, lon);
          var data = {
              lat: lat,
              lon: lon
          }
-         console.log(encodeParams(data));
+         // console.log(encodeParams(data));
          $http({
-             url: 'http://107.23.243.89/api/GetMapData_1.0',
-             // url: 'http://35.154.60.19/api/GetMapData_1.0',
+             // url: 'http://107.23.243.89/api/GetMapData_1.0',
+             url: 'http://35.154.60.19/api/GetMapData_1.0',
              method: 'GET',
              params: {
                  args: encodeParams(data)
              }
          }).then(function(response) {
-            console.log(response);
+            // console.log(response);
              $scope.mapData = response.data;
              for (key in $scope.mapData) {
                  if ($scope.mapData[key].type == 'residential' || $scope.mapData[key].type == 'cghs') {
@@ -94,7 +93,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                          '<div class="card info_content mg0">' +
                          '<div class="card-image">' +
                          '<img src="' + image + '">' +
-                         '<a href="" class="btn red absbtn"><i class="material-icons left">details</i>See Details</a>' +
+                         '<div class="btn red absbtn details-link" id="'+key+'"><i class="material-icons left">details</i>See Details</div>' +
                          '</div>' +
                          '<div class="cardTitle row mgan bdbtm">' +
                          '<a class="col m8 black-text text-lighten-4 pd5 pd-tspanmap">' +
@@ -124,10 +123,13 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                          '<span class="block b ellipsis">Rent Price</span>' +
                          '<span class="ft12 block ellipsis">₹' + $scope.mapData[key].rent.min + ' - ₹' + $scope.mapData[key].rent.max + '</span>' +
                          '</div>' +
-                         '<div class="col m6 pd5 center ht50">' +
-                         '<span class="block b ellipsis">'+$scope.mapData[key].bhks+' BHK</span>' +
+                         '<div class="col m6 pd5 center ht50">';
+
+                    if($scope.mapData[key].bhks){
+                        content[0] += '<span class="block b ellipsis">'+$scope.mapData[key].bhks+' BHK</span>';    
+                    }
                          // '<span class="ft12 block ellipsis">1776 Sq. Ft. - 2345 Sq. </span>' +
-                         '</div>' +
+                    content[0] += '</div>' +
                          '</div>' +
                          '</div>' +
                          '</div>'
@@ -144,7 +146,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                          '<div class="card info_content mg0">' +
                          '<div class="card-image">' +
                          '<img src="' + image + '">' +
-                         '<a href="" class="btn red absbtn"><i class="material-icons left">details</i>See Details</a>' +
+                         '<div class="btn red absbtn details-link" id="'+key+'"><i class="material-icons left">details</i>See Details</div>' +
                          '</div>' +
                          '<div class="cardTitle row mgan bdbtm">' +
                          '<a class="col m8 black-text text-lighten-4 pd5 pd-tspanmap">' +
@@ -184,7 +186,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                          '<div class="card info_content mg0">' +
                          '<div class="card-image">' +
                          '<img src="' + image + '">' +
-                         '<a href="" class="btn red absbtn"><i class="material-icons left">details</i>See Details</a>' +
+                         '<div class="btn red absbtn details-link" id="'+key+'"><i class="material-icons left">details</i>See Details</div>' +
                          '</div>' +
                          '<div class="cardTitle row mgan bdbtm">' +
                          '<a class="col m8 black-text text-lighten-4 pd5 pd-tspanmap">' +
@@ -321,7 +323,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
          $scope.min = 0;
          $scope.max = 10;
          $scope.currentPage = 1;
-         console.log($scope.selectedType);
+         // console.log($scope.selectedType);
          getMapList();
          $scope.showList();
      }
@@ -329,7 +331,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
      function getMapList(){
         if ($scope.selectedType == 'projects') {
              $scope.listMenu = $scope.projectMarkers;
-             console.log($scope.projectMarkers.length);
+             // console.log($scope.projectMarkers.length);
              getPages($scope.projectMarkers);
              $scope.menuTitle = 'Projects';
              initMap($scope.projectMarkers, $scope.projectInfoWindow);
@@ -383,7 +385,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
 
      // get search results based on the string in input box
      $scope.getSearchData = function() {
-         console.log($scope.searchedText);
+         // console.log($scope.searchedText);
          if ($scope.searchedText.length > 2) {
              var data = {
                  name: $scope.searchedText
@@ -406,9 +408,9 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
                     $scope.showSearch = true;
                  }
                 $scope.fetchingResults = false;
-                 console.log($scope.searchByNameResults);
+                 // console.log($scope.searchByNameResults);
              }, function myError(err) {
-                 console.log(err);
+                 // console.log(err);
                  $scope.fetchingResults = false;
              })
          }
@@ -432,4 +434,26 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', function($scope, $time
         // console.log($scope.mapSearched.location.lat,$scope.mapSearched.location.lon);
         getMapData($scope.mapSearched.location.lat,$scope.mapSearched.location.lon);
      }
+
+
+     // Take to details page if see details is clicked on any of the infowindows
+     $(document).on("click",".details-link", function () {
+        var param={};
+       var clickedBtnID = $(this).attr('id'); // or var clickedBtnID = this.id
+       if($scope.mapData[clickedBtnID].type == 'locality' || $scope.mapData[clickedBtnID].type == 'location'){
+            Materialize.toast('Coming Soon!',2000);
+       } else if($scope.mapData[clickedBtnID].type == 'residential'){
+            param = {
+                projectId: $scope.mapData[clickedBtnID].id
+            }
+            $state.go('project-details', { p: encodeParams(param) });
+       } else if($scope.mapData[clickedBtnID].type =='cghs'){
+            param = {
+                projectId: $scope.mapData[clickedBtnID].id,
+                category: 'cghs'
+            }
+            $state.go('project-details', { p: encodeParams(param) });
+       }
+       // console.log($scope.mapData[clickedBtnID]);
+    });
  }]);
