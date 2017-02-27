@@ -1,9 +1,10 @@
-app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', '$state', function($scope, $timeout, $stateParams, $rootScope, $state) {
+app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', '$state', '$http', function($scope, $timeout, $stateParams, $rootScope, $state, $http) {
     $('ul.tabs').tabs();
     // loading(true);
     $scope.loading = true;
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     var parameters = decodeParams($stateParams.p);
+    var parameter = '';
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
