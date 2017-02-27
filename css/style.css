@@ -2631,7 +2631,7 @@ footer.page-footer .footer-copyright{line-height: 20px; height: 20px}
         width: 100% !important;
     }
     .search-results {
-        z-index: 9999;
+        z-index: 999;
         position: absolute;
         width: 100%;
     }
@@ -2718,11 +2718,7 @@ h4{font-size: 20px !important;}
 .bgxs{background-color: #666;}
 #searchboxhome .s12{width: 100%;}
 #searchboxhome .wd-sm, .hometabs { width: 100% !important; }
-.search-results{
-z-index: 999;
-position: absolute;
-width: 100%;
-}
+
 .hometabs a.active:after{bottom: -8px;}
 .home-search{top:50%;}
 #searchboxhome .input-field{margin-top: 0px !important;}
@@ -2944,10 +2940,5 @@ width: 100%;
 .search-results {
     z-index: 999;
     position: absolute;
-    width: 100%;
-}
-.search-results{
-z-index: 999;
-position: absolute;
-width: 100%;
+    width: 100%;  max-height: 250px !important; overflow-y: auto;
 }
