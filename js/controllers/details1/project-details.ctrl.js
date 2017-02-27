@@ -678,7 +678,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
                 $("#goodStar").css("width", ($scope.reviewObject.threeStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
                 $("#averageStar").css("width", ($scope.reviewObject.twoStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
                 $("#badStar").css("width", ($scope.reviewObject.oneStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
-                // console.log($scope.reviewObject);
+                console.log($scope.reviewObject);
             }
         }
     }, function myError(err) {

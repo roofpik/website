@@ -12,7 +12,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         }
         // console.log($stateParams);
     if ($stateParams.id) {
-        var params = decodeParams($stateParams.id);
+        var params = $stateParams.id;
     }
     console.log(params);
     $scope.projects1 = {}; //bind project name with project ID
@@ -49,9 +49,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     }];
     var user;
     if (params) {
-        if (params.id) {
             $scope.showSearch = false;
-        }
     } else {
         console.log('called');
         $scope.showSearch = true;
