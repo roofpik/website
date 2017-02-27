@@ -156,7 +156,7 @@
                         </div>
                     </div>
                     <div ng-hide="loading" class="card horizontal imgfx" ng-class="displayType" ng-repeat="project in projectList track by $index">
-                        <a ng-href="{{getRedirectionString(project.id)}}">
+                        <a ng-href="{{getRedirectionString(project.id, project.type)}}">
                             <div class="card-image fix40 left">
                                 <img ng-src="{{project.cover}}" class="responsive-img">
                             </div>

@@ -180,7 +180,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
                 args: encodeParams(data)
             }
         }).then(function mySucces(response) {
-            // console.log(response);
+            console.log(response);
             $scope.projectList = [];
             totalProjects = response.data.hits;
             if ($scope.pages.length == 0) {
@@ -202,11 +202,12 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
             console.log($scope.projects);
             for (key in $scope.projects) {
                 if ($scope.projects[key].cover.indexOf('http') == -1) {
-                    if (parameters.category == 'CGHS') {
-                        $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/cghs/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-s.jpg';
-                    } else {
-                        $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/residential/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-s.jpg';
-                    }
+                    // if ($scope.projects[key].type == 'C') {
+                    //     $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/cghs/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-s.jpg';
+                    // } else {
+                    //     $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/residential/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-s.jpg';
+                    // }
+                    $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/'+$scope.projects[key].type+'/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-s.jpg';
                 }
                 $scope.projectList.push($scope.projects[key]);
             }
@@ -218,13 +219,14 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
         })
     }
 
-    $scope.getRedirectionString = function(id) {
+    $scope.getRedirectionString = function(id, type) {
         var data = {
-            projectId: id
+            projectId: id,
+            category: type
         }
-        if (parameters.category == 'CGHS') {
-            data.category = 'cghs';
-        }
+        // if (parameters.category == 'CGHS') {
+        //     data.category = 'cghs';
+        // }
         return '../#/project-details/' + encodeParams(data);
     }
 
@@ -308,3 +310,5 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
         }
     }
 }]);
+
+
