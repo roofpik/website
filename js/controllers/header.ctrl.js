@@ -1,5 +1,6 @@
 app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeout', '$stateParams', function($scope, $state, $http, $rootScope, $timeout, $stateParams) {
 
+    // console.log('in')
     $(document).ready(function() {
         Materialize.updateTextFields();
         $('.button-collapse').sideNav({
@@ -36,7 +37,7 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
         page_start: $scope.page_start,
         page_size: $scope.page_size
     }
-    
+
 
     fetchProjects()
 
@@ -70,6 +71,23 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
         }, function myError(err) {
             // console.log(err);
         })
+        // goToProjectsReview();
+    }
+
+    $scope.findProjectId = function() {
+        console.log('working')
+        $timeout(function() {
+            console.log(window.location.href);
+            var url = window.location.href.split('/');
+            console.log(url)
+            if (url[4] == 'project-details') {
+                $scope.projectId = decodeParams(url[5]).projectId;
+                $state.go('write-review', {id: $scope.projectId});
+            } else {
+                $state.go('write-review');
+            }
+            // console.log($scope.projectId);
+        }, 0)
     }
 
     $scope.callFunction = function() {
