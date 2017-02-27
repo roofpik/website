@@ -1,6 +1,6 @@
 app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$location', '$stateParams', '$http', function($scope, $timeout, $rootScope, $location, $stateParams, $http) {
     document.title = "Write Review";
-    console.log($stateParams);
+    // console.log($stateParams.id);
     var timestamp = new Date().getTime();
     var urlInfo = {
         url: $location.path()
@@ -15,6 +15,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         var params = $stateParams.id;
     }
     console.log(params);
+    // $scope.projectId = params.projectId;
     $scope.projects1 = {}; //bind project name with project ID
     $scope.projects2 = {}; //bind project name with null for autocomplete
     $scope.projects3 = {}; //bind project name with project type
@@ -171,6 +172,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                             $scope.projects1[$scope.projectList[key].name.toString()] = $scope.projectList[key].id;
                             $scope.projects2[$scope.projectList[key].name.toString()] = null;
                             $scope.projects3[$scope.projectList[key].name.toString()] = $scope.projectList[key].type;
+                            $scope.projects4[$scope.projectList[key].id] = $scope.projectList[key].name;
                         }
                         $scope.showLoading = false;
                         bindList();
