@@ -111,20 +111,17 @@
     </div>
     <div class="row blue lighten-1 center pda50 mgbn">
         <i class="material-icons medium white-text">card_giftcard</i>
-        <h4 class="uppercase white-text">
-        write a review and claim your goody bag.</h4>
-        <button class="btn white black-text mgt20" ng-click="test()"><i class="material-icons left">create</i>Review Now</button>
+        <h5 class="uppercase white-text">
+        write a review and claim your goody bag.</h5>
+        <button id="review_btn" class="btn btn-large white black-text mgt20" ng-click="test()"><i class="material-icons left">create</i>Review Now</button>
     </div>
-    <div class="row mgbn white hidden_sm">
-        <div class="container container2">
-            <div class="row mgbn">
-                <div class="col m12 pda10">
-                    <div maphome></div>
-                </div>
-            </div>
-        </div>
+   
+     <div class="row pda10 mgbn reletive white">
+        <div ui-view="coverStories"></div>
     </div>
     <div class="row blue lighten-1 center white-text mgbn pda50">
+  
+     <h4 class="center b ltspacing">In Stats</h4>
         <div class="col s12 m4 pda10">
             <div class="allbd block pda10">
                 <i class="material-icons medium">edit</i>
@@ -151,7 +148,13 @@
             </div>
         </div>
     </div>
-    <div class="row pda10 mgbn reletive white">
-        <div ui-view="coverStories"></div>
+    <div class="row mgbn white hidden_sm">
+        <div class="container container2">
+            <div class="row mgbn">
+                <div class="col m12 pda10">
+                    <div maphome></div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
