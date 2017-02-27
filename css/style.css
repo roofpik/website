@@ -898,6 +898,10 @@ padding-left:90px;
 .list_searchicon{display: none;}
 .closeabsbtn{display: none;}
 .h4{font-size: 30px;}
+/*captcha start*/
+.rc-anchor-normal{width: calc(100% - 3rem); margin-left: 3rem;}
+.captcha{}
+/*captcha end*/
 
 @keyframes fade-in {
     from    { opacity: 0; }
