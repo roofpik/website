@@ -667,7 +667,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
             id: $scope.projectId
         }
     }).then(function mySucces(response) {
-        // console.log(response);
+        console.log(response);
         if (response.status == 200) {
             if (response.data.numberOfReviews != 0) {
                 $rootScope.allRatings = response.data;
@@ -706,6 +706,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
                 page_start: page_start
             }
         }).then(function mySucces(response) {
+            console.log(response);
             if (response.data) {
                 totalReviews = response.data.hits;
                 reviewsFetchedNum += Object.keys(response.data.details).length;
