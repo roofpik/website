@@ -2,7 +2,7 @@
 app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '$http', function($scope, $stateParams, $state, $timeout, $http) {
     document.title = "My Profile";
     var uid = decodeParams($stateParams.id)
-    console.log(uid)
+    // console.log(uid)
         // $scope.userId = 'vyEaEOyjGgUl8OvOVRZek8twcpk1'
     $scope.userId = uid.id;
     // if user is not signed in, take him to the home page
@@ -119,8 +119,8 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         })
     }
 
-    function showHideReviewRating(amenities, maids, electricity, greenAreas, security, infra, parking) {
-        if (amenities || maids|| electricity ||greenAreas || security || infra || parking) {
+    function showHideReviewRating(i, amenities, maids, electricity, greenAreas, security, infra, parking) {
+        if (amenities || maids || electricity || greenAreasExistsnAreas || security || infra || parking) {
             $scope.showRatings = false;
         } else {
             $scope.showRatings = true;
@@ -145,7 +145,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
                 console.log(response);
                 $scope.text = response.data.reviewText;
                 setReviewText($scope.text, i, response)
-                showHideReviewRating($scope.userReviews[i].amenitiesExists, $scope.userReviews[i].houseMaidsExists, $scope.userReviews[i].electricityExists, $scope.userReviews[i].greenAreasExists, $scope.userReviews[i].securityExists, $scope.userReviews[i].infraExists, $scope.userReviews[i].parkingExists);
+                showHideReviewRating(i, $scope.userReviews[i].amenitiesExists, $scope.userReviews[i].houseMaidsExists, $scope.userReviews[i].electricityExists, $scope.userReviews[i].greenAreasExists, $scope.userReviews[i].securityExists, $scope.userReviews[i].infraExists, $scope.userReviews[i].parkingExists);
             }
             // loading(false, 1000);
         }, function myError(err) {

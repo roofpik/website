@@ -119,7 +119,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         }
     }
 
-    if ($stateParams.id) {
+    if (params) {
         $scope.showLoading = true;
         $scope.showList = false;
         $scope.showSearch = false;

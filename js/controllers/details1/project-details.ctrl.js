@@ -1,12 +1,12 @@
-app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', function($scope, $timeout, $stateParams, $rootScope){
-	$('ul.tabs').tabs();
+app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', '$state', function($scope, $timeout, $stateParams, $rootScope, $state) {
+    $('ul.tabs').tabs();
     // loading(true);
     $scope.loading = true;
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     var parameters = decodeParams($stateParams.p);
     $scope.projectId = parameters.projectId;
-    if(parameters.category){
-        if(parameters.category == 'cghs'){
+    if (parameters.category) {
+        if (parameters.category == 'cghs') {
             $scope.category = 'cghs';
         } else {
             $scope.category = 'residential';
@@ -20,283 +20,284 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     $scope.configurations = [];
     $scope.minBhk = 0;
     $scope.projectDataFetched = false;
-	$scope.allAmenities = {
-    	'basic': {
-	        'carParking': {
-	        	name: 'Car Parking',
-	        	img: 'images/icons/car-parking.png'
-	        },
-	        'cctv': {
-	        	name: 'CCTV',
-	        	img: 'images/icons/cctv.png'
-	        },
-	        'clubhouse': {
-	        	name: 'Clubhouse',
-	        	img: 'images/icons/clubhouse.png'
-	        },
-	        'fireProtection': {
-	        	name: 'Fire Protection',
-	        	img: 'images/icons/fire.png'
-	        },
-	        'gym': {
-	        	name: 'Gym',
-	        	img: 'images/icons/gym.png'
-	        },
-	        'intercom': {
-	        	name: 'Intercom',
-	        	img: 'images/icons/Intercom.png'
-	        },
-	        'kidsPlayArea': {
-	        	name: 'Kids Play Area',
-	        	img: 'images/icons/kidsPlayground.png'
-	        },
-	        'kidsPool': {
-	        	name: 'Kids Pool',
-	        	img: 'images/icons/Pool_2.png'
-	        },
-	        'lifts': {
-	        	name: 'Lifts',
-	        	img: 'images/icons/lift.png'
-	        },
-	        'parks': {
-	        	name: 'Parks',
-	        	img: 'images/icons/garden.png'
-	        },
-	        'powerBackup': {
-	        	name: 'Power Backup',
-	        	img: 'images/icons/power-backup.png'
-	        },
-	        'security24x7': {
-	        	name: 'Security 24X7',
-	        	img: 'images/icons/group_full_security.png'
-	        },
-	        'swimmingPool': {
-	        	name: 'Swimming Pool',
-	        	img: 'images/icons/swiming-pool.png'
-	        },
-	        'videoPhone': {
-	        	name: 'Video Phone',
-	        	img: 'images/icons/smartphones.png'
-	        },
-	        'waterSupply24x7': {
-	        	name: 'Water Supply 24X7',
-	        	img: 'images/icons/water3.png'
-	        }
-    	},
-    	'convenience':{
-    		'badmintonCourt': {
-	        	name: 'Badminton Court',
-	        	img: 'images/icons/Tennis_court.png'
-	        },
-	        'football': {
-	        	name: 'Football',
-	        	img: 'images/icons/basketball.png'
-	        },
-	        'inhouseChemist': {
-	        	name: 'Inhouse Chemist',
-	        	img: 'images/icons/Inhouse-chemist.png'
-	        },
-	        'inhouseGroceryStore': {
-	        	name: 'Inhouse Grocery Store',
-	        	img: 'images/icons/store.png'
-	        },
-	        'inhousePlaySchool': {
-	        	name: 'Inhouse Play School',
-	        	img: 'images/icons/Bookmark.png'
-	        },
-	        'inhouseRestaurants': {
-	        	name: 'Inhouse Restaurants',
-	        	img: 'images/icons/restaurant.png'
-	        },
-	        'multipurposeCourt': {
-	        	name: 'Multipurpose Court',
-	        	img: 'images/icons/court.png'
-	        },
-	        'squashCourt': {
-	        	name: 'Squash Court',
-	        	img: 'images/icons/balls-snooker.png'
-	        },
-	        'volleyball': {
-	        	name: 'Volleyball',
-	        	img: 'images/icons/Volleyball.png'
-	        }
-    	},
-    	'entertainment': {
-    		'amphitheatre': {
-	        	name: 'Amphitheatre',
-	        	img: 'images/icons/Amphitheatre.png'
-	        },
-	        'bowling': {
-	        	name: 'Bowling',
-	        	img: 'images/icons/bowling.png'
-	        },
-	        'cafe': {
-	        	name: 'Cafe',
-	        	img: 'images/icons/cafe.png'
-	        },
-	        'cardsRoom': {
-	        	name: 'Cards Room',
-	        	img: 'images/icons/card.png'
-	        },
-	        'indoorGames': {
-	        	name: 'Indoor Games',
-	        	img: 'images/icons/chess.png'
-	        },
-	        'jacuzzi': {
-	        	name: 'Jacuzzi',
-	        	img: 'images/icons/Jacuzzi.png'
-	        },
-	        'library': {
-	        	name: 'Library',
-	        	img: 'images/icons/Library.png'
-	        },
-	        'miniTheatre': {
-	        	name: 'Mini Theatre',
-	        	img: 'images/icons/Theatre.png'
-	        },
-	        'partyHall': {
-	        	name: 'Party Hall',
+    $scope.allAmenities = {
+        'basic': {
+            'carParking': {
+                name: 'Car Parking',
+                img: 'images/icons/car-parking.png'
+            },
+            'cctv': {
+                name: 'CCTV',
+                img: 'images/icons/cctv.png'
+            },
+            'clubhouse': {
+                name: 'Clubhouse',
+                img: 'images/icons/clubhouse.png'
+            },
+            'fireProtection': {
+                name: 'Fire Protection',
+                img: 'images/icons/fire.png'
+            },
+            'gym': {
+                name: 'Gym',
+                img: 'images/icons/gym.png'
+            },
+            'intercom': {
+                name: 'Intercom',
+                img: 'images/icons/Intercom.png'
+            },
+            'kidsPlayArea': {
+                name: 'Kids Play Area',
+                img: 'images/icons/kidsPlayground.png'
+            },
+            'kidsPool': {
+                name: 'Kids Pool',
+                img: 'images/icons/Pool_2.png'
+            },
+            'lifts': {
+                name: 'Lifts',
+                img: 'images/icons/lift.png'
+            },
+            'parks': {
+                name: 'Parks',
+                img: 'images/icons/garden.png'
+            },
+            'powerBackup': {
+                name: 'Power Backup',
+                img: 'images/icons/power-backup.png'
+            },
+            'security24x7': {
+                name: 'Security 24X7',
+                img: 'images/icons/group_full_security.png'
+            },
+            'swimmingPool': {
+                name: 'Swimming Pool',
+                img: 'images/icons/swiming-pool.png'
+            },
+            'videoPhone': {
+                name: 'Video Phone',
+                img: 'images/icons/smartphones.png'
+            },
+            'waterSupply24x7': {
+                name: 'Water Supply 24X7',
+                img: 'images/icons/water3.png'
+            }
+        },
+        'convenience': {
+            'badmintonCourt': {
+                name: 'Badminton Court',
+                img: 'images/icons/Tennis_court.png'
+            },
+            'football': {
+                name: 'Football',
+                img: 'images/icons/basketball.png'
+            },
+            'inhouseChemist': {
+                name: 'Inhouse Chemist',
+                img: 'images/icons/Inhouse-chemist.png'
+            },
+            'inhouseGroceryStore': {
+                name: 'Inhouse Grocery Store',
+                img: 'images/icons/store.png'
+            },
+            'inhousePlaySchool': {
+                name: 'Inhouse Play School',
+                img: 'images/icons/Bookmark.png'
+            },
+            'inhouseRestaurants': {
+                name: 'Inhouse Restaurants',
+                img: 'images/icons/restaurant.png'
+            },
+            'multipurposeCourt': {
+                name: 'Multipurpose Court',
+                img: 'images/icons/court.png'
+            },
+            'squashCourt': {
+                name: 'Squash Court',
+                img: 'images/icons/balls-snooker.png'
+            },
+            'volleyball': {
+                name: 'Volleyball',
+                img: 'images/icons/Volleyball.png'
+            }
+        },
+        'entertainment': {
+            'amphitheatre': {
+                name: 'Amphitheatre',
+                img: 'images/icons/Amphitheatre.png'
+            },
+            'bowling': {
+                name: 'Bowling',
+                img: 'images/icons/bowling.png'
+            },
+            'cafe': {
+                name: 'Cafe',
+                img: 'images/icons/cafe.png'
+            },
+            'cardsRoom': {
+                name: 'Cards Room',
+                img: 'images/icons/card.png'
+            },
+            'indoorGames': {
+                name: 'Indoor Games',
+                img: 'images/icons/chess.png'
+            },
+            'jacuzzi': {
+                name: 'Jacuzzi',
+                img: 'images/icons/Jacuzzi.png'
+            },
+            'library': {
+                name: 'Library',
+                img: 'images/icons/Library.png'
+            },
+            'miniTheatre': {
+                name: 'Mini Theatre',
+                img: 'images/icons/Theatre.png'
+            },
+            'partyHall': {
+                name: 'Party Hall',
                 img: 'images/icons/hall.png'
-	        },
-	        'spa': {
-	        	name: 'Spa',
-	        	img: 'images/icons/spa.png'
-	        },
-	        'steam-sauna': {
-	        	name: 'Steam/Sauna',
-	        	img: 'images/icons/Steam.png'
-	        },
-	        'videoGames': {
-	        	name: 'Video Games',
-	        	img: 'images/icons/video-games.png'
-	        }
-    	},
-    	'safety' : {
-	        'gatedCommunity': {
-	        	name: 'Gated Community',
-	        	img: 'images/icons/group2.png'
-	        },
-	        'guardAtLiftLobby': {
-	        	name: 'Guard At Lift Lobby',
-	        	img: 'images/icons/Elevator.png'
-	        },
-	        'guestAccomodation': {
-	        	name: 'Guest Accomodation',
-	        	img: 'images/icons/hotel.png'
-	        },
-	        'petArea': {
-	        	name: 'Pet Area',
-	        	img: 'images/icons/miscellaneous-62.png'
-	        },
-	        'smartCard-biometric': {
-	        	name: 'SmartCard/Biometric',
-	        	img: 'images/icons/smart-card.png'
-	        },
-	        'visitorParking': {
-	        	name: 'Visitor Parking',
-	        	img: 'images/icons/Parking.png'
-	        }
-    	},
-    	'services': {
-	        'maintenanceStaff': {
-	        	name: 'Maintenance Staff',
-	        	img: 'images/icons/group_full_security.png'
-	        },
-	        'rainWaterHarvesting': {
-	        	name: 'Rain Water Harvesting',
-	        	img: 'images/icons/weather-04.png'
-	        },
-	        'wasteDisposal': {
-	        	name: 'Waste Disposal',
-	        	img: 'images/icons/wastedisposal.png'
-	        }
-    	},
-    	'sports': {
-	        'basketballCourt': {
-	        	name: 'Basketball Court',
-	        	img: 'images/icons/basketball.png'
-	        },
-	        'cricket': {
-	        	name: 'Cricket',
-	        	img: 'images/icons/cricket.png'
-	        },
-	        'golfCourseFacing': {
-	        	name: 'Golf Course Facing',
-	        	img: 'images/icons/1golf.png'
-	        },
-	        'golfPutting': {
-	        	name: 'Golf Putting',
-	        	img: 'images/icons/golf.png'
-	        },
-	        'joggingTrack': {
-	        	name: 'Jogging Track',
-	        	img: 'images/icons/walk.png'
-	        },
-	        'skatingRink': {
-	        	name: 'Skating Rink',
-	        	img: 'images/icons/icon-skate.png'
-	        },
-	        'snookerPool': {
-	        	name: 'Snooker/Pool',
-	        	img: 'images/icons/balls-snooker.png'
-	        },
-	        'tableTennis': {
-	        	name: 'Table Tennis',
-	        	img: 'images/icons/court.png'
-	        },
-	        'tennisCourt': {
-	        	name: 'Tennis Court',
-	        	img: 'images/icons/Tennis_court.png'
-	        }
-    	}
+            },
+            'spa': {
+                name: 'Spa',
+                img: 'images/icons/spa.png'
+            },
+            'steam-sauna': {
+                name: 'Steam/Sauna',
+                img: 'images/icons/Steam.png'
+            },
+            'videoGames': {
+                name: 'Video Games',
+                img: 'images/icons/video-games.png'
+            }
+        },
+        'safety': {
+            'gatedCommunity': {
+                name: 'Gated Community',
+                img: 'images/icons/group2.png'
+            },
+            'guardAtLiftLobby': {
+                name: 'Guard At Lift Lobby',
+                img: 'images/icons/Elevator.png'
+            },
+            'guestAccomodation': {
+                name: 'Guest Accomodation',
+                img: 'images/icons/hotel.png'
+            },
+            'petArea': {
+                name: 'Pet Area',
+                img: 'images/icons/miscellaneous-62.png'
+            },
+            'smartCard-biometric': {
+                name: 'SmartCard/Biometric',
+                img: 'images/icons/smart-card.png'
+            },
+            'visitorParking': {
+                name: 'Visitor Parking',
+                img: 'images/icons/Parking.png'
+            }
+        },
+        'services': {
+            'maintenanceStaff': {
+                name: 'Maintenance Staff',
+                img: 'images/icons/group_full_security.png'
+            },
+            'rainWaterHarvesting': {
+                name: 'Rain Water Harvesting',
+                img: 'images/icons/weather-04.png'
+            },
+            'wasteDisposal': {
+                name: 'Waste Disposal',
+                img: 'images/icons/wastedisposal.png'
+            }
+        },
+        'sports': {
+            'basketballCourt': {
+                name: 'Basketball Court',
+                img: 'images/icons/basketball.png'
+            },
+            'cricket': {
+                name: 'Cricket',
+                img: 'images/icons/cricket.png'
+            },
+            'golfCourseFacing': {
+                name: 'Golf Course Facing',
+                img: 'images/icons/1golf.png'
+            },
+            'golfPutting': {
+                name: 'Golf Putting',
+                img: 'images/icons/golf.png'
+            },
+            'joggingTrack': {
+                name: 'Jogging Track',
+                img: 'images/icons/walk.png'
+            },
+            'skatingRink': {
+                name: 'Skating Rink',
+                img: 'images/icons/icon-skate.png'
+            },
+            'snookerPool': {
+                name: 'Snooker/Pool',
+                img: 'images/icons/balls-snooker.png'
+            },
+            'tableTennis': {
+                name: 'Table Tennis',
+                img: 'images/icons/court.png'
+            },
+            'tennisCourt': {
+                name: 'Tennis Court',
+                img: 'images/icons/Tennis_court.png'
+            }
+        }
     };
 
     $scope.amenitiesPresent = {
-    	'basic' : {
-    		'present': false,
-    		'name': 'Basic',
-    		'hrefLink': '#basic'
-    	},
-    	'convenience': {
-    		'present': false,
-    		'name': 'Convenience',
-    		'hrefLink': '#convenience'
-    	},
-    	'entertainment': {
-    		'present': false,
-    		'name': 'Entertainment',
-    		'hrefLink': '#entertainment'
-    	},
-    	'safety': {
-    		'present': false,
-    		'name': 'Safety',
-    		'hrefLink': '#safety'
-    	},
-    	'services': {
-    		'present': false,
-    		'name': 'Services',
-    		'hrefLink': '#services'
-    	},
-    	'sports': {
-    		'present': false,
-    		'name': 'Sports',
-    		'hrefLink': '#sports'
-    	}
+        'basic': {
+            'present': false,
+            'name': 'Basic',
+            'hrefLink': '#basic'
+        },
+        'convenience': {
+            'present': false,
+            'name': 'Convenience',
+            'hrefLink': '#convenience'
+        },
+        'entertainment': {
+            'present': false,
+            'name': 'Entertainment',
+            'hrefLink': '#entertainment'
+        },
+        'safety': {
+            'present': false,
+            'name': 'Safety',
+            'hrefLink': '#safety'
+        },
+        'services': {
+            'present': false,
+            'name': 'Services',
+            'hrefLink': '#services'
+        },
+        'sports': {
+            'present': false,
+            'name': 'Sports',
+            'hrefLink': '#sports'
+        }
     };
 
-     $scope.scrollToDiv = function(value){
-              $('html,body').animate({
-            scrollTop: $("."+value).offset().top - 80},
-        'slow');
+    $scope.scrollToDiv = function(value) {
+        $('html,body').animate({
+                scrollTop: $("." + value).offset().top - 80
+            },
+            'slow');
     }
 
-    db.ref('projects/-KYJONgh0P98xoyPPYm9/'+$scope.category+'/' + $scope.projectId).once('value', function(snapshot) {
+    db.ref('projects/-KYJONgh0P98xoyPPYm9/' + $scope.category + '/' + $scope.projectId).once('value', function(snapshot) {
         $timeout(function() {
-        	// console.log(snapshot.val());
+            // console.log(snapshot.val());
             $scope.project = snapshot.val();
             $scope.projectName = $scope.project.projectName;
-            document.title=$scope.projectName;
-            $scope.coverImage = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/'+$scope.category+'/' + $scope.project.projectId + '/images/coverPhoto/' + $scope.project.images.coverPhoto.url + '-m.jpg';
+            document.title = $scope.projectName;
+            $scope.coverImage = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/' + $scope.category + '/' + $scope.project.projectId + '/images/coverPhoto/' + $scope.project.images.coverPhoto.url + '-m.jpg';
             $scope.path = ["Gurgaon", "Residential"];
             if ($scope.project.configurations) {
                 generateInfo($scope.project.configurations);
@@ -319,20 +320,20 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     })
 
     function generateAmenitiesList(amenities) {
-    	for(key in amenities){
-    		for(key1 in amenities[key]){
-    			if(amenities[key][key1] != 'NA'){
-    				$scope.amenitiesPresent[key].present = true;
-    			}
-    		}
-    	}
+        for (key in amenities) {
+            for (key1 in amenities[key]) {
+                if (amenities[key][key1] != 'NA') {
+                    $scope.amenitiesPresent[key].present = true;
+                }
+            }
+        }
 
-    	for(key in $scope.amenitiesPresent){
-    		if($scope.amenitiesPresent[key].present){
-    			$scope.showAmenities = true;
-    		}
-    	}
-    	// console.log($scope.amenitiesPresent);
+        for (key in $scope.amenitiesPresent) {
+            if ($scope.amenitiesPresent[key].present) {
+                $scope.showAmenities = true;
+            }
+        }
+        // console.log($scope.amenitiesPresent);
     }
 
     function generateInfo(config) {
@@ -498,7 +499,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     }
 
     function addNa(configs) {
-    	var data = [];
+        var data = [];
         for (key in configs) {
             // console.log(configs[key]);
             if (!configs[key].buyMin) {
@@ -513,87 +514,91 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
             if (!configs[key].rentMax) {
                 configs[key].rentMax = 'NA'
             }
-            if(key == minBhk){
-            	configs[key].selected = true;
+            if (key == minBhk) {
+                configs[key].selected = true;
             } else {
-            	configs[key].selected = false;
+                configs[key].selected = false;
             }
-            configs[key].hrefLink = '#bhk'+configs[key].bhk;
+            configs[key].hrefLink = '#bhk' + configs[key].bhk;
             data.push(configs[key]);
         }
         // console.log(data);
         generateConfigurationDisplay(data);
-        
+
     }
 
-    function generateConfigurationDisplay(data){
-    	var sampleConfig = {};
-    	for(key in data){
-    		if(!sampleConfig[data[key].bhk]){
+    function generateConfigurationDisplay(data) {
+        var sampleConfig = {};
+        for (key in data) {
+            if (!sampleConfig[data[key].bhk]) {
                 sampleConfig[data[key].bhk] = {
                     superBuiltArea: [],
                     rent: [],
                     unit: [],
-                    hrefLink: '#bhk'+data[key].bhk,
+                    hrefLink: '#bhk' + data[key].bhk,
                     bhk: data[key].bhk
                 };
             }
             var area = {
-            	min: data[key].superBuiltAreaMin,
-            	max: data[key].superBuiltAreaMax
+                min: data[key].superBuiltAreaMin,
+                max: data[key].superBuiltAreaMax
             }
             var price = {
-            	min: data[key].rentMin,
-            	max: data[key].rentMax
+                min: data[key].rentMin,
+                max: data[key].rentMax
             }
             sampleConfig[data[key].bhk].superBuiltArea.push(area);
             sampleConfig[data[key].bhk].rent.push(price);
             sampleConfig[data[key].bhk].unit.push(data[key].unit);
-            if(data[key].bhk == $scope.minBhk){
-            	sampleConfig[data[key].bhk].selected = true;
+            if (data[key].bhk == $scope.minBhk) {
+                sampleConfig[data[key].bhk].selected = true;
             }
-    	}
-    	for(key in sampleConfig){
-    		$scope.configurations.push(sampleConfig[key]);
-    	}
-    	$timeout(function(){
+        }
+        for (key in sampleConfig) {
+            $scope.configurations.push(sampleConfig[key]);
+        }
+        $timeout(function() {
             // loading(false);
             $scope.projectDataFetched = true;
             $('ul.tabs').tabs();
-        },500);
-    	// console.log($scope.configurations);
+        }, 500);
+        // console.log($scope.configurations);
     }
 
-	$scope.selectConfig = function(config){
-		for(key in $scope.configurations){
-			if($scope.configurations[key].bhk ==config.bhk) {
-				$scope.configurations[key].selected = true;
-			} else {
-				$scope.configurations[key].selected = false;
-			}
-		}
-	}
+    $scope.selectConfig = function(config) {
+        for (key in $scope.configurations) {
+            if ($scope.configurations[key].bhk == config.bhk) {
+                $scope.configurations[key].selected = true;
+            } else {
+                $scope.configurations[key].selected = false;
+            }
+        }
+    }
 
-	$scope.provideDetails = function(data){
-		// loading(true);
-		db.ref('queries/'+$scope.cityId+'/'+$scope.category+'/'+$scope.projectId).push(data).then(function(){
+    $scope.provideDetails = function(data) {
+        // loading(true);
+        db.ref('queries/' + $scope.cityId + '/' + $scope.category + '/' + $scope.projectId).push(data).then(function() {
             // loading(false);
-			swal('Request Logged', 'You will recieve the details in your mail', 'success');
-			$timeout(function(){
-				$scope.query = {};
-				$scope.contactForm.$setPristine();
-        		$scope.contactForm.$setUntouched();
-			},1000);
-		})
-	}
+            swal('Request Logged', 'You will recieve the details in your mail', 'success');
+            $timeout(function() {
+                $scope.query = {};
+                $scope.contactForm.$setPristine();
+                $scope.contactForm.$setUntouched();
+            }, 1000);
+        })
+    }
+    $scope.goToWriteReview = function() {
+        console.log('called')
+        $state.go('write-review', { id: $scope.projectId });
+    }
 
     function generateImageList(images) {
         var imageData = [];
         for (key in images) {
             if (key == 'coverPhoto') {
                 var newImage = {
-                    thumb: "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/'+$scope.category+'/' + $scope.project.projectId + '/images/coverPhoto/' + images[key].url + '-s.jpg',
-                    src: "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/'+$scope.category+'/' + $scope.project.projectId + '/images/coverPhoto/' + images[key].url + '-m.jpg',
+                    thumb: "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/' + $scope.category + '/' + $scope.project.projectId + '/images/coverPhoto/' + images[key].url + '-s.jpg',
+                    src: "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/' + $scope.category + '/' + $scope.project.projectId + '/images/coverPhoto/' + images[key].url + '-m.jpg',
                     display: false
                 }
                 if (images[key].description) {
@@ -603,8 +608,8 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
             } else {
                 for (key1 in images[key]) {
                     var newImage = {
-                        thumb: "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/'+$scope.category+'/' + $scope.project.projectId + '/images/' + key + '/' + key1 + '/' + images[key][key1].url + '-s.jpg',
-                        src: "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/'+$scope.category+'/' + $scope.project.projectId + '/images/' + key + '/' + key1 + '/' + images[key][key1].url + '-m.jpg',
+                        thumb: "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/' + $scope.category + '/' + $scope.project.projectId + '/images/' + key + '/' + key1 + '/' + images[key][key1].url + '-s.jpg',
+                        src: "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/' + $scope.category + '/' + $scope.project.projectId + '/images/' + key + '/' + key1 + '/' + images[key][key1].url + '-m.jpg',
                         display: false
                     }
                     if (images[key][key1].description) {
@@ -622,10 +627,11 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
         console.log($scope.allRatings);
     });
 
+
 }]);
 
 // Reviews and Ratings Controller
-app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', '$http', '$state', function($scope, $timeout, $stateParams, $rootScope, $http, $state){
+app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', '$http', '$state', function($scope, $timeout, $stateParams, $rootScope, $http, $state) {
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     var parameters = decodeParams($stateParams.p);
     $scope.projectId = parameters.projectId;
@@ -643,35 +649,35 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
     $scope.hasReviews = false;
     $scope.reviewAvailable = false;
     $scope.ratingSummaryParams = [
-        {id: 'security', id1: 'security1', name: 'Security'},
-        {id: 'amenities', id1: 'amenities1', name: 'Amenities'},
-        {id: 'openAndGreenAreas', id1: 'openAndGreenAreas1', name: 'Open and Green Areas'},
-        {id: 'electricityAndWaterSupply', id1: 'electricityAndWaterSupply1', name: 'Electricity and Water Supply'},
-        {id: 'convenienceOfHouseMaids', id1: 'convenienceOfHouseMaids1', name: 'Convenience of Housemaids'},
-        {id: 'convenienceOfParking', id1: 'convenienceOfParking1', name: 'Convenience of Parking'},
-        {id: 'infrastructure', id1: 'infrastructure1', name: 'Infrastructure'},
-        {id: 'layoutOfApartment', id1: 'layoutOfApartment1', name: 'Layout of Apartments'}
+        { id: 'security', id1: 'security1', name: 'Security' },
+        { id: 'amenities', id1: 'amenities1', name: 'Amenities' },
+        { id: 'openAndGreenAreas', id1: 'openAndGreenAreas1', name: 'Open and Green Areas' },
+        { id: 'electricityAndWaterSupply', id1: 'electricityAndWaterSupply1', name: 'Electricity and Water Supply' },
+        { id: 'convenienceOfHouseMaids', id1: 'convenienceOfHouseMaids1', name: 'Convenience of Housemaids' },
+        { id: 'convenienceOfParking', id1: 'convenienceOfParking1', name: 'Convenience of Parking' },
+        { id: 'infrastructure', id1: 'infrastructure1', name: 'Infrastructure' },
+        { id: 'layoutOfApartment', id1: 'layoutOfApartment1', name: 'Layout of Apartments' }
     ];
 
 
     $http({
         url: 'http://35.154.60.19/api/GetReviewSummary_1.0',
-        method : 'GET',
+        method: 'GET',
         params: {
             id: $scope.projectId
         }
     }).then(function mySucces(response) {
         // console.log(response);
-        if(response.status == 200){
-            if(response.data.numberOfReviews != 0){
+        if (response.status == 200) {
+            if (response.data.numberOfReviews != 0) {
                 $rootScope.allRatings = response.data;
-                $scope.reviewsAvailable =true;
-                if(response.data.numberOfReviews > 0){
+                $scope.reviewsAvailable = true;
+                if (response.data.numberOfReviews > 0) {
                     $scope.reviewAvailable = true;
                 }
                 $scope.reviewObject = response.data;
-                for(key in $scope.reviewObject){
-                    $scope.reviewObject[key+'1'] = Math.round($scope.reviewObject[key]);
+                for (key in $scope.reviewObject) {
+                    $scope.reviewObject[key + '1'] = Math.round($scope.reviewObject[key]);
                 }
                 $("#excellentStar").css("width", ($scope.reviewObject.fiveStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
                 $("#veryGoodStar").css("width", ($scope.reviewObject.fourStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
@@ -688,10 +694,10 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
 
     getReviews();
 
-    function getReviews(){
+    function getReviews() {
         $http({
             url: 'http://35.154.60.19/api/GetProjectReviews_1.0',
-            method : 'GET',
+            method: 'GET',
             params: {
                 pid: $scope.projectId,
                 overallRating: selectedRating,
@@ -700,27 +706,27 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
                 page_start: page_start
             }
         }).then(function mySucces(response) {
-            if(response.data){
+            if (response.data) {
                 totalReviews = response.data.hits;
                 reviewsFetchedNum += Object.keys(response.data.details).length;
-                if(reviewsFetchedNum == totalReviews){
+                if (reviewsFetchedNum == totalReviews) {
                     $scope.hasMoreReviews = false;
                 }
-                for(key in response.data.details){
-                    if(response.data.details[key].reviewText.length < response.data.details[key].wordCount) {
+                for (key in response.data.details) {
+                    if (response.data.details[key].reviewText.length < response.data.details[key].wordCount) {
                         response.data.details[key].showMore = true;
                     } else {
                         response.data.details[key].showMore = false;
                     }
                     $scope.reviews.push(response.data.details[key]);
                 }
-                if($scope.reviews.length > 0){
+                if ($scope.reviews.length > 0) {
                     $scope.hasReviews = true;
                 }
             } else {
                 $scope.hasMoreReviews = false;
             }
-            if($scope.projectDataFetched){
+            if ($scope.projectDataFetched) {
                 // loading(false);    
             }
         }, function myError(err) {
@@ -728,7 +734,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
         })
     }
 
-    $scope.showReviewText = function(index){
+    $scope.showReviewText = function(index) {
         // console.log($scope.reviews[index]);
         // loading(true);
         $http({
@@ -739,10 +745,10 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
             }
         }).then(function mySucces(response) {
             // console.log(response);
-            if(response.status == 200){
+            if (response.status == 200) {
                 $scope.reviews[index].reviewText = response.data.reviewText;
                 $scope.reviews[index].showMore = false;
-            } 
+            }
             // loading(false, 1000);
         }, function myError(err) {
             console.log(err);
@@ -758,20 +764,20 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
     };
     $scope.ratingIndex = ['one', 'two', 'three', 'four', 'five'];
 
-    $scope.filterReview = function(index){
+    $scope.filterReview = function(index) {
         var count = 0;
         count = $scope.allRatings[index];
-        if($scope.ratingSelected[index]){
-            for(var i = count-1; i < 5; i++){
+        if ($scope.ratingSelected[index]) {
+            for (var i = count - 1; i < 5; i++) {
                 $scope.ratingSelected[$scope.ratingIndex[i]] = true;
             }
             selectedRating = count;
         } else {
             // console.log(count);
-            for(var i = 4; i > count-1 ; i--){
+            for (var i = 4; i > count - 1; i--) {
                 $scope.ratingSelected[$scope.ratingIndex[i]] = false;
             }
-            selectedRating = count -1;
+            selectedRating = count - 1;
         }
         $scope.reviews = [];
         reviewsFetchedNum = 0;
@@ -785,9 +791,9 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
         getReviews();
     }
 
-    $scope.filterReviewByCustomerType = function(index){
-        if($scope.selectedCustomerType[index]){
-            if(index == 'tenant'){
+    $scope.filterReviewByCustomerType = function(index) {
+        if ($scope.selectedCustomerType[index]) {
+            if (index == 'tenant') {
                 customerType = 'tenant';
                 $scope.selectedCustomerType.owner = false;
             } else {
@@ -806,21 +812,21 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
         $scope.hasMoreReviews = true;
         $scope.hasReviews = false;
         $scope.reviewAvailable = false;
-        getReviews(); 
+        getReviews();
     }
 
     $scope.showMoreReviews = function() {
         // loading(true);
         page_start = reviewsFetchedNum;
         // console.log(page_start);
-        if(totalReviews - reviewsFetchedNum < 5){
+        if (totalReviews - reviewsFetchedNum < 5) {
             page_size = totalReviews - reviewsFetchedNum
         }
         getReviews();
     }
 
-    $scope.takeToWriteReview = function(){
-        $state.go('write-review', {id: $scope.projectId});
+    $scope.takeToWriteReview = function() {
+        $state.go('write-review', { id: $scope.projectId });
     }
 }]);
 
@@ -841,7 +847,7 @@ app.controller('galleryCtrl', ['$scope', '$timeout', function($scope, $timeout) 
             });
 
             $('.trigger_gallery').on('click', function() {
-            	// console.log('clicked');
+                // console.log('clicked');
                 gallery.startImageLightbox();
             });
             $scope.showGallery = true;
