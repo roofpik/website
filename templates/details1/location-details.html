@@ -9,33 +9,45 @@
             </div>
         </nav> -->
     </div>
-    <div class="row">
+    <div class="row" ng-hide="loading">
         <div class="col s12 m8">
             <h1 class="hd1 b">{{name}}</h1>
             <div class="row mgbn ft12">
-                <div class="col s12 ft20i vatop mgt5">
-                    <i class="material-icons blue-text">location_on</i>
-                    {{location.state}}
-                </div>
-                <div class="col s12 grey-text mgt5 review ft20i vatop" ng-show="allRatings">
+                <!-- <div class="col s12 ft20i vatop mgt5">
+                    <i class="material-icons blue-text">location_on</i> {{location.state}}
+                </div> -->
+                <!-- <div class="col s12 grey-text mgt5 review ft20i vatop" ng-show="allRatings">
                     <span><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < allRatings.averageRating1 ? 'blue-text':'normal'">star</i></span><span>({{allRatings.averageRating}})</span>
                     <a href="" class="mgr10"><span>{{allRatings.numberOfReviews}} Review</span><span ng-show="allRatings.numberOfReviews > 1">s</span></a>
-                </div>
+                </div> -->
             </div>
         </div>
-        <div class="col s12 m4 grey-text ft13 text-darken-2 right-align">
+        <!-- <div class="col s12 m4 grey-text ft13 text-darken-2 right-align">
             <div class="ft19 b"><span ng-show="rentMin != 'NA'">₹</span>{{rentMin}}<span ng-show="rentMin != rentMax"> - ₹{{rentMax}}</span></div>
             <div class="row mgbn ft12" ng-show="project.configurations">
                 <div class="col s12 mgt5">{{bhk}} BHK</div>
                 <div class="col s12 mgt5">{{minArea}} <span ng-show="minArea != 'NA'">Sq.Ft.</span><span ng-show="minArea != maxArea"> - {{maxArea}} Sq.Ft.</span></div>
             </div>
+        </div> -->
+    </div>
+</div>
+<div ng-show="loading" class="preloader-wrapper big active loaderPosition">
+    <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+            <div class="circle"></div>
+        </div>
+        <div class="gap-patch">
+            <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+            <div class="circle"></div>
         </div>
     </div>
 </div>
 <section>
     <div class="container">
         <div class="row mgln mgrn mgbn">
-            <div class="col pdan s12 m7 waves-effect waves-light img-detail htfixbox">
+            <div class="col pdan s12 m7 waves-effect waves-light img-detail htfixbox" ng-hide = "loading">
                 <img ng-src="{{coverImage}}">
                 <div class="img-btn center-align">
                     <div class="gallery-btn">
@@ -44,24 +56,24 @@
                 </div>
             </div>
             <div class="col s12 m5 amen-tab htfixbox boxsd white">
-                <ul class="tabs">
+                <ul class="tabs" ng-hide = "loading">
                     <li class="tab col m12"><a class="active" href="#interest">Yes I am Interested</a></li>
                     <!-- <li class="tab col m6"><a href="#pricefinder">Price finder</a></li> -->
                 </ul>
-                <div class="row">
-                    <div id="interest" class="col s12">
+                <div class="row"  ng-hide = "loading">
+                    <div id="interest" class="col s12" ng-hide = "loading">
                         <form name="contactForm">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">account_circle</i>
-                                <input placeholder="Name" type="text" class="validate mgb5 ft12" ng-model="query.userName" required>                               
+                                <input placeholder="Name" type="text" class="validate mgb5 ft12" ng-model="query.userName" required>
                             </div>
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">phone</i>
-                                <input placeholder="Phone" type="text" class="validate mgb5 ft12" ng-minlength="10" ng-maxlength="10" ng-model="query.mobile" required>                                
+                                <input placeholder="Phone" type="text" class="validate mgb5 ft12" ng-minlength="10" ng-maxlength="10" ng-model="query.mobile" required>
                             </div>
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">email</i>
-                                <input placeholder="Email" type="email" class="validate mgb5 ft12" ng-model="query.email" required>                               
+                                <input placeholder="Email" type="email" class="validate mgb5 ft12" ng-model="query.email" required>
                             </div>
                             <div class="col s12 mgb5 mgt10">
                                 <input type="checkbox" id="che1" ng-model="query.moverPacker" class="filled-in ft12" />
@@ -81,4 +93,43 @@
         </div>
     </div>
 </section>
+<div>
+    <!-- <div class="row" ng-repeat="key in relatedProjects">
+        <div class="col s12 m7">
+            <div class="card">
+                <div class="card-image">
+                    <img ng-src="{{key.coverImage}}">
+                    <span class="card-title">{{key.name}}</span>
+                </div>
+                <div class="card-content">
+                    <p>{{key.address}}</p>
+                    <i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < key.overallRating? 'blue-text': 'normal'">star</i>
+                </div>
+                <div class="card-action">
+                    <a ng-click="goToProjectsPage(key)">View Project</a>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="row" ng-hide="loading">
+        <h3>Available Projects</h3>
+        <div class="col s12 m4 myClass" ng-repeat="key in relatedProjects">
+            <div class="card horizontal">
+                <div class="card-image">
+                    <img ng-src="{{key.coverImage}}">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <h5>{{key.name}}</h5>
+                        <p>{{key.address}}</p>
+                        <i ng-show="key.overallRating !=  0" class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < key.overallRating? 'blue-text': 'normal'">star</i>
+                        <p ng-show="key.overallRating == 0"><i>Not Rated Yet  </i></p>
+                    </div>
+                    <div class="card-action">
+                        <a ng-click="goToProjectsPage(key)">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
