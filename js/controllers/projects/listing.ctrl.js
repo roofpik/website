@@ -56,10 +56,10 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
             $timeout(function() {
                 $scope.locations = [];
                 for (key in data) {
-                    $scope.locations.push(data[key]);
+                    $scope.locations.push(data[key]);    
                 }
                 getBuilders();
-            }, 0)
+            }, 10)
         });
     }
 
@@ -199,7 +199,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
             totalProjectsFetched += Object.keys(response.data.details).length;
             $scope.dataFetched = true;
             $scope.projects = response.data.details;
-            console.log($scope.projects);
+            // console.log($scope.projects);
             for (key in $scope.projects) {
                 if ($scope.projects[key].cover.indexOf('http') == -1) {
                     // if ($scope.projects[key].type == 'C') {

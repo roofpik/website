@@ -8,6 +8,7 @@
     <link rel="icon" href="images/general/favicon.png" type="image/png">
     <!-- css-->
     <link rel="stylesheet" type="text/css" href="bower_components/sweetalert/dist/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
     <link rel="stylesheet" href="css/materialize.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style-inp.css">
@@ -24,9 +25,24 @@
     <script type="text/javascript" src="bower_components/materialize/dist/js/materialize.min.js"></script>
     <script type="text/javascript" src="bower_components/materialize/dist/js/materialize.min.js"></script>
     <!-- Materialize End -->
-    <!-- Google captcha -->
-    <!-- <script src='https://www.google.com/recaptcha/api.js'></script> -->
-    <!-- Google captcha end -->
+    <!-- Start Alexa Certify Javascript -->
+    <script type="text/javascript">
+    _atrk_opts = {
+        atrk_acct: "+j6Jo1IWx810cv",
+        domain: "roofpik.com",
+        dynamic: true
+    };
+    (function() {
+        var as = document.createElement('script');
+        as.type = 'text/javascript';
+        as.async = true;
+        as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js";
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(as, s);
+    })();
+    </script>
+    <noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=+j6Jo1IWx810cv" style="display:none" height="1" width="1" alt="" /></noscript>
+    <!-- End Alexa Certify Javascript -->
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -39,7 +55,7 @@
     <div id="loginbox" class="modal">
         <div login></div>
     </div>
-    <div ui-view autoscroll="true"></div>
+    <div ui-view autoscroll="true" class="minhtall"></div>
     <div footer></div>
     <a href="" id="scrollUp" style="display:none;" class="back-to-top"><i class="material-icons">arrow_upward</i></a>
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>

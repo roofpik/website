@@ -88,14 +88,14 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
 
     $("#name-search").focusin(function() {
         $timeout(function() {
-            $scope.showSearch2 = true;
-        }, 100);
+            $('.search-results').fadeIn();
+        }, 0);
     });
 
     // hide search by name list when input for searching by name
 
     $("#name-search").focusout(function() {
-        $scope.showSearch2 = false;
+        $('.search-results').fadeOut();
     });
 
     getCurrentLocation();
@@ -196,6 +196,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     }
 
     $scope.selectSearchByName = function(val) {
+        console.log(val);
         $scope.searchedText = val.name;
         $scope.searchedValue = val;
         $scope.showSearch2 = false;
@@ -335,9 +336,9 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     };
     
 
-    $(document).on("click",".searchByNameItem", function () {
-        console.log(this);
-    });
+    // $(document).on("click",".searchByNameItem", function () {
+    //     console.log(this);
+    // });
 
 }]);
 
@@ -360,3 +361,17 @@ app.controller('coverStoryHomeCtrl', ['$scope', '$timeout', function($scope, $ti
             }, 0);
         })
 }]);
+
+
+app.directive('autoComplete', function($timeout) {
+    return function(scope, iElement, iAttrs) {
+        iElement.autocomplete({
+            source: scope[iAttrs.uiItems],
+            select: function() {
+                $timeout(function() {
+                    iElement.trigger('input');
+                }, 0);
+            }
+        })
+    }
+});

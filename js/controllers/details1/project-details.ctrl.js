@@ -8,7 +8,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
-            console.log(user);
+            // console.log(user);
             $scope.userId = user.uid;
             $scope.userName = user.displayName;
         } else {
@@ -318,10 +318,6 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
             }
             generateImageList($scope.project.images);
             generateConfigurations($scope.project.configurations);
-            $scope.buyMin = convertCurrency($scope.project.price.buy.min);
-            $scope.buyMax = convertCurrency($scope.project.price.buy.max);
-            $scope.rentMin = convertCurrency($scope.project.price.rent.min);
-            $scope.rentMax = convertCurrency($scope.project.price.rent.max);
             if (angular.isDefined($stateParams.category)) {
                 $scope.path.push(($stateParams.category).capitalize());
             }
@@ -350,10 +346,18 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     function generateInfo(config) {
         var bhkData = [];
         var areaData = [];
+        var minPriceData= [];
+        var maxPriceData= [];
         for (key in config) {
             bhkData.push(config[key].bhk);
             areaData.push(config[key].superBuiltArea);
             $scope.propertyTypes.push(config[key].unit);
+            if(config[key].pricing.rent.min != 'NA'){
+                minPriceData.push(config[key].pricing.rent.min);
+            }
+            if(config[key].pricing.rent.max != 'NA'){
+                maxPriceData.push(config[key].pricing.rent.max);
+            }
         }
         $scope.propertyTypes = jQuery.unique($scope.propertyTypes);
         bhkData = jQuery.unique(bhkData);
@@ -362,6 +366,20 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
         minBhk = bhkData[0];
         areaData = jQuery.unique(areaData);
         areaData = areaData.sort();
+        if(minPriceData.length != 0){
+            minPriceData =minPriceData.sort();
+            $scope.rentMin = convertCurrency(minPriceData[minPriceData.length -1]);
+        } else {
+            $scope.rentMin = 'NA';
+        }
+
+        if(maxPriceData.length != 0){
+            maxPriceData =maxPriceData.sort();
+            $scope.rentMax = convertCurrency(maxPriceData[0]);
+        } else {
+            $scope.rentMax = 'NA';
+        }
+        
         $scope.minArea = areaData[0];
         $scope.maxArea = areaData[areaData.length - 1];
         for (key in bhkData) {
@@ -404,16 +422,6 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
                     } else if (configs[key].superBuiltArea > example[configs[key].bhk].superBuiltAreaMax) {
                         example[configs[key].bhk].superBuiltAreaMax = configs[key].superBuiltArea;
                     }
-                    if (configs[key].pricing.buy.min != 'NA') {
-                        if (configs[key].pricing.buy.min < example[configs[key].bhk].buyMin) {
-                            example[configs[key].bhk].buyMin = convertCurrency(configs[key].pricing.buy.min);
-                        }
-                    }
-                    if (configs[key].pricing.buy.max != 'NA') {
-                        if (configs[key].pricing.buy.max > example[configs[key].bhk].buyMax) {
-                            example[configs[key].bhk].buyMax = convertCurrency(configs[key].pricing.buy.max);
-                        }
-                    }
                     if (configs[key].pricing.rent.min != 'NA') {
                         if (configs[key].pricing.rent.min < example[configs[key].bhk].rentMin) {
                             example[configs[key].bhk].rentMin = convertCurrency(configs[key].pricing.rent.min);
@@ -431,26 +439,11 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
                         superBuiltAreaMin: configs[key].superBuiltArea,
                         superBuiltAreaMax: configs[key].superBuiltArea
                     }
-                    if (configs[key].pricing.buy.min != 'NA') {
-                        data.buyMin = convertCurrency(configs[key].pricing.buy.min);
-                    }
-                    if (configs[key].pricing.buy.max != 'NA') {
-                        data.buyMax = convertCurrency(configs[key].pricing.buy.max);
-                    }
                     if (configs[key].pricing.rent.min != 'NA') {
                         data.rentMin = convertCurrency(configs[key].pricing.rent.min);
                     }
                     if (configs[key].pricing.rent.max != 'NA') {
                         data.rentMax = convertCurrency(configs[key].pricing.rent.max);
-                    }
-                    if (data.buyMin) {
-                        if (!data.buyMax) {
-                            data.buyMax = data.buyMin;
-                        }
-                    } else {
-                        if (data.buyMax) {
-                            data.buyMin = data.buyMax;
-                        }
                     }
                     if (data.rentMin) {
                         if (!data.rentMax) {
@@ -471,26 +464,13 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
                     superBuiltAreaMin: configs[key].superBuiltArea,
                     superBuiltAreaMax: configs[key].superBuiltArea
                 }
-                if (configs[key].pricing.buy.min != 'NA') {
-                    data.buyMin = convertCurrency(configs[key].pricing.buy.min);
-                }
-                if (configs[key].pricing.buy.max != 'NA') {
-                    data.buyMax = convertCurrency(configs[key].pricing.buy.max);
-                }
                 if (configs[key].pricing.rent.min != 'NA') {
-                    data.rentMin = convertCurrency(configs[key].pricing.rent.min);
+                    // data.rentMin = convertCurrency(configs[key].pricing.rent.min);
+                    data.rentMin = configs[key].pricing.rent.min;
 
                     if (configs[key].pricing.rent.max != 'NA') {
-                        data.rentMax = convertCurrency(configs[key].pricing.rent.max);
-                    }
-                    if (data.buyMin) {
-                        if (!data.buyMax) {
-                            data.buyMax = data.buyMin;
-                        }
-                    } else {
-                        if (data.buyMax) {
-                            data.buyMin = data.buyMax;
-                        }
+                        // data.rentMax = convertCurrency(configs[key].pricing.rent.max);
+                        data.rentMax = configs[key].pricing.rent.max;
                     }
                     if (data.rentMin) {
                         if (!data.rentMax) {
@@ -513,12 +493,6 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
         var data = [];
         for (key in configs) {
             // console.log(configs[key]);
-            if (!configs[key].buyMin) {
-                configs[key].buyMin = 'NA'
-            }
-            if (!configs[key].buyMax) {
-                configs[key].buyMax = 'NA'
-            }
             if (!configs[key].rentMin) {
                 configs[key].rentMin = 'NA'
             }
@@ -541,6 +515,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     function generateConfigurationDisplay(data) {
         var sampleConfig = {};
         for (key in data) {
+            console.log(data[key]);
             if (!sampleConfig[data[key].bhk]) {
                 sampleConfig[data[key].bhk] = {
                     superBuiltArea: [],
@@ -599,7 +574,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
         })
     }
     $scope.goToWriteReview = function() {
-        console.log('called')
+        // console.log('called')
         $state.go('write-review', { id: $scope.projectId });
     }
 
@@ -635,7 +610,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
 
     $rootScope.$watch('allRatings', function() {
         $scope.allRatings = $rootScope.allRatings;
-        console.log($scope.allRatings);
+        // console.log($scope.allRatings);
     });
 
 
@@ -663,11 +638,8 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
         { id: 'security', id1: 'security1', name: 'Security' },
         { id: 'amenities', id1: 'amenities1', name: 'Amenities' },
         { id: 'openAndGreenAreas', id1: 'openAndGreenAreas1', name: 'Open and Green Areas' },
-        { id: 'electricityAndWaterSupply', id1: 'electricityAndWaterSupply1', name: 'Electricity and Water Supply' },
-        { id: 'convenienceOfHouseMaids', id1: 'convenienceOfHouseMaids1', name: 'Convenience of Housemaids' },
         { id: 'convenienceOfParking', id1: 'convenienceOfParking1', name: 'Convenience of Parking' },
-        { id: 'infrastructure', id1: 'infrastructure1', name: 'Infrastructure' },
-        { id: 'layoutOfApartment', id1: 'layoutOfApartment1', name: 'Layout of Apartments' }
+        { id: 'infrastructure', id1: 'infrastructure1', name: 'Infrastructure' }
     ];
 
 
@@ -695,11 +667,11 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
                 $("#goodStar").css("width", ($scope.reviewObject.threeStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
                 $("#averageStar").css("width", ($scope.reviewObject.twoStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
                 $("#badStar").css("width", ($scope.reviewObject.oneStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
-                console.log($scope.reviewObject);
+                // console.log($scope.reviewObject);
             }
         }
     }, function myError(err) {
-        console.log(err);
+        // console.log(err);
     })
 
 
@@ -707,7 +679,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
 
     function getReviews() {
         $http({
-            url: 'http://35.154.60.19/api/GetProjectReviews_1.0',
+            url: 'http://107.23.243.89/api/GetProjectReviews_1.0',
             method: 'GET',
             params: {
                 pid: $scope.projectId,
@@ -742,7 +714,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
                 // loading(false);    
             }
         }, function myError(err) {
-            console.log(err);
+            // console.log(err);
         })
     }
 
@@ -763,7 +735,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
             }
             // loading(false, 1000);
         }, function myError(err) {
-            console.log(err);
+            // console.log(err);
         })
     }
 
@@ -846,7 +818,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
 app.controller('galleryCtrl', ['$scope', '$timeout', function($scope, $timeout) {
     $scope.showGallery = true;
     $scope.$on('initGallery', function(event, data) {
-        console.log(data);
+        // console.log(data);
         $scope.images = data;
         $timeout(function() {
             var gallery = $('a[data-imagelightbox="a"]').imageLightbox({

@@ -163,7 +163,7 @@
                             <div class="cardpdt fix60 left">
                                 <span class="block black-text ft13 ellipsis">{{project.name}}</span>
                                 <span class="block ft12 grey-text ellipsis">{{project.address}}</span>
-                                <span class="block ft12 grey-text ellipsis"><i class="material-icons ft14 text-darken-2" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < project.rating ? 'amber-text':'normal'">star</i>({{project.rating}}) {{project.numberOfReviews}} Reviews</span>
+                                <span class="block ft12 grey-text ellipsis"><i class="material-icons ft14 text-darken-2" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < project.rating ? 'amber-text':'normal'">star</i><span ng-show="project.rating">({{project.rating}})</span> <span ng-show="project.numberOfReviews">{{project.numberOfReviews}}</span><span ng-hide="project.numberOfReviews">No</span> Reviews</span>
                                 <span class="block ft12 grey-text ellipsis" ng-show="project.bhks">{{project.bhks}} BHK Available</span>
                                 <span class="block ft12 grey-text ellipsis" ng-show="project.area">{{project.area.min}} <span ng-show="project.area.min != project.area.max">- {{project.area.max}}</span> Sq.ft.</span>
                             </div>
