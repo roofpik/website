@@ -50,3 +50,7 @@
     height: 100px;
     margin: auto;
 }
+
+.myClass{
+    min-height: 200px;
+}
