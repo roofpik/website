@@ -56,7 +56,7 @@
                                 <img src="http://www.ladbrokes.com/bingo/christmas-cracker/images/loadingAnimation.gif" class="loading-icon" ng-show="searchingName" />
                                 <div class="search-results">
                                     <ul class="collection homecoll" >
-                                        <li ng-repeat="item in searchByNameData |filter:searchedText" ng-click="selectSearchByName(item)" class="searchByNameItem collection-item">
+                                        <li ng-repeat="item in searchByNameData |filter:searchedText" ng-click="selectSearchByName(item)" class="searchByNameItem collection-item pda10">
                                             <span class="title ft13" ng-bind-html="item.name | highlight:searchedText"></span>
                                         </li>
                                     </ul>

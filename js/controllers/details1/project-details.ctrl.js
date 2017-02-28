@@ -515,7 +515,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     function generateConfigurationDisplay(data) {
         var sampleConfig = {};
         for (key in data) {
-            console.log(data[key]);
+            // console.log(data[key]);
             if (!sampleConfig[data[key].bhk]) {
                 sampleConfig[data[key].bhk] = {
                     superBuiltArea: [],
@@ -644,7 +644,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
 
 
     $http({
-        url: 'http://35.154.60.19/api/GetReviewSummary_1.0',
+        url: 'http://107.23.243.89/api/GetReviewSummary_1.0',
         method: 'GET',
         params: {
             id: $scope.projectId
@@ -659,14 +659,14 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
                     $scope.reviewAvailable = true;
                 }
                 $scope.reviewObject = response.data;
-                for (key in $scope.reviewObject) {
-                    $scope.reviewObject[key + '1'] = Math.round($scope.reviewObject[key]);
+                for (key in $scope.reviewObject.numbers) {
+                    $scope.reviewObject.numbers[key + '1'] = Math.round($scope.reviewObject.numbers[key]);
                 }
-                $("#excellentStar").css("width", ($scope.reviewObject.fiveStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
-                $("#veryGoodStar").css("width", ($scope.reviewObject.fourStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
-                $("#goodStar").css("width", ($scope.reviewObject.threeStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
-                $("#averageStar").css("width", ($scope.reviewObject.twoStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
-                $("#badStar").css("width", ($scope.reviewObject.oneStar / $scope.reviewObject.numberOfReviews) * 100 + '%');
+                $("#excellentStar").css("width", ($scope.reviewObject.numbers.fiveStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
+                $("#veryGoodStar").css("width", ($scope.reviewObject.numbers.fourStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
+                $("#goodStar").css("width", ($scope.reviewObject.numbers.threeStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
+                $("#averageStar").css("width", ($scope.reviewObject.numbers.twoStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
+                $("#badStar").css("width", ($scope.reviewObject.numbers.oneStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
                 // console.log($scope.reviewObject);
             }
         }
