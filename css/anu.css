@@ -23,15 +23,6 @@
     font-weight: bold;
     color:#000;
 }
-.loaderPositionCoverStories {
-	position: absolute;
-    left: 50%;
-    top: 300px !important;
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    z-index: 9;
-}
 
 #map-list li {
     cursor:pointer;

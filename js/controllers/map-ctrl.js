@@ -10,7 +10,6 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', '$state', '$rootScope'
     $scope.localityInfoWindow = [];
     $scope.locationInfoWindow = [];
     $scope.searchByNameResults = [];
-    $scope.loading = true;
     $scope.fetchingResults = false;
     var finalMarkers = [];
 
@@ -31,6 +30,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', '$state', '$rootScope'
     $rootScope.$watch('showMap', function() {
         if ($rootScope.showMap && !$scope.dataFetchedOnce) {
             // alert('fetching Map Data');
+            $scope.loading = true;
             $scope.showMapOnHome = true;
             getCurrentLocation();
         }

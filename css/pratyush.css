@@ -22,7 +22,7 @@
 .loaderPositionMap {
     position: absolute;
     left: 50%;
-    top: 1100px;
+    top: 2200px;
     width: 100px;
     height: 100px;
     margin: auto;
@@ -31,10 +31,11 @@
 .loaderPositionCoverStories {
     position: absolute;
     left: 50%;
-    top: 2500px;
+    top: 200px;
     width: 100px;
     height: 100px;
     margin: auto;
+    z-index: 9;
 }
 
 .loaderPositionProfile{
