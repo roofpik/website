@@ -26,16 +26,36 @@
                 <b>Review Anonymously:</b> Our hawk-eyed moderators have a thing against reviews with personal information such as names, phone numbers, emails, or other contact details. Make sure your review doesn’t include such information.</p>
         </div>
         <div class="col s12 m8 pdleft50">
-            <h5 class="pdt10 b" ng-click = "submitReview()">Write Review</h5>
+            <h5 class="pdt10 b" ng-click="submitReview()">Write Review</h5>
             <hr>
             <form name="reviewForm">
                 <div class="row mgbn" ng-show="showSearch">
                     <div class="input-field col s12 reletive">
                         <input id="select_project" ng-model="selectedItem" ng-change="nameEntered()" type="text" class="validate mgbn" required><img src="http://www.ladbrokes.com/bingo/christmas-cracker/images/loadingAnimation.gif" ng-show="showLoading" class="loading-icon" />
                         <label for="select_project">Select Project</label>
+                        <div class="search-results" ng-show="showResults">
+                            <ul class="collection homecoll">
+                                <li ng-repeat="item in projectList" ng-click="selectProject(item)" class="searchByNameItem collection-item">
+                                    <span class="title ft13" ng-bind-html="item.name | highlight:selectedItem"></span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="row" ng-hide="showSearch">
+                <div ng-show="showLoadingSelected" class="preloader-wrapper big active loaderPositionReview">
+                    <div class="spinner-layer spinner-blue-only">
+                        <div class="circle-clipper left ">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" ng-show="showSelected">
                     <div class="col s12 pdb10">
                         <h4 class="ft19">{{selectedItem}}</h4>
                     </div>
@@ -77,7 +97,7 @@
                         <label for="textarea1">Type your review</label>
                     </div>
                 </div>
-                <p ng-click="showMoreFn()" class="alignc" style= "cursor: pointer" ng-class="showMore?'roofGrey': 'roofGreen'"><b>{{showMoreLess}}</b></p>
+                <p ng-click="showMoreFn()" class="alignc" style="cursor: pointer" ng-class="showMore?'roofGrey': 'roofGreen'"><b>{{showMoreLess}}</b></p>
                 <div ng-show="showMore" class="mgt20">
                     <div class="row mgbn" ng-repeat="item in ratingParams">
                         <div class="col left ft13 pdb10">{{item.name}}</div>
@@ -151,7 +171,7 @@
                             </div>
                         </div>
                     </div>
-                     <div class="row mgb10">
+                    <div class="row mgb10">
                         <div class="col left ft13 pdb10">Apartment Layout Efficient?</div>
                         <div class="col s12 grey-text">
                             <div class="col right">
@@ -177,7 +197,7 @@
                             </div>
                         </div>
                     </div>
-                     <div class="row mgb10">
+                    <div class="row mgb10">
                         <div class="col left ft13 pdb10">Regular/Clean Water Supply?</div>
                         <div class="col s12 grey-text">
                             <div class="col right">

@@ -1,28 +1,30 @@
 app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$location', '$stateParams', '$http', function($scope, $timeout, $rootScope, $location, $stateParams, $http) {
     document.title = "Write Review";
-    // console.log($stateParams.id);    
-    if (checkLocalStorage('loginStatus')) {
-        $scope.loginStatus = JSON.parse(localStorage.getItem('loginStatus'));
-        if (JSON.parse(localStorage.getItem('loginStatus'))) {
-            user = firebase.auth().currentUser;
+    // console.log($stateParams.id); 
+    $timeout(function() {
+        if (checkLocalStorage('loginStatus')) {
+            $scope.loginStatus = JSON.parse(localStorage.getItem('loginStatus'));
+            if (JSON.parse(localStorage.getItem('loginStatus'))) {
+                user = firebase.auth().currentUser;
+            } else {
+                console.log('this is working')
+                $rootScope.$emit("callShowLogin", {});
+            }
         } else {
-            console.log('this is working');
             $rootScope.$emit("callShowLogin", {});
         }
-    } else {
-        $rootScope.$emit("callShowLogin", {});
-    }
-    $rootScope.$watch('loginStatus', function() {
-        // $timeout(function() {
-        if ($rootScope.loginStatus) {
-            $scope.loginStatus = true;
-            $scope.user = firebase.auth().currentUser;
-        } else {
-            $scope.loginStatus = false;
-        }
-        // getUser($scope.user);
-        // }, 0)
-    })
+        $rootScope.$watch('loginStatus', function() {
+            // $timeout(function() {
+            if ($rootScope.loginStatus) {
+                $scope.loginStatus = true;
+                $scope.user = firebase.auth().currentUser;
+            } else {
+                $scope.loginStatus = false;
+            }
+            // getUser($scope.user);
+            // }, 0)
+        })
+    }, 0)
 
     function getUser(user) {
         // console.log(user);
@@ -37,7 +39,6 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         url: $location.path()
     }
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
-    $scope.showLoading = false;
     $scope.user = {};
     $scope.review = {
             ratings: {}
@@ -79,9 +80,12 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     }];
     var user;
     if (params) {
-        $scope.showSearch = false;
+        $scope.showSelected = true;
+        $scope.showLoadingSelected = true;
+        $scope.showLoading = true;
     } else {
-        console.log('called');
+        // console.log('called');
+        $scope.showSelected = false;
         $scope.showSearch = true;
     }
 
@@ -129,7 +133,6 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
 
     if (params) {
         $scope.showLoading = true;
-        $scope.showList = false;
         $scope.showSearch = false;
         $http({
             url: 'http://107.23.243.89/api/GetResidential_1.0',
@@ -148,65 +151,78 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                         console.log($scope.selectedItem);
                     }
                 }
-                $scope.showLoading = false;
             }, 500)
-            $scope.showLoading = false;
+            $scope.showLoadingSelected = false;
         }, function myError(err) {})
 
     }
     $scope.nameEntered = function() {
-        $scope.showLoading = true;
         if ($scope.selectedItem) {
-            if ($scope.selectedItem.length = 2) {
+            if ($scope.selectedItem.length > 2) {
+                $scope.showLoading = true;
+                $scope.showResults = true;
                 var data = {
                     name: $scope.selectedItem
                 }
                 var args = encodeParams(data);
-                console.log(args);
+                // console.log(args);
                 $http({
-
                     url: 'http://107.23.243.89/api/GetByName_1.0',
                     method: 'GET',
                     params: {
                         args: args
                     }
                 }).then(function mySucces(response) {
+                    $scope.projectList = {};
                     $timeout(function() {
-                        console.log(response)
-                        if (response.data) {
+                        if (Object.keys(response.data).length > 0) {
                             $scope.projectList = response.data;
-                        }
-                        for (key in $scope.projectList) {
-                            $scope.projects1[$scope.projectList[key].name.toString()] = $scope.projectList[key].id;
-                            $scope.projects2[$scope.projectList[key].name.toString()] = null;
-                            $scope.projects3[$scope.projectList[key].name.toString()] = $scope.projectList[key].type;
-                            // $scope.projects4[$scope.projectList[key].id] = $scope.projectList[key].name;
+                            // console.log($scope.projectList);
                         }
                         $scope.showLoading = false;
-                        bindList();
                     }, 500)
                 }, function myError(err) {})
+            } else {
+                $scope.showResults = false;
             }
         }
     }
 
-    function bindList() {
-        $('#select_project').autocomplete({
-            data: $scope.projects2,
-            limit: 10,
-            onAutocomplete: function(value, data) {
-                $scope.selectedItem = value;
-                $scope.projectSelected = true;
-                $scope.selectedProject.name = $scope.selectedItem;
-                $scope.selectedProject.id = $scope.projects1[$scope.selectedItem];
-                $scope.selectedProject.type = $scope.projects3[$scope.selectedItem];
-                console.log($scope.selectedProject);
-            }
-        });
-        $timeout(function() {
-            $scope.showLoading = false;
-        }, 200);
+    $scope.selectProject = function(project) {
+        // console.log(project)
+        $scope.selectedItem = project.name;
+        $scope.showResults = false;
     }
+
+    $("#select_project").focusin(function() {
+        $timeout(function() {
+            $('.search-results').fadeIn();
+        }, 0);
+    });
+
+    // hide search by name list when input for searching by name
+
+    $("#select_project").focusout(function() {
+        $('.search-results').fadeOut();
+    });
+
+    // function bindList() {
+    //     $('#select_project').autocomplete({
+    //         data: $scope.projects2,
+    //         limit: 10,
+    //         onAutocomplete: function(value, data) {
+    //             $scope.selectedItem = value;
+    //             $scope.projectSelected = true;
+    //             $scope.selectedProject.name = $scope.selectedItem;
+    //             $scope.selectedProject.id = $scope.projects1[$scope.selectedItem];
+    //             $scope.selectedProject.type = $scope.projects3[$scope.selectedItem];
+    //             console.log($scope.selectedProject);
+    //         }
+    //     });
+    //     $timeout(function() {
+    //         $scope.showLoading = false;
+    //     }, 200);
+    // }
 
 
     // $scope.selectProject = function(val) {
