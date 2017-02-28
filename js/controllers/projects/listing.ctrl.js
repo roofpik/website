@@ -56,10 +56,10 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
             $timeout(function() {
                 $scope.locations = [];
                 for (key in data) {
-                    $scope.locations.push(data[key]);
+                    $scope.locations.push(data[key]);    
                 }
                 getBuilders();
-            }, 0)
+            }, 10)
         });
     }
 
@@ -172,7 +172,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
         }
         data.page_start = page_start;
         data.page_size = page_size;
-        // console.log(data);
+        console.log(data);
         $http({
             url: 'http://107.23.243.89/api/GetListing_1.0',
             method: 'GET',
@@ -180,7 +180,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
                 args: encodeParams(data)
             }
         }).then(function mySucces(response) {
-            // console.log(response);
+            console.log(response);
             $scope.projectList = [];
             totalProjects = response.data.hits;
             if ($scope.pages.length == 0) {
@@ -199,14 +199,15 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
             totalProjectsFetched += Object.keys(response.data.details).length;
             $scope.dataFetched = true;
             $scope.projects = response.data.details;
-            console.log($scope.projects);
+            // console.log($scope.projects);
             for (key in $scope.projects) {
                 if ($scope.projects[key].cover.indexOf('http') == -1) {
-                    if (parameters.category == 'CGHS') {
-                        $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/cghs/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-s.jpg';
-                    } else {
-                        $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/residential/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-s.jpg';
-                    }
+                    // if ($scope.projects[key].type == 'C') {
+                    //     $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/cghs/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-s.jpg';
+                    // } else {
+                    //     $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/residential/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-s.jpg';
+                    // }
+                    $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/'+$scope.projects[key].type+'/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-s.jpg';
                 }
                 $scope.projectList.push($scope.projects[key]);
             }
@@ -218,13 +219,14 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
         })
     }
 
-    $scope.getRedirectionString = function(id) {
+    $scope.getRedirectionString = function(id, type) {
         var data = {
-            projectId: id
+            projectId: id,
+            category: type
         }
-        if (parameters.category == 'CGHS') {
-            data.category = 'cghs';
-        }
+        // if (parameters.category == 'CGHS') {
+        //     data.category = 'cghs';
+        // }
         return '../#/project-details/' + encodeParams(data);
     }
 
@@ -308,3 +310,5 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
         }
     }
 }]);
+
+

@@ -51,4 +51,6 @@
     margin: auto;
 }
 
-
+.myClass{
+    min-height: 200px;
+}

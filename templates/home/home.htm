@@ -54,10 +54,9 @@
                                 <span class="inpspn">Find :</span>
                                 <input type="text" placeholder="Apartments, Commercials, PG" id="name-search" class="autocompletenear inp_pdw mgbn" ng-model="searchedText" ng-change="getSearchData()">
                                 <img src="http://www.ladbrokes.com/bingo/christmas-cracker/images/loadingAnimation.gif" class="loading-icon" ng-show="searchingName" />
-                                <div class="search-results" ng-show="showSearch2">
-                                    <ul class="collection homecoll">
-                                        <li ng-repeat="item in searchByNameData |filter:searchedText" class=" collection-item avatar" ng-click="selectSearchByName(item)">
-                                            <!-- <img ng-src="{{item.icon}}" class="circle" /> -->
+                                <div class="search-results">
+                                    <ul class="collection homecoll" >
+                                        <li ng-repeat="item in searchByNameData |filter:searchedText" ng-click="selectSearchByName(item)" class="searchByNameItem collection-item">
                                             <span class="title ft13" ng-bind-html="item.name | highlight:searchedText"></span>
                                         </li>
                                     </ul>

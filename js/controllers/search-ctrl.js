@@ -255,7 +255,7 @@ app.controller('searchCtrl', ['$scope', '$http', '$state', '$timeout', '$rootSco
      // get search results based on the string in input box
      $scope.getSearchData = function() {
          // console.log($scope.searchedText);
-         if ($scope.searchedText.length > 2) {
+         if ($scope.searchedText.length == 2) {
             $scope.searchingName = true;
              var data = {
                  name: $scope.searchedText
