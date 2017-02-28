@@ -22,10 +22,11 @@
 .loaderPositionMap {
     position: absolute;
     left: 50%;
-    top: 2200px;
+    top: 2400px;
     width: 100px;
     height: 100px;
     margin: auto;
+    z-index: 9;
 }
 
 .loaderPositionCoverStories {

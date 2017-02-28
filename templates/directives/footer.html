@@ -21,7 +21,8 @@
                     <form name="newsletter">
                         <div class="input-field col s12 pdln mgtn">
                             <i class="material-icons prefix">email</i>
-                            <input placeholder="Email" type="email" ng-model="mail" class="validate mgbn ft12" required>
+                            <input name="emailAddress" placeholder="Email*" type="email" ng-model="mail" class="validate mgbn ft12" required>
+                            <p class="redf" ng-show="newsletter.emailAddress.$invalid && newsletter.emailAddress.$touched">Please enter a vaild email address.</p>
                         </div>
                         <div class="col s12 mgt10 pdln">
                             <button class="btn btn-full blue" ng-click="addSubscriber(mail)" ng-disabled="newsletter.$invalid"><i class="material-icons left">send</i> Join</button>
@@ -48,22 +49,25 @@
                     <form name="contactUs" ng-submit="submitQuery(user)">
                         <div class="input-field col s12 pdln mgtn">
                             <i class="material-icons prefix">account_circle</i>
-                            <input placeholder="Name" type="text" class="validate mgbn ft12" ng-model="user.name" required>
+                            <input name="userName" placeholder="Name*" type="text" class="validate mgbn ft12" ng-model="user.name" required>
+                            <p class="redf" ng-show="contactUs.userName.$invalid && contactUs.userName.$touched">This field is required.</p>
                         </div>
                         <div class="row mgan">
                             <div class="input-field col s12 m6 pdln mgtn">
                                 <i class="material-icons prefix">phone</i>
-                                <input placeholder="Phone" type="text" class="validate mgbn ft12" ng-model="user.mobile" ng-minlength="10" ng-maxlength="10" required>
+                                <input name="userMobile" placeholder="Phone*" type="text" class="validate mgbn ft12" ng-model="user.mobile" ng-minlength="10" ng-maxlength="10" required>
+                                <p class="redf" ng-show="contactUs.userMobile.$invalid && contactUs.userMobile.$touched">Invalid Number</p>
                             </div>
                             <div class="input-field col s12 m6 pdln mgtn">
                                 <i class="material-icons prefix">email</i>
-                                <input placeholder="Email" type="email" class="validate mgbn ft12" ng-model="user.email" required>
+                                <input name="userEmail" placeholder="Email*" type="email" class="validate mgbn ft12" ng-model="user.email" required>
+                                <p class="redf" ng-show="contactUs.userEmail.$invalid && contactUs.userEmail.$touched">Please enter a valid email address.</p>
                             </div>
                         </div>
                         <div class="input-field col s12 pdln mgtn sele_list">
                             <i class="material-icons prefix">list</i>
                             <select class="mgbn" ng-model="user.userType" required>
-                                <option value="" disabled selected>Choose your option</option>
+                                <option value="" disabled selected>Choose your option*</option>
                                 <option value="partner">Partner</option>
                                 <option value="investor">Investor</option>
                                 <option value="career">Career</option>
@@ -71,7 +75,8 @@
                         </div>
                         <div class="input-field col s12 pdln mgtn">
                             <i class="material-icons prefix">mode_edit</i>
-                            <textarea id="icon_prefix2" placeholder="Type your text" ng-model="user.message" class="materialize-textarea mgbn" required></textarea>
+                            <textarea name="userText" id="icon_prefix2" placeholder="Type your text*" ng-model="user.message" class="materialize-textarea mgbn" required></textarea>
+                            <p class="redf" ng-show="contactUs.userText.$invalid && contactUs.userText.$touched">This field is required.</p>
                         </div>
                         <!--   <div
                     vc-recaptcha theme="'light'" key="model.key" on-create="setWidgetId(widgetId)" on-success="setResponse(response)" on-expire="cbExpiration()" >
