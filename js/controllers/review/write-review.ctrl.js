@@ -1,12 +1,44 @@
 app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$location', '$stateParams', '$http', function($scope, $timeout, $rootScope, $location, $stateParams, $http) {
     document.title = "Write Review";
-    // console.log($stateParams.id);
+    // console.log($stateParams.id);    
+    if (checkLocalStorage('loginStatus')) {
+        $scope.loginStatus = JSON.parse(localStorage.getItem('loginStatus'));
+        if (JSON.parse(localStorage.getItem('loginStatus'))) {
+            user = firebase.auth().currentUser;
+        } else {
+            console.log('this is working');
+            $rootScope.$emit("callShowLogin", {});
+        }
+    } else {
+        $rootScope.$emit("callShowLogin", {});
+    }
+    $rootScope.$watch('loginStatus', function() {
+        // $timeout(function() {
+        if ($rootScope.loginStatus) {
+            $scope.loginStatus = true;
+            $scope.user = firebase.auth().currentUser;
+        } else {
+            $scope.loginStatus = false;
+        }
+        // getUser($scope.user);
+        // }, 0)
+    })
+
+    function getUser(user) {
+        // console.log(user);
+        $scope.userName = user.displayName;
+        $scope.userId = user.uid;
+        // console.log($scope.userName);
+    }
+
+
     var timestamp = new Date().getTime();
     var urlInfo = {
         url: $location.path()
     }
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.showLoading = false;
+    $scope.user = {};
     $scope.review = {
             ratings: {}
         }
@@ -14,7 +46,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     if ($stateParams.id) {
         var params = $stateParams.id;
     }
-    console.log(params);
+    // console.log(params);
     // $scope.projectId = params.projectId;
     $scope.projects1 = {}; //bind project name with project ID
     $scope.projects2 = {}; //bind project name with null for autocomplete
@@ -44,38 +76,15 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     }, {
         name: 'Infrastructure',
         id: 8
-    }, {
-        name: 'Layout of the apartment',
-        id: 9
     }];
     var user;
     if (params) {
-            $scope.showSearch = false;
+        $scope.showSearch = false;
     } else {
         console.log('called');
         $scope.showSearch = true;
     }
-    $rootScope.$watch('loginStatus', function() {
-        if ($rootScope.loginStatus) {
-            $scope.loginStatus = true;
-            user = firebase.auth().currentUser;
-        } else {
-            $scope.loginStatus = false;
-        }
-    })
 
-    if (checkLocalStorage('loginStatus')) {
-        $scope.loginStatus = JSON.parse(localStorage.getItem('loginStatus'));
-        if (JSON.parse(localStorage.getItem('loginStatus'))) {
-            user = firebase.auth().currentUser;
-        } else {
-
-            $rootScope.$emit("callShowLogin", {});
-        }
-    } else {
-
-        $rootScope.$emit("callShowLogin", {});
-    }
     $scope.ratingsObject = {
         iconOnColor: 'rgb(45, 182, 214)', //Optional
         iconOffColor: 'rgb(140, 140, 140)', //Optional
@@ -103,8 +112,6 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
             $scope.review.ratings.convenienceOfParking = rating;
         } else if (index == 8) {
             $scope.review.ratings.infrastructure = rating;
-        } else if (index == 9) {
-            $scope.review.ratings.layoutOfApartment = rating;
         }
     };
     $scope.projectLocality = [];
@@ -143,6 +150,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                 }
                 $scope.showLoading = false;
             }, 500)
+            $scope.showLoading = false;
         }, function myError(err) {})
 
     }
@@ -172,7 +180,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                             $scope.projects1[$scope.projectList[key].name.toString()] = $scope.projectList[key].id;
                             $scope.projects2[$scope.projectList[key].name.toString()] = null;
                             $scope.projects3[$scope.projectList[key].name.toString()] = $scope.projectList[key].type;
-                            $scope.projects4[$scope.projectList[key].id] = $scope.projectList[key].name;
+                            // $scope.projects4[$scope.projectList[key].id] = $scope.projectList[key].name;
                         }
                         $scope.showLoading = false;
                         bindList();
@@ -224,77 +232,115 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     });
 
     $scope.submitReview = function() {
+        console.log($scope.review);
         swal({
-            title: "Submitting Review",
-            text: "Please wait...",
-            imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
-            showConfirmButton: false
-        });
-        var reviewPath = '';
-        var userReviewPath = '';
-        var key = '';
-        $scope.review.userName = user.displayName;
-        // $scope.review.userName = 'Anu Porwal';
-        $scope.review.userId = user.uid;
-        // $scope.review.userId = '2cQ2XQ7w7pdT9WGq2nyGJhrPSOo2';
-        $scope.review.blocked = false;
-        $scope.review.createdDate = new Date().getTime();
-        $scope.review.dataFormat = 1;
-        $scope.review.wordCount = ($scope.review.reviewText).length;
-        $scope.review.source = 'website';
-        $scope.review.status = 'uploaded';
-        var updates = {};
-        $scope.userReviewData = {
-            cityId: $scope.cityId,
-            cityName: 'Gurgaon',
-            reviewTitle: $scope.review.reviewTitle,
-            status: $scope.review.status,
-            createdDate: $scope.review.createdDate
-        }
-        if ($scope.selectedProject.type == 'residential') {
-            newKey = db.ref('websiteReviews/' + $scope.cityId + '/residential/' + $scope.selectedProject.id).push().key;
-            $scope.userReviewData.projectId = $scope.selectedProject.id;
-            $scope.userReviewData.projectName = $scope.selectedProject.name;
-            reviewPath = 'websiteReviews/' + $scope.cityId + '/residential/' + $scope.selectedProject.id + '/' + newKey;
-            userReviewPath = 'userReviews/' + $scope.review.userId + '/residential/' + newKey;
-        }
+                title: "Enter Your Phone Number",
+                text: "You will soon receive a one time password",
+                type: "input",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                animation: "slide-from-top",
+                inputPlaceholder: "Phone Number"
+            },
+            function(inputValue) {
+                if (inputValue === false) return false;
+                if (inputValue === "") {
+                    swal.showInputError("Please Enter Your Mobile Number");
+                    return false
+                }
 
-        if ($scope.selectedProject.type == 'location') {
-            newKey = db.ref('websiteReviews/' + $scope.cityId + '/location/' + $scope.selectedProject.id).push().key;
-            $scope.userReviewData.projectId = $scope.selectedProject.id;
-            $scope.userReviewData.projectName = $scope.selectedProject.name;
-            reviewPath = 'websiteReviews/' + $scope.cityId + '/location/' + $scope.selectedProject.id + '/' + newKey;
-            userReviewPath = 'userReviews/' + $scope.review.userId + '/location/' + newKey;
-        }
 
-        if ($scope.selectedProject.type == 'locality') {
-            newKey = db.ref('websiteReviews/' + $scope.cityId + '/locality/' + $scope.selectedProject.id).push().key;
-            $scope.userReviewData.projectId = $scope.selectedProject.id;
-            $scope.userReviewData.projectName = $scope.selectedProject.name;
-            reviewPath = 'websiteReviews/' + $scope.cityId + '/locality/' + $scope.selectedProject.id + '/' + newKey;
-            userReviewPath = 'userReviews/' + $scope.review.userId + '/locality/' + newKey;
-        }
-
-        if (Object.keys($scope.review.ratings).length == 0) {
-            delete $scope.review.ratings;
-        }
-        updates[reviewPath] = $scope.review;
-        updates[userReviewPath] = $scope.userReviewData;
-        console.log(updates);
-        db.ref().update(updates).then(function() {
-            $timeout(function() {
                 swal({
-                    title: "Done",
-                    text: "Your review was successfully submitted!",
-                    type: "success",
-                    showCancelButton: false,
-                    confirmButtonColor: "#AEDEF4",
-                    confirmButtonText: "OK",
-                    closeOnConfirm: false
-                }, function() {
-                    window.location.reload(true);
-                });
-            }, 500);
-        })
+                        title: "Verifying Your Phone Number",
+                        text: "Please Enter The OTP",
+                        type: "input",
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        animation: "slide-from-top",
+                        inputPlaceholder: "One Time Password"
+                    },
+                    function(inputValue) {
+                        if (inputValue === false) return false;
+
+                        if (inputValue === "") {
+                            swal.showInputError("This Field Cannot Be Left Blank");
+                            return false
+                        }
+
+                    });
+            });
+
+        // swal({
+        //     title: "Submitting Review",
+        //     text: "Please wait...",
+        //     imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
+        //     showConfirmButton: false
+        // });
+        // var reviewPath = '';
+        // var userReviewPath = '';
+        // var key = '';
+        // $scope.review.userName = user.displayName;
+        // // $scope.review.userName = 'Anu Porwal';
+        // $scope.review.userId = user.uid;
+        // // $scope.review.userId = '2cQ2XQ7w7pdT9WGq2nyGJhrPSOo2';
+        // $scope.review.blocked = false;
+        // $scope.review.createdDate = new Date().getTime();
+        // $scope.review.dataFormat = 1;
+        // $scope.review.wordCount = ($scope.review.reviewText).length;
+        // $scope.review.source = 'website';
+        // $scope.review.status = 'uploaded';
+        // var updates = {};
+        // $scope.userReviewData = {
+        //     cityId: $scope.cityId,
+        //     cityName: 'Gurgaon',
+        //     reviewTitle: $scope.review.reviewTitle,
+        //     status: $scope.review.status,
+        //     createdDate: $scope.review.createdDate
+        // }
+        // if ($scope.selectedProject.type == 'residential') {
+        //     newKey = db.ref('websiteReviews/' + $scope.cityId + '/residential/' + $scope.selectedProject.id).push().key;
+        //     $scope.userReviewData.projectId = $scope.selectedProject.id;
+        //     $scope.userReviewData.projectName = $scope.selectedProject.name;
+        //     reviewPath = 'websiteReviews/' + $scope.cityId + '/residential/' + $scope.selectedProject.id + '/' + newKey;
+        //     userReviewPath = 'userReviews/' + $scope.review.userId + '/residential/' + newKey;
+        // }
+
+        // if ($scope.selectedProject.type == 'location') {
+        //     newKey = db.ref('websiteReviews/' + $scope.cityId + '/location/' + $scope.selectedProject.id).push().key;
+        //     $scope.userReviewData.projectId = $scope.selectedProject.id;
+        //     $scope.userReviewData.projectName = $scope.selectedProject.name;
+        //     reviewPath = 'websiteReviews/' + $scope.cityId + '/location/' + $scope.selectedProject.id + '/' + newKey;
+        //     userReviewPath = 'userReviews/' + $scope.review.userId + '/location/' + newKey;
+        // }
+
+        // if ($scope.selectedProject.type == 'locality') {
+        //     newKey = db.ref('websiteReviews/' + $scope.cityId + '/locality/' + $scope.selectedProject.id).push().key;
+        //     $scope.userReviewData.projectId = $scope.selectedProject.id;
+        //     $scope.userReviewData.projectName = $scope.selectedProject.name;
+        //     reviewPath = 'websiteReviews/' + $scope.cityId + '/locality/' + $scope.selectedProject.id + '/' + newKey;
+        //     userReviewPath = 'userReviews/' + $scope.review.userId + '/locality/' + newKey;
+        // }
+
+        // if (Object.keys($scope.review.ratings).length == 0) {
+        //     delete $scope.review.ratings;
+        // }
+        // updates[reviewPath] = $scope.review;
+        // updates[userReviewPath] = $scope.userReviewData;
+        // console.log(updates);
+        // db.ref().update(updates).then(function() {
+        //     $timeout(function() {
+        //         swal({
+        //             title: "Done",
+        //             text: "Your review was successfully submitted!",
+        //             type: "success",
+        //             showCancelButton: false,
+        //             confirmButtonColor: "#AEDEF4",
+        //             confirmButtonText: "OK",
+        //             closeOnConfirm: false
+        //         }, function() {
+        //             window.location.reload(true);
+        //         });
+        //     }, 500);
+        // })
     }
 }])

@@ -26,7 +26,7 @@
                 <b>Review Anonymously:</b> Our hawk-eyed moderators have a thing against reviews with personal information such as names, phone numbers, emails, or other contact details. Make sure your review doesn’t include such information.</p>
         </div>
         <div class="col s12 m8 pdleft50">
-            <h5 class="pdt10 b">Write Review</h5>
+            <h5 class="pdt10 b" ng-click = "submitReview()">Write Review</h5>
             <hr>
             <form name="reviewForm">
                 <div class="row mgbn" ng-show="showSearch">
@@ -58,7 +58,7 @@
                 <hr>
                 <div class="row mgt20">
                     <div class="col s12 pdb10">Overall rating *</div>
-                    <div class="col s12">
+                    <div class="col s12 pointer">
                         <review-ratings ratingsobj='ratingsObject' index='1'></review-ratings>
                     </div>
                 </div>
@@ -77,77 +77,116 @@
                         <label for="textarea1">Type your review</label>
                     </div>
                 </div>
-                <p ng-click="showMoreFn()" class="alignc" ng-class="showMore?'roofGrey': 'roofGreen'"><b>{{showMoreLess}}</b></p>
+                <p ng-click="showMoreFn()" class="alignc" style= "cursor: pointer" ng-class="showMore?'roofGrey': 'roofGreen'"><b>{{showMoreLess}}</b></p>
                 <div ng-show="showMore" class="mgt20">
                     <div class="row mgbn" ng-repeat="item in ratingParams">
                         <div class="col left ft13 pdb10">{{item.name}}</div>
-                        <div class="col right ft20i pdl0 grey-text">
+                        <div class="col right ft20i pdl0 grey-text pointer">
                             <review-ratings ratingsobj='ratingsObject' index='item.id'></review-ratings>
                         </div>
                     </div>
                     <hr>
                     <div class="row mgb10">
-                        <div class="col left ft13 pdb10">Is the project conveniently located ?</div>
+                        <div class="col left ft13 pdb10">Good Schools?</div>
                         <div class="col s12 grey-text">
                             <div class="col right">
-                                <input class="with-gap" name="group2" type="radio" id="pcln" ng-model="review.projectConvenientlyLocated" value="No" />
-                                <label for="pcln">No</label>
+                                <input class="with-gap" name="group2" type="radio" id="schoolsNo" ng-model="review.schoolsAvailable" value="No" />
+                                <label for="schoolsNo">No</label>
                             </div>
                             <div class="col right">
-                                <input class="with-gap" name="group2" type="radio" id="pcly" ng-model="review.projectConvenientlyLocated" value="Yes" />
-                                <label for="pcly">Yes</label>
+                                <input class="with-gap" name="group2" type="radio" id="schoolsYes" ng-model="review.schoolsAvailable" value="Yes" />
+                                <label for="schoolsYes">Yes</label>
                             </div>
                         </div>
                     </div>
                     <div class="row mgb10">
-                        <div class="col left ft13 pdb10">Do you have easy access to public transport ?</div>
+                        <div class="col left ft13 pdb10">Good Markets?</div>
                         <div class="col s12 grey-text">
                             <div class="col right">
-                                <input class="with-gap" name="group3" type="radio" id="eaptn" ng-model="review.easyAccessToPublicTransport" value="No" />
-                                <label for="eaptn">No</label>
+                                <input class="with-gap" name="group3" type="radio" id="marketsNo" ng-model="review.marketsAvailable" value="No" />
+                                <label for="marketsNo">No</label>
                             </div>
                             <div class="col right">
-                                <input class="with-gap" name="group3" type="radio" id="eapty" ng-model="review.easyAccessToPublicTransport" value="Yes" />
-                                <label for="eapty">Yes</label>
+                                <input class="with-gap" name="group3" type="radio" id="marketsYes" ng-model="review.marketsAvailable" value="Yes" />
+                                <label for="marketsYes">Yes</label>
                             </div>
                         </div>
                     </div>
                     <div class="row mgb10">
-                        <div class="col left ft13 pdb10">Do you have good schools nearby ?</div>
+                        <div class="col left ft13 pdb10">Reputed Hospitals?</div>
                         <div class="col s12 grey-text">
                             <div class="col right">
-                                <input class="with-gap" name="group4" type="radio" id="gsn" ng-model="review.goodSchools" value="No" />
-                                <label for="gsn">No</label>
+                                <input class="with-gap" name="group4" type="radio" id="hospitalsNo" ng-model="review.hospitalsAvailable" value="No" />
+                                <label for="hospitalsNo">No</label>
                             </div>
                             <div class="col right">
-                                <input class="with-gap" name="group4" type="radio" id="gsy" ng-model="review.goodSchools" value="Yes" />
-                                <label for="gsy">Yes</label>
+                                <input class="with-gap" name="group4" type="radio" id="hospitalsYes" ng-model="review.hospitalsAvailable" value="Yes" />
+                                <label for="hospitalsYes">Yes</label>
                             </div>
                         </div>
                     </div>
                     <div class="row mgb10">
-                        <div class="col left ft13 pdb10">Do you have markets nearby ?</div>
+                        <div class="col left ft13 pdb10">Daily Need Items?</div>
                         <div class="col s12 grey-text">
                             <div class="col right">
-                                <input class="with-gap" name="group5" type="radio" id="mn" ng-model="review.markets" value="No" />
-                                <label for="mn">No</label>
+                                <input class="with-gap" name="group5" type="radio" id="dailyNeedsNo" ng-model="review.dailyNeedsAvailable" value="No" />
+                                <label for="dailyNeedsNo">No</label>
                             </div>
                             <div class="col right">
-                                <input class="with-gap" name="group5" type="radio" id="my" ng-model="review.markets" value="Yes" />
-                                <label for="my">Yes</label>
+                                <input class="with-gap" name="group5" type="radio" id="dailyNeedsYes" ng-model="review.dailyNeedsAvailable" value="Yes" />
+                                <label for="dailyNeedsYes">Yes</label>
                             </div>
                         </div>
                     </div>
                     <div class="row mgb10">
-                        <div class="col left ft13 pdb10">Do you have good hospitals nearby ?</div>
+                        <div class="col left ft13 pdb10">Public Transport?</div>
                         <div class="col s12 grey-text">
                             <div class="col right">
-                                <input class="with-gap" name="group6" type="radio" id="ghn" ng-model="review.goodHospitals" value="No" />
-                                <label for="ghn">No</label>
+                                <input class="with-gap" name="group6" type="radio" id="transportNo" ng-model="review.transportAvailable" value="No" />
+                                <label for="transportNo">No</label>
                             </div>
                             <div class="col right">
-                                <input class="with-gap" name="group6" type="radio" id="ghy" ng-model="review.goodHospitals" value="Yes" />
-                                <label for="ghy">Yes</label>
+                                <input class="with-gap" name="group6" type="radio" id="transportYes" ng-model="review.transportAvailable" value="Yes" />
+                                <label for="transportYes">Yes</label>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="row mgb10">
+                        <div class="col left ft13 pdb10">Apartment Layout Efficient?</div>
+                        <div class="col s12 grey-text">
+                            <div class="col right">
+                                <input class="with-gap" name="group7" type="radio" id="layoutNo" ng-model="review.layoutEfficient" value="No" />
+                                <label for="layoutNo">No</label>
+                            </div>
+                            <div class="col right">
+                                <input class="with-gap" name="group7" type="radio" id="layoutYes" ng-model="review.layoutEfficient" value="Yes" />
+                                <label for="layoutYes">Yes</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mgb10">
+                        <div class="col left ft13 pdb10">24x7 Electricity?</div>
+                        <div class="col s12 grey-text">
+                            <div class="col right">
+                                <input class="with-gap" name="group8" type="radio" id="electricityNo" ng-model="review.electricityAvailable" value="No" />
+                                <label for="electricityNo">No</label>
+                            </div>
+                            <div class="col right">
+                                <input class="with-gap" name="group8" type="radio" id="electricityYes" ng-model="review.electricityAvailable" value="Yes" />
+                                <label for="electricityYes">Yes</label>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="row mgb10">
+                        <div class="col left ft13 pdb10">Regular/Clean Water Supply?</div>
+                        <div class="col s12 grey-text">
+                            <div class="col right">
+                                <input class="with-gap" name="group9" type="radio" id="waterNo" ng-model="review.waterSupplyAvailable" value="No" />
+                                <label for="waterNo">No</label>
+                            </div>
+                            <div class="col right">
+                                <input class="with-gap" name="group9" type="radio" id="waterYes" ng-model="review.waterSupplyAvailable" value="Yes" />
+                                <label for="waterYes">Yes</label>
                             </div>
                         </div>
                     </div>

@@ -50,9 +50,9 @@
             <div class="col pdan s12 m7 waves-effect waves-light img-detail htfixbox" ng-hide = "loading">
                 <img ng-src="/images/dummy/locationDummy.png">
                 <div class="img-btn center-align">
-                    <div class="gallery-btn">
+                    <!-- <div class="gallery-btn">
                         <gallery></gallery>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col s12 m5 amen-tab htfixbox boxsd white">
@@ -112,7 +112,7 @@
         </div>
     </div> -->
     <div class="row" ng-hide="loading">
-        <h3>Available Projects</h3>
+        <h4>Available Projects</h4>
         <div class="col s12 m4 myClass" ng-repeat="key in relatedProjects">
             <div class="card horizontal">
                 <div class="card-image">
@@ -123,7 +123,7 @@
                         <h5>{{key.name}}</h5>
                         <p>{{key.address}}</p>
                         <i ng-show="key.overallRating !=  0" class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < key.overallRating? 'blue-text': 'normal'">star</i>
-                        <p ng-show="key.overallRating == 0"><i>Not Rated Yet  </i></p>
+                        <p ng-show="key.overallRating == 0"><i>Not Rated Yet</i></p>
                     </div>
                     <div class="card-action">
                         <a ng-click="goToProjectsPage(key)">View Project</a>

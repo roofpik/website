@@ -27,9 +27,46 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
                 // generateImageList($scope.location.images);
             });
         }, 0)
+        getRelatedProjects();
+        getNearBy(); ///To Work On
     }
 
-    getRelatedProjects();
+    function getNearBy(){
+        // if (parameters.category == 'locations') {
+        //     var data = {
+        //         locationId: $scope.locId
+        //     }
+        // } else {
+        //     var data = {
+        //         locationId: $scope.locId
+        //     }
+        // }
+        // var data = {
+        //     locationId: '-Kc2BjFK-YABXahO8OnL   '
+        // }
+        // $http({
+        //     url: 'http://107.23.243.89/api/GetNearby_1.0',
+        //     method: 'GET',
+        //     params: {
+        //         args: encodeParams(data)
+        //     }
+        // }).then(function mySucces(response) {
+        //     console.log(response);
+            // var i = 0;
+            // for (key in response.data.details) {
+            //     $scope.relatedProjects[i] = {};
+            //     $scope.relatedProjects[i].name = response.data.details[key].name;
+            //     $scope.relatedProjects[i].id = response.data.details[key].id;
+            //     $scope.relatedProjects[i].address = response.data.details[key].address;
+            //     $scope.relatedProjects[i].overallRating = response.data.details[key].rating;
+            //     $scope.relatedProjects[i].type = response.data.details[key].type;
+            //     $scope.relatedProjects[i].coverImage = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/' + $scope.relatedProjects[i].type + '/' + $scope.relatedProjects[i].id + '/images/coverPhoto/' + response.data.details[key].cover + '-s.jpg';
+            //     i++;
+            // }
+            // $scope.loading = false;
+
+        // })
+    }
 
     function getRelatedProjects() {
         console.log($scope.locId);
@@ -48,7 +85,7 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
                 page_size: 100
             }
         }
-        console.log(encodeParams(data));
+        // console.log(encodeParams(data));
         $http({
             url: 'http://107.23.243.89/api/GetListing_1.0',
             method: 'GET',
@@ -58,28 +95,28 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
         }).then(function mySucces(response) {
             console.log(response);
             var i = 0;
-            for (key in response.data.details){
-                $scope.relatedProjects[i] = {}; 
+            for (key in response.data.details) {
+                $scope.relatedProjects[i] = {};
                 $scope.relatedProjects[i].name = response.data.details[key].name;
                 $scope.relatedProjects[i].id = response.data.details[key].id;
                 $scope.relatedProjects[i].address = response.data.details[key].address;
                 $scope.relatedProjects[i].overallRating = response.data.details[key].rating;
                 $scope.relatedProjects[i].type = response.data.details[key].type;
-                $scope.relatedProjects[i].coverImage = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/'+$scope.relatedProjects[i].type+'/' + $scope.relatedProjects[i].id + '/images/coverPhoto/' + response.data.details[key].cover + '-s.jpg';
+                $scope.relatedProjects[i].coverImage = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/' + $scope.relatedProjects[i].type + '/' + $scope.relatedProjects[i].id + '/images/coverPhoto/' + response.data.details[key].cover + '-s.jpg';
                 i++;
             }
             $scope.loading = false;
 
         })
-        if(Object.keys($scope.relatedProjects).length == 0){
+        if (Object.keys($scope.relatedProjects).length == 0) {
             $scope.hideList = false;
         }
 
     }
 
-    $scope.goToProjectsPage = function(key){
-        console.log(key)
-        if (key.type == 'residential') {
+    $scope.goToProjectsPage = function(key) {
+            console.log(key)
+            if (key.type == 'residential') {
                 param = {
                     projectId: key.id
                 }
@@ -91,35 +128,35 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
                 }
                 $state.go('project-details', { p: encodeParams(param) });
             }
-    }
-    // function generateImageList(images) {
-    //     var imageData = [];
-    //     for (key in images) {
-    //         if (key == 'coverPhoto') {
-    //             var newImage = {
-    //                 thumb: "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/cghs/-KbT8haHPqV7gTy55f-x/images/coverPhoto/' + images[key].url + '-s.jpg',
-    //                 src: "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/cghs/-KbT8haHPqV7gTy55f-x/images/coverPhoto/' + images[key].url + '-m.jpg',
-    //                 display: false
-    //             }
-    //             if (images[key].description) {
-    //                 newImage.caption = images[key].description;
-    //             }
-    //             imageData.push(newImage);
-    //         } else {
-    //             for (key1 in images[key]) {
-    //                 var newImage = {
-    //                     thumb: "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/cghs/-KbT8haHPqV7gTy55f-x/images/' + key + '/' + key1 + '/' + images[key][key1].url + '-s.jpg',
-    //                     src: "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/cghs/-KbT8haHPqV7gTy55f-x/images/' + key + '/' + key1 + '/' + images[key][key1].url + '-m.jpg',
-    //                     display: false
-    //                 }
-    //                 if (images[key][key1].description) {
-    //                     newImage.caption = images[key][key1].description;
-    //                 }
-    //                 imageData.push(newImage);
-    //             }
-    //         }
-    //     }
-    //     console.log(imageData);
-    //     $rootScope.$broadcast('initGallery', imageData);
-    // }
+        }
+        // function generateImageList(images) {
+        //     var imageData = [];
+        //     for (key in images) {
+        //         if (key == 'coverPhoto') {
+        //             var newImage = {
+        //                 thumb: "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/cghs/-KbT8haHPqV7gTy55f-x/images/coverPhoto/' + images[key].url + '-s.jpg',
+        //                 src: "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/cghs/-KbT8haHPqV7gTy55f-x/images/coverPhoto/' + images[key].url + '-m.jpg',
+        //                 display: false
+        //             }
+        //             if (images[key].description) {
+        //                 newImage.caption = images[key].description;
+        //             }
+        //             imageData.push(newImage);
+        //         } else {
+        //             for (key1 in images[key]) {
+        //                 var newImage = {
+        //                     thumb: "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/cghs/-KbT8haHPqV7gTy55f-x/images/' + key + '/' + key1 + '/' + images[key][key1].url + '-s.jpg',
+        //                     src: "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/cghs/-KbT8haHPqV7gTy55f-x/images/' + key + '/' + key1 + '/' + images[key][key1].url + '-m.jpg',
+        //                     display: false
+        //                 }
+        //                 if (images[key][key1].description) {
+        //                     newImage.caption = images[key][key1].description;
+        //                 }
+        //                 imageData.push(newImage);
+        //             }
+        //         }
+        //     }
+        //     console.log(imageData);
+        //     $rootScope.$broadcast('initGallery', imageData);
+        // }
 }])

@@ -54,3 +54,7 @@
 .myClass{
     min-height: 200px;
 }
+
+.pointer{
+    cursor: pointer;
+}
