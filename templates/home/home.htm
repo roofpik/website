@@ -55,8 +55,8 @@
                                 <input type="text" placeholder="Apartments, Commercials, PG" id="name-search" class="autocompletenear inp_pdw mgbn" ng-model="searchedText" ng-change="getSearchData()">
                                 <img src="http://www.ladbrokes.com/bingo/christmas-cracker/images/loadingAnimation.gif" class="loading-icon" ng-show="searchingName" />
                                 <div class="search-results">
-                                    <ul class="collection homecoll" >
-                                        <li ng-repeat="item in searchByNameData |filter:searchedText" ng-click="selectSearchByName(item)" class="searchByNameItem collection-item">
+                                    <ul class="collection homecoll">
+                                        <li ng-repeat="item in searchByNameData |filter:searchedText" ng-click="selectSearchByName(item)" class="searchByNameItem collection-item pda10">
                                             <span class="title ft13" ng-bind-html="item.name | highlight:searchedText"></span>
                                         </li>
                                     </ul>
@@ -108,22 +108,21 @@
             </div>
         </div>
     </div>
-    <div class="row bluetrans center pda50 mgbn">
+    <div class="row bluetrans center pda50 mgbn write-review-home">
         <i class="material-icons medium white-text">card_giftcard</i>
         <h5 class="uppercase white-text">
         write a review and claim your goody bag.</h5>
         <button id="review_btn" class="btn btn-large white black-text mgt20" ng-click="test()"><i class="material-icons left">create</i>Review Now</button>
     </div>
     <div class="row mgan white">
-   <div class="container container2">
-     <div class="row pda10 mgbn reletive white">
-        <div ui-view="coverStories"></div>
+        <div class="container container2">
+            <div class="row pda10 mgbn reletive white">
+                <div ui-view="coverStories"></div>
+            </div>
+        </div>
     </div>
-    </div>
-    </div>
-    <div class="row bluetrans center white-text mgbn pda50">
-  
-     <h4 class="center b ltspacing">In Stats</h4>
+    <div class="row bluetrans center white-text mgbn pda50 stats-home">
+        <h4 class="center b ltspacing">In Stats</h4>
         <div class="col s12 m4 pda10">
             <div class="allbd block pda10">
                 <i class="material-icons medium">edit</i>

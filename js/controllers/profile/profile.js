@@ -120,7 +120,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     }
 
     function showHideReviewRating(i, amenities, maids, electricity, greenAreas, security, infra, parking) {
-        if (amenities || maids || electricity || greenAreasExistsnAreas || security || infra || parking) {
+        if (amenities || maids || electricity || greenAreas || security || infra || parking) {
             $scope.showRatings = false;
         } else {
             $scope.showRatings = true;

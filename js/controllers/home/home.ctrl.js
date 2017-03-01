@@ -219,7 +219,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
                     category: 'cghs'
                 }
                 $state.go('project-details', { p: encodeParams(param) });
-            } else if ($scope.searchedValue.type == 'locality') {            
+            } else if ($scope.searchedValue.type == 'locality') {
                 param = {
                     vertical: 'residential',
                     category: 'all',
@@ -334,44 +334,45 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         }
         return $sce.trustAsHtml(text.replace(new RegExp(search, 'gi'), '<span class="highlightedText">$&</span>'));
     };
-    
 
-    // $(document).on("click",".searchByNameItem", function () {
-    //     console.log(this);
-    // });
+
+// get data to display on map and cover stories only when scrolled to that particular div
+    $(window).bind('scroll', function() {
+        if ($(window).scrollTop() >= $('.write-review-home').offset().top + $('.write-review-home').outerHeight() - window.innerHeight) {
+            $timeout(function(){
+                $rootScope.showCoverStories = true;
+            },0);
+        }
+        if ($(window).scrollTop() >= $('.stats-home').offset().top + $('.stats-home').outerHeight() - window.innerHeight) {
+            $timeout(function(){
+                $rootScope.showMap = true;
+            },0);
+        }
+    });
 
 }]);
 
-app.controller('coverStoryHomeCtrl', ['$scope', '$timeout', function($scope, $timeout) {
+app.controller('coverStoryHomeCtrl', ['$scope', '$timeout', '$rootScope', function($scope, $timeout, $rootScope) {
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.coverStoriesFetched = false;
     $scope.stories = [];
-    db.ref('shortStories/-KYJONgh0P98xoyPPYm9')
-        .limitToFirst(8)
-        .once('value', function(response) {
-            $timeout(function() {
-                for (key in response.val()) {
-                    var data = response.val()[key];
-                    data.redirectionUrl = '/#/story/gurgaon/' + convertToHyphenSeparated(data.placeName) + '/' + convertToHyphenSeparated(data.title) + '/' + data.storyId;
-                    data.redirectionUrl = data.redirectionUrl.replace(/[?=]/g, "");
-                    data.coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/' + $scope.cityId + '/' + data.storyId + '/coverPhoto/' + data.coverPhoto + '-m.jpg';
-                    $scope.stories.push(data);
-                }
-                $scope.coverStoriesFetched = true;
-            }, 0);
-        })
+    $rootScope.$watch('showCoverStories', function() {
+        if($rootScope.showCoverStories && !$scope.coverStoriesFetched){
+            db.ref('shortStories/-KYJONgh0P98xoyPPYm9')
+                .limitToFirst(8)
+                .once('value', function(response) {
+                    $timeout(function() {
+                        for (key in response.val()) {
+                            var data = response.val()[key];
+                            data.redirectionUrl = '/#/story/gurgaon/' + convertToHyphenSeparated(data.placeName) + '/' + convertToHyphenSeparated(data.title) + '/' + data.storyId;
+                            data.redirectionUrl = data.redirectionUrl.replace(/[?=]/g, "");
+                            data.coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/' + $scope.cityId + '/' + data.storyId + '/coverPhoto/' + data.coverPhoto + '-m.jpg';
+                            $scope.stories.push(data);
+                        }
+                        $scope.coverStoriesFetched = true;
+                    }, 0);
+                })
+        }
+        // console.log($scope.allRatings);
+    });
 }]);
-
-
-app.directive('autoComplete', function($timeout) {
-    return function(scope, iElement, iAttrs) {
-        iElement.autocomplete({
-            source: scope[iAttrs.uiItems],
-            select: function() {
-                $timeout(function() {
-                    iElement.trigger('input');
-                }, 0);
-            }
-        })
-    }
-});

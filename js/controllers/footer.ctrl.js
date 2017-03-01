@@ -4,15 +4,25 @@ app.controller('footerCtrl', ['$scope', '$timeout', 'vcRecaptchaService', functi
         $(".dropdown-button").dropdown();
     })
 
+    $scope.forms = {};
+
     $scope.submitQuery = function(user) {
         console.log(user);
         db.ref('contactUs').push($scope.user).then(function() {
             $timeout(function() {
                 $scope.user = {};
-                $scope.contactUs.$setUntouched();
-                $scope.contactUs.$setPristine();
+                $scope.forms.contactUs.$setUntouched();
+                $scope.forms.contactUs.$setPristine();
             }, 100);
-            Materialize.toast('Request successfully submitted', 4000)
+            // Materialize.toast('Request successfully submitted', 4000)
+            swal({
+                title:"",
+                text: "Request successfully submitted",
+                // text: "I will close in 2 seconds.",
+                timer: 3000,
+                showConfirmButton: false,
+                type: 'success'
+            });
         })
     }
 
@@ -24,8 +34,18 @@ app.controller('footerCtrl', ['$scope', '$timeout', 'vcRecaptchaService', functi
         db.ref('contactUs').push(data).then(function() {
             $timeout(function() {
                 $scope.mail = '';
+                $scope.forms.newsletter.$setPristine();
+                $scope.forms.newsletter.$setUntouched();
             }, 100);
-            Materialize.toast('You have successfully subscribed to our newsletters.', 4000)
+            // Materialize.toast('You have successfully subscribed to our newsletters.', 4000)
+            swal({
+                title: "",
+                text: "You have successfully subscribed to our newsletters",
+                // text: "I will close in 2 seconds.",
+                timer: 3000,
+                showConfirmButton: false,
+                type: 'success'
+            });
         })
     }
 

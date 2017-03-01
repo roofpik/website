@@ -75,7 +75,6 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
     }
 
     $scope.findProjectId = function() {
-        console.log('working')
         $timeout(function() {
             console.log(window.location.href);
             var url = window.location.href.split('/');

@@ -1,17 +1,8 @@
 app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$location', '$stateParams', '$http', function($scope, $timeout, $rootScope, $location, $stateParams, $http) {
     document.title = "Write Review";
-    // console.log($stateParams.id);    
-    if (checkLocalStorage('loginStatus')) {
-        $scope.loginStatus = JSON.parse(localStorage.getItem('loginStatus'));
-        if (JSON.parse(localStorage.getItem('loginStatus'))) {
-            user = firebase.auth().currentUser;
-        } else {
-            console.log('this is working');
-            $rootScope.$emit("callShowLogin", {});
-        }
-    } else {
-        $rootScope.$emit("callShowLogin", {});
-    }
+    // console.log($stateParams.id); 
+    $scope.couponCode = '';
+
     $rootScope.$watch('loginStatus', function() {
         // $timeout(function() {
         if ($rootScope.loginStatus) {
@@ -20,9 +11,27 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         } else {
             $scope.loginStatus = false;
         }
-        // getUser($scope.user);
+        getUser($scope.user);
         // }, 0)
     })
+    if (checkLocalStorage('loginStatus')) {
+        $scope.loginStatus = JSON.parse(localStorage.getItem('loginStatus'));
+        if (JSON.parse(localStorage.getItem('loginStatus'))) {
+            user = firebase.auth().currentUser;
+        } else {
+            console.log('this is working')
+            $rootScope.$emit("callShowLogin");
+        }
+    } else {
+        $rootScope.$emit("callShowLogin");
+    }
+
+    // if(firebase.auth().currentUser){
+
+    // }else {
+    //     $rootScope.$emit("callShowLogin");
+    // }
+
 
     function getUser(user) {
         // console.log(user);
@@ -32,12 +41,11 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     }
 
 
-    var timestamp = new Date().getTime();
+
     var urlInfo = {
         url: $location.path()
     }
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
-    $scope.showLoading = false;
     $scope.user = {};
     $scope.review = {
             ratings: {}
@@ -57,31 +65,28 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     }
     $scope.ratingParams = [{
         name: 'Security',
-        id: 2
+        id: 1
     }, {
         name: 'Amenities',
-        id: 3
+        id: 2
     }, {
         name: 'Open and green areas',
-        id: 4
-    }, {
-        name: 'Electricity and water supply',
-        id: 5
-    }, {
-        name: 'Convenience of housemaids',
-        id: 6
+        id: 3
     }, {
         name: 'Convenience of parking',
-        id: 7
+        id: 4
     }, {
         name: 'Infrastructure',
-        id: 8
+        id: 5
     }];
     var user;
     if (params) {
-        $scope.showSearch = false;
+        $scope.showSelected = true;
+        $scope.showLoadingSelected = true;
+        $scope.showLoading = true;
     } else {
-        console.log('called');
+        // console.log('called');
+        $scope.showSelected = false;
         $scope.showSearch = true;
     }
 
@@ -129,7 +134,6 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
 
     if (params) {
         $scope.showLoading = true;
-        $scope.showList = false;
         $scope.showSearch = false;
         $http({
             url: 'http://107.23.243.89/api/GetResidential_1.0',
@@ -148,73 +152,62 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                         console.log($scope.selectedItem);
                     }
                 }
-                $scope.showLoading = false;
             }, 500)
-            $scope.showLoading = false;
+            $scope.showLoadingSelected = false;
         }, function myError(err) {})
 
     }
     $scope.nameEntered = function() {
-        $scope.showLoading = true;
         if ($scope.selectedItem) {
-            if ($scope.selectedItem.length = 2) {
+            if ($scope.selectedItem.length > 2) {
+                $scope.showLoading = true;
+                $scope.showResults = true;
                 var data = {
                     name: $scope.selectedItem
                 }
                 var args = encodeParams(data);
-                console.log(args);
+                // console.log(args);
                 $http({
-
                     url: 'http://107.23.243.89/api/GetByName_1.0',
                     method: 'GET',
                     params: {
                         args: args
                     }
                 }).then(function mySucces(response) {
+                    $scope.projectList = {};
                     $timeout(function() {
-                        console.log(response)
-                        if (response.data) {
+                        if (Object.keys(response.data).length > 0) {
                             $scope.projectList = response.data;
-                        }
-                        for (key in $scope.projectList) {
-                            $scope.projects1[$scope.projectList[key].name.toString()] = $scope.projectList[key].id;
-                            $scope.projects2[$scope.projectList[key].name.toString()] = null;
-                            $scope.projects3[$scope.projectList[key].name.toString()] = $scope.projectList[key].type;
-                            // $scope.projects4[$scope.projectList[key].id] = $scope.projectList[key].name;
+                            // console.log($scope.projectList);
                         }
                         $scope.showLoading = false;
-                        bindList();
                     }, 500)
                 }, function myError(err) {})
+            } else {
+                $scope.showResults = false;
             }
         }
     }
 
-    function bindList() {
-        $('#select_project').autocomplete({
-            data: $scope.projects2,
-            limit: 10,
-            onAutocomplete: function(value, data) {
-                $scope.selectedItem = value;
-                $scope.projectSelected = true;
-                $scope.selectedProject.name = $scope.selectedItem;
-                $scope.selectedProject.id = $scope.projects1[$scope.selectedItem];
-                $scope.selectedProject.type = $scope.projects3[$scope.selectedItem];
-                console.log($scope.selectedProject);
-            }
-        });
-        $timeout(function() {
-            $scope.showLoading = false;
-        }, 200);
+    $scope.selectProject = function(project) {
+        // console.log(project)
+        $scope.projectSelected = true;
+        $scope.selectedItem = project.name;
+        $scope.showResults = false;
     }
 
+    $("#select_name_review").focusin(function() {
+        $timeout(function() {
+            $('.search-results').fadeIn();
+        }, 0);
+    });
 
-    // $scope.selectProject = function(val) {
-    //     $scope.selectedItem = val.name;
-    //     $scope.selectedProject = val;
-    //     $scope.showList = false;
-    //     $scope.projectSelected = true;
-    // }
+    // hide search by name list when input for searching by name
+
+    $("#select_name_review").focusout(function() {
+        $('.search-results').fadeOut();
+    });
+
 
     $scope.showMoreFn = function() {
         $scope.showMore = !$scope.showMore;
@@ -225,49 +218,50 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         }
     }
 
-    $("#select_project").focusout(function() {
-        $timeout(function() {
-            $scope.showList = false;
-        }, 100);
-    });
-
     $scope.submitReview = function() {
         console.log($scope.review);
         swal({
-                title: "Enter Your Phone Number",
+                title: "Enter your 10 digit mobile number",
                 text: "You will soon receive a one time password",
                 type: "input",
                 showCancelButton: true,
                 closeOnConfirm: false,
+                cancelButtonText: 'Submit without verification',
+                confirmButtonText: 'Send OTP',
                 animation: "slide-from-top",
                 inputPlaceholder: "Phone Number"
             },
             function(inputValue) {
-                if (inputValue === false) return false;
-                if (inputValue === "") {
-                    swal.showInputError("Please Enter Your Mobile Number");
-                    return false
+                if (inputValue == "") {
+                    swal.showInputError("Mobile number not entered");
+                    return false;
+                } else if (inputValue.length < 10) {
+                    swal.showInputError("Mobile number incorrect");
+                    return false;
+                } else if (inputValue.length == 10) {
+                    sendOtp(inputValue);
+                } else {
+                    // Materialize.toast("You have successfully logged in!", 2000, 'rounded');
+                    return true;
                 }
+                // swal({
+                //         title: "Verifying Your Phone Number",
+                //         text: "Please Enter The OTP",
+                //         type: "input",
+                //         showCancelButton: true,
+                //         closeOnConfirm: false,
+                //         animation: "slide-from-top",
+                //         inputPlaceholder: "One Time Password"
+                //     },
+                //     function(inputValue) {
+                //         if (inputValue === false) return false;
 
+                //         if (inputValue === "") {
+                //             swal.showInputError("This Field Cannot Be Left Blank");
+                //             return false
+                //         }
 
-                swal({
-                        title: "Verifying Your Phone Number",
-                        text: "Please Enter The OTP",
-                        type: "input",
-                        showCancelButton: true,
-                        closeOnConfirm: false,
-                        animation: "slide-from-top",
-                        inputPlaceholder: "One Time Password"
-                    },
-                    function(inputValue) {
-                        if (inputValue === false) return false;
-
-                        if (inputValue === "") {
-                            swal.showInputError("This Field Cannot Be Left Blank");
-                            return false
-                        }
-
-                    });
+                //     });
             });
 
         // swal({
@@ -343,4 +337,119 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         //     }, 500);
         // })
     }
-}])
+
+    /*Coupon Code Verification Starts*/
+
+    $scope.validateCoupon = function() {
+
+        console.log($scope.couponCode)
+        var timestamp = parseInt((new Date().getTime()) / 1000);
+        // console.log(timestamp);
+        if ($scope.couponCode == '') {
+            $scope.couponEmpty = true;
+            $scope.couponCodeSuccessful = false;
+            $scope.couponInactive = false;
+            $scope.couponExpired = false;
+            $scope.couponInvalid = false;
+        } else{
+            $timeout(function() {
+                db.ref('coupons/' + $scope.couponCode).once('value', function(snapshot) {
+                    $scope.couponDetails = snapshot.val();
+                    if ($scope.couponDetails != null) {
+                        if (timestamp > $scope.couponDetails.createdDate && timestamp < $scope.couponDetails.expiryDate) {
+                            if ($scope.couponDetails.status == 'active') {
+                                $scope.couponCodeSuccessful = true;
+                                $scope.couponEmpty = false;
+                                $scope.couponInactive = false;
+                                $scope.couponExpired = false;
+                                $scope.couponInvalid = false;
+
+                            } else {
+                                $scope.couponInactive = true;
+                                $scope.couponCodeSuccessful = false;
+                                $scope.couponEmpty = false;
+                                $scope.couponExpired = false;
+                                $scope.couponInvalid = false;
+                            }
+                        } else {
+                            $scope.couponExpired = true;
+                            $scope.couponCodeSuccessful = false;
+                            $scope.couponEmpty = false;
+                            $scope.couponInactive = false;
+                            $scope.couponInvalid = false;
+
+                        }
+                    } else {
+                        $scope.couponInvalid = true;
+                        $scope.couponCodeSuccessful = false;
+                        $scope.couponEmpty = false;
+                        $scope.couponInactive = false;
+                        $scope.couponExpired = false;
+                        console.log($scope.couponInvalid);
+                    }
+                })
+            }, 0)
+        }
+    }
+
+    /*Coupon Code Verification Ends*/
+
+    // sends one time password to registered email and mobile number
+    function sendOtp(mobile) {
+        swal({
+            title: "Sending OTP",
+            text: "Please wait...",
+            imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
+            showConfirmButton: false
+        });
+        var otp = Math.floor(1000 + Math.random() * 9000);
+        var data = {
+            mobile: parseInt(mobile),
+            otp: otp
+        }
+        $http({
+            url: 'http://107.23.243.89/api/SendOTP_1.0',
+            method: 'GET',
+            params: {
+                args: encodeParams(data)
+            }
+        }).then(function(response) {
+            console.log(response);
+            if (response.status == 200) {
+                // console.log('sent');
+                swal({
+                        title: "Enter OTP",
+                        text: "A verification code has been sent to your registered mobile xxxxxxxxx" + mobile[mobile.length - 1],
+                        type: "input",
+                        showCancelButton: true,
+                        closeOnConfirm: true,
+                        animation: "slide-from-top",
+                        inputPlaceholder: "One Time Password"
+                    },
+                    function(inputValue) {
+                        if (inputValue == "") {
+                            swal.showInputError("OTP not entered");
+                            return false;
+                        } else if (inputValue.length < 4) {
+                            swal.showInputError("Incorrect OTP");
+                            return false;
+                        } else if (inputValue.length == 4) {
+                            if(inputValue == otp){
+                                $scope.mobileVerified = true;
+                                alert('mobile verified');
+                            } else {
+                                swal.showInputError("Incorrect OTP");
+                            }
+                        } else {
+                            // swal('')
+                            alert('mobile not verified');
+                            return true;
+                        }
+                    });
+            } else {
+                // console.log('not sent');
+                swal('OTP not sent', 'Please try again.', 'error');
+            }
+        });
+    }
+}]);
