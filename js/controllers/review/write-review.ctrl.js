@@ -371,7 +371,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                         $scope.messageClass = 'failed';
                     }
                     $scope.applyingCoupon= false;
-                }, 0);
+                }, 1000);
             });
         }
     }

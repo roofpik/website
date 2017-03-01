@@ -97,8 +97,8 @@
                         <label for="textarea1">Type your review</label>
                     </div>
                 </div>
-                <div class="row mgbn mgt20" ng-show="couponCodeSuccessful">
-                    <p>The coupon code {{couponCode}} has been successfully applied</p>
+                <div class="row mgbn mgt20 pdb10" ng-show="couponCodeSuccessful">
+                    <p class="success pdl10">The coupon code {{couponCode}} has been successfully applied</p>
                 </div>
                 <div class="row mgbn mgt20" ng-hide="couponCodeSuccessful">
                     <div class="col s12 pdb10">Have a coupon code?</div>
@@ -111,6 +111,19 @@
                             </div>
                             <div class="col s4">
                                 <button ng-hide="couponCodeSuccessful || applyingCoupon" class="max btn" ng-click="validateCoupon()">Apply</button>
+                                <div ng-show="applyingCoupon" class="max preloader-wrapper small active">
+                                    <div class="spinner-layer spinner-blue-only">
+                                        <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="gap-patch">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="circle-clipper right">
+                                            <div class="circle"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
