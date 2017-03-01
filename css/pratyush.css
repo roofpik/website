@@ -54,7 +54,7 @@
 
 .loaderPositionReview{
     position: absolute;
-    left: 60%;
+    left: 35%;
     top: 190px;
     width: 30px !important;
     height: 30px !important;
@@ -73,4 +73,9 @@
     height: 30px !important;
     width: 200px !important;
     background-color: #1AB0D3;
+}
+
+.verifiedIcon {
+    height: 30px;
+    width: 30px;
 }

@@ -1,18 +1,24 @@
 //YET TO INCLUDE THE CHANGE IMAGE FEATURE
 app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '$http', function($scope, $stateParams, $state, $timeout, $http) {
     document.title = "My Profile";
-    var uid = decodeParams($stateParams.id)
+    // var uid = decodeParams($stateParams.id)
+    $scope.cityId = '-KYJONgh0P98xoyPPYm9'
         // console.log(uid)
-    $scope.userId = 'PTAksrDxGnX79L200YGnmgi8wxH2'
-        // $scope.userId = uid.id;
+        // $scope.userId = 'PTAksrDxGnX79L200YGnmgi8wxH2'
         // if user is not signed in, take him to the home page
     firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-            // User is signed in.
-        } else {
-            $state.go('home');
-        }
+        $timeout(function() {
+            if (user) {
+                console.log(firebase.auth().currentUser)
+                $scope.user = firebase.auth().currentUser
+            } else {
+                $state.go('home');
+            }
+            getUser($scope.user)
+        }, 100)
     });
+    // $scope.userId = 'G5FQWnOOoFcRl8oMiQ6Tub9R9Ho2'
+    console.log($scope.userId);
     $scope.textReviews = 0;
     $scope.nonTextReviews = 0;
     // $scope.overallExists = false;
@@ -36,9 +42,14 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     $scope.noReviewsToShow = false;
     $scope.userReviews = {};
     $scope.userReviews[$scope.i] = 0;
-    getUserData();
+
+    function getUser(user){
+        $scope.userId = user.uid;
+        getUserData();
+    }
 
     function getUserData() {
+        console.log($scope.userId)
         db.ref('users/' + $scope.userId).once('value', function(snapshot) {
             $timeout(function() {
                 if (snapshot.val().fname) {
@@ -98,8 +109,15 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
                             if (snapshot.val()[key][key1].projectId) {
                                 $scope.userReviews[$scope.i].projectId = snapshot.val()[key][key1].projectId;
                             }
+                            if (snapshot.val()[key][key1].verified) {
+                                $scope.userReviews[$scope.i].reviewVerified = snapshot.val()[key][key1].verified;
+                                if ($scope.userReviews[$scope.i].reviewVerified == true) {
+                                    $scope.verifiedReviewMessage = "Verified Review"
+                                }
+                            }
                             $scope.userReviews[$scope.i].type = key;
                             $scope.userReviews[$scope.i].reviewId = key1;
+                            $scope.userReviews[$scope.i].counter = $scope.i;
                             getReviewData($scope.i, key1);
                             $scope.i++;
                             // $scope.noReviews = false;
@@ -108,6 +126,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
                         }
                     }
                 }
+                $scope.loading = false;
             })
         })
     }
@@ -128,27 +147,30 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     }
 
     function getReviewData(i, Id) {
+        console.log($scope.userReviews[i]);
         console.log(Id);
         $http({
             url: 'http://107.23.243.89/api/GetReviewDetails_1.0',
             method: 'GET',
             params: {
-                id: Id
+                id: Id,
+                type: $scope.userReviews[i].type
             }
         }).then(function mySucces(response) {
-            console.log(response);
-            if (response.status == 200) {
+            $timeout(function() {
                 console.log(response);
-                $scope.text = response.data.reviewText;
-                setReviewText($scope.text, i, response)
-                showHideReviewRating(i, $scope.userReviews[i].overallExists);
-                $scope.loading = false;
-                
-            }
-            // loading(false, 1000);
-        }, function myError(err) {
-            console.log(err);
-        });
+                if (response.status == 200) {
+                    console.log(response);
+                    $scope.text = response.data.reviewText;
+                    setReviewText($scope.text, i, response)
+                    showHideReviewRating(i, $scope.userReviews[i].overallExists);
+                    $scope.loading = false;
+                }
+                // loading(false, 1000);
+            }, function myError(err) {
+                console.log(err);
+            }, 0);
+        })
     }
 
     function setReviewText(text, i, response) {
@@ -160,6 +182,12 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         if ($scope.userReviews[i].overallExists && response.data.reviewTitle == '' && response.data.reviewText == '') {
             $scope.nonTextReviews++;
         }
+        console.log($scope.userReviews[i].type, $scope.userReviews[i].projectId, $scope.userReviews[i].reviewId)
+        db.ref('reviews/' + $scope.cityId + '/' + $scope.userReviews[i].type + '/' + $scope.userReviews[i].projectId + '/' + $scope.userReviews[i].reviewId).once('value', function(response) {
+            $timeout(function() {
+                $scope.userReviews[i].reviewVerified = response.val().verified;
+            }, 0);
+        })
     }
 
     //Function to redirect to the project page from user's reviews
@@ -248,7 +276,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         //     }
         // }
 
-    //Image Uploader (Not fully correct)
+    //Image Uploader (Not correct)
     $scope.getFileDetails = function(file) {
             var file = file.files[0];
             var image = "https://getuikit.com/v2/docs/images/" + file.name; //To Rectify
@@ -260,7 +288,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         $scope.image = image;
     }
 
-    $scope.getVerified = function() {
+    $scope.getVerified = function(id) {
         swal({
                 title: "Enter your 10 digit mobile number",
                 text: "You will soon receive a one time password",
@@ -280,7 +308,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
                     swal.showInputError("Mobile number incorrect");
                     return false;
                 } else if (inputValue.length == 10) {
-                    sendOtp(inputValue);
+                    sendOtp(inputValue, id);
                 } else {
                     // Materialize.toast("You have successfully logged in!", 2000, 'rounded');
                     return true;
@@ -288,7 +316,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
             });
     }
 
-    function sendOtp(mobile) {
+    function sendOtp(mobile, id) {
         swal({
             title: "Sending OTP",
             text: "Please wait...",
@@ -307,42 +335,59 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
                 args: encodeParams(data)
             }
         }).then(function(response) {
-            console.log(response);
-            if (response.status == 200) {
-                // console.log('sent');
-                swal({
-                        title: "Enter OTP",
-                        text: "A verification code has been sent to your registered mobile xxxxxxxxx" + mobile[mobile.length - 1],
-                        type: "input",
-                        showCancelButton: true,
-                        closeOnConfirm: true,
-                        animation: "slide-from-top",
-                        inputPlaceholder: "One Time Password"
-                    },
-                    function(inputValue) {
-                        if (inputValue == "") {
-                            swal.showInputError("OTP not entered");
-                            return false;
-                        } else if (inputValue.length < 4) {
-                            swal.showInputError("Incorrect OTP");
-                            return false;
-                        } else if (inputValue.length == 4) {
-                            if (inputValue == otp) {
-                                $scope.mobileVerified = true;
-                                alert('mobile verified');
-                            } else {
+            $timeout(function() {
+                console.log(response);
+                if (response.status == 200) {
+                    // console.log('sent');
+                    swal({
+                            title: "Enter OTP",
+                            text: "A verification code has been sent to your registered mobile xxxxxxxxx" + mobile[mobile.length - 1],
+                            type: "input",
+                            showCancelButton: true,
+                            closeOnConfirm: true,
+                            animation: "slide-from-top",
+                            inputPlaceholder: "One Time Password"
+                        },
+                        function(inputValue) {
+                            if (inputValue == "") {
+                                swal.showInputError("OTP not entered");
+                                return false;
+                            } else if (inputValue.length < 4) {
                                 swal.showInputError("Incorrect OTP");
+                                return false;
+                            } else if (inputValue.length == 4) {
+                                if (inputValue == otp) {
+                                    $scope.mobileVerified = true;
+                                    alert('Verified Successfully');
+                                    setVerifiedReview(id.counter);
+
+                                } else {
+                                    swal.showInputError("Incorrect OTP");
+                                }
+                            } else {
+                                // swal('')
+                                alert('Not Verified');
+                                return true;
                             }
-                        } else {
-                            // swal('')
-                            alert('mobile not verified');
-                            return true;
-                        }
-                    });
-            } else {
-                // console.log('not sent');
-                swal('OTP not sent', 'Please try again.', 'error');
-            }
+                        });
+
+                } else {
+                    // console.log('not sent');
+                    swal('OTP not sent', 'Please try again.', 'error');
+                }
+            }, 0)
         });
     }
+
+    function setVerifiedReview(i) {
+        $timeout(function() {
+            if ($scope.mobileVerified) {
+                db.ref('users/' + $scope.cityId + '/' + id.type + '/' + id.projectId + '/' + id.reviewId + 'verified').set('true');
+                $scope.userReviews[i].reviewVerified = true;
+            }
+
+
+        }, 100)
+    }
+
 }])
