@@ -1,6 +1,9 @@
 app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$location', '$stateParams', '$http', function($scope, $timeout, $rootScope, $location, $stateParams, $http) {
     document.title = "Write Review";
-    $('.modal').modal(); 
+    $('.modal').modal({
+        dismissible: false
+    });
+
     $scope.couponCode = '';
 
     $rootScope.$watch('loginStatus', function() {
@@ -17,7 +20,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     if (checkLocalStorage('loginStatus')) {
         $scope.loginStatus = JSON.parse(localStorage.getItem('loginStatus'));
         if (JSON.parse(localStorage.getItem('loginStatus'))) {
-            user = firebase.auth().currentUser;
+            $scope.user = firebase.auth().currentUser;
         } else {
             console.log('this is working')
             $rootScope.$emit("callShowLogin");
@@ -218,61 +221,6 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         }
     }
 
-    $scope.submitReview1 = function() {
-        if ($scope.couponCodeSuccessful) {
-            swal({
-                    title: "Enter your 10 digit mobile number",
-                    text: "You will soon receive a one time password",
-                    type: "input",
-                    showCancelButton: false,
-                    closeOnConfirm: false,
-                    confirmButtonText: 'Send OTP',
-                    animation: "slide-from-top",
-                    inputPlaceholder: "Phone Number"
-                },
-                function(inputValue) {
-                    if (inputValue == "") {
-                        swal.showInputError("Mobile number not entered");
-                        return false;
-                    } else if (inputValue.length < 10) {
-                        swal.showInputError("Mobile number incorrect");
-                        return false;
-                    } else if (inputValue.length == 10) {
-                        sendOtp(inputValue);
-                    } else {
-                        return false;
-                    }
-                });
-        } else {
-        swal({
-                title: "Enter your 10 digit mobile number",
-                text: "You will soon receive a one time password",
-                type: "input",
-                showCancelButton: true,
-                closeOnConfirm: false,
-                cancelButtonText: 'Submit without verification',
-                confirmButtonText: 'Send OTP',
-                animation: "slide-from-top",
-                inputPlaceholder: "Phone Number"
-            },
-            function(inputValue, isConfirm) {
-                console.log(isConfirm);
-                if (inputValue == "") {
-                    swal.showInputError("Mobile number not entered");
-                    return false;
-                } else if (inputValue.length < 10) {
-                    swal.showInputError("Mobile number incorrect");
-                    return false;
-                } else if (inputValue.length == 10) {
-                    sendOtp(inputValue);
-                } else {
-                    console.log('submit without verification called');
-                    return true;
-                }
-            });       
-        }
-    }
-
     $scope.submitReview = function() {
         console.log($scope.review);
         swal({
@@ -294,7 +242,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                     swal.showInputError("Mobile number incorrect");
                     return false;
                 } else if (inputValue.length == 10) {
-                    sendOtp(inputValue);
+                    $scope.sendOtp(inputValue);
                 } else {
                     // Materialize.toast("You have successfully logged in!", 2000, 'rounded');
                     return true;
@@ -437,61 +385,75 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     /*Coupon Code Verification Ends*/
 
     // sends one time password to registered email and mobile number
-    function sendOtp(mobile) {
-        swal({
-            title: "Sending OTP",
-            text: "Please wait...",
-            imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
-            showConfirmButton: false
-        });
-        var otp = Math.floor(1000 + Math.random() * 9000);
-        var data = {
-            mobile: parseInt(mobile),
-            otp: otp
-        }
-        $http({
-            url: 'http://107.23.243.89/api/SendOTP_1.0',
-            method: 'GET',
-            params: {
-                args: encodeParams(data)
-            }
-        }).then(function(response) {
-            console.log(response);
-            if (response.status == 200) {
-                // console.log('sent');
+    $scope.sendOtp = function(mobile) {
+        if (mobile) {
+            mobile = mobile.toString();
+            if (mobile.length == 10) {
                 swal({
-                        title: "Enter OTP",
-                        text: "A verification code has been sent to your registered mobile xxxxxxxxx" + mobile[mobile.length - 1],
-                        type: "input",
-                        showCancelButton: true,
-                        closeOnConfirm: true,
-                        animation: "slide-from-top",
-                        inputPlaceholder: "One Time Password"
-                    },
-                    function(inputValue) {
-                        if (inputValue == "") {
-                            swal.showInputError("OTP not entered");
-                            return false;
-                        } else if (inputValue.length < 4) {
-                            swal.showInputError("Incorrect OTP");
-                            return false;
-                        } else if (inputValue.length == 4) {
-                            if (inputValue == otp) {
-                                $scope.mobileVerified = true;
-                                alert('mobile verified');
-                            } else {
-                                swal.showInputError("Incorrect OTP");
-                            }
-                        } else {
-                            // swal('')
-                            alert('mobile not verified');
-                            return true;
-                        }
-                    });
+                    title: "Sending OTP",
+                    text: "Please wait...",
+                    imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
+                    showConfirmButton: false
+                });
+                var otp = Math.floor(1000 + Math.random() * 9000);
+                // var data = {
+                //     mobile: mobile,
+                //     otp: otp,
+                //     email: $scope.user.email
+                // }
+
+                var splitEmail= $scope.user.email.split("@");
+                $http({
+                    url: 'http://107.23.243.89/api/SendOTP_1.0',
+                    method: 'GET',
+                    params: {
+                        mobile: mobile,
+                        otp: otp.toString(),
+                        email: $scope.user.email
+                    }
+                }).then(function(response) {
+                    console.log(response);
+                    if (response.status == 200) {
+                        // console.log('sent');
+                        swal({
+                                title: "Enter OTP",
+                                text: "A verification code has been sent to your registered mobile "+mobile[0]+"xxxxxxxx" + mobile[mobile.length - 1]+"and email address "+$scope.user.email[0]+"XXX"+splitEmail[1],
+                                type: "input",
+                                showCancelButton: true,
+                                closeOnConfirm: true,
+                                animation: "slide-from-top",
+                                inputPlaceholder: "One Time Password"
+                            },
+                            function(inputValue) {
+                                if (inputValue == "") {
+                                    swal.showInputError("OTP not entered");
+                                    return false;
+                                } else if (inputValue.length < 4) {
+                                    swal.showInputError("Incorrect OTP");
+                                    return false;
+                                } else if (inputValue.length == 4) {
+                                    if (inputValue == otp) {
+                                        $scope.mobileVerified = true;
+                                        alert('mobile verified');
+                                    } else {
+                                        swal.showInputError("Incorrect OTP");
+                                    }
+                                } else {
+                                    // swal('')
+                                    alert('mobile not verified');
+                                    return true;
+                                }
+                            });
+                    } else {
+                        // console.log('not sent');
+                        swal('OTP not sent', 'Please try again.', 'error');
+                    }
+                });
             } else {
-                // console.log('not sent');
-                swal('OTP not sent', 'Please try again.', 'error');
+                Materialize.toast('Invalid Number', 2000);
             }
-        });
+        } else {
+            Materialize.toast('Please enter your 10 digit mobile number', 2000);
+        }
     }
 }]);

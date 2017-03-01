@@ -358,7 +358,6 @@ app.controller('loginCtrl', function($scope, $timeout, $rootScope, $location, $h
             var name = encodeURIComponent(userDetails.displayName);
             var config = 1;
             var parameter = btoa('email=' + email + '&name=' + name + '&config=' + config);
-            console.log(parameter);
             $http({
                 url: 'http://107.23.243.89/api/SendMail_1.0',
                 method: 'GET',
