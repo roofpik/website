@@ -31,11 +31,11 @@
             <form name="reviewForm">
                 <div class="row mgbn" ng-show="showSearch">
                     <div class="input-field col s12 reletive">
-                        <input id="select_project" ng-model="selectedItem" ng-change="nameEntered()" type="text" class="validate mgbn" required><img src="http://www.ladbrokes.com/bingo/christmas-cracker/images/loadingAnimation.gif" ng-show="showLoading" class="loading-icon" />
-                        <label for="select_project">Select Project</label>
+                        <input id="select_name_review" ng-model="selectedItem" ng-change="nameEntered()" type="text" class="validate mgbn" required><img src="http://www.ladbrokes.com/bingo/christmas-cracker/images/loadingAnimation.gif" ng-show="showLoading" class="loading-icon" autocomplete="false" />
+                        <label for="select_name_review">Select Project</label>
                         <div class="search-results" ng-show="showResults">
                             <ul class="collection homecoll">
-                                <li ng-repeat="item in projectList" ng-click="selectProject(item)" class="searchByNameItem collection-item">
+                                <li ng-repeat="item in projectList" ng-click="selectProject(item)" class="pda10 searchByNameItem collection-item">
                                     <span class="title ft13" ng-bind-html="item.name | highlight:selectedItem"></span>
                                 </li>
                             </ul>
@@ -96,15 +96,6 @@
                         <textarea id="textarea1" type="text" class="materialize-textarea validate" ng-model="review.reviewText" required></textarea>
                         <label for="textarea1">Type your review</label>
                     </div>
-                </div>
-                <div class="row mgbn mgt20">
-                    <div class="col s12 pdb10">Have A Coupon Code?</div>
-                    <div class="input-field col s12">
-                        <input id="couponCode" type="text" class="validate" ng-model="couponCode">
-                        <p ng-show="couponEmpty">This field cannot be left blank *</p>
-                        <label for="couponCode">Code</label><a class="waves-effect waves-light btn" ng-click = "validateCoupon()">Apply</a>
-                    </div>
-
                 </div>
                 <p ng-click="showMoreFn()" class="alignc" style="cursor: pointer" ng-class="showMore?'roofGrey': 'roofGreen'"><b>{{showMoreLess}}</b></p>
                 <div ng-show="showMore" class="mgt20">
@@ -221,7 +212,9 @@
                     </div>
                     <hr>
                 </div>
-                <a href="" ng-click="submitReview()" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating || !projectSelected )?'disabled':'normal'" class="waves-effect waves-light blue lighten-1 btn block mgt20">Submit</a>
+                <a href="" ng-click="submitReview()" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating  )?'disabled':'normal'" class="waves-effect waves-light blue lighten-1 btn block mgt20">Submit</a>
                 <p ng-hide="loginStatus" id="loginSignup">Please login/signup to submit review *</p>
             </form>
         </div>
+    </div>
+</div>
