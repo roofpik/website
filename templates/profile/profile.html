@@ -10,15 +10,15 @@
                     </div>
                 </div>
                 <div class="row white-text proflink mgbn">
-                    <div class="col s3">
+                    <div class="col s4 m4 l3">
                         <h4 class="mgan">{{textReviews}}</h4>
                         <p class="mgan">Reviews</p>
                     </div>
-                    <div class="col s3">
+                    <div class="col s4 m4 l3">
                         <h4 class="mgan">{{nonTextReviews}}</h4>
                         <p class="mgan">Ratings</p>
                     </div>
-                    <div class="col s3">
+                    <div class="col s4 m4 l3">
                         <h4 class="mgan">0</h4>
                         <p class="mgan">Score</p>
                     </div>
@@ -29,24 +29,24 @@
     <div class="container container2">
         <div class="row pdleft200 mgt10">
             <form name="profileForm">
-                <div class="input-field col s3 mgtn" ng-click="enableFullName()">
+                <div class="input-field col s12 m4 l4 mgtn" ng-click="enableFullName()">
                     <!--   <i class="material-icons prefix">account_circle</i> -->
                     <input placeholder="Full Name" type="text" class="validate mgb5 bodn ht2rem ft16b grey-text text-darken-1" ng-disabled="disableFullName" ng-model="user.fullName" ng-blur="blurFullName()">
                 </div>
-                <div class="input-field col s3 mgtn" ng-click="enablePhoneNumber()">
+                <div class="input-field col s12 m4 l4 mgtn" ng-click="enablePhoneNumber()">
                     <!-- <i class="material-icons prefix">phone</i> -->
                     <input placeholder="Phone Number" type="tel" class="validate bodn ht2rem grey-text mgb5 ft14" ng-model="user.phoneNumber" ng-disabled="disablePhoneNumber" ng-blur="blurPhoneNumber()">
                 </div>
-                <div class="input-field col s3 mgtn" ng-click="enableAddress()">
+                <div class="input-field col s12 m12 l4 mgtn" ng-click="enableAddress()">
                     <!-- <i class="material-icons prefix">account_balance</i> -->
                     <input placeholder="Address" type="text" class="validate mgb5 ht2rem bodn grey-text ft14" ng-model="user.address" ng-disabled="disableAddress" ng-blur="blurAddress()">
                 </div>
                 <div class="clearfix"></div>
-                <div class="input-field col s3 mgtn">
+                <div class="input-field col s12 m5 l5 mgtn">
                     <!-- <i class="material-icons prefix">email</i> -->
                     <input placeholder="Email" type="email" class="validate grey-text mgb5 ht2rem bodn ft14" ng-model="user.emailId" ng-disabled=true>
                 </div>
-                <div class="input-field col s3 mgtn">
+                <div class="input-field col s12 m5 l5 mgtn">
                     <!-- <i class="material-icons prefix">location_city</i> -->
                     <input placeholder="City" type="text" class="validate grey-text mgb5 ht2rem bodn ft14" ng-model="user.city" ng-disabled=true>
                 </div>
@@ -83,7 +83,7 @@
                 </div> -->
                 <ul ng-hide = "loading" class="timeline">
                     <li ng-show="showReviews" class="timeline">
-                        <div class="timeline-badge blue"><i class="material-icons">edit</i></div>
+                        <div class="timeline-badge blue"><i class="material-icons left">edit</i></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h5 class="mgan">No Reviews! </h5>
@@ -94,7 +94,7 @@
                         </div>
                     </li>
                     <li ng-hide="showReviews" ng-repeat="id in userReviews" ng-class="$index%2==0 ? 'timeline' : 'timeline-inverted'">
-                        <div class="timeline-badge blue"><i class="material-icons">edit</i></div>
+                        <div class="timeline-badge blue"><i class="material-icons left">edit</i></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h5 class="mgan">{{id.reviewTitle}} <i ng-show="id.projectName" ng-click="goToProjectPage(id)"><a style = "cursor: pointer">- {{id.projectName}}</a></i></h5>
@@ -109,7 +109,7 @@
                         </div>
                     </li>
                     <li ng-show="showRatings" class="timeline-inverted">
-                        <div class="timeline-badge green"><i class="material-icons">star</i></div>
+                        <div class="timeline-badge green"><i class="material-icons left">star</i></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h5 class="mgan">No Ratings! </h5>
@@ -120,7 +120,7 @@
                         </div>
                     </li>
                     <li ng-hide = "showRatings" ng-repeat="id in userReviews" ng-class="$index%2==0? 'timeline-inverted' : 'timeline'">
-                        <div class="timeline-badge green"><i class="material-icons">star</i></div>
+                        <div class="timeline-badge green"><i class="material-icons left">star</i></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h5 class="mgan">{{id.projectName}}</h5>
@@ -132,7 +132,7 @@
                             </div>
                     </li>
                     <!-- <li>
-                        <div class="timeline-badge orange"><i class="material-icons">thumb_up</i></div>
+                        <div class="timeline-badge orange"><i class="material-icons left">thumb_up</i></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h5 class="mgan">Mussum ipsum cacilds</h5>
@@ -141,7 +141,7 @@
                         </div>
                     </li>
                     <li class="timeline-inverted">
-                        <div class="timeline-badge black"><i class="material-icons">visibility</i></div>
+                        <div class="timeline-badge black"><i class="material-icons left">visibility</i></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h5 class="mgan">View</h5>

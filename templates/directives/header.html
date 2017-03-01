@@ -29,13 +29,15 @@
                         </a>
                     </li>
                     <li ng-show="loginStatus">
-                        <a href="" class="dropdown-button btn wd-sm btn-flat capitalize" data-activates='dropdown1'><img ng-src="{{user.photoURL}}" class="display-img left" />{{user.displayName}}</a>
-                        <ul id='dropdown1' class='dropdown-content myClass'>
-                            <li><a ng-click="goToProfile()">My Profile</a></li>
+                        <a href="" id="pdan" class="dropdown-button btn wd-sm btn-flat capitalize" data-activates='dropdown1'><img ng-src="{{user.photoURL}}" class="display-img left" />{{user.displayName}}</a>
+                        <ul id='dropdown1' class='dropdown-content droplogin'>
+                            <li><a ng-click="goToProfile()">
+                            <i class="material-icons left">person</i>My Profile</a></li>
                             <li class="divider"></li>
-                            <li><a>Settings</a></li>
+                          <!--   <li><a>Settings</a></li> -->
                             <li class="divider"></li>
-                            <li><a ng-click="logout()">Logout</a></li>
+                            <li><a ng-click="logout()">
+                            <i class="material-icons left">power_settings_new</i>Logout</a></li>
                         </ul>
                     </li>
                     <!--  <li><a data-activates="slide-out-right" href="#" class="button-heart show-on-large"><i class="material-icons grey-text">favorite_border</i></a></li> -->
