@@ -12,11 +12,13 @@
                 <div class="row white-text proflink mgbn">
                     <div class="col s3">
                         <h4 class="mgan">{{textReviews}}</h4>
-                        <p class="mgan">Reviews</p>
+                        <p class = "mgan" ng-show = "textReviews == 1">Review</p>
+                        <p class="mgan" ng-show = "textReviews != 1">Reviews</p>
                     </div>
                     <div class="col s3">
                         <h4 class="mgan">{{nonTextReviews}}</h4>
-                        <p class="mgan">Ratings</p>
+                        <p class="mgan" ng-show = "nonTextReviews == 1">Rating</p>
+                        <p class="mgan" ng-show = "nonTextReviews != 1">Ratings</p>
                     </div>
                     <div class="col s3">
                         <h4 class="mgan">0</h4>
@@ -97,14 +99,14 @@
                         <div class="timeline-badge blue"><i class="material-icons">edit</i></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h5 class="mgan">{{id.reviewTitle}} <i ng-show="id.projectName" ng-click="goToProjectPage(id)"><a style = "cursor: pointer">- {{id.projectName}}</a></i></h5>
+                                <h5 class="mgan">{{id.reviewTitle}} <i ng-show="id.projectName" ng-click="goToProjectPage(id)"><a style = "cursor: pointer">- {{id.projectName}}</a></i></h5><img src = "https://cdn0.iconfinder.com/data/icons/round-ui-icons/128/tick_green.png" class = "verifiedIcon" ng-show = "id.reviewVerified"/>
                                 <p class="mgan grey-text"><small>{{id.createdDate | date:'MMM dd, yy'}}</small></p>
                             </div>
                             <div class="timeline-body">
                                 <p>{{id.reviewText}}</p>
                                 <br>
-                                <a class="waves-effect waves-light btn myButton" ng-click = "getVerified()">Get Verified</a>
-                                <span  ng-show = "id.overallExists"> <p><b>Overall Rating: </b></p><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < id.overallRatings? 'blue-text': 'normal'">star</i></span>
+                                <a class="waves-effect waves-light btn myButton" ng-hide = "id.reviewVerified" ng-click = "getVerified(id)">Get Verified</a>
+                                <span  ng-show = "id.overallExists"> <p><div class = "col"><b>Overall Rating: </b></p></div><div class = "col"><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < id.overallRatings? 'blue-text': 'normal'">star</i></span></div>
                             </div>
                         </div>
                     </li>

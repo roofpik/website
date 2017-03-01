@@ -209,12 +209,7 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
     }
 
     $scope.goToProfile = function() {
-        var params = {
-                id: $scope.userId
-            }
-            // console.log(params);
-        var parameter = encodeParams(params)
-        $state.go('profile', { id: parameter })
+        $state.go('profile')
     };
 
     // $scope.takeToMyReviews = function() {
