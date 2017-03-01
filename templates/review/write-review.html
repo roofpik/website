@@ -97,17 +97,22 @@
                         <label for="textarea1">Type your review</label>
                     </div>
                 </div>
-                <div class="row mgbn mgt20">
+                <div class="row mgbn mgt20" ng-show="couponCodeSuccessful">
+                    <p>The coupon code {{couponCode}} has been successfully applied</p>
+                </div>
+                <div class="row mgbn mgt20" ng-hide="couponCodeSuccessful">
                     <div class="col s12 pdb10">Have a coupon code?</div>
                     <div class="input-field col s12">
-                        <input id="couponCode" type="text" class="validate" ng-model="couponCode">
-                        <div ng-show="couponEmpty" class="failed">This field cannot be left blank</div>
-                        <div ng-show="couponCodeSuccessful" class="success">Your coupon code has been applied successfully</div>
-                        <div ng-show="couponInactive" class="failed">Your code isn't active</div>
-                        <div ng-show="couponExpired" class="failed">Your code has expired</div>
-                        <div ng-show="couponInvalid" class="failed">Please enter a valid coupon code</div>
-                        <label for="couponCode">Enter Your Coupon Code</label>
-                        <a ng-hide="couponCodeSuccessful" class="waves-effect waves-light btn" ng-click="validateCoupon()">Apply</a>
+                        <div class="row mgbn">
+                            <div class="col s8 ">
+                                <input id="couponCode" type="text" class="validate" ng-model="couponCode">
+                                <div ng-class="messageClass">{{message}}</div>
+                                <label for="couponCode">Enter Your Coupon Code</label>
+                            </div>
+                            <div class="col s4">
+                                <button ng-hide="couponCodeSuccessful || applyingCoupon" class="max btn" ng-click="validateCoupon()">Apply</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <p ng-click="showMoreFn()" class="alignc" style="cursor: pointer" ng-class="showMore?'roofGrey': 'roofGreen'"><b>{{showMoreLess}}</b></p>
