@@ -10,22 +10,8 @@
         </nav>
     </div>
     <div class="row">
-        <div class="col s12 m4 justify ftw3">
-            <h5 class="pdt10 b">Reviewing Tips</h5>
-            <hr> Your review can directly impact someone’s decision to buy or rent property. So make it count by using these reviewing tips:
-            <p>
-                <b>Remain Relevant:</b> A review with the relevant details garners more ratings and trust. Avoid excessive complaints or compliments, provide specific details where possible, and be objective about your views. The best reviews state both pros and cons.
-            </p>
-            <p>
-                <b>Honesty Helps:</b> Although this is a neutral platform for users to openly share their views, reviews with discriminatory, libellous, or profane content will not pass the verification stage. Share your own experiences and not what you’ve heard about the property or neighbourhood you’re reviewing.
-            </p>
-            <p>
-                <b>Add Photos:</b> You may not be able to write a thousand words, so post a picture! Photos of the property, project, and locality help garner more readers for your review besides making it credible.
-            </p>
-            <p>
-                <b>Review Anonymously:</b> Our hawk-eyed moderators have a thing against reviews with personal information such as names, phone numbers, emails, or other contact details. Make sure your review doesn’t include such information.</p>
-        </div>
-        <div class="col s12 m8 pdleft50">
+        
+        <div class="col s12 m8 wd676">
             <h5 class="pdt10 b">Write Review</h5>
             <hr>
             <form name="reviewForm">
@@ -97,37 +83,7 @@
                         <label for="textarea1">Type your review</label>
                     </div>
                 </div>
-                <div class="row mgbn mgt20 pdb10" ng-show="couponCodeSuccessful">
-                    <p class="success pdl10">The coupon code {{couponCode}} has been successfully applied</p>
-                </div>
-                <div class="row mgbn mgt20" ng-hide="couponCodeSuccessful">
-                    <div class="col s12 pdb10">Have a coupon code?</div>
-                    <div class="input-field col s12">
-                        <div class="row mgbn">
-                            <div class="col s8 ">
-                                <input id="couponCode" type="text" class="validate" ng-model="couponCode">
-                                <div ng-class="messageClass">{{message}}</div>
-                                <label for="couponCode">Enter Your Coupon Code</label>
-                            </div>
-                            <div class="col s4">
-                                <button ng-hide="couponCodeSuccessful || applyingCoupon" class="max btn" ng-click="validateCoupon()">Apply</button>
-                                <div ng-show="applyingCoupon" class="max preloader-wrapper small active">
-                                    <div class="spinner-layer spinner-blue-only">
-                                        <div class="circle-clipper left">
-                                            <div class="circle"></div>
-                                        </div>
-                                        <div class="gap-patch">
-                                            <div class="circle"></div>
-                                        </div>
-                                        <div class="circle-clipper right">
-                                            <div class="circle"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
                 <p ng-click="showMoreFn()" class="alignc" style="cursor: pointer" ng-class="showMore?'roofGrey': 'roofGreen'"><b>{{showMoreLess}}</b></p>
                 <div ng-show="showMore" class="mgt20">
                     <div class="row mgbn" ng-repeat="item in ratingParams">
@@ -243,9 +199,55 @@
                     </div>
                     <hr>
                 </div>
+                 <div class="row mgbn mgt20 pdb10" ng-show="couponCodeSuccessful">
+                    <p class="success pdl10">The coupon code {{couponCode}} has been successfully applied</p>
+                </div>
+                <div class="row mgbn mgt20" ng-hide="couponCodeSuccessful">
+                    <div class="col s12 pdb10">Have a coupon code?</div>
+                    <div class="input-field col s12">
+                        <div class="row mgbn">
+                            <div class="col s8 ">
+                                <input id="couponCode" type="text" class="validate" ng-model="couponCode">
+                                <div ng-class="messageClass">{{message}}</div>
+                                <label for="couponCode">Enter Your Coupon Code</label>
+                            </div>
+                            <div class="col s4">
+                                <button ng-hide="couponCodeSuccessful || applyingCoupon" class="max btn" ng-click="validateCoupon()">Apply</button>
+                                <div ng-show="applyingCoupon" class="max preloader-wrapper small active">
+                                    <div class="spinner-layer spinner-blue-only">
+                                        <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="gap-patch">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="circle-clipper right">
+                                            <div class="circle"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <a href="" ng-click="submitReview()" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating  )?'disabled':'normal'" class="waves-effect waves-light blue lighten-1 btn block mgt20">Submit</a>
                 <p ng-hide="loginStatus" id="loginSignup">Please login/signup to submit review *</p>
             </form>
+        </div>
+        <div class="col s12 m4 justify ftw3 hide767">
+            <h5 class="pdt10 b">Reviewing Tips</h5>
+            <hr> Your review can directly impact someone’s decision to buy or rent property. So make it count by using these reviewing tips:
+            <p>
+                <b>Remain Relevant:</b> A review with the relevant details garners more ratings and trust. Avoid excessive complaints or compliments, provide specific details where possible, and be objective about your views. The best reviews state both pros and cons.
+            </p>
+            <p>
+                <b>Honesty Helps:</b> Although this is a neutral platform for users to openly share their views, reviews with discriminatory, libellous, or profane content will not pass the verification stage. Share your own experiences and not what you’ve heard about the property or neighbourhood you’re reviewing.
+            </p>
+            <p>
+                <b>Add Photos:</b> You may not be able to write a thousand words, so post a picture! Photos of the property, project, and locality help garner more readers for your review besides making it credible.
+            </p>
+            <p>
+                <b>Review Anonymously:</b> Our hawk-eyed moderators have a thing against reviews with personal information such as names, phone numbers, emails, or other contact details. Make sure your review doesn’t include such information.</p>
         </div>
     </div>
 </div>

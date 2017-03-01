@@ -2555,6 +2555,8 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width:0px) and (max-width: 767px) {
+  .hide767{display: none;}
+  .wd676{width: 100% !important;}
   .hdboxabs {
     bottom: 67px;
     left: 25px;
