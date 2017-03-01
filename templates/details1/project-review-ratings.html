@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col s4 mgt20">
+            <div class="col s3 m3 mgt20 wd_dt1">
                 <div class="allbd white pda10 htrating">
                     <h5 class="ft15 mgtn b mgb10">User Rating</h5>
                     <div class="row mgbn">
@@ -87,7 +87,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col s2 mgt20">
+            <div class="col s2 m2 mgt20 wd_dt2">
                 <div class="allbd white pda10 htrating">
                     <h5 class="ft15 mgtn b mgb10">Resident Type</h5>
                     <div class="row mgbn">
@@ -104,13 +104,82 @@
                     </div>
                 </div>
             </div>
-            <div class="col s6 mgt20">
+            <div class="col s3 m3 mgt20 wd_dt3">
                 <div class="allbd white pda10 ft13 htrating">
                     <h5 class="ft15 mgtn b mgb10">Rating Summary</h5>
                     <div class="row mgbn" ng-repeat="item in ratingSummaryParams">
                         <div class="col s7">{{item.name}} ({{reviewObject.numbers[item.id]}})</div>
                         <div class="col s5 right-align  grey-text ft20i">
                             <i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < reviewObject.numbers[item.id1]? 'blue-text': 'normal'">star</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col s4 m4 mgt20 wd_dt4">
+                <div class="allbd white pda10 ft12 htrating">
+                    <h5 class="ft15 mgtn b mgb10">Facilities</h5>
+                    <div class="row mgbn">
+                        <div class="col s8 lineht20">Good schools?</div>                       
+                        <div class="col s4 right pdln">
+                            <span class="progress mgbn  ht10 grey lighten-2">
+                        <span class="determinate blue" style="width: 30%"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mgbn">
+                        <div class="col s8 lineht20">Good Markets?</div>
+                      <div class="col s4 right pdln">
+                            <span class="progress mgbn  ht10 grey lighten-2">
+                        <span class="determinate blue" style="width: 30%"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mgbn">
+                        <div class="col s8 lineht20">Reputed Hospitals?</div>
+                         <div class="col s4 right pdln">
+                            <span class="progress mgbn  ht10 grey lighten-2">
+                        <span class="determinate blue" style="width: 30%"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mgbn">
+                        <div class="col s8 lineht20">Daily Need Items?</div>
+                       <div class="col s4 right pdln">
+                            <span class="progress mgbn  ht10 grey lighten-2">
+                        <span class="determinate blue" style="width: 30%"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mgbn">
+                        <div class="col s8 lineht20">Public Transport?</div>
+                        <div class="col s4 right pdln">
+                            <span class="progress mgbn  ht10 grey lighten-2">
+                        <span class="determinate blue" style="width: 30%"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mgbn">
+                        <div class="col s8 lineht20">Apartment layout efficient?</div>
+                        <div class="col s4 right pdln">
+                            <span class="progress mgbn  ht10 grey lighten-2">
+                        <span class="determinate blue" style="width: 30%"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mgbn">
+                        <div class="col s8 lineht20">24x7 electricity?</div>
+                         <div class="col s4 right pdln">
+                            <span class="progress mgbn  ht10 grey lighten-2">
+                        <span class="determinate blue" style="width: 30%"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mgbn">
+                        <div class="col s8 lineht20">Regular/clean water supply?</div>
+                       <div class="col s4 right pdln">
+                            <span class="progress mgbn  ht10 grey lighten-2">
+                        <span class="determinate blue" style="width: 30%"></span>
+                            </span>
                         </div>
                     </div>
                 </div>
