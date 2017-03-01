@@ -69,3 +69,11 @@
     height: 30px !important;
     margin: auto;
 }
+
+.failed{
+    color: red;
+}
+
+.success{
+    color: green;
+}

@@ -2,7 +2,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     document.title = "Write Review";
     // console.log($stateParams.id); 
     $scope.couponCode = '';
-    $scope.couponEmpty = false;
+
     $rootScope.$watch('loginStatus', function() {
         // $timeout(function() {
         if ($rootScope.loginStatus) {
@@ -41,7 +41,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     }
 
 
-    var timestamp = new Date().getTime();
+
     var urlInfo = {
         url: $location.path()
     }
@@ -337,15 +337,57 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     /*Coupon Code Verification Starts*/
 
     $scope.validateCoupon = function() {
+
+        console.log($scope.couponCode)
+        var timestamp = parseInt((new Date().getTime()) / 1000);
+        // console.log(timestamp);
         if ($scope.couponCode == '') {
             $scope.couponEmpty = true;
-            console.log($scope.couponEmpty);
-        } else {
+            $scope.couponCodeSuccessful = false;
+            $scope.couponInactive = false;
+            $scope.couponExpired = false;
+            $scope.couponInvalid = false;
+        } else{
             $timeout(function() {
                 db.ref('coupons/' + $scope.couponCode).once('value', function(snapshot) {
-                    console.log(snapshot.val());
+                    $scope.couponDetails = snapshot.val();
+                    if ($scope.couponDetails != null) {
+                        if (timestamp > $scope.couponDetails.createdDate && timestamp < $scope.couponDetails.expiryDate) {
+                            if ($scope.couponDetails.status == 'active') {
+                                $scope.couponCodeSuccessful = true;
+                                $scope.couponEmpty = false;
+                                $scope.couponInactive = false;
+                                $scope.couponExpired = false;
+                                $scope.couponInvalid = false;
+
+                            } else {
+                                $scope.couponInactive = true;
+                                $scope.couponCodeSuccessful = false;
+                                $scope.couponEmpty = false;
+                                $scope.couponExpired = false;
+                                $scope.couponInvalid = false;
+                            }
+                        } else {
+                            $scope.couponExpired = true;
+                            $scope.couponCodeSuccessful = false;
+                            $scope.couponEmpty = false;
+                            $scope.couponInactive = false;
+                            $scope.couponInvalid = false;
+
+                        }
+                    } else {
+                        $scope.couponInvalid = true;
+                        $scope.couponCodeSuccessful = false;
+                        $scope.couponEmpty = false;
+                        $scope.couponInactive = false;
+                        $scope.couponExpired = false;
+                        console.log($scope.couponInvalid);
+                    }
                 })
-            })
+            }, 0)
         }
     }
+
+    /*Coupon Code Verification Ends*/
+
 }])
