@@ -83,7 +83,39 @@
                         <label for="textarea1">Type your review</label>
                     </div>
                 </div>
-               
+                <div class="row mgbn mgt20 pdb10" ng-show="couponCodeSuccessful">
+                    <p class="success pdl10">The coupon code {{couponCode}} has been successfully applied</p>
+                </div>
+                <div class="row mgbn mgt20" ng-hide="couponCodeSuccessful">
+                    <div class="col s12 pdb10">Have a coupon code?</div>
+                    <div class="input-field col s12">
+                        <form name="reviewCoupon">
+                            <div class="row mgbn">
+                                <div class="col s8 ">
+                                    <input id="couponCode" type="text" class="validate" ng-model="couponCode">
+                                    <div ng-class="messageClass">{{message}}</div>
+                                    <label for="couponCode">Enter Your Coupon Code</label>
+                                </div>
+                                <div class="col s4">
+                                    <button ng-hide="couponCodeSuccessful || applyingCoupon" class="max btn blue" ng-click="validateCoupon()">Apply</button>
+                                    <div ng-show="applyingCoupon" class="max preloader-wrapper small active">
+                                        <div class="spinner-layer spinner-blue-only">
+                                            <div class="circle-clipper left">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="gap-patch">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="circle-clipper right">
+                                                <div class="circle"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <p ng-click="showMoreFn()" class="alignc" style="cursor: pointer" ng-class="showMore?'roofGrey': 'roofGreen'"><b>{{showMoreLess}}</b></p>
                 <div ng-show="showMore" class="mgt20">
                     <div class="row mgbn" ng-repeat="item in ratingParams">
@@ -199,38 +231,8 @@
                     </div>
                     <hr>
                 </div>
-                 <div class="row mgbn mgt20 pdb10" ng-show="couponCodeSuccessful">
-                    <p class="success pdl10">The coupon code {{couponCode}} has been successfully applied</p>
-                </div>
-                <div class="row mgbn mgt20" ng-hide="couponCodeSuccessful">
-                    <div class="col s12 pdb10">Have a coupon code?</div>
-                    <div class="input-field col s12">
-                        <div class="row mgbn">
-                            <div class="col s8 ">
-                                <input id="couponCode" type="text" class="validate" ng-model="couponCode">
-                                <div ng-class="messageClass">{{message}}</div>
-                                <label for="couponCode">Enter Your Coupon Code</label>
-                            </div>
-                            <div class="col s4">
-                                <button ng-hide="couponCodeSuccessful || applyingCoupon" class="max btn" ng-click="validateCoupon()">Apply</button>
-                                <div ng-show="applyingCoupon" class="max preloader-wrapper small active">
-                                    <div class="spinner-layer spinner-blue-only">
-                                        <div class="circle-clipper left">
-                                            <div class="circle"></div>
-                                        </div>
-                                        <div class="gap-patch">
-                                            <div class="circle"></div>
-                                        </div>
-                                        <div class="circle-clipper right">
-                                            <div class="circle"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <a href="" ng-click="submitReview()" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating  )?'disabled':'normal'" class="waves-effect waves-light blue lighten-1 btn block mgt20">Submit</a>
+                <button data-target="modal1" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating || !projectSelected)?'disabled':'normal'" class="blue lighten-1 btn block mgt20 wd100">Submit</button>
+                <!-- <a href="" ng-click="submitReview1()" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating || !projectSelected)?'disabled':'normal'" class="blue lighten-1 btn block mgt20">Submit</a> -->
                 <p ng-hide="loginStatus" id="loginSignup">Please login/signup to submit review *</p>
             </form>
         </div>
@@ -248,6 +250,15 @@
             </p>
             <p>
                 <b>Review Anonymously:</b> Our hawk-eyed moderators have a thing against reviews with personal information such as names, phone numbers, emails, or other contact details. Make sure your review doesn’t include such information.</p>
+        </div>
+    </div>
+    <div id="modal1" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
         </div>
     </div>
 </div>

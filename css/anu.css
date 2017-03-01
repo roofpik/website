@@ -1,33 +1,54 @@
 .whiteb {
-	background:#fff;
-	border: solid 1px #ccc;
+    background: #fff;
+    border: solid 1px #ccc;
 }
 
-.floatr{
-	float:right;
+.floatr {
+    float: right;
 }
 
-.list-icon{
-	height: 30px;
+.list-icon {
+    height: 30px;
     float: left;
     z-index: 1 !important;
 }
 
-.map-radio{width:50%; position: absolute; left: 30%; bottom: 0%; z-index: 9; transform: translate(-50%, -50%); color:#000;}
+.map-radio {
+    width: 50%;
+    position: absolute;
+    left: 30%;
+    bottom: 0%;
+    z-index: 9;
+    transform: translate(-50%, -50%);
+    color: #000;
+}
 
 .map-radio label {
-	color: #000;
+    color: #000;
 }
 
 .highlightedText {
     font-weight: bold;
-    color:#000;
+    color: #000;
 }
 
 #map-list li {
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .redf {
-	color:#FF4F33;
+    color: #FF4F33;
+}
+
+.loaderPositionCoverStories {
+    left: 50%;
+    top: 300px;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    z-index: 9;
+}
+
+.wd100 {
+    width:100%;
 }
