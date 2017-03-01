@@ -191,11 +191,12 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
 
     $scope.selectProject = function(project) {
         // console.log(project)
+        $scope.projectSelected = true;
         $scope.selectedItem = project.name;
         $scope.showResults = false;
     }
 
-    $("#select_project").focusin(function() {
+    $("#select_name_review").focusin(function() {
         $timeout(function() {
             $('.search-results').fadeIn();
         }, 0);
@@ -203,7 +204,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
 
     // hide search by name list when input for searching by name
 
-    $("#select_project").focusout(function() {
+    $("#select_name_review").focusout(function() {
         $('.search-results').fadeOut();
     });
 
@@ -217,47 +218,50 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         }
     }
 
-    $("#select_project").focusout(function() {
-        $timeout(function() {
-            $scope.showList = false;
-        }, 100);
-    });
-
     $scope.submitReview = function() {
         console.log($scope.review);
         swal({
-                title: "Enter Your Phone Number",
+                title: "Enter your 10 digit mobile number",
                 text: "You will soon receive a one time password",
                 type: "input",
                 showCancelButton: true,
                 closeOnConfirm: false,
+                cancelButtonText: 'Submit without verification',
+                confirmButtonText: 'Send OTP',
                 animation: "slide-from-top",
                 inputPlaceholder: "Phone Number"
             },
             function(inputValue) {
-                if (inputValue === false) return false;
-                if (inputValue === "") {
-                    swal.showInputError("Please Enter Your Mobile Number");
-                    return false
+                if (inputValue == "") {
+                    swal.showInputError("Mobile number not entered");
+                    return false;
+                } else if (inputValue.length < 10) {
+                    swal.showInputError("Mobile number incorrect");
+                    return false;
+                } else if (inputValue.length == 10) {
+                    sendOtp(inputValue);
+                } else {
+                    // Materialize.toast("You have successfully logged in!", 2000, 'rounded');
+                    return true;
                 }
-                swal({
-                        title: "Verifying Your Phone Number",
-                        text: "Please Enter The OTP",
-                        type: "input",
-                        showCancelButton: true,
-                        closeOnConfirm: false,
-                        animation: "slide-from-top",
-                        inputPlaceholder: "One Time Password"
-                    },
-                    function(inputValue) {
-                        if (inputValue === false) return false;
+                // swal({
+                //         title: "Verifying Your Phone Number",
+                //         text: "Please Enter The OTP",
+                //         type: "input",
+                //         showCancelButton: true,
+                //         closeOnConfirm: false,
+                //         animation: "slide-from-top",
+                //         inputPlaceholder: "One Time Password"
+                //     },
+                //     function(inputValue) {
+                //         if (inputValue === false) return false;
 
-                        if (inputValue === "") {
-                            swal.showInputError("This Field Cannot Be Left Blank");
-                            return false
-                        }
+                //         if (inputValue === "") {
+                //             swal.showInputError("This Field Cannot Be Left Blank");
+                //             return false
+                //         }
 
-                    });
+                //     });
             });
 
         // swal({
@@ -390,4 +394,62 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
 
     /*Coupon Code Verification Ends*/
 
-}])
+    // sends one time password to registered email and mobile number
+    function sendOtp(mobile) {
+        swal({
+            title: "Sending OTP",
+            text: "Please wait...",
+            imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
+            showConfirmButton: false
+        });
+        var otp = Math.floor(1000 + Math.random() * 9000);
+        var data = {
+            mobile: parseInt(mobile),
+            otp: otp
+        }
+        $http({
+            url: 'http://107.23.243.89/api/SendOTP_1.0',
+            method: 'GET',
+            params: {
+                args: encodeParams(data)
+            }
+        }).then(function(response) {
+            console.log(response);
+            if (response.status == 200) {
+                // console.log('sent');
+                swal({
+                        title: "Enter OTP",
+                        text: "A verification code has been sent to your registered mobile xxxxxxxxx" + mobile[mobile.length - 1],
+                        type: "input",
+                        showCancelButton: true,
+                        closeOnConfirm: true,
+                        animation: "slide-from-top",
+                        inputPlaceholder: "One Time Password"
+                    },
+                    function(inputValue) {
+                        if (inputValue == "") {
+                            swal.showInputError("OTP not entered");
+                            return false;
+                        } else if (inputValue.length < 4) {
+                            swal.showInputError("Incorrect OTP");
+                            return false;
+                        } else if (inputValue.length == 4) {
+                            if(inputValue == otp){
+                                $scope.mobileVerified = true;
+                                alert('mobile verified');
+                            } else {
+                                swal.showInputError("Incorrect OTP");
+                            }
+                        } else {
+                            // swal('')
+                            alert('mobile not verified');
+                            return true;
+                        }
+                    });
+            } else {
+                // console.log('not sent');
+                swal('OTP not sent', 'Please try again.', 'error');
+            }
+        });
+    }
+}]);
