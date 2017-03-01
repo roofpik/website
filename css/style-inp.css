@@ -24,7 +24,7 @@
    .input-field .prefix.active {
      color: #2DB6D6;
    }
-
+[type="radio"]:not(:checked)+label, [type="radio"]:checked+label{padding-left: 27px;}
 input:not([type]).valid, input:not([type]):focus.valid,
 input[type=text].valid,
 input[type=text]:focus.valid,
