@@ -351,9 +351,9 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
             $scope.couponInactive = false;
             $scope.couponExpired = false;
             $scope.couponInvalid = false;
-        } else{
-            $timeout(function() {
-                db.ref('coupons/' + $scope.couponCode).once('value', function(snapshot) {
+        } else {
+            db.ref('coupons/' + $scope.couponCode).once('value', function(snapshot) {
+                $timeout(function() {
                     $scope.couponDetails = snapshot.val();
                     if ($scope.couponDetails != null) {
                         if (timestamp > $scope.couponDetails.createdDate && timestamp < $scope.couponDetails.expiryDate) {
@@ -434,7 +434,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                             swal.showInputError("Incorrect OTP");
                             return false;
                         } else if (inputValue.length == 4) {
-                            if(inputValue == otp){
+                            if (inputValue == otp) {
                                 $scope.mobileVerified = true;
                                 alert('mobile verified');
                             } else {

@@ -2,10 +2,10 @@
 app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '$http', function($scope, $stateParams, $state, $timeout, $http) {
     document.title = "My Profile";
     var uid = decodeParams($stateParams.id)
-    // console.log(uid)
-        // $scope.userId = 'vyEaEOyjGgUl8OvOVRZek8twcpk1'
-    $scope.userId = uid.id;
-    // if user is not signed in, take him to the home page
+        // console.log(uid)
+    $scope.userId = 'PTAksrDxGnX79L200YGnmgi8wxH2'
+        // $scope.userId = uid.id;
+        // if user is not signed in, take him to the home page
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
@@ -14,6 +14,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         }
     });
     $scope.textReviews = 0;
+    $scope.nonTextReviews = 0;
     // $scope.overallExists = false;
     $scope.showRatings = true;
     $scope.loading = true;
@@ -81,12 +82,6 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
             $timeout(function() {
                 for (key in snapshot.val()) {
                     for (key1 in snapshot.val()[key]) {
-                        $scope.userReviews[$scope.i].houseMaidsExists = false;
-                        $scope.userReviews[$scope.i].electricityExists = false;
-                        $scope.userReviews[$scope.i].greenAreasExists = false;
-                        $scope.userReviews[$scope.i].securityExists = false;
-                        $scope.userReviews[$scope.i].infraExists = false;
-                        $scope.userReviews[$scope.i].parkingExists = false;
                         $scope.userReviews[$scope.i].overallExists = false;
                         if (snapshot.val()[key]) {
                             $scope.userReviews[$scope.i] = {};
@@ -113,14 +108,12 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
                         }
                     }
                 }
-                bindReviews();
-                $scope.loading = false;
             })
         })
     }
 
-    function showHideReviewRating(i, amenities, maids, electricity, greenAreas, security, infra, parking) {
-        if (amenities || maids || electricity || greenAreas || security || infra || parking) {
+    function showHideReviewRating(i, overall) {
+        if (overall && $scope.userReviews[i].reviewTitle == '' && $scope.userReviews[i].reviewText == '') {
             $scope.showRatings = false;
         } else {
             $scope.showRatings = true;
@@ -128,24 +121,29 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         if ($scope.userReviews[0] == 0) {
             $scope.showReviews = true;
         } else {
-            $scope.showReviews = false;
+            if (overall) {
+                $scope.showReviews = false;
+            }
         }
-
     }
 
-    function getReviewData(i, projId) {
+    function getReviewData(i, Id) {
+        console.log(Id);
         $http({
             url: 'http://107.23.243.89/api/GetReviewDetails_1.0',
             method: 'GET',
             params: {
-                id: projId
+                id: Id
             }
         }).then(function mySucces(response) {
+            console.log(response);
             if (response.status == 200) {
                 console.log(response);
                 $scope.text = response.data.reviewText;
                 setReviewText($scope.text, i, response)
-                showHideReviewRating(i, $scope.userReviews[i].amenitiesExists, $scope.userReviews[i].houseMaidsExists, $scope.userReviews[i].electricityExists, $scope.userReviews[i].greenAreasExists, $scope.userReviews[i].securityExists, $scope.userReviews[i].infraExists, $scope.userReviews[i].parkingExists);
+                showHideReviewRating(i, $scope.userReviews[i].overallExists);
+                $scope.loading = false;
+                
             }
             // loading(false, 1000);
         }, function myError(err) {
@@ -158,70 +156,11 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         if (response.data.overallRating) {
             $scope.userReviews[i].overallRatings = response.data.overallRating;
             $scope.userReviews[i].overallExists = true;
+        }
+        if ($scope.userReviews[i].overallExists && response.data.reviewTitle == '' && response.data.reviewText == '') {
             $scope.nonTextReviews++;
         }
-        if (response.data.ratings) {
-            if (response.data.ratings.amenities) {
-                $scope.userReviews[i].amenitiesRatings = response.data.ratings.amenities;
-                $scope.userReviews[i].amenitiesExists = true;
-                // console.log('amenitiesWorking')
-            }
-            if (response.data.ratings.convenienceOfHouseMaids) {
-                $scope.userReviews[i].convenienceOfHouseMaidRating = response.data.ratings.convenienceOfHouseMaids;
-                $scope.userReviews[i].houseMaidsExists = true;
-            }
-            if (response.data.ratings.electricityAndWaterSupply) {
-                $scope.userReviews[i].electricityAndWaterSupplyRating = response.data.ratings.electricityAndWaterSupply;
-                $scope.userReviews[i].electricityExists = true;
-            }
-            if (response.data.ratings.openAndGreenAreas) {
-                $scope.userReviews[i].openAndGreenAreasRating = response.data.ratings.openAndGreenAreas;
-                $scope.userReviews[i].greenAreasExists = true;
-            }
-            if (response.data.ratings.security) {
-                $scope.userReviews[i].securityRating = response.data.ratings.security;
-                $scope.userReviews[i].securityExists = true;
-            }
-            if (response.data.ratings.infrasctructure) {
-                $scope.userReviews[i].infrastructureRating = response.data.ratings.infrastructure;
-                $scope.userReviews[i].infraExists = true;
-            }
-            if (response.data.ratings.convenienceOfParking) {
-                $scope.userReviews[i].parkingRating = response.data.ratings.convenienceOfParking;
-                $scope.userReviews[i].parkingExists = true;
-            }
-        }
     }
-
-    function bindReviews() {
-
-        $scope.totalRatings = $scope.textReviews + $scope.nonTextReviews;
-        // $scope.loading = false;
-
-        // if (Object.keys($scope.userReviews).length) {
-        //     $scope.showReviews = true;
-        // } else {
-        //     $scope.noReviewsToShow = true;
-        // }
-        // $http({
-        //     url: 'http://107.23.243.89/api/GetReviewDetails_1.0',
-        //     method: 'GET',
-        //     params: {
-        //         id: $scope.reviews[index].reviewId
-        //     }
-        // }).then(function mySucces(response) {
-        //     // console.log(response);
-        //     if(response.status == 200){
-        //         $scope.reviews[index].reviewText = response.data.reviewText;
-        //         $scope.reviews[index].showMore = false;
-        //     } 
-        //     loading(false, 1000);
-        // }, function myError(err) {
-        //     console.log(err);
-        // })
-    }
-
-
 
     //Function to redirect to the project page from user's reviews
 
@@ -321,4 +260,89 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         $scope.image = image;
     }
 
+    $scope.getVerified = function() {
+        swal({
+                title: "Enter your 10 digit mobile number",
+                text: "You will soon receive a one time password",
+                type: "input",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Send OTP',
+                animation: "slide-from-top",
+                inputPlaceholder: "Phone Number"
+            },
+            function(inputValue) {
+                if (inputValue == "") {
+                    swal.showInputError("Mobile number not entered");
+                    return false;
+                } else if (inputValue.length < 10) {
+                    swal.showInputError("Mobile number incorrect");
+                    return false;
+                } else if (inputValue.length == 10) {
+                    sendOtp(inputValue);
+                } else {
+                    // Materialize.toast("You have successfully logged in!", 2000, 'rounded');
+                    return true;
+                }
+            });
+    }
+
+    function sendOtp(mobile) {
+        swal({
+            title: "Sending OTP",
+            text: "Please wait...",
+            imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
+            showConfirmButton: false
+        });
+        var otp = Math.floor(1000 + Math.random() * 9000);
+        var data = {
+            mobile: parseInt(mobile),
+            otp: otp
+        }
+        $http({
+            url: 'http://107.23.243.89/api/SendOTP_1.0',
+            method: 'GET',
+            params: {
+                args: encodeParams(data)
+            }
+        }).then(function(response) {
+            console.log(response);
+            if (response.status == 200) {
+                // console.log('sent');
+                swal({
+                        title: "Enter OTP",
+                        text: "A verification code has been sent to your registered mobile xxxxxxxxx" + mobile[mobile.length - 1],
+                        type: "input",
+                        showCancelButton: true,
+                        closeOnConfirm: true,
+                        animation: "slide-from-top",
+                        inputPlaceholder: "One Time Password"
+                    },
+                    function(inputValue) {
+                        if (inputValue == "") {
+                            swal.showInputError("OTP not entered");
+                            return false;
+                        } else if (inputValue.length < 4) {
+                            swal.showInputError("Incorrect OTP");
+                            return false;
+                        } else if (inputValue.length == 4) {
+                            if (inputValue == otp) {
+                                $scope.mobileVerified = true;
+                                alert('mobile verified');
+                            } else {
+                                swal.showInputError("Incorrect OTP");
+                            }
+                        } else {
+                            // swal('')
+                            alert('mobile not verified');
+                            return true;
+                        }
+                    });
+            } else {
+                // console.log('not sent');
+                swal('OTP not sent', 'Please try again.', 'error');
+            }
+        });
+    }
 }])

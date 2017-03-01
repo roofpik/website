@@ -15,7 +15,7 @@
                         <p class="mgan">Reviews</p>
                     </div>
                     <div class="col s3">
-                        <h4 class="mgan">{{totalRatings}}</h4>
+                        <h4 class="mgan">{{nonTextReviews}}</h4>
                         <p class="mgan">Ratings</p>
                     </div>
                     <div class="col s3">
@@ -103,6 +103,7 @@
                             <div class="timeline-body">
                                 <p>{{id.reviewText}}</p>
                                 <br>
+                                <a class="waves-effect waves-light btn myButton" ng-click = "getVerified()">Get Verified</a>
                                 <span  ng-show = "id.overallExists"> <p><b>Overall Rating: </b></p><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < id.overallRatings? 'blue-text': 'normal'">star</i></span>
                             </div>
                         </div>
@@ -122,19 +123,12 @@
                         <div class="timeline-badge green"><i class="material-icons">star</i></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h5 class="mgan">{{id.projectName}} (Rating Summary)</h5>
+                                <h5 class="mgan">{{id.projectName}}</h5>
                                 <p class="mgan grey-text"><small>{{id.createdDate | date:'MMM dd, yy'}}</small></p>
                             </div>
                             <div class="timeline-body">
                                 <br>
-                                <span ng-show = "id.amenitiesExists"><p>Amenities: </p><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < id.amenitiesRatings? 'blue-text': 'normal'">star</i><hr></span>
-                                
-                                <span ng-show = "id.houseMaidsExists"><p>Convenience Of House Maids: </p><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < id.convenienceOfHouseMaidRating? 'blue-text': 'normal'">star</i><hr></span>
-                                <span ng-show = "id.electricityExists"><p>Electricity And Water Supply: </p><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < id.electricityAndWaterSupplyRating? 'blue-text': 'normal'">star</i><hr></span>
-                                <span ng-show = "id.greenAreasExists"><p>Open And Green Areas: </p><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < id.openAndGreenAreasRating? 'blue-text': 'normal'">star</i><hr></span>
-                                <span ng-show = "id.securityExists"><p>Security: </p><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < id.securityRating? 'blue-text': 'normal'">star</i><hr></span>
-                                 <span ng-show = "id.infraExists"><p>Infrastructure: </p><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < id.infrastructureRating? 'blue-text': 'normal'">star</i><hr></span>
-                                 <span ng-show = "id.parkingExists"><p>Convenience Of Parking: </p><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < id.parkingRating? 'blue-text': 'normal'">star</i><hr></span>
+                                <span  ng-show = "id.overallExists"> <p><b>Overall Rating: </b></p><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < id.overallRatings? 'blue-text': 'normal'">star</i></span>
                             </div>
                     </li>
                     <!-- <li>

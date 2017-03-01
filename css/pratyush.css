@@ -68,3 +68,9 @@
 .success{
     color: green;
 }
+
+.myButton {
+    height: 30px !important;
+    width: 200px !important;
+    background-color: #1AB0D3;
+}
