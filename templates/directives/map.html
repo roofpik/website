@@ -16,7 +16,7 @@
         <div class="col m7 l8 reletive">
             <div id="mapContainer">
                 <div id="mapCanvas" class="ht600"></div>
-                <div class="map-search">
+                <div class="map-search" ng-hide = "true">
                     <div id="search_map" class="row radius2 pdr10 cardmg">
                         <div class="col s9">
                             <div class="input-field card ht45 pdan reletive">
@@ -26,7 +26,6 @@
                                 <div class="search-results" ng-show="showSearch">
                                     <ul class="collection homecoll">
                                         <li ng-repeat="item in searchByNameResults | filter:searchedText" class=" collection-item avatar" ng-click="selectResult(item)">
-                                            <!-- <img ng-src="{{item.icon}}" class="circle" /> -->
                                             <span class="title ft13" ng-bind-html="item.name | highlight:searchedText"></span>
                                         </li>
                                     </ul>

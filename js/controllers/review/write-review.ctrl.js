@@ -1,6 +1,6 @@
 app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$location', '$stateParams', '$http', function($scope, $timeout, $rootScope, $location, $stateParams, $http) {
     document.title = "Write Review";
-    // console.log($stateParams.id); 
+    $('.modal').modal(); 
     $scope.couponCode = '';
 
     $rootScope.$watch('loginStatus', function() {
@@ -218,6 +218,61 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         }
     }
 
+    $scope.submitReview1 = function() {
+        if ($scope.couponCodeSuccessful) {
+            swal({
+                    title: "Enter your 10 digit mobile number",
+                    text: "You will soon receive a one time password",
+                    type: "input",
+                    showCancelButton: false,
+                    closeOnConfirm: false,
+                    confirmButtonText: 'Send OTP',
+                    animation: "slide-from-top",
+                    inputPlaceholder: "Phone Number"
+                },
+                function(inputValue) {
+                    if (inputValue == "") {
+                        swal.showInputError("Mobile number not entered");
+                        return false;
+                    } else if (inputValue.length < 10) {
+                        swal.showInputError("Mobile number incorrect");
+                        return false;
+                    } else if (inputValue.length == 10) {
+                        sendOtp(inputValue);
+                    } else {
+                        return false;
+                    }
+                });
+        } else {
+        swal({
+                title: "Enter your 10 digit mobile number",
+                text: "You will soon receive a one time password",
+                type: "input",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                cancelButtonText: 'Submit without verification',
+                confirmButtonText: 'Send OTP',
+                animation: "slide-from-top",
+                inputPlaceholder: "Phone Number"
+            },
+            function(inputValue, isConfirm) {
+                console.log(isConfirm);
+                if (inputValue == "") {
+                    swal.showInputError("Mobile number not entered");
+                    return false;
+                } else if (inputValue.length < 10) {
+                    swal.showInputError("Mobile number incorrect");
+                    return false;
+                } else if (inputValue.length == 10) {
+                    sendOtp(inputValue);
+                } else {
+                    console.log('submit without verification called');
+                    return true;
+                }
+            });       
+        }
+    }
+
     $scope.submitReview = function() {
         console.log($scope.review);
         swal({
@@ -343,9 +398,9 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     $scope.validateCoupon = function() {
         console.log($scope.couponCode);
         var timestamp = parseInt((new Date().getTime()) / 1000);
-        // console.log(timestamp);
         if ($scope.couponCode == '') {
-
+            $scope.message = 'Please enter the coupon code.';
+            $scope.messageClass = 'failed';
         } else {
             $scope.applyingCoupon = true;
             db.ref('coupons/' + $scope.couponCode).once('value', function(snapshot) {
@@ -361,16 +416,19 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                             } else {
                                 $scope.message = 'This coupon code is not active';
                                 $scope.messageClass = 'failed';
+                                $scope.couponCodeSuccessful = false;
                             }
                         } else {
                             $scope.message = 'This coupon code has expired'
                             $scope.messageClass = 'failed';
+                            $scope.couponCodeSuccessful = false;
                         }
                     } else {
                         $scope.message = 'This coupon code is invalid'
                         $scope.messageClass = 'failed';
+                        $scope.couponCodeSuccessful = false;
                     }
-                    $scope.applyingCoupon= false;
+                    $scope.applyingCoupon = false;
                 }, 1000);
             });
         }
