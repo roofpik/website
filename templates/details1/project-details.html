@@ -76,7 +76,7 @@
                     </div>
                 </div>
             </div> -->
-            <div ng-hide="loading" class="col m8 img-detail htfixbox reletive pdln pdrn">
+            <div ng-hide="loading" class="col s12 m8 wid100 img-detail htfixbox reletive pdln pdrn imggradient">
                 <img ng-src="{{coverImage}}">
                 <div class="boxabs">
                     <div class="img_thumb">
@@ -90,10 +90,10 @@
                         <a href="" class="mgr10"><span>{{allRatings.numbers.numberOfReviews}} Review</span><span ng-show="allRatings.numbers.numberOfReviews > 1">s</span></a>
                     </div>
                 </div>
-                <div class="fixed-action-btn horizontal boxabs_bt">
-                    <button class="stand"><i class="material-icons left ft14">thumb_up</i>Like</button>
-                    <button class="stand" ng-click="goToWriteReview()"><i class="material-icons ft14 left">edit</i> Write Review</button>
-                    <button class="stand"><i class="material-icons ft14 left">book</i>Bookmark</button>
+                <div class="fixed-action-btn horizontal boxabs_bt xstop">
+                    <button class="stand wd40"><i class="material-icons left ft14">thumb_up</i>Like</button>
+                    <button class="stand wd40" ng-click="goToWriteReview()"><i class="material-icons ft14 left">edit</i> Write Review</button>
+                    <button class="stand wd40"><i class="material-icons ft14 left">book</i>Bookmark</button>
                 </div>
                 <!-- <div class="img-btn center-align">
                     <div class="gallery-btn">
@@ -101,8 +101,16 @@
                     </div>
                 </div> -->
             </div>
-            <div class="col s4 m4 amen-tab htfixbox">
-                <div ng-show="loading" class="preloader-wrapper big active loaderPositionDetails">
+             <div id="interested">
+            <button onclick="$('#xshideside') .css ('right','0px')">
+            Yes I am Interested</button></div>
+            <div id="xshideside" class="col s12 m4 amen-tab htfixbox" > 
+           
+            <div id="interestedout">
+            <button onclick="$('#xshideside') .css ('right','-350px')">
+            Yes I am Interested</button>
+            </div>         
+            <div ng-show="loading" class="preloader-wrapper big active loaderPositionDetails">
                     <div class="spinner-layer spinner-blue-only">
                         <div class="circle-clipper left">
                             <div class="circle"></div>
@@ -150,12 +158,12 @@
                 </div>
             </div>
         </div>
-        <div class="row mgt5 mgan pdleftbig" ng-hide="loading">
+        <div class="row mgt5 mgan pdleftbig hdnxstb" ng-hide="loading">
             <a href="" ng-click="scrollToDiv('amenities')" class="stand_amn"><i class="material-icons left ft14">list</i>Amenities</a>
             <a href="" ng-click="scrollToDiv('price_ranges')" class="stand_amn"><i class="material-icons left ft14">location_city</i>Available Property Types</a>
             <a href="" ng-click="scrollToDiv('price_ranges')" class="stand_amn"><i class="material-icons left ft14">done</i>Price Ranges</a>
             <a href="" ng-click="scrollToDiv('reviews')" class="stand_amn"><i class="material-icons left ft14">edit</i>Reviews</a>
-            <a href="" ng-click="scrollToDiv('reviews')" class="stand_amn"><i class="material-icons left ft14">star_border</i>Ratings</a>
+           <!--  <a href="" ng-click="scrollToDiv('reviews')" class="stand_amn"><i class="material-icons left ft14">star_border</i>Ratings</a> -->
             <a href="" ng-click="scrollToDiv('gallerybx')" class="stand_amn"><i class="material-icons left ft14">photo_library</i>Gallery</a>
             <a href="" ng-click="scrollToDiv('cover_stories')" class="stand_amn"><i class="material-icons left ft14">wallpaper</i> Related Cover Stories</a>
         </div>
@@ -164,39 +172,39 @@
 <div class="container container2" ng-hide="loading">
     <div class="row mgt20" ng-show="project.standoutFeatures">
         <div class="col">
-            <span class="stand" ng-repeat="feature in project.standoutFeatures">{{feature.featureName}}</span>
+            <span class="stand xstop50" ng-repeat="feature in project.standoutFeatures">{{feature.featureName}}</span>
         </div>
     </div>
     <div class="row linehth5">
-        <div class="col s4 pda10">
+        <div class="col s12 m6 l4 wd33tb pda10">
             <h5 class="ft12 mgan"><i class="material-icons left teal-text text-accent-4">vpn_key</i> Possession</h5>
             <h4 class="mgan ft16b pdl34 truncate">{{project.projectStatus}}</h4>
             <!-- <p class="mgan ft12 pdl34" ng-show="project.possession.year != 'NA'">{{project.possession.month}} {{project.possession.year}}</p> -->
         </div>
-        <div class="col s4 pda10">
+        <div class="col s12 m6 l4 pda10 wd33tb">
             <h5 class="ft12 mgan"><i class="material-icons left cyan-text text-accent-4">place</i> Address</h5>
             <h4 class="mgan ft16b pdl34 truncate">{{project.projectDetails.address.displayAddress}}</h4>
             <!-- <p class="mgan ft12 pdl34">{{project.projectDetails.address.addressLine2}}</p> -->
-        </div>
-        <div class="col s4 pda10">
-            <h5 class="ft12 mgan"><i class="material-icons left deep-purple-text text-accent-1 ">details</i>   Project Details</h5>
-            <h4 class="mgan ft16b pdl34 truncate">{{project.projectDetails.numberOfUnits}} <span ng-show="project.projectDetails.numberOfUnits != 'NA'">Units</span></h4>
-            <p class="mgan ft12 pdl34" ng-show="project.projectDetails.numberOfTowers != 'NA'">{{project.projectDetails.numberOfTowers}}Towers</p>
-        </div>
-        <div class="col s4 pda10">
+        </div>       
+        <div class="col s12 m6 l4 pda10 wd33tb">
             <h5 class="ft12 mgan"><i class="material-icons left  yellow-text text-accent-4">local_offer</i> Rent</h5>
             <h4 class="mgan ft16b pdl34 truncate"><span ng-show="rentMin != 'NA'">  &#8377;</span>{{rentMin}}<span ng-show="rentMin != rentMax"> - &#8377;{{rentMax}}</span></h4>
             <!-- <p class="mgan ft12 pdl34">Nov 2015</p> -->
         </div>
-        <div class="col s4 pda10">
+        <div class="col s12 m6 l4 pda10 wd33tb">
             <h5 class="ft12 mgan"><i class="material-icons left orange-text text-accent-4">photo_size_select_small</i> Area</h5>
             <h4 class="mgan ft16b pdl34 truncate">{{minArea}} <span ng-show="minArea != 'NA'">Sq.Ft.</span><span ng-show="minArea != maxArea"> - {{maxArea}} Sq.Ft.</span></h4>
             <!-- <p class="mgan ft12 pdl34">Nov 2015</p> -->
         </div>
-        <div class="col s4 pda10">
+        <div class="col s12 m6 l4 pda10 wd33tb">
             <h5 class="ft12 mgan"> <i class="material-icons left  red-text text-accent-4">account_balance</i> Segment</h5>
             <h4 class="mgan ft16b pdl34 truncate">{{project.segment}}</h4>
             <!-- <p class="mgan ft12 pdl34">Nov 2015</p> -->
+        </div>
+         <div class="col s12 m6 l4 pda10 wd33tb">
+            <h5 class="ft12 mgan"><i class="material-icons left deep-purple-text text-accent-1 ">details</i>   Project Details</h5>
+            <h4 class="mgan ft16b pdl34 truncate">{{project.projectDetails.numberOfUnits}} <span ng-show="project.projectDetails.numberOfUnits != 'NA'">Units</span></h4>
+            <p class="mgan ft12 pdl_p34" ng-show="project.projectDetails.numberOfTowers != 'NA'">{{project.projectDetails.numberOfTowers}}Towers</p>
         </div>
     </div>
     <section class="mgt20 reviews" ui-view="reviewRating"></section>

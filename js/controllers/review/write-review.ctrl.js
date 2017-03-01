@@ -341,54 +341,37 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     /*Coupon Code Verification Starts*/
 
     $scope.validateCoupon = function() {
-
-        console.log($scope.couponCode)
+        console.log($scope.couponCode);
         var timestamp = parseInt((new Date().getTime()) / 1000);
         // console.log(timestamp);
         if ($scope.couponCode == '') {
-            $scope.couponEmpty = true;
-            $scope.couponCodeSuccessful = false;
-            $scope.couponInactive = false;
-            $scope.couponExpired = false;
-            $scope.couponInvalid = false;
         } else {
+            $scope.applyingCoupon = true;
             db.ref('coupons/' + $scope.couponCode).once('value', function(snapshot) {
                 $timeout(function() {
                     $scope.couponDetails = snapshot.val();
-                    if ($scope.couponDetails != null) {
+                    if ($scope.couponDetails) {
                         if (timestamp > $scope.couponDetails.createdDate && timestamp < $scope.couponDetails.expiryDate) {
                             if ($scope.couponDetails.status == 'active') {
+                                $scope.message = 'Your coupon code has been applied successfully';
+                                $scope.messageClass = 'success';
                                 $scope.couponCodeSuccessful = true;
-                                $scope.couponEmpty = false;
-                                $scope.couponInactive = false;
-                                $scope.couponExpired = false;
-                                $scope.couponInvalid = false;
 
                             } else {
-                                $scope.couponInactive = true;
-                                $scope.couponCodeSuccessful = false;
-                                $scope.couponEmpty = false;
-                                $scope.couponExpired = false;
-                                $scope.couponInvalid = false;
+                                $scope.message = 'This coupon code is not active';
+                                $scope.messageClass = 'failed';
                             }
                         } else {
-                            $scope.couponExpired = true;
-                            $scope.couponCodeSuccessful = false;
-                            $scope.couponEmpty = false;
-                            $scope.couponInactive = false;
-                            $scope.couponInvalid = false;
-
+                            $scope.message = 'This coupon code has expired'
+                            $scope.messageClass = 'failed';
                         }
                     } else {
-                        $scope.couponInvalid = true;
-                        $scope.couponCodeSuccessful = false;
-                        $scope.couponEmpty = false;
-                        $scope.couponInactive = false;
-                        $scope.couponExpired = false;
-                        console.log($scope.couponInvalid);
+                        $scope.message = 'This coupon code is invalid'
+                        $scope.messageClass = 'failed';
                     }
-                })
-            }, 0)
+                    $scope.applyingCoupon= false;
+                }, 1000);
+            });
         }
     }
 
