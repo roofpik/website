@@ -335,6 +335,8 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         return $sce.trustAsHtml(text.replace(new RegExp(search, 'gi'), '<span class="highlightedText">$&</span>'));
     };
 
+
+// get data to display on map and cover stories only when scrolled to that particular div
     $(window).bind('scroll', function() {
         if ($(window).scrollTop() >= $('.write-review-home').offset().top + $('.write-review-home').outerHeight() - window.innerHeight) {
             $timeout(function(){
@@ -356,7 +358,6 @@ app.controller('coverStoryHomeCtrl', ['$scope', '$timeout', '$rootScope', functi
     $scope.stories = [];
     $rootScope.$watch('showCoverStories', function() {
         if($rootScope.showCoverStories && !$scope.coverStoriesFetched){
-            // alert('fetching stories');
             db.ref('shortStories/-KYJONgh0P98xoyPPYm9')
                 .limitToFirst(8)
                 .once('value', function(response) {

@@ -22,19 +22,21 @@
 .loaderPositionMap {
     position: absolute;
     left: 50%;
-    top: 1800px;
+    top: 2400px;
     width: 100px;
     height: 100px;
     margin: auto;
+    z-index: 9;
 }
 
 /*.loaderPositionCoverStories {
     position: absolute;
     left: 50%;
-    top: 2500px;
+    top: 200px;
     width: 100px;
     height: 100px;
     margin: auto;
+<<<<<<< HEAD
 }*/
 
 .loaderPositionProfile{
