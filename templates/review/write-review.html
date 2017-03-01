@@ -26,7 +26,7 @@
                 <b>Review Anonymously:</b> Our hawk-eyed moderators have a thing against reviews with personal information such as names, phone numbers, emails, or other contact details. Make sure your review doesn’t include such information.</p>
         </div>
         <div class="col s12 m8 pdleft50">
-            <h5 class="pdt10 b" ng-click="submitReview()">Write Review</h5>
+            <h5 class="pdt10 b">Write Review</h5>
             <hr>
             <form name="reviewForm">
                 <div class="row mgbn" ng-show="showSearch">
@@ -96,6 +96,15 @@
                         <textarea id="textarea1" type="text" class="materialize-textarea validate" ng-model="review.reviewText" required></textarea>
                         <label for="textarea1">Type your review</label>
                     </div>
+                </div>
+                <div class="row mgbn mgt20">
+                    <div class="col s12 pdb10">Have A Coupon Code?</div>
+                    <div class="input-field col s12">
+                        <input id="couponCode" type="text" class="validate" ng-model="couponCode">
+                        <p ng-show="couponEmpty">This field cannot be left blank *</p>
+                        <label for="couponCode">Code</label><a class="waves-effect waves-light btn" ng-click = "validateCoupon()">Apply</a>
+                    </div>
+
                 </div>
                 <p ng-click="showMoreFn()" class="alignc" style="cursor: pointer" ng-class="showMore?'roofGrey': 'roofGreen'"><b>{{showMoreLess}}</b></p>
                 <div ng-show="showMore" class="mgt20">

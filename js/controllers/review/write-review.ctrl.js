@@ -1,30 +1,37 @@
 app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$location', '$stateParams', '$http', function($scope, $timeout, $rootScope, $location, $stateParams, $http) {
     document.title = "Write Review";
     // console.log($stateParams.id); 
-    $timeout(function() {
-        if (checkLocalStorage('loginStatus')) {
-            $scope.loginStatus = JSON.parse(localStorage.getItem('loginStatus'));
-            if (JSON.parse(localStorage.getItem('loginStatus'))) {
-                user = firebase.auth().currentUser;
-            } else {
-                console.log('this is working')
-                $rootScope.$emit("callShowLogin", {});
-            }
+    $scope.couponCode = '';
+    $scope.couponEmpty = false;
+    $rootScope.$watch('loginStatus', function() {
+        // $timeout(function() {
+        if ($rootScope.loginStatus) {
+            $scope.loginStatus = true;
+            $scope.user = firebase.auth().currentUser;
         } else {
-            $rootScope.$emit("callShowLogin", {});
+            $scope.loginStatus = false;
         }
-        $rootScope.$watch('loginStatus', function() {
-            // $timeout(function() {
-            if ($rootScope.loginStatus) {
-                $scope.loginStatus = true;
-                $scope.user = firebase.auth().currentUser;
-            } else {
-                $scope.loginStatus = false;
-            }
-            // getUser($scope.user);
-            // }, 0)
-        })
-    }, 0)
+        getUser($scope.user);
+        // }, 0)
+    })
+    if (checkLocalStorage('loginStatus')) {
+        $scope.loginStatus = JSON.parse(localStorage.getItem('loginStatus'));
+        if (JSON.parse(localStorage.getItem('loginStatus'))) {
+            user = firebase.auth().currentUser;
+        } else {
+            console.log('this is working')
+            $rootScope.$emit("callShowLogin");
+        }
+    } else {
+        $rootScope.$emit("callShowLogin");
+    }
+
+    // if(firebase.auth().currentUser){
+
+    // }else {
+    //     $rootScope.$emit("callShowLogin");
+    // }
+
 
     function getUser(user) {
         // console.log(user);
@@ -58,25 +65,19 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     }
     $scope.ratingParams = [{
         name: 'Security',
-        id: 2
+        id: 1
     }, {
         name: 'Amenities',
-        id: 3
+        id: 2
     }, {
         name: 'Open and green areas',
-        id: 4
-    }, {
-        name: 'Electricity and water supply',
-        id: 5
-    }, {
-        name: 'Convenience of housemaids',
-        id: 6
+        id: 3
     }, {
         name: 'Convenience of parking',
-        id: 7
+        id: 4
     }, {
         name: 'Infrastructure',
-        id: 8
+        id: 5
     }];
     var user;
     if (params) {
@@ -206,31 +207,6 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         $('.search-results').fadeOut();
     });
 
-    // function bindList() {
-    //     $('#select_project').autocomplete({
-    //         data: $scope.projects2,
-    //         limit: 10,
-    //         onAutocomplete: function(value, data) {
-    //             $scope.selectedItem = value;
-    //             $scope.projectSelected = true;
-    //             $scope.selectedProject.name = $scope.selectedItem;
-    //             $scope.selectedProject.id = $scope.projects1[$scope.selectedItem];
-    //             $scope.selectedProject.type = $scope.projects3[$scope.selectedItem];
-    //             console.log($scope.selectedProject);
-    //         }
-    //     });
-    //     $timeout(function() {
-    //         $scope.showLoading = false;
-    //     }, 200);
-    // }
-
-
-    // $scope.selectProject = function(val) {
-    //     $scope.selectedItem = val.name;
-    //     $scope.selectedProject = val;
-    //     $scope.showList = false;
-    //     $scope.projectSelected = true;
-    // }
 
     $scope.showMoreFn = function() {
         $scope.showMore = !$scope.showMore;
@@ -264,8 +240,6 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                     swal.showInputError("Please Enter Your Mobile Number");
                     return false
                 }
-
-
                 swal({
                         title: "Verifying Your Phone Number",
                         text: "Please Enter The OTP",
@@ -358,5 +332,20 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         //         });
         //     }, 500);
         // })
+    }
+
+    /*Coupon Code Verification Starts*/
+
+    $scope.validateCoupon = function() {
+        if ($scope.couponCode == '') {
+            $scope.couponEmpty = true;
+            console.log($scope.couponEmpty);
+        } else {
+            $timeout(function() {
+                db.ref('coupons/' + $scope.couponCode).once('value', function(snapshot) {
+                    console.log(snapshot.val());
+                })
+            })
+        }
     }
 }])
