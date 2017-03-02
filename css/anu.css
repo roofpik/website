@@ -50,13 +50,23 @@
 }
 
 .wd100 {
-    width:100%;
+    width: 100%;
 }
 
 .ht40 {
-    height:40% !important;
+    height: 40% !important;
 }
 
 .mgtp10 {
-    margin-top:10% !important;
+    margin-top: 10% !important;
+}
+
+.loadingPositionModal {
+    padding-left: 50%;
+    padding-top: 10%;
+}
+
+.loadingMessagePosition {
+    padding-left: 43%;
+    font-weight: bold;
 }

@@ -230,8 +230,8 @@
                     </div>
                     <hr>
                 </div>
-                <button data-target="mobile-verification-modal"  class="blue lighten-1 btn block mgt20 wd100">Submit</button>
-                <!-- <button data-target="mobile-verification-modal" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating || !projectSelected)?'disabled':'normal'" class="blue lighten-1 btn block mgt20 wd100">Submit</button> -->
+                <!-- <button data-target="mobile-verification-modal" class="blue lighten-1 btn block mgt20 wd100">Submit</button> -->
+                <button data-target="mobile-verification-modal" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating || !projectSelected)?'disabled':'normal'" class="blue lighten-1 btn block mgt20 wd100">Submit</button>
                 <!-- <a href="" ng-click="submitReview()" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating || !projectSelected)?'disabled':'normal'" class="blue lighten-1 btn block mgt20">Submit</a> -->
                 <p ng-hide="loginStatus" id="loginSignup">Please login/signup to submit review *</p>
             </form>
@@ -254,7 +254,7 @@
     </div>
     <div id="mobile-verification-modal" class="modal modal-fixed-footer ht40 mgtp10">
         <div class="modal-content">
-            <div class="row mgbn mgt20">
+            <div class="row mgbn mgt20" ng-hide="showOtpField || showModalLoading">
                 <div class="col s12">
                     <h5>Enter your 10 digit mobile number</h5>
                     <p>We will send you a verification code.</p>
@@ -263,10 +263,39 @@
                     <input name="userMobile" id="mobile-number" type="number" class="validate" ng-model="mobileNum" ng-minlength="10" ng-maxlength="10" required>
                 </div>
             </div>
+            <div class="row mgbn mgt20" ng-show="showModalLoading">
+                <div class="loadingPositionModal">
+                    <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-blue-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="loadingMessagePosition">{{loadingMessage}}</p>
+            </div>
+            <div class="row mgbn mgt20" ng-show="showOtpField">
+                <div class="col s12">
+                    <h5>OTP sent successfully</h5>
+                    <p>A verification code has been sent to your registered mobile {{userMobileNum[0]}}xxxxxxxx{{userMobileNum[9]}}and email address {{splitEmail[0][0]}}XXX@{{splitEmail[1]}}</p>
+                </div>
+                <div class="input-field col s12">
+                    <input name="userOtp" id="user-otp" type="number" class="validate" ng-model="optNum" ng-minlength="4" ng-maxlength="4" required>
+                    <p ng-show="incorrectOtp">Incorrect OTP</p>
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
-            <button class="modal-action modal-close blue btn-flat white-text" ng-click="sendOtp(mobileNum)">Send OTP</button>
-            <button class="modal-action modal-close grey btn-flat white-text mgr10" ng-hide="couponCodeSuccessful" ng-click="submitWithoutVerification()">Submit without verification</button>
+            <button ng-hide="showOtpField || showModalLoading" class="modal-action blue btn-flat white-text" ng-click="sendOtp(mobileNum)">Send OTP</button>
+            <button ng-hide="showOtpField || showModalLoading || couponCodeSuccessful" class="modal-action grey btn-flat white-text mgr10" ng-click="submitWithoutVerification()">Submit without verification</button>
+            <button ng-show="showOtpField" class="modal-action blue btn-flat white-text mgr10" ng-click="verifyOtp(optNum)">Verify OTP</button>
         </div>
     </div>
 </div>
