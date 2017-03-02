@@ -126,7 +126,6 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
                     // console.log(err);
                 }, 100)
         })
-
     }
 
     function showHideRatings() {

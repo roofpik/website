@@ -349,6 +349,10 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
             }
         }
     });
+    $scope.goToWriteReview = function(){
+        console.log('here')
+        $state.go('write-review');
+    }
 
 }]);
 
@@ -375,4 +379,6 @@ app.controller('coverStoryHomeCtrl', ['$scope', '$timeout', '$rootScope', functi
         }
         // console.log($scope.allRatings);
     });
+
+
 }]);

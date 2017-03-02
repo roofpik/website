@@ -301,10 +301,10 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
             },
             'slow');
     }
-
+    console.log($scope.category)
     db.ref('projects/-KYJONgh0P98xoyPPYm9/' + $scope.category + '/' + $scope.projectId).once('value', function(snapshot) {
         $timeout(function() {
-            // console.log(snapshot.val());
+            console.log(snapshot.val());
             $scope.project = snapshot.val();
             $scope.projectName = $scope.project.projectName;
             document.title = $scope.projectName;
