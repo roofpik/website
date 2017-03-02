@@ -313,7 +313,7 @@ h5 {
     padding: 0 20px 20px;
     height: 250px;
     top: 0;
-    bottom: 0;
+    bottom: 0; position: fixed;
     margin: auto;
 }
 
@@ -1411,7 +1411,7 @@ footer.page-footer {
 #imagelightbox {
     cursor: pointer;
     position: fixed;
-    z-index: 10000;
+    z-index: 9999;
     touch-action: none;
     box-shadow: 0 0 3.125em rgba(0, 0, 0, .75);
     /* 50 */
@@ -1433,7 +1433,7 @@ footer.page-footer {
     background-color: rgb(128, 128, 128);
     background-color: rgba(0, 0, 0, .5);
     position: fixed;
-    z-index: 10003;
+    z-index: 9999;
     top: 50%;
     left: 50%;
     padding: 0.65em;
@@ -1474,7 +1474,7 @@ footer.page-footer {
     /* 40 */
     background-color: #666;
     position: fixed;
-    z-index: 10002;
+    z-index: 9998;
     top: 2.5em;
     /* 40 */
     right: 2.5em;
@@ -1515,7 +1515,7 @@ footer.page-footer {
     color: #fff;
     background-color: #666;
     position: fixed;
-    z-index: 10001;
+    z-index: 9999;
     left: 0;
     right: 0;
     bottom: 0;
@@ -1530,7 +1530,7 @@ footer.page-footer {
     background-color: #444;
     background-color: rgba(0, 0, 0, .5);
     position: fixed;
-    z-index: 10001;
+    z-index: 9999;
     left: 50%;
     bottom: 3.75em;
     /* 60 */
@@ -1571,7 +1571,7 @@ footer.page-footer {
     vertical-align: middle;
     display: none;
     position: fixed;
-    z-index: 10001;
+    z-index: 9999;
     top: 50%;
     margin-top: -3.75em;
     /* 60 */
@@ -2213,7 +2213,7 @@ footer.page-footer .footer-copyright {
 .boxthree, .boxonelocation {
     width: calc(33.3% - 10px) !important;
 }
-
+.gallerynew{position: relative;}
 .gallerynew a img {
     width: 218px;
     height: 180px;

@@ -7,17 +7,17 @@ app.directive('contentLoading', function() {
     }
 });
 
-app.directive('gallery', function() {
-    return {
-        restrict: 'E',
-        replace: true,
-        templateUrl: 'templates/projects/gallery.html',
-        controller: 'galleryCtrl',
-        scope: {
-            galleryResponse: '='
-        }
-    }
-});
+// app.directive('gallery', function() {
+//     return {
+//         restrict: 'E',
+//         replace: true,
+//         templateUrl: 'templates/projects/gallery.html',
+//         controller: 'galleryCtrl',
+//         scope: {
+//             galleryResponse: '='
+//         }
+//     }
+// });
 app.directive('gallerynew', function() {
     return {
         restrict: 'E',

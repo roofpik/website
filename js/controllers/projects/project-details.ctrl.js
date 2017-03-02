@@ -1,6 +1,6 @@
 app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', function($scope, $timeout, $stateParams, $rootScope){
 	$('ul.tabs').tabs();
-
+$('.materialboxed').materialbox();
     console.log('called')
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     console.log($stateParams.projectId);
@@ -817,7 +817,7 @@ app.controller('galleryCtrl', ['$scope', '$timeout', function($scope, $timeout) 
                 button: true,
                 caption: true,
                 navigation: false,
-                overlay: true
+                overlay: false
             });
 
             $('.trigger_gallery').on('click', function() {
