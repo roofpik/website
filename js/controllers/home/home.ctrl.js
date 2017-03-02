@@ -221,24 +221,20 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
                 $state.go('project-details', { p: encodeParams(param) });
             } else if ($scope.searchedValue.type == 'locality') {
                 param = {
-                    vertical: 'residential',
-                    category: 'all',
-                    locality: $scope.searchedValue.id
+                    id: $scope.searchedValue.id,
+                    category: 'locality'
                 }
                 var parameter = encodeParams(param);
-                console.log(parameter);
-                $state.go('list', { p: parameter });
+                $state.go('location-details', { p: parameter });
                 // Materialize.toast('Coming Soon!', 2000);
                 // $state.go('location-details', { p: encodeParams(param) });
             } else if ($scope.searchedValue.type == 'location') {
                 param = {
-                    vertical: 'residential',
-                    category: 'all',
-                    location: $scope.searchedValue.id
+                    id: $scope.searchedValue.id,
+                    category: 'locations'
                 }
                 var parameter = encodeParams(param);
-                console.log(parameter);
-                $state.go('list', { p: parameter });
+                $state.go('location-details', { p: parameter });
                 // Materialize.toast('Coming Soon!', 2000);
                 // $state.go('location-details', { p: encodeParams(param) });
             }

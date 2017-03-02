@@ -2739,6 +2739,9 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width:0px) and (max-width: 400px) {
+  .pdleft200 .ht2rem{text-align: center;}
+  .pdleft200{padding-left: 0px; padding-top: 80px; text-align: center;}
+  .prof_img{left:26% !important;}
     .proflink {
         bottom: 90px;
         left: 20px;
