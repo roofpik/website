@@ -366,27 +366,7 @@ app.controller('loginCtrl', function($scope, $timeout, $rootScope, $location, $h
                 }
             }).then(function(response) {
                 console.log(response);
-                swal({
-                        title: "Signup Successful",
-                        text: "Have a code ?",
-                        type: "input",
-                        showCancelButton: true,
-                        closeOnConfirm: false,
-                        animation: "slide-from-top",
-                        inputPlaceholder: "Enter Code"
-                    },
-                    function(inputValue) {
-                        if (inputValue.length) {
-                            db.ref('users/' + user.uid + '/codeUsed').set(inputValue.toUpperCase()).then(function() {
-                                $timeout(function() {
-                                    Materialize.toast("You have successfully logged in!", 2000, 'rounded');
-                                })
-                            });
-                        } else {
-                            Materialize.toast("You have successfully logged in!", 2000, 'rounded');
-                            return true;
-                        }
-                    });
+                Materialize.toast("You have successfully logged in!", 2000, 'rounded');
             });
         } else {
             Materialize.toast("You have successfully logged in!", 2000, 'rounded');

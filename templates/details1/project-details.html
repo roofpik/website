@@ -9,56 +9,6 @@
             </div>
         </nav>
     </div>
-    <div class="row radius2 mgan cardmg">
-        <div class="col s6 offset-s2 pdrn">
-            <!-- <div class="input-field card col s12 ht45 pdan reletive">
-                <span class="inpspn">Find :</span>
-                <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompletenear inp_pdw mgbn">
-                <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" ng-show="searchingName" />
-                <div class="search-results" ng-show="showSearch">
-                    <ul class="collection homecoll">
-                        <li ng-repeat="item in categorySearch| filter: searched" class=" collection-item avatar" ng-click="selectType(item)">
-                            <img ng-src="{{item.icon}}" class="circle" />
-                            <span class="title ft13">{{item.name}}</span>
-                        </li>
-                    </ul>
-                </div>
-            </div> -->
-        </div>
-        <!-- <div class="row mgan">
-            <button class="btn-flat list_searchicon" onclick="$('#list_search') .css ('top','80px')"><i class="material-icons">search</i></button>
-            <div id="list_search" class="row mgan search_allpage">
-                <button class="closeabssearch" onclick="$('#list_search') .css ('top','-200%')"><i class="material-icons">close</i></button>
-                <searchall></searchall>
-            </div>
-        </div> -->
-        <!-- <div class="input-field col m2 pdln">
-            <button class="btn btn-full  blue ht45" ng-click="search()">
-                <i class="material-icons left">search</i>Search
-            </button>
-        </div> -->
-    </div>
-    <!--  <div class="row">
-        <div class="col s12 m8">
-            <h1 class="hd1 b">{{projectName}}</h1>
-            <div class="row mgbn ft12">
-                <div class="col s12 ft20i vatop mgt5">
-                    <i class="material-icons blue-text">location_on</i>{{project.projectDetails.address.addressLine1}}, {{project.projectDetails.address.addressLine2}}
-                </div>
-                <div class="col s12 grey-text mgt5 review ft20i vatop" ng-show="allRatings">
-                    <span><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < allRatings.averageRating1 ? 'blue-text':'normal'">star</i></span><span>({{allRatings.averageRating}})</span>
-                    <a href="" class="mgr10"><span>{{allRatings.numberOfReviews}} Review</span><span ng-show="allRatings.numberOfReviews > 1">s</span></a>
-                </div>
-            </div>
-        </div>
-        <div class="col s12 m4 grey-text ft13 text-darken-2 right-align">
-            <div class="ft19 b"><span ng-show="rentMin != 'NA'">₹</span>{{rentMin}}<span ng-show="rentMin != rentMax"> - ₹{{rentMax}}</span></div>
-            <div class="row mgbn ft12" ng-show="project.configurations">
-                <div class="col s12 mgt5">{{bhk}} BHK</div>
-                <div class="col s12 mgt5">{{minArea}} <span ng-show="minArea != 'NA'">Sq.Ft.</span><span ng-show="minArea != maxArea"> - {{maxArea}} Sq.Ft.</span></div>
-            </div>
-        </div>
-    </div> -->
 </div>
 <section>
     <div class="container container2">
@@ -85,32 +35,30 @@
                 </div>
                 <div class="hdboxabs boxabs_bt">
                     <h5 class="b white-text mgbn ellipsis">{{projectName}}</h5>
+                    <div class="col s12 white-text mgt5 review ft20i vatop" ng-hide="allRatings">
+                        <a href="" class="mgr10"><span>No Reviews</span></a>
+                    </div>
                     <div class="col s12 white-text mgt5 review ft20i vatop" ng-show="allRatings">
                         <span><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < allRatings.numbers.averageRating1 ? 'amber-text text-darken-2':'normal'">star</i></span><span>({{allRatings.numbers.averageRating}})</span>
                         <a href="" class="mgr10"><span>{{allRatings.numbers.numberOfReviews}} Review</span><span ng-show="allRatings.numbers.numberOfReviews > 1">s</span></a>
                     </div>
                 </div>
                 <div class="fixed-action-btn horizontal boxabs_bt xstop">
-                    <button class="stand wd40"><i class="material-icons left ft14">thumb_up</i>Like</button>
+                    <!-- <button class="stand wd40"><i class="material-icons left ft14">thumb_up</i>Like</button> -->
                     <button class="stand wd40" ng-click="goToWriteReview()"><i class="material-icons ft14 left">edit</i> Write Review</button>
-                    <button class="stand wd40"><i class="material-icons ft14 left">book</i>Bookmark</button>
+                    <!-- <button class="stand wd40"><i class="material-icons ft14 left">book</i>Bookmark</button> -->
                 </div>
-                <!-- <div class="img-btn center-align">
-                    <div class="gallery-btn">
-                        <gallery></gallery>
-                    </div>
-                </div> -->
             </div>
-             <div id="interested">
-            <button onclick="$('#xshideside') .css ('right','0px')">
-            Yes I am Interested</button></div>
-            <div id="xshideside" class="col s12 m4 amen-tab htfixbox" > 
-           
-            <div id="interestedout">
-            <button onclick="$('#xshideside') .css ('right','-350px')">
-            Yes I am Interested</button>
-            </div>         
-            <div ng-show="loading" class="preloader-wrapper big active loaderPositionDetails">
+            <div id="interested">
+                <button onclick="$('#xshideside') .css ('right','0px')">
+                    Yes I am Interested</button>
+            </div>
+            <div id="xshideside" class="col s12 m4 amen-tab htfixbox">
+                <div id="interestedout">
+                    <button onclick="$('#xshideside') .css ('right','-350px')">
+                        Yes I am Interested</button>
+                </div>
+                <div ng-show="loading" class="preloader-wrapper big active loaderPositionDetails">
                     <div class="spinner-layer spinner-blue-only">
                         <div class="circle-clipper left">
                             <div class="circle"></div>
@@ -129,7 +77,7 @@
                 </div>
                 <div class="row" ng-hide="loading">
                     <div id="interest" class="col s12">
-                        <form name="contactForm">
+                        <form name="forms.contactForm">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">account_circle</i>
                                 <input placeholder="Name" type="text" class="validate mgb5 ft12" ng-model="query.userName" required>
@@ -151,7 +99,8 @@
                                 <label for="che2" class="mgl3r">Need Interior Designer</label>
                             </div>
                             <div class="col s12 mgtmn mgt10">
-                                <button ng-disabled="contactForm.$invalid" class="waves-effect waves-light btn btn-full blue lighten-2" ng-click="provideDetails(query)"><i class="material-icons left">list</i> Provide Details</button>
+                                {{contactForm.$invalid}}
+                                <button ng-disabled="forms.contactForm.$invalid" class="waves-effect waves-light btn btn-full blue lighten-2" ng-click="provideDetails(query)"><i class="material-icons left">list</i> Provide Details</button>
                             </div>
                         </form>
                     </div>
@@ -163,9 +112,9 @@
             <a href="" ng-click="scrollToDiv('price_ranges')" class="stand_amn"><i class="material-icons left ft14">location_city</i>Available Property Types</a>
             <a href="" ng-click="scrollToDiv('price_ranges')" class="stand_amn"><i class="material-icons left ft14">done</i>Price Ranges</a>
             <a href="" ng-click="scrollToDiv('reviews')" class="stand_amn"><i class="material-icons left ft14">edit</i>Reviews</a>
-           <!--  <a href="" ng-click="scrollToDiv('reviews')" class="stand_amn"><i class="material-icons left ft14">star_border</i>Ratings</a> -->
+            <!--  <a href="" ng-click="scrollToDiv('reviews')" class="stand_amn"><i class="material-icons left ft14">star_border</i>Ratings</a> -->
             <a href="" ng-click="scrollToDiv('gallerybx')" class="stand_amn"><i class="material-icons left ft14">photo_library</i>Gallery</a>
-            <a href="" ng-click="scrollToDiv('cover_stories')" class="stand_amn"><i class="material-icons left ft14">wallpaper</i> Related Cover Stories</a>
+            <!-- <a href="" ng-click="scrollToDiv('cover_stories')" class="stand_amn"><i class="material-icons left ft14">wallpaper</i> Related Cover Stories</a> -->
         </div>
     </div>
 </section>
@@ -185,7 +134,7 @@
             <h5 class="ft12 mgan"><i class="material-icons left cyan-text text-accent-4">place</i> Address</h5>
             <h4 class="mgan ft16b pdl34 truncate">{{project.projectDetails.address.displayAddress}}</h4>
             <!-- <p class="mgan ft12 pdl34">{{project.projectDetails.address.addressLine2}}</p> -->
-        </div>       
+        </div>
         <div class="col s12 m6 l4 pda10 wd33tb">
             <h5 class="ft12 mgan"><i class="material-icons left  yellow-text text-accent-4">local_offer</i> Rent</h5>
             <h4 class="mgan ft16b pdl34 truncate"><span ng-show="rentMin != 'NA'">  &#8377;</span>{{rentMin}}<span ng-show="rentMin != rentMax"> - &#8377;{{rentMax}}</span></h4>
@@ -201,10 +150,10 @@
             <h4 class="mgan ft16b pdl34 truncate">{{project.segment}}</h4>
             <!-- <p class="mgan ft12 pdl34">Nov 2015</p> -->
         </div>
-         <div class="col s12 m6 l4 pda10 wd33tb">
+        <div class="col s12 m6 l4 pda10 wd33tb">
             <h5 class="ft12 mgan"><i class="material-icons left deep-purple-text text-accent-1 ">details</i>   Project Details</h5>
             <h4 class="mgan ft16b pdl34 truncate">{{project.projectDetails.numberOfUnits}} <span ng-show="project.projectDetails.numberOfUnits != 'NA'">Units</span></h4>
-            <p class="mgan ft12 pdl_p34" ng-show="project.projectDetails.numberOfTowers != 'NA'">{{project.projectDetails.numberOfTowers}}Towers</p>
+            <!-- <p class="mgan ft12 pdl_p34" ng-show="project.projectDetails.numberOfTowers != 'NA'">{{project.projectDetails.numberOfTowers}}Towers</p> -->
         </div>
     </div>
     <section class="mgt20 reviews" ui-view="reviewRating"></section>
