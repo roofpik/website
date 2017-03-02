@@ -140,9 +140,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         if ($scope.userReviews[0] == 0) {
             $scope.showReviews = true;
         } else {
-            if (overall) {
                 $scope.showReviews = false;
-            }
         }
     }
 
