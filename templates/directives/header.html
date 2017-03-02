@@ -18,11 +18,11 @@
                     </ul>
                 </div>
                 <ul class="right mgr10 toprtbtn">
-                <li class="mgr10"><a href="" id="abslocation" class="btn-flat ft12 ft20i capitalize truncate"> 
-                <i class="material-icons left grey-text bticont mgrn">location_on</i>Gurgaon</a></li>                  
-                   
+                    <li class="mgr10">
+                        <a href="" id="abslocation" class="btn-flat ft12 ft20i capitalize truncate">
+                            <i class="material-icons left grey-text bticont mgrn">location_on</i>Gurgaon</a>
+                    </li>
                     <li class="mgr10"><a ng-click="findProjectId()" class="btn blue mgr10 capitalize"><i class="material-icons left bticont" ng-click = "">create</i> Write Review</a></li>
-
                     <li>
                         <a data-target="loginbox" ng-hide="loginStatus" id="open-login" class="btn blue-grey darken-4 capitalize">
                             <i class="material-icons left bticont">lock_outline</i> Login/Sign Up
@@ -31,13 +31,17 @@
                     <li ng-show="loginStatus">
                         <a href="" id="pdan" class="dropdown-button btn wd-sm btn-flat capitalize" data-activates='dropdown1'><img ng-src="{{user.photoURL}}" class="display-img left" />{{user.displayName}}</a>
                         <ul id='dropdown1' class='dropdown-content droplogin'>
-                            <li><a ng-click="goToProfile()">
-                            <i class="material-icons left">person</i>My Profile</a></li>
+                            <li>
+                                <a ng-click="goToProfile()">
+                                    <i class="material-icons left">person</i>My Profile</a>
+                            </li>
                             <li class="divider"></li>
-                          <!--   <li><a>Settings</a></li> -->
+                            <!--   <li><a>Settings</a></li> -->
                             <li class="divider"></li>
-                            <li><a ng-click="logout()">
-                            <i class="material-icons left">power_settings_new</i>Logout</a></li>
+                            <li>
+                                <a ng-click="logout()">
+                                    <i class="material-icons left">power_settings_new</i>Logout</a>
+                            </li>
                         </ul>
                     </li>
                     <!--  <li><a data-activates="slide-out-right" href="#" class="button-heart show-on-large"><i class="material-icons grey-text">favorite_border</i></a></li> -->
@@ -99,4 +103,6 @@
         </div>
     </form>
 </div>
-</div>
+<!-- <div id="loginbox" class="modal">
+    <div login></div>
+</div> -->
