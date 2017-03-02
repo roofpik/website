@@ -54,7 +54,7 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
     function getReviews() {
 
         $http({
-            url: 'http://107.23.243.89/api/GetReviewSummary_1.0',
+            url: 'http://35.154.60.19/api/GetReviewSummary_1.0',
             method: 'GET',
             params: {
                 id: '-K_UDYa-_29iscnH_YE1', //TO REMOVE LATER
@@ -90,7 +90,7 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
             // console.log(err);
         })
         $http({
-            url: 'http://107.23.243.89/api/GetProjectReviews_1.0',
+            url: 'http://35.154.60.19/api/GetProjectReviews_1.0',
             method: 'GET',
             params: {
                 pid: '-K_UDYa-_29iscnH_YE1', //To change later
@@ -150,7 +150,7 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
         console.log($scope.type)
             // loading(true);
         $http({
-            url: 'http://107.23.243.89/api/GetReviewDetails_1.0',
+            url: 'http://35.154.60.19/api/GetReviewDetails_1.0',
             method: 'GET',
             params: {
                 id: $scope.allReviews[index].reviewId,
@@ -183,7 +183,7 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
     //     }
     //     console.log(encodeParams(data));
     //     $http({
-    //         url: 'http://107.23.243.89/api/GetNearby_1.0',
+    //         url: 'http://35.154.60.19/api/GetNearby_1.0',
     //         method: 'GET',
     //         params: {
     //             args: encodeParams(data)
@@ -211,7 +211,7 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
     //     }
 
     //     $http({
-    //         url: 'http://107.23.243.89/api/GetRelatedServices_1.0',
+    //         url: 'http://35.154.60.19/api/GetRelatedServices_1.0',
     //         method: 'GET',
     //         params: {
     //             args: encodeParams(data)
@@ -254,7 +254,7 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
         }
         console.log(encodeParams(data));
         $http({
-            url: 'http://107.23.243.89/api/GetListing_1.0',
+            url: 'http://35.154.60.19/api/GetListing_1.0',
             method: 'GET',
             params: {
                 args: encodeParams(data)

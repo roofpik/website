@@ -359,7 +359,7 @@ app.controller('loginCtrl', function($scope, $timeout, $rootScope, $location, $h
             var config = 1;
             var parameter = btoa('email=' + email + '&name=' + name + '&conf=' + config);
             $http({
-                url: 'http://107.23.243.89/api/SendMail_1.0',
+                url: 'http://35.154.60.19/api/SendMail_1.0',
                 method: 'GET',
                 params: {
                     args: parameter

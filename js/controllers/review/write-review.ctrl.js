@@ -120,7 +120,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         $scope.showLoading = true;
         $scope.showSearch = false;
         $http({
-            url: 'http://107.23.243.89/api/GetResidential_1.0',
+            url: 'http://35.154.60.19/api/GetResidential_1.0',
             method: 'GET',
             params: {
                 details_name: $scope.selectedItem,
@@ -151,7 +151,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                 }
                 var args = encodeParams(data);
                 $http({
-                    url: 'http://107.23.243.89/api/GetByName_1.0',
+                    url: 'http://35.154.60.19/api/GetByName_1.0',
                     method: 'GET',
                     params: {
                         args: args
@@ -286,7 +286,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                 }
                 console.log(parameter);
                 $http({
-                    url: 'http://107.23.243.89/api/SendMail_1.0',
+                    url: 'http://35.154.60.19/api/SendMail_1.0',
                     method: 'GET',
                     params: {
                         args: btoa(parameter)
@@ -366,7 +366,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
 
                 $scope.splitEmail = $scope.user.email.split("@");
                 $http({
-                    url: 'http://107.23.243.89/api/SendOTP_1.0',
+                    url: 'http://35.154.60.19/api/SendOTP_1.0',
                     method: 'GET',
                     params: {
                         mobile: mobile,
