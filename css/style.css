@@ -1879,7 +1879,7 @@ i.left {
 }
 
 .info_content {
-    .display-img width: 300px;
+    width: 300px;
 }
 
 .info_content h3 {
