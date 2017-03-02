@@ -82,7 +82,9 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
             if (url[4] == 'project-details') {
                 $scope.projectId = decodeParams(url[5]).projectId;
                 $state.go('write-review', {id: $scope.projectId});
-            } else {
+            } else if(url[4] == 'location-details'){
+                $scope.id = decodeParams(url[5].projectId);
+            }else {
                 $state.go('write-review');
             }
             // console.log($scope.projectId);
