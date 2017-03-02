@@ -313,7 +313,8 @@ h5 {
     padding: 0 20px 20px;
     height: 250px;
     top: 0;
-    bottom: 0; position: fixed;
+    bottom: 0;
+    position: fixed;
     margin: auto;
 }
 
@@ -1228,11 +1229,17 @@ footer.page-footer {
     margin: 6px 4px 0 0;
 }
 
-.stand:hover,
+.hovern:hover {
+    background-color: rgba(0, 0, 0, 0) !important;
+    cursor: default !important;
+}
+
+
+/*.stand:hover,
 .stand:focus {
     background-color: #42A5F5;
     color: #fff;
-}
+}*/
 
 .boxsd {
     box-shadow: 0 0 2px #666;
@@ -1879,7 +1886,7 @@ i.left {
 }
 
 .info_content {
-    .display-img width: 300px;
+    width: 300px;
 }
 
 .info_content h3 {
@@ -2172,7 +2179,8 @@ footer.page-footer .footer-copyright {
     max-width: 25% !important;
 }
 
-.boxtwo .fix40, .boxonelocation .fix40 {
+.boxtwo .fix40,
+.boxonelocation .fix40 {
     width: 38% !important;
     max-width: 38% !important;
 }
@@ -2186,7 +2194,8 @@ footer.page-footer .footer-copyright {
     height: 110px;
 }
 
-.boxone a, .boxonelocation a,
+.boxone a,
+.boxonelocation a,
 .boxtwo a,
 .boxthree a {
     width: 100%;
@@ -2194,7 +2203,8 @@ footer.page-footer .footer-copyright {
     display: block;
 }
 
-.boxone, .boxonelocation,
+.boxone,
+.boxonelocation,
 .boxtwo,
 .boxthree {
     transition: all .25s ease-in;
@@ -2210,10 +2220,15 @@ footer.page-footer .footer-copyright {
     width: calc(50% - 10px)!important;
 }
 
-.boxthree, .boxonelocation {
+.boxthree,
+.boxonelocation {
     width: calc(33.3% - 10px) !important;
 }
-.gallerynew{position: relative;}
+
+.gallerynew {
+    position: relative;
+}
+
 .gallerynew a img {
     width: 218px;
     height: 180px;
@@ -2417,7 +2432,7 @@ footer.page-footer .footer-copyright {
 }
 
 .imggradient:before {
-  content: " ";
+    content: " ";
     position: absolute !important;
     width: 100% !important;
     left: 0;
@@ -2468,6 +2483,7 @@ footer.page-footer .footer-copyright {
     top: 64px !important;
     width: 195px !important;
 }
+
 .htratinglocation {
     min-height: 200px;
 }
@@ -2576,9 +2592,9 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width:0px) and (max-width: 767px) {
-  .boxonelocation {
-    width: calc(100% - 10px) !important;
-}
+    .boxonelocation {
+        width: calc(100% - 10px) !important;
+    }
     #pdan {
         padding-right: 0px !important;
         padding-left: 0px !important;
@@ -3003,9 +3019,9 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-   .boxonelocation {
-    width: calc(50% - 10px) !important;
-}
+    .boxonelocation {
+        width: calc(50% - 10px) !important;
+    }
     .wd33tb {
         width: 33% !important;
     }
@@ -3110,9 +3126,9 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width: 1024px) and (max-width: 1180px) {
-   .boxonelocation {
-    width: calc(33.3% - 10px) !important;
-}
+    .boxonelocation {
+        width: calc(33.3% - 10px) !important;
+    }
     .hdboxabs {
         bottom: 60px;
         left: 195px;
