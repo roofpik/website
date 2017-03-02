@@ -139,7 +139,7 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
 
     function showHideReviews() {
         if ($scope.i == 0) {
-            $scope.hasReviews = false;
+                $scope.hasReviews = false;
         } else {
             $scope.hasReviews = true;
         }

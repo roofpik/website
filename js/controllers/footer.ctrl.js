@@ -1,4 +1,4 @@
-app.controller('footerCtrl', ['$scope', '$timeout', 'vcRecaptchaService', function($scope, $timeout, vcRecaptchaService) {
+app.controller('footerCtrl', ['$scope', '$timeout', 'vcRecaptchaService', '$state', function($scope, $timeout, vcRecaptchaService, $state) {
     $(document).ready(function() {
         Materialize.updateTextFields();
         $(".dropdown-button").dropdown();
@@ -98,6 +98,14 @@ app.controller('footerCtrl', ['$scope', '$timeout', 'vcRecaptchaService', functi
             // because each response can be checked just once
             vcRecaptchaService.reload($scope.widgetId);
         }
+    }
+
+    $scope.goToListPage = function(){
+        var params = {
+            vertical: 'residential',
+            category: 'all'
+        }
+        $state.go('list', {p: encodeParams(params)});
     }
 
 }]);
