@@ -1,4 +1,4 @@
-var app = angular.module('roofpikWeb', ['ui.router', 'vcRecaptcha']);
+var app = angular.module('roofpikWeb', ['ui.router']);
 
 app.run(function($rootScope, $timeout, $window) {
     $rootScope.loginStatus = false;

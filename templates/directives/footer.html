@@ -4,14 +4,14 @@
             <div class="col s12 m3 bodft xssm1">
                 <h5>Links</h5>
                 <ul class="footer-link">
-                    <li><a class="grey-text" href="#!">Home</a></li>
-                    <li><a class="grey-text" href="#!">About Us</a></li>
-                    <li><a class="grey-text" href="#!">Blogs</a></li>
-                    <li><a class="grey-text" href="#!">Write Review</a></li>
-                    <li><a class="grey-text" href="#!">Cover Stories</a></li>
-                    <li><a class="grey-text" ng-click = "goToListPage()">Projects</a></li>
-                    <li><a class="grey-text" href="#!">FAQ's</a></li>
-                    <li><a class="grey-text" href="#!">Contact Us</a></li>
+                    <!-- <li><a class="grey-text" href="#!">Home</a></li> -->
+                    <li><a class="grey-text" href="/#/about-us">About Us</a></li>
+                    <li><a class="grey-text" href="/#/blogs/gurgaon/-KYJONgh0P98xoyPPYm9/1">Blogs</a></li>
+                    <li><a class="grey-text" href="/#/cover-stories/gurgaon/-KYJONgh0P98xoyPPYm9/1">Cover Stories</a></li>
+                    <li><a class="grey-text" ng-href="{{goToListPage()}}">Projects</a></li>
+                    <li><a class="grey-text" href="/#/write-review">Write Review</a></li>
+                    <li><a class="grey-text" href="/#/faq">FAQ's</a></li>
+                    <li><a class="grey-text" href="/#/contact-us">Contact Us</a></li>
                 </ul>
             </div>
             <div class="col s6 m4 pdr70 xs12 bodxs xssm2">
@@ -85,10 +85,10 @@
                         <!--   <div
                     vc-recaptcha theme="'light'" key="model.key" on-create="setWidgetId(widgetId)" on-success="setResponse(response)" on-expire="cbExpiration()" >
                         </div> -->
-                        <div class="input-field col s12 pdln mgtn overhdn">
+                        <!-- <div class="input-field col s12 pdln mgtn overhdn">
                             <div id="captcha" vc-recaptcha theme="'dark'" key="model.key" on-create="setWidgetId(widgetId)" on-success="setResponse(response)" on-expire="cbExpiration()">
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col s12 mgt10 pdln">
                             <button class="btn btn-full dark-grey blue" ng-disabled="forms.contactUs.$invalid" type="submit"><i class="material-icons left">list</i> Submit</button>
                         </div>
