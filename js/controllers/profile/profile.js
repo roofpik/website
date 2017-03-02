@@ -382,16 +382,16 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     function setVerifiedReview(i, mobile) {
         console.log(i);
         console.log(mobile);
+        var updates = {
+            mobile: $scope.userReviews[i].reviewId
+        }
         $timeout(function() {
             if ($scope.mobileVerified) {
                 $scope.userReviews[i].reviewVerified = true;
                 db.ref('userReviews/' + $scope.userReviews[i].projectId + '/' + $scope.userReviews[i].type +'/' + $scope.userReviews[i].reviewId + '/verified').set('true');
                 db.ref('users/' + $scope.userId + '/mobile/mobileNum').set(mobile);
-                db.ref('userRegistration/mobile/' + mobile).set($scope.userReviews[i].reviewId);
+                db.ref('userRegistration/mobile/').update(updates);
             }
-
-
         }, 100)
     }
-
 }])
