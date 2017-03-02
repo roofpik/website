@@ -4,25 +4,25 @@
             <div class="nav-wrapper">
                 <!--   <a href="" onmouseover="$('#slide-out-top').css('display', 'block');" class="mgleftrt black-text left topmenu">
                     <i class="material-icons">menu</i></a> -->
-                <a href="" onclick="$('#slide-out-top').toggle()" class="mgleftrt black-text left topmenu">
+                <a href="" onclick="$('#slide-out-top').toggle();" class="mgleftrt black-text left topmenu">
                     <i class="material-icons">menu</i></a>
-                <a href="#home" class="rooflogo left"><img src="images/general/logo.png"></a>
-                <div id="slide-out-top" class="responsive_m">
+                <a href="#home" onclick="$('#slide-out-top').toggle();" class="rooflogo left"><img src="images/general/logo.png"></a>
+                <div id="slide-out-top" class="responsive_m" style="display: none;">
                     <ul class="hdr_list center">
-                        <li><a href="#about-us" class="">About</a></li>
-                        <li><a href="#cover-stories/gurgaon/-KYJONgh0P98xoyPPYm9/1">Cover Stories</a></li>
-                        <li><a href="#blogs/gurgaon/-KYJONgh0P98xoyPPYm9/1">Blogs</a></li>
-                        <li><a href="#write-review">Write Review</a></li>
-                        <li><a href="#faq"> FAQs </a></li>
-                        <li><a href="#contact-us">Contact us</a></li>
+                        <li><a href="#about-us" onclick="$('#slide-out-top').toggle();" class="">About</a></li>
+                        <li><a onclick="$('#slide-out-top').toggle();" href="#cover-stories/gurgaon/-KYJONgh0P98xoyPPYm9/1">Cover Stories</a></li>
+                        <li><a onclick="$('#slide-out-top').toggle();" href="#blogs/gurgaon/-KYJONgh0P98xoyPPYm9/1">Blogs</a></li>
+                        <li><a onclick="$('#slide-out-top').toggle();" href="#write-review">Write Review</a></li>
+                        <li><a onclick="$('#slide-out-top').toggle();" href="#faq"> FAQs </a></li>
+                        <li><a onclick="$('#slide-out-top').toggle();" href="#contact-us">Contact us</a></li>
                     </ul>
                 </div>
                 <ul class="right mgr10 toprtbtn">
                     <li class="mgr10">
-                        <a href="" id="abslocation" class="btn-flat ft12 ft20i capitalize truncate">
+                        <a id="abslocation" class="btn-flat hovern ft12 ft20i capitalize truncate">
                             <i class="material-icons left grey-text bticont mgrn">location_on</i>Gurgaon</a>
                     </li>
-                    <li class="mgr10"><a ng-click="findProjectId()" class="btn blue mgr10 capitalize"><i class="material-icons left bticont" ng-click = "">create</i> Write Review</a></li>
+                    <li class="mgr10"><a ng-click="findProjectId()"  class="btn blue mgr10 capitalize"><i class="material-icons left bticont" ng-click = "">create</i> Write Review</a></li>
                     <li>
                         <a data-target="loginbox" ng-hide="loginStatus" id="open-login" class="btn blue-grey darken-4 capitalize">
                             <i class="material-icons left bticont">lock_outline</i> Login/Sign Up
