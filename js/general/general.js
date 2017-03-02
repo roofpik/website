@@ -49,6 +49,7 @@ function encodeParams(param) {
             parameter += '&';
         }
         parameter += key + '=' + param[key];
+        // console.log(parameter);
     }
     return btoa(parameter);
 }
@@ -60,7 +61,9 @@ function decodeParams(param) {
     param = param.split('&');
     for (key in param) {
         var field = param[key].split('=');
+        console.log(field[1], decodeURIComponent(field[1]));
         parameter[field[0]] = decodeURIComponent(field[1]);
+        console.log(parameter);
     }
     return parameter;
 }

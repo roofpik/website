@@ -43,7 +43,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     $scope.userReviews = {};
     $scope.userReviews[$scope.i] = 0;
 
-    function getUser(user){
+    function getUser(user) {
         $scope.userId = user.uid;
         getUserData();
     }
@@ -185,7 +185,9 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         console.log($scope.userReviews[i].type, $scope.userReviews[i].projectId, $scope.userReviews[i].reviewId)
         db.ref('reviews/' + $scope.cityId + '/' + $scope.userReviews[i].type + '/' + $scope.userReviews[i].projectId + '/' + $scope.userReviews[i].reviewId).once('value', function(response) {
             $timeout(function() {
-                $scope.userReviews[i].reviewVerified = response.val().verified;
+                if (response.val().verified) {
+                    $scope.userReviews[i].reviewVerified = response.val().verified;
+                }
             }, 0);
         })
     }
@@ -382,16 +384,16 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     function setVerifiedReview(i, mobile) {
         console.log(i);
         console.log(mobile);
+        var updates = {
+            mobile: $scope.userReviews[i].reviewId
+        }
         $timeout(function() {
             if ($scope.mobileVerified) {
                 $scope.userReviews[i].reviewVerified = true;
-                db.ref('userReviews/' + $scope.userReviews[i].projectId + '/' + $scope.userReviews[i].type +'/' + $scope.userReviews[i].reviewId + '/verified').set('true');
+                db.ref('userReviews/' + $scope.userReviews[i].projectId + '/' + $scope.userReviews[i].type + '/' + $scope.userReviews[i].reviewId + '/verified').set('true');
                 db.ref('users/' + $scope.userId + '/mobile/mobileNum').set(mobile);
-                db.ref('userRegistration/mobile/' + mobile).set($scope.userReviews[i].reviewId);
+                db.ref('userRegistration/mobile/').update(updates);
             }
-
-
         }, 100)
     }
-
 }])

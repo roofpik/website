@@ -2172,7 +2172,7 @@ footer.page-footer .footer-copyright {
     max-width: 25% !important;
 }
 
-.boxtwo .fix40 {
+.boxtwo .fix40, .boxonelocation .fix40 {
     width: 38% !important;
     max-width: 38% !important;
 }
@@ -2186,7 +2186,7 @@ footer.page-footer .footer-copyright {
     height: 110px;
 }
 
-.boxone a,
+.boxone a, .boxonelocation a,
 .boxtwo a,
 .boxthree a {
     width: 100%;
@@ -2194,7 +2194,7 @@ footer.page-footer .footer-copyright {
     display: block;
 }
 
-.boxone,
+.boxone, .boxonelocation,
 .boxtwo,
 .boxthree {
     transition: all .25s ease-in;
@@ -2210,7 +2210,7 @@ footer.page-footer .footer-copyright {
     width: calc(50% - 10px)!important;
 }
 
-.boxthree {
+.boxthree, .boxonelocation {
     width: calc(33.3% - 10px) !important;
 }
 
@@ -2416,12 +2416,13 @@ footer.page-footer .footer-copyright {
     overflow-y: auto;
 }
 
-.imggradient img:after {
-    position: absolute;
-    width: 100%;
+.imggradient:before {
+  content: " ";
+    position: absolute !important;
+    width: 100% !important;
     left: 0;
     bottom: 0;
-    min-height: 100px;
+    min-height: 150px;
     background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.99) 98%, rgba(0, 0, 0, 1) 99%);
     background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.99) 98%, rgba(0, 0, 0, 1) 99%);
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.99) 98%, rgba(0, 0, 0, 1) 99%);
@@ -2575,6 +2576,9 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width:0px) and (max-width: 767px) {
+  .boxonelocation {
+    width: calc(100% - 10px) !important;
+}
     #pdan {
         padding-right: 0px !important;
         padding-left: 0px !important;
@@ -2999,6 +3003,9 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
+   .boxonelocation {
+    width: calc(50% - 10px) !important;
+}
     .wd33tb {
         width: 33% !important;
     }
@@ -3103,6 +3110,9 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width: 1024px) and (max-width: 1180px) {
+   .boxonelocation {
+    width: calc(33.3% - 10px) !important;
+}
     .hdboxabs {
         bottom: 60px;
         left: 195px;

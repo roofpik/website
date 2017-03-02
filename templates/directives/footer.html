@@ -9,7 +9,7 @@
                     <li><a class="grey-text" href="#!">Blogs</a></li>
                     <li><a class="grey-text" href="#!">Write Review</a></li>
                     <li><a class="grey-text" href="#!">Cover Stories</a></li>
-                    <li><a class="grey-text" ng-click="testListPage()">Projects</a></li>
+                    <li><a class="grey-text" ng-click = "goToListPage()">Projects</a></li>
                     <li><a class="grey-text" href="#!">FAQ's</a></li>
                     <li><a class="grey-text" href="#!">Contact Us</a></li>
                 </ul>
@@ -24,10 +24,10 @@
                             <input name="emailAddress" placeholder="Email *" type="email" ng-model="mail" class="validate mgbn ft12" required>
                             <p class="redf" ng-show="forms.newsletter.emailAddress.$invalid && forms.newsletter.emailAddress.$touched">Please enter a vaild email address.</p>
                         </div>
-                        <div class="input-field col s12 pdln mgtn overhdn">
+ <!--                        <div class="input-field col s12 pdln mgtn overhdn">
                             <div id="captcha" vc-recaptcha theme="'dark'" key="model.key" on-create="setWidgetId(widgetId)" on-success="setResponse(response)" on-expire="cbExpiration()">
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col s12 mgt10 pdln">
                             <button class="btn btn-full blue" ng-click="addSubscriber(mail)" ng-disabled="forms.newsletter.$invalid"><i class="material-icons left">send</i> Join</button>
                         </div>

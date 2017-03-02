@@ -1,8 +1,11 @@
 app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$location', '$stateParams', '$http', function($scope, $timeout, $rootScope, $location, $stateParams, $http) {
     document.title = "Write Review";
-    $('.modal').modal(); 
+    $('.modal').modal({
+        dismissible: false
+    });
     $scope.couponCode = '';
-
+    $scope.couponCodeSuccessful = false;
+    $scope.step = 1;
     $rootScope.$watch('loginStatus', function() {
         // $timeout(function() {
         if ($rootScope.loginStatus) {
@@ -17,7 +20,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     if (checkLocalStorage('loginStatus')) {
         $scope.loginStatus = JSON.parse(localStorage.getItem('loginStatus'));
         if (JSON.parse(localStorage.getItem('loginStatus'))) {
-            user = firebase.auth().currentUser;
+            $scope.user = firebase.auth().currentUser;
         } else {
             console.log('this is working')
             $rootScope.$emit("callShowLogin");
@@ -26,22 +29,10 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         $rootScope.$emit("callShowLogin");
     }
 
-    // if(firebase.auth().currentUser){
-
-    // }else {
-    //     $rootScope.$emit("callShowLogin");
-    // }
-
-
     function getUser(user) {
-        // console.log(user);
         $scope.userName = user.displayName;
         $scope.userId = user.uid;
-        // console.log($scope.userName);
     }
-
-
-
     var urlInfo = {
         url: $location.path()
     }
@@ -55,10 +46,6 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         var params = $stateParams.id;
     }
     console.log(params);
-    // $scope.projectId = params.projectId;
-    $scope.projects1 = {}; //bind project name with project ID
-    $scope.projects2 = {}; //bind project name with null for autocomplete
-    $scope.projects3 = {}; //bind project name with project type
     $scope.selectedProject = {};
     $scope.review = {
         ratings: {}
@@ -110,12 +97,8 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         } else if (index == 4) {
             $scope.review.ratings.openAndGreenAreas = rating;
         } else if (index == 5) {
-            $scope.review.ratings.electricityAndWaterSupply = rating;
-        } else if (index == 6) {
-            $scope.review.ratings.convenienceOfHouseMaids = rating;
-        } else if (index == 7) {
             $scope.review.ratings.convenienceOfParking = rating;
-        } else if (index == 8) {
+        } else if (index == 6) {
             $scope.review.ratings.infrastructure = rating;
         }
     };
@@ -167,7 +150,6 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                     name: $scope.selectedItem
                 }
                 var args = encodeParams(data);
-                // console.log(args);
                 $http({
                     url: 'http://107.23.243.89/api/GetByName_1.0',
                     method: 'GET',
@@ -179,7 +161,6 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                     $timeout(function() {
                         if (Object.keys(response.data).length > 0) {
                             $scope.projectList = response.data;
-                            // console.log($scope.projectList);
                         }
                         $scope.showLoading = false;
                     }, 500)
@@ -191,9 +172,10 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     }
 
     $scope.selectProject = function(project) {
-        // console.log(project)
+        console.log(project);
         $scope.projectSelected = true;
         $scope.selectedItem = project.name;
+        $scope.selectedProject = project;
         $scope.showResults = false;
     }
 
@@ -219,179 +201,106 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         }
     }
 
-    $scope.submitReview1 = function() {
-        if ($scope.couponCodeSuccessful) {
-            swal({
-                    title: "Enter your 10 digit mobile number",
-                    text: "You will soon receive a one time password",
-                    type: "input",
-                    showCancelButton: false,
-                    closeOnConfirm: false,
-                    confirmButtonText: 'Send OTP',
-                    animation: "slide-from-top",
-                    inputPlaceholder: "Phone Number"
-                },
-                function(inputValue) {
-                    if (inputValue == "") {
-                        swal.showInputError("Mobile number not entered");
-                        return false;
-                    } else if (inputValue.length < 10) {
-                        swal.showInputError("Mobile number incorrect");
-                        return false;
-                    } else if (inputValue.length == 10) {
-                        sendOtp(inputValue);
-                    } else {
-                        return false;
-                    }
-                });
-        } else {
-        swal({
-                title: "Enter your 10 digit mobile number",
-                text: "You will soon receive a one time password",
-                type: "input",
-                showCancelButton: true,
-                closeOnConfirm: false,
-                cancelButtonText: 'Submit without verification',
-                confirmButtonText: 'Send OTP',
-                animation: "slide-from-top",
-                inputPlaceholder: "Phone Number"
-            },
-            function(inputValue, isConfirm) {
-                console.log(isConfirm);
-                if (inputValue == "") {
-                    swal.showInputError("Mobile number not entered");
-                    return false;
-                } else if (inputValue.length < 10) {
-                    swal.showInputError("Mobile number incorrect");
-                    return false;
-                } else if (inputValue.length == 10) {
-                    sendOtp(inputValue);
-                } else {
-                    console.log('submit without verification called');
-                    return true;
-                }
-            });       
-        }
-    }
-
     $scope.submitReview = function() {
-        console.log($scope.review);
-        swal({
-                title: "Enter your 10 digit mobile number",
-                text: "You will soon receive a one time password",
-                type: "input",
-                showCancelButton: true,
-                closeOnConfirm: false,
-                cancelButtonText: 'Submit without verification',
-                confirmButtonText: 'Send OTP',
-                animation: "slide-from-top",
-                inputPlaceholder: "Phone Number"
-            },
-            function(inputValue) {
-                if (inputValue == "") {
-                    swal.showInputError("Mobile number not entered");
-                    return false;
-                } else if (inputValue.length < 10) {
-                    swal.showInputError("Mobile number incorrect");
-                    return false;
-                } else if (inputValue.length == 10) {
-                    sendOtp(inputValue);
+        console.log($scope.selectedProject);
+        var reviewPath = '';
+        var userReviewPath = '';
+        var newKey = '';
+        $scope.review.userName = $scope.user.displayName;
+        // $scope.review.userName = 'Anu Porwal';
+        $scope.review.userId = $scope.user.uid;
+        // $scope.review.userId = '2cQ2XQ7w7pdT9WGq2nyGJhrPSOo2';
+        $scope.review.blocked = false;
+        $scope.review.createdDate = new Date().getTime();
+        $scope.review.dataFormat = 1;
+        $scope.review.wordCount = ($scope.review.reviewText).length;
+        $scope.review.source = 'website';
+        $scope.review.status = 'uploaded';
+        var updates = {};
+        $scope.userReviewData = {
+            cityId: $scope.cityId,
+            cityName: 'Gurgaon',
+            reviewTitle: $scope.review.reviewTitle,
+            status: $scope.review.status,
+            createdDate: $scope.review.createdDate
+        }
+        if ($scope.selectedProject.type == 'residential') {
+            newKey = db.ref('websiteReviews/' + $scope.cityId + '/residential/' + $scope.selectedProject.id).push().key;
+            $scope.userReviewData.id = $scope.selectedProject.id;
+            $scope.userReviewData.name = $scope.selectedProject.name;
+            reviewPath = 'websiteReviews/' + $scope.cityId + '/residential/' + $scope.selectedProject.id + '/' + newKey;
+            userReviewPath = 'userReviews/' + $scope.review.userId + '/residential/' + newKey;
+        } else if ($scope.selectedProject.type == 'location') {
+            newKey = db.ref('websiteReviews/' + $scope.cityId + '/location/' + $scope.selectedProject.id).push().key;
+            $scope.userReviewData.id = $scope.selectedProject.id;
+            $scope.userReviewData.name = $scope.selectedProject.name;
+            reviewPath = 'websiteReviews/' + $scope.cityId + '/location/' + $scope.selectedProject.id + '/' + newKey;
+            userReviewPath = 'userReviews/' + $scope.review.userId + '/location/' + newKey;
+        } else if ($scope.selectedProject.type == 'locality') {
+            newKey = db.ref('websiteReviews/' + $scope.cityId + '/locality/' + $scope.selectedProject.id).push().key;
+            $scope.userReviewData.id = $scope.selectedProject.id;
+            $scope.userReviewData.name = $scope.selectedProject.name;
+            reviewPath = 'websiteReviews/' + $scope.cityId + '/locality/' + $scope.selectedProject.id + '/' + newKey;
+            userReviewPath = 'userReviews/' + $scope.review.userId + '/locality/' + newKey;
+        } else if ($scope.selectedProject.type == 'cghs') {
+            newKey = db.ref('websiteReviews/' + $scope.cityId + '/cghs/' + $scope.selectedProject.id).push().key;
+            $scope.userReviewData.id = $scope.selectedProject.id;
+            $scope.userReviewData.name = $scope.selectedProject.name;
+            reviewPath = 'websiteReviews/' + $scope.cityId + '/cghs/' + $scope.selectedProject.id + '/' + newKey;
+            userReviewPath = 'userReviews/' + $scope.review.userId + '/cghs/' + newKey;
+        }
+
+        if (Object.keys($scope.review.ratings).length == 0) {
+            delete $scope.review.ratings;
+        }
+        if ($scope.review.mobileNum) {
+            updates['userRegistration/mobile/' + $scope.userMobileNum] = $scope.user.uid;
+            updates['users/' + $scope.user.uid + '/mobile/mobileNum'] = $scope.userMobileNum;
+            updates['users/' + $scope.user.uid + '/mobile/mobileVerified'] = true;
+        }
+        updates[reviewPath] = $scope.review;
+        updates[userReviewPath] = $scope.userReviewData;
+        console.log(updates);
+        db.ref().update(updates).then(function() {
+            $timeout(function() {
+                var email = encodeURIComponent($scope.user.email);
+                var name = encodeURIComponent($scope.user.displayName);
+                var config = 2;
+                var verifiedFlag = '';
+                if ($scope.review.verified) {
+                    verifiedFlag = 'True';
                 } else {
-                    // Materialize.toast("You have successfully logged in!", 2000, 'rounded');
-                    return true;
+                    verifiedFlag = 'False';
                 }
-                // swal({
-                //         title: "Verifying Your Phone Number",
-                //         text: "Please Enter The OTP",
-                //         type: "input",
-                //         showCancelButton: true,
-                //         closeOnConfirm: false,
-                //         animation: "slide-from-top",
-                //         inputPlaceholder: "One Time Password"
-                //     },
-                //     function(inputValue) {
-                //         if (inputValue === false) return false;
-
-                //         if (inputValue === "") {
-                //             swal.showInputError("This Field Cannot Be Left Blank");
-                //             return false
-                //         }
-
-                //     });
-            });
-
-        // swal({
-        //     title: "Submitting Review",
-        //     text: "Please wait...",
-        //     imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
-        //     showConfirmButton: false
-        // });
-        // var reviewPath = '';
-        // var userReviewPath = '';
-        // var key = '';
-        // $scope.review.userName = user.displayName;
-        // // $scope.review.userName = 'Anu Porwal';
-        // $scope.review.userId = user.uid;
-        // // $scope.review.userId = '2cQ2XQ7w7pdT9WGq2nyGJhrPSOo2';
-        // $scope.review.blocked = false;
-        // $scope.review.createdDate = new Date().getTime();
-        // $scope.review.dataFormat = 1;
-        // $scope.review.wordCount = ($scope.review.reviewText).length;
-        // $scope.review.source = 'website';
-        // $scope.review.status = 'uploaded';
-        // var updates = {};
-        // $scope.userReviewData = {
-        //     cityId: $scope.cityId,
-        //     cityName: 'Gurgaon',
-        //     reviewTitle: $scope.review.reviewTitle,
-        //     status: $scope.review.status,
-        //     createdDate: $scope.review.createdDate
-        // }
-        // if ($scope.selectedProject.type == 'residential') {
-        //     newKey = db.ref('websiteReviews/' + $scope.cityId + '/residential/' + $scope.selectedProject.id).push().key;
-        //     $scope.userReviewData.projectId = $scope.selectedProject.id;
-        //     $scope.userReviewData.projectName = $scope.selectedProject.name;
-        //     reviewPath = 'websiteReviews/' + $scope.cityId + '/residential/' + $scope.selectedProject.id + '/' + newKey;
-        //     userReviewPath = 'userReviews/' + $scope.review.userId + '/residential/' + newKey;
-        // }
-
-        // if ($scope.selectedProject.type == 'location') {
-        //     newKey = db.ref('websiteReviews/' + $scope.cityId + '/location/' + $scope.selectedProject.id).push().key;
-        //     $scope.userReviewData.projectId = $scope.selectedProject.id;
-        //     $scope.userReviewData.projectName = $scope.selectedProject.name;
-        //     reviewPath = 'websiteReviews/' + $scope.cityId + '/location/' + $scope.selectedProject.id + '/' + newKey;
-        //     userReviewPath = 'userReviews/' + $scope.review.userId + '/location/' + newKey;
-        // }
-
-        // if ($scope.selectedProject.type == 'locality') {
-        //     newKey = db.ref('websiteReviews/' + $scope.cityId + '/locality/' + $scope.selectedProject.id).push().key;
-        //     $scope.userReviewData.projectId = $scope.selectedProject.id;
-        //     $scope.userReviewData.projectName = $scope.selectedProject.name;
-        //     reviewPath = 'websiteReviews/' + $scope.cityId + '/locality/' + $scope.selectedProject.id + '/' + newKey;
-        //     userReviewPath = 'userReviews/' + $scope.review.userId + '/locality/' + newKey;
-        // }
-
-        // if (Object.keys($scope.review.ratings).length == 0) {
-        //     delete $scope.review.ratings;
-        // }
-        // updates[reviewPath] = $scope.review;
-        // updates[userReviewPath] = $scope.userReviewData;
-        // console.log(updates);
-        // db.ref().update(updates).then(function() {
-        //     $timeout(function() {
-        //         swal({
-        //             title: "Done",
-        //             text: "Your review was successfully submitted!",
-        //             type: "success",
-        //             showCancelButton: false,
-        //             confirmButtonColor: "#AEDEF4",
-        //             confirmButtonText: "OK",
-        //             closeOnConfirm: false
-        //         }, function() {
-        //             window.location.reload(true);
-        //         });
-        //     }, 500);
-        // })
+                var couponFlag = '';
+                if ($scope.review.couponApplied) {
+                    couponFlag = 'True';
+                } else {
+                    couponFlag = 'False';
+                }
+                var parameter = 'email=' + email + '&name=' + name + '&conf=' + config + '&verifiedFlag=' + verifiedFlag + '&couponFlag=' + couponFlag;
+                if ($scope.review.couponApplied) {
+                    parameter += '&coupon=' + $scope.review.couponCode;
+                }
+                console.log(parameter);
+                $http({
+                    url: 'http://107.23.243.89/api/SendMail_1.0',
+                    method: 'GET',
+                    params: {
+                        args: btoa(parameter)
+                    }
+                }).then(function mySucces(response) {
+                    console.log(response);
+                    $timeout(function() {
+                        $scope.step = 5;
+                    }, 1000)
+                }, function myError(err) {
+                    $timeout(function() {
+                        $scope.step = 5;
+                    }, 1000)
+                })
+            }, 0);
+        })
     }
 
     /*Coupon Code Verification Starts*/
@@ -438,61 +347,83 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     /*Coupon Code Verification Ends*/
 
     // sends one time password to registered email and mobile number
-    function sendOtp(mobile) {
-        swal({
-            title: "Sending OTP",
-            text: "Please wait...",
-            imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
-            showConfirmButton: false
-        });
-        var otp = Math.floor(1000 + Math.random() * 9000);
-        var data = {
-            mobile: parseInt(mobile),
-            otp: otp
-        }
-        $http({
-            url: 'http://107.23.243.89/api/SendOTP_1.0',
-            method: 'GET',
-            params: {
-                args: encodeParams(data)
-            }
-        }).then(function(response) {
-            console.log(response);
-            if (response.status == 200) {
-                // console.log('sent');
-                swal({
-                        title: "Enter OTP",
-                        text: "A verification code has been sent to your registered mobile xxxxxxxxx" + mobile[mobile.length - 1],
-                        type: "input",
-                        showCancelButton: true,
-                        closeOnConfirm: true,
-                        animation: "slide-from-top",
-                        inputPlaceholder: "One Time Password"
-                    },
-                    function(inputValue) {
-                        if (inputValue == "") {
-                            swal.showInputError("OTP not entered");
-                            return false;
-                        } else if (inputValue.length < 4) {
-                            swal.showInputError("Incorrect OTP");
-                            return false;
-                        } else if (inputValue.length == 4) {
-                            if (inputValue == otp) {
-                                $scope.mobileVerified = true;
-                                alert('mobile verified');
-                            } else {
-                                swal.showInputError("Incorrect OTP");
-                            }
-                        } else {
-                            // swal('')
-                            alert('mobile not verified');
-                            return true;
-                        }
-                    });
+    $scope.sendOtp = function(mobile) {
+        if (mobile) {
+            mobile = mobile.toString();
+            $scope.userMobileNum = mobile;
+            if (mobile.length == 10) {
+                $scope.step = 2;
+                $scope.loadingMessage = 'Sending OTP...';
+                // $scope.showModalLoading = true;
+                $scope.otp = Math.floor(1000 + Math.random() * 9000);
+                // var data = {
+                //     mobile: mobile,
+                //     otp: otp,
+                //     email: $scope.user.email
+                // }
+
+                $scope.splitEmail = $scope.user.email.split("@");
+                $http({
+                    url: 'http://107.23.243.89/api/SendOTP_1.0',
+                    method: 'GET',
+                    params: {
+                        mobile: mobile,
+                        otp: $scope.otp.toString(),
+                        email: $scope.user.email
+                    }
+                }).then(function(response) {
+                    console.log(response);
+                    if (response.status == 200) {
+                        $timeout(function() {
+                            // $scope.showModalLoading = false;
+                            $scope.step = 3;
+                        }, 1000);
+                    } else {
+                        $scope.step = 1;
+                        $scope.numberError = 'OTP not sent, please try again.'
+                    }
+                });
             } else {
-                // console.log('not sent');
-                swal('OTP not sent', 'Please try again.', 'error');
+                $scope.step = 1;
+                $scope.numberError = 'Please enter your 10 digit mobile number';
             }
-        });
+        } else {
+            $scope.step = 1;
+            $scope.numberError = 'Please enter your 10 digit mobile number';
+        }
+    }
+
+    $scope.verifyOtp = function(otp) {
+        console.log(otp, $scope.otp);
+        if (parseInt($scope.otp) != parseInt(otp)) {
+            $scope.incorrectOtp = true;
+        } else {
+            $scope.step = 4;
+            if ($scope.couponCodeSuccessful) {
+                $scope.review.couponApplied = true;
+                $scope.review.couponCode = $scope.couponCode;
+            } else {
+                $scope.review.couponApplied = false;
+            }
+            $scope.review.verified = true;
+            $scope.review.mobileNum = parseInt($scope.userMobileNum);
+            $scope.loadingMessage = 'Submitting review...';
+            $scope.submitReview();
+        }
+    }
+
+    $scope.submitWithoutVerification = function() {
+        // console.log($scope.review);
+        $scope.step = 4;
+        $scope.review.couponApplied = false;
+        $scope.review.verified = false;
+        $scope.loadingMessage = 'Submitting review...'
+        $scope.submitReview();
+    }
+
+    $scope.refreshPage = function() {
+        $timeout(function() {
+            window.location.reload(true);
+        }, 1000);
     }
 }]);

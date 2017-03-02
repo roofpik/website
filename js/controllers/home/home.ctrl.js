@@ -334,15 +334,19 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
 
 // get data to display on map and cover stories only when scrolled to that particular div
     $(window).bind('scroll', function() {
-        if ($(window).scrollTop() >= $('.write-review-home').offset().top + $('.write-review-home').outerHeight() - window.innerHeight) {
-            $timeout(function(){
-                $rootScope.showCoverStories = true;
-            },0);
+        if($('.write-review-home').offset()){
+            if ($(window).scrollTop() >= $('.write-review-home').offset().top + $('.write-review-home').outerHeight() - window.innerHeight) {
+                $timeout(function(){
+                    $rootScope.showCoverStories = true;
+                },0);
+            }
         }
-        if ($(window).scrollTop() >= $('.stats-home').offset().top + $('.stats-home').outerHeight() - window.innerHeight) {
-            $timeout(function(){
-                $rootScope.showMap = true;
-            },0);
+        if($('.stats-home').offset()){
+            if ($(window).scrollTop() >= $('.stats-home').offset().top + $('.stats-home').outerHeight() - window.innerHeight) {
+                $timeout(function(){
+                    $rootScope.showMap = true;
+                },0);
+            }
         }
     });
 

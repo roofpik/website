@@ -100,4 +100,12 @@ app.controller('footerCtrl', ['$scope', '$timeout', 'vcRecaptchaService', '$stat
         }
     }
 
+    $scope.goToListPage = function(){
+        var params = {
+            vertical: 'residential',
+            category: 'all'
+        }
+        $state.go('list', {p: encodeParams(params)});
+    }
+
 }]);
