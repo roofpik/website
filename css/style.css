@@ -2456,8 +2456,20 @@ footer.page-footer .footer-copyright {
 .bghome {
     background-color: #1AB0D3;
 }
-.dropdown-content li>a, .dropdown-content li>span{color:#2196F3; width: 100% !important;}
-.droplogin{top: 64px !important; width: 195px !important;}
+
+.dropdown-content li>a,
+.dropdown-content li>span {
+    color: #2196F3;
+    width: 100% !important;
+}
+
+.droplogin {
+    top: 64px !important;
+    width: 195px !important;
+}
+.htratinglocation {
+    min-height: 200px;
+}
 
 /*add other new other css end*/
 
@@ -2563,7 +2575,10 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width:0px) and (max-width: 767px) {
-  #pdan{padding-right: 0px !important; padding-left: 0px !important;}
+    #pdan {
+        padding-right: 0px !important;
+        padding-left: 0px !important;
+    }
     .timeline:before,
     .timeline > li > .timeline-badge {
         left: 10%;
@@ -2739,9 +2754,17 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width:0px) and (max-width: 400px) {
-  .pdleft200 .ht2rem{text-align: center;}
-  .pdleft200{padding-left: 0px; padding-top: 80px; text-align: center;}
-  .prof_img{left:26% !important;}
+    .pdleft200 .ht2rem {
+        text-align: center;
+    }
+    .pdleft200 {
+        padding-left: 0px;
+        padding-top: 80px;
+        text-align: center;
+    }
+    .prof_img {
+        left: 26% !important;
+    }
     .proflink {
         bottom: 90px;
         left: 20px;
@@ -2771,7 +2794,9 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width:0px) and (max-width: 600px) {
-  .droplogin{top:56px !important;}
+    .droplogin {
+        top: 56px !important;
+    }
     .mgt70 {
         margin-top: 56px;
     }
@@ -2842,15 +2867,19 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width: 601px) and (max-width: 767px) {
-  .bodft {
-    border-bottom: solid 1px #ddd;
-    padding-bottom: 5px !important;
-}
-.footer-link li {
-    display: inline-block;
-}
-  .xssm1{width: 100% !important;}
-  .xssm2{width: 50% !important;}
+    .bodft {
+        border-bottom: solid 1px #ddd;
+        padding-bottom: 5px !important;
+    }
+    .footer-link li {
+        display: inline-block;
+    }
+    .xssm1 {
+        width: 100% !important;
+    }
+    .xssm2 {
+        width: 50% !important;
+    }
     #abslocation {
         width: 100px !important;
         text-align: right;

@@ -1,4 +1,4 @@
-app.controller('footerCtrl', ['$scope', '$timeout', 'vcRecaptchaService', function($scope, $timeout, vcRecaptchaService) {
+app.controller('footerCtrl', ['$scope', '$timeout', 'vcRecaptchaService', '$state', function($scope, $timeout, vcRecaptchaService, $state) {
     $(document).ready(function() {
         Materialize.updateTextFields();
         $(".dropdown-button").dropdown();

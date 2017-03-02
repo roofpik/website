@@ -54,8 +54,8 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
             url: 'http://107.23.243.89/api/GetReviewSummary_1.0',
             method: 'GET',
             params: {
-                id: $scope.locId,
-                type: $scope.type
+                id: '-K_UDYa-_29iscnH_YE1', //TO REMOVE LATER
+                type: 'locality'
             }
         }).then(function mySucces(response) {
             console.log(response);
@@ -90,8 +90,8 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
             url: 'http://107.23.243.89/api/GetProjectReviews_1.0',
             method: 'GET',
             params: {
-                pid: $scope.locId,
-                type: $scope.type,
+                pid: '-K_UDYa-_29iscnH_YE1', //To change later
+                type: 'locality',
                 page_size: '20'
             }
         }).then(function mySucces(response) {
