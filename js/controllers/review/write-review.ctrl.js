@@ -5,6 +5,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     });
     $scope.couponCode = '';
     $scope.couponCodeSuccessful = false;
+    $scope.step = 1;
     $rootScope.$watch('loginStatus', function() {
         // $timeout(function() {
         if ($rootScope.loginStatus) {
@@ -28,16 +29,9 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         $rootScope.$emit("callShowLogin");
     }
 
-    // if(firebase.auth().currentUser){
-
-    // }else {
-    //     $rootScope.$emit("callShowLogin");
-    // }
     function getUser(user) {
-        // console.log(user);
         $scope.userName = user.displayName;
         $scope.userId = user.uid;
-        // console.log($scope.userName);
     }
     var urlInfo = {
         url: $location.path()
@@ -52,10 +46,6 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         var params = $stateParams.id;
     }
     console.log(params);
-    // $scope.projectId = params.projectId;
-    $scope.projects1 = {}; //bind project name with project ID
-    $scope.projects2 = {}; //bind project name with null for autocomplete
-    $scope.projects3 = {}; //bind project name with project type
     $scope.selectedProject = {};
     $scope.review = {
         ratings: {}
@@ -164,7 +154,6 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                     name: $scope.selectedItem
                 }
                 var args = encodeParams(data);
-                // console.log(args);
                 $http({
                     url: 'http://107.23.243.89/api/GetByName_1.0',
                     method: 'GET',
@@ -176,7 +165,6 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                     $timeout(function() {
                         if (Object.keys(response.data).length > 0) {
                             $scope.projectList = response.data;
-                            // console.log($scope.projectList);
                         }
                         $scope.showLoading = false;
                     }, 500)
@@ -188,7 +176,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     }
 
     $scope.selectProject = function(project) {
-        // console.log(project)
+        console.log(project);
         $scope.projectSelected = true;
         $scope.selectedItem = project.name;
         $scope.selectedProject = project;
@@ -246,22 +234,24 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
             $scope.userReviewData.projectName = $scope.selectedProject.name;
             reviewPath = 'websiteReviews/' + $scope.cityId + '/residential/' + $scope.selectedProject.id + '/' + newKey;
             userReviewPath = 'userReviews/' + $scope.review.userId + '/residential/' + newKey;
-        }
-
-        if ($scope.selectedProject.type == 'location') {
+        } else if ($scope.selectedProject.type == 'location') {
             newKey = db.ref('websiteReviews/' + $scope.cityId + '/location/' + $scope.selectedProject.id).push().key;
             $scope.userReviewData.projectId = $scope.selectedProject.id;
             $scope.userReviewData.projectName = $scope.selectedProject.name;
             reviewPath = 'websiteReviews/' + $scope.cityId + '/location/' + $scope.selectedProject.id + '/' + newKey;
             userReviewPath = 'userReviews/' + $scope.review.userId + '/location/' + newKey;
-        }
-
-        if ($scope.selectedProject.type == 'locality') {
+        } else if ($scope.selectedProject.type == 'locality') {
             newKey = db.ref('websiteReviews/' + $scope.cityId + '/locality/' + $scope.selectedProject.id).push().key;
             $scope.userReviewData.projectId = $scope.selectedProject.id;
             $scope.userReviewData.projectName = $scope.selectedProject.name;
             reviewPath = 'websiteReviews/' + $scope.cityId + '/locality/' + $scope.selectedProject.id + '/' + newKey;
             userReviewPath = 'userReviews/' + $scope.review.userId + '/locality/' + newKey;
+        } else if ($scope.selectedProject.type == 'cghs') {
+            newKey = db.ref('websiteReviews/' + $scope.cityId + '/cghs/' + $scope.selectedProject.id).push().key;
+            $scope.userReviewData.projectId = $scope.selectedProject.id;
+            $scope.userReviewData.projectName = $scope.selectedProject.name;
+            reviewPath = 'websiteReviews/' + $scope.cityId + '/cghs/' + $scope.selectedProject.id + '/' + newKey;
+            userReviewPath = 'userReviews/' + $scope.review.userId + '/cghs/' + newKey;
         }
 
         if (Object.keys($scope.review.ratings).length == 0) {
@@ -272,61 +262,46 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
             updates['users/' + $scope.user.uid + '/mobile/mobileNum'] = $scope.userMobileNum;
             updates['users/' + $scope.user.uid + '/mobile/mobileVerified'] = true;
         }
-        console.log(reviewPath);
         updates[reviewPath] = $scope.review;
         updates[userReviewPath] = $scope.userReviewData;
         console.log(updates);
-        $scope.showModalLoading = false;
-        var email = encodeURIComponent($scope.user.email);
-        var name = encodeURIComponent($scope.user.displayName);
-        var config = 2;
-        var verifiedFlag='';
-        if($scope.review.verified){
-            verifiedFlag = 'True';
-        } else {
-            verifiedFlag = 'False';
-        }
-        var couponFlag = '';
-        if($scope.review.couponApplied){
-            couponFlag= 'True';
-        } else {
-            couponFlag = 'False';
-        }
-        var parameter = 'email=' + email + '&name=' + name + '&conf=' + config+'&verifiedFlag='+verifiedFlag+'&couponFlag='+couponFlag;
-        if ($scope.review.couponApplied) {
-            parameter += '&coupon='+$scope.review.couponCode;
-        }
-        console.log(parameter);
-        console.log(btoa(parameter));
-        $http({
-                url: 'http://107.23.243.89/api/SendMail_1.0',
-                method: 'GET',
-                params: {
-                    args: btoa(parameter)
+        db.ref().update(updates).then(function() {
+            $timeout(function() {
+                var email = encodeURIComponent($scope.user.email);
+                var name = encodeURIComponent($scope.user.displayName);
+                var config = 2;
+                var verifiedFlag = '';
+                if ($scope.review.verified) {
+                    verifiedFlag = 'True';
+                } else {
+                    verifiedFlag = 'False';
                 }
-            }).then(function mySucces(response) {
-                console.log(response);
-                $timeout(function() {
-
-                }, 0)
-            }, function myError(err) {
-
-            })
-            // db.ref().update(updates).then(function() {
-            //     $timeout(function() {
-            //         swal({
-            //             title: "Done",
-            //             text: "Your review was successfully submitted!",
-            //             type: "success",
-            //             showCancelButton: false,
-            //             confirmButtonColor: "#AEDEF4",
-            //             confirmButtonText: "OK",
-            //             closeOnConfirm: false
-            //         }, function() {
-            //             window.location.reload(true);
-            //         });
-            //     }, 500);
-            // })
+                var couponFlag = '';
+                if ($scope.review.couponApplied) {
+                    couponFlag = 'True';
+                } else {
+                    couponFlag = 'False';
+                }
+                var parameter = 'email=' + email + '&name=' + name + '&conf=' + config + '&verifiedFlag=' + verifiedFlag + '&couponFlag=' + couponFlag;
+                if ($scope.review.couponApplied) {
+                    parameter += '&coupon=' + $scope.review.couponCode;
+                }
+                $http({
+                    url: 'http://107.23.243.89/api/SendMail_1.0',
+                    method: 'GET',
+                    params: {
+                        args: btoa(parameter)
+                    }
+                }).then(function mySucces(response) {
+                    console.log(response);
+                    $timeout(function() {
+                        $scope.step = 5;
+                    }, 0)
+                }, function myError(err) {
+                    $scope.step = 5;
+                })
+            }, 500);
+        })
     }
 
     /*Coupon Code Verification Starts*/
@@ -378,8 +353,9 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
             mobile = mobile.toString();
             $scope.userMobileNum = mobile;
             if (mobile.length == 10) {
+                $scope.step = 2;
                 $scope.loadingMessage = 'Sending OTP...';
-                $scope.showModalLoading = true;
+                // $scope.showModalLoading = true;
                 $scope.otp = Math.floor(1000 + Math.random() * 9000);
                 // var data = {
                 //     mobile: mobile,
@@ -400,19 +376,21 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                     console.log(response);
                     if (response.status == 200) {
                         $timeout(function() {
-                            $scope.showModalLoading = false;
-                            $scope.showOtpField = true;
+                            // $scope.showModalLoading = false;
+                            $scope.step = 3;
                         }, 1000);
                     } else {
-                        // console.log('not sent');
-                        Materialize.toast('OTP not sent', 'Please try again.', 'error');
+                        $scope.step = 1;
+                        $scope.numberError = 'OTP not sent, please try again.'
                     }
                 });
             } else {
-                Materialize.toast('Invalid Number', 2000);
+                $scope.step = 1;
+                $scope.numberError = 'Please enter your 10 digit mobile number';
             }
         } else {
-            Materialize.toast('Please enter your 10 digit mobile number', 2000);
+            $scope.step = 1;
+            $scope.numberError = 'Please enter your 10 digit mobile number';
         }
     }
 
@@ -420,8 +398,8 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         console.log(otp, $scope.otp);
         if (parseInt($scope.otp) != parseInt(otp)) {
             $scope.incorrectOtp = true;
-            // alert('incorrect OTP');
         } else {
+            $scope.step = 4;
             if ($scope.couponCodeSuccessful) {
                 $scope.review.couponApplied = true;
                 $scope.review.couponCode = $scope.couponCode;
@@ -430,10 +408,8 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
             }
             $scope.review.verified = true;
             $scope.review.mobileNum = parseInt($scope.userMobileNum);
-            $scope.showModalLoading = true;
             $scope.loadingMessage = 'Submitting review...';
             $scope.submitReview();
-            // submit review and send email
         }
     }
 
@@ -441,8 +417,13 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         console.log($scope.review);
         $scope.review.couponApplied = false;
         $scope.review.verified = false;
-        $scope.showModalLoading = true;
         $scope.loadingMessage = 'Submitting review...'
-            // $scope.submitReview();
+        $scope.submitReview();
+    }
+
+    $scope.refreshPage = function() {
+        $timeout(function() {
+            window.location.reload(true);
+        }, 1000);
     }
 }]);
