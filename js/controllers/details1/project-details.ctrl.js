@@ -25,6 +25,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     } else {
         $scope.category = 'residential';
     }
+    $scope.forms = {};
 
     $scope.propertyTypes = [];
     $scope.bhk = '';
@@ -301,10 +302,10 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
             },
             'slow');
     }
-
+    console.log($scope.category)
     db.ref('projects/-KYJONgh0P98xoyPPYm9/' + $scope.category + '/' + $scope.projectId).once('value', function(snapshot) {
         $timeout(function() {
-            // console.log(snapshot.val());
+            console.log(snapshot.val());
             $scope.project = snapshot.val();
             $scope.projectName = $scope.project.projectName;
             document.title = $scope.projectName;
@@ -343,19 +344,23 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
         // console.log($scope.amenitiesPresent);
     }
 
+    function sortNumber(a, b) {
+        return a - b;
+    }
+
     function generateInfo(config) {
         var bhkData = [];
         var areaData = [];
-        var minPriceData= [];
-        var maxPriceData= [];
+        var minPriceData = [];
+        var maxPriceData = [];
         for (key in config) {
             bhkData.push(config[key].bhk);
-            areaData.push(config[key].superBuiltArea);
+            areaData.push(parseInt(config[key].superBuiltArea));
             $scope.propertyTypes.push(config[key].unit);
-            if(config[key].pricing.rent.min != 'NA'){
+            if (config[key].pricing.rent.min != 'NA') {
                 minPriceData.push(config[key].pricing.rent.min);
             }
-            if(config[key].pricing.rent.max != 'NA'){
+            if (config[key].pricing.rent.max != 'NA') {
                 maxPriceData.push(config[key].pricing.rent.max);
             }
         }
@@ -365,21 +370,23 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
         $scope.minBhk = bhkData[0];
         minBhk = bhkData[0];
         areaData = jQuery.unique(areaData);
-        areaData = areaData.sort();
-        if(minPriceData.length != 0){
-            minPriceData =minPriceData.sort();
-            $scope.rentMin = convertCurrency(minPriceData[minPriceData.length -1]);
+        areaData = areaData.sort(sortNumber);
+        minPriceData = minPriceData.sort(sortNumber);
+        maxPriceData = maxPriceData.sort(sortNumber);
+        console.log(minPriceData);
+        console.log(maxPriceData);
+        if (minPriceData.length != 0) {
+            $scope.rentMin = convertCurrency(minPriceData[0]);
         } else {
             $scope.rentMin = 'NA';
         }
 
-        if(maxPriceData.length != 0){
-            maxPriceData =maxPriceData.sort();
-            $scope.rentMax = convertCurrency(maxPriceData[0]);
+        if (maxPriceData.length != 0) {
+            $scope.rentMax = convertCurrency(maxPriceData[maxPriceData.length - 1]);
         } else {
             $scope.rentMax = 'NA';
         }
-        
+
         $scope.minArea = areaData[0];
         $scope.maxArea = areaData[areaData.length - 1];
         for (key in bhkData) {
@@ -417,33 +424,33 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
         for (key in configs) {
             if (example[configs[key].bhk]) {
                 if (example[configs[key].bhk].unit == configs[key].unit) {
-                    if (configs[key].superBuiltArea < example[configs[key].bhk].superBuiltAreaMin) {
+                    if (parseInt(configs[key].superBuiltArea) < example[configs[key].bhk].superBuiltAreaMin) {
                         example[configs[key].bhk].superBuiltAreaMin = configs[key].superBuiltArea;
                     } else if (configs[key].superBuiltArea > example[configs[key].bhk].superBuiltAreaMax) {
                         example[configs[key].bhk].superBuiltAreaMax = configs[key].superBuiltArea;
                     }
                     if (configs[key].pricing.rent.min != 'NA') {
                         if (configs[key].pricing.rent.min < example[configs[key].bhk].rentMin) {
-                            example[configs[key].bhk].rentMin = convertCurrency(configs[key].pricing.rent.min);
+                            example[configs[key].bhk].rentMin = configs[key].pricing.rent.min;
                         }
                     }
                     if (configs[key].pricing.rent.max != 'NA') {
                         if (configs[key].pricing.rent.max > example[configs[key].bhk].rentMax) {
-                            example[configs[key].bhk].rentMax = convertCurrency(configs[key].pricing.rent.max);
+                            example[configs[key].bhk].rentMax = configs[key].pricing.rent.max;
                         }
                     }
                 } else {
                     var data = {
                         unit: configs[key].unit,
                         bhk: configs[key].bhk,
-                        superBuiltAreaMin: configs[key].superBuiltArea,
-                        superBuiltAreaMax: configs[key].superBuiltArea
+                        superBuiltAreaMin: parseInt(configs[key].superBuiltArea),
+                        superBuiltAreaMax: parseInt(configs[key].superBuiltArea)
                     }
                     if (configs[key].pricing.rent.min != 'NA') {
-                        data.rentMin = convertCurrency(configs[key].pricing.rent.min);
+                        data.rentMin = configs[key].pricing.rent.min;
                     }
                     if (configs[key].pricing.rent.max != 'NA') {
-                        data.rentMax = convertCurrency(configs[key].pricing.rent.max);
+                        data.rentMax = configs[key].pricing.rent.max;
                     }
                     if (data.rentMin) {
                         if (!data.rentMax) {
@@ -461,8 +468,8 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
                 var data = {
                     unit: configs[key].unit,
                     bhk: configs[key].bhk,
-                    superBuiltAreaMin: configs[key].superBuiltArea,
-                    superBuiltAreaMax: configs[key].superBuiltArea
+                    superBuiltAreaMin: parseInt(configs[key].superBuiltArea),
+                    superBuiltAreaMax: parseInt(configs[key].superBuiltArea)
                 }
                 if (configs[key].pricing.rent.min != 'NA') {
                     // data.rentMin = convertCurrency(configs[key].pricing.rent.min);
@@ -486,6 +493,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
                 // console.log(example);
             }
         }
+        console.log(example);
         addNa(example);
     }
 
@@ -526,8 +534,8 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
                 };
             }
             var area = {
-                min: data[key].superBuiltAreaMin,
-                max: data[key].superBuiltAreaMax
+                min: parseInt(data[key].superBuiltAreaMin),
+                max: parseInt(data[key].superBuiltAreaMax)
             }
             var price = {
                 min: data[key].rentMin,
@@ -565,11 +573,11 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
         // loading(true);
         db.ref('queries/' + $scope.cityId + '/' + $scope.category + '/' + $scope.projectId).push(data).then(function() {
             // loading(false);
-            swal('Request Logged', 'You will recieve the details in your mail', 'success');
+            swal('Request Logged', 'You will receive the details in your mail', 'success');
             $timeout(function() {
                 $scope.query = {};
-                $scope.contactForm.$setPristine();
-                $scope.contactForm.$setUntouched();
+                $scope.forms.contactForm.$setPristine();
+                $scope.forms.contactForm.$setUntouched();
             }, 1000);
         })
     }
@@ -652,22 +660,39 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
     }).then(function mySucces(response) {
         console.log(response);
         if (response.status == 200) {
-            if (response.data.numberOfReviews != 0) {
-                $rootScope.allRatings = response.data;
-                $scope.reviewsAvailable = true;
-                if (response.data.numberOfReviews > 0) {
-                    $scope.reviewAvailable = true;
+            if (response.data[$scope.projectId]) {
+                if (response.data[$scope.projectId] != 'not found') {
+                    $rootScope.allRatings = response.data;
+                    $scope.reviewsAvailable = true;
+                    if (response.data.numberOfReviews > 0) {
+                        $scope.reviewAvailable = true;
+                    }
+                    $scope.reviewObject = response.data;
+                    for (key in $scope.reviewObject.numbers) {
+                        $scope.reviewObject.numbers[key + '1'] = Math.round($scope.reviewObject.numbers[key]);
+                    }
+                    $("#excellentStar").css("width", ($scope.reviewObject.numbers.fiveStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
+                    $("#veryGoodStar").css("width", ($scope.reviewObject.numbers.fourStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
+                    $("#goodStar").css("width", ($scope.reviewObject.numbers.threeStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
+                    $("#averageStar").css("width", ($scope.reviewObject.numbers.twoStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
+                    $("#badStar").css("width", ($scope.reviewObject.numbers.oneStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
+                    // console.log($scope.reviewObject);
                 }
-                $scope.reviewObject = response.data;
-                for (key in $scope.reviewObject.numbers) {
-                    $scope.reviewObject.numbers[key + '1'] = Math.round($scope.reviewObject.numbers[key]);
-                }
-                $("#excellentStar").css("width", ($scope.reviewObject.numbers.fiveStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
-                $("#veryGoodStar").css("width", ($scope.reviewObject.numbers.fourStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
-                $("#goodStar").css("width", ($scope.reviewObject.numbers.threeStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
-                $("#averageStar").css("width", ($scope.reviewObject.numbers.twoStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
-                $("#badStar").css("width", ($scope.reviewObject.numbers.oneStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
-                // console.log($scope.reviewObject);
+            } else if( response.data.numbers.numberOfReviews != 0){
+                    $rootScope.allRatings = response.data;
+                    $scope.reviewsAvailable = true;
+                    if (response.data.numberOfReviews > 0) {
+                        $scope.reviewAvailable = true;
+                    }
+                    $scope.reviewObject = response.data;
+                    for (key in $scope.reviewObject.numbers) {
+                        $scope.reviewObject.numbers[key + '1'] = Math.round($scope.reviewObject.numbers[key]);
+                    }
+                    $("#excellentStar").css("width", ($scope.reviewObject.numbers.fiveStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
+                    $("#veryGoodStar").css("width", ($scope.reviewObject.numbers.fourStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
+                    $("#goodStar").css("width", ($scope.reviewObject.numbers.threeStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
+                    $("#averageStar").css("width", ($scope.reviewObject.numbers.twoStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
+                    $("#badStar").css("width", ($scope.reviewObject.numbers.oneStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
             }
         }
     }, function myError(err) {

@@ -2,7 +2,7 @@
     <div ng-hide="reviewsAvailable">
         <div class="row pda20 mgan blue lighten-1 center">
             <h4 class="mgan ft22 white-text">
-                <span class="mgt5 in-block">No reviews.</span>
+                <span class="mgt5 in-block">No reviews</span>
             </h4>
             <div class="row mgt20 center-align">
                 <button class="btn white grey-text" ng-click="takeToWriteReview()"><i class="material-icons left">edit</i> Write Review</button>
@@ -15,7 +15,7 @@
                 <span class="">
                      <i class="material-icons small" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < reviewObject.numbers.averageRating1? 'amber-text text-darken-2': 'normal'">star</i>
                 </span>
-                <span class="mgt5 in-block"> {{reviewObject.numbers.averageRating}}/5 From {{reviewObject.numbers.numberOfReviews}} Review<span ng-show="reviewObject.numbers.numberOfReviews > 1">s</span> </span>
+                <span class="mgt5 in-block"> {{reviewObject.numbers.averageRating || 0}}/5 From {{reviewObject.numbers.numberOfReviews}} Review<span ng-show="reviewObject.numbers.numberOfReviews > 1">s</span> </span>
             </h4>
             <div class="row mgt20 center-align">
                 <button class="btn white grey-text" ng-click="takeToWriteReview()"><i class="material-icons left">edit</i> Write Review</button>
@@ -202,7 +202,7 @@
                     </div>
                     <div class="col s12">
                         <p><b>{{review.reviewTitle}}</b></p>
-                        <p class="justify">{{review.reviewText}}<span ng-show="review.showMore" class="roofGreen" ng-click="showReviewText($index)">...Show More</span></p>
+                        <p class="justify">{{review.reviewText}}<span ng-show="review.showMore" class="roofGreen" ng-click="showReviewText($index)" style = "cursor: pointer">...Show More</span></p>
                     </div>
                 </div>
             </div>
