@@ -267,18 +267,20 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                 var name = encodeURIComponent($scope.user.displayName);
                 var config = 2;
                 var verifiedFlag = '';
+                var parameter = 'email=' + email + '&name=' + name + '&conf=' + config
                 if ($scope.review.verified) {
                     verifiedFlag = 'True';
+                    parameter += '&verifiedFlag=' + verifiedFlag;
                 } else {
                     verifiedFlag = 'False';
                 }
                 var couponFlag = '';
                 if ($scope.review.couponApplied) {
                     couponFlag = 'True';
+                    parameter += '&couponFlag=' + couponFlag;
                 } else {
                     couponFlag = 'False';
                 }
-                var parameter = 'email=' + email + '&name=' + name + '&conf=' + config + '&verifiedFlag=' + verifiedFlag + '&couponFlag=' + couponFlag;
                 if ($scope.review.couponApplied) {
                     parameter += '&coupon=' + $scope.review.couponCode;
                 }
