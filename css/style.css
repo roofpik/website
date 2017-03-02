@@ -1786,8 +1786,8 @@ i.left {
 .proflink {
     position: absolute;
     bottom: 0;
-    left: 200px;
-    width: 70%;
+    left: 180px;
+    width: calc(100% - 180px);
 }
 
 .rdsan {
@@ -2443,14 +2443,22 @@ footer.page-footer .footer-copyright {
 .pdl_p34 {
     padding-left: 34px
 }
-.lineht20{line-height: 23px}
 
-#interested, #interestedout { 
-  display: none;
-       
-      }
+.lineht20 {
+    line-height: 23px
+}
 
-     
+#interested,
+#interestedout {
+    display: none;
+}
+
+.bghome {
+    background-color: #1AB0D3;
+}
+.dropdown-content li>a, .dropdown-content li>span{color:#2196F3; width: 100% !important;}
+.droplogin{top: 64px !important; width: 195px !important;}
+
 /*add other new other css end*/
 
 
@@ -2520,10 +2528,10 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width:0px) and (max-width: 500px) {
-  .img_thumb {
-    width: 120px;
-    height: 95px;
-}
+    .img_thumb {
+        width: 120px;
+        height: 95px;
+    }
     .smpd40 {
         padding-left: 10px !important;
         padding-right: 10px !important;
@@ -2555,50 +2563,99 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width:0px) and (max-width: 767px) {
-  .hide767{display: none;}
-  .wd676{width: 100% !important;}
-  .hdboxabs {
-    bottom: 67px;
-    left: 25px;
-    width: 80%;
-}
-
-  #interested, #interestedout { 
-        height: 0px; display: block;
-        width: 65px; 
-        position: fixed ;  
+  #pdan{padding-right: 0px !important; padding-left: 0px !important;}
+    .timeline:before,
+    .timeline > li > .timeline-badge {
+        left: 10%;
+    }
+    .timeline > li > .timeline-panel {
+        width: 95%;
+    }
+    .timeline > li {
+        padding-left: 90px !important;
+        padding-right: 0px !important;
+    }
+    .timeline > li > .timeline-panel {
+        float: right !important;
+    }
+    .timeline > li .timeline-panel:before {
+        border-left-width: 0 !important;
+        border-right-width: 15px !important;
+        left: -15px !important;
+        right: auto !important;
+    }
+    .timeline > li .timeline-panel:after {
+        border-left-width: 0 !important;
+        border-right-width: 14px !important;
+        left: -14px !important;
+        right: auto !important;
+    }
+    .hide767 {
+        display: none;
+    }
+    .wd676 {
+        width: 100% !important;
+    }
+    .hdboxabs {
+        bottom: 67px;
+        left: 25px;
+        width: 80%;
+    }
+    #interested,
+    #interestedout {
+        height: 0px;
+        display: block;
+        width: 65px;
+        position: fixed;
         right: 0;
-        top: 60%; 
+        top: 60%;
         z-index: 1000;
         transform: rotate(-90deg);
-        -webkit-transform: rotate(-90deg); 
-        -moz-transform: rotate(-90deg); 
-        -o-transform: rotate(-90deg); 
-        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
-      }
- #interested{top:54% !important;}
-      #interested button, #interestedout button { 
-        display: block; 
-        background: #2196F3; 
-        height: 35px; border:0; /*box-shadow: 0 0 3px #666;*/
-        width: 165px; 
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=3);
+    }
+    #interested {
+        top: 54% !important;
+    }
+    #interested button,
+    #interestedout button {
+        display: block;
+        background: #2196F3;
+        height: 35px;
+        border: 0;
+        /*box-shadow: 0 0 3px #666;*/
+        width: 165px;
         padding: 4px 12px;
-        color: #fff;        
-        font-size: 15px; 
-        font-weight: bold; 
-        text-decoration: none;       
-      }
-
-      #interested button:hover,  #interestedout button:hover { 
-        background: #f5f5f5; color:#444;
-      }
-#interestedout{position: absolute !important; right: 282px;}
-
-  #xshideside{width: 280px !important; background-color: #f5f5f5; z-index: 9999; 
-   /* box-shadow: 0 0 3px #666;*/
-    transition: all .35s ease-in; position: fixed !important; right: -330px; top: 17%; back}
-  .wid100{width: 100% !important;}
- 
+        color: #fff;
+        font-size: 15px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    #interested button:hover,
+    #interestedout button:hover {
+        background: #f5f5f5;
+        color: #444;
+    }
+    #interestedout {
+        position: absolute !important;
+        right: 282px;
+    }
+    #xshideside {
+        width: 280px !important;
+        background-color: #f5f5f5;
+        z-index: 9999;
+        /* box-shadow: 0 0 3px #666;*/
+        transition: all .35s ease-in;
+        position: fixed !important;
+        right: -330px;
+        top: 17%;
+        back
+    }
+    .wid100 {
+        width: 100% !important;
+    }
     .wd_dt1 {
         width: 65% !important;
     }
@@ -2611,7 +2668,6 @@ footer.page-footer .footer-copyright {
     .wd_dt4 {
         width: 100% !important;
     }
-
     #loginbox {
         width: 90%;
     }
@@ -2659,21 +2715,38 @@ footer.page-footer .footer-copyright {
         display: none;
     }
 }
+
 @media screen and (min-width:0px) and (max-width: 550px) {
- .wd40{width: 30px !important; height: 27px; overflow: hidden; line-height: 27px;}
-.xstop{bottom: 0px !important; right: 5%;}
-
-
+    .wd40 {
+        width: 30px !important;
+        height: 27px;
+        overflow: hidden;
+        line-height: 27px;
+    }
+    .xstop {
+        bottom: 0px !important;
+        right: 5%;
+    }
 }
+
 @media screen and (min-width:320px) and (max-width: 600px) {
     #abslocation {
-        width: 70px !important; text-align: right;
+        width: 70px !important;
+        text-align: right;
         padding-left: 0px !important;
         padding-right: 0px !important;
     }
 }
 
 @media screen and (min-width:0px) and (max-width: 400px) {
+  .pdleft200 .ht2rem{text-align: center;}
+  .pdleft200{padding-left: 0px; padding-top: 80px; text-align: center;}
+  .prof_img{left:26% !important;}
+    .proflink {
+        bottom: 90px;
+        left: 20px;
+        width: calc(100% - 20px);
+    }
     .toprtbtn li a {
         margin-right: 0px !important;
     }
@@ -2698,6 +2771,10 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width:0px) and (max-width: 600px) {
+  .droplogin{top:56px !important;}
+    .mgt70 {
+        margin-top: 56px;
+    }
     .rooflogo {
         width: 26px;
         overflow: hidden;
@@ -2765,6 +2842,15 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width: 601px) and (max-width: 767px) {
+  .bodft {
+    border-bottom: solid 1px #ddd;
+    padding-bottom: 5px !important;
+}
+.footer-link li {
+    display: inline-block;
+}
+  .xssm1{width: 100% !important;}
+  .xssm2{width: 50% !important;}
     #abslocation {
         width: 100px !important;
         text-align: right;
@@ -2884,7 +2970,9 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-    .wd33tb{width: 33% !important;}
+    .wd33tb {
+        width: 33% !important;
+    }
     .wd_dt1 {
         width: 35% !important;
     }
@@ -2934,8 +3022,12 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width: 0px) and (max-width: 1023px) {
-  .xstop50{margin-top: 50px;}
-  .hdnxstb{display: none !important;}
+    .xstop50 {
+        margin-top: 50px;
+    }
+    .hdnxstb {
+        display: none !important;
+    }
     h4 {
         font-size: 2rem
     }
