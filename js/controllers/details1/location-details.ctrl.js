@@ -57,8 +57,8 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
             url: 'http://107.23.243.89/api/GetReviewSummary_1.0',
             method: 'GET',
             params: {
-                id: $scope.locId,
-                type: $scope.type
+                id: '-K_UDYa-_29iscnH_YE1', //TO REMOVE LATER
+                type: 'locality'
             }
         }).then(function mySucces(response) {
             console.log(response);
@@ -93,8 +93,8 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
             url: 'http://107.23.243.89/api/GetProjectReviews_1.0',
             method: 'GET',
             params: {
-                pid: $scope.locId,
-                type: $scope.type,
+                pid: '-K_UDYa-_29iscnH_YE1', //To change later
+                type: 'locality',
                 page_size: '20'
             }
         }).then(function mySucces(response) {
@@ -126,7 +126,6 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
                     // console.log(err);
                 }, 100)
         })
-
     }
 
     function showHideRatings() {
@@ -301,6 +300,7 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
     $scope.takeToWriteReview = function() {
         $state.go('write-review', { id: $scope.locId });
     }
+
     $scope.provideDetails = function(data) {
         // loading(true);
         db.ref('queries/' + $scope.cityId + '/' + $scope.category + '/' + $scope.projectId).push(data).then(function() {
@@ -313,4 +313,5 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
             }, 1000);
         })
     }
+// >>>>>>> 2a07306f260e5aba5b8c075720725593f0e08825
 }])
