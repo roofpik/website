@@ -18,7 +18,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         }, 100)
     });
     // $scope.userId = 'G5FQWnOOoFcRl8oMiQ6Tub9R9Ho2'
-    console.log($scope.userId);
+    // console.log($scope.userId);
     $scope.textReviews = 0;
     $scope.nonTextReviews = 0;
     // $scope.overallExists = false;
@@ -359,7 +359,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
                                 if (inputValue == otp) {
                                     $scope.mobileVerified = true;
                                     alert('Verified Successfully');
-                                    setVerifiedReview(id.counter);
+                                    setVerifiedReview(id.counter, mobile);
 
                                 } else {
                                     swal.showInputError("Incorrect OTP");
@@ -379,11 +379,15 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         });
     }
 
-    function setVerifiedReview(i) {
+    function setVerifiedReview(i, mobile) {
+        console.log(i);
+        console.log(mobile);
         $timeout(function() {
             if ($scope.mobileVerified) {
-                db.ref('users/' + $scope.cityId + '/' + id.type + '/' + id.projectId + '/' + id.reviewId + 'verified').set('true');
                 $scope.userReviews[i].reviewVerified = true;
+                db.ref('userReviews/' + $scope.userReviews[i].projectId + '/' + $scope.userReviews[i].type +'/' + $scope.userReviews[i].reviewId + '/verified').set('true');
+                db.ref('users/' + $scope.userId + '/mobile/mobileNum').set(mobile);
+                db.ref('userRegistration/mobile/' + mobile).set($scope.userReviews[i].reviewId);
             }
 
 

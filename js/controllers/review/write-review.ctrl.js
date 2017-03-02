@@ -54,7 +54,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     if ($stateParams.id) {
         var params = $stateParams.id;
     }
-    // console.log(params);
+    console.log(params);
     // $scope.projectId = params.projectId;
     $scope.projects1 = {}; //bind project name with project ID
     $scope.projects2 = {}; //bind project name with null for autocomplete
@@ -125,6 +125,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     $scope.showMoreLess = 'Show More +';
     $scope.projectSelected = false;
     $('#textarea1').trigger('autoresize');
+    console.log(params);
 
     if (params) {
         if (params.name) {
