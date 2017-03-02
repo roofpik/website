@@ -42,7 +42,7 @@
 
 .loaderPositionCoverStories {
     left: 50%;
-    top: 300px;
+    top: 250px;
     width: 100px;
     height: 100px;
     margin: auto;
@@ -50,5 +50,23 @@
 }
 
 .wd100 {
-    width:100%;
+    width: 100%;
+}
+
+.ht40 {
+    height: 40% !important;
+}
+
+.mgtp10 {
+    margin-top: 10% !important;
+}
+
+.loadingPositionModal {
+    padding-left: 50%;
+    padding-top: 10%;
+}
+
+.loadingMessagePosition {
+    padding-left: 43%;
+    font-weight: bold;
 }
