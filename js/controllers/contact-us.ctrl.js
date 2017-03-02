@@ -2,7 +2,7 @@ app.controller('contactUsCtrl', ['$scope', '$timeout', function($scope, $timeout
 	$timeout(function() {
         myMap();
     }, 100);
-    
+    document.title = 'Contact Us';
     $scope.user = {};
 
 
