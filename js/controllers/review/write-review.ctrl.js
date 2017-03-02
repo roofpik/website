@@ -97,12 +97,8 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         } else if (index == 4) {
             $scope.review.ratings.openAndGreenAreas = rating;
         } else if (index == 5) {
-            $scope.review.ratings.electricityAndWaterSupply = rating;
-        } else if (index == 6) {
-            $scope.review.ratings.convenienceOfHouseMaids = rating;
-        } else if (index == 7) {
             $scope.review.ratings.convenienceOfParking = rating;
-        } else if (index == 8) {
+        } else if (index == 6) {
             $scope.review.ratings.infrastructure = rating;
         }
     };
