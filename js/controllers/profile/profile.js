@@ -140,9 +140,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         if ($scope.userReviews[0] == 0) {
             $scope.showReviews = true;
         } else {
-            if (overall) {
                 $scope.showReviews = false;
-            }
         }
     }
 
@@ -242,14 +240,17 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         // console.log($scope.name);
         db.ref('users/' + $scope.userId + '/' + 'fname').set($scope.name[0]);
         db.ref('users/' + $scope.userId + '/' + 'lname').set($scope.name[1]);
+        Materialize.toast("Your Name Has Been Updated", 1000, 'rounded');
     }
     $scope.blurPhoneNumber = function() {
         $scope.disablePhoneNumber = true;
         db.ref('users/' + $scope.userId + '/' + 'mobile/mobileNum').set($scope.user.phoneNumber);
+        Materialize.toast("Your Phone Number Has Been Updated", 1000, 'rounded');
     }
     $scope.blurAddress = function() {
             $scope.disableAddress = true;
             db.ref('users/' + $scope.userId + '/' + 'address/addressLine1').set($scope.user.address);
+            Materialize.toast("Your Adderss Has Been Updated", 1000, 'rounded');
         }
         // $scope.blurPwd = function() {
         //     $scope.disablePwd = true;

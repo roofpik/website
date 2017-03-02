@@ -23,7 +23,7 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
     ];
     if (parameters.category == 'locations') {
         db.ref('locations/' + $scope.cityId + '/' + $scope.locId).once('value', function(response) {
-            $timeout(function() {   
+            $timeout(function() {
                 console.log(response.val());
                 $scope.name = response.val().locationName;
                 $scope.id = response.val().locationId;
@@ -300,5 +300,17 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
 
     $scope.takeToWriteReview = function() {
         $state.go('write-review', { id: $scope.locId });
+    }
+    $scope.provideDetails = function(data) {
+        // loading(true);
+        db.ref('queries/' + $scope.cityId + '/' + $scope.category + '/' + $scope.projectId).push(data).then(function() {
+            // loading(false);
+            swal('Request Logged', 'You will receive the details in your mail', 'success');
+            $timeout(function() {
+                $scope.query = {};
+                $scope.contactForm.$setPristine();
+                $scope.contactForm.$setUntouched();
+            }, 1000);
+        })
     }
 }])
