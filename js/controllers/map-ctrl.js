@@ -294,6 +294,9 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', '$state', '$rootScope'
             $scope.projectInfoWindow = [];
             $scope.localityInfoWindow = [];
             $scope.locationInfoWindow = [];
+            $scope.listMenu = [];
+            $scope.loading = true;
+            $scope.goToPage(1);
             getMapData(event.latLng.lat(), event.latLng.lng());
         });
 

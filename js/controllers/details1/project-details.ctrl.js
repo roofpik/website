@@ -719,6 +719,12 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
     getReviews();
 
     function getReviews() {
+        $scope.fetchingReviews = true;
+        if(page_start == 0){
+            $scope.firstLoading = true;
+        } else {
+            $scope.firstLoading = false;
+        }
         console.log($scope.projectId,selectedRating, customerType, page_size, page_start)
         $http({
             url: 'http://107.23.243.89/api/GetProjectReviews_1.0',
@@ -755,7 +761,9 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
             if ($scope.projectDataFetched) {
                 // loading(false);    
             }
+            $scope.fetchingReviews = false;
         }, function myError(err) {
+            $scope.fetchingReviews = false;
             // console.log(err);
         })
     }

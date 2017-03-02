@@ -33,7 +33,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
     $stateProvider.state('about-us', {
         url: '/about-us',
-        templateUrl: 'templates/general/about-us.htm'
+        templateUrl: 'templates/general/about-us.htm',
+        controller: 'aboutUsCtrl'
     });
 
     $stateProvider.state('projects', {
