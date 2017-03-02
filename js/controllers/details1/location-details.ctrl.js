@@ -12,6 +12,7 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
     $scope.type = parameters.category;
     $scope.allReviews = {};
     $scope.relatedProjects = {};
+    $scope.path = ["Gurgaon", $scope.type]
     console.log($scope.locId);
     $scope.ratingSummaryParams = [
         { id: 'security', id1: 'security1', name: 'Security' },
@@ -22,10 +23,11 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
     ];
     if (parameters.category == 'locations') {
         db.ref('locations/' + $scope.cityId + '/' + $scope.locId).once('value', function(response) {
-            $timeout(function() {
+            $timeout(function() {   
                 console.log(response.val());
                 $scope.name = response.val().locationName;
                 $scope.id = response.val().locationId;
+                $scope.path.push($scope.name);
                 document.title = $scope.name;
             }, 0);
         })
@@ -37,6 +39,7 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
                 console.log(response.val());
                 $scope.name = response.val().localityName;
                 $scope.id = response.val().localityId;
+                $scope.path.push($scope.name)
                 document.title = $scope.name;
                 // $scope.coverImage = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/cghs/-KbT8haHPqV7gTy55f-x/images/coverPhoto/' + $scope.location.images.coverPhoto.url + '-m.jpg';
                 // generateImageList($scope.location.images);
@@ -136,10 +139,8 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
 
     function showHideReviews() {
         if ($scope.i == 0) {
-            console.log('hello')
             $scope.hasReviews = false;
         } else {
-            console.log('hello')
             $scope.hasReviews = true;
         }
     }
