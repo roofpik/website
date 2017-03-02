@@ -230,26 +230,26 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         }
         if ($scope.selectedProject.type == 'residential') {
             newKey = db.ref('websiteReviews/' + $scope.cityId + '/residential/' + $scope.selectedProject.id).push().key;
-            $scope.userReviewData.projectId = $scope.selectedProject.id;
-            $scope.userReviewData.projectName = $scope.selectedProject.name;
+            $scope.userReviewData.id = $scope.selectedProject.id;
+            $scope.userReviewData.name = $scope.selectedProject.name;
             reviewPath = 'websiteReviews/' + $scope.cityId + '/residential/' + $scope.selectedProject.id + '/' + newKey;
             userReviewPath = 'userReviews/' + $scope.review.userId + '/residential/' + newKey;
         } else if ($scope.selectedProject.type == 'location') {
             newKey = db.ref('websiteReviews/' + $scope.cityId + '/location/' + $scope.selectedProject.id).push().key;
-            $scope.userReviewData.projectId = $scope.selectedProject.id;
-            $scope.userReviewData.projectName = $scope.selectedProject.name;
+            $scope.userReviewData.id = $scope.selectedProject.id;
+            $scope.userReviewData.name = $scope.selectedProject.name;
             reviewPath = 'websiteReviews/' + $scope.cityId + '/location/' + $scope.selectedProject.id + '/' + newKey;
             userReviewPath = 'userReviews/' + $scope.review.userId + '/location/' + newKey;
         } else if ($scope.selectedProject.type == 'locality') {
             newKey = db.ref('websiteReviews/' + $scope.cityId + '/locality/' + $scope.selectedProject.id).push().key;
-            $scope.userReviewData.projectId = $scope.selectedProject.id;
-            $scope.userReviewData.projectName = $scope.selectedProject.name;
+            $scope.userReviewData.id = $scope.selectedProject.id;
+            $scope.userReviewData.name = $scope.selectedProject.name;
             reviewPath = 'websiteReviews/' + $scope.cityId + '/locality/' + $scope.selectedProject.id + '/' + newKey;
             userReviewPath = 'userReviews/' + $scope.review.userId + '/locality/' + newKey;
         } else if ($scope.selectedProject.type == 'cghs') {
             newKey = db.ref('websiteReviews/' + $scope.cityId + '/cghs/' + $scope.selectedProject.id).push().key;
-            $scope.userReviewData.projectId = $scope.selectedProject.id;
-            $scope.userReviewData.projectName = $scope.selectedProject.name;
+            $scope.userReviewData.id = $scope.selectedProject.id;
+            $scope.userReviewData.name = $scope.selectedProject.name;
             reviewPath = 'websiteReviews/' + $scope.cityId + '/cghs/' + $scope.selectedProject.id + '/' + newKey;
             userReviewPath = 'userReviews/' + $scope.review.userId + '/cghs/' + newKey;
         }
@@ -286,6 +286,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                 if ($scope.review.couponApplied) {
                     parameter += '&coupon=' + $scope.review.couponCode;
                 }
+                console.log(parameter);
                 $http({
                     url: 'http://107.23.243.89/api/SendMail_1.0',
                     method: 'GET',
@@ -296,11 +297,13 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                     console.log(response);
                     $timeout(function() {
                         $scope.step = 5;
-                    }, 0)
+                    }, 1000)
                 }, function myError(err) {
-                    $scope.step = 5;
+                    $timeout(function() {
+                        $scope.step = 5;
+                    }, 1000)
                 })
-            }, 500);
+            }, 0);
         })
     }
 
@@ -414,7 +417,8 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     }
 
     $scope.submitWithoutVerification = function() {
-        console.log($scope.review);
+        // console.log($scope.review);
+        $scope.step = 4;
         $scope.review.couponApplied = false;
         $scope.review.verified = false;
         $scope.loadingMessage = 'Submitting review...'
