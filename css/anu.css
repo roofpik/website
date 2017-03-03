@@ -53,21 +53,18 @@
     width: 100%;
 }
 
-.ht40 {
-    height: 350px !important;
-}
 
 .mgtp10 {
     margin-top: 10% !important;
 }
-
+.ht40{height: 265px !important;}
 .loadingPositionModal {
-    padding-left: 50%;
-    padding-top: 10%;
+    /*padding-left: 50%;*/
+    padding-top: 70px;
 }
 
 .loadingMessagePosition {
-    padding-left: 43%;
+    /*padding-left: 43%;*/
     font-weight: bold;
 }
 

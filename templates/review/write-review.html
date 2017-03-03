@@ -115,7 +115,7 @@
                         </form>
                     </div>
                 </div>
-                <p ng-click="showMoreFn()" class="alignc" style="cursor: pointer" ng-class="showMore?'roofGrey': 'roofGreen'"><b>{{showMoreLess}}</b></p>
+                <p ng-click="showMoreFn()" class="alignc pointer" ng-class="showMore?'roofGrey': 'roofGreen'"><b>{{showMoreLess}}</b></p>
                 <div ng-show="showMore" class="mgt20">
                     <div class="row mgbn" ng-repeat="item in ratingParams">
                         <div class="col left ft13 pdb10">{{item.name}}</div>
@@ -124,40 +124,40 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="row mgb10">
-                        <div class="col left ft13 pdb10">Good Schools?</div>
-                        <div class="col s12 grey-text">
+                    <div class="row mgb10 mgt20">
+                        <div class="col left ft13">Good Schools?</div>
+                        <div class="col right pdan grey-text">
                             <div class="col right">
                                 <input class="with-gap" name="group2" type="radio" id="schoolsNo" ng-model="review.schoolsAvailable" value="No" />
                                 <label for="schoolsNo">No</label>
                             </div>
-                            <div class="col right">
+                            <div class="col xspdn right">
                                 <input class="with-gap" name="group2" type="radio" id="schoolsYes" ng-model="review.schoolsAvailable" value="Yes" />
                                 <label for="schoolsYes">Yes</label>
                             </div>
                         </div>
                     </div>
                     <div class="row mgb10">
-                        <div class="col left ft13 pdb10">Good Markets?</div>
-                        <div class="col s12 grey-text">
+                        <div class="col left ft13">Good Markets?</div>
+                        <div class="col right pdan grey-text">
                             <div class="col right">
                                 <input class="with-gap" name="group3" type="radio" id="marketsNo" ng-model="review.marketsAvailable" value="No" />
                                 <label for="marketsNo">No</label>
                             </div>
-                            <div class="col right">
+                            <div class="col xspdn right">
                                 <input class="with-gap" name="group3" type="radio" id="marketsYes" ng-model="review.marketsAvailable" value="Yes" />
                                 <label for="marketsYes">Yes</label>
                             </div>
                         </div>
                     </div>
                     <div class="row mgb10">
-                        <div class="col left ft13 pdb10">Reputed Hospitals?</div>
-                        <div class="col s12 grey-text">
+                        <div class="col left ft13">Reputed Hospitals?</div>
+                        <div class="col right pdan grey-text">
                             <div class="col right">
                                 <input class="with-gap" name="group4" type="radio" id="hospitalsNo" ng-model="review.hospitalsAvailable" value="No" />
                                 <label for="hospitalsNo">No</label>
                             </div>
-                            <div class="col right">
+                            <div class="col xspdn right">
                                 <input class="with-gap" name="group4" type="radio" id="hospitalsYes" ng-model="review.hospitalsAvailable" value="Yes" />
                                 <label for="hospitalsYes">Yes</label>
                             </div>
@@ -165,12 +165,12 @@
                     </div>
                     <div class="row mgb10">
                         <div class="col left ft13 pdb10">Daily Need Items?</div>
-                        <div class="col s12 grey-text">
+                        <div class="col right pdan grey-text">
                             <div class="col right">
                                 <input class="with-gap" name="group5" type="radio" id="dailyNeedsNo" ng-model="review.dailyNeedsAvailable" value="No" />
                                 <label for="dailyNeedsNo">No</label>
                             </div>
-                            <div class="col right">
+                            <div class="col xspdn right">
                                 <input class="with-gap" name="group5" type="radio" id="dailyNeedsYes" ng-model="review.dailyNeedsAvailable" value="Yes" />
                                 <label for="dailyNeedsYes">Yes</label>
                             </div>
@@ -178,12 +178,12 @@
                     </div>
                     <div class="row mgb10">
                         <div class="col left ft13 pdb10">Public Transport?</div>
-                        <div class="col s12 grey-text">
+                        <div class="col right pdan grey-text">
                             <div class="col right">
                                 <input class="with-gap" name="group6" type="radio" id="transportNo" ng-model="review.transportAvailable" value="No" />
                                 <label for="transportNo">No</label>
                             </div>
-                            <div class="col right">
+                            <div class="col xspdn right">
                                 <input class="with-gap" name="group6" type="radio" id="transportYes" ng-model="review.transportAvailable" value="Yes" />
                                 <label for="transportYes">Yes</label>
                             </div>
@@ -191,12 +191,12 @@
                     </div>
                     <div class="row mgb10">
                         <div class="col left ft13 pdb10">Apartment Layout Efficient?</div>
-                        <div class="col s12 grey-text">
+                        <div class="col right pdan grey-text">
                             <div class="col right">
                                 <input class="with-gap" name="group7" type="radio" id="layoutNo" ng-model="review.layoutEfficient" value="No" />
                                 <label for="layoutNo">No</label>
                             </div>
-                            <div class="col right">
+                            <div class="col xspdn right">
                                 <input class="with-gap" name="group7" type="radio" id="layoutYes" ng-model="review.layoutEfficient" value="Yes" />
                                 <label for="layoutYes">Yes</label>
                             </div>
@@ -204,12 +204,12 @@
                     </div>
                     <div class="row mgb10">
                         <div class="col left ft13 pdb10">24x7 Electricity?</div>
-                        <div class="col s12 grey-text">
+                        <div class="col right pdan grey-text">
                             <div class="col right">
                                 <input class="with-gap" name="group8" type="radio" id="electricityNo" ng-model="review.electricityAvailable" value="No" />
                                 <label for="electricityNo">No</label>
                             </div>
-                            <div class="col right">
+                            <div class="col xspdn right">
                                 <input class="with-gap" name="group8" type="radio" id="electricityYes" ng-model="review.electricityAvailable" value="Yes" />
                                 <label for="electricityYes">Yes</label>
                             </div>
@@ -217,12 +217,12 @@
                     </div>
                     <div class="row mgb10">
                         <div class="col left ft13 pdb10">Regular/Clean Water Supply?</div>
-                        <div class="col s12 grey-text">
+                        <div class="col right pdan grey-text">
                             <div class="col right">
                                 <input class="with-gap" name="group9" type="radio" id="waterNo" ng-model="review.waterSupplyAvailable" value="No" />
                                 <label for="waterNo">No</label>
                             </div>
-                            <div class="col right">
+                            <div class="col xspdn right">
                                 <input class="with-gap" name="group9" type="radio" id="waterYes" ng-model="review.waterSupplyAvailable" value="Yes" />
                                 <label for="waterYes">Yes</label>
                             </div>
@@ -252,19 +252,20 @@
                 <b>Review Anonymously:</b> Our hawk-eyed moderators have a thing against reviews with personal information such as names, phone numbers, emails, or other contact details. Make sure your review doesn’t include such information.</p> -->
         </div>
     </div>
-    <div id="mobile-verification-modal" class="modal modal-fixed-footer ht40 mgtp10">
+    <div id="mobile-verification-modal" class="modal mgtp10 overhdn ht40">
         <div class="modal-content">
-            <div class="row mgbn mgt20" ng-show="step == 1">
+            <div class="row mgbn" ng-show="step == 1">
                 <div class="col s12">
-                    <h5>Enter your 10 digit mobile number</h5>
+                    <h5 class="ft15 b mgtn mgb10 pdb10 bdbtm">Enter your 10 digit mobile number</h5>
                     <p>We will send you a verification code.</p>
                 </div>
                 <div class="input-field col s12">
-                    <input name="userMobile" id="mobile-number" type="number" class="validate" ng-model="mobileNum" ng-minlength="10" ng-maxlength="10" required>
-                    <p class="red-text" ng-show="numberError">{{numberError}}</p>
+                    <input name="userMobile" id="mobile-number" type="number" class="validate mgb10" ng-model="mobileNum" ng-minlength="10" ng-maxlength="10" required>
+                    <label for="mobile-number">Enter your mobile number</label>
+                    <div class="red-text" ng-show="numberError">{{numberError}}</div>
                 </div>
             </div>
-            <div class="row mgbn mgt20" ng-show="step == 2">
+            <div class="row mgbn center" ng-show="step == 2">
                 <div class="loadingPositionModal">
                     <div class="preloader-wrapper small active">
                         <div class="spinner-layer spinner-blue-only">
@@ -282,17 +283,18 @@
                 </div>
                 <p class="loadingMessagePosition">{{loadingMessage}}</p>
             </div>
-            <div class="row mgbn mgt20" ng-show="step == 3">
+            <div class="row mgbn" ng-show="step == 3">
                 <div class="col s12">
-                    <h5>OTP sent successfully</h5>
-                    <p>A verification code has been sent to your registered mobile {{userMobileNum[0]}}xxxxxxxx{{userMobileNum[9]}}and email address {{splitEmail[0][0]}}xxx@{{splitEmail[1]}}</p>
+                    <h5 class="ft15 b mgtn mgb10 pdb10 bdbtm">OTP sent successfully</h5>
+                    <div>A verification code has been sent to your registered mobile {{userMobileNum[0]}}xxxxxxxx{{userMobileNum[9]}}and email address {{splitEmail[0][0]}}xxx@{{splitEmail[1]}}</div>
                 </div>
                 <div class="input-field col s12">
-                    <input name="userOtp" id="user-otp" type="number" class="validate" ng-model="optNum" ng-minlength="4" ng-maxlength="4" required>
-                    <p ng-show="incorrectOtp">Incorrect OTP</p>
+                    <input name="userOtp" id="user-otp" type="number" class="validate mgb10" ng-model="optNum" ng-minlength="4" ng-maxlength="4" required>
+                    <label for="user-otp">Type your OTP here</label>
+                    <div class="red-text" ng-show="incorrectOtp">Incorrect OTP</div>
                 </div>
             </div>
-            <div class="row mgbn mgt20" ng-show="step == 4">
+            <div class="row mgbn center" ng-show="step == 4">
                 <div class="loadingPositionModal">
                     <div class="preloader-wrapper small active">
                         <div class="spinner-layer spinner-blue-only">
@@ -308,19 +310,23 @@
                         </div>
                     </div>
                 </div>
-                <p class="loadingMessagePosition">Submitting Review...</p>
+                <div class="loadingMessagePosition">Submitting Review...</div>
             </div>
-            <div class="row mgbn mgt20" ng-show="step == 5">
-                <div>
-                    <p><b>Your review has been successfully submitted.</b></p>
+            <div class="row mgbn" ng-show="step == 5">
+                <div class="col s12">
+                  <h5 class="ft15 b mgtn mgb10 pdb10 bdbtm">  Your review has been successfully submitted.</h5>
+                </div>
+                <div class="col s12 mgt20 center">
+                    <i class="material-icons green-text medium">check_circle</i>
+
                 </div>
             </div>
         </div>
-        <div class="modal-footer">
-            <button ng-show="step == 1" class="modal-action blue btn-flat white-text" ng-click="sendOtp(mobileNum)">Send OTP</button>
-            <button ng-show="(step == 1) && !couponCodeSuccessful" class="modal-action grey btn-flat white-text mgr10" ng-click="submitWithoutVerification()">Submit without verification</button>
+        <div class="modal-footer fixftm">
+            <button ng-show="step == 1" class="modal-action blue btn-flat white-text mgr10" ng-click="sendOtp(mobileNum)">Send OTP</button>
+            <button ng-show="(step == 1) && !couponCodeSuccessful" class="modal-action grey btn-flat white-text mgr10" ng-click="submitWithoutVerification()">Submit unverified </button>
             <button ng-show="step == 3" class="modal-action blue btn-flat white-text mgr10" ng-click="verifyOtp(optNum)">Verify OTP</button>
-            <button ng-show="step == 5" class="modal-action modal-close blue btn-flat white-text mgr10" ng-click="refreshPage()">OK</button>
+            <button ng-show="step == 5" class="modal-action modal-close blue btn-flat wd90 white-text mgr10" ng-click="refreshPage()">OK</button>
         </div>
     </div>
 </div>
