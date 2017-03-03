@@ -775,7 +775,8 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
             url: 'http://35.154.60.19/api/GetReviewDetails_1.0',
             method: 'GET',
             params: {
-                id: $scope.reviews[index].reviewId
+                id: $scope.reviews[index].reviewId,
+                type: $scope.category
             }
         }).then(function mySucces(response) {
             // console.log(response);
@@ -882,7 +883,7 @@ app.controller('galleryCtrl', ['$scope', '$timeout', function($scope, $timeout) 
 
             $('.trigger_gallery').on('click', function() {
                 // console.log('clicked');
-                gallery.startImageLightbox();
+                // gallery.startImageLightbox();
             });
             $scope.showGallery = true;
 

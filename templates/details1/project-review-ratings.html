@@ -208,7 +208,7 @@
                         <img class="imgcir mgt10" src="images/general/noImage.png">
                     </div>
                     <div class="col">
-                        <p><b> {{review.userName}}</b> | {{review.createdDate | date:'MMM dd, yy'}}</p>
+                        <p><b><span ng-show="review.userName == 'NA' || review.anonymous">Anonymous</span><span ng-hide="review.userName == 'NA' || review.anonymous">{{review.userName}}</span></b> | {{review.createdDate | date:'MMM dd, yy'}}</p>
                         <p class="grey-text review ft20i mgbn mgtmn">
                             <i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < review.overallRating? 'blue-text':'normal'">star</i>
                         </p>

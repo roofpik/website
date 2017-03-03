@@ -1348,6 +1348,7 @@ footer.page-footer {
     color: #fff;
     padding: 4px 10px;
     border-radius: 3px;
+    cursor:pointer;
 }
 
 .filterList {

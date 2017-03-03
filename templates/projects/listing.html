@@ -169,8 +169,11 @@
                             </div>
                         </a>
                     </div>
+                    <div ng-show="hasNoProjects" class="card pda10 center ft24 blue-text">
+                        <p><b>No matching properties available</b></p>
+                    </div>
                 </div>
-                <div class="row" ng-hide="loading">
+                <div class="row" ng-hide="loading|| hasNoProjects">
                     <ul class="pagination">
                         <li ng-class="currentPage == 1? 'disabled' : 'waves-effect'" ng-click="changePage(1)"><a href=""><i class="material-icons">chevron_left</i></a></li>
                         <li ng-class="page == currentPage? 'active' : 'waves-effect'" ng-repeat="page in pages" ng-click="goToPage(page)"><a href="">{{page}}</a></li>
