@@ -14,7 +14,7 @@
                         <div class="input-field card col s12 ht45 pdan bod-right rdsan reletive">
                             <span class="inpspn">Find :</span>
                             <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompletenear inp_pdw mgbn" ng-model="categorySearched">
-                            <!-- <img src="https://media.giphy.com/media/dWZ8hwnTnOX1m/200.gif" class="loading-icon" /> -->
+                            <!-- <img src="https://bottlevoice.com/ja/images/loading256.gif" class="loading-icon" /> -->
                             <div class="search-results" ng-show="showSearch">
                                 <ul class="collection homecoll">
                                     <li ng-repeat="item in categorySearch| filter: categorySearched" class=" collection-item avatar" ng-click="selectCategory(item)">
@@ -33,7 +33,7 @@
                         <div class="input-field card col s12 ht45 pdan rdsan">
                             <span class="inpspn">Near :</span>
                             <input placeholder="Enter a Destination" class="autocompletenear inp_pdw mgbn" id="locality-search" ng-model="locationSearched" ng-change="searchLocation()">
-                            <img src="http://www.ladbrokes.com/bingo/christmas-cracker/images/loadingAnimation.gif" class="loading-icon" ng-show="searchingLocation" />
+                            <img src="https://bottlevoice.com/ja/images/loading256.gif" class="loading-icon" ng-show="searchingLocation" />
                             <div class="search-results" ng-show="showSearch1">
                                 <ul class="collection homecoll">
                                     <li ng-repeat="item in locations | filter:locationSearched" class=" collection-item avatar" ng-click="selectLocation(item)">
@@ -50,7 +50,7 @@
                         <div class="input-field card col s12 ht45 pdan reletive rdsan">
                             <span class="inpspn">Find :</span>
                             <input type="text" placeholder="Apartments, Commercials, PG" id="name-search" class="autocompletenear inp_pdw mgbn" ng-model="searchedText" ng-change="getSearchData()">
-                            <img src="http://www.ladbrokes.com/bingo/christmas-cracker/images/loadingAnimation.gif" class="loading-icon" ng-show="searchingName" />
+                            <img src="https://bottlevoice.com/ja/images/loading256.gif" class="loading-icon" ng-show="searchingName" />
                             <div class="search-results" ng-show="showSearch2">
                                 <ul class="collection homecoll">
                                     <li ng-repeat="item in searchByNameData |filter:searchedText" class=" collection-item avatar" ng-click="selectSearchByName(item)">
