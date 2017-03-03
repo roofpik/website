@@ -77,7 +77,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', '$state', '$rootScope'
             }
             // console.log(encodeParams(data));
         $http({
-            // url: 'http://107.23.243.89/api/GetMapData_1.0',
+            // url: 'http://35.154.60.19/api/GetMapData_1.0',
             url: 'http://35.154.60.19/api/GetMapData_1.0',
             method: 'GET',
             params: {
@@ -407,7 +407,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', '$state', '$rootScope'
             }
             $scope.fetchingResults = true;
             $http({
-                url: 'http://107.23.243.89/api/GetByName_1.0',
+                url: 'http://35.154.60.19/api/GetByName_1.0',
                 method: 'GET',
                 params: {
                     args: encodeParams(data)

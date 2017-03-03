@@ -1,6 +1,15 @@
 app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$state', function($scope, $http, $timeout, $stateParams, $state) {
-    var parameters = decodeParams($stateParams.p);
+    console.log($stateParams.p);
+    if($stateParams.p){
+        var parameters = decodeParams($stateParams.p);
+    } else {
+        var parameters = {
+            vertical: 'residential',
+            category: 'all'
+        }
+    }
     // console.log(parameters);
+    document.title = "Projects";
     $scope.loading = true;
     $scope.filters = {
         style: null,
@@ -174,7 +183,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
         data.page_size = page_size;
         console.log(data);
         $http({
-            url: 'http://107.23.243.89/api/GetListing_1.0',
+            url: 'http://35.154.60.19/api/GetListing_1.0',
             method: 'GET',
             params: {
                 args: encodeParams(data)
@@ -183,6 +192,11 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
             console.log(response);
             $scope.projectList = [];
             totalProjects = response.data.hits;
+            if(totalProjects == 0){
+                $scope.hasNoProjects = true;
+            } else {
+                $scope.hasNoProjects = false;
+            }
             if ($scope.pages.length == 0) {
                 var max = 0;
                 if (totalProjects / page_size > parseInt(totalProjects / page_size)) {

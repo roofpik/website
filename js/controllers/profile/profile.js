@@ -148,7 +148,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         console.log($scope.userReviews[i]);
         console.log(Id);
         $http({
-            url: 'http://107.23.243.89/api/GetReviewDetails_1.0',
+            url: 'http://35.154.60.19/api/GetReviewDetails_1.0',
             method: 'GET',
             params: {
                 id: Id,
@@ -332,7 +332,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
             otp: otp
         }
         $http({
-            url: 'http://107.23.243.89/api/SendOTP_1.0',
+            url: 'http://35.154.60.19/api/SendOTP_1.0',
             method: 'GET',
             params: {
                 args: encodeParams(data)

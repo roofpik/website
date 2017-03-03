@@ -1348,6 +1348,7 @@ footer.page-footer {
     color: #fff;
     padding: 4px 10px;
     border-radius: 3px;
+    cursor:pointer;
 }
 
 .filterList {
@@ -1736,11 +1737,11 @@ i.left {
 
 .loading-icon {
     position: absolute !important;
-    right: 10px;
-    top: 10px;
+    right: 8px;
+    top: 8px;
     z-index: 9 !important;
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
 }
 
 .coverimg {

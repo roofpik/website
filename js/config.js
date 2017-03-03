@@ -71,53 +71,54 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         }
     });
 
-    $stateProvider.state('cghs', {
-        url: '/cghs?bhk&price_range&area_range&location&locality&propertyType',
-        templateUrl: 'templates/projects/cghs.html',
-        controller: 'cghsCtrl'
-    });
+    // $stateProvider.state('cghs', {
+    //     url: '/cghs?bhk&price_range&area_range&location&locality&propertyType',
+    //     templateUrl: 'templates/projects/cghs.html',
+    //     controller: 'cghsCtrl'
+    // });
 
-    $stateProvider.state('commercial-details', {
-        url: '/commercial-details',
-        views: {
-            '': {
-                templateUrl: 'templates/projects/commercial-details.html',
-                controller: 'commercialDetailsCtrl'
-            },
-            'reviewRating@commercial-details': {
-                templateUrl: 'templates/projects/commercial-review-ratings.html',
-                controller: 'commercialReviewRatingCtrl'
-            }
-        }
-    });
+    // $stateProvider.state('commercial-details', {
+    //     url: '/commercial-details',
+    //     views: {
+    //         '': {
+    //             templateUrl: 'templates/projects/commercial-details.html',
+    //             controller: 'commercialDetailsCtrl'
+    //         },
+    //         'reviewRating@commercial-details': {
+    //             templateUrl: 'templates/projects/commercial-review-ratings.html',
+    //             controller: 'commercialReviewRatingCtrl'
+    //         }
+    //     }
+    // });
 
-    $stateProvider.state('co-working-details', {
-        url: '/co-working-details',
-        views: {
-            '': {
-                templateUrl: 'templates/projects/co-working-details.html',
-                controller: 'coWorkingDetailsCtrl'
-            },
-            'reviewRating@co-working-details': {
-                templateUrl: 'templates/projects/co-working-review-ratings.html',
-                controller: 'coWorkingReviewRatingCtrl'
-            }
-        }
-    });
+    // $stateProvider.state('co-working-details', {
+    //     url: '/co-working-details',
+    //     views: {
+    //         '': {
+    //             templateUrl: 'templates/projects/co-working-details.html',
+    //             controller: 'coWorkingDetailsCtrl'
+    //         },
+    //         'reviewRating@co-working-details': {
+    //             templateUrl: 'templates/projects/co-working-review-ratings.html',
+    //             controller: 'coWorkingReviewRatingCtrl'
+    //         }
+    //     }
+    // });
 
-    $stateProvider.state('pg-details', {
-        url: '/pg-details',
-        views: {
-            '': {
-                templateUrl: 'templates/projects/pg-details.html',
-                controller: 'pgDetailsCtrl'
-            },
-            'reviewRating@pg-details': {
-                templateUrl: 'templates/projects/pg-review-ratings.html',
-                controller: 'pgReviewRatingCtrl'
-            }
-        }
-    });
+    // $stateProvider.state('pg-details', {
+    //     url: '/pg-details',
+    //     views: {
+    //         '': {
+    //             templateUrl: 'templates/projects/pg-details.html',
+    //             controller: 'pgDetailsCtrl'
+    //         },
+    //         'reviewRating@pg-details': {
+    //             templateUrl: 'templates/projects/pg-review-ratings.html',
+    //             controller: 'pgReviewRatingCtrl'
+    //         }
+    //     }
+    // });
+
 
     $stateProvider.state('blogs', {
         url: '/blogs/:city/:cityId/:from',
@@ -259,11 +260,11 @@ $stateProvider.state('write-review', {
         templateUrl: 'templates/projects/listing.html',
         controller: 'listCtrl'
     })
-    $stateProvider.state('listing', {
-        url: '/listing?parameters',
-        templateUrl: 'templates/details/listing.html',
-        controller: 'listingCtrl'
-    })
+    // $stateProvider.state('listing', {
+    //     url: '/listing?parameters',
+    //     templateUrl: 'templates/details/listing.html',
+    //     controller: 'listingCtrl'
+    // })
 
 $urlRouterProvider.otherwise('/home');
 }]);

@@ -653,7 +653,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
 
 
     $http({
-        url: 'http://107.23.243.89/api/GetReviewSummary_1.0',
+        url: 'http://35.154.60.19/api/GetReviewSummary_1.0',
         method: 'GET',
         params: {
             id: $scope.projectId
@@ -728,7 +728,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
         }
         console.log($scope.projectId,selectedRating, customerType, page_size, page_start)
         $http({
-            url: 'http://107.23.243.89/api/GetProjectReviews_1.0',
+            url: 'http://35.154.60.19/api/GetProjectReviews_1.0',
             method: 'GET',
             params: {
                 pid: $scope.projectId,
@@ -776,7 +776,8 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
             url: 'http://35.154.60.19/api/GetReviewDetails_1.0',
             method: 'GET',
             params: {
-                id: $scope.reviews[index].reviewId
+                id: $scope.reviews[index].reviewId,
+                type: $scope.category
             }
         }).then(function mySucces(response) {
             // console.log(response);
@@ -884,7 +885,7 @@ app.controller('galleryCtrl', ['$scope', '$timeout', function($scope, $timeout) 
 
             $('.trigger_gallery').on('click', function() {
                 // console.log('clicked');
-                gallery.startImageLightbox();
+                // gallery.startImageLightbox();
             });
             $scope.showGallery = true;
 

@@ -150,7 +150,7 @@ app.controller('searchCtrl', ['$scope', '$http', '$state', '$timeout', '$rootSco
         finalParam = btoa(parameter + name);
         console.log(atob(finalParam));
         $http({
-            url: 'http://107.23.243.89/api/GetLocations_1.0',
+            url: 'http://35.154.60.19/api/GetLocations_1.0',
             method: 'GET',
             params: {
                 args: finalParam
@@ -261,7 +261,7 @@ app.controller('searchCtrl', ['$scope', '$http', '$state', '$timeout', '$rootSco
                  name: $scope.searchedText
              }
              $http({
-                 url: 'http://107.23.243.89/api/GetByName_1.0',
+                 url: 'http://35.154.60.19/api/GetByName_1.0',
                  method: 'GET',
                  params: {
                      args: encodeParams(data)

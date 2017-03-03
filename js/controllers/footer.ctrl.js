@@ -100,15 +100,4 @@ app.controller('footerCtrl', ['$scope', '$timeout', '$state', function($scope, $
     //     }
     // }
 
-
-
-    $scope.goToListPage = function(){
-        var params = {
-            vertical: 'residential',
-            category: 'all'
-        }
-        return '/#/list?p='+encodeParams(params);
-        // $state.go('list', {p: encodeParams(params)});
-    }
-
 }]);

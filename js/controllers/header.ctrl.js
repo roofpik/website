@@ -43,7 +43,7 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
 
     function fetchProjects() {
         $http({
-            url: 'http://107.23.243.89/api/GetResidential_1.0',
+            url: 'http://35.154.60.19/api/GetResidential_1.0',
             method: 'GET',
             params: {
                 style: $scope.filters.style,
@@ -93,7 +93,7 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
         $scope.projectList = [];
         if ($scope.enteredText.length >= 2) {
             $http({
-                url: 'http://107.23.243.89/api/GetResidential_1.0',
+                url: 'http://35.154.60.19/api/GetResidential_1.0',
                 method: 'GET',
                 params: {
                     details_name: $scope.enteredText
