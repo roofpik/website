@@ -68,6 +68,10 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
                 templateUrl: 'templates/details1/project-review-ratings.html',
                 controller: 'locationReviewRatingCtrl'
             }
+            // 'relatedProjects@location-details':{
+            //     templateUrl: 'templates/details1/related-projects.html',
+            //     contoller: 'relatedProjectsCtrl'
+            // }
         }
     });
 

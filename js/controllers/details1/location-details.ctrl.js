@@ -9,7 +9,7 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
     $scope.allReviews = {};
     $scope.relatedProjects = {};
     $scope.path = ["Gurgaon", $scope.type]
-    if(parameters.category == 'locality'){
+    if (parameters.category == 'locality') {
         $scope.category = 'locality';
     } else {
         $scope.category = 'location';
@@ -54,8 +54,8 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
         })
     }
 
-    $scope.goToWriteReview = function(){
-        $state.go('write-review', { id: $scope.id, n: btoa(encodeURIComponent(document.title)), t:btoa($scope.category)});
+    $scope.goToWriteReview = function() {
+        $state.go('write-review', { id: $scope.id, n: btoa(encodeURIComponent(document.title)), t: btoa($scope.category) });
     }
 }])
 
@@ -86,11 +86,81 @@ app.controller('locationReviewRatingCtrl', ['$scope', '$timeout', '$stateParams'
         { id: 'infrastructure', id1: 'infrastructure1', name: 'Infrastructure' }
     ];
 
-    if(parameters.category == 'locality'){
+    if (parameters.category == 'locality') {
         $scope.category = 'locality';
     } else {
         $scope.category = 'location';
     }
+
+    // getRelatedProjects();
+
+    function getRelatedProjects() {
+        console.log($scope.locId);
+        var data = {
+            locationId: $scope.locId,
+            category: 'all',
+            vertical: 'residential',
+            page_size: 100
+        }
+        console.log(encodeParams(data));
+        $http({
+            url: 'http://35.154.60.19/api/GetListing_1.0',
+            method: 'GET',
+            params: {
+                args: encodeParams(data)
+            }
+        }).then(function mySucces(response) {
+            console.log(response);
+            var i = 0;
+            for (key in response.data.details) {
+                $scope.relatedProjects[i] = {};
+                $scope.relatedProjects[i].name = response.data.details[key].name;
+                $scope.relatedProjects[i].id = response.data.details[key].id;
+                $scope.relatedProjects[i].address = response.data.details[key].address;
+                $scope.relatedProjects[i].overallRating = response.data.details[key].rating;
+                $scope.relatedProjects[i].type = response.data.details[key].type;
+                $scope.relatedProjects[i].coverImage = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/' + $scope.relatedProjects[i].type + '/' + $scope.relatedProjects[i].id + '/images/coverPhoto/' + response.data.details[key].cover + '-s.jpg';
+                i++;
+            }
+            console.log($scope.relatedProjects);
+        })
+        $scope.loading = false;
+        if (Object.keys($scope.relatedProjects).length == 0) {
+            $scope.hideList = false;
+        }
+        // $scope.loading = false;
+    }
+
+    // $scope.test=function(){
+    //     alert(1);
+    // }
+    // $scope.getRedirectionString = function(id, type) {
+    //     console.log(id, type);
+    //     var data = {
+    //         projectId: id,
+    //         category: type
+    //     }
+    //     return '../#/project-details/' + encodeParams(data);
+    // }
+
+
+    // $scope.goToProjectsPage = function(key) {
+    //     alert(key);
+    //     return;
+    //     console.log(key)
+    //     if (key.type == 'residential') {
+    //         param = {
+    //             projectId: key.id
+    //         }
+    //         $state.go('project-details', { p: encodeParams(param) });
+    //     } else if (key.type == 'cghs') {
+    //         param = {
+    //             projectId: key.id,
+    //             category: 'cghs'
+    //         }
+    //         $state.go('project-details', { p: encodeParams(param) });
+    //     }
+    // }
 
 
     $http({
@@ -139,23 +209,23 @@ app.controller('locationReviewRatingCtrl', ['$scope', '$timeout', '$stateParams'
         $("#averageStar").css("width", ($scope.reviewObject.numbers.twoStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
         $("#badStar").css("width", ($scope.reviewObject.numbers.oneStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
 
-        $scope.gsp = parseFloat(($scope.reviewObject.yes_no.goodSchools.yes / ($scope.reviewObject.yes_no.goodSchools.yes + $scope.reviewObject.yes_no.goodSchools.no + $scope.reviewObject.yes_no.goodSchools['not sure']))*100).toFixed(2)+'%';
-        $scope.gmp = parseFloat(($scope.reviewObject.yes_no.markets.yes / ($scope.reviewObject.yes_no.markets.yes + $scope.reviewObject.yes_no.markets.no + $scope.reviewObject.yes_no.markets['not sure']))*100).toFixed(2)+'%';
-        $scope.rhp = parseFloat(($scope.reviewObject.yes_no.goodHospitals.yes / ($scope.reviewObject.yes_no.goodHospitals.yes + $scope.reviewObject.yes_no.goodHospitals.no + $scope.reviewObject.yes_no.goodSchools['not sure']))*100).toFixed(2)+'%';
-        $scope.dnip = parseFloat(($scope.reviewObject.yes_no.dailyNeedItems.yes / ($scope.reviewObject.yes_no.dailyNeedItems.yes + $scope.reviewObject.yes_no.dailyNeedItems.no + $scope.reviewObject.yes_no.goodSchools['not sure']))*100).toFixed(2)+'%';
-        $scope.ptp = parseFloat(($scope.reviewObject.yes_no.easyAccessToPublicTransport.yes / ($scope.reviewObject.yes_no.easyAccessToPublicTransport.yes + $scope.reviewObject.yes_no.easyAccessToPublicTransport.no + $scope.reviewObject.yes_no.goodSchools['not sure']))*100).toFixed(2)+'%';
-        $scope.alep = parseFloat(($scope.reviewObject.yes_no.apartmentLayoutEfficient.yes / ($scope.reviewObject.yes_no.apartmentLayoutEfficient.yes + $scope.reviewObject.yes_no.apartmentLayoutEfficient.no + $scope.reviewObject.yes_no.goodSchools['not sure']))*100).toFixed(2)+'%';
-        $scope.epp = parseFloat(($scope.reviewObject.yes_no['24x7electricity'].yes / ($scope.reviewObject.yes_no['24x7electricity'].yes + $scope.reviewObject.yes_no['24x7electricity'].no + $scope.reviewObject.yes_no.goodSchools['not sure']))*100).toFixed(2)+'%';
-        $scope.rcwsp = parseFloat(($scope.reviewObject.yes_no.regularCleanWaterSupply.yes / ($scope.reviewObject.yes_no.regularCleanWaterSupply.yes + $scope.reviewObject.yes_no.regularCleanWaterSupply.no + $scope.reviewObject.yes_no.goodSchools['not sure']))*100).toFixed(2)+'%';
-        
-        $('#gs').css("width", ($scope.reviewObject.yes_no.goodSchools.yes / ($scope.reviewObject.yes_no.goodSchools.yes + $scope.reviewObject.yes_no.goodSchools.no + $scope.reviewObject.yes_no.goodSchools['not sure']))*100+'%');
-        $('#gm').css("width", ($scope.reviewObject.yes_no.markets.yes / ($scope.reviewObject.yes_no.markets.yes + $scope.reviewObject.yes_no.markets.no + $scope.reviewObject.yes_no.markets['not sure']))*100+'%');
-        $('#rh').css("width", ($scope.reviewObject.yes_no.goodHospitals.yes / ($scope.reviewObject.yes_no.goodHospitals.yes + $scope.reviewObject.yes_no.goodHospitals.no + $scope.reviewObject.yes_no.goodHospitals['not sure']))*100+'%');
-        $('#dni').css("width", ($scope.reviewObject.yes_no.dailyNeedItems.yes / ($scope.reviewObject.yes_no.dailyNeedItems.yes + $scope.reviewObject.yes_no.dailyNeedItems.no + $scope.reviewObject.yes_no.dailyNeedItems['not sure']))*100+'%');
-        $('#pt').css("width", ($scope.reviewObject.yes_no.easyAccessToPublicTransport.yes / ($scope.reviewObject.yes_no.easyAccessToPublicTransport.yes + $scope.reviewObject.yes_no.easyAccessToPublicTransport.no + $scope.reviewObject.yes_no.easyAccessToPublicTransport['not sure']))*100+'%');
-        $('#ale').css("width", ($scope.reviewObject.yes_no.apartmentLayoutEfficient.yes / ($scope.reviewObject.yes_no.apartmentLayoutEfficient.yes + $scope.reviewObject.yes_no.apartmentLayoutEfficient.no + $scope.reviewObject.yes_no.apartmentLayoutEfficient['not sure']))*100+'%');
-        $('#24e').css("width", ($scope.reviewObject.yes_no['24x7electricity'].yes / ($scope.reviewObject.yes_no['24x7electricity'].yes + $scope.reviewObject.yes_no['24x7electricity'].no + $scope.reviewObject.yes_no['24x7electricity']['not sure']))*100+'%');
-        $('#rcws').css("width", ($scope.reviewObject.yes_no.regularCleanWaterSupply.yes / ($scope.reviewObject.yes_no.regularCleanWaterSupply.yes + $scope.reviewObject.yes_no.regularCleanWaterSupply.no + $scope.reviewObject.yes_no.regularCleanWaterSupply['not sure']))*100+'%');
+        $scope.gsp = parseFloat(($scope.reviewObject.yes_no.goodSchools.yes / ($scope.reviewObject.yes_no.goodSchools.yes + $scope.reviewObject.yes_no.goodSchools.no + $scope.reviewObject.yes_no.goodSchools['not sure'])) * 100).toFixed(2) + '%';
+        $scope.gmp = parseFloat(($scope.reviewObject.yes_no.markets.yes / ($scope.reviewObject.yes_no.markets.yes + $scope.reviewObject.yes_no.markets.no + $scope.reviewObject.yes_no.markets['not sure'])) * 100).toFixed(2) + '%';
+        $scope.rhp = parseFloat(($scope.reviewObject.yes_no.goodHospitals.yes / ($scope.reviewObject.yes_no.goodHospitals.yes + $scope.reviewObject.yes_no.goodHospitals.no + $scope.reviewObject.yes_no.goodSchools['not sure'])) * 100).toFixed(2) + '%';
+        $scope.dnip = parseFloat(($scope.reviewObject.yes_no.dailyNeedItems.yes / ($scope.reviewObject.yes_no.dailyNeedItems.yes + $scope.reviewObject.yes_no.dailyNeedItems.no + $scope.reviewObject.yes_no.goodSchools['not sure'])) * 100).toFixed(2) + '%';
+        $scope.ptp = parseFloat(($scope.reviewObject.yes_no.easyAccessToPublicTransport.yes / ($scope.reviewObject.yes_no.easyAccessToPublicTransport.yes + $scope.reviewObject.yes_no.easyAccessToPublicTransport.no + $scope.reviewObject.yes_no.goodSchools['not sure'])) * 100).toFixed(2) + '%';
+        $scope.alep = parseFloat(($scope.reviewObject.yes_no.apartmentLayoutEfficient.yes / ($scope.reviewObject.yes_no.apartmentLayoutEfficient.yes + $scope.reviewObject.yes_no.apartmentLayoutEfficient.no + $scope.reviewObject.yes_no.goodSchools['not sure'])) * 100).toFixed(2) + '%';
+        $scope.epp = parseFloat(($scope.reviewObject.yes_no['24x7electricity'].yes / ($scope.reviewObject.yes_no['24x7electricity'].yes + $scope.reviewObject.yes_no['24x7electricity'].no + $scope.reviewObject.yes_no.goodSchools['not sure'])) * 100).toFixed(2) + '%';
+        $scope.rcwsp = parseFloat(($scope.reviewObject.yes_no.regularCleanWaterSupply.yes / ($scope.reviewObject.yes_no.regularCleanWaterSupply.yes + $scope.reviewObject.yes_no.regularCleanWaterSupply.no + $scope.reviewObject.yes_no.goodSchools['not sure'])) * 100).toFixed(2) + '%';
+
+        $('#gs').css("width", ($scope.reviewObject.yes_no.goodSchools.yes / ($scope.reviewObject.yes_no.goodSchools.yes + $scope.reviewObject.yes_no.goodSchools.no + $scope.reviewObject.yes_no.goodSchools['not sure'])) * 100 + '%');
+        $('#gm').css("width", ($scope.reviewObject.yes_no.markets.yes / ($scope.reviewObject.yes_no.markets.yes + $scope.reviewObject.yes_no.markets.no + $scope.reviewObject.yes_no.markets['not sure'])) * 100 + '%');
+        $('#rh').css("width", ($scope.reviewObject.yes_no.goodHospitals.yes / ($scope.reviewObject.yes_no.goodHospitals.yes + $scope.reviewObject.yes_no.goodHospitals.no + $scope.reviewObject.yes_no.goodHospitals['not sure'])) * 100 + '%');
+        $('#dni').css("width", ($scope.reviewObject.yes_no.dailyNeedItems.yes / ($scope.reviewObject.yes_no.dailyNeedItems.yes + $scope.reviewObject.yes_no.dailyNeedItems.no + $scope.reviewObject.yes_no.dailyNeedItems['not sure'])) * 100 + '%');
+        $('#pt').css("width", ($scope.reviewObject.yes_no.easyAccessToPublicTransport.yes / ($scope.reviewObject.yes_no.easyAccessToPublicTransport.yes + $scope.reviewObject.yes_no.easyAccessToPublicTransport.no + $scope.reviewObject.yes_no.easyAccessToPublicTransport['not sure'])) * 100 + '%');
+        $('#ale').css("width", ($scope.reviewObject.yes_no.apartmentLayoutEfficient.yes / ($scope.reviewObject.yes_no.apartmentLayoutEfficient.yes + $scope.reviewObject.yes_no.apartmentLayoutEfficient.no + $scope.reviewObject.yes_no.apartmentLayoutEfficient['not sure'])) * 100 + '%');
+        $('#24e').css("width", ($scope.reviewObject.yes_no['24x7electricity'].yes / ($scope.reviewObject.yes_no['24x7electricity'].yes + $scope.reviewObject.yes_no['24x7electricity'].no + $scope.reviewObject.yes_no['24x7electricity']['not sure'])) * 100 + '%');
+        $('#rcws').css("width", ($scope.reviewObject.yes_no.regularCleanWaterSupply.yes / ($scope.reviewObject.yes_no.regularCleanWaterSupply.yes + $scope.reviewObject.yes_no.regularCleanWaterSupply.no + $scope.reviewObject.yes_no.regularCleanWaterSupply['not sure'])) * 100 + '%');
     }
 
 
@@ -163,7 +233,7 @@ app.controller('locationReviewRatingCtrl', ['$scope', '$timeout', '$stateParams'
 
     function getReviews() {
         $scope.fetchingReviews = true;
-        if(page_start == 0){
+        if (page_start == 0) {
             $scope.firstLoading = true;
         } else {
             $scope.firstLoading = false;
@@ -205,13 +275,13 @@ app.controller('locationReviewRatingCtrl', ['$scope', '$timeout', '$stateParams'
             if ($scope.projectDataFetched) {
                 // loading(false);    
             }
-            $timeout(function(){
-                $scope.fetchingReviews = false;    
-            },1000);
+            $timeout(function() {
+                $scope.fetchingReviews = false;
+            }, 1000);
         }, function myError(err) {
-            $timeout(function(){
-                $scope.fetchingReviews = false;    
-            },1000);
+            $timeout(function() {
+                $scope.fetchingReviews = false;
+            }, 1000);
             // console.log(err);
         })
     }
@@ -309,6 +379,75 @@ app.controller('locationReviewRatingCtrl', ['$scope', '$timeout', '$stateParams'
     }
 
     $scope.takeToWriteReview = function() {
-        $state.go('write-review', { id: $scope.locationId, n: btoa(encodeURIComponent(document.title)), t:btoa($scope.category)});
+        $state.go('write-review', { id: $scope.locationId, n: btoa(encodeURIComponent(document.title)), t: btoa($scope.category) });
     }
 }]);
+
+
+// app.controller('relatedProjectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', function($scope, $http, $timeout, $stateParams) {
+//     console.log('called');
+//     var parameters = decodeParams($stateParams.p);
+//     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
+//     $scope.locId = parameters.id;
+//     $scope.type = parameters.category;
+//     if (parameters.category == 'locality') {
+//         $scope.category = 'locality';
+//     } else {
+//         $scope.category = 'location';
+//     }
+
+//     getRelatedProjects();
+
+//     function getRelatedProjects() {
+//         console.log($scope.locId);
+//         var data = {
+//             locationId: $scope.locId,
+//             category: 'all',
+//             vertical: 'residential',
+//             page_size: 100
+//         }
+//         console.log(encodeParams(data));
+//         $http({
+//             url: 'http://35.154.60.19/api/GetListing_1.0',
+//             method: 'GET',
+//             params: {
+//                 args: encodeParams(data)
+//             }
+//         }).then(function mySucces(response) {
+//             console.log(response);
+//             var i = 0;
+//             for (key in response.data.details) {
+//                 $scope.relatedProjects[i] = {};
+//                 $scope.relatedProjects[i].name = response.data.details[key].name;
+//                 $scope.relatedProjects[i].id = response.data.details[key].id;
+//                 $scope.relatedProjects[i].address = response.data.details[key].address;
+//                 $scope.relatedProjects[i].overallRating = response.data.details[key].rating;
+//                 $scope.relatedProjects[i].type = response.data.details[key].type;
+//                 $scope.relatedProjects[i].coverImage = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/' + $scope.relatedProjects[i].type + '/' + $scope.relatedProjects[i].id + '/images/coverPhoto/' + response.data.details[key].cover + '-s.jpg';
+//                 i++;
+//             }
+//             console.log($scope.relatedProjects);
+//         })
+//         $scope.loading = false;
+//         if (Object.keys($scope.relatedProjects).length == 0) {
+//             $scope.hideList = false;
+//         }
+//         // $scope.loading = false;
+//     }
+
+//     $scope.goToProjectsPage = function(key) {
+//         console.log(key)
+//         if (key.type == 'residential') {
+//             param = {
+//                 projectId: key.id
+//             }
+//             $state.go('project-details', { p: encodeParams(param) });
+//         } else if (key.type == 'cghs') {
+//             param = {
+//                 projectId: key.id,
+//                 category: 'cghs'
+//             }
+//             $state.go('project-details', { p: encodeParams(param) });
+//         }
+//     }
+// }]);

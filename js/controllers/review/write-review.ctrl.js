@@ -240,8 +240,6 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         }
         updates[reviewPath] = $scope.review;
         updates[userReviewPath] = $scope.userReviewData;
-        console.log(updates);
-        return;
         db.ref().update(updates).then(function() {
             $timeout(function() {
                 var email = encodeURIComponent($scope.user.email);
