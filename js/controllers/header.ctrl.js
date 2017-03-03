@@ -76,12 +76,32 @@ app.controller('headerCtrl', ['$scope', '$state', '$http', '$rootScope', '$timeo
 
     $scope.findProjectId = function() {
         $timeout(function() {
-            console.log(window.location.href);
             var url = window.location.href.split('/');
-            console.log(url)
+            if(url[5]){
+                var writeReviewData = decodeParams(url[5]);
+                var id = '';
+                var name = btoa(encodeURIComponent(document.title));
+                var type = '';
+            }
+            // console.log(document.title);
             if (url[4] == 'project-details') {
-                $scope.projectId = decodeParams(url[5]).projectId;
-                $state.go('write-review', {id: $scope.projectId});
+                id = writeReviewData.projectId;
+                if(writeReviewData.category){
+                    type = 'cghs'
+                } else {
+                    type = 'residential';
+                }
+                type = btoa(type);
+                $state.go('write-review', { id: id, n:name, t:type});
+            } else if(url[4] == 'location-details') {
+                id = writeReviewData.id; 
+                if(writeReviewData.category == 'locality'){
+                    type = 'locality'
+                } else {
+                    type = 'location';
+                }
+                type = btoa(type);
+                $state.go('write-review', { id: id, n:name, t:type});
             } else {
                 $state.go('write-review');
             }

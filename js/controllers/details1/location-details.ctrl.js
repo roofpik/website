@@ -3,302 +3,42 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
     var parameters = decodeParams($stateParams.p);
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.loading = true;
-    $scope.reviewsAvailable = false;
-    $scope.hasRatings = false;
-    $scope.hasReviews = false;
-    $scope.i = 0;
     console.log(parameters)
     $scope.locId = parameters.id;
     $scope.type = parameters.category;
     $scope.allReviews = {};
     $scope.relatedProjects = {};
     $scope.path = ["Gurgaon", $scope.type]
-    console.log($scope.locId);
-    $scope.ratingSummaryParams = [
-        { id: 'security', id1: 'security1', name: 'Security' },
-        { id: 'amenities', id1: 'amenities1', name: 'Amenities' },
-        { id: 'openAndGreenAreas', id1: 'openAndGreenAreas1', name: 'Open and Green Areas' },
-        { id: 'convenienceOfParking', id1: 'convenienceOfParking1', name: 'Convenience of Parking' },
-        { id: 'infrastructure', id1: 'infrastructure1', name: 'Infrastructure' }
-    ];
+    if(parameters.category == 'locality'){
+        $scope.category = 'locality';
+    } else {
+        $scope.category = 'location';
+    }
+
+
     if (parameters.category == 'locations') {
         db.ref('locations/' + $scope.cityId + '/' + $scope.locId).once('value', function(response) {
+            console.log(response.val());
             $timeout(function() {
-                console.log(response.val());
                 $scope.name = response.val().locationName;
                 $scope.id = response.val().locationId;
+                $scope.loading = false;
                 $scope.path.push($scope.name);
                 document.title = $scope.name;
             }, 0);
         })
-        getRelatedProjects();
-        getReviews();
     } else {
         db.ref('locality/' + $scope.cityId + '/' + $scope.locId).once('value', function(response) {
             $timeout(function() {
-                console.log(response.val());
                 $scope.name = response.val().localityName;
                 $scope.id = response.val().localityId;
+                $scope.loading = false;
                 $scope.path.push($scope.name)
                 document.title = $scope.name;
                 // $scope.coverImage = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/cghs/-KbT8haHPqV7gTy55f-x/images/coverPhoto/' + $scope.location.images.coverPhoto.url + '-m.jpg';
                 // generateImageList($scope.location.images);
             }, 0);
         })
-        getRelatedProjects();
-        getReviews();
-        // getNearBy();
-        // getRelatedServices();
-    }
-
-    function getReviews() {
-
-        $http({
-            url: 'http://35.154.60.19/api/GetReviewSummary_1.0',
-            method: 'GET',
-            params: {
-                id: '-K_UDYa-_29iscnH_YE1', //TO REMOVE LATER
-                type: 'locality'
-            }
-        }).then(function mySucces(response) {
-            console.log(response);
-            if (response.status == 200) {
-                if (response.data) {
-                    if (response.data.numbers) {
-                        if (response.data.numbers.numberOfReviews != 0) {
-                            $rootScope.allRatings = response.data.numbers;
-                            $scope.reviewsAvailable = true;
-                            if (response.data.numbers.numberOfReviews > 0) {
-                                $scope.reviewAvailable = true;
-                            }
-                            $scope.reviewObject = response.data;
-                            for (key in $scope.reviewObject.numbers) {
-                                $scope.reviewObject.numbers[key + '1'] = Math.round($scope.reviewObject.numbers[key]);
-                            }
-                            // $("#excellentStar").css("width", ($scope.reviewObject.numbers.fiveStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
-                            // $("#veryGoodStar").css("width", ($scope.reviewObject.numbers.fourStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
-                            // $("#goodStar").css("width", ($scope.reviewObject.numbers.threeStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
-                            // $("#averageStar").css("width", ($scope.reviewObject.numbers.twoStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
-                            // $("#badStar").css("width", ($scope.reviewObject.numbers.oneStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
-                            // // console.log($scope.reviewObject);
-                            showHideRatings();
-                        }
-                    }
-                }
-            }
-        }, function myError(err) {
-            // console.log(err);
-        })
-        $http({
-            url: 'http://35.154.60.19/api/GetProjectReviews_1.0',
-            method: 'GET',
-            params: {
-                pid: '-K_UDYa-_29iscnH_YE1', //To change later
-                type: 'locality',
-                page_size: '20'
-            }
-        }).then(function mySucces(response) {
-            console.log(response);
-            $timeout(function() {
-                    if (response.status == 200) {
-                        if (response.data.details) {
-                            for (key in response.data.details) {
-                                $scope.allReviews[key] = {};
-                                $scope.allReviews[key].reviewTitle = response.data.details[key].reviewTitle;
-                                $scope.allReviews[key].reviewText = response.data.details[key].reviewText;
-                                $scope.allReviews[key].overallRating = response.data.details[key].overallRating;
-                                $scope.allReviews[key].userName = response.data.details[key].userName;
-                                $scope.allReviews[key].createdDate = response.data.details[key].createdDate;
-                                $scope.allReviews[key].reviewId = response.data.details[key].reviewId;
-                                if (response.data.details[key].reviewText.length < response.data.details[key].wordCount) {
-                                    $scope.allReviews[key].showMore = true;
-                                } else {
-                                    $scope.allReviews[key].showMore = false;
-                                }
-                                $scope.i++
-                            }
-                        }
-                        showHideReviews();
-                    }
-                    console.log($scope.allReviews)
-                },
-                function myError(err) {
-                    // console.log(err);
-                }, 100)
-        })
-    }
-
-    function showHideRatings() {
-        if ($rootScope.allRatings) {
-            $scope.hasRatings = true;
-        } else {
-            $scope.hasRatings = false;
-        }
-    }
-
-    function showHideReviews() {
-        if ($scope.i == 0) {
-            $scope.hasReviews = false;
-        } else {
-            $scope.hasReviews = true;
-        }
-    }
-    $scope.showReviewText = function(index) {
-        // console.log($scope.reviews[index]);
-        console.log(index);
-        console.log($scope.allReviews[index].reviewId);
-        console.log($scope.type)
-            // loading(true);
-        $http({
-            url: 'http://35.154.60.19/api/GetReviewDetails_1.0',
-            method: 'GET',
-            params: {
-                id: $scope.allReviews[index].reviewId,
-                type: $scope.type
-            }
-        }).then(function mySucces(response) {
-            console.log(response);
-            if (response.status == 200) {
-                $scope.allReviews[index].reviewText = response.data.reviewText;
-                $scope.allReviews[index].showMore = false;
-            }
-            // loading(false, 1000);
-        }, function myError(err) {
-            // console.log(err);
-        })
-    }
-
-    // function getNearBy() {
-    //     // if (parameters.category == 'locations') {
-    //     //     var data = {
-    //     //         locationId: $scope.locId
-    //     //     }
-    //     // } else {
-    //     //     var data = {
-    //     //         localityId: $scope.locId
-    //     //     }
-    //     // }
-    //     var data = {
-    //         locationId: '-Kc2BjFK-YABXahO8OnL'
-    //     }
-    //     console.log(encodeParams(data));
-    //     $http({
-    //         url: 'http://35.154.60.19/api/GetNearby_1.0',
-    //         method: 'GET',
-    //         params: {
-    //             args: encodeParams(data)
-    //         }
-    //     }).then(function mySucces(response) {
-    //         if (response.data) {
-    //             $scope.nearby = {}
-    //             for (key in response.data) {
-    //                 $scope.nearby[key] = {};
-    //                 $scope.nearby[key].type = response.data[key].nearby;
-    //                 $scope.nearby[key].name = response.data[key].details.details.name;
-    //                 $scope.nearby[key].website = response.data[key].details.details.website;
-    //                 $scope.nearby[key].address = response.data[key].details.address.addressLine1;
-    //             }
-    //         }
-    //         // console.log($scope.nearby);
-    //         // $scope.loading = false;
-
-    //     })
-    // }
-
-    // function getRelatedServices() {
-    //     var data = {
-    //         locationId: '-KZzbkeqpCyCV8cZ33wi'
-    //     }
-
-    //     $http({
-    //         url: 'http://35.154.60.19/api/GetRelatedServices_1.0',
-    //         method: 'GET',
-    //         params: {
-    //             args: encodeParams(data)
-    //         }
-    //     }).then(function mySucces(response) {
-    //         console.log(response);
-    //         if (response.data) {
-    //             $scope.relatedServices = {}
-    //             for (key in response.data) {
-    //                 $scope.relatedServices[key] = {};
-    //                 $scope.relatedServices[key].type = response.data[key].nearby;
-    //                 $scope.relatedServices[key].name = response.data[key].details.details.name;
-    //                 $scope.relatedServices[key].website = response.data[key].details.details.website;
-    //                 $scope.relatedServices[key].address = response.data[key].details.address.addressLine1;
-    //             }
-    //         }
-    //         console.log($scope.relatedServices);
-    //         // $scope.loading = false;
-
-    //     })
-
-    // }
-
-    function getRelatedProjects() {
-        // console.log($scope.locId);
-        if (parameters.category == 'locations') {
-            var data = {
-                locationId: $scope.locId,
-                vertical: 'residential',
-                category: 'all',
-                page_size: 100
-            }
-        } else {
-            var data = {
-                locationId: $scope.locId,
-                category: 'all',
-                vertical: 'residential',
-                page_size: 100
-            }
-        }
-        console.log(encodeParams(data));
-        $http({
-            url: 'http://35.154.60.19/api/GetListing_1.0',
-            method: 'GET',
-            params: {
-                args: encodeParams(data)
-            }
-        }).then(function mySucces(response) {
-            console.log(response);
-            var i = 0;
-            for (key in response.data.details) {
-                $scope.relatedProjects[i] = {};
-                $scope.relatedProjects[i].name = response.data.details[key].name;
-                $scope.relatedProjects[i].id = response.data.details[key].id;
-                $scope.relatedProjects[i].address = response.data.details[key].address;
-                $scope.relatedProjects[i].overallRating = response.data.details[key].rating;
-                $scope.relatedProjects[i].type = response.data.details[key].type;
-                $scope.relatedProjects[i].coverImage = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/' + $scope.relatedProjects[i].type + '/' + $scope.relatedProjects[i].id + '/images/coverPhoto/' + response.data.details[key].cover + '-s.jpg';
-                i++;
-            }
-            console.log($scope.relatedProjects);
-        })
-        $scope.loading = false;
-        if (Object.keys($scope.relatedProjects).length == 0) {
-            $scope.hideList = false;
-        }
-        // $scope.loading = false;
-    }
-
-    $scope.goToProjectsPage = function(key) {
-        console.log(key)
-        if (key.type == 'residential') {
-            param = {
-                projectId: key.id
-            }
-            $state.go('project-details', { p: encodeParams(param) });
-        } else if (key.type == 'cghs') {
-            param = {
-                projectId: key.id,
-                category: 'cghs'
-            }
-            $state.go('project-details', { p: encodeParams(param) });
-        }
-    }
-
-    $scope.takeToWriteReview = function() {
-        $state.go('write-review', { id: $scope.locId });
     }
 
     $scope.provideDetails = function(data) {
@@ -313,5 +53,262 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
             }, 1000);
         })
     }
-// >>>>>>> 2a07306f260e5aba5b8c075720725593f0e08825
+
+    $scope.goToWriteReview = function(){
+        $state.go('write-review', { id: $scope.id, n: btoa(encodeURIComponent(document.title)), t:btoa($scope.category)});
+    }
 }])
+
+
+app.controller('locationReviewRatingCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', '$http', '$state', function($scope, $timeout, $stateParams, $rootScope, $http, $state) {
+    $scope.cityId = '-KYJONgh0P98xoyPPYm9';
+    var parameters = decodeParams($stateParams.p);
+    console.log(parameters);
+    $scope.locationId = parameters.id;
+    $scope.reviews = [];
+    $scope.reviewsAvailable = false;
+    var selectedRating = 0;
+    $scope.reviews = [];
+    var reviewsFetchedNum = 0;
+    var totalReviews = 0;
+    var page_start = 0;
+    var page_size = 5;
+    $scope.reviewsFetched = false;
+    var customerType = null;
+    $scope.hasMoreReviews = true;
+    $scope.hasReviews = false;
+    $scope.reviewAvailable = false;
+    $scope.ratingSummaryParams = [
+        { id: 'security', id1: 'security1', name: 'Security' },
+        { id: 'amenities', id1: 'amenities1', name: 'Amenities' },
+        { id: 'openAndGreenAreas', id1: 'openAndGreenAreas1', name: 'Open and Green Areas' },
+        { id: 'convenienceOfParking', id1: 'convenienceOfParking1', name: 'Convenience of Parking' },
+        { id: 'infrastructure', id1: 'infrastructure1', name: 'Infrastructure' }
+    ];
+
+    if(parameters.category == 'locality'){
+        $scope.category = 'locality';
+    } else {
+        $scope.category = 'location';
+    }
+
+
+    $http({
+        url: 'http://35.154.60.19/api/GetReviewSummary_1.0',
+        method: 'GET',
+        params: {
+            id: $scope.locationId,
+            type: $scope.category
+        }
+    }).then(function mySucces(response) {
+        console.log(response);
+        if (response.status == 200) {
+            if (response.data[$scope.locationId]) {
+                if (response.data[$scope.locationId] != 'not found') {
+                    $rootScope.allRatings = response.data;
+                    $scope.reviewsAvailable = true;
+                    if (response.data.numberOfReviews > 0) {
+                        $scope.reviewAvailable = true;
+                    }
+                    $scope.reviewObject = response.data;
+                    createProgressBars();
+                    // console.log($scope.reviewObject);
+                }
+            } else if (response.data.numbers.numberOfReviews != 0) {
+                $rootScope.allRatings = response.data;
+                $scope.reviewsAvailable = true;
+                if (response.data.numberOfReviews > 0) {
+                    $scope.reviewAvailable = true;
+                }
+                $scope.reviewObject = response.data;
+                createProgressBars();
+            }
+        }
+    }, function myError(err) {
+        // console.log(err);
+    })
+
+    function createProgressBars() {
+        console.log($scope.reviewObject);
+        for (key in $scope.reviewObject.numbers) {
+            $scope.reviewObject.numbers[key + '1'] = Math.round($scope.reviewObject.numbers[key]);
+        }
+        $("#excellentStar").css("width", ($scope.reviewObject.numbers.fiveStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
+        $("#veryGoodStar").css("width", ($scope.reviewObject.numbers.fourStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
+        $("#goodStar").css("width", ($scope.reviewObject.numbers.threeStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
+        $("#averageStar").css("width", ($scope.reviewObject.numbers.twoStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
+        $("#badStar").css("width", ($scope.reviewObject.numbers.oneStar / $scope.reviewObject.numbers.numberOfReviews) * 100 + '%');
+
+        $scope.gsp = parseFloat(($scope.reviewObject.yes_no.goodSchools.yes / ($scope.reviewObject.yes_no.goodSchools.yes + $scope.reviewObject.yes_no.goodSchools.no + $scope.reviewObject.yes_no.goodSchools['not sure']))*100).toFixed(2)+'%';
+        $scope.gmp = parseFloat(($scope.reviewObject.yes_no.markets.yes / ($scope.reviewObject.yes_no.markets.yes + $scope.reviewObject.yes_no.markets.no + $scope.reviewObject.yes_no.markets['not sure']))*100).toFixed(2)+'%';
+        $scope.rhp = parseFloat(($scope.reviewObject.yes_no.goodHospitals.yes / ($scope.reviewObject.yes_no.goodHospitals.yes + $scope.reviewObject.yes_no.goodHospitals.no + $scope.reviewObject.yes_no.goodSchools['not sure']))*100).toFixed(2)+'%';
+        $scope.dnip = parseFloat(($scope.reviewObject.yes_no.dailyNeedItems.yes / ($scope.reviewObject.yes_no.dailyNeedItems.yes + $scope.reviewObject.yes_no.dailyNeedItems.no + $scope.reviewObject.yes_no.goodSchools['not sure']))*100).toFixed(2)+'%';
+        $scope.ptp = parseFloat(($scope.reviewObject.yes_no.easyAccessToPublicTransport.yes / ($scope.reviewObject.yes_no.easyAccessToPublicTransport.yes + $scope.reviewObject.yes_no.easyAccessToPublicTransport.no + $scope.reviewObject.yes_no.goodSchools['not sure']))*100).toFixed(2)+'%';
+        $scope.alep = parseFloat(($scope.reviewObject.yes_no.apartmentLayoutEfficient.yes / ($scope.reviewObject.yes_no.apartmentLayoutEfficient.yes + $scope.reviewObject.yes_no.apartmentLayoutEfficient.no + $scope.reviewObject.yes_no.goodSchools['not sure']))*100).toFixed(2)+'%';
+        $scope.epp = parseFloat(($scope.reviewObject.yes_no['24x7electricity'].yes / ($scope.reviewObject.yes_no['24x7electricity'].yes + $scope.reviewObject.yes_no['24x7electricity'].no + $scope.reviewObject.yes_no.goodSchools['not sure']))*100).toFixed(2)+'%';
+        $scope.rcwsp = parseFloat(($scope.reviewObject.yes_no.regularCleanWaterSupply.yes / ($scope.reviewObject.yes_no.regularCleanWaterSupply.yes + $scope.reviewObject.yes_no.regularCleanWaterSupply.no + $scope.reviewObject.yes_no.goodSchools['not sure']))*100).toFixed(2)+'%';
+        
+        $('#gs').css("width", ($scope.reviewObject.yes_no.goodSchools.yes / ($scope.reviewObject.yes_no.goodSchools.yes + $scope.reviewObject.yes_no.goodSchools.no + $scope.reviewObject.yes_no.goodSchools['not sure']))*100+'%');
+        $('#gm').css("width", ($scope.reviewObject.yes_no.markets.yes / ($scope.reviewObject.yes_no.markets.yes + $scope.reviewObject.yes_no.markets.no + $scope.reviewObject.yes_no.markets['not sure']))*100+'%');
+        $('#rh').css("width", ($scope.reviewObject.yes_no.goodHospitals.yes / ($scope.reviewObject.yes_no.goodHospitals.yes + $scope.reviewObject.yes_no.goodHospitals.no + $scope.reviewObject.yes_no.goodHospitals['not sure']))*100+'%');
+        $('#dni').css("width", ($scope.reviewObject.yes_no.dailyNeedItems.yes / ($scope.reviewObject.yes_no.dailyNeedItems.yes + $scope.reviewObject.yes_no.dailyNeedItems.no + $scope.reviewObject.yes_no.dailyNeedItems['not sure']))*100+'%');
+        $('#pt').css("width", ($scope.reviewObject.yes_no.easyAccessToPublicTransport.yes / ($scope.reviewObject.yes_no.easyAccessToPublicTransport.yes + $scope.reviewObject.yes_no.easyAccessToPublicTransport.no + $scope.reviewObject.yes_no.easyAccessToPublicTransport['not sure']))*100+'%');
+        $('#ale').css("width", ($scope.reviewObject.yes_no.apartmentLayoutEfficient.yes / ($scope.reviewObject.yes_no.apartmentLayoutEfficient.yes + $scope.reviewObject.yes_no.apartmentLayoutEfficient.no + $scope.reviewObject.yes_no.apartmentLayoutEfficient['not sure']))*100+'%');
+        $('#24e').css("width", ($scope.reviewObject.yes_no['24x7electricity'].yes / ($scope.reviewObject.yes_no['24x7electricity'].yes + $scope.reviewObject.yes_no['24x7electricity'].no + $scope.reviewObject.yes_no['24x7electricity']['not sure']))*100+'%');
+        $('#rcws').css("width", ($scope.reviewObject.yes_no.regularCleanWaterSupply.yes / ($scope.reviewObject.yes_no.regularCleanWaterSupply.yes + $scope.reviewObject.yes_no.regularCleanWaterSupply.no + $scope.reviewObject.yes_no.regularCleanWaterSupply['not sure']))*100+'%');
+    }
+
+
+    getReviews();
+
+    function getReviews() {
+        $scope.fetchingReviews = true;
+        if(page_start == 0){
+            $scope.firstLoading = true;
+        } else {
+            $scope.firstLoading = false;
+        }
+        console.log(page_size, page_start)
+        $http({
+            url: 'http://35.154.60.19/api/GetProjectReviews_1.0',
+            method: 'GET',
+            params: {
+                pid: $scope.locationId,
+                overallRating: selectedRating,
+                userType: customerType,
+                page_size: page_size,
+                page_start: page_start,
+                type: $scope.category
+            }
+        }).then(function mySucces(response) {
+            console.log(response);
+            if (response.data) {
+                totalReviews = response.data.hits;
+                reviewsFetchedNum += Object.keys(response.data.details).length;
+                if (reviewsFetchedNum == totalReviews) {
+                    $scope.hasMoreReviews = false;
+                }
+                for (key in response.data.details) {
+                    if (response.data.details[key].reviewText.length < response.data.details[key].wordCount) {
+                        response.data.details[key].showMore = true;
+                    } else {
+                        response.data.details[key].showMore = false;
+                    }
+                    $scope.reviews.push(response.data.details[key]);
+                }
+                if ($scope.reviews.length > 0) {
+                    $scope.hasReviews = true;
+                }
+            } else {
+                $scope.hasMoreReviews = false;
+            }
+            if ($scope.projectDataFetched) {
+                // loading(false);    
+            }
+            $timeout(function(){
+                $scope.fetchingReviews = false;    
+            },1000);
+        }, function myError(err) {
+            $timeout(function(){
+                $scope.fetchingReviews = false;    
+            },1000);
+            // console.log(err);
+        })
+    }
+
+    $scope.showReviewText = function(index) {
+        // console.log($scope.reviews[index]);
+        // loading(true);
+        $http({
+            url: 'http://35.154.60.19/api/GetReviewDetails_1.0',
+            method: 'GET',
+            params: {
+                id: $scope.reviews[index].reviewId,
+                type: parameters.category
+            }
+        }).then(function mySucces(response) {
+            // console.log(response);
+            if (response.status == 200) {
+                $scope.reviews[index].reviewText = response.data.reviewText;
+                $scope.reviews[index].showMore = false;
+            }
+            // loading(false, 1000);
+        }, function myError(err) {
+            // console.log(err);
+        })
+    }
+
+    $scope.allRatings = {
+        'one': 1,
+        'two': 2,
+        'three': 3,
+        'four': 4,
+        'five': 5
+    };
+    $scope.ratingIndex = ['one', 'two', 'three', 'four', 'five'];
+
+    $scope.filterReview = function(index) {
+        var count = 0;
+        count = $scope.allRatings[index];
+        if ($scope.ratingSelected[index]) {
+            for (var i = count - 1; i < 5; i++) {
+                $scope.ratingSelected[$scope.ratingIndex[i]] = true;
+            }
+            selectedRating = count;
+        } else {
+            // console.log(count);
+            for (var i = 4; i > count - 1; i--) {
+                $scope.ratingSelected[$scope.ratingIndex[i]] = false;
+            }
+            selectedRating = count - 1;
+        }
+        $scope.reviews = [];
+        reviewsFetchedNum = 0;
+        totalReviews = 0;
+        page_start = 0;
+        page_size = 5;
+        $scope.reviewsFetched = false;
+        $scope.hasMoreReviews = true;
+        $scope.hasReviews = false;
+        $scope.reviewAvailable = false;
+        getReviews();
+    }
+
+    $scope.filterReviewByCustomerType = function(index) {
+        if ($scope.selectedCustomerType[index]) {
+            if (index == 'tenant') {
+                customerType = 'tenant';
+                $scope.selectedCustomerType.owner = false;
+            } else {
+                customerType = 'owner';
+                $scope.selectedCustomerType.tenant = false;
+            }
+        } else {
+            customerType = null;
+        }
+        $scope.reviews = [];
+        reviewsFetchedNum = 0;
+        totalReviews = 0;
+        page_start = 0;
+        page_size = 5;
+        $scope.reviewsFetched = false;
+        $scope.hasMoreReviews = true;
+        $scope.hasReviews = false;
+        $scope.reviewAvailable = false;
+        getReviews();
+    }
+
+    $scope.showMoreReviews = function() {
+        // loading(true);
+        page_start = reviewsFetchedNum;
+        // console.log(page_start);
+        if (totalReviews - reviewsFetchedNum < 5) {
+            page_size = totalReviews - reviewsFetchedNum
+        }
+        getReviews();
+    }
+
+    $scope.takeToWriteReview = function() {
+        $state.go('write-review', { id: $scope.locationId, n: btoa(encodeURIComponent(document.title)), t:btoa($scope.category)});
+    }
+}]);

@@ -39,13 +39,9 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.user = {};
     $scope.review = {
-            ratings: {}
-        }
-        // console.log($stateParams);
-    if ($stateParams.id) {
-        var params = $stateParams.id;
+        ratings: {}
     }
-    console.log(params);
+        // console.log($stateParams);
     $scope.selectedProject = {};
     $scope.review = {
         ratings: {}
@@ -66,16 +62,19 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         name: 'Infrastructure',
         id: 5
     }];
-    var user;
-    if (params) {
-        $scope.showSelected = true;
-        $scope.showLoadingSelected = true;
-        $scope.showLoading = true;
-    } else {
-        // console.log('called');
-        $scope.showSelected = false;
-        $scope.showSearch = true;
-    }
+
+    // if ($stateParams.id) {
+    //     var params = $stateParams.id;
+    // }
+    // if (params) {
+    //     $scope.showSelected = true;
+    //     $scope.showLoadingSelected = true;
+    //     $scope.showLoading = true;
+    // } else {
+    //     // console.log('called');
+    //     $scope.showSelected = false;
+    //     $scope.showSearch = true;
+    // }
 
     $scope.ratingsObject = {
         iconOnColor: 'rgb(45, 182, 214)', //Optional
@@ -108,39 +107,21 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     $scope.showMoreLess = 'Show More +';
     $scope.projectSelected = false;
     $('#textarea1').trigger('autoresize');
-    console.log(params);
 
-    if (params) {
-        if (params.name) {
-            $scope.selectedItem = params.name;
+    if ($stateParams.id) {
+        console.log($stateParams);
+        $scope.selectedItem = decodeURIComponent((atob($stateParams.n)));
+        $scope.selectedProject = {
+            id: $stateParams.id,
+            name: $scope.selectedItem,
+            type: atob($stateParams.t)
         }
-    }
-
-    if (params) {
-        $scope.showLoading = true;
         $scope.showSearch = false;
-        $http({
-            url: 'http://35.154.60.19/api/GetResidential_1.0',
-            method: 'GET',
-            params: {
-                details_name: $scope.selectedItem,
-                page_size: 92
-            }
-        }).then(function mySucces(response) {
-            $timeout(function() {
-                for (key in response.data.details) {
-                    if (response.data.details[key].id == $stateParams.id) {
-                        $scope.selectedProject = response.data.details[key];
-                        $scope.selectedItem = $scope.selectedProject.name;
-                        $scope.projectSelected = true;
-                        console.log($scope.selectedItem);
-                    }
-                }
-            }, 500)
-            $scope.showLoadingSelected = false;
-        }, function myError(err) {})
-
+        $scope.projectSelected = true;
+    } else {
+        $scope.showSearch = true;
     }
+
     $scope.nameEntered = function() {
         if ($scope.selectedItem) {
             if ($scope.selectedItem.length > 2) {
@@ -172,7 +153,6 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     }
 
     $scope.selectProject = function(project) {
-        console.log(project);
         $scope.projectSelected = true;
         $scope.selectedItem = project.name;
         $scope.selectedProject = project;
@@ -261,6 +241,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         updates[reviewPath] = $scope.review;
         updates[userReviewPath] = $scope.userReviewData;
         console.log(updates);
+        return;
         db.ref().update(updates).then(function() {
             $timeout(function() {
                 var email = encodeURIComponent($scope.user.email);
