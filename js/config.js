@@ -63,10 +63,14 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             '': {
                 templateUrl: 'templates/details1/location-details.html',
                 controller: 'locationDetailsCtrl'
+            },
+            'reviewRating@location-details': {
+                templateUrl: 'templates/details1/project-review-ratings.html',
+                controller: 'locationReviewRatingCtrl'
             }
-            // 'reviewRating@location-details': {
-            //     templateUrl: 'templates/details1/location-review-ratings.html',
-            //     controller: 'locationReviewRatingCtrl'
+            // 'relatedProjects@location-details':{
+            //     templateUrl: 'templates/details1/related-projects.html',
+            //     contoller: 'relatedProjectsCtrl'
             // }
         }
     });
@@ -248,23 +252,23 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         }
     });
 
-$stateProvider.state('write-review', {
-    url: '/write-review?id',
-    templateUrl: 'templates/review/write-review.html',
-    controller: 'writeReviewCtrl'
-});
+    $stateProvider.state('write-review', {
+        url: '/write-review?id?n>t',
+        templateUrl: 'templates/review/write-review.html',
+        controller: 'writeReviewCtrl'
+    });
 
 
     $stateProvider.state('list', {
-        url: '/list?p',
-        templateUrl: 'templates/projects/listing.html',
-        controller: 'listCtrl'
-    })
-    // $stateProvider.state('listing', {
-    //     url: '/listing?parameters',
-    //     templateUrl: 'templates/details/listing.html',
-    //     controller: 'listingCtrl'
-    // })
+            url: '/list?p',
+            templateUrl: 'templates/projects/listing.html',
+            controller: 'listCtrl'
+        })
+        // $stateProvider.state('listing', {
+        //     url: '/listing?parameters',
+        //     templateUrl: 'templates/details/listing.html',
+        //     controller: 'listingCtrl'
+        // })
 
-$urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/home');
 }]);

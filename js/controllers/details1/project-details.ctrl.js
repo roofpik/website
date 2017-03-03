@@ -1,9 +1,11 @@
 app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', '$state', '$http', function($scope, $timeout, $stateParams, $rootScope, $state, $http) {
     $('ul.tabs').tabs();
+   $('.materialboxed').materialbox();
     // loading(true);
     $scope.loading = true;
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     var parameters = decodeParams($stateParams.p);
+    console.log(parameters);
     var parameter = '';
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
@@ -583,7 +585,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     }
     $scope.goToWriteReview = function() {
         // console.log('called')
-        $state.go('write-review', { id: $scope.projectId });
+        $state.go('write-review', { id: $scope.projectId, n: btoa(encodeURIComponent(document.title)), t:btoa($scope.category) });
     }
 
     function generateImageList(images) {
@@ -615,13 +617,6 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
         }
         $rootScope.$broadcast('initGallery', imageData);
     }
-
-    $rootScope.$watch('allRatings', function() {
-        $scope.allRatings = $rootScope.allRatings;
-        // console.log($scope.allRatings);
-    });
-
-
 }]);
 
 // Reviews and Ratings Controller
@@ -861,12 +856,13 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
     }
 
     $scope.takeToWriteReview = function() {
-        $state.go('write-review', { id: $scope.projectId });
+        $state.go('write-review', { id: $scope.projectId, n: btoa(encodeURIComponent(document.title)), t:btoa($scope.category) });
     }
 }]);
 
 
 app.controller('galleryCtrl', ['$scope', '$timeout', function($scope, $timeout) {
+          $('.materialboxed').materialbox();
     $scope.showGallery = true;
     $scope.$on('initGallery', function(event, data) {
         // console.log(data);

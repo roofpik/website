@@ -38,7 +38,7 @@
                     <div class="col s12 white-text mgt5 review ft20i vatop" ng-hide="allRatings">
                         <a href="" class="mgr10"><span>No Reviews</span></a>
                     </div>
-                    <div class="col s12 white-text mgt5 review ft20i vatop" ng-show="allRatings">
+                    <div class="col s12 white-text mgt5 review ft20i vatop pdln" ng-show="allRatings">
                         <span><i class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < allRatings.numbers.averageRating1 ? 'amber-text text-darken-2':'normal'">star</i></span><span>({{allRatings.numbers.averageRating}})</span>
                         <a href="" class="mgr10"><span>{{allRatings.numbers.numberOfReviews}} Review</span><span ng-show="allRatings.numbers.numberOfReviews > 1">s</span></a>
                     </div>

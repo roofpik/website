@@ -87,6 +87,7 @@
         };
 
     $.fn.imageLightbox = function (opts) {
+         
         var options = $.extend({
                 selector:       'a[data-imagelightbox]',
                 id:             'imagelightbox',

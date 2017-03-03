@@ -1,0 +1,35 @@
+<div ng-hide="loading">
+    <h5 class="ft15 b mgtn mgb10 pdb10 bdbtm">Available Projects</h5>
+    <div class="col s12">
+        <div class="row mgbn mgrtmns10 reletive">
+            <div ng-show="loading" class="preloader-wrapper big active loaderPosition">
+                <div class="spinner-layer spinner-blue-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <div ng-hide="loading" class="card horizontal boxonelocation imgfx" ng-class="displayType" ng-repeat="key in relatedProjects">
+                <a ng-click="goToProjectsPage(key)">
+                    <div class="card-image fix40 left">
+                        <img ng-src="{{key.coverImage}}" class="responsive-img">
+                    </div>
+                    <div class="cardpdt fix60 left">
+                        <span class="block black-text ft13 ellipsis">{{key.name}}</span>
+                        <span class="block ft12 grey-text ellipsis">{{key.address}}</span>
+                        <span class="block ft12 grey-text ellipsis">
+                            <i ng-show="key.overallRating !=  0" class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < key.overallRating? 'blue-text': 'normal'">star</i>
+                            </span>
+                        <p ng-show="key.overallRating == 0"><i>Not Rated Yet</i></p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
