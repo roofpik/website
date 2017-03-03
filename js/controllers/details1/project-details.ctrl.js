@@ -1,5 +1,6 @@
 app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', '$state', '$http', function($scope, $timeout, $stateParams, $rootScope, $state, $http) {
     $('ul.tabs').tabs();
+   $('.materialboxed').materialbox();
     // loading(true);
     $scope.loading = true;
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
@@ -866,6 +867,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
 
 
 app.controller('galleryCtrl', ['$scope', '$timeout', function($scope, $timeout) {
+          $('.materialboxed').materialbox();
     $scope.showGallery = true;
     $scope.$on('initGallery', function(event, data) {
         // console.log(data);

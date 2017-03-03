@@ -155,7 +155,7 @@ body {
 }
 
 .mgb10 {
-    margin-bottom: 10px;
+    margin-bottom: 10px !important;
 }
 
 .mgtn {
@@ -312,7 +312,7 @@ h5 {
     width: 350px;
     padding: 0 20px 20px;
     height: 250px;
-    top: 0;
+    top: 0; left: 0;right: 0;
     bottom: 0;
     position: fixed;
     margin: auto;
@@ -2419,7 +2419,7 @@ footer.page-footer .footer-copyright {
     width: calc(100% - 3rem);
     margin-left: 3rem;
 }
-
+.wd90{width: 90px;}
 
 /*add other new css start*/
 
@@ -2487,7 +2487,7 @@ footer.page-footer .footer-copyright {
 .htratinglocation {
     min-height: 200px;
 }
-
+.fixftm{position: absolute; bottom: 0;}
 /*add other new other css end*/
 
 
@@ -2557,6 +2557,8 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width:0px) and (max-width: 500px) {
+  
+  .modal-footer button{font-size: 11px !important;}
     .img_thumb {
         width: 120px;
         height: 95px;
@@ -2592,6 +2594,13 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width:0px) and (max-width: 767px) {
+
+ #toast-container {
+    left: 0 !important; right: 0 !important;
+    bottom: 7%;
+    max-width: 90%;
+  }
+
     .boxonelocation {
         width: calc(100% - 10px) !important;
     }

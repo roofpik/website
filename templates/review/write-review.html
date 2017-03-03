@@ -252,19 +252,20 @@
                 <b>Review Anonymously:</b> Our hawk-eyed moderators have a thing against reviews with personal information such as names, phone numbers, emails, or other contact details. Make sure your review doesn’t include such information.</p>
         </div>
     </div>
-    <div id="mobile-verification-modal" class="modal modal-fixed-footer ht40 mgtp10">
+    <div id="mobile-verification-modal" class="modal mgtp10 overhdn ht40">
         <div class="modal-content">
-            <div class="row mgbn mgt20" ng-show="step == 1">
+            <div class="row mgbn" ng-show="step == 1">
                 <div class="col s12">
-                    <h5>Enter your 10 digit mobile number</h5>
+                    <h5 class="ft15 b mgtn mgb10 pdb10 bdbtm">Enter your 10 digit mobile number</h5>
                     <p>We will send you a verification code.</p>
                 </div>
                 <div class="input-field col s12">
-                    <input name="userMobile" id="mobile-number" type="number" class="validate" ng-model="mobileNum" ng-minlength="10" ng-maxlength="10" required>
-                    <p class="red-text" ng-show="numberError">{{numberError}}</p>
+                    <input name="userMobile" id="mobile-number" type="number" class="validate mgb10" ng-model="mobileNum" ng-minlength="10" ng-maxlength="10" required>
+                    <label for="mobile-number">Enter your mobile number</label>
+                    <div class="red-text" ng-show="numberError">{{numberError}}</div>
                 </div>
             </div>
-            <div class="row mgbn mgt20" ng-show="step == 2">
+            <div class="row mgbn center" ng-show="step == 2">
                 <div class="loadingPositionModal">
                     <div class="preloader-wrapper small active">
                         <div class="spinner-layer spinner-blue-only">
@@ -282,17 +283,18 @@
                 </div>
                 <p class="loadingMessagePosition">{{loadingMessage}}</p>
             </div>
-            <div class="row mgbn mgt20" ng-show="step == 3">
+            <div class="row mgbn" ng-show="step == 3">
                 <div class="col s12">
-                    <h5>OTP sent successfully</h5>
-                    <p>A verification code has been sent to your registered mobile {{userMobileNum[0]}}xxxxxxxx{{userMobileNum[9]}}and email address {{splitEmail[0][0]}}xxx@{{splitEmail[1]}}</p>
+                    <h5 class="ft15 b mgtn mgb10 pdb10 bdbtm">OTP sent successfully</h5>
+                    <div>A verification code has been sent to your registered mobile {{userMobileNum[0]}}xxxxxxxx{{userMobileNum[9]}}and email address {{splitEmail[0][0]}}xxx@{{splitEmail[1]}}</div>
                 </div>
                 <div class="input-field col s12">
-                    <input name="userOtp" id="user-otp" type="number" class="validate" ng-model="optNum" ng-minlength="4" ng-maxlength="4" required>
-                    <p ng-show="incorrectOtp">Incorrect OTP</p>
+                    <input name="userOtp" id="user-otp" type="number" class="validate mgb10" ng-model="optNum" ng-minlength="4" ng-maxlength="4" required>
+                    <label for="user-otp">Type your OTP here</label>
+                    <div class="red-text" ng-show="incorrectOtp">Incorrect OTP</div>
                 </div>
             </div>
-            <div class="row mgbn mgt20" ng-show="step == 4">
+            <div class="row mgbn center" ng-show="step == 4">
                 <div class="loadingPositionModal">
                     <div class="preloader-wrapper small active">
                         <div class="spinner-layer spinner-blue-only">
@@ -308,19 +310,23 @@
                         </div>
                     </div>
                 </div>
-                <p class="loadingMessagePosition">Submitting Review...</p>
+                <div class="loadingMessagePosition">Submitting Review...</div>
             </div>
-            <div class="row mgbn mgt20" ng-show="step == 5">
-                <div>
-                    <p><b>Your review has been successfully submitted.</b></p>
+            <div class="row mgbn" ng-show="step == 5">
+                <div class="col s12">
+                  <h5 class="ft15 b mgtn mgb10 pdb10 bdbtm">  Your review has been successfully submitted.</h5>
+                </div>
+                <div class="col s12 mgt20 center">
+                    <i class="material-icons green-text medium">check_circle</i>
+
                 </div>
             </div>
         </div>
-        <div class="modal-footer">
-            <button ng-show="step == 1" class="modal-action blue btn-flat white-text" ng-click="sendOtp(mobileNum)">Send OTP</button>
-            <button ng-show="(step == 1) && !couponCodeSuccessful" class="modal-action grey btn-flat white-text mgr10" ng-click="submitWithoutVerification()">Submit without verification</button>
+        <div class="modal-footer fixftm">
+            <button ng-show="step == 1" class="modal-action blue btn-flat white-text mgr10" ng-click="sendOtp(mobileNum)">Send OTP</button>
+            <button ng-show="(step == 1) && !couponCodeSuccessful" class="modal-action grey btn-flat white-text mgr10" ng-click="submitWithoutVerification()">Submit unverified </button>
             <button ng-show="step == 3" class="modal-action blue btn-flat white-text mgr10" ng-click="verifyOtp(optNum)">Verify OTP</button>
-            <button ng-show="step == 5" class="modal-action modal-close blue btn-flat white-text mgr10" ng-click="refreshPage()">OK</button>
+            <button ng-show="step == 5" class="modal-action modal-close blue btn-flat wd90 white-text mgr10" ng-click="refreshPage()">OK</button>
         </div>
     </div>
 </div>
