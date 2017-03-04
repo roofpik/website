@@ -448,9 +448,9 @@ ul,
 
 #search {
     display: block;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 300;
-    width: 82%;
+     width:calc(100% - 35px);
     padding-left: 35px;
     height: 43px;
     margin: 0;
@@ -473,6 +473,23 @@ ul,
     top: 10px;
     color: #ccc;
     left: 7px;
+    cursor: pointer;
+}
+#search_list {
+    display: block;
+    font-size: 13px;
+    font-weight: 300;
+    width:calc(100% - 35px);
+    padding-left: 35px;
+    height: 30px;
+    margin: 0;
+    border: 0;
+}
+.search_ilist {
+    position: absolute;
+    top: 2px;
+    color: #ccc;
+    left: 5px;
     cursor: pointer;
 }
 
@@ -2426,7 +2443,7 @@ footer.page-footer .footer-copyright {
 .wd90 {
     width: 90px;
 }
-
+#materialbox-overlay{background-color: rgba(41,41,41,0.90) !important;}
 
 /*add other new css start*/
 
@@ -2499,7 +2516,8 @@ footer.page-footer .footer-copyright {
     position: absolute;
     bottom: 0;
 }
-
+.img_media{width: calc(25% - 10px); height: 150px; margin-right: 10px; margin-top: 10px; overflow: hidden; float: left; display: block;}
+.img_media div img, .img_media div{width:100%; height: 100%;}
 
 /*add other new other css end*/
 
