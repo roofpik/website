@@ -32,17 +32,17 @@
                             </div>
                             <div class="row pdt2 mgbn">
                                 <h5 class="ush6">Project Segment</h5>
-                                <hr>  
-                                <div class="row mgt10 mgbn mgln mgrn">                          
-                                <div class="mgt5" ng-repeat="item in segments">
-                                    <input type="checkbox" class="filled-in" ng-model="selected.segment[item.name]" id="{{item.id}}" />
-                                    <label for="{{item.id}}">{{item.name}}</label>
+                                <hr>
+                                <div class="row mgt10 mgbn mgln mgrn">
+                                    <div class="mgt5" ng-repeat="item in segments">
+                                        <input type="checkbox" class="filled-in" ng-model="selected.segment[item.name]" id="{{item.id}}" />
+                                        <label for="{{item.id}}">{{item.name}}</label>
+                                    </div>
                                 </div>
-                                </div> 
                             </div>
                             <div class="row pdt2 mgbn">
                                 <h5 class="ush6">Bedroom</h5>
-                                <hr>                                
+                                <hr>
                                 <div class="filterList row mgan">
                                     <div class="col s6 pdln mgt5" ng-repeat="item in [1, 2, 3, 4, 5, 6]">
                                         <input type="checkbox" class="filled-in" ng-model="selected.bhk[item]" id="{{item}}" />
@@ -53,10 +53,10 @@
                             <div class="row pdt2 mgbn">
                                 <h5 class="ush6">Locality</h5>
                                 <hr>
-                                 <div class="input-field mgtn bodinp">
+                                <div class="input-field mgtn bodinp">
                                     <input class="inpfilter" id="search_list" ng-model="searchLocality" placeholder="Search"><i class="material-icons search_ilist">search</i>
                                     <div class="search-results"></div>
-                                </div>                               
+                                </div>
                                 <div class="filterList mgt10">
                                     <div class="mgt5" ng-repeat="locality in localities | filter: searchLocality">
                                         <input type="checkbox" class="filled-in" id="{{locality.localityId}}" ng-model="selected.locality[locality.localityId]" />
@@ -67,7 +67,7 @@
                             <div class="row pdt2 mgbn">
                                 <h5 class="ush6">Location</h5>
                                 <hr>
-                                 <div class="input-field mgtn bodinp">
+                                <div class="input-field mgtn bodinp">
                                     <input class="inpfilter" id="search_list" ng-model="searchLocation" placeholder="Search"><i class="material-icons search_ilist">search</i>
                                     <div class="search-results"></div>
                                 </div>
@@ -81,7 +81,7 @@
                             <div class="row pdt2 mgbn">
                                 <h5 class="ush6">Builders</h5>
                                 <hr>
-                                 <div class="input-field mgtn bodinp">
+                                <div class="input-field mgtn bodinp">
                                     <input class="inpfilter" id="search_list" ng-model="searchBuilder" placeholder="Search"><i class="material-icons search_ilist">search</i>
                                     <div class="search-results"></div>
                                 </div>
@@ -94,7 +94,7 @@
                             </div>
                             <div class="row pdt2 mgbn">
                                 <h5 class="ush6">Rating</h5>
-                                <hr>                                
+                                <hr>
                                 <div class="filterList mgt10">
                                     <div ng-repeat="i in [1,2,3,4,5]">
                                         <input type="checkbox" class="filled-in" id="{{5-i+1}}+'star'" ng-model="selected.rating[6-i]" />
@@ -197,3 +197,4 @@
             </div>
         </div>
     </div>
+</div>
