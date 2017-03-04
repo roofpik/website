@@ -1,4 +1,5 @@
 app.controller('mapCtrl', ['$scope', '$timeout', '$http', '$state', '$rootScope', function($scope, $timeout, $http, $state, $rootScope) {
+    $('.map-content').hide();
     $scope.selectedType = 'projects';
     $('.collapsible').collapsible();
     $('.draggable').attr('draggable', true);
@@ -321,6 +322,7 @@ app.controller('mapCtrl', ['$scope', '$timeout', '$http', '$state', '$rootScope'
 
         });
         $scope.loading = false;
+        $('.map-content').fadeIn();
     }
 
     $scope.openInfoWindow = function(index, from) {

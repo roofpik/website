@@ -357,6 +357,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
 }]);
 
 app.controller('coverStoryHomeCtrl', ['$scope', '$timeout', '$rootScope', function($scope, $timeout, $rootScope) {
+    $('.home-cover-stories').hide();
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.coverStoriesFetched = false;
     $scope.stories = [];
@@ -374,6 +375,7 @@ app.controller('coverStoryHomeCtrl', ['$scope', '$timeout', '$rootScope', functi
                             $scope.stories.push(data);
                         }
                         $scope.coverStoriesFetched = true;
+                        $('.home-cover-stories').fadeIn(2000);
                     }, 0);
                 })
         }
