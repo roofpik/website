@@ -231,7 +231,7 @@
                     <hr>
                 </div>
                 <!-- <button data-target="mobile-verification-modal" class="blue lighten-1 btn block mgt20 wd100">Submit</button> -->
-                <button data-target="mobile-verification-modal" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating || !projectSelected)?'disabled':'normal'" class="blue lighten-1 btn block mgt20 wd100">Submit</button>
+                <button data-target="mobile-verification-modal" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating || !projectSelected|| !loginStatus)?'disabled':'normal'" class="blue lighten-1 btn block mgt20 wd100">Submit</button>
                 <!-- <a href="" ng-click="submitReview()" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating || !projectSelected)?'disabled':'normal'" class="blue lighten-1 btn block mgt20">Submit</a> -->
                 <p ng-hide="loginStatus" id="loginSignup">Please login/signup to submit review *</p>
             </form>
