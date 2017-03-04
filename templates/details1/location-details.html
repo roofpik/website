@@ -5,7 +5,7 @@
                 <div class="nav-wrapper">
                     <div class="col s12">
                         <a href="#home" class="breadcrumb">Home</a>
-                        <a href="#projects" class="breadcrumb" ng-repeat="path in path track by $index">{{path}}</a>
+                        <a href="#list" class="breadcrumb" ng-repeat="path in path track by $index">{{path}}</a>
                     </div>
                 </div>
             </nav>
@@ -93,10 +93,11 @@
                 </div>
             </div>
             <div class="row mgt5 mgan pdleftbig hdnxstb" ng-hide="loading">
-                <a href="" ng-click="scrollToDiv('price_ranges')" class="stand_amn"><i class="material-icons left ft14">location_city</i>Available Projects</a>
+                <a href="" ng-click="scrollToDiv('projects')" class="stand_amn"><i class="material-icons left ft14">location_city</i>Available Projects</a>
                 <a href="" ng-click="scrollToDiv('reviews')" class="stand_amn"><i class="material-icons left ft14">edit</i>Reviews</a>
             </div>
         </div>
     </section>
     <section class="mgt20 reviews container container2" ui-view="reviewRating"></section>
+    <section class="mgt20 projects container container2" ui-view="relatedProjectsSection"></section>
 </div>
