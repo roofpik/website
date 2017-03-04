@@ -7,7 +7,7 @@ app.controller('footerCtrl', ['$scope', '$timeout', '$state', function($scope, $
     $scope.forms = {};
 
     $scope.submitQuery = function(user) {
-        console.log(user);
+        // console.log(user);
         db.ref('contactUs').push($scope.user).then(function() {
             $timeout(function() {
                 $scope.user = {};

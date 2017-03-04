@@ -310,7 +310,7 @@ app.controller('locationReviewRatingCtrl', ['$scope', '$timeout', '$stateParams'
 
 
 app.controller('relatedProjectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', function($scope, $http, $timeout, $stateParams) {
-    console.log('called');
+    // console.log('called');
     var parameters = decodeParams($stateParams.p);
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.locId = parameters.id;
@@ -338,7 +338,7 @@ app.controller('relatedProjectsCtrl', ['$scope', '$http', '$timeout', '$statePar
             page_size: page_size,
             page_start: page_start
         }
-        console.log(data);
+        // console.log(data);
         $scope.loading = true;
         $http({
             url: 'http://35.154.60.19/api/GetListing_1.0',

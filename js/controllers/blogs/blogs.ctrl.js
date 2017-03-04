@@ -16,10 +16,10 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $sce, $stateParam
 
 app.controller('featuredBlogsCtrl', function($scope, $timeout, $stateParams) {
 
-    console.log('featured called');
+    // console.log('featured called');
     $scope.featuredBlogs = [];
     db.ref('featuredBlogs/' + $scope.cityId).once('value', function(data) {
-        console.log(data.val());
+        // console.log(data.val());
         $timeout(function() {
             if (data.val()) {
                 angular.forEach(data.val(), function(value, key) {
@@ -61,7 +61,7 @@ app.controller('featuredBlogsCtrl', function($scope, $timeout, $stateParams) {
 
 app.controller('popularLocalityCtrl', function($scope, $timeout, $stateParams) {
 
-    console.log('popular called');
+    // console.log('popular called');
 
     db.ref('popularBlogs/' + $scope.cityId).once('value', function(snapshot) {
         $timeout(function() {
@@ -110,7 +110,7 @@ app.controller('popularLocalityCtrl', function($scope, $timeout, $stateParams) {
 
 app.controller('shortBlogsCtrl', function($scope, $timeout, $sce, $stateParams) {
 
-    console.log('Short blogs called');
+    // console.log('Short blogs called');
     db.ref('shortBlogs/' + $scope.cityId).once('value', function(snapshot) {
         $timeout(function() {
             if (snapshot.val()) {
@@ -211,7 +211,7 @@ app.controller('shortBlogsCtrl', function($scope, $timeout, $sce, $stateParams) 
     }
 
     $scope.shareonfb = function(blog) {
-        console.log(blog);
+        // console.log(blog);
         var hashtag = '';
         for (key in blog.hashtags) {
             hashtag += ' #' + blog.hashtags[key].tag;

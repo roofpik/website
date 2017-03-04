@@ -9,7 +9,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     firebase.auth().onAuthStateChanged(function(user) {
         $timeout(function() {
             if (user) {
-                console.log(firebase.auth().currentUser)
+                // console.log(firebase.auth().currentUser)
                 $scope.user = firebase.auth().currentUser
             } else {
                 $state.go('home');
@@ -49,7 +49,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     }
 
     function getUserData() {
-        console.log($scope.userId)
+        // console.log($scope.userId)
         db.ref('users/' + $scope.userId).once('value', function(snapshot) {
             $timeout(function() {
                 if (snapshot.val().fname) {
@@ -145,8 +145,8 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     }
 
     function getReviewData(i, Id) {
-        console.log($scope.userReviews[i]);
-        console.log(Id);
+        // console.log($scope.userReviews[i]);
+        // console.log(Id);
         $http({
             url: 'http://35.154.60.19/api/GetReviewDetails_1.0',
             method: 'GET',
@@ -156,9 +156,9 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
             }
         }).then(function mySucces(response) {
             $timeout(function() {
-                console.log(response);
+                // console.log(response);
                 if (response.status == 200) {
-                    console.log(response);
+                    // console.log(response);
                     $scope.text = response.data.reviewText;
                     setReviewText($scope.text, i, response)
                     showHideReviewRating(i, $scope.userReviews[i].overallExists);
@@ -166,7 +166,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
                 }
                 // loading(false, 1000);
             }, function myError(err) {
-                console.log(err);
+                // console.log(err);
             }, 0);
         })
     }
@@ -180,7 +180,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
         if ($scope.userReviews[i].overallExists && response.data.reviewTitle == '' && response.data.reviewText == '') {
             $scope.nonTextReviews++;
         }
-        console.log($scope.userReviews[i].type, $scope.userReviews[i].projectId, $scope.userReviews[i].reviewId)
+        // console.log($scope.userReviews[i].type, $scope.userReviews[i].projectId, $scope.userReviews[i].reviewId)
         db.ref('reviews/' + $scope.cityId + '/' + $scope.userReviews[i].type + '/' + $scope.userReviews[i].projectId + '/' + $scope.userReviews[i].reviewId).once('value', function(response) {
             $timeout(function() {
                 if (response.val().verified) {
@@ -339,7 +339,7 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
             }
         }).then(function(response) {
             $timeout(function() {
-                console.log(response);
+                // console.log(response);
                 if (response.status == 200) {
                     // console.log('sent');
                     swal({
@@ -383,8 +383,8 @@ app.controller('profileCtrl', ['$scope', '$stateParams', '$state', '$timeout', '
     }
 
     function setVerifiedReview(i, mobile) {
-        console.log(i);
-        console.log(mobile);
+        // console.log(i);
+        // console.log(mobile);
         var updates = {
             mobile: $scope.userReviews[i].reviewId
         }
