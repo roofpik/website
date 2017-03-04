@@ -1,8 +1,8 @@
-<div ng-hide="loading">
+<div class="related-projects mgb10">
     <h5 class="ft15 b mgtn mgb10 pdb10 bdbtm">Available Projects</h5>
     <div class="col s12">
         <div class="row mgbn mgrtmns10 reletive">
-            <div ng-show="loading" class="preloader-wrapper big active loaderPosition">
+            <div ng-show="loading" class="preloader-wrapper big active loaderPositionlocationProjects">
                 <div class="spinner-layer spinner-blue-only">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
@@ -15,21 +15,32 @@
                     </div>
                 </div>
             </div>
-            <div ng-hide="loading" class="card horizontal boxonelocation imgfx" ng-class="displayType" ng-repeat="key in relatedProjects">
-                <a ng-click="goToProjectsPage(key)">
+            <div ng-hide="loading" class="card horizontal boxonelocation imgfx" ng-class="displayType" ng-repeat="project in relatedProjects track by $index">
+                <!-- <a ng-click="goToProjectsPage(project)"> -->
+                <a ng-href="{{getRedirectionString(project.id, project.type)}}">
                     <div class="card-image fix40 left">
-                        <img ng-src="{{key.coverImage}}" class="responsive-img">
+                        <img ng-src="{{project.cover}}" class="responsive-img">
                     </div>
                     <div class="cardpdt fix60 left">
-                        <span class="block black-text ft13 ellipsis">{{key.name}}</span>
-                        <span class="block ft12 grey-text ellipsis">{{key.address}}</span>
-                        <span class="block ft12 grey-text ellipsis">
-                            <i ng-show="key.overallRating !=  0" class="material-icons" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < key.overallRating? 'blue-text': 'normal'">star</i>
-                            </span>
-                        <p ng-show="key.overallRating == 0"><i>Not Rated Yet</i></p>
+                        <span class="block black-text ft13 ellipsis">{{project.name}}</span>
+                        <span class="block ft12 grey-text ellipsis">{{project.address}}</span>
+                        <span class="block ft12 grey-text ellipsis"><i class="material-icons ft14 text-darken-2" ng-repeat="i in [1,2,3,4,5] track by $index" ng-class="$index < project.rating ? 'amber-text':'normal'">star</i><span ng-show="project.rating">({{project.rating}})</span> <span ng-show="project.numberOfReviews">{{project.numberOfReviews}}</span><span ng-hide="project.numberOfReviews">No</span> Reviews</span>
+                        <span class="block ft12 grey-text ellipsis" ng-show="project.bhks">{{project.bhks}} BHK Available</span>
+                        <span class="block ft12 grey-text ellipsis" ng-show="project.area">{{project.area.min}} <span ng-show="project.area.min != project.area.max">- {{project.area.max}}</span> Sq.ft.</span>
+                        </p>
                     </div>
                 </a>
             </div>
+            <div ng-show="hasNoProjects" class="card pda10 center ft24 blue-text">
+                <p><b>No matching properties available</b></p>
+            </div>
         </div>
+    </div>
+    <div class="col s12" ng-hide="loading|| hasNoProjects">
+        <ul class="pagination">
+            <li ng-class="currentPage == 1? 'disabled' : 'waves-effect'" ng-click="changePage(1)"><a href=""><i class="material-icons">chevron_left</i></a></li>
+            <li ng-class="page == currentPage? 'active' : 'waves-effect'" ng-repeat="page in pages" ng-click="goToPage(page)"><a href="">{{page}}</a></li>
+            <li ng-class="currentPage == lastPage? 'disabled' : 'waves-effect'" ng-click="changePage(2)"><a href=""><i class="material-icons">chevron_right</i></a></li>
+        </ul>
     </div>
 </div>

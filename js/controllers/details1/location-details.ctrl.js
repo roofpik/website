@@ -1,14 +1,10 @@
 app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '$timeout', '$http', '$state', function($scope, $stateParams, $rootScope, $timeout, $http, $state) {
-    console.log($stateParams.p);
     var parameters = decodeParams($stateParams.p);
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.loading = true;
-    console.log(parameters)
     $scope.locId = parameters.id;
     $scope.type = parameters.category;
-    $scope.allReviews = {};
-    $scope.relatedProjects = {};
-    $scope.path = ["Gurgaon", $scope.type]
+    $scope.path = ["Gurgaon"];
     if (parameters.category == 'locality') {
         $scope.category = 'locality';
     } else {
@@ -18,7 +14,6 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
 
     if (parameters.category == 'locations') {
         db.ref('locations/' + $scope.cityId + '/' + $scope.locId).once('value', function(response) {
-            console.log(response.val());
             $timeout(function() {
                 $scope.name = response.val().locationName;
                 $scope.id = response.val().locationId;
@@ -39,6 +34,13 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
                 // generateImageList($scope.location.images);
             }, 0);
         })
+    }
+
+    $scope.scrollToDiv = function(value) {
+        $('html,body').animate({
+                scrollTop: $("." + value).offset().top - 80
+            },
+            'slow');
     }
 
     $scope.provideDetails = function(data) {
@@ -63,7 +65,6 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
 app.controller('locationReviewRatingCtrl', ['$scope', '$timeout', '$stateParams', '$rootScope', '$http', '$state', function($scope, $timeout, $stateParams, $rootScope, $http, $state) {
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     var parameters = decodeParams($stateParams.p);
-    console.log(parameters);
     $scope.locationId = parameters.id;
     $scope.reviews = [];
     $scope.reviewsAvailable = false;
@@ -92,77 +93,6 @@ app.controller('locationReviewRatingCtrl', ['$scope', '$timeout', '$stateParams'
         $scope.category = 'location';
     }
 
-    // getRelatedProjects();
-
-    function getRelatedProjects() {
-        console.log($scope.locId);
-        var data = {
-            locationId: $scope.locId,
-            category: 'all',
-            vertical: 'residential',
-            page_size: 100
-        }
-        console.log(encodeParams(data));
-        $http({
-            url: 'http://35.154.60.19/api/GetListing_1.0',
-            method: 'GET',
-            params: {
-                args: encodeParams(data)
-            }
-        }).then(function mySucces(response) {
-            console.log(response);
-            var i = 0;
-            for (key in response.data.details) {
-                $scope.relatedProjects[i] = {};
-                $scope.relatedProjects[i].name = response.data.details[key].name;
-                $scope.relatedProjects[i].id = response.data.details[key].id;
-                $scope.relatedProjects[i].address = response.data.details[key].address;
-                $scope.relatedProjects[i].overallRating = response.data.details[key].rating;
-                $scope.relatedProjects[i].type = response.data.details[key].type;
-                $scope.relatedProjects[i].coverImage = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/' + $scope.relatedProjects[i].type + '/' + $scope.relatedProjects[i].id + '/images/coverPhoto/' + response.data.details[key].cover + '-s.jpg';
-                i++;
-            }
-            console.log($scope.relatedProjects);
-        })
-        $scope.loading = false;
-        if (Object.keys($scope.relatedProjects).length == 0) {
-            $scope.hideList = false;
-        }
-        // $scope.loading = false;
-    }
-
-    // $scope.test=function(){
-    //     alert(1);
-    // }
-    // $scope.getRedirectionString = function(id, type) {
-    //     console.log(id, type);
-    //     var data = {
-    //         projectId: id,
-    //         category: type
-    //     }
-    //     return '../#/project-details/' + encodeParams(data);
-    // }
-
-
-    // $scope.goToProjectsPage = function(key) {
-    //     alert(key);
-    //     return;
-    //     console.log(key)
-    //     if (key.type == 'residential') {
-    //         param = {
-    //             projectId: key.id
-    //         }
-    //         $state.go('project-details', { p: encodeParams(param) });
-    //     } else if (key.type == 'cghs') {
-    //         param = {
-    //             projectId: key.id,
-    //             category: 'cghs'
-    //         }
-    //         $state.go('project-details', { p: encodeParams(param) });
-    //     }
-    // }
-
-
     $http({
         url: 'http://35.154.60.19/api/GetReviewSummary_1.0',
         method: 'GET',
@@ -171,7 +101,6 @@ app.controller('locationReviewRatingCtrl', ['$scope', '$timeout', '$stateParams'
             type: $scope.category
         }
     }).then(function mySucces(response) {
-        console.log(response);
         if (response.status == 200) {
             if (response.data[$scope.locationId]) {
                 if (response.data[$scope.locationId] != 'not found') {
@@ -199,7 +128,6 @@ app.controller('locationReviewRatingCtrl', ['$scope', '$timeout', '$stateParams'
     })
 
     function createProgressBars() {
-        console.log($scope.reviewObject);
         for (key in $scope.reviewObject.numbers) {
             $scope.reviewObject.numbers[key + '1'] = Math.round($scope.reviewObject.numbers[key]);
         }
@@ -238,7 +166,6 @@ app.controller('locationReviewRatingCtrl', ['$scope', '$timeout', '$stateParams'
         } else {
             $scope.firstLoading = false;
         }
-        console.log(page_size, page_start)
         $http({
             url: 'http://35.154.60.19/api/GetProjectReviews_1.0',
             method: 'GET',
@@ -251,7 +178,6 @@ app.controller('locationReviewRatingCtrl', ['$scope', '$timeout', '$stateParams'
                 type: $scope.category
             }
         }).then(function mySucces(response) {
-            console.log(response);
             if (response.data) {
                 totalReviews = response.data.hits;
                 reviewsFetchedNum += Object.keys(response.data.details).length;
@@ -287,14 +213,13 @@ app.controller('locationReviewRatingCtrl', ['$scope', '$timeout', '$stateParams'
     }
 
     $scope.showReviewText = function(index) {
-        // console.log($scope.reviews[index]);
-        // loading(true);
+        // console.log(parameters.category, $scope.reviews[index].reviewId);
         $http({
             url: 'http://35.154.60.19/api/GetReviewDetails_1.0',
             method: 'GET',
             params: {
                 id: $scope.reviews[index].reviewId,
-                type: parameters.category
+                type: $scope.category
             }
         }).then(function mySucces(response) {
             // console.log(response);
@@ -384,70 +309,113 @@ app.controller('locationReviewRatingCtrl', ['$scope', '$timeout', '$stateParams'
 }]);
 
 
-// app.controller('relatedProjectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', function($scope, $http, $timeout, $stateParams) {
-//     console.log('called');
-//     var parameters = decodeParams($stateParams.p);
-//     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
-//     $scope.locId = parameters.id;
-//     $scope.type = parameters.category;
-//     if (parameters.category == 'locality') {
-//         $scope.category = 'locality';
-//     } else {
-//         $scope.category = 'location';
-//     }
+app.controller('relatedProjectsCtrl', ['$scope', '$http', '$timeout', '$stateParams', function($scope, $http, $timeout, $stateParams) {
+    console.log('called');
+    var parameters = decodeParams($stateParams.p);
+    $scope.cityId = '-KYJONgh0P98xoyPPYm9';
+    $scope.locId = parameters.id;
+    $scope.type = parameters.category;
+    $scope.relatedProjects = [];
+    var page_start = 0;
+    var page_size = 9;
+    $scope.pages = [];
+    $scope.currentPage = 1;
+    $scope.lastPage = 0;
+    var totalProjectsFetched = 0;
+    if (parameters.category == 'locality') {
+        $scope.category = 'locality';
+    } else {
+        $scope.category = 'location';
+    }
 
-//     getRelatedProjects();
+    getRelatedProjects();
 
-//     function getRelatedProjects() {
-//         console.log($scope.locId);
-//         var data = {
-//             locationId: $scope.locId,
-//             category: 'all',
-//             vertical: 'residential',
-//             page_size: 100
-//         }
-//         console.log(encodeParams(data));
-//         $http({
-//             url: 'http://35.154.60.19/api/GetListing_1.0',
-//             method: 'GET',
-//             params: {
-//                 args: encodeParams(data)
-//             }
-//         }).then(function mySucces(response) {
-//             console.log(response);
-//             var i = 0;
-//             for (key in response.data.details) {
-//                 $scope.relatedProjects[i] = {};
-//                 $scope.relatedProjects[i].name = response.data.details[key].name;
-//                 $scope.relatedProjects[i].id = response.data.details[key].id;
-//                 $scope.relatedProjects[i].address = response.data.details[key].address;
-//                 $scope.relatedProjects[i].overallRating = response.data.details[key].rating;
-//                 $scope.relatedProjects[i].type = response.data.details[key].type;
-//                 $scope.relatedProjects[i].coverImage = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/' + $scope.relatedProjects[i].type + '/' + $scope.relatedProjects[i].id + '/images/coverPhoto/' + response.data.details[key].cover + '-s.jpg';
-//                 i++;
-//             }
-//             console.log($scope.relatedProjects);
-//         })
-//         $scope.loading = false;
-//         if (Object.keys($scope.relatedProjects).length == 0) {
-//             $scope.hideList = false;
-//         }
-//         // $scope.loading = false;
-//     }
+    function getRelatedProjects() {
+        var data = {
+            locationId: $scope.locId,
+            category: 'all',
+            vertical: 'residential',
+            page_size: page_size,
+            page_start: page_start
+        }
+        $scope.loading = true;
+        $http({
+            url: 'http://35.154.60.19/api/GetListing_1.0',
+            method: 'GET',
+            params: {
+                args: encodeParams(data)
+            }
+        }).then(function mySucces(response) {
+            $scope.relatedProjects = [];
+            totalProjects = response.data.hits;
+            if (totalProjects == 0) {
+                $scope.hasNoProjects = true;
+            } else {
+                $scope.hasNoProjects = false;
+            }
+            if ($scope.pages.length == 0) {
+                var max = 0;
+                if (totalProjects / page_size > parseInt(totalProjects / page_size)) {
+                    max = parseInt(totalProjects / page_size) + 1;
+                } else {
+                    max = parseInt(totalProjects / page_size);
+                }
+                // console.log(max);
+                for (var i = 1; i <= max; i++) {
+                    $scope.pages.push(i);
+                }
+                $scope.lastPage = $scope.pages[$scope.pages.length - 1];
+            }
+            totalProjectsFetched += Object.keys(response.data.details).length;
+            $scope.dataFetched = true;
+            $scope.projects = response.data.details;
+            for (key in $scope.projects) {
+                if ($scope.projects[key].cover.indexOf('http') == -1) {
+                    $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/' + $scope.projects[key].type + '/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-s.jpg';
+                }
+                $scope.relatedProjects.push($scope.projects[key]);
+            }
+            // console.log($scope.relatedProjects);
+            $timeout(function(){
+                $scope.loading = false;
+            }, 1000);
+        }, function myError(err) {
+            $timeout(function(){
+                $scope.loading = false;
+            }, 1000);
+        })
+    }
 
-//     $scope.goToProjectsPage = function(key) {
-//         console.log(key)
-//         if (key.type == 'residential') {
-//             param = {
-//                 projectId: key.id
-//             }
-//             $state.go('project-details', { p: encodeParams(param) });
-//         } else if (key.type == 'cghs') {
-//             param = {
-//                 projectId: key.id,
-//                 category: 'cghs'
-//             }
-//             $state.go('project-details', { p: encodeParams(param) });
-//         }
-//     }
-// }]);
+    $scope.goToPage = function(pageNum) {
+        $('html,body').animate({
+                scrollTop: $(".related-projects").offset().top - 80
+            },
+        'slow');
+        page_start = (pageNum - 1) * page_size;
+        $scope.currentPage = pageNum;
+        if (pageNum == $scope.pages[$scope.pages.length - 1]) {
+            page_size = totalProjects - page_start;
+        }
+        getRelatedProjects();
+    }
+
+    $scope.changePage = function(val) {
+        if (val == 1) {
+            if ($scope.currentPage > 1) {
+                $scope.goToPage($scope.currentPage - 1);
+            }
+        } else {
+            if (val != $scope.lastPage) {
+                $scope.goToPage($scope.currentPage + 1);
+            }
+        }
+    }
+
+    $scope.getRedirectionString = function(id, type) {
+        var data = {
+            projectId: id,
+            category: type
+        }
+        return '../#/project-details/' + encodeParams(data);
+    }
+}]);

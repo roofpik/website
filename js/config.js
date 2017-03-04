@@ -67,11 +67,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             'reviewRating@location-details': {
                 templateUrl: 'templates/details1/project-review-ratings.html',
                 controller: 'locationReviewRatingCtrl'
+            },
+            'relatedProjectsSection@location-details':{
+                templateUrl: 'templates/details1/related-projects.html',
+                controller: 'relatedProjectsCtrl'
             }
-            // 'relatedProjects@location-details':{
-            //     templateUrl: 'templates/details1/related-projects.html',
-            //     contoller: 'relatedProjectsCtrl'
-            // }
         }
     });
 

@@ -53,11 +53,14 @@
     width: 100%;
 }
 
-
 .mgtp10 {
     margin-top: 10% !important;
 }
-.ht40{height: 265px !important;}
+
+.ht40 {
+    height: 265px !important;
+}
+
 .loadingPositionModal {
     /*padding-left: 50%;*/
     padding-top: 70px;
@@ -72,4 +75,18 @@
     margin-left: 50%;
     margin-top: 50px;
     margin-bottom: 50px;
+}
+
+.loaderPositionlocationProjects {
+    position: absolute;
+    left: 50%;
+    top: 35px;
+    z-index: 1;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
+
+.related-projects {
+    min-height:200px;
 }
