@@ -5,7 +5,7 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $sce, $sta
     //     url: $location.path()
     // }
     // UserTokenService.checkToken(urlInfo, timestamp, 1);
-    console.log('cover called');
+    // console.log('cover called');
 
     $scope.showNoStories = false;
     $scope.featuredStories = [];
@@ -19,10 +19,10 @@ app.controller('coverStoriesCtrl', function($scope, $timeout, $state, $sce, $sta
 
 
 app.controller('featuredStoriesCtrl', function($scope, $timeout, $stateParams) {
-    console.log('featured called');
+    // console.log('featured called');
     $scope.featuredStories = [];
     db.ref('featuredStories/' + $scope.cityId).once('value', function(data) {
-        console.log(data.val());
+        // console.log(data.val());
         $timeout(function() {
             if (data.val()) {
                 angular.forEach(data.val(), function(value, key) {
@@ -37,7 +37,7 @@ app.controller('featuredStoriesCtrl', function($scope, $timeout, $stateParams) {
                     value.coverPhoto = 'http://cdn.roofpik.com/roofpik/coverStory/stories/' + $scope.cityId + '/' + value.storyId + '/coverPhoto/' + value.coverPhoto + '-m.jpg';
                     $scope.featuredStories.push(value);
                 })
-                console.log($scope.featuredStories);
+                // console.log($scope.featuredStories);
                 $('.carousel.carousel-slider').carousel({ full_width: true });
             }
         }, 0);
@@ -75,7 +75,7 @@ app.controller('popularLocationStoriesCtrl', function($scope, $timeout, $statePa
 })
 
 app.controller('shortStoriesCtrl', function($scope, $sce, $timeout, $stateParams) {
-    console.log('called');
+    // console.log('called');
     db.ref('shortStories/' + $scope.cityId).once('value', function(snapshot) {
         $timeout(function() {
             if (snapshot.val()) {

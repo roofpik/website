@@ -1,5 +1,5 @@
 app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$state', function($scope, $http, $timeout, $stateParams, $state) {
-    console.log($stateParams.p);
+    // console.log($stateParams.p);
     if($stateParams.p){
         var parameters = decodeParams($stateParams.p);
     } else {
@@ -181,7 +181,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
         }
         data.page_start = page_start;
         data.page_size = page_size;
-        console.log(data);
+        // console.log(data);
         $http({
             url: 'http://35.154.60.19/api/GetListing_1.0',
             method: 'GET',
@@ -189,7 +189,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
                 args: encodeParams(data)
             }
         }).then(function mySucces(response) {
-            console.log(response);
+            // console.log(response);
             $scope.projectList = [];
             totalProjects = response.data.hits;
             if(totalProjects == 0){

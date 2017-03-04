@@ -5,7 +5,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     $scope.loading = true;
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     var parameters = decodeParams($stateParams.p);
-    console.log(parameters);
+    // console.log(parameters);
     var parameter = '';
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
@@ -304,10 +304,10 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
             },
             'slow');
     }
-    console.log($scope.category)
+    // console.log($scope.category)
     db.ref('projects/-KYJONgh0P98xoyPPYm9/' + $scope.category + '/' + $scope.projectId).once('value', function(snapshot) {
         $timeout(function() {
-            console.log(snapshot.val());
+            // console.log(snapshot.val());
             $scope.project = snapshot.val();
             $scope.projectName = $scope.project.projectName;
             document.title = $scope.projectName;
@@ -375,8 +375,8 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
         areaData = areaData.sort(sortNumber);
         minPriceData = minPriceData.sort(sortNumber);
         maxPriceData = maxPriceData.sort(sortNumber);
-        console.log(minPriceData);
-        console.log(maxPriceData);
+        // console.log(minPriceData);
+        // console.log(maxPriceData);
         if (minPriceData.length != 0) {
             $scope.rentMin = convertCurrency(minPriceData[0]);
         } else {
@@ -495,7 +495,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
                 // console.log(example);
             }
         }
-        console.log(example);
+        // console.log(example);
         addNa(example);
     }
 
@@ -657,7 +657,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
             id: $scope.projectId
         }
     }).then(function mySucces(response) {
-        console.log(response);
+        // console.log(response);
         if (response.status == 200) {
             if (response.data[$scope.projectId]) {
                 if (response.data[$scope.projectId] != 'not found') {
@@ -685,7 +685,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
     })
 
     function createProgressBars() {
-        console.log($scope.reviewObject);
+        // console.log($scope.reviewObject);
         for (key in $scope.reviewObject.numbers) {
             $scope.reviewObject.numbers[key + '1'] = Math.round($scope.reviewObject.numbers[key]);
         }
@@ -724,7 +724,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
         } else {
             $scope.firstLoading = false;
         }
-        console.log($scope.projectId, selectedRating, customerType, page_size, page_start)
+        // console.log($scope.projectId, selectedRating, customerType, page_size, page_start)
         $http({
             url: 'http://35.154.60.19/api/GetProjectReviews_1.0',
             method: 'GET',
@@ -736,7 +736,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
                 page_start: page_start
             }
         }).then(function mySucces(response) {
-            console.log(response);
+            // console.log(response);
             if (response.data) {
                 totalReviews = response.data.hits;
                 reviewsFetchedNum += Object.keys(response.data.details).length;

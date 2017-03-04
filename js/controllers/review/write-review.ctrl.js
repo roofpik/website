@@ -22,7 +22,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
         if (JSON.parse(localStorage.getItem('loginStatus'))) {
             $scope.user = firebase.auth().currentUser;
         } else {
-            console.log('this is working')
+            // console.log('this is working')
             $rootScope.$emit("callShowLogin");
         }
     } else {
@@ -109,7 +109,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     $('#textarea1').trigger('autoresize');
 
     if ($stateParams.id) {
-        console.log($stateParams);
+        // console.log($stateParams);
         $scope.selectedItem = decodeURIComponent((atob($stateParams.n)));
         $scope.selectedProject = {
             id: $stateParams.id,
@@ -182,7 +182,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     }
 
     $scope.submitReview = function() {
-        console.log($scope.selectedProject);
+        // console.log($scope.selectedProject);
         var reviewPath = '';
         var userReviewPath = '';
         var newKey = '';
@@ -263,7 +263,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                 if ($scope.review.couponApplied) {
                     parameter += '&coupon=' + $scope.review.couponCode;
                 }
-                console.log(parameter);
+                // console.log(parameter);
                 $http({
                     url: 'http://35.154.60.19/api/SendMail_1.0',
                     method: 'GET',
@@ -271,7 +271,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                         args: btoa(parameter)
                     }
                 }).then(function mySucces(response) {
-                    console.log(response);
+                    // console.log(response);
                     $timeout(function() {
                         $scope.step = 5;
                     }, 1000)
@@ -287,7 +287,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     /*Coupon Code Verification Starts*/
 
     $scope.validateCoupon = function() {
-        console.log($scope.couponCode);
+        // console.log($scope.couponCode);
         var timestamp = parseInt((new Date().getTime()) / 1000);
         if ($scope.couponCode == '') {
             $scope.message = 'Please enter the coupon code.';
@@ -353,7 +353,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
                         email: $scope.user.email
                     }
                 }).then(function(response) {
-                    console.log(response);
+                    // console.log(response);
                     if (response.status == 200) {
                         $timeout(function() {
                             // $scope.showModalLoading = false;
@@ -375,7 +375,7 @@ app.controller('writeReviewCtrl', ['$scope', '$timeout', '$rootScope', '$locatio
     }
 
     $scope.verifyOtp = function(otp) {
-        console.log(otp, $scope.otp);
+        // console.log(otp, $scope.otp);
         if (parseInt($scope.otp) != parseInt(otp)) {
             $scope.incorrectOtp = true;
         } else {

@@ -57,7 +57,7 @@ app.controller('contactUsCtrl', ['$scope', '$timeout', function($scope, $timeout
             },100);
             sweetAlert("Done!", "Your query was successfully submitted.", "success");
         })
-        console.log($scope.user);
+        // console.log($scope.user);
         
     }
     loading(false);

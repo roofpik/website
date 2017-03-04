@@ -153,7 +153,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
             name = '';
         }
         finalParam = btoa(parameter + name);
-        console.log(atob(finalParam));
+        // console.log(atob(finalParam));
         $http({
             url: 'http://35.154.60.19/api/GetLocations_1.0',
             method: 'GET',
@@ -168,7 +168,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
             }
             $timeout(function() {
                 $scope.searchingLocation = false;
-                console.log('now false');
+                // console.log('now false');
             }, 0);
             $scope.loading = false;
             // console.log($scope.locations);
@@ -180,7 +180,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         if ($scope.locationSearched) {
             if ($scope.locationSearched.length > 2) {
                 $scope.searchingLocation = true;
-                console.log('now false');
+                // console.log('now false');
                 name = "&name=" + encodeURIComponent($scope.locationSearched);
                 getLocations(name);
             }
@@ -196,7 +196,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     }
 
     $scope.selectSearchByName = function(val) {
-        console.log(val);
+        // console.log(val);
         $scope.searchedText = val.name;
         $scope.searchedValue = val;
         $scope.showSearch2 = false;
@@ -324,7 +324,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     }
 
     $scope.highlight = function(text, search) {
-        console.log('called');
+        // console.log('called');
         if (!search) {
             return $sce.trustAsHtml(text);
         }
@@ -350,7 +350,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         }
     });
     $scope.goToWriteReview = function(){
-        console.log('here')
+        // console.log('here')
         $state.go('write-review');
     }
 
