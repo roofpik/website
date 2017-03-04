@@ -2205,6 +2205,10 @@ footer.page-footer .footer-copyright {
     max-width: 38% !important;
 }
 
+.boxonelocation .fix40 img {
+    height: 120px;
+}
+
 .boxthree .fix40 {
     width: 40% !important;
     max-width: 40% !important;
