@@ -338,6 +338,7 @@ app.controller('relatedProjectsCtrl', ['$scope', '$http', '$timeout', '$statePar
             page_size: page_size,
             page_start: page_start
         }
+        console.log(data);
         $scope.loading = true;
         $http({
             url: 'http://35.154.60.19/api/GetListing_1.0',
@@ -376,11 +377,11 @@ app.controller('relatedProjectsCtrl', ['$scope', '$http', '$timeout', '$statePar
                 $scope.relatedProjects.push($scope.projects[key]);
             }
             // console.log($scope.relatedProjects);
-            $timeout(function(){
+            $timeout(function() {
                 $scope.loading = false;
             }, 1000);
         }, function myError(err) {
-            $timeout(function(){
+            $timeout(function() {
                 $scope.loading = false;
             }, 1000);
         })
@@ -390,12 +391,16 @@ app.controller('relatedProjectsCtrl', ['$scope', '$http', '$timeout', '$statePar
         $('html,body').animate({
                 scrollTop: $(".related-projects").offset().top - 80
             },
-        'slow');
+            'slow');
         page_start = (pageNum - 1) * page_size;
-        $scope.currentPage = pageNum;
-        if (pageNum == $scope.pages[$scope.pages.length - 1]) {
-            page_size = totalProjects - page_start;
+        if (pageNum < $scope.currentPage) {
+            page_size = 9;
+        } else {
+            if (pageNum == $scope.pages[$scope.pages.length - 1]) {
+                page_size = totalProjects - page_start;
+            }
         }
+        $scope.currentPage = pageNum;
         getRelatedProjects();
     }
 
