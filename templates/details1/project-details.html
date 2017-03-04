@@ -222,7 +222,11 @@
             <h5 class="ft15 b mgtn mgb10 pdb10 bdbtm">Gallery</h5>
         </div>
         <div class="col s12 mgan">
-            <div class="img_media">
+            <div class="img_media" ng-repeat="image in projectImages">
+                <img class="materialboxed" ng-src="{{image.src}}" alt="" style="width: 100%;">
+                <!-- <img class="materialboxed" src="images/home/home-bg.jpg" alt=""> -->
+            </div>
+<!--             <div class="img_media">
                 <img class="materialboxed" src="images/home/home-bg.jpg" alt="">
             </div>
             <div class="img_media">
@@ -233,13 +237,7 @@
             </div>
             <div class="img_media">
                 <img class="materialboxed" src="images/home/home-bg.jpg" alt="">
-            </div>
-            <div class="img_media">
-                <img class="materialboxed" src="images/home/home-bg.jpg" alt="">
-            </div>
+            </div> -->
         </div>
-        <!--  <div class="row mgan">
-            <gallerynew></gallerynew>
-        </div> -->
     </div>
 </div>
