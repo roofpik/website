@@ -27,7 +27,7 @@
                     <h5 class="ft15 mgtn b mgb10">User Rating</h5>
                     <div class="row mgbn">
                         <div class="col s6 mgrn">
-                            <input type="checkbox" class="filled-in" ng-change="filterReview('five')" ng-model="ratingSelected.five" id="filled-in-box2" />
+                            <input type="checkbox" class="filled-in" ng-change="filterReview(5)" ng-model="ratingSelected.five" id="filled-in-box2" />
                             <label for="filled-in-box2">Excellent </label>
                         </div>
                         <div class="col s3 pdan">
@@ -39,7 +39,7 @@
                     </div>
                     <div class="row mgbn">
                         <div class="col s6 mgrn">
-                            <input type="checkbox" class="filled-in" ng-change="filterReview('four')" ng-model="ratingSelected.four" id="filled-in-box3" />
+                            <input type="checkbox" class="filled-in" ng-change="filterReview(4)" ng-model="ratingSelected.four" id="filled-in-box3" />
                             <label for="filled-in-box3">Very Good </label>
                         </div>
                         <div class="col s3 pdan">
@@ -51,7 +51,7 @@
                     </div>
                     <div class="row mgbn">
                         <div class="col s6 mgrn">
-                            <input type="checkbox" class="filled-in" ng-change="filterReview('three')" ng-model="ratingSelected.three" id="filled-in-box4" />
+                            <input type="checkbox" class="filled-in" ng-change="filterReview(3)" ng-model="ratingSelected.three" id="filled-in-box4" />
                             <label for="filled-in-box4">Good </label>
                         </div>
                         <div class="col s3 pdan">
@@ -63,7 +63,7 @@
                     </div>
                     <div class="row mgbn">
                         <div class="col s6 mgrn">
-                            <input type="checkbox" class="filled-in" ng-change="filterReview('two')" ng-model="ratingSelected.two" id="filled-in-box5" />
+                            <input type="checkbox" class="filled-in" ng-change="filterReview(2)" ng-model="ratingSelected.two" id="filled-in-box5" />
                             <label for="filled-in-box5">Average </label>
                         </div>
                         <div class="col s3 pdan">
@@ -75,7 +75,7 @@
                     </div>
                     <div class="row mgbn">
                         <div class="col s6 mgrn">
-                            <input type="checkbox" class="filled-in" ng-change="filterReview('one')" ng-model="ratingSelected.one" id="filled-in-box6" />
+                            <input type="checkbox" class="filled-in" ng-change="filterReview(1)" ng-model="ratingSelected.one" id="filled-in-box6" />
                             <label for="filled-in-box6">Bad </label>
                         </div>
                         <div class="col s3 pdan">
@@ -198,8 +198,8 @@
                 </div>
             </div>
         </div>
-        <div class="row mgt20 mgan" ng-hide="hasReviews || fetchingReviews">
-            <h3>No Reviews</h3>
+        <div class="row mgt20 mgan ft22" ng-hide="hasReviews || fetchingReviews">
+            <h4>No Reviews</h4>
         </div>
         <div class="row mgt20 mgan" ng-show="hasReviews || !fetchingReviews">
             <div class="col s12">

@@ -299,12 +299,12 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     };
 
     $scope.scrollToDiv = function(value) {
-        $('html,body').animate({
-                scrollTop: $("." + value).offset().top - 80
-            },
-            'slow');
-    }
-    // console.log($scope.category)
+            $('html,body').animate({
+                    scrollTop: $("." + value).offset().top - 80
+                },
+                'slow');
+        }
+        // console.log($scope.category)
     db.ref('projects/-KYJONgh0P98xoyPPYm9/' + $scope.category + '/' + $scope.projectId).once('value', function(snapshot) {
         $timeout(function() {
             // console.log(snapshot.val());
@@ -616,7 +616,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
             }
         }
         $scope.projectImages = imageData;
-        $timeout(function(){
+        $timeout(function() {
             $('.materialboxed').materialbox();
         }, 500);
         // $rootScope.$broadcast('initGallery', imageData);
@@ -630,7 +630,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
     $scope.projectId = parameters.projectId;
     $scope.reviews = [];
     $scope.reviewsAvailable = false;
-    var selectedRating = 0;
+    var selectedRating = '';
     $scope.reviews = [];
     var reviewsFetchedNum = 0;
     var totalReviews = 0;
@@ -724,9 +724,9 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
         } else {
             $scope.firstLoading = false;
         }
-        // console.log($scope.projectId, selectedRating, customerType, page_size, page_start)
+        console.log($scope.projectId, selectedRating, customerType, page_size, page_start)
         $http({
-            url: 'http://35.154.60.19/api/GetProjectReviews_1.0',
+            url: 'http://107.23.243.89/api/GetProjectReviews_1.0',
             method: 'GET',
             params: {
                 pid: $scope.projectId,
@@ -736,7 +736,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
                 page_start: page_start
             }
         }).then(function mySucces(response) {
-            // console.log(response);
+            console.log(response);
             if (response.data) {
                 totalReviews = response.data.hits;
                 reviewsFetchedNum += Object.keys(response.data.details).length;
@@ -789,30 +789,18 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
         })
     }
 
-    $scope.allRatings = {
-        'one': 1,
-        'two': 2,
-        'three': 3,
-        'four': 4,
-        'five': 5
-    };
-    $scope.ratingIndex = ['one', 'two', 'three', 'four', 'five'];
-
     $scope.filterReview = function(index) {
-        var count = 0;
-        count = $scope.allRatings[index];
-        if ($scope.ratingSelected[index]) {
-            for (var i = count - 1; i < 5; i++) {
-                $scope.ratingSelected[$scope.ratingIndex[i]] = true;
+        console.log(selectedRating);
+        if(selectedRating.length != 0){
+            if(selectedRating.indexOf(index) == -1){
+                selectedRating += '$'+index.toString();    
+            } else {
+                selectedRating = selectedRating.split("$"+index).join('');
             }
-            selectedRating = count;
         } else {
-            // console.log(count);
-            for (var i = 4; i > count - 1; i--) {
-                $scope.ratingSelected[$scope.ratingIndex[i]] = false;
-            }
-            selectedRating = count - 1;
+            selectedRating = index.toString();
         }
+        console.log(selectedRating);
         $scope.reviews = [];
         reviewsFetchedNum = 0;
         totalReviews = 0;

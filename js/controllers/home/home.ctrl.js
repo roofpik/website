@@ -145,7 +145,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
     }
 
     function getLocations(name) {
-        console.log(parameter);
+        // console.log(parameter);
         if (!name) {
             name = '';
         }
@@ -157,7 +157,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
                 args: finalParam
             }
         }).then(function(response) {
-            console.log(response);
+            // console.log(response);
             $scope.locations = [];
             for (key in response.data.details) {
                 $scope.locations.push(response.data.details[key]);
@@ -187,11 +187,12 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
         $scope.selectedLocation = loc;
         if ($scope.exploreLocality) {
             if ($scope.selectedLocation.type == 'locality') {
-                param.category = 'lcoality'
+                param.category = 'locality'
             } else {
                 param.category = 'locations'
             }
-            param.id = $scope.selectedLocation.id
+            param.id = $scope.selectedLocation.id;
+            // console.log(param);
             $state.go('location-details', { p: encodeParams(param) });
         } else {
             param.vertical = 'residential';
@@ -282,7 +283,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
             $state.go('list', { p: parameter });
         } else if ($scope.selectedLocation) {
             if ($scope.selectedLocation.type == 'locality') {
-                param.category = 'lcoality'
+                param.category = 'locality'
             } else {
                 param.category = 'locations'
             }
@@ -310,7 +311,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', '$rootScope
                     args: encodeParams(data)
                 }
             }).then(function mySucces(response) {
-                console.log(response);
+                // console.log(response);
                 $scope.categorySearch = [];
                 if (Object.keys(response.data).length > 0) {
                     for (key in response.data) {

@@ -1,6 +1,6 @@
 app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$state', function($scope, $http, $timeout, $stateParams, $state) {
     // console.log($stateParams.p);
-    if($stateParams.p){
+    if ($stateParams.p) {
         var parameters = decodeParams($stateParams.p);
     } else {
         var parameters = {
@@ -65,7 +65,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
             $timeout(function() {
                 $scope.locations = [];
                 for (key in data) {
-                    $scope.locations.push(data[key]);    
+                    $scope.locations.push(data[key]);
                 }
                 getBuilders();
             }, 10)
@@ -167,6 +167,15 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
         }
         if (parameters.category) {
             $scope.filters.category = parameters.category;
+            if ($scope.filters.category == 'Penthouses / Duplexes$Villas / Row-houses') {
+                $scope.propertyType = 'Penthouse / Villas';
+            } else if ($scope.filters.category == 'Independent Floors') {
+                $scope.propertyType = 'Low Rise / Independent Floors';
+            } else if ($scope.filters.category == 'CGHS') {
+                $scope.propertyType = 'CGHS';
+            } else {
+                $scope.propertyType = 'Apartments';
+            }
         }
         fetchProjects();
     }
@@ -181,7 +190,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
         }
         data.page_start = page_start;
         data.page_size = page_size;
-        // console.log(data);
+        console.log(data);
         $http({
             url: 'http://35.154.60.19/api/GetListing_1.0',
             method: 'GET',
@@ -192,7 +201,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
             console.log(response);
             $scope.projectList = [];
             totalProjects = response.data.hits;
-            if(totalProjects == 0){
+            if (totalProjects == 0) {
                 $scope.hasNoProjects = true;
             } else {
                 $scope.hasNoProjects = false;
@@ -221,7 +230,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
                     // } else {
                     //     $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/residential/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-s.jpg';
                     // }
-                    $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/'+$scope.projects[key].type+'/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-s.jpg';
+                    $scope.projects[key].cover = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/' + $scope.projects[key].type + '/' + $scope.projects[key].id + '/images/coverPhoto/' + $scope.projects[key].cover + '-s.jpg';
                 }
                 $scope.projectList.push($scope.projects[key]);
             }
@@ -235,12 +244,12 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
 
     $scope.getRedirectionString = function(id, type) {
         var data = {
-            projectId: id,
-            category: type
-        }
-        // if (parameters.category == 'CGHS') {
-        //     data.category = 'cghs';
-        // }
+                projectId: id,
+                category: type
+            }
+            // if (parameters.category == 'CGHS') {
+            //     data.category = 'cghs';
+            // }
         return '../#/project-details/' + encodeParams(data);
     }
 
@@ -282,15 +291,26 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
     }
 
     $scope.applyFilters = function() {
+        var ratings = [];
         for (key in $scope.selected) {
             if ($scope.selected[key]) {
                 parameters[key] = '';
-                for (key1 in $scope.selected[key]) {
-                    if ($scope.selected[key][key1]) {
-                        if (parameters[key].length != 0) {
-                            parameters[key] += '$'
+                if (key == 'rating') {
+                    for(key1 in Object.keys($scope.selected[key])){
+                        if($scope.selected[key][Object.keys($scope.selected[key])[key1]]){
+                            ratings.push(parseInt(Object.keys($scope.selected[key])[key1]));
                         }
-                        parameters[key] += key1;
+                    }
+                    ratings = ratings.sort();
+                    parameters[key] = ratings[0];
+                } else {
+                    for (key1 in $scope.selected[key]) {
+                        if ($scope.selected[key][key1]) {
+                            if (parameters[key].length != 0) {
+                                parameters[key] += '$'
+                            }
+                            parameters[key] += key1;
+                        }
                     }
                 }
             }
@@ -324,5 +344,3 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
         }
     }
 }]);
-
-
