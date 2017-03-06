@@ -1068,7 +1068,7 @@ footer.page-footer {
 }
 
 .minht {
-    min-height: 460px;
+    min-height: 470px;
 }
 
 .box-h {
@@ -2485,13 +2485,16 @@ footer.page-footer .footer-copyright {
 }
 
 .wd90 {
-    width: 90px;
+    width: 90px; 
 }
 
 #materialbox-overlay {
     background-color: rgba(41, 41, 41, 0.90) !important;
 }
-
+.cir_contimg{ width: 40px; height: 40px; line-height: 40px !important; float: left; margin-right: 10px; }
+.cir_cont{width: 40px; height: 40px; margin-right: 5px; border-radius: 50%; line-height: 40px !important;}
+.borderrds20{border-radius: 30px; color: #666; font-size: 14px; }
+.borderrds20 span{display: inline-block; vertical-align: top; margin-top: 10px;}
 
 /*add other new css start*/
 
@@ -2580,7 +2583,6 @@ footer.page-footer .footer-copyright {
     width: 100%;
     height: 100%;
 }
-
 
 /*add other new other css end*/
 
