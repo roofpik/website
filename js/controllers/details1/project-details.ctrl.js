@@ -13,6 +13,8 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
             // console.log(user);
             $scope.userId = user.uid;
             $scope.userName = user.displayName;
+            checkLiked($scope.userId);
+            checkBookmarked($scope.userId);
         } else {
             // $state.go('home');
         }
@@ -34,6 +36,9 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     $scope.configurations = [];
     $scope.minBhk = 0;
     $scope.projectDataFetched = false;
+    $scope.hasLiked = false;
+    $scope.hasDisliked = false;
+    $scope.hasBookmarked = false;
     $scope.allAmenities = {
         'basic': {
             'carParking': {
@@ -299,12 +304,12 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     };
 
     $scope.scrollToDiv = function(value) {
-        $('html,body').animate({
-                scrollTop: $("." + value).offset().top - 80
-            },
-            'slow');
-    }
-    // console.log($scope.category)
+            $('html,body').animate({
+                    scrollTop: $("." + value).offset().top - 80
+                },
+                'slow');
+        }
+        // console.log($scope.category)
     db.ref('projects/-KYJONgh0P98xoyPPYm9/' + $scope.category + '/' + $scope.projectId).once('value', function(snapshot) {
         $timeout(function() {
             // console.log(snapshot.val());
@@ -616,11 +621,168 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
             }
         }
         $scope.projectImages = imageData;
-        $timeout(function(){
+        $timeout(function() {
             $('.materialboxed').materialbox();
         }, 500);
         // $rootScope.$broadcast('initGallery', imageData);
     }
+
+
+    function checkLiked(id) {
+        db.ref('userActivity/likes')
+            .orderByChild('userId')
+            .equalTo(id)
+            .once('value', function(response) {
+                $timeout(function() {
+                    if (response.val()) {
+                        for (key in response.val()) {
+                            if (response.val()[key]) {
+                                if (response.val()[key].id == $scope.projectId && response.val()[key].isLiked == 'true' && response.val()[key].isDisliked == 'false') {
+                                    $scope.showLike = true;
+                                    $scope.pushIdLiked = key;
+                                    console.log($scope.pushIdLiked);
+                                } else {
+                                    $scope.pushIdLiked = key;
+                                }
+                            }
+                        }
+                    }
+                }, 0)
+            })
+
+    }
+
+    function checkBookmarked(id) {
+        db.ref('userActivity/bookmarks')
+            .orderByChild('userId')
+            .equalTo(id)
+            .once('value', function(response) {
+                $timeout(function() {
+                    if (response.val()) {
+                        for (key in response.val()) {
+                            if (response.val()[key]) {
+                                if (response.val()[key].id == $scope.projectId && response.val()[key].active == 'true') {
+                                    $scope.pushIdBookmarked = key;
+                                    $scope.hasBookmarked = true;
+                                }
+                            }
+                        }
+                    }
+                }, 0)
+            })
+    }
+
+    $scope.projectLiked = function() {
+        if ($scope.pushIdLiked) {
+            db.ref('userActivity/likes/' + $scope.pushIdLiked + '/' + 'isLiked').set('true');
+            db.ref('userActivity/likes/' + $scope.pushIdLiked + '/' + 'isDisliked').set('false');
+            $scope.showLike = true;
+        } else {
+            var params = {
+                token: $scope.userId,
+                operation: 'likes',
+                isLiked: 'true',
+                isDisliked: 'false',
+                type: $scope.category,
+                id: $scope.projectId
+            }
+            console.log(parameter);
+            $http({
+                url: 'http://107.23.243.89/api/LogActivity_1.0',
+                method: 'GET',
+                params: {
+                    args: encodeParams(params)
+                }
+            }).then(function mySucces(response) {
+                $scope.token = response.data;
+                $scope.showLike = true;
+
+            }, function myError(err) {
+                // console.log(err);
+            })
+        }
+    }
+
+
+    $scope.projectBookmarked = function() {
+        // checkBookmarked($scope.userId);
+
+        if ($scope.pushIdBookmarked) {
+            db.ref('userActivity/bookmarks/' + $scope.pushIdBookmarked + '/' + 'active').set('true');
+            $scope.hasBookmarked = true;
+        } else {
+            var params = {
+                token: $scope.userId,
+                operation: 'bookmarks',
+                type: $scope.category,
+                active: 'true',
+                id: $scope.projectId
+            }
+            $http({
+                url: 'http://107.23.243.89/api/LogActivity_1.0',
+                method: 'GET',
+                params: {
+                    args: encodeParams(params)
+                }
+            }).then(function mySucces(response) {
+                $scope.token = response.data;
+                $scope.hasBookmarked = true;
+                console.log($scope.token);
+                // demoFunction($scope.token);
+
+            }, function myError(err) {
+                // console.log(err);
+            })
+        }
+    }
+    $scope.unBookmark = function() {
+        db.ref('userActivity/bookmarks')
+            .orderByChild('userId')
+            .equalTo($scope.userId)
+            .once('value', function(response) {
+                $timeout(function() {
+                    if (response.val()) {
+                        for (key in response.val()) {
+                            if (response.val()[key]) {
+                                if (response.val()[key].id == $scope.projectId && response.val()[key].active == 'true') {
+                                    $scope.pushIdBookmarked = key;
+                                    if ($scope.pushIdBookmarked) {
+                                        db.ref('userActivity/bookmarks/' + $scope.pushIdBookmarked + '/' + 'active').set('false');
+                                        $scope.hasBookmarked = false;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }, 100)
+            })
+    }
+
+    $scope.projectUnliked = function() {
+        db.ref('userActivity/likes')
+            .orderByChild('userId')
+            .equalTo($scope.userId)
+            .once('value', function(response) {
+                $timeout(function() {
+                    if (response.val()) {
+                        for (key in response.val()) {
+                            if (response.val()[key]) {
+                                if (response.val()[key].id == $scope.projectId && response.val()[key].isLiked == 'true' && response.val()[key].isDisliked == 'false') {
+                                    $scope.pushIdLiked = key;
+                                    if ($scope.pushIdLiked) {
+                                        db.ref('userActivity/likes/' + $scope.pushIdLiked + '/' + 'isDisliked').set('false')
+                                        db.ref('userActivity/likes/' + $scope.pushIdLiked + '/' + 'isLiked').set('false')
+                                        $scope.showLike = false;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }, 100)
+            })
+
+    }
+
 }]);
 
 // Reviews and Ratings Controller
