@@ -7,6 +7,17 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     var parameters = decodeParams($stateParams.p);
     // console.log(parameters);
     var parameter = '';
+    $scope.projectId = parameters.projectId;
+    console.log($scope.projectId);
+    if (parameters.category) {
+        if (parameters.category == 'cghs') {
+            $scope.category = 'cghs';
+        } else {
+            $scope.category = 'residential';
+        }
+    } else {
+        $scope.category = 'residential';
+    }
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
@@ -19,16 +30,6 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
             // $state.go('home');
         }
     });
-    $scope.projectId = parameters.projectId;
-    if (parameters.category) {
-        if (parameters.category == 'cghs') {
-            $scope.category = 'cghs';
-        } else {
-            $scope.category = 'residential';
-        }
-    } else {
-        $scope.category = 'residential';
-    }
     $scope.forms = {};
     $scope.projectImages = [];
     $scope.propertyTypes = [];
@@ -637,12 +638,11 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
                     if (response.val()) {
                         for (key in response.val()) {
                             if (response.val()[key]) {
+                                console.log(response.val())
                                 if (response.val()[key].id == $scope.projectId && response.val()[key].isLiked == 'true' && response.val()[key].isDisliked == 'false') {
                                     $scope.showLike = true;
                                     $scope.pushIdLiked = key;
                                     console.log($scope.pushIdLiked);
-                                } else {
-                                    $scope.pushIdLiked = key;
                                 }
                             }
                         }
@@ -673,6 +673,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     }
 
     $scope.projectLiked = function() {
+        checkLiked($scope.userId);
         if ($scope.pushIdLiked) {
             db.ref('userActivity/likes/' + $scope.pushIdLiked + '/' + 'isLiked').set('true');
             db.ref('userActivity/likes/' + $scope.pushIdLiked + '/' + 'isDisliked').set('false');
