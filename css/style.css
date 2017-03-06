@@ -2683,9 +2683,7 @@ footer.page-footer .footer-copyright {
         width: 38% !important;
         max-width: 38% !important;
     }
-    .twoxshdn {
-        display: none;
-    }
+   
 }
 
 @media screen and (min-width:0px) and (max-width: 767px) {
@@ -2789,7 +2787,7 @@ footer.page-footer .footer-copyright {
         position: fixed !important;
         right: -330px;
         top: 17%;
-        back
+       
     }
     .wid100 {
         width: 100% !important;
@@ -2849,9 +2847,7 @@ footer.page-footer .footer-copyright {
         width: 38% !important;
         max-width: 38% !important;
     }
-    .twoxshdn {
-        display: none;
-    }
+    
 }
 
 @media screen and (min-width:0px) and (max-width: 550px) {
@@ -2865,6 +2861,7 @@ footer.page-footer .footer-copyright {
         bottom: 0px !important;
         right: 5%;
     }
+
 }
 
 @media screen and (min-width:320px) and (max-width: 600px) {
@@ -2920,6 +2917,9 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width:0px) and (max-width: 600px) {
+   .twoxshdn {
+        display: none;
+    }
     .droplogin {
         top: 56px !important;
     }
@@ -3018,9 +3018,18 @@ footer.page-footer .footer-copyright {
     .list_searchicon {
         right: 50% !important;
     }
-    .boxthree {
+    .boxthree, .boxtwo {
         width: calc(50% - 10px) !important;
     }
+    .boxtwo .fix40 {
+    width: 40% !important;
+    max-width: 40% !important;
+}
+
+.boxtwo .fix40 img {
+    height: 110px;
+}
+
     .ht350 {
         height: 200px;
     }

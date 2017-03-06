@@ -137,14 +137,14 @@
                             <div class="search-results"></div>
                         </div>
                     </div> -->
-                        <div class="col s3 pdl15 right-align right pdrn">
+                        <div class="col s2 m3 l2 pdl15 right-align right pdrn">
                             <a href="" onclick="$('#boxfilterlist') .css ('right','0px')" class="blue-text hide-on-large-only"><i class="material-icons small">filter_list</i></a>
-                            <a href="" ng-class="selectedView == 'list'? 'blue-text':'black-text'" ng-click="changeView(1)"><i class="material-icons small">view_list</i></a>
+                            <a class="hide-on-small-only" href="" ng-class="selectedView == 'list'? 'blue-text':'black-text'" ng-click="changeView(1)"><i class="material-icons small">view_list</i></a>
                             <a href="" class="twoxshdn" ng-class="selectedView == 'grid1'? 'blue-text':'black-text'" ng-click="changeView(2)"><i class="material-icons small">border_all</i></a>
                             <a href="" class="hidden_sm" ng-class="selectedView == 'grid2'? 'blue-text':'black-text'" ng-click="changeView(3)">
                                 <i class="material-icons small">apps</i></a>
                         </div>
-                        <div class="col s2 pdl15 pdrn right">
+                        <div class="col s4 m3 pdl15 pdrn right">
                             <select class="browser-default" ng-change="changeNumberOfProjects()" ng-model="showProjects">
                                 <option value="" disabled selected>Select</option>
                                 <option value="10">10</option>
