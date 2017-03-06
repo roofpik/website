@@ -1,5 +1,6 @@
 app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '$timeout', '$http', '$state', function($scope, $stateParams, $rootScope, $timeout, $http, $state) {
-    var parameters = decodeParams($stateParams.p);
+   $('ul.tabs').tabs();
+    var parameters = decodeParams($stateParams.p);        
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.loading = true;
     $scope.locId = parameters.id;

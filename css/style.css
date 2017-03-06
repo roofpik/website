@@ -450,7 +450,7 @@ ul,
     display: block;
     font-size: 14px;
     font-weight: 300;
-     width:calc(100% - 35px);
+    width: calc(100% - 35px);
     padding-left: 35px;
     height: 43px;
     margin: 0;
@@ -475,16 +475,18 @@ ul,
     left: 7px;
     cursor: pointer;
 }
+
 #search_list {
     display: block;
     font-size: 13px;
     font-weight: 300;
-    width:calc(100% - 35px);
+    width: calc(100% - 35px);
     padding-left: 35px;
     height: 30px;
     margin: 0;
     border: 0;
 }
+
 .search_ilist {
     position: absolute;
     top: 2px;
@@ -720,6 +722,44 @@ hr {
     font-weight: 600
 }
 
+.tabedit.tabs .tab a {
+    font-size: 14px;
+    /*background-color: #eee;*/
+    color: #666;
+    text-align: left;
+    position: relative;
+}
+
+.tabedit .indicator {
+    background-color: none !important;
+    display: none;
+}
+
+.tabedit a.active:after {
+    content: "";
+    width: 0px;
+    height: 0px;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 19px solid #1ab0d3;
+    position: absolute;
+    bottom: -10px;
+    left: 100px;
+    margin-left: -12px;
+}
+
+
+/*.tabedit.tabs .indicator {
+    background-color: #09657a;
+}
+*/
+
+.tabedit.tabs .tab a.active {
+    font-weight: 600;
+    color: #1ab0d3;
+    /*background-color: #1ab0d3;*/
+}
+
 .pd5 {
     padding: 5px !important;
 }
@@ -866,7 +906,7 @@ a i {
     margin: 0;
     padding-top: 15px;
     font-weight: 500;
-    ine-height: 32px;
+    line-height: 32px;
 }
 
 .box-sd {
@@ -1028,7 +1068,7 @@ footer.page-footer {
 }
 
 .minht {
-    min-height: 460px;
+    min-height: 470px;
 }
 
 .box-h {
@@ -1729,13 +1769,13 @@ i.left {
     overflow: visible;
 }
 
+.bgmap {
+    background-color: #f0ede5
+}
+
 .hometabs .indicator {
     background-color: none !important;
     display: none;
-}
-
-.bgmap {
-    background-color: #f0ede5
 }
 
 .hometabs a.active:after {
@@ -2445,9 +2485,16 @@ footer.page-footer .footer-copyright {
 }
 
 .wd90 {
-    width: 90px;
+    width: 90px; 
 }
-#materialbox-overlay{background-color: rgba(41,41,41,0.90) !important;}
+
+#materialbox-overlay {
+    background-color: rgba(41, 41, 41, 0.90) !important;
+}
+.cir_contimg{ width: 40px; height: 40px; line-height: 40px !important; float: left; margin-right: 10px; }
+.cir_cont{width: 40px; height: 40px; margin-right: 5px; border-radius: 50%; line-height: 40px !important;}
+.borderrds20{border-radius: 30px; color: #666; font-size: 14px; }
+.borderrds20 span{display: inline-block; vertical-align: top; margin-top: 10px;}
 
 /*add other new css start*/
 
@@ -2520,8 +2567,22 @@ footer.page-footer .footer-copyright {
     position: absolute;
     bottom: 0;
 }
-.img_media{width: calc(25% - 10px); height: 150px; margin-right: 10px; margin-top: 10px; overflow: hidden; float: left; display: block;}
-.img_media div img, .img_media div{width:100%; height: 100%;}
+
+.img_media {
+    width: calc(25% - 10px);
+    height: 150px;
+    margin-right: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+    float: left;
+    display: block;
+}
+
+.img_media div img,
+.img_media div {
+    width: 100%;
+    height: 100%;
+}
 
 /*add other new other css end*/
 
@@ -2624,9 +2685,7 @@ footer.page-footer .footer-copyright {
         width: 38% !important;
         max-width: 38% !important;
     }
-    .twoxshdn {
-        display: none;
-    }
+   
 }
 
 @media screen and (min-width:0px) and (max-width: 767px) {
@@ -2730,7 +2789,7 @@ footer.page-footer .footer-copyright {
         position: fixed !important;
         right: -330px;
         top: 17%;
-        back
+       
     }
     .wid100 {
         width: 100% !important;
@@ -2790,9 +2849,7 @@ footer.page-footer .footer-copyright {
         width: 38% !important;
         max-width: 38% !important;
     }
-    .twoxshdn {
-        display: none;
-    }
+    
 }
 
 @media screen and (min-width:0px) and (max-width: 550px) {
@@ -2806,6 +2863,7 @@ footer.page-footer .footer-copyright {
         bottom: 0px !important;
         right: 5%;
     }
+
 }
 
 @media screen and (min-width:320px) and (max-width: 600px) {
@@ -2818,6 +2876,10 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width:0px) and (max-width: 400px) {
+      .img_media {
+    width: calc(100% - 10px) !important;
+   
+}
     .xspdn {
         padding: 0 !important;
     }
@@ -2861,6 +2923,13 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width:0px) and (max-width: 600px) {
+    .img_media {
+    width: calc(50% - 10px);
+   
+}
+   .twoxshdn {
+        display: none;
+    }
     .droplogin {
         top: 56px !important;
     }
@@ -2934,6 +3003,10 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width: 601px) and (max-width: 767px) {
+  .img_media {
+    width: calc(50% - 10px);
+   
+}
     .bodft {
         border-bottom: solid 1px #ddd;
         padding-bottom: 5px !important;
@@ -2959,9 +3032,18 @@ footer.page-footer .footer-copyright {
     .list_searchicon {
         right: 50% !important;
     }
-    .boxthree {
+    .boxthree, .boxtwo {
         width: calc(50% - 10px) !important;
     }
+    .boxtwo .fix40 {
+    width: 40% !important;
+    max-width: 40% !important;
+}
+
+.boxtwo .fix40 img {
+    height: 110px;
+}
+
     .ht350 {
         height: 200px;
     }
@@ -3125,7 +3207,7 @@ footer.page-footer .footer-copyright {
 
 @media screen and (min-width: 0px) and (max-width: 1023px) {
     .xstop50 {
-        margin-top: 50px;
+        margin-top: 50px !important;
     }
     .hdnxstb {
         display: none !important;
