@@ -32,17 +32,17 @@
                             </div>
                             <div class="row pdt2 mgbn">
                                 <h5 class="ush6">Project Segment</h5>
-                                <hr>  
-                                <div class="row mgt10 mgbn mgln mgrn">                          
-                                <div class="mgt5" ng-repeat="item in segments">
-                                    <input type="checkbox" class="filled-in" ng-model="selected.segment[item.name]" id="{{item.id}}" />
-                                    <label for="{{item.id}}">{{item.name}}</label>
+                                <hr>
+                                <div class="row mgt10 mgbn mgln mgrn">
+                                    <div class="mgt5" ng-repeat="item in segments">
+                                        <input type="checkbox" class="filled-in" ng-model="selected.segment[item.name]" id="{{item.id}}" />
+                                        <label for="{{item.id}}">{{item.name}}</label>
+                                    </div>
                                 </div>
-                                </div> 
                             </div>
                             <div class="row pdt2 mgbn">
                                 <h5 class="ush6">Bedroom</h5>
-                                <hr>                                
+                                <hr>
                                 <div class="filterList row mgan">
                                     <div class="col s6 pdln mgt5" ng-repeat="item in [1, 2, 3, 4, 5, 6]">
                                         <input type="checkbox" class="filled-in" ng-model="selected.bhk[item]" id="{{item}}" />
@@ -53,12 +53,12 @@
                             <div class="row pdt2 mgbn">
                                 <h5 class="ush6">Locality</h5>
                                 <hr>
-                                 <div class="input-field mgtn bodinp">
-                                    <input class="inpfilter" id="search_list" placeholder="search"><i class="material-icons search_ilist">search</i>
+                                <div class="input-field mgtn bodinp">
+                                    <input class="inpfilter" id="search_list" ng-model="searchLocality" placeholder="Search"><i class="material-icons search_ilist">search</i>
                                     <div class="search-results"></div>
-                                </div>                               
+                                </div>
                                 <div class="filterList mgt10">
-                                    <div class="mgt5" ng-repeat="locality in localities">
+                                    <div class="mgt5" ng-repeat="locality in localities | filter: searchLocality">
                                         <input type="checkbox" class="filled-in" id="{{locality.localityId}}" ng-model="selected.locality[locality.localityId]" />
                                         <label for="{{locality.localityId}}">{{locality.localityName}}</label>
                                     </div>
@@ -67,12 +67,12 @@
                             <div class="row pdt2 mgbn">
                                 <h5 class="ush6">Location</h5>
                                 <hr>
-                                 <div class="input-field mgtn bodinp">
-                                    <input class="inpfilter" id="search_list" placeholder="search"><i class="material-icons search_ilist">search</i>
+                                <div class="input-field mgtn bodinp">
+                                    <input class="inpfilter" id="search_list" ng-model="searchLocation" placeholder="Search"><i class="material-icons search_ilist">search</i>
                                     <div class="search-results"></div>
                                 </div>
                                 <div class="filterList mgt10">
-                                    <div class="mgt5" ng-repeat="location in locations">
+                                    <div class="mgt5" ng-repeat="location in locations | filter:searchLocation">
                                         <input type="checkbox" class="filled-in" id="{{location.locationId}}" ng-model="selected.location[location.locationId]" />
                                         <label for="{{location.locationId}}">{{location.locationName}}</label>
                                     </div>
@@ -81,12 +81,12 @@
                             <div class="row pdt2 mgbn">
                                 <h5 class="ush6">Builders</h5>
                                 <hr>
-                                 <div class="input-field mgtn bodinp">
-                                    <input class="inpfilter" id="search_list" placeholder="search"><i class="material-icons search_ilist">search</i>
+                                <div class="input-field mgtn bodinp">
+                                    <input class="inpfilter" id="search_list" ng-model="searchBuilder" placeholder="Search"><i class="material-icons search_ilist">search</i>
                                     <div class="search-results"></div>
                                 </div>
                                 <div class="filterList mgt10">
-                                    <div class="mgt5" ng-repeat="builder in builders">
+                                    <div class="mgt5" ng-repeat="builder in builders | filter:searchBuilder">
                                         <input type="checkbox" class="filled-in" id="{{builder.builderId}}" ng-model="selected.details_builder[builder.builderId]" />
                                         <label for="{{builder.builderId}}">{{builder.builderName}}</label>
                                     </div>
@@ -94,7 +94,7 @@
                             </div>
                             <div class="row pdt2 mgbn">
                                 <h5 class="ush6">Rating</h5>
-                                <hr>                                
+                                <hr>
                                 <div class="filterList mgt10">
                                     <div ng-repeat="i in [1,2,3,4,5]">
                                         <input type="checkbox" class="filled-in" id="{{5-i+1}}+'star'" ng-model="selected.rating[6-i]" />
@@ -107,10 +107,10 @@
                                 <hr>
                                 <div class="filterList row mgbn">
                                     <div class="col s6">
-                                        <input type="text" placeholder="Min" class="filled-in" id="min-price" ng-model="price.min" />
+                                        <input type="number" placeholder="Min" class="filled-in" id="min-price" ng-model="price.min" />
                                     </div>
                                     <div class="col s6">
-                                        <input type="text" placeholder="Max" class="filled-in" id="max-price" ng-model="price.max" />
+                                        <input type="number" placeholder="Max" class="filled-in" id="max-price" ng-model="price.max" />
                                     </div>
                                 </div>
                             </div>
@@ -119,10 +119,10 @@
                                 <hr>
                                 <div class="filterList row mgbn">
                                     <div class="col s6">
-                                        <input type="text" placeholder="Min" class="filled-in" id="min-area" ng-model="area.min" />
+                                        <input type="number" placeholder="Min" class="filled-in" id="min-area" ng-model="area.min" />
                                     </div>
                                     <div class="col s6">
-                                        <input type="text" placeholder="Max" class="filled-in" id="max-area" ng-model="area.max" />
+                                        <input type="number" placeholder="Max" class="filled-in" id="max-area" ng-model="area.max" />
                                     </div>
                                 </div>
                             </div>
@@ -197,3 +197,4 @@
             </div>
         </div>
     </div>
+</div>
