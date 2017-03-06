@@ -82,52 +82,64 @@ var searchObject = {
     'residential': [{
         icon: 'images/homeicon/CGHS.png',
         name: 'CGHS',
-        id: 1
+        id: 1,
+        from:'local'
     }, {
         icon: 'images/homeicon/Apartment.png',
         name: 'Apartments',
-        id: 2
+        id: 2,
+        from:'local'
     }, {
         icon: 'images/homeicon/Villa-penthouse.png',
         name: 'Penthouse / Villas',
-        id: 3
+        id: 3,
+        from:'local'
     }, {
         icon: 'images/homeicon/Lowrise.png',
         name: 'Low Rise / Independent Floors',
-        id: 4
+        id: 4,
+        from:'local'
     }],
     'commercial': [{
         icon: 'images/homeicon/Malls.png',
         name: 'Malls',
-        id: 1
+        id: 1,
+        from:'local'
     }, {
         icon: 'images/homeicon/OpenMarkets.png',
         name: 'Open Markets',
-        id: 2
+        id: 2,
+        from:'local'
     }, {
         icon: 'images/homeicon/Business Center.png',
         name: 'Business Centers',
-        id: 3
+        id: 3,
+        from:'local'
     }, {
         icon: 'images/homeicon/ITParks.png',
         name: 'IT Parks',
-        id: 3
+        id: 3,
+        from:'local'
     }, {
         icon: 'images/homeicon/Commercial.png',
         name: 'Co-work',
-        id: 3
+        id: 3,
+        from:'local'
     }],
     'pg': [{
         icon: 'images/homeicon/Commercial.png',
         name: 'Girls Hostels',
-        id: 1
+        id: 1,
+        from:'local'
     }, {
         icon: 'images/homeicon/Commercial.png',
         name: 'Boys Hostels',
-        id: 2
+        id: 2,
+        from:'local'
     }, {
         icon: 'images/homeicon/Commercial.png',
         name: 'Co-host',
-        id: 3
+        id: 3,
+        from:'local'
     }]
 };

@@ -189,7 +189,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
                 args: encodeParams(data)
             }
         }).then(function mySucces(response) {
-            // console.log(response);
+            console.log(response);
             $scope.projectList = [];
             totalProjects = response.data.hits;
             if(totalProjects == 0){

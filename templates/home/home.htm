@@ -18,17 +18,18 @@
                         <div class="col s12 m6 pdrn ">
                             <div class="input-field card col s12 ht45 pdan bod-right rdsan reletive">
                                 <span class="inpspn">Find :</span>
-                                <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompletenear inp_pdw mgbn" ng-model="categorySearched">
-                                <div class="search-results" ng-show="showSearch">
+                                <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompletenear inp_pdw mgbn" ng-model="searchedText" ng-change="getSearchData()">
+                                <img src="images/general/buffering.gif" class="loading-icon" ng-show="searchingName" />
+                                <div class="search-results" id="category-search">
                                     <ul class="collection homecoll">
-                                        <li ng-repeat="item in categorySearch| filter: categorySearched" class=" collection-item avatar" ng-click="selectCategory(item)">
+                                        <li ng-repeat="item in categorySearch" class=" collection-item avatar" ng-click="selectSearchByName(item)">
                                             <img ng-src="{{item.icon}}" class="circle" />
-                                            <span class="title ft13" ng-bind-html="item.name | highlight:categorySearched"></span>
+                                            <span class="title ft13" ng-bind-html="item.name | highlight:searchedText"></span>
                                         </li>
                                     </ul>
                                     <div class="pd5 grey lighten-4 ft12">More Options</div>
                                     <ul class="collection homecoll">
-                                        <li class=" collection-item avatar"><img ng-src="images/homeicon/Commercial.png" class="circle" /> Explore Locality</li>
+                                        <li class=" collection-item avatar" ng-click="takeToLocalityBox()"><img ng-src="images/homeicon/Commercial.png" class="circle" /> Explore Locality</li>
                                     </ul>
                                 </div>
                             </div>
@@ -38,9 +39,9 @@
                                 <span class="inpspn">Near :</span>
                                 <input placeholder="Enter a Destination" class="autocompletenear inp_pdw mgbn" id="locality-search" ng-model="locationSearched" ng-change="searchLocation()">
                                 <img src="images/general/buffering.gif" class="loading-icon" ng-show="searchingLocation" />
-                                <div class="search-results" ng-show="showSearch1">
+                                <div class="search-results" id="locality-selection">
                                     <ul class="collection homecoll">
-                                        <li ng-repeat="item in locations | filter:locationSearched" class=" collection-item avatar" ng-click="selectLocation(item)">
+                                        <li ng-repeat="item in locations | filter:locationSearched" class=" collection-item" ng-click="selectLocation(item)">
                                             <span class="title ft13" ng-bind-html="item.name | highlight:locationSearched"></span>
                                         </li>
                                     </ul>
@@ -48,7 +49,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mgbn" ng-show="searchByName">
+                    <!-- <div class="row mgbn" ng-show="searchByName">
                         <div class="col s12 res-xsip2">
                             <div class="input-field card col s12 ht45 pdan reletive rdsan">
                                 <span class="inpspn">Find :</span>
@@ -63,7 +64,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="input-field col m2 s12 pdan res-xsb">
                     <button class="btn btn-full resbtn blue ht45 wd-sm overhidden mpdt5" ng-click="search()">
