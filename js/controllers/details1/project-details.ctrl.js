@@ -862,7 +862,7 @@ app.controller('projectReviewRatingCtrl', ['$scope', '$timeout', '$stateParams',
 
 
 app.controller('galleryCtrl', ['$scope', '$timeout', function($scope, $timeout) {
-          $('.materialboxed').materialbox();
+    $('.materialboxed').materialbox();
     $scope.showGallery = true;
     $scope.$on('initGallery', function(event, data) {
         // console.log(data);
