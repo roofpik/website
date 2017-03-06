@@ -2876,6 +2876,10 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width:0px) and (max-width: 400px) {
+      .img_media {
+    width: calc(100% - 10px) !important;
+   
+}
     .xspdn {
         padding: 0 !important;
     }
@@ -2919,6 +2923,10 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width:0px) and (max-width: 600px) {
+    .img_media {
+    width: calc(50% - 10px);
+   
+}
    .twoxshdn {
         display: none;
     }
@@ -2995,6 +3003,10 @@ footer.page-footer .footer-copyright {
 }
 
 @media screen and (min-width: 601px) and (max-width: 767px) {
+  .img_media {
+    width: calc(50% - 10px);
+   
+}
     .bodft {
         border-bottom: solid 1px #ddd;
         padding-bottom: 5px !important;
