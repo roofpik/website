@@ -273,7 +273,8 @@ app.controller('locationReviewRatingCtrl', ['$scope', '$timeout', '$stateParams'
     } else {
         $scope.category = 'location';
     }
-
+    console.log($scope.locationId);
+    console.log($scope.category);
     $http({
         url: 'http://35.154.60.19/api/GetReviewSummary_1.0',
         method: 'GET',
@@ -282,6 +283,7 @@ app.controller('locationReviewRatingCtrl', ['$scope', '$timeout', '$stateParams'
             type: $scope.category
         }
     }).then(function mySucces(response) {
+        console.log(response);
         if (response.status == 200) {
             if (response.data[$scope.locationId]) {
                 if (response.data[$scope.locationId] != 'not found') {

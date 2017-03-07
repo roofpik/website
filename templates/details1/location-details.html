@@ -11,19 +11,6 @@
             </nav>
         </div>
     </div>
-    <div ng-show="loading" class="preloader-wrapper big active loaderPosition">
-        <div class="spinner-layer spinner-blue-only">
-            <div class="circle-clipper left">
-                <div class="circle"></div>
-            </div>
-            <div class="gap-patch">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-clipper right">
-                <div class="circle"></div>
-            </div>
-        </div>
-    </div>
     <section>
         <div class="container container2">
             <!-- tab box start -->
@@ -31,7 +18,8 @@
                 <ul class="tabedit tabs">
                     <li class="tab">
                         <a class="active pdln" href="#projectstab">
-                            <i class="material-icons left mgt10">location_city</i> Available Projects</a>
+                            <i class="material-icons left mgt10">location_city</i> Available Projects
+                        </a>
                     </li>
                     <li class="tab">
                         <a href="#projectstab2">
@@ -42,6 +30,19 @@
                     <div class="mgt20 row mgln mgrn projects" ui-view="relatedProjectsSection"></div>
                 </div>
                 <div id="projectstab2" class="col s12 pdan">
+                    <div ng-show="loading" class="preloader-wrapper big active loaderPosition">
+                        <div class="spinner-layer spinner-blue-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row mgan grey lighten-4">
                         <div ng-hide="loading" class="col s12 m8 wid100 img-detail htfixbox reletive pdln pdrn imggradient">
                             <img ng-src="/images/dummy/not_available.jpg">
