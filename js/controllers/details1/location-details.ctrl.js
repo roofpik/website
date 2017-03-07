@@ -21,6 +21,7 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
                 $scope.loading = false;
                 $scope.path.push($scope.name);
                 document.title = $scope.name;
+                setId($scope.id);
             }, 0);
         })
     } else {
@@ -31,10 +32,15 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
                 $scope.loading = false;
                 $scope.path.push($scope.name)
                 document.title = $scope.name;
+                setId($scope.id);
                 // $scope.coverImage = "http://cdn.roofpik.com/roofpik/projects/" + $scope.cityId + '/cghs/-KbT8haHPqV7gTy55f-x/images/coverPhoto/' + $scope.location.images.coverPhoto.url + '-m.jpg';
                 // generateImageList($scope.location.images);
             }, 0);
         })
+    }
+
+    function setId(id){
+        $scope.projectId = id;
     }
 
     $scope.scrollToDiv = function(value) {
@@ -43,7 +49,6 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
             },
             'slow');
     }
-
     $scope.provideDetails = function(data) {
         // loading(true);
         db.ref('queries/' + $scope.cityId + '/' + $scope.category + '/' + $scope.projectId).push(data).then(function() {
@@ -94,6 +99,7 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
                                 if (response.val()[key].id == $scope.projectId && response.val()[key].isLiked == 'true' && response.val()[key].isDisliked == 'false') {
                                     $scope.showLike = true;
                                     $scope.pushIdLiked = key;
+                                    console.log('here');
                                     // console.log($scope.pushIdLiked);
                                 } else if (response.val()[key].id == $scope.projectId) {
                                     $scope.pushIdLiked = key;
