@@ -202,10 +202,6 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
         }
         data.page_start = page_start;
         data.page_size = page_size;
-        console.log(data);
-        console.log(encodeParams(data));
-        console.log(decodeParams(encodeParams(data)));
-        return;
         $http({
             url: 'http://35.154.60.19/api/GetListing_1.0',
             method: 'GET',
@@ -213,7 +209,6 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
                 args: encodeParams(data)
             }
         }).then(function mySucces(response) {
-            console.log(response);
             $scope.projectList = [];
             totalProjects = response.data.hits;
             if (totalProjects == 0) {
