@@ -104,6 +104,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
             $scope.filters.bhk = parameters.bhk;
             reverseBindParams(parameters.bhk, 'bhk');
         }
+        console.log(parameters);
         if (parameters.rating) {
             $scope.filters.rating = parameters.rating;
             $scope.selected.rating = {};
@@ -112,13 +113,11 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
                     $scope.selected.rating[i] = true;
                 }
             }
-            // console.log($scope.selected.rating);
+            console.log($scope.selected.rating);
         }
         if (parameters.price_range) {
             $scope.filters.price_range = parameters.price_range;
             var temp = parameters['price_range'].split('$');
-            console.log(temp);
-            console.log('if');
             if (parseInt(temp[0]) < parseInt(temp[1])) {
                 $scope.price.min = parseInt(temp[0]);
                 $scope.price.max = parseInt(temp[1]);
@@ -202,8 +201,9 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
         }
         data.page_start = page_start;
         data.page_size = page_size;
+        console.log(data);
         $http({
-            url: 'http://35.154.60.19/api/GetListing_1.0',
+            url: 'http://107.23.243.89/api/GetListing_1.0',
             method: 'GET',
             params: {
                 args: encodeParams(data)
@@ -301,18 +301,35 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
     }
 
     $scope.applyFilters = function() {
-        var ratings = [];
+        var ratings1 = [];
+        var ratings2 = [];
         for (key in $scope.selected) {
             if ($scope.selected[key]) {
                 parameters[key] = '';
                 if (key == 'rating') {
                     for (key1 in Object.keys($scope.selected[key])) {
                         if ($scope.selected[key][Object.keys($scope.selected[key])[key1]]) {
-                            ratings.push(parseInt(Object.keys($scope.selected[key])[key1]));
+                            ratings1.push(parseInt(Object.keys($scope.selected[key])[key1]));
+                        } else {
+                            ratings2.push(parseInt(Object.keys($scope.selected[key])[key1]));
                         }
                     }
-                    ratings = ratings.sort();
-                    parameters[key] = ratings[0];
+                    ratings1 = ratings1.sort();
+                    ratings2 = ratings2.sort();
+                    if(ratings2.length ==0){
+                        parameters[key] = ratings1[0];
+                    } else {
+                        if(ratings1.length != 0){
+                            for(i in ratings1){
+                                if(ratings1[i] < ratings2[ratings2.length-1]){
+                                    ratings1.splice( i, 1 );
+                                }
+                            }
+                            if(ratings1.length != 0){
+                                parameters[key] = ratings1[0];
+                            }
+                        }
+                    }
                 } else {
                     for (key1 in $scope.selected[key]) {
                         if ($scope.selected[key][key1]) {

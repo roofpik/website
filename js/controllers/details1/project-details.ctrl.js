@@ -33,6 +33,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
             // $scope.userId = 'random';
         }
     });
+    $rootScope.allRatings = null;
     $scope.forms = {};
     $scope.projectImages = [];
     $scope.propertyTypes = [];
