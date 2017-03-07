@@ -24,10 +24,13 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
             // console.log(user);
             $scope.userId = user.uid;
             $scope.userName = user.displayName;
-            checkLiked($scope.userId);
-            checkBookmarked($scope.userId);
+            if (user.uid) {
+                checkLiked($scope.userId);
+                checkBookmarked($scope.userId);
+            }
         } else {
             // $state.go('home');
+            // $scope.userId = 'random';
         }
     });
     $scope.forms = {};
@@ -643,6 +646,8 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
                                     $scope.showLike = true;
                                     $scope.pushIdLiked = key;
                                     console.log($scope.pushIdLiked);
+                                } else if(response.val()[key].id == $scope.projectId){
+                                    $scope.pushIdLiked = key;
                                 }
                             }
                         }
@@ -664,6 +669,8 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
                                 if (response.val()[key].id == $scope.projectId && response.val()[key].active == 'true') {
                                     $scope.pushIdBookmarked = key;
                                     $scope.hasBookmarked = true;
+                                } else if(response.val()[key].id == $scope.projectId){
+                                    $scope.pushIdBookmarked = key;
                                 }
                             }
                         }
@@ -687,7 +694,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
                 type: $scope.category,
                 id: $scope.projectId
             }
-            console.log(parameter);
+            // console.log(parameter);
             $http({
                 url: 'http://107.23.243.89/api/LogActivity_1.0',
                 method: 'GET',
@@ -703,7 +710,6 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
             })
         }
     }
-
 
     $scope.projectBookmarked = function() {
         // checkBookmarked($scope.userId);
@@ -728,7 +734,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
             }).then(function mySucces(response) {
                 $scope.token = response.data;
                 $scope.hasBookmarked = true;
-                console.log($scope.token);
+                // console.log($scope.token);
                 // demoFunction($scope.token);
 
             }, function myError(err) {
