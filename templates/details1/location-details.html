@@ -33,8 +33,10 @@
                         <a class="active pdln" href="#projectstab">
                             <i class="material-icons left mgt10">location_city</i> Available Projects</a>
                     </li>
-                    <li class="tab"><a href="#projectstab2">
-                    <i class="material-icons left mgt10">business</i> Related Projects</a></li>
+                    <li class="tab">
+                        <a href="#projectstab2">
+                            <i class="material-icons left mgt10">business</i> Related Projects</a>
+                    </li>
                 </ul>
                 <div id="projectstab" class="col s12 pdan">
                     <div class="mgt20 row mgln mgrn projects" ui-view="relatedProjectsSection"></div>
@@ -57,7 +59,13 @@
                             </div>
                             <div class="fixed-action-btn horizontal boxabs_bt xstop">
                                 <!-- <button class="stand wd40"><i class="material-icons left ft14">thumb_up</i>Like</button> -->
+                                <button class="stand wd40" ng-click="projectLiked()" ng-hide="showLike"><i class="material-icons left ft14">thumb_up</i>Like</button>
+                                <button class="stand wd40" ng-show="showLike" ng-click="projectUnliked()" style="background-color: #26a69a"><i class="material-icons left ft14">thumb_down</i>Unlike</button>
+                                <!-- <button class="stand wd40" ng-click="projectDisliked()" ng-hide="showDislike"><i class="material-icons left ft14">thumb_down</i>Dislike</button>
+                    <button class="stand wd40" ng-show="showDislike" style="background-color: #26a69a" disabled><i class="material-icons left ft14">thumb_down</i>Disliked</button> -->
                                 <button class="stand wd40" ng-click="goToWriteReview()"><i class="material-icons ft14 left">edit</i> Write Review</button>
+                                <button class="stand wd40" ng-click="projectBookmarked()" ng-hide="hasBookmarked"><i class="material-icons ft14 left">book</i>Bookmark</button>
+                                <button class="stand wd40" ng-click="projectUnmarked()" ng-show="hasBookmarked" style="background-color: #26a69a"><i class="material-icons left ft14">book</i>Unmark</button>
                                 <!-- <button class="stand wd40"><i class="material-icons ft14 left">book</i>Bookmark</button> -->
                             </div>
                         </div>

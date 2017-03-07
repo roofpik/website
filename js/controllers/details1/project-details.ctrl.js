@@ -8,7 +8,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
     // console.log(parameters);
     var parameter = '';
     $scope.projectId = parameters.projectId;
-    console.log($scope.projectId);
+    // console.log($scope.projectId);
     if (parameters.category) {
         if (parameters.category == 'cghs') {
             $scope.category = 'cghs';
@@ -641,11 +641,11 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
                     if (response.val()) {
                         for (key in response.val()) {
                             if (response.val()[key]) {
-                                console.log(response.val())
+                                // console.log(response.val())
                                 if (response.val()[key].id == $scope.projectId && response.val()[key].isLiked == 'true' && response.val()[key].isDisliked == 'false') {
                                     $scope.showLike = true;
                                     $scope.pushIdLiked = key;
-                                    console.log($scope.pushIdLiked);
+                                    // console.log($scope.pushIdLiked);
                                 } else if(response.val()[key].id == $scope.projectId){
                                     $scope.pushIdLiked = key;
                                 }
@@ -742,7 +742,7 @@ app.controller('projectDetailsCtrl', ['$scope', '$timeout', '$stateParams', '$ro
             })
         }
     }
-    $scope.unBookmark = function() {
+    $scope.projectUnmarked = function() {
         db.ref('userActivity/bookmarks')
             .orderByChild('userId')
             .equalTo($scope.userId)

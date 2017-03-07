@@ -1,6 +1,6 @@
 app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '$timeout', '$http', '$state', function($scope, $stateParams, $rootScope, $timeout, $http, $state) {
-   $('ul.tabs').tabs();
-    var parameters = decodeParams($stateParams.p);        
+    $('ul.tabs').tabs();
+    var parameters = decodeParams($stateParams.p);
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.loading = true;
     $scope.locId = parameters.id;
@@ -60,6 +60,186 @@ app.controller('locationDetailsCtrl', ['$scope', '$stateParams', '$rootScope', '
     $scope.goToWriteReview = function() {
         $state.go('write-review', { id: $scope.id, n: btoa(encodeURIComponent(document.title)), t: btoa($scope.category) });
     }
+
+    $scope.hasLiked = false;
+    $scope.hasDisliked = false;
+    $scope.hasBookmarked = false;
+
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            // User is signed in.
+            // console.log(user);
+            $scope.userId = user.uid;
+            $scope.userName = user.displayName;
+            if (user.uid) {
+                checkLiked($scope.userId);
+                checkBookmarked($scope.userId);
+            }
+        } else {
+            // $state.go('home');
+            // $scope.userId = 'random';
+        }
+    });
+
+    function checkLiked(id) {
+        db.ref('userActivity/likes')
+            .orderByChild('userId')
+            .equalTo(id)
+            .once('value', function(response) {
+                $timeout(function() {
+                    if (response.val()) {
+                        for (key in response.val()) {
+                            if (response.val()[key]) {
+                                // console.log(response.val())
+                                if (response.val()[key].id == $scope.projectId && response.val()[key].isLiked == 'true' && response.val()[key].isDisliked == 'false') {
+                                    $scope.showLike = true;
+                                    $scope.pushIdLiked = key;
+                                    // console.log($scope.pushIdLiked);
+                                } else if (response.val()[key].id == $scope.projectId) {
+                                    $scope.pushIdLiked = key;
+                                }
+                            }
+                        }
+                    }
+                }, 0)
+            })
+
+    }
+
+    function checkBookmarked(id) {
+        db.ref('userActivity/bookmarks')
+            .orderByChild('userId')
+            .equalTo(id)
+            .once('value', function(response) {
+                $timeout(function() {
+                    if (response.val()) {
+                        for (key in response.val()) {
+                            if (response.val()[key]) {
+                                if (response.val()[key].id == $scope.projectId && response.val()[key].active == 'true') {
+                                    $scope.pushIdBookmarked = key;
+                                    $scope.hasBookmarked = true;
+                                } else if (response.val()[key].id == $scope.projectId) {
+                                    $scope.pushIdBookmarked = key;
+                                }
+                            }
+                        }
+                    }
+                }, 0)
+            })
+    }
+
+    $scope.projectLiked = function() {
+        checkLiked($scope.userId);
+        if ($scope.pushIdLiked) {
+            db.ref('userActivity/likes/' + $scope.pushIdLiked + '/' + 'isLiked').set('true');
+            db.ref('userActivity/likes/' + $scope.pushIdLiked + '/' + 'isDisliked').set('false');
+            $scope.showLike = true;
+        } else {
+            var params = {
+                    token: $scope.userId,
+                    operation: 'likes',
+                    isLiked: 'true',
+                    isDisliked: 'false',
+                    type: $scope.category,
+                    id: $scope.projectId
+                }
+                // console.log(parameter);
+            $http({
+                url: 'http://107.23.243.89/api/LogActivity_1.0',
+                method: 'GET',
+                params: {
+                    args: encodeParams(params)
+                }
+            }).then(function mySucces(response) {
+                $scope.token = response.data;
+                $scope.showLike = true;
+
+            }, function myError(err) {
+                // console.log(err);
+            })
+        }
+    }
+
+    $scope.projectBookmarked = function() {
+        // checkBookmarked($scope.userId);
+
+        if ($scope.pushIdBookmarked) {
+            db.ref('userActivity/bookmarks/' + $scope.pushIdBookmarked + '/' + 'active').set('true');
+            $scope.hasBookmarked = true;
+        } else {
+            var params = {
+                token: $scope.userId,
+                operation: 'bookmarks',
+                type: $scope.category,
+                active: 'true',
+                id: $scope.projectId
+            }
+            $http({
+                url: 'http://107.23.243.89/api/LogActivity_1.0',
+                method: 'GET',
+                params: {
+                    args: encodeParams(params)
+                }
+            }).then(function mySucces(response) {
+                $scope.token = response.data;
+                $scope.hasBookmarked = true;
+                // console.log($scope.token);
+                // demoFunction($scope.token);
+
+            }, function myError(err) {
+                // console.log(err);
+            })
+        }
+    }
+    $scope.projectUnmarked = function() {
+        db.ref('userActivity/bookmarks')
+            .orderByChild('userId')
+            .equalTo($scope.userId)
+            .once('value', function(response) {
+                $timeout(function() {
+                    if (response.val()) {
+                        for (key in response.val()) {
+                            if (response.val()[key]) {
+                                if (response.val()[key].id == $scope.projectId && response.val()[key].active == 'true') {
+                                    $scope.pushIdBookmarked = key;
+                                    if ($scope.pushIdBookmarked) {
+                                        db.ref('userActivity/bookmarks/' + $scope.pushIdBookmarked + '/' + 'active').set('false');
+                                        $scope.hasBookmarked = false;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }, 100)
+            })
+    }
+
+    $scope.projectUnliked = function() {
+        db.ref('userActivity/likes')
+            .orderByChild('userId')
+            .equalTo($scope.userId)
+            .once('value', function(response) {
+                $timeout(function() {
+                    if (response.val()) {
+                        for (key in response.val()) {
+                            if (response.val()[key]) {
+                                if (response.val()[key].id == $scope.projectId && response.val()[key].isLiked == 'true' && response.val()[key].isDisliked == 'false') {
+                                    $scope.pushIdLiked = key;
+                                    if ($scope.pushIdLiked) {
+                                        db.ref('userActivity/likes/' + $scope.pushIdLiked + '/' + 'isDisliked').set('false')
+                                        db.ref('userActivity/likes/' + $scope.pushIdLiked + '/' + 'isLiked').set('false')
+                                        $scope.showLike = false;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }, 100)
+            })
+
+    }
+
+
 }])
 
 
@@ -333,13 +513,13 @@ app.controller('relatedProjectsCtrl', ['$scope', '$http', '$timeout', '$statePar
 
     function getRelatedProjects() {
         var data = {
-            locationId: $scope.locId,
-            category: 'all',
-            vertical: 'residential',
-            page_size: page_size,
-            page_start: page_start
-        }
-        // console.log(data);
+                locationId: $scope.locId,
+                category: 'all',
+                vertical: 'residential',
+                page_size: page_size,
+                page_start: page_start
+            }
+            // console.log(data);
         $scope.loading = true;
         $http({
             url: 'http://35.154.60.19/api/GetListing_1.0',
