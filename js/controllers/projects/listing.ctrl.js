@@ -116,27 +116,38 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
         }
         if (parameters.price_range) {
             $scope.filters.price_range = parameters.price_range;
-            var temp = parameters[key].split('$');
-            if (key == 'price_range') {
-                if (temp[0] < temp[1]) {
-                    $scope.price.min = temp[0];
-                    $scope.price.max = temp[1];
-                } else {
-                    $scope.price.min = temp[1];
-                    $scope.price.max = temp[0];
-                }
+            var temp = parameters['price_range'].split('$');
+            console.log(temp);
+            console.log('if');
+            if (parseInt(temp[0]) < parseInt(temp[1])) {
+                $scope.price.min = parseInt(temp[0]);
+                $scope.price.max = parseInt(temp[1]);
+            } else {
+                $scope.price.min = parseInt(temp[1]);
+                $scope.price.max = parseInt(temp[0]);
+            }
+            // console.log($scope.price);
+            if ($scope.price.min == 0) {
+                $scope.price.min = null;
+            }
+            if ($scope.price.max == 1500000) {
+                $scope.price.max = null;
             }
         }
         if (parameters.area_range) {
             $scope.filters.area_range = parameters.area_range;
-            if (key == 'area_range') {
-                if (temp[0] < temp[1]) {
-                    $scope.area.min = temp[0];
-                    $scope.area.max = temp[1];
-                } else {
-                    $scope.area.min = temp[1];
-                    $scope.area.max = temp[0];
-                }
+            if (parseInt(temp[0]) < parseInt(temp[1])) {
+                $scope.area.min = parseInt(temp[0]);
+                $scope.area.max = parseInt(temp[1]);
+            } else {
+                $scope.area.min = parseInt(temp[1]);
+                $scope.area.max = parseInt(temp[0]);
+            }
+            if ($scope.area.min == 0) {
+                $scope.area.min = null;
+            }
+            if ($scope.area.max == 100000) {
+                $scope.area.max = null;
             }
         }
         if (parameters.location && parameters.locality) {
@@ -183,6 +194,7 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
     function fetchProjects() {
         var data = {};
         $scope.loading = true;
+        console.log($scope.filters);
         for (key in $scope.filters) {
             if ($scope.filters[key]) {
                 data[key] = $scope.filters[key];
@@ -191,6 +203,9 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
         data.page_start = page_start;
         data.page_size = page_size;
         console.log(data);
+        console.log(encodeParams(data));
+        console.log(decodeParams(encodeParams(data)));
+        return;
         $http({
             url: 'http://35.154.60.19/api/GetListing_1.0',
             method: 'GET',
@@ -296,8 +311,8 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
             if ($scope.selected[key]) {
                 parameters[key] = '';
                 if (key == 'rating') {
-                    for(key1 in Object.keys($scope.selected[key])){
-                        if($scope.selected[key][Object.keys($scope.selected[key])[key1]]){
+                    for (key1 in Object.keys($scope.selected[key])) {
+                        if ($scope.selected[key][Object.keys($scope.selected[key])[key1]]) {
                             ratings.push(parseInt(Object.keys($scope.selected[key])[key1]));
                         }
                     }
@@ -317,14 +332,22 @@ app.controller('listCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$sta
         }
         // console.log(parameters);
         if ($scope.price) {
-            if ($scope.price.min && $scope.price.max) {
-                parameters.price_range = $scope.price.min + '$' + $scope.price.max;
+            if (!$scope.price.min) {
+                $scope.price.min = 0
             }
+            if (!$scope.price.max) {
+                $scope.price.max = 1500000;
+            }
+            parameters.price_range = $scope.price.min + '$' + $scope.price.max;
         }
         if ($scope.area) {
-            if ($scope.area.min && $scope.area.max) {
-                parameters.area = $scope.area.min + '$' + $scope.area.max;
+            if (!$scope.area.min) {
+                $scope.area.min = 0
             }
+            if (!$scope.area.max) {
+                $scope.area.max = 100000;
+            }
+            parameters.area = $scope.area.min + '$' + $scope.area.max;
         }
         // console.log(parameters);
         $state.go('list', { p: encodeParams(parameters) }, { reload: true });
