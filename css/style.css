@@ -64,7 +64,7 @@ body{font-size: 13px; color:#484848;}
 .ft18{font-size: 18px !important;}
 .wdp70{width: 80%;}
 .relative{position: relative ;}
-.transform{position: absolute; left: 50%; z-index: 999; top: 50%; transform: translate(-50%, -50%);}
+.transform{position: absolute; left: 50%; margin-top: 30px; z-index: 9; top: 50%; transform: translate(-50%, -50%);}
 .b{font-weight: 700;}
 .btn{padding:0 15px;}
 .btn, .btn:hover, .btn:focus{box-shadow: none;}
@@ -98,18 +98,17 @@ body{font-size: 13px; color:#484848;}
 .btnnum:hover, .btnnum:focus{background-color: #26a69a; color: #fff;}
 .bhkactive{background-color: #ff5a5f; color: #fff;}
 
-
-.seldrop .select-dropdown{ margin-left: -11px; width: 150px !important; margin-top: 45px; }
-.seldrop .select-wrapper input.select-dropdown{ width: 100% !important;  }
-
+.mgtb_big{margin-top: 120px; margin-bottom: 60px;}
+.seldrop .select-dropdown{ margin-left: -12px; width: calc(100% + 24px) !important; margin-top: 45px; }
+.seldrop .select-wrapper input.select-dropdown{ width: 100% !important; font-size: 11px !important; }
 
 .shdsm{
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 }
 
 .abs_city{position: absolute; display: none; top: 62px;  border: 1px solid #ddd; left: 0; width: 750px; 
-  background-color: #fff; z-index: 999 !important; padding:10px;}
-.abs_check ul li{ width: 25%; float: left; text-align: left; padding-left: 10px; padding-bottom: 5px; }
+  background-color: #fff; z-index: 999 !important; padding:0 10px 10px 10px;}
+.abs_check ul li{ margin-top: 20px; width: 25%; float: left; text-align: left; padding-left: 10px; padding-bottom: 5px; }
 .boxsdn{box-shadow: none !important; border: none !important;}
 .btn-full{width: 100%;}
 .btn-primary:hover, .btn-primary:focus{ border-color: #ff7e82;
