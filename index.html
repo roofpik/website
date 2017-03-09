@@ -2,277 +2,688 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, initial-scale=1.0, user-scalable=0">
     <link rel="icon" href="images/general/favicon.png" type="image/png">
     <!--Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="css/materialize.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/style-inp.css">
-    <link rel="stylesheet" href="css/map.css">
 </head>
 
-<body ng-app="mroofpik">
+<body>
+    <!-- header part start -->
     <header>
-        <div class="navbar-fixed">
-            <nav class="white">
+        <div class="navbar headerfix">
+            <nav class="white boxsdn">
                 <div class="nav-wrapper">
                     <a href="#" data-activates="slide-out" class="button-collapse show-on-large grey-text left">
                         <i class="material-icons">menu</i></a>
-                    <a href="#home" class="rooflogo left"><img src="images/general/logo.png"></a>
-                    <ul class="right mgr10">
-                        <li> <a href="#write-review" class="wd-sm waves-effect waves-light btn light-blue lighten-2 capitalize"><i class="material-icons left bticont">create</i> Write Review</a></li>
-                        <li>
-                            <a data-target="loginbox" class="btn wd-sm waves-effect waves-light text-lo white lighten-5 grey-text mgln capitalize">
-                                <i class="material-icons left bticont">lock_outline</i> Login/Sign Up</a>
+                    <a href="#home" class="rooflogo left"><img src="images/general/logoicon.png"></a>
+                    <div class="search_header">
+                        <i class="material-icons searchtopicon">search</i>
+                        <input type="text" name="" placeholder="search">
+                        <div class="search-results resultfind">
+                            <ul class="collection homecoll white mgan">
+                                <li class="collection-item avatar">
+                                    <img src="images/homeicon/CGHS.png" class="circle" />
+                                    <span class="title ft13">CGHS</span>
+                                </li>
+                                <li class="collection-item avatar">
+                                    <img src="images/homeicon/Apartment.png" class="circle" />
+                                    <span class="title ft13">Apartment</span>
+                                </li>
+                                <li class="collection-item avatar">
+                                    <img src="images/homeicon/Villa-penthouse.png" class="circle" />
+                                    <span class="title ft13">Penthouse / Villa</span>
+                                </li>
+                            </ul>
+                            <div class="pd5 grey lighten-4 ft12 lht">More Options</div>
+                            <ul class="collection homecoll mgan">
+                                <li class="collection-item avatar"><img src="images/homeicon/Commercial.png" class="circle" /> Explore Locality</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="right">
+                        <li> <a href="#write-review" class="btn mgln mgr10 ft12 capitalize"><i class="material-icons left bticon">create</i> Write Review</a></li>
+                        <li style="display: none;">
+                            <a data-target="loginbox" class="btn mgln mgr10 ft12 btn-primary mgln capitalize">
+                                <i class="material-icons left bticon">lock_outline</i> Login/Sign Up</a>
                         </li>
-                        <li><a data-target="searchbox"><i class="material-icons grey-text">search</i></a></li>
-                        <li><a data-activates="slide-out-right" href="#" class="button-heart show-on-large"><i class="material-icons grey-text">favorite_border</i></a></li>
-                        </ul>
+                        <li class="">
+                            <a href="" class="dropdown-button btn btn-flat mgln ft12 mgr10 capitalize" data-activates="dropdown1">
+                                <img class="display-img left" src="images/general/noImage.png">Digamber Sharma</a>
+                            <ul id="dropdown1" class="dropdown-content droplogin">
+                                <li>
+                                    <a href="">
+                                        <i class="material-icons left">person</i>My Profile</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="">
+                                        <i class="material-icons left">power_settings_new</i>Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <span class="right ft12 grey-text mgr30">
+                                <i class="material-icons left tiny bticont mgrn">location_on</i>Gurgaon</span>
                 </div>
             </nav>
         </div>
-        <div id="slide-out" class="side-nav overhdn">
-            <div class="row slidelogofixed mgbn">
-                <a href="#home" class=" ahoverncol s9 pdan rooflogoslide">
-                    <img src="images/general/logo.png"></a>
+        <div id="slide-out" class="side-nav over_hidden">
+            <div class="row mgan">
+                <a href="#home" class="logoslide mgt10"><img src="images/general/logo.png"></a>
             </div>
-            <div class="row overfy mgbn ulli-side">
+            <div class="row over_hidden mgbn">
                 <ul>
-                    <li><a href="#about-us" class="waves-effect waves-light">About</a></li>
+                    <li><a href="#about-us" class="">About</a></li>
                     <li><a href="#cover-stories">Cover Stories</a></li>
                     <li><a href="#blogs">Blogs</a></li>
-                    <li class="no-padding">
-                        <ul class="collapsible collapsible-accordion">
-                            <li>
-                                <a class="collapsible-header waves-effect waves-light">Localities<i class="material-icons right">arrow_drop_down</i></a>
-                                <div class="collapsible-body">
-                                    <ul>
-                                        <li><a href="#projects">Sohna Road</a></li>
-                                        <li><a href="#!">Golf Course Extn Road</a></li>
-                                        <li><a href="#!">Dwarka Expressway</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
                     <li><a href="#write-review">Write Review</a></li>
                     <li><a href="#faq"> FAQ's </a></li>
                     <li><a href="#contact-us">Contact us</a></li>
-                    <li><a href="#!">Terms & Privacy</a></li>                    
+                    <li><a href="#!">Terms & Privacy</a></li>
                 </ul>
             </div>
-            <footer class="page-footer  grey lighten-4">
-                <div class="row mgbn pdleftright">
-                    <div class="col left pdt10 left-align">
-                        <h6 class="grey-text mgtn">Follow us</h6>
-                    </div>
-                    <div class="col right right-align">
-                        <a href="https://www.facebook.com/roofpik" target="_blank">
-                            <img src="images/general/facebook.png">
-                        </a>
-                        <a href="https://www.linkedin.com/company/roofpik?trk=job_view_topcard_company_name" target="_blank">
-                            <img src="images/general/linked-in.png">
-                        </a>
-                        <a href="https://www.twitter.com/roofpik" target="_blank">
-                            <img src="images/general/twitter.png">
-                        </a>
-                    </div>
-                </div>
-                <div class="footer-copyright center">
-                    <div class="container grey-text">
-                        © AlphaBinary Technologies Pvt Ltd
-                    </div>
-                </div>
-            </footer>
         </div>
     </header>
-    <div ng-view class="min-ht"></div>
-    <div id="searchbox" class="modal white modal-fixed-footer">
-        <form>
-            <div class="modal-content pdb25">
-                <h5 class="ft16b mgtn"> Search 
-                   <a class="right modal-close grey-text" ><i class="material-icons">close</i> </a>
-                </h5>
-                <h6 class="grey-text pdlrn ft15 ftw3">Browse through 1,000+ verified property reviews. Or share one today.</h6>
-                <div class="search-wrapper card">
-                    <input id="search" placeholder="search"><i class="material-icons search_i">search</i>
-                    <div class="search-results"></div>
-                </div>
-                <div class="card horizontal">
-                    <a href="">
-                        <div class="card-image fix40 left">
-                            <img src="images/general/bestech.jpg" class="responsive-img">
+    <!-- header part end -->
+    <!-- content part end -->
+    <main>
+        <div class="row ht300 white relative">
+            <div class="transform center wdp70">
+                <h5><b class="redt">Roofpik</b> Power Your Property Search with Genuine User Reviews </h5>
+                <div id="searchboxhome" class="row radius2 pdr10 cardmg searchfix">
+                    <div style="display: none" class="col s12 m10 no-padding">
+                        <div class="row mgbn" ng-hide="searchByName">
+                            <div class="col s12 m6 pdrn ">
+                                <div class="input-field card col s12 ht45 no-padding bod-right rdsan relative">
+                                    <span class="inpspn">Find :</span>
+                                    <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompleteFind inp_pdw mgbn" ng-model="searchedText" ng-change="getSearchData()">
+                                    <img src="images/general/buffering.gif" class="loading-icon" ng-show="searchingName" />
+                                    <div class="search-results left-align" id="category-search">
+                                        <ul class="collection homecoll white mgan">
+                                            <li class="collection-item avatar">
+                                                <img src="images/homeicon/CGHS.png" class="circle" />
+                                                <span class="title ft13">CGHS</span>
+                                            </li>
+                                            <li class="collection-item avatar">
+                                                <img src="images/homeicon/Apartment.png" class="circle" />
+                                                <span class="title ft13">Apartment</span>
+                                            </li>
+                                            <li class="collection-item avatar">
+                                                <img src="images/homeicon/Villa-penthouse.png" class="circle" />
+                                                <span class="title ft13">Penthouse / Villa</span>
+                                            </li>
+                                        </ul>
+                                        <div class="pd5 grey lighten-4 ft12">More Options</div>
+                                        <ul class="collection homecoll mgan">
+                                            <li class="collection-item avatar"><img src="images/homeicon/Commercial.png" class="circle" /> Explore Locality</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 pdln">
+                                <div class="input-field card col s12 ht45 no-padding rdsan">
+                                    <span class="inpspn">Near :</span>
+                                    <input placeholder="Enter a Destination" class="autocompleteNear inp_pdw mgbn">
+                                    <img src="images/general/buffering.gif" class="loading-icon" />
+                                    <div class="search-results left-align">
+                                        <ul class="collection homecoll white mgan">
+                                            <li class="collection-item avatar">
+                                                <img src="images/homeicon/CGHS.png" class="circle" />
+                                                <span class="title ft13">CGHS</span>
+                                            </li>
+                                            <li class="collection-item avatar">
+                                                <img src="images/homeicon/Apartment.png" class="circle" />
+                                                <span class="title ft13">Apartment</span>
+                                            </li>
+                                            <li class="collection-item avatar">
+                                                <img src="images/homeicon/Villa-penthouse.png" class="circle" />
+                                                <span class="title ft13">Penthouse / Villa</span>
+                                            </li>
+                                        </ul>
+                                        <div class="pd5 grey lighten-4 ft12">More Options</div>
+                                        <ul class="collection homecoll mgan">
+                                            <li class="collection-item avatar"><img src="images/homeicon/Commercial.png" class="circle" /> Explore Locality</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="cardpdt span_block fix60 left">
-                            <span class="black-text ft13 ellipsis">Bestech Park View City 1 </span>
-                            <span class="ft12 grey-text ellipsis">Sohna Road, Sector 48 Project</span>
+                    </div>
+                    <div id="advanced-search" style="display: block" class="col s12 m10 no-padding">
+                        <div class="row mgbn relative">
+                            <div class="col s3 m3 no-padding">
+                                <div class="input-field card ht45 no-padding bod-right rdsan relative">
+                                    <button onclick="$('.abs_city') .toggle ()" class="btn white no-padding grey-text pdrn ht45 lin45">Neighborhoods <i class="material-icons right">arrow_drop_down</i></button>
+                                </div>
+                                <div class="abs_city">
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <ul class="tabs">
+                                                <li class="tab"><a class="active" href="#atest1">Tab 1</a></li>
+                                                <li class="tab"><a href="#atest2">Tab 2</a></li>
+                                                <li class="tab"><a href="#atest3">Tab 3</a></li>
+                                                <li class="tab"><a href="#atest4">Tab 4 Tab 4</a></li>
+                                                <li class="tab"><a href="#atest5">Tab 5</a></li>
+                                                <li class="tab"><a href="#atest6">Tab 6 Tab 6 Tab 6</a></li>
+                                            </ul>
+                                        </div>
+                                        <div id="atest1">
+                                            <ul>
+                                                <li>
+                                                    <p>
+                                                        <input type="checkbox" id="c1" />
+                                                        <label for="c1">Red</label>
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p>
+                                                        <input type="checkbox" id="c2" />
+                                                        <label for="c2">Blue</label>
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p>
+                                                        <input type="checkbox" id="c3" />
+                                                        <label for="c3">Green</label>
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div id="atest2">
+                                            <ul>
+                                                <li>
+                                                    <p>
+                                                        <input type="checkbox" id="c4" />
+                                                        <label for="c4">One</label>
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p>
+                                                        <input type="checkbox" id="c5" />
+                                                        <label for="c5">Two</label>
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p>
+                                                        <input type="checkbox" id="c6" />
+                                                        <label for="c6">Three</label>
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div id="atest3"></div>
+                                        <div id="atest4"></div>
+                                        <div id="atest5"></div>
+                                        <div id="atest6"></div>
+                                        <!--       <div id="test1" class="col s12">
+                                            <ul>
+                                                <li>
+                                                    <input type="checkbox" id="test1" />
+                                                    <label for="test1">lorem ipsum </label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="test2" />
+                                                    <label for="test2">lorem ipsum </label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="test3" />
+                                                    <label for="test3">lorem ipsum </label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="test4" />
+                                                    <label for="test4">lorem ipsum </label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="test5" />
+                                                    <label for="test5">lorem ipsum </label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="test6" />
+                                                    <label for="test6">lorem ipsum </label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div id="test2" class="col s12">
+                                            <ul>
+                                                <li>
+                                                    <input type="checkbox" id="test1" />
+                                                    <label for="test1">lorem ipsum </label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="test2" />
+                                                    <label for="test2">lorem ipsum </label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="test3" />
+                                                    <label for="test3">lorem ipsum </label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="test4" />
+                                                    <label for="test4">lorem ipsum </label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="test5" />
+                                                    <label for="test5">lorem ipsum </label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="test6" />
+                                                    <label for="test6">lorem ipsum </label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div id="test3" class="col s12">
+                                            <ul>
+                                                <li>
+                                                    <input type="checkbox" id="test1" />
+                                                    <label for="test1">lorem ipsum </label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="test2" />
+                                                    <label for="test2">lorem ipsum </label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="test3" />
+                                                    <label for="test3">lorem ipsum </label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="test4" />
+                                                    <label for="test4">lorem ipsum </label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="test5" />
+                                                    <label for="test5">lorem ipsum </label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="test6" />
+                                                    <label for="test6">lorem ipsum </label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div id="test4" class="col s12">
+                                            <ul>
+                                                <li>
+                                                    <input type="checkbox" id="test1" />
+                                                    <label for="test1">lorem ipsum </label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="test2" />
+                                                    <label for="test2">lorem ipsum </label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="test3" />
+                                                    <label for="test3">lorem ipsum </label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="test4" />
+                                                    <label for="test4">lorem ipsum </label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="test5" />
+                                                    <label for="test5">lorem ipsum </label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="test6" />
+                                                    <label for="test6">lorem ipsum </label>
+                                                </li>
+                                            </ul>
+                                        </div> -->
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <button onclick="$('.abs_city') .css ('display','none')" class="btn right">Done/Close</button>
+                                </div>
+                            </div>
+                            <div class="col s2 m2 pdrn">
+                                <div class="input-field card col s12 ht45 bod-right rdsan relative seldrop">
+                                    <select>
+                                        <option value="" disabled selected>Select</option>
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col s3 m3 right-align pdrn">
+                                <div class="input-field col s12 ht45 no-padding rdsan relative">
+                                    <ul class="mgtn">
+                                        <li title="1 BHK" class="btnnum bhkactive shdsm">1</li>
+                                        <li title="2 BHK" class="btnnum shdsm">2</li>
+                                        <li title="3 BHK" class="btnnum shdsm">3</li>
+                                        <li title="4 BHK" class="btnnum shdsm">4</li>
+                                        <li title="5 BHK" class="btnnum shdsm">5</li>
+                                        <li title="6+ BHK" class="btnnum shdsm">6+</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col s2 m2 pdrn ">
+                                <div class="input-field card col s12 ht45 no-padding bod-right rdsan relative">
+                                    <span class="inpspn ft15">₹</span>
+                                    <input type="text" placeholder="min.rent" id="type-selection" class="autocompleteFind inp_pdwsm  mgbn" ng-model="searchedText">
+                                </div>
+                            </div>
+                            <div class="col s2 m2 pdln">
+                                <div class="input-field card col s12 ht45 no-padding rdsan">
+                                    <span class="inpspn ft15">₹</span>
+                                    <input placeholder="max.rent" class="autocompleteNear inp_pdwsm mgbn">
+                                </div>
+                            </div>
                         </div>
-                    </a>
-                </div>
-                <div class="card horizontal">
-                    <a href="">
-                        <div class="card-image fix40 left">
-                            <img src="images/general/bestech.jpg" class="responsive-img">
-                        </div>
-                        <div class="cardpdt span_block fix60 left">
-                            <span class="black-text ft13 ellipsis">Bestech Park View City 1 </span>
-                            <span class="ft12 grey-text ellipsis">Sohna Road, Sector 48 Project</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="card horizontal">
-                    <a href="">
-                        <div class="card-image fix40 left">
-                            <img src="images/general/bestech.jpg" class="responsive-img">
-                        </div>
-                        <div class="cardpdt span_block fix60 left">
-                            <span class="black-text ft13 ellipsis">Bestech Park View City 1 </span>
-                            <span class="ft12 grey-text ellipsis">Sohna Road, Sector 48 Project</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="card horizontal">
-                    <a href="">
-                        <div class="card-image fix40 left">
-                            <img src="images/general/bestech.jpg" class="responsive-img">
-                        </div>
-                        <div class="cardpdt span_block fix60 left">
-                            <span class="black-text ft13 ellipsis">Bestech Park View City 1 </span>
-                            <span class="ft12 grey-text ellipsis">Sohna Road, Sector 48 Project</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="card horizontal">
-                    <a href="">
-                        <div class="card-image fix40 left">
-                            <img src="images/general/bestech.jpg" class="responsive-img">
-                        </div>
-                        <div class="cardpdt span_block fix60 left">
-                            <span class="black-text ft13 ellipsis">Bestech Park View City 1 </span>
-                            <span class="ft12 grey-text ellipsis">Sohna Road, Sector 48 Project</span>
-                        </div>
-                    </a>
+                    </div>
+                    <div class="input-field col m2 s12 no-padding">
+                        <button class="btn btn-full pdl10 pdr10 resbtn ht45 overhidden " ng-click="search()">
+                            <i class="material-icons left">search</i>Search
+                        </button>
+                        <a href="" class="adva_btn mgt10">Basic Search</a>
+                    </div>
                 </div>
             </div>
-        </form>
-    </div>
-    <div id="loginbox" class="modal">
-        <a class="closebtn modal-close"><i class="material-icons">close</i></a>
-        <div class="modal-content pdb25">
-            <h5 class="ft16b"><i class="material-icons grey-text mgnr5 left">lock_outline</i>  Login / Sign Up</h5>
-            <p class="grey-text  text-darken-3  center bodb">
-                <span class="mgtmns bg-fa">Login with</span>
-            </p>
-            <a href="" class="btn  btn-block  pdt2 mgt30 grey lighten-5 fb-text">
-                <img class="left pdt2" src="images/general/facebook1.png"> facebook</a>
-            <a href="" class="btn  btn-block pdt2 grey mgt15 lighten-5 gl-text">
-                <img class="left pdt2" src="images/general/googleplus.png"> google</a>
         </div>
-    </div>
-    <div id="slide-out-right" class="side-nav rightslide pda20  overhdn">
-        <div class="row row-mgn ht-auto">
-            <h5 class="ft16b mgtn"> Favourites </h5>
-            <div class="card horizontal">
-                <button class="closecard"><i class="material-icons">close</i></button>
-                <a href="">
-                    <div class="card-image fix40 left">
-                        <img src="images/general/bestech.jpg" class="responsive-img">
+        <div class="row mgbn">
+            <div class="container">
+                <div class="row mg48">
+                    <div class="col s4 write">
+                        <h3>Write a Review About Your Buying or Renting Experience</h3>
+                        <p>Your verified review will do more than help someone find their dream property. It will also help educate a girl. For every new review on the website, Roofpik joins hands with Nanhi Kali to sponsor a day’s education for a girl child.</p>
+                        <a href="" class="btn">WRITE A REVIEW</a>
                     </div>
-                    <div class="cardpdt span_block fix60 left">
-                        <span class="black-text ft13 ellipsis">Bestech Park View City 1 </span>
-                        <span class="ft12 grey-text ellipsis">Sohna Road, Sector 48 Project</span>
+                    <div class="col s7 right">
+                        <img class="responsive-img" src="images/home/writebg.jpg">
                     </div>
-                </a>
-            </div>
-            <div class="card horizontal">
-                <button class="closecard"><i class="material-icons">close</i></button>
-                <a href="">
-                    <div class="card-image fix40 left">
-                        <img src="images/general/bestech.jpg" class="responsive-img">
+                </div>
+                <div class="row mg48 mgln mgrn">
+                    <h3 class="heading">
+                       Popular Projects                   
+                    </h3>
+                    <div class="slider ht400">
+                        <ul class="slides white ht350">
+                            <li>
+                                <div class="row mns8 mgbn">
+                                    <div class="col s4 pdlr8">
+                                        <div class="card boxsdn mgtn rdsan pdbn mgbn">
+                                            <div class="card-image">
+                                                <img src="images/general/bestech.jpg">
+                                            </div>
+                                            <div class="card-content pdt8 pdln pdrn pdbn">
+                                                <a href="" class="a48">
+                                                    <h5 class="truncate mgan ft15 lineh18 b lts">₹11469 Vipul Greens</h5>
+                                                    <h6 class="truncate mgt3 mgbn ft15 lineh18  lts">Sohna Road, Sector 48</h6>
+                                                    <div class="star lineh16 mgt5">
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <span class="ft12 lts4 lineh16">(3.95) 91 Reviews</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col s4 pdlr8">
+                                        <div class="card boxsdn mgtn rdsan pdbn mgbn">
+                                            <div class="card-image">
+                                                <img src="images/general/bestech.jpg">
+                                            </div>
+                                            <div class="card-content pdt8 pdln pdrn pdbn">
+                                                <a href="" class="a48">
+                                                    <h5 class="truncate mgan ft15 lineh18 b lts">₹11469 Vipul Greens</h5>
+                                                    <h6 class="truncate mgt3 mgbn ft15 lineh18  lts">Sohna Road, Sector 48</h6>
+                                                    <div class="star lineh16 mgt5">
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <span class="ft12 lts4 lineh16">(3.95) 91 Reviews</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col s4 pdlr8">
+                                        <div class="card boxsdn mgtn rdsan pdbn mgbn">
+                                            <div class="card-image">
+                                                <img src="images/general/bestech.jpg">
+                                            </div>
+                                            <div class="card-content pdt8 pdln pdrn pdbn">
+                                                <a href="" class="a48">
+                                                    <h5 class="truncate mgan ft15 lineh18 b lts">₹11469 Vipul Greens</h5>
+                                                    <h6 class="truncate mgt3 mgbn ft15 lineh18  lts">Sohna Road, Sector 48</h6>
+                                                    <div class="star lineh16 mgt5">
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <span class="ft12 lts4 lineh16">(3.95) 91 Reviews</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row mns8 mgbn">
+                                    <div class="col s4 pdlr8">
+                                        <div class="card boxsdn mgtn rdsan pdbn mgbn">
+                                            <div class="card-image">
+                                                <img src="images/general/bestech.jpg">
+                                            </div>
+                                            <div class="card-content pdt8 pdln pdrn pdbn">
+                                                <a href="" class="a48">
+                                                    <h5 class="truncate mgan ft15 lineh18 b lts">₹11469 Sohna Road</h5>
+                                                    <h6 class="truncate mgt3 mgbn ft15 lineh18  lts">Sohna Road, Sector 48</h6>
+                                                    <div class="star lineh16 mgt5">
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <span class="ft12 lts4 lineh16">(3.95) 91 Reviews</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col s4 pdlr8">
+                                        <div class="card boxsdn mgtn rdsan pdbn mgbn">
+                                            <div class="card-image">
+                                                <img src="images/general/bestech.jpg">
+                                            </div>
+                                            <div class="card-content pdt8 pdln pdrn pdbn">
+                                                <a href="" class="a48">
+                                                    <h5 class="truncate mgan ft15 lineh18 b lts">₹11469 Sohna Road</h5>
+                                                    <h6 class="truncate mgt3 mgbn ft15 lineh18  lts">Sohna Road, Sector 48</h6>
+                                                    <div class="star lineh16 mgt5">
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <span class="ft12 lts4 lineh16">(3.95) 91 Reviews</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col s4 pdlr8">
+                                        <div class="card boxsdn mgtn rdsan pdbn mgbn">
+                                            <div class="card-image">
+                                                <img src="images/general/bestech.jpg">
+                                            </div>
+                                            <div class="card-content pdt8 pdln pdrn pdbn">
+                                                <a href="" class="a48">
+                                                    <h5 class="truncate mgan ft15 lineh18 b lts">₹11469 Sohna Road</h5>
+                                                    <h6 class="truncate mgt3 mgbn ft15 lineh18  lts">Sohna Road, Sector 48</h6>
+                                                    <div class="star lineh16 mgt5">
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <span class="ft12 lts4 lineh16">(3.95) 91 Reviews</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="cardpdt span_block fix60 left">
-                        <span class="black-text ft13 ellipsis">Bestech Park View City 1 </span>
-                        <span class="ft12 grey-text ellipsis">Sohna Road, Sector 48 Project</span>
-                    </div>
-                </a>
-            </div>
-            <div class="card horizontal">
-                <button class="closecard"><i class="material-icons">close</i></button>
-                <a href="">
-                    <div class="card-image fix40 left">
-                        <img src="images/general/bestech.jpg" class="responsive-img">
-                    </div>
-                    <div class="cardpdt span_block fix60 left">
-                        <span class="black-text ft13 ellipsis">Bestech Park View City 1 </span>
-                        <span class="ft12 grey-text ellipsis">Sohna Road, Sector 48 Project</span>
-                    </div>
-                </a>
-            </div>
-            <div class="card horizontal">
-                <button class="closecard"><i class="material-icons">close</i></button>
-                <a href="">
-                    <div class="card-image fix40 left">
-                        <img src="images/general/bestech.jpg" class="responsive-img">
-                    </div>
-                    <div class="cardpdt span_block fix60 left">
-                        <span class="black-text ft13 ellipsis">Bestech Park View City 1 </span>
-                        <span class="ft12 grey-text ellipsis">Sohna Road, Sector 48 Project</span>
-                    </div>
-                </a>
-            </div>
-            <div class="card horizontal">
-                <button class="closecard"><i class="material-icons">close</i></button>
-                <a href="">
-                    <div class="card-image fix40 left">
-                        <img src="images/general/bestech.jpg" class="responsive-img">
-                    </div>
-                    <div class="cardpdt span_block fix60 left">
-                        <span class="black-text ft13 ellipsis">Bestech Park View City 1 </span>
-                        <span class="ft12 grey-text ellipsis">Sohna Road, Sector 48 Project</span>
-                    </div>
-                </a>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="row grey lighten-5 pd48 mgbn">
+            <div class="container">
+                <div class="row mgbn">
+                    <h5 class="center mgtn"> Popular Searches  </h5>
+                    <div class="col s3">
+                        <h3 class="heading">Dubai Properties For sale</h3>
+                        <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
+                        <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
+                        <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
+                        <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
+                        <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
+                    </div>
+                    <div class="col s3">
+                        <h3 class="heading">Dubai Properties For sale</h3>
+                        <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
+                        <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
+                        <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
+                        <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
+                        <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
+                    </div>
+                    <div class="col s3">
+                        <h3 class="heading">Dubai Properties For sale</h3>
+                        <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
+                        <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
+                        <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
+                        <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
+                        <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
+                    </div>
+                    <div class="col s3">
+                        <h3 class="heading">Dubai Properties For sale</h3>
+                        <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
+                        <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
+                        <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
+                        <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
+                        <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mgbn pd48">
+            <div class="container">
+                <h5 class="center mgtn"> Our Partners  </h5>
+                <p class="center ft14 grey-text">Lorem ipsum is simmply dummy text</p>
+                <div class="row mgbn mgt10">
+                    <div class="col s3 black">
+                        <img src="images/partners/fastfox-logo.png">
+                    </div>
+                    <div class="col s3">
+                        <img src="images/partners/99acres.png">
+                    </div>
+                    <div class="col s3">
+                        <img src="images/partners/magicbricks.png">
+                    </div>
+                    <div class="col s3">
+                        <img src="images/partners/triplogo.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row bodt bodb mgbn">
+            <div class="container">
+                <div class="row mgbn">
+                    <div class="col s4 pdl40 pd48 bod-right relative">
+                        <i class="material-icons iconlfix">star</i>
+                        <h5 class="heading mgbn mgtn">Neutral and Unbiased Reviews</h5>
+                        <p class="mgbn">Registered users and verified reviews help us derive accurate ratings.</p>
+                    </div>
+                    <div class="col s4 pdl40 pd48 bod-right relative">
+                        <i class="material-icons iconlfix">show_chart</i>
+                        <h5 class="heading mgbn mgtn">Fact-driven Insights</h5>
+                        <p class="mgbn">From noise levels to maintenance, get all the vital stats of a property.</p>
+                    </div>
+                    <div class="col s4 pdl40 pd48 relative">
+                        <i class="material-icons iconlfix">list</i>
+                        <h5 class="heading mgbn mgtn">Analytical Comparison</h5>
+                        <p class="mgbn">We work magic with complex technologies to create detailed property comparisons.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- content part end -->
+    <!-- footer part start -->
+    <footer class="pd48">
+        <div class="container">
+            <div class="row footerlink">
+                <div class="col s4">
+                    <h3 class="heading mgtn">Usefull Links</h3>
+                    <a href="">About Us </a>
+                    <a href="">Blog</a>
+                    <a href="">Cover Stories</a>
+                    <a href="">Projects</a>
+                    <a href="">Write Review</a>
+                    <a href="">FAQs</a>
+                    <a href="">Contact Us</a>
+                </div>
+                <div class="col s4">
+                    <h3 class="heading mgtn">Discover</h3>
+                    <a href="" class="truncate">Apartments  Dubai Marnia </a>
+                    <a href="" class="truncate">Apartments for Sale </a>
+                    <a href="" class="truncate">Apartments for Sale in</a>
+                    <a href="" class="truncate">Apartments Sale in Dubai </a>
+                    <a href="" class="truncate">Apartments for Sale in Dubai Marnia </a>
+                </div>
+                <div class="col s4 ft15">
+                    <h3 class="heading mgtn">Contact Us</h3>
+                    <p><i class="material-icons left">location_on</i> 250, Vipul Trade Center,Sector 48, Gurgaon, Haryana</p>
+                    <p><i class="material-icons left">phone</i>+91 124 438 4167</p>
+                    <p><i class="material-icons left">email</i>contact@roofpik.com</p>
+                </div>
+            </div>
+            <div class="row bodt mgan pdt30">
+                <div class="col s6 color8 ft14 pdln">© AlphaBinary Technologies Pvt Ltd</div>
+                <div class="col s6 right-align pdrn">
+                    <span class="mgt5 b ft14 inlineb"> Follow Us </span>
+                    <a href="" class="right mgl10"><img src="images/general/facebook.png" alt="Facebook"></a>
+                    <a href="" class="right mgl10"><img src="images/general/twitter.png" alt=""></a>
+                    <a href="" class="right mgl10"><img src="images/general/linked-in.png" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer part start -->
     <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
     <script src="js/materialize.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBw11e3mCdbPwpJCwtxHn5yCGt1uwErX24"></script>
     <!-- controllers -->
     <script src="js/angular.min.js"></script>
-    <script src="js/angular-route.js"></script>
-    <script src="js/config.js"></script>
-    <script src="js/controllers/home-ctrl.js"></script>
-    <script src="js/controllers/projects.js"></script>
-    <script src="js/controllers/project-details.js"></script>
-    <script src="js/controllers/commercial-details.js"></script>
-    <script src="js/controllers/pg-details.js"></script>
-    <script src="js/controllers/co-working-details.js"></script>
-    <script src="js/controllers/cover-stories-ctrl.js"></script>
-    <script src="js/controllers/blogs-ctrl.js"></script>
-    <script src="js/controllers/contact-us.ctrl.js"></script>
-    <script src="js/controllers/faq-ctrl.js"></script>
-    <script src="js/controllers/map-ctrl.js"></script>
-    
     <!-- controllers -->
     <script>
     $(document).ready(function() {
+        $('ul.tabs').tabs();
         Materialize.updateTextFields();
+
         $('.button-collapse').sideNav({
             menuWidth: 300, // Default is 240
             edge: 'left', // Choose the horizontal origin
             closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
             draggable: true // Choose whether you can drag to open on touch screens
         });
-        $('.button-heart').sideNav({
-            menuWidth: 400, // Default is 240
-            edge: 'right', // Choose the horizontal origin
-            closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-            draggable: true // Choose whether you can drag to open on touch screens
-        });
-        $(".dropdown-button").dropdown();
-        $('.modal').modal();
+        $('select').material_select();
+        $('.slider').slider();
+        $('.dropdown-button').dropdown();
+        $('.carousel').carousel();
+
     });
     </script>
 </body>
