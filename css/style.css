@@ -105,10 +105,17 @@ body{font-size: 13px; color:#484848;}
 .shdsm{
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 }
-
+.spleft{display: inline-block;}
 .abs_city{position: absolute; display: none; top: 62px;  border: 1px solid #ddd; left: 0; width: 750px; 
   background-color: #fff; z-index: 999 !important; padding:0 10px 10px 10px;}
 .abs_check ul li{ margin-top: 20px; width: 25%; float: left; text-align: left; padding-left: 10px; padding-bottom: 5px; }
+.pmg5 p{margin:0 !important; line-height: 25px;}
+.abs_check [type="checkbox"]+label{font-size: 12px !important;}
+.price_m{top: 45px; }
+.price_m ul{height: 125px; overflow-y: auto; margin:0;}
+.price_m ul li{line-height: 25px; padding: 0 10px; cursor: pointer;}
+.price_m ul li:hover{background-color: #eee;}
+
 .boxsdn{box-shadow: none !important; border: none !important;}
 .btn-full{width: 100%;}
 .btn-primary:hover, .btn-primary:focus{ border-color: #ff7e82;

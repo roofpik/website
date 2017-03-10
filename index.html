@@ -44,12 +44,12 @@
                         </div>
                     </div>
                     <ul class="right">
-                        <li> <a href="#write-review" class="btn mgln mgr10 ft12 capitalize"><i class="material-icons left bticon">create</i> Write Review</a></li>
+                        <li> <a href="#write-review" class="btn btn-primary mgln mgr10 ft12 capitalize"><i class="material-icons left bticon">create</i> Write Review</a></li>
                         <li style="display: none;">
-                            <a data-target="loginbox" class="btn mgln mgr10 ft12 btn-primary mgln capitalize">
+                            <a data-target="loginbox" class="btn mgln mgr10 ft12 mgln capitalize">
                                 <i class="material-icons left bticon">lock_outline</i> Login/Sign Up</a>
                         </li>
-                        <li class="">
+                        <li class="" style="display: block;">
                             <a href="" class="dropdown-button btn btn-flat mgln ft12 mgr10 capitalize" data-activates="dropdown1">
                                 <img class="display-img left" src="images/general/noImage.png">Digamber Sharma</a>
                             <ul id="dropdown1" class="dropdown-content droplogin">
@@ -161,13 +161,14 @@
                                 <div class="abs_city mgt10">
                                     <div class="row">
                                         <div class="col s12">
-                                            <ul class="tabs">
-                                                <li class="tab"><a href="#atest1" class="active">Tab 1</a></li>
-                                                <li class="tab"><a href="#atest2">Tab 2</a></li>
-                                                <li class="tab"><a href="#atest3">Tab 3</a></li>
-                                                <li class="tab"><a href="#atest4">Tab 4 Tab 4</a></li>
-                                                <li class="tab"><a href="#atest5">Tab 5</a></li>
-                                                <li class="tab"><a href="#atest6">Tab 6 Tab 6 Tab 6</a></li>
+                                            <h5 class="ft16 left-align">Neighborhoods</h5>
+                                            <ul class="tabs left-align">
+                                                <li class="tab"><a href="#atest1" class="active ft12">Tab 1</a></li>
+                                                <li class="tab"><a class="ft12" href="#atest2">Tab 2</a></li>
+                                                <li class="tab"><a class="ft12" href="#atest3">Tab 3</a></li>
+                                                <li class="tab"><a class="ft12" href="#atest4">Tab 4 Tab 4</a></li>
+                                                <li class="tab"><a class="ft12" href="#atest5">Tab 5</a></li>
+                                                <li class="tab"><a class="ft12" href="#atest6">Tab 6 Tab 6 Tab 6</a></li>
                                             </ul>
                                         </div>
                                         <div class="abs_check" id="atest1">
@@ -184,7 +185,7 @@
                                                     <input type="checkbox" id="c3" />
                                                     <label for="c3">Green</label>
                                                 </li>
-                                                 <li>
+                                                <li>
                                                     <input type="checkbox" id="c4" />
                                                     <label for="c4">Green</label>
                                                 </li>
@@ -231,7 +232,7 @@
                                             </ul>
                                         </div>
                                         <div class="abs_check" id="atest4">
-                                             <ul>
+                                            <ul>
                                                 <li>
                                                     <input type="checkbox" id="dc4" />
                                                     <label for="dc4">One</label>
@@ -251,7 +252,7 @@
                                             </ul>
                                         </div>
                                         <div class="abs_check" id="atest5">
-                                         <ul>
+                                            <ul>
                                                 <li>
                                                     <input type="checkbox" id="ec4" />
                                                     <label for="ec4">One</label>
@@ -269,9 +270,9 @@
                                                     <label for="ec7">Three</label>
                                                 </li>
                                             </ul>
-                                            </div>
+                                        </div>
                                         <div class="abs_check" id="atest6">
-                                             <ul>
+                                            <ul>
                                                 <li>
                                                     <input type="checkbox" id="fc4" />
                                                     <label for="fc4">One</label>
@@ -289,7 +290,6 @@
                                                     <label for="fc7">Three</label>
                                                 </li>
                                             </ul>
-
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
@@ -322,12 +322,36 @@
                                 <div class="input-field card col s12 ht45 no-padding bod-right rdsan relative">
                                     <span class="inpspn ft15">₹</span>
                                     <input type="text" placeholder="min.rent" id="type-selection" class="autocompleteFind inp_pdwsm  mgbn" ng-model="searchedText">
+                                    <div class="search-results price_m white shdsm" style="display: block">
+                                        <ul class="left-align">
+                                            <li>₹ 5000</li>
+                                            <li>₹ 5000</li>
+                                            <li>₹ 7000</li>
+                                            <li>₹ 7000</li>
+                                            <li>₹ 11000</li>
+                                            <li>₹ 7000</li>
+                                            <li>₹ 7000</li>
+                                            <li>₹ 11000</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col s2 m2 pdln">
                                 <div class="input-field card col s12 ht45 no-padding rdsan">
                                     <span class="inpspn ft15">₹</span>
                                     <input placeholder="max.rent" class="autocompleteNear inp_pdwsm mgbn">
+                                    <div class="search-results price_m white shdsm" style="display: block">
+                                        <ul class="left-align">
+                                            <li>₹ 5000</li>
+                                            <li>₹ 5000</li>
+                                            <li>₹ 7000</li>
+                                            <li>₹ 7000</li>
+                                            <li>₹ 11000</li>
+                                            <li>₹ 7000</li>
+                                            <li>₹ 7000</li>
+                                            <li>₹ 11000</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -602,9 +626,10 @@
                     <a href="" class="truncate">Apartments Sale in Dubai </a>
                     <a href="" class="truncate">Apartments for Sale in Dubai Marnia </a>
                 </div>
-                <div class="col s4 ft13">
+                <div class="col s4 ft13 pmg5">
                     <h3 class="heading mgtn">Contact Us</h3>
-                    <p><i class="material-icons left ft18 grey-text">location_on</i> 250, Vipul Trade Center,Sector 48, Gurgaon, Haryana</p>
+                    <p><i class="material-icons left ft18 grey-text">location_on</i>
+                        <span class="spleft"> 250, Vipul Trade Center,Sector 48, <br>Gurgaon, Haryana</span></p>
                     <p><i class="material-icons left ft18 grey-text">phone</i>+91 124 438 4167</p>
                     <p><i class="material-icons left ft18 grey-text">email</i>contact@roofpik.com</p>
                 </div>
