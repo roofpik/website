@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, initial-scale=1.0, user-scalable=0">
+    <link rel="icon" href="images/general/favicon.png" type="image/png">
+    <!--Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+</head>
+
+<body>
+    <div class="row img_detail mgbn">
+        <img src="images/home/home-bg.jpg" class="responsive-img">
+        <div class="dt_abs">
+            <h3 class="white-text text-sd mgbn">Property Heading</h3>
+            <h5 class="white-text text-sd">Sector 48, Gurgaon</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="row linkroot mgbn">
+                <nav>
+                    <div class="nav-wrapper">
+                        <div class="col s12">
+                            <a href="" class="breadcrumb">Home</a>
+                            <a href="" class="breadcrumb">Blogs</a>
+                            <a href="" class="breadcrumb">lorem ipsum</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="row">
+                <div class="col s8">
+                    <div class="row" id="Overview">
+                        <div class="col s12 pdb20">
+                            <h3 class="heading mgbn">Overview</h3>
+                            <div class="ft14 grey-text">M3M Merlin Gurgaon</div>
+                        </div>
+                        <div class="col s12">
+                            <div class="row pdt10">
+                                <div class="col s3 pdb10">
+                                    <div class="ft14"> Under Construction </div>
+                                    <div class="grey-text ft12">status</div>
+                                </div>
+                                <div class="col s3 pdb10">
+                                    <div class="ft14"> 13.34 Acres </div>
+                                    <div class="grey-text ft12">total area</div>
+                                </div>
+                                <div class="col s3 pdb10">
+                                    <div class="ft14"> 510 </div>
+                                    <div class="grey-text ft12">total launched apartments</div>
+                                </div>
+                                <div class="col s3 pdb10">
+                                    <div class="ft14"> Sep'11 </div>
+                                    <div class="grey-text ft12">launch date</div>
+                                </div>
+                                <div class="col s3 pdb10">
+                                    <div class="ft14"> New and Resale </div>
+                                    <div class="grey-text ft12">availability</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 ft14 grey-text text-darken-2">
+                            <p>M3M Merlin is situated in Gurgaons Sector 67. The community has 3 and 4BHK apartments and penthouses. These units are completed and available through resale and the developer. Spread across 13.34 acres. in terms of super built-up areas. Some of the units have access to the terrace and a servants room built in the apartment. There are various amenities available to home owners such as childrens play zone, gymnasium and jogging track. M3M is one of Gurgaons reputed property developers with ten pro... <a href="">more</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s4">
+                    <h3 class="heading">Latest Blogs</h3>
+                    <a href="" class="row bodb pdb10 left mgln">
+                        <div class="col s4 pdln bl_rimg"><img src="images/home/writebg.jpg" class="responsive-img"></div>
+                        <div class="col s8 pdrn pdln">
+                            <h6 class="ft14 mgt5 grey-text text-darken-1">Piramal Enterprises Limited</h6>
+                            <h5 class="ft15 mgan grey-text text-darken-4">Invest in Residential Development in India.</h5>
+                        </div>
+                    </a>
+                    <a href="" class="row bodb pdb10 left mgln">
+                        <div class="col s4 pdln bl_rimg"><img src="images/home/writebg.jpg" class="responsive-img"></div>
+                        <div class="col s8 pdrn pdln">
+                            <h6 class="ft14 mgt5 grey-text text-darken-1">Piramal Enterprises Limited</h6>
+                            <h5 class="ft15 mgan grey-text text-darken-4">Invest in Residential Development in India.</h5>
+                        </div>
+                    </a>
+                    <a href="" class="row bodb pdb10 left mgln">
+                        <div class="col s4 pdln bl_rimg"><img src="images/home/writebg.jpg" class="responsive-img"></div>
+                        <div class="col s8 pdrn pdln">
+                            <h6 class="ft14 mgt5 grey-text text-darken-1">Piramal Enterprises Limited</h6>
+                            <h5 class="ft15 mgan grey-text text-darken-4">Invest in Residential Development in India.</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <!-- controllers -->
+    <script src="js/angular.min.js"></script>
+    <!-- controllers -->
+    <script>
+    $(document).ready(function() {
+        $('ul.tabs').tabs();
+        Materialize.updateTextFields();
+
+        $('.button-collapse').sideNav({
+            menuWidth: 300, // Default is 240
+            edge: 'left', // Choose the horizontal origin
+            closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+            draggable: true // Choose whether you can drag to open on touch screens
+        });
+        $('select').material_select();
+        $('.slider').slider();
+        $('.dropdown-button').dropdown();
+        $('.carousel').carousel();
+        $('.modal').modal();
+
+    });
+    </script>
+</body>
+
+</html>
