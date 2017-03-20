@@ -38,65 +38,39 @@
             <nav class="white boxsdn">
                 <div class="nav-wrapper">
                     <div class="row">
-                        <div class="col s1">
+                        <div class="col no-padding">
                             <a href="#" data-activates="slide-out" class="button-collapse show-on-large grey-text left">
                                 <i class="material-icons">menu</i></a>
                             <a href="#home" class="rooflogo left"><img src="images/general/logoicon.png"></a>
                         </div>
-                        <div class="col s6">
+                        <div class="col s4 m5 l6 pdln hide-on-med-and-down">
                             <div class="search_header">
                                 <i class="material-icons searchtopicon">search</i>
-                                <input type="text" name="" placeholder="search">
+                                <input type="text" name="" placeholder="search" class="mgbn">
                                 <div class="search-results resultfind">
                                     <ul class="collection homecoll white mgan">
                                         <li class="collection-item avatar">
-                                            <img src="images/homeicon/CGHS.png" class="circle" />
-                                            <span class="title ft13">CGHS</span>
+                                            <span class="b ft13">Gurgaon</span>
+                                            <span class="ft12">CGHS</span>
                                         </li>
                                         <li class="collection-item avatar">
-                                            <img src="images/homeicon/Apartment.png" class="circle" />
-                                            <span class="title ft13">Apartment</span>
+                                            <span class="b ft13">Gurgaon</span>
+                                            <span class="ft12">Apartment</span>
                                         </li>
                                         <li class="collection-item avatar">
-                                            <img src="images/homeicon/Villa-penthouse.png" class="circle" />
-                                            <span class="title ft13">Penthouse / Villa</span>
+                                            <span class="b ft13">Gurgaon</span>
+                                            <span class="ft12">Penthouse / Villa</span>
                                         </li>
-                                    </ul>
-                                    <div class="pd5 grey lighten-4 ft12 lht">More Options</div>
-                                    <ul class="collection homecoll mgan">
-                                        <li class="collection-item avatar"><img src="images/homeicon/Commercial.png" class="circle" /> Explore Locality</li>
+                                        <li class="collection-item avatar b">More Options</li>
+                                        <li class="collection-item avatar"> Explore Locality</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <!--  <div class="search_header">
-                        <i class="material-icons searchtopicon">search</i>
-                        <input type="text" name="" placeholder="search">
-                        <div class="search-results resultfind">
-                            <ul class="collection homecoll white mgan">
-                                <li class="collection-item avatar">
-                                    <img src="images/homeicon/CGHS.png" class="circle" />
-                                    <span class="title ft13">CGHS</span>
-                                </li>
-                                <li class="collection-item avatar">
-                                    <img src="images/homeicon/Apartment.png" class="circle" />
-                                    <span class="title ft13">Apartment</span>
-                                </li>
-                                <li class="collection-item avatar">
-                                    <img src="images/homeicon/Villa-penthouse.png" class="circle" />
-                                    <span class="title ft13">Penthouse / Villa</span>
-                                </li>
-                            </ul>
-                            <div class="pd5 grey lighten-4 ft12 lht">More Options</div>
-                            <ul class="collection homecoll mgan">
-                                <li class="collection-item avatar"><img src="images/homeicon/Commercial.png" class="circle" /> Explore Locality</li>
-                            </ul>
-                        </div>
-                    </div> -->
                         <ul class="right">
-                            <li> <a href="write-review.html" class="btn btn-primary mgln mgr10 ft12 capitalize"><i class="material-icons left bticon">create</i> Write Review</a></li>
+                            <li> <a href="write-review.html" class="btn btn-primary mgln mgr10 ft12 capitalize xs-wd"><i class="material-icons left bticon">create</i> Write Review</a></li>
                             <li style="display: block;">
-                                <a href="#login_signup_popup" class="btn mgln mgr10 ft12 mgln capitalize">
+                                <a href="#login_signup_popup" class="btn mgln mgr10 ft12 mgln capitalize xs-wd">
                                     <i class="material-icons left bticon">lock_outline</i> Login/Sign Up</a>
                             </li>
                             <li class="" style="display: none;">
@@ -115,8 +89,8 @@
                                 </ul>
                             </li>
                         </ul>
-                        <span class="right ft12 grey-text mgr30">
-                                <i class="material-icons left tiny bticont mgrn">location_on</i>Gurgaon</span>
+                        <span class="right ft12 grey-text mgr30 xsnr10">
+                        <i class="material-icons left tiny bticont mgrn">location_on</i>Gurgaon</span>
                     </div>
                 </div>
             </nav>
@@ -141,16 +115,16 @@
     <!-- header part end -->
     <!-- content part end -->
     <main>
-        <div class="row ht300 white relative">
+        <div class="row ht300 xsht5 white relative">
             <div class="transform center wdp70">
-                <h5><b class="redt">Roofpik</b> Power Your Property Search with Genuine User Reviews </h5>
-                <div id="searchboxhome" class="row radius2 pdr10 cardmg searchfix">
-                    <div style="display: none" class="col s12 m10 no-padding">
+                <h5 class="xshdh"><b class="redt">Roofpik</b> Power Your Property Search with Genuine User Reviews </h5>
+                <div id="searchboxhome" class="row radius2 pdr10 cardmg searchfix xspd0">
+                    <div style="display: block" class="col s12 m10 l10 no-padding xswdfull xspd0">
                         <div class="row mgbn" ng-hide="searchByName">
-                            <div class="col s12 m6 pdrn ">
-                                <div class="input-field card col s12 ht45 no-padding bod-right rdsan relative">
+                            <div class="col s12 m6 pdrn xswdfull xspd0">
+                                <div class="input-field card col s12 ht45 no-padding bodl bodt bodb bod-right rdsan relative">
                                     <span class="inpspn">Find :</span>
-                                    <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompleteFind inp_pdw mgbn" ng-model="searchedText" ng-change="getSearchData()">
+                                    <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompleteFind inp_pdw boxsdn mgbn" ng-model="searchedText" ng-change="getSearchData()">
                                     <img src="images/general/buffering.gif" class="loading-icon" ng-show="searchingName" />
                                     <div class="search-results left-align" id="category-search">
                                         <ul class="collection homecoll white mgan">
@@ -174,10 +148,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col s12 m6 pdln">
-                                <div class="input-field card col s12 ht45 no-padding rdsan">
+                            <div class="col s12 m6 pdln xswdfull xspd0">
+                                <div class="input-field card col s12 ht45 no-padding bodt bodb bod-right rdsan">
                                     <span class="inpspn">Near :</span>
-                                    <input placeholder="Enter a Destination" class="autocompleteNear inp_pdw mgbn">
+                                    <input placeholder="Enter a Destination" class="autocompleteNear boxsdn inp_pdw mgbn">
                                     <img src="images/general/buffering.gif" class="loading-icon" />
                                     <div class="search-results left-align">
                                         <ul class="collection homecoll white mgan">
@@ -203,7 +177,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="advanced-search" style="display: block" class="col s12 m10 no-padding">
+                    <div id="advanced-search" style="display: none;" class="col s12 m10 l10 no-padding hide-on-med-and-down">
                         <div class="row mgbn relative">
                             <div class="col s3 m3 no-padding">
                                 <div class="input-field card ht45 no-padding bod-right rdsan relative">
@@ -407,11 +381,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="input-field col m2 s12 no-padding">
-                        <button class="btn btn-full pdl10 pdr10 resbtn ht45 overhidden " ng-click="search()">
-                            <i class="material-icons left">search</i>Search
+                    <div class="input-field col m2 l2 s12 xswdfull no-padding">
+                        <button class="btn btn-full pdl10 pdr10 resbtn ht45 overhidden" ng-click="search()">
+                            <i class="material-icons left xs-mgt5">search</i>Search
                         </button>
-                        <a href="" class="adva_btn mgt10">Basic Search</a>
+                        <a href="" class="adva_btn mgt10 hide-on-med-and-down">Basic Search</a>
                     </div>
                 </div>
             </div>
@@ -420,9 +394,10 @@
             <div class="container">
                 <h5 class="center mgtn"> Explore Micromarkets  </h5>
                 <p class="center ft14 grey-text">Lorem ipsum is simmply dummy text</p>
-                <div class="row">
-                    <div class="col s4">
-                        <div class="card">
+                <div class="row mgln mgrn">
+                    <div class="col s12 m12 l4">    
+                       <div class="row">
+                        <div class="card col s12  m6 l12">
                             <div class="card-content">
                                 <div class="row">
                                     <div class="col s8">
@@ -437,7 +412,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card">
+                        <div class="card col s12 m6 l12">
                             <div class="card-content">
                                 <div class="row">
                                     <div class="col s8">
@@ -452,8 +427,9 @@
                                 </div>
                             </div>
                         </div>
+                        </div>
                     </div>
-                    <div class="col s8">
+                    <div class="col s8 m8 l8 hide-on-med-and-down">
                         <img src="images/home/gurgaon.png" class="responsive-img">
                         <div class="sohna-road">
                             <p>Sohna Road</p>
@@ -462,7 +438,7 @@
                             </div>
                         </div>
                         <div class="golf-course-extn-rd">
-                        <p>Golf Course Extn Road</p>
+                            <p>Golf Course Extn Road</p>
                             <div class="wrapper">
                                 <div class="cssload-loader"></div>
                             </div>
@@ -474,16 +450,16 @@
         <div class="row mgbn">
             <div class="container">
                 <div class="row mg48">
-                    <div class="col s4 write">
+                    <div class="col s12 m5 l4 write xswdfull">
                         <h3>Write a Review About Your Buying or Renting Experience</h3>
                         <p>Your verified review will do more than help someone find their dream property. It will also help educate a girl. For every new review on the website, Roofpik joins hands with Nanhi Kali to sponsor a day’s education for a girl child.</p>
                         <a href="" class="btn">WRITE A REVIEW</a>
                     </div>
-                    <div class="col s7 right">
+                    <div class="col s12 m7 l7 right xsmgt20 xsnone">
                         <img class="responsive-img" src="images/home/writebg.jpg">
                     </div>
                 </div>
-                <div class="row mg48 mgln mgrn">
+                <div class="row mg48 mgln mgrn hide-on-med-and-down">
                     <h3 class="heading">
                        Popular Projects                   
                     </h3>
@@ -632,7 +608,7 @@
             <div class="container">
                 <div class="row mgbn">
                     <h5 class="center mgtn"> Popular Searches  </h5>
-                    <div class="col s3">
+                    <div class="col s12 m6 l3">
                         <h3 class="heading">Apartments For Rent</h3>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
@@ -640,7 +616,7 @@
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                     </div>
-                    <div class="col s3">
+                    <div class="col s12 m6 l3">
                         <h3 class="heading">Villas for Rent</h3>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
@@ -648,7 +624,7 @@
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                     </div>
-                    <div class="col s3">
+                    <div class="col s12 m6 l3">
                         <h3 class="heading">Penthouse For Rent</h3>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
@@ -656,7 +632,7 @@
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                     </div>
-                    <div class="col s3">
+                    <div class="col s12 m6 l3">
                         <h3 class="heading">Row Houses For Rent</h3>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
@@ -671,17 +647,17 @@
             <div class="container">
                 <h5 class="center mgtn"> Our Partners  </h5>
                 <p class="center ft14 grey-text">Lorem ipsum is simmply dummy text</p>
-                <div class="row mgbn mgt10 mgln mgrn">
-                    <div class="col s3 black">
+                <div class="row mgbn mgt10 mgln mgrn center">
+                    <div class="col s12 m6 l3 black xsmgt20">
                         <img src="images/partners/fastfox-logo.png">
                     </div>
-                    <div class="col s3">
+                    <div class="col s12 m6 l3 xsmgt20">
                         <img src="images/partners/99acres.png">
                     </div>
-                    <div class="col s3">
+                    <div class="col s12 m6 l3 xsmgt20">
                         <img src="images/partners/magicbricks.png">
                     </div>
-                    <div class="col s3">
+                    <div class="col s12 m6 l3 xsmgt20">
                         <img src="images/partners/triplogo.png">
                     </div>
                 </div>
@@ -690,17 +666,17 @@
         <div class="row bodt bodb mgbn">
             <div class="container">
                 <div class="row mgbn">
-                    <div class="col s4 pdl40 pd48 bod-right relative">
+                    <div class="col s12 m4 pdl40 pd48 bod-right xsbdrn relative">
                         <i class="material-icons iconlfix">star</i>
                         <h5 class="heading mgbn mgtn">Neutral and Unbiased Reviews</h5>
                         <p class="mgbn">Registered users and verified reviews help us derive accurate ratings.</p>
                     </div>
-                    <div class="col s4 pdl40 pd48 bod-right relative">
+                    <div class="col s12 m4 pdl40 pd48 bod-right xsbdrn relative">
                         <i class="material-icons iconlfix">show_chart</i>
                         <h5 class="heading mgbn mgtn">Fact-driven Insights</h5>
                         <p class="mgbn">From noise levels to maintenance, get all the vital stats of a property.</p>
                     </div>
-                    <div class="col s4 pdl40 pd48 relative">
+                    <div class="col s12 m4 pdl40 pd48 relative">
                         <i class="material-icons iconlfix">list</i>
                         <h5 class="heading mgbn mgtn">Analytical Comparison</h5>
                         <p class="mgbn">We work magic with complex technologies to create detailed property comparisons.</p>
@@ -714,7 +690,7 @@
     <footer class="pd48">
         <div class="container">
             <div class="row footerlink">
-                <div class="col s4">
+                <div class="col s12 m4">
                     <h3 class="heading mgtn">Usefull Links</h3>
                     <a href="">About Us </a>
                     <a href="">Blog</a>
@@ -724,7 +700,7 @@
                     <a href="">FAQs</a>
                     <a href="">Contact Us</a>
                 </div>
-                <div class="col s4">
+                <div class="col s12 m4 xspdt">
                     <h3 class="heading mgtn">Discover</h3>
                     <a href="" class="truncate">About Roofpik </a>
                     <a href="" class="truncate">career@Roofpik </a>
@@ -733,7 +709,7 @@
                     <a href="" class="truncate">Rental & Review Industry </a>
                     <a href="" class="truncate">Business</a>
                 </div>
-                <div class="col s4 ft13 pmg5">
+                <div class="col s12 m4 ft13 pmg5 xspdt">
                     <h3 class="heading mgtn">Contact Us</h3>
                     <p><i class="material-icons left mgt3 ft18 grey-text">location_on</i>
                         <span class="spleft"> 250, Vipul Trade Center,Sector 48, <br>Gurgaon, Haryana</span></p>
@@ -742,8 +718,8 @@
                 </div>
             </div>
             <div class="row bodt mgan pdt30">
-                <div class="col s6 color8 ft14 pdln">© AlphaBinary Technologies Pvt Ltd</div>
-                <div class="col s6 right-align pdrn">
+                <div class="col s12 m6 color8 ft14 pdln">© AlphaBinary Technologies Pvt Ltd</div>
+                <div class="col s12 m6 right-align pdrn xsmgt20">
                     <span class="mgt5 b ft14 inlineb grey-text"> Follow Us </span>
                     <a href="" class="right mgl10"><img src="images/general/facebook.png" alt="Facebook"></a>
                     <a href="" class="right mgl10"><img src="images/general/twitter.png" alt=""></a>
@@ -781,7 +757,6 @@
     <!-- controllers -->
     <script>
     $(document).ready(function() {
-
 
         Highcharts.chart('chart1', {
             chart: {

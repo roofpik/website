@@ -1,8 +1,8 @@
 body{font-size: 13px; color:#484848; font-weight: 300;}
-.rooflogo {width: 35px !important;}
-.rooflogo img{width: 100%; padding-top: 17px;}
+.rooflogo {width: 35px !important; line-height: 110%;}
+.rooflogo img{width: 100%; padding-top: 12px;}
 .logoslide img{width: 100%;}
-.logoslide{width: 130px !important; padding:0 0 0 30px !important;}
+.logoslide{width: 130px !important; padding:10px 0 0 30px !important;}
 .logoslide:hover{background-color: transparent !important;}
 
 .headerfix{border-bottom: 1px solid #dce0e0;
@@ -111,12 +111,12 @@ hr{border-top: solid 1px #ddd !important;
 .dropdown-content li>a, .dropdown-content li>span{padding:8px 10px !important; font-size: 14px;}
 .dropdown-content li>a, .dropdown-content li{line-height: 40px; min-height: 40px}
 
-.search_header{width: 40%; padding-left: 10px; float: left; color: #666; border-left:solid 1px #ddd; height:100%; position: relative; display: block; margin-left: 20px;}
+.search_header{width: 100%; padding-left: 10px; float: left; color: #666; border-left:solid 1px #ddd; height:100%; position: relative; display: block; margin-left: 20px;}
 .search_header input {border:none !important; color:#666; padding-left: 30px; width: calc(100% - 30px)}
 .search_header input:focus, .search_header input:focus:not([readonly]), .search_header input:hover{box-shadow:none !important;border:none !important;}
 .searchtopicon{position: absolute; width: 30px; top: 0px; left: 10px;}
 .resultfind, .resultfind ul, .resultfind ul li  {width: 100%; margin-left: -11px;
-    margin-top: -10px; }
+    margin-top: 0px; }
     .lht{    height: 30px;
     line-height: 20px;}
     .inp_pdwsm{padding-left: 25px !important; border-bottom: none !important;
@@ -210,10 +210,15 @@ input:focus + div.search-results , .autocompleteFind:focus + .search-results {
     padding-left: 55px;
 }
 
+.search_header .homecoll .collection-item.avatar{background-color: #fafafa; border-bottom: solid 1px #ddd;  padding-left: 15px; color:#444;}
+.search_header .homecoll .collection-item.avatar:nth-child(2n){background-color: #fff;}
+.search_header .homecoll {border-bottom: none;}
+.search_header .homecoll .collection-item.avatar:hover{background-color: #ff5a5f; color: #fff !important;}
+
 .salient li{ width: 50%; float: left; font-weight: 300; display: block; padding-left: 40px; font-size: 14px; margin-bottom: 10px; position: relative; }
 .salient li:before{
     position: absolute; width: 20px;  height: 15px;
-  content: '\E5CA';
+  content: '\E5CA'
   color: #26a69a; left: 5px; top:-8px;
   vertical-align: top;
   display: inline-block;
@@ -277,7 +282,8 @@ input:focus + div.search-results , .autocompleteFind:focus + .search-results {
 .ht45 {    height: 45px;}
 .bod-right {   border-right: 1px solid #ddd;}
 
-.mg48{margin:48px 0px !important;}
+.mg48{margin-top:48px !important; margin-bottom: 48px !important;}
+
 .write h3{font-weight: 700;
     color: #484848;    
     margin: 0px;
@@ -344,7 +350,7 @@ footer{width: 100%}
 .bodt{border-top: 1px solid #ddd;}
 .bodall{border: 1px solid #ddd !important;}
 .bodb{border-bottom: 1px solid #ddd;}
-.bodb{border-bottom: 1px solid #ddd;}
+.bodl{border-left: 1px solid #ddd;}
 .pdt30{padding-top: 25px !important;}
 .wd20p{width: 20% !important;}
 .color8{color: #848484}
@@ -627,4 +633,42 @@ input[type=text], input[type=email], .input-field .prefix ~ textarea, .select-wr
 @-moz-keyframes cssload-animation {
   0% { -moz-transform: scale(0); }
   100% { -moz-transform: scale(1); }
+}
+
+
+/*responsive media css*/
+@media only screen and (max-width: 992px){
+.side-nav a { padding: 0 32px;}
+
+}
+@media screen and (min-width:0px) and (max-width: 1079px) {
+.container {  max-width: 90%; width: 90%; }
+
+i.left { margin-right: 10px; }
+
+}
+@media screen and (min-width:0px) and (max-width: 767px) {
+.xs-wd{width: 45px !important; overflow: hidden; padding: 0 10px !important;}
+.xspd0{padding:0 !important;}
+.xswdfull{width: 100% !important;}
+.xsht5{height: 450px !important;}
+.xscenter{text-align: center !important;}
+.xsnone{display: none !important;}
+}
+@media screen and (min-width:600px) and (max-width: 767px) {
+.xs-mgt5{margin-top: 5px !important;}
+.micro-markets .card-title{font-size: 15px !important; line-height: 110% !important;}
+}
+@media screen and (min-width:0px) and (max-width: 600px) {
+.xsbdrn{border-right:0 !important;}
+.xspdt{padding-top: 48px !important;}
+.xsmgt20{margin-top: 20px !important;}
+}
+@media screen and (min-width:0px) and (max-width: 400px) {
+#login_signup_popup{width: 96%; }
+.xsnr10{margin-right: 10px !important;}
+.write h3{font-size: 21px; line-height: 25px;}
+.xshdh{    font-size: 19px;
+    line-height: 24px;}
+
 }
