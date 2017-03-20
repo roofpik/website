@@ -8,6 +8,27 @@
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/materialize.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <!--  <script src="https://cdn.anychart.com/js/7.13.0/anychart-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.anychart.com/css/7.13.0/anychart-ui.min.css" /> -->
+    <style>
+    .highcharts-container {
+        position: inherit !important;
+    }
+    
+    .highcharts-tooltip {
+        z-index: 9998;
+    }
+    
+    .micro-markets .card-title {
+        font-size: 17px;
+        font-weight: 500;
+    }
+    
+    .micro-markets .card {
+        overflow: hidden;
+    }
+    </style>
 </head>
 
 <body>
@@ -16,10 +37,39 @@
         <div class="navbar headerfix">
             <nav class="white boxsdn">
                 <div class="nav-wrapper">
-                    <a href="#" data-activates="slide-out" class="button-collapse show-on-large grey-text left">
-                        <i class="material-icons">menu</i></a>
-                    <a href="#home" class="rooflogo left"><img src="images/general/logoicon.png"></a>
-                    <div class="search_header">
+                    <div class="row">
+                        <div class="col s1">
+                            <a href="#" data-activates="slide-out" class="button-collapse show-on-large grey-text left">
+                                <i class="material-icons">menu</i></a>
+                            <a href="#home" class="rooflogo left"><img src="images/general/logoicon.png"></a>
+                        </div>
+                        <div class="col s6">
+                            <div class="search_header">
+                                <i class="material-icons searchtopicon">search</i>
+                                <input type="text" name="" placeholder="search">
+                                <div class="search-results resultfind">
+                                    <ul class="collection homecoll white mgan">
+                                        <li class="collection-item avatar">
+                                            <img src="images/homeicon/CGHS.png" class="circle" />
+                                            <span class="title ft13">CGHS</span>
+                                        </li>
+                                        <li class="collection-item avatar">
+                                            <img src="images/homeicon/Apartment.png" class="circle" />
+                                            <span class="title ft13">Apartment</span>
+                                        </li>
+                                        <li class="collection-item avatar">
+                                            <img src="images/homeicon/Villa-penthouse.png" class="circle" />
+                                            <span class="title ft13">Penthouse / Villa</span>
+                                        </li>
+                                    </ul>
+                                    <div class="pd5 grey lighten-4 ft12 lht">More Options</div>
+                                    <ul class="collection homecoll mgan">
+                                        <li class="collection-item avatar"><img src="images/homeicon/Commercial.png" class="circle" /> Explore Locality</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  <div class="search_header">
                         <i class="material-icons searchtopicon">search</i>
                         <input type="text" name="" placeholder="search">
                         <div class="search-results resultfind">
@@ -42,31 +92,32 @@
                                 <li class="collection-item avatar"><img src="images/homeicon/Commercial.png" class="circle" /> Explore Locality</li>
                             </ul>
                         </div>
-                    </div>
-                    <ul class="right">
-                        <li> <a href="write-review.html" class="btn btn-primary mgln mgr10 ft12 capitalize"><i class="material-icons left bticon">create</i> Write Review</a></li>
-                        <li style="display: block;">
-                            <a href="#login_signup_popup" class="btn mgln mgr10 ft12 mgln capitalize">
-                                <i class="material-icons left bticon">lock_outline</i> Login/Sign Up</a>
-                        </li>
-                        <li class="" style="display: none;">
-                            <a href="" class="dropdown-button btn btn-flat mgln ft12 mgr10 capitalize" data-activates="dropdown1">
-                                <img class="display-img left" src="images/general/noImage.png">Digamber Sharma</a>
-                            <ul id="dropdown1" class="dropdown-content droplogin">
-                                <li>
-                                    <a href="">
-                                        <i class="material-icons left">person</i>My Profile</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="">
-                                        <i class="material-icons left">power_settings_new</i>Logout</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <span class="right ft12 grey-text mgr30">
+                    </div> -->
+                        <ul class="right">
+                            <li> <a href="write-review.html" class="btn btn-primary mgln mgr10 ft12 capitalize"><i class="material-icons left bticon">create</i> Write Review</a></li>
+                            <li style="display: block;">
+                                <a href="#login_signup_popup" class="btn mgln mgr10 ft12 mgln capitalize">
+                                    <i class="material-icons left bticon">lock_outline</i> Login/Sign Up</a>
+                            </li>
+                            <li class="" style="display: none;">
+                                <a href="" class="dropdown-button btn btn-flat mgln ft12 mgr10 capitalize" data-activates="dropdown1">
+                                    <img class="display-img left" src="images/general/noImage.png">Digamber Sharma</a>
+                                <ul id="dropdown1" class="dropdown-content droplogin">
+                                    <li>
+                                        <a href="">
+                                            <i class="material-icons left">person</i>My Profile</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="">
+                                            <i class="material-icons left">power_settings_new</i>Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <span class="right ft12 grey-text mgr30">
                                 <i class="material-icons left tiny bticont mgrn">location_on</i>Gurgaon</span>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -365,6 +416,61 @@
                 </div>
             </div>
         </div>
+        <section class="micro-markets">
+            <div class="container">
+                <h5 class="center mgtn"> Explore Micromarkets  </h5>
+                <p class="center ft14 grey-text">Lorem ipsum is simmply dummy text</p>
+                <div class="row">
+                    <div class="col s4">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col s8">
+                                        <span class="card-title">Sohna Road</span>
+                                        <p>3 BHK <span>starting 25,000 Rs</span></p>
+                                        <p><a href="#">66 Projects</a>
+                                            <a href="#">9 Localities</a></p>
+                                    </div>
+                                    <div class="col s4">
+                                        <div id="chart1" style="height: 200px; max-width: 300px; margin: 0 auto;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col s8">
+                                        <span class="card-title">Golf Course Ext Road</span>
+                                        <p>3 BHK <span>starting 25,000 Rs</span></p>
+                                        <p><a href="#">66 Projects</a>
+                                            <a href="#">9 Localities</a></p>
+                                    </div>
+                                    <div class="col s4">
+                                        <div id="chart2" style="height: 200px; max-width: 300px; margin: 0 auto; "></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s8">
+                        <img src="images/home/gurgaon.png" class="responsive-img">
+                        <div class="sohna-road">
+                            <p>Sohna Road</p>
+                            <div class="wrapper">
+                                <div class="cssload-loader"></div>
+                            </div>
+                        </div>
+                        <div class="golf-course-extn-rd">
+                        <p>Golf Course Extn Road</p>
+                            <div class="wrapper">
+                                <div class="cssload-loader"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <div class="row mgbn">
             <div class="container">
                 <div class="row mg48">
@@ -527,7 +633,7 @@
                 <div class="row mgbn">
                     <h5 class="center mgtn"> Popular Searches  </h5>
                     <div class="col s3">
-                        <h3 class="heading">Dubai Properties For sale</h3>
+                        <h3 class="heading">Apartments For Rent</h3>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
@@ -535,7 +641,7 @@
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                     </div>
                     <div class="col s3">
-                        <h3 class="heading">Dubai Properties For sale</h3>
+                        <h3 class="heading">Villas for Rent</h3>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
@@ -543,7 +649,7 @@
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                     </div>
                     <div class="col s3">
-                        <h3 class="heading">Dubai Properties For sale</h3>
+                        <h3 class="heading">Penthouse For Rent</h3>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
@@ -551,7 +657,7 @@
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                     </div>
                     <div class="col s3">
-                        <h3 class="heading">Dubai Properties For sale</h3>
+                        <h3 class="heading">Row Houses For Rent</h3>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
                         <a href="" class="alink ft15 truncate">Apartments for Sale in Dubai Marnia </a>
@@ -620,11 +726,12 @@
                 </div>
                 <div class="col s4">
                     <h3 class="heading mgtn">Discover</h3>
-                    <a href="" class="truncate">Apartments  Dubai Marnia </a>
-                    <a href="" class="truncate">Apartments for Sale </a>
-                    <a href="" class="truncate">Apartments for Sale in</a>
-                    <a href="" class="truncate">Apartments Sale in Dubai </a>
-                    <a href="" class="truncate">Apartments for Sale in Dubai Marnia </a>
+                    <a href="" class="truncate">About Roofpik </a>
+                    <a href="" class="truncate">career@Roofpik </a>
+                    <a href="" class="truncate">Verified Residents</a>
+                    <a href="" class="truncate">Content Guidelines </a>
+                    <a href="" class="truncate">Rental & Review Industry </a>
+                    <a href="" class="truncate">Business</a>
                 </div>
                 <div class="col s4 ft13 pmg5">
                     <h3 class="heading mgtn">Contact Us</h3>
@@ -645,28 +752,25 @@
             </div>
         </div>
     </footer>
-
     <div id="login_signup_popup" class="modal white">
         <div class="modal-contant pda20">
-        <div class="row mgbn">
-            <div class="col s12 pdb10 mgt10">
-         <a href="#!" class=" modal-action modal-close block grey-text right"><i class="material-icons">close</i></a>
-           <h3 class="ft15 ftw300  grey-text text-darken-2"> <i class="material-icons grey-text mgmnst3 ft20 left mgr10">lock_outline</i> Login / Sign Up</h3>
-           </div>
-        </div>
-           <div class="row">
-               <div class="col s12 center">
-                   <a href="" class="btn btn-full btfacebook btn-large b blue darken-4 white-text">
-                   <img src="images/general/facebook1.png" class="left facebookicon"> Log in with Facebook</a>
-<div class="row mgln mgrn pdt30">
- <hr class="mgmnsb10">
-                 <span class="inline white pdl10 pdr10 grey-text"> OR</span>
-                
-                 </div>
-
-                        <a href="" class="btn white btn-large btgoogle b btn-full bodall grey-text text-darken-2"><img src="images/general/googleplusicon.png" class="left icongoogle"> Log in with Google</a>
-               </div>
-           </div>
+            <div class="row mgbn">
+                <div class="col s12 pdb10 mgt10">
+                    <a href="#!" class=" modal-action modal-close block grey-text right"><i class="material-icons">close</i></a>
+                    <h3 class="ft15 ftw300  grey-text text-darken-2"> <i class="material-icons grey-text mgmnst3 ft20 left mgr10">lock_outline</i> Login / Sign Up</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 center">
+                    <a href="" class="btn btn-full btfacebook btn-large b blue darken-4 white-text">
+                        <img src="images/general/facebook1.png" class="left facebookicon"> Log in with Facebook</a>
+                    <div class="row mgln mgrn pdt30">
+                        <hr class="mgmnsb10">
+                        <span class="inline white pdl10 pdr10 grey-text"> OR</span>
+                    </div>
+                    <a href="" class="btn white btn-large btgoogle b btn-full bodall grey-text text-darken-2"><img src="images/general/googleplusicon.png" class="left icongoogle"> Log in with Google</a>
+                </div>
+            </div>
         </div>
     </div>
     <!-- footer part start -->
@@ -677,6 +781,139 @@
     <!-- controllers -->
     <script>
     $(document).ready(function() {
+
+
+        Highcharts.chart('chart1', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                margin: [0, 0, 0, 0],
+                spacingTop: 0,
+                spacingBottom: 0,
+                spacingLeft: 0,
+                spacingRight: 0
+            },
+            title: {
+                text: null
+            },
+            tooltip: {
+                pointFormat: ' <b>{point.y}</b>'
+            },
+            plotOptions: {
+                pie: {
+                    size: '100%',
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    }
+                }
+            },
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
+                data: [{
+                    name: 'Villas',
+                    y: 22,
+                    sliced: true,
+                    selected: true
+                }, {
+                    name: 'Apartments',
+                    y: 70
+                }, {
+                    name: 'Penthouse',
+                    y: 18
+                }, {
+                    name: 'Row House',
+                    y: 15
+                }]
+            }]
+        });
+
+
+        Highcharts.chart('chart2', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                margin: [0, 0, 0, 0],
+                spacingTop: 0,
+                spacingBottom: 0,
+                spacingLeft: 0,
+                spacingRight: 0
+            },
+            title: {
+                text: null
+            },
+            tooltip: {
+                pointFormat: ' <b>{point.y}</b>'
+            },
+            plotOptions: {
+                pie: {
+                    size: '100%',
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    }
+                }
+            },
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
+                data: [{
+                    name: 'Villas',
+                    y: 18,
+                    sliced: true,
+                    selected: true
+                }, {
+                    name: 'Apartments',
+                    y: 22
+                }, {
+                    name: 'Penthouse',
+                    y: 19
+                }, {
+                    name: 'Row House',
+                    y: 10
+                }]
+            }]
+        });
+
+        setTimeout(function() {
+            $('#chart1').css('position', 'absolute');
+            $('#chart1').css('top', '-18px');
+            $('#chart2').css('position', 'absolute');
+            $('#chart2').css('top', '-18px');
+        }, 1000);
+
+        // anychart.onDocumentReady(function() {
+        //     // create pie chart with passed data
+        //     chart = anychart.pie([
+        //         ['Department Stores', 6371664],
+        //         ['Discount Stores', 7216301],
+        //         ['Men\'s/Women\'s Stores', 1486621],
+        //         ['Juvenile Specialty Stores', 786622],
+        //         ['All other outlets', 900000]
+        //     ]);
+
+        //     // set container id for the chart
+        //     chart.container('chart1');
+
+        //     // set chart title text settings
+        //     chart.legend(false);
+
+        //     //set chart radius
+        //     chart.radius('50%');
+
+        //     // create empty area in pie chart
+        //     chart.innerRadius('40%');
+
+        //     // initiate chart drawing
+        //     chart.draw();
+        // });
         $('.modal').modal();
         $('ul.tabs').tabs();
         Materialize.updateTextFields();
