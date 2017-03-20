@@ -55,6 +55,7 @@ hr{border-top: solid 1px #ddd !important;
 .mgbn{margin-bottom: 0px !important;}
 .mgt10{margin-top: 10px !important;} 
 .mgt20{margin-top: 20px !important;} 
+.mgt30{margin-top: 30px !important;} 
 .mgtn{margin-top: 0px !important;}
 .mgb10{margin-bottom: 10px !important;}
 .mgl10{margin-left: 10px !important;}
@@ -468,3 +469,40 @@ box-shadow: -4px 15px 45px 2px rgba(0,0,0,0.3);
 
     padding-left: 25px !important;  font-size: 13px !important;
 }
+.cir_cont {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    line-height: 40px;
+    border-radius: 50%;
+}
+.cir_contimg {
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-right: 10px;
+    line-height: 40px;
+}
+.borderrds20 {
+    border-radius: 30px;
+    color: #666;
+    font-size: 14px;
+}
+.borderrds20 span {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 10px;
+}
+.input-field .prefix {
+    width: 2rem;
+    font-size: 1.7rem;
+    padding-top: 7px;
+    color: #9e9e9e;
+}
+input[type=text], input[type=email], .input-field .prefix ~ textarea, .select-wrapper input.select-dropdown {
+    border-color: #ddd;
+}
+.input-field label {
+    font-size: 13px;
+}
+.gm-style-iw > div, .gm-style-iw > div > div {overflow: visible !important;}
