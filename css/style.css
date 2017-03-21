@@ -83,6 +83,8 @@ hr{border-top: solid 1px #ddd !important;
 .wdp70{width: 80%;}
 .relative{position: relative ;}
 .transform{position: absolute; left: 50%; margin-top: 30px; z-index: 9; top: 50%; transform: translate(-50%, -50%);}
+
+.transformfix{position: absolute; left: 50%;  z-index: 9; top: 50%; transform: translate(-50%, -50%);}
 .b{font-weight: 700;}
 .btn-fix{top: 30px; left: 39%;}
 .btn{padding:0 15px;}
@@ -146,7 +148,7 @@ hr{border-top: solid 1px #ddd !important;
 }
 .pointer{cursor: pointer;}
 .pdb20{padding-bottom: 20px !important;}
-.rtfixabs{position: fixed; width: 325px; z-index: 99; top: 10%; right: 7%; padding: 30px 20px !important; margin-left: 40px !important;}
+.rtfixabs{position: fixed; width: 300px; z-index: 99; top: 10%; right: 7%; padding: 30px 20px !important; margin-left: 40px !important;}
 .btnnum{padding:0 10px; cursor: pointer; text-align: center; width: 16.5%; line-height: 45px; background-color: #fafafa;  float: left; }
 .btnnum:hover, .btnnum:focus{background-color: #26a69a; color: #fff;}
 .bhkactive{background-color: #ff5a5f; color: #fff;}
@@ -390,7 +392,7 @@ footer{width: 100%}
 .menu_sub li a{float: left; display: inline-block; color:#666; margin-right:30px; line-height: 48px;}
 .menu_sub li a:hover, .menu_sub li a:focus {color: #ff5a5f;}
 
-.circle{width: 130px; height: 130px; overflow: hidden; border-radius: 50%; vertical-align: middle; margin:0 20px 0 0; border: 4px solid #ddd; display: inline-block;}
+.circle{width: 120px; height: 120px; overflow: hidden; border-radius: 50%; vertical-align: middle; margin:0 20px 20px 0; border: 4px solid #ddd; display: inline-block;}
 .linkroot nav {
     height: 30px;
     padding-top: 5px;
@@ -449,7 +451,10 @@ footer{width: 100%}
 }
 #seesample_popup, #addatip_popup{display: none; overflow: visible; position: absolute; z-index: 9;
 box-shadow: -4px 15px 45px 2px rgba(0,0,0,0.3);
- width: 300px; right: 10px; top: 10px;}
+ width: 280px; }
+#addatip_popup{right: 10px; top: 30px;}
+#seesample_popup{left: 100px; top: -24px;}
+
 #seesample_popup:before, #addatip_popup:before{    
      width: 0; 
   height: 0;  position: absolute; left: -15px; top: 20px;
@@ -468,6 +473,7 @@ box-shadow: -4px 15px 45px 2px rgba(0,0,0,0.3);
     display: block;
 }
 .leftsd{box-shadow: inset 8px 0 9px -8px rgba(0,0,0,0.2);}
+.rightsd{box-shadow: inset -8px 0 9px -8px rgba(0,0,0,0.2);}
 
 
 
@@ -513,11 +519,18 @@ input[type=text], input[type=email], .input-field .prefix ~ textarea, .select-wr
     font-size: 13px;
 }
 .gm-style-iw > div, .gm-style-iw > div > div {overflow: visible !important;}
-.smclose, .btfiltersm{display: none;}
+.smclose, .btfiltersm, .miconleft, .miconright{display: none;}
 .filter_fix{display: block;}
-
-
-
+.img_adver{height: 500px; overflow: hidden;}
+.img_adver img{ width: 100%; height: 100%; }
+.parallax img {
+    position: fixed;
+}
+.htv100 {
+    height: 100vh !important;
+    display: block;
+}
+.pdt100{padding-top: 130px !important;}
 
 /*Arpit*/
 
@@ -644,21 +657,34 @@ input[type=text], input[type=email], .input-field .prefix ~ textarea, .select-wr
     right: 0 !important; top:0 !important;}
 .img_detail { height: auto; }
 .menu_sub li a {  margin-right: 15px !important;  font-size: 13px !important;}
+.smxst{margin-top: 50px;}
+.rightsd{box-shadow: inset 0px -8px 8px -8px rgba(0,0,0,0.2); padding-bottom: 50px !important;}
 }
 @media screen and (min-width:0px) and (max-width: 1079px) {
 .container {  max-width: 90%; width: 90%; }
 i.left { margin-right: 10px; }
 }
-@media screen and (min-width:993px) and (max-width: 1040px) {
+
+@media screen and (min-width:993px) and (max-width: 1079px) {
+.rtfixabs{width: 290px !important; right: 4% !important;}
 .filterList div label{font-size: 11px !important;}
 }
 
-@media screen and (min-width:993px) and (max-width: 1040px) {
+@media screen and (min-width:1080px) and (max-width: 1120px) {
+.container{width: 95%}
 .rtfixabs{width: 290px !important; right: 4% !important;}
+
+}
+@media screen and (min-width:993px) and (max-width: 1200px) {
+    #seesample_popup{right: 0px; top: -24px; left: auto;}
 }
 
 
 @media screen and (min-width:0px) and (max-width: 767px) {
+
+.miconleft, .miconright{position: absolute; display: block; height: 20px; color:#999; line-height: 20px; z-index: 99; width: 25px; text-align: center; top: 13px}
+.miconleft{left: 0px}
+.miconright{right: -5px}
 
 .xs-wd{width: 45px !important; overflow: hidden; padding: 0 10px !important;}
 .xspd0{padding:0 !important;}
@@ -682,7 +708,9 @@ i.left { margin-right: 10px; }
         filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=3);}
         .smclose{display: block; position: absolute; left: 20px; top: 20px; cursor: pointer;}
 #fixsub_hd{display: none !important;}
-
+.salient li{font-size: 13px;}
+.heading{font-size: 16px !important ;}
+.text_abs_blog h5{font-size: 15px !important;}
 
 }
 
@@ -694,20 +722,30 @@ i.left { margin-right: 10px; }
 }
 
 @media screen and (min-width:0px) and (max-width: 600px) {
+
+.arrow_box{display: none;}
+.xs_bdaw { border-bottom: 2px solid #fff !important; border-left:none; border-right:none; border-top:none; }
+.xs_bdtn{border-top:none !important; border-right:none;}
+.img_location{height: 200px}
  h3{font-size: 2rem;}
  h5{font-size: 1.10rem;}
 .dt_abs{left: 25px;}
 .salient li{ width: 100%; }
 
+#seesample_popup{left: 0px; top: -24px;}
+#addatip_popup{display: none !important;}
+
 .wd20p{width: 33% !important;}
 .xsbdrn{border-right:0 !important;}
 .xspdt{padding-top: 48px !important;}
 .xsmgt20{margin-top: 20px !important;}
-.imglist {
-    height: 200px;
-}
+.imglist { height: 200px; }
 .xspdl10{padding-left: 10px !important;}
 .gallery a img{width: 50%; padding-bottom: 5px;}
+#facilities_popup{width: 90%;}
+.xspdb10{padding-bottom:10px !important; }
+.xspdt10{padding-top:10px !important; }
+.xspdln{padding-left: 0 !important;}
 
 }
 @media screen and (min-width:0px) and (max-width: 400px) {
@@ -719,5 +757,12 @@ i.left { margin-right: 10px; }
 .listp p {font-size: 11px;}
 .wd20p{width: 50% !important;}
 .imgcir{width: 40px; height: 40px;}
+.modal .modal-content{padding:15px;}
+
+.circle{width: 100px; height: 100px;}
+.circle .ft12{font-size: 11px !important;}
+.tabs .tab a{font-size: 13px;}
+#seesample_popup, #addatip_popup{width: 90%;}
+
 
 }
