@@ -218,7 +218,7 @@ input:focus + div.search-results , .autocompleteFind:focus + .search-results {
 .salient li{ width: 50%; float: left; font-weight: 300; display: block; padding-left: 40px; font-size: 14px; margin-bottom: 10px; position: relative; }
 .salient li:before{
     position: absolute; width: 20px;  height: 15px;
-  content: '\E5CA'
+  content: '\E5CA';
   color: #26a69a; left: 5px; top:-8px;
   vertical-align: top;
   display: inline-block;
@@ -513,7 +513,8 @@ input[type=text], input[type=email], .input-field .prefix ~ textarea, .select-wr
     font-size: 13px;
 }
 .gm-style-iw > div, .gm-style-iw > div > div {overflow: visible !important;}
-
+.smclose, .btfiltersm{display: none;}
+.filter_fix{display: block;}
 
 
 
@@ -639,30 +640,75 @@ input[type=text], input[type=email], .input-field .prefix ~ textarea, .select-wr
 /*responsive media css*/
 @media only screen and (max-width: 992px){
 .side-nav a { padding: 0 32px;}
-
+.sm_rtfixabs .rtfixabs {position: relative !important; width: 100%; margin-left: 0px !important; 
+    right: 0 !important; top:0 !important;}
+.img_detail { height: auto; }
+.menu_sub li a {  margin-right: 15px !important;  font-size: 13px !important;}
 }
 @media screen and (min-width:0px) and (max-width: 1079px) {
 .container {  max-width: 90%; width: 90%; }
-
 i.left { margin-right: 10px; }
-
 }
+@media screen and (min-width:993px) and (max-width: 1040px) {
+.filterList div label{font-size: 11px !important;}
+}
+
+@media screen and (min-width:993px) and (max-width: 1040px) {
+.rtfixabs{width: 290px !important; right: 4% !important;}
+}
+
+
 @media screen and (min-width:0px) and (max-width: 767px) {
+
 .xs-wd{width: 45px !important; overflow: hidden; padding: 0 10px !important;}
 .xspd0{padding:0 !important;}
 .xswdfull{width: 100% !important;}
 .xsht5{height: 450px !important;}
 .xscenter{text-align: center !important;}
 .xsnone{display: none !important;}
+.filter_fix{position: fixed !important; right: 0% !important; width: 250px !important; height: 100vh; overflow-y: auto; padding: 30px !important; box-shadow: 0 0 5px #666; background-color: #fff; display: none; top:0; z-index: 9999; transition: all .25s ease-in;}
+.xspdl0{padding-left: 0px !important;}
+.btfiltersm{ height: 25px; background-color: #ff5a5f; color: #fff;
+        display: block;
+        width: 65px; border: none; font-weight: 700; letter-spacing: 1px;
+        position: fixed;
+        right: -20px;
+        top: 48%;
+        z-index: 1000;
+        transform: rotate(-90deg);
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=3);}
+        .smclose{display: block; position: absolute; left: 20px; top: 20px; cursor: pointer;}
+#fixsub_hd{display: none !important;}
+
+
 }
+
 @media screen and (min-width:600px) and (max-width: 767px) {
 .xs-mgt5{margin-top: 5px !important;}
 .micro-markets .card-title{font-size: 15px !important; line-height: 110% !important;}
+.wd20p{width: 25% !important;}
+
 }
+
 @media screen and (min-width:0px) and (max-width: 600px) {
+ h3{font-size: 2rem;}
+ h5{font-size: 1.10rem;}
+.dt_abs{left: 25px;}
+.salient li{ width: 100%; }
+
+.wd20p{width: 33% !important;}
 .xsbdrn{border-right:0 !important;}
 .xspdt{padding-top: 48px !important;}
 .xsmgt20{margin-top: 20px !important;}
+.imglist {
+    height: 200px;
+}
+.xspdl10{padding-left: 10px !important;}
+.gallery a img{width: 50%; padding-bottom: 5px;}
+
 }
 @media screen and (min-width:0px) and (max-width: 400px) {
 #login_signup_popup{width: 96%; }
@@ -670,5 +716,8 @@ i.left { margin-right: 10px; }
 .write h3{font-size: 21px; line-height: 25px;}
 .xshdh{    font-size: 19px;
     line-height: 24px;}
+.listp p {font-size: 11px;}
+.wd20p{width: 50% !important;}
+.imgcir{width: 40px; height: 40px;}
 
 }
