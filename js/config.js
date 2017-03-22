@@ -32,5 +32,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         controller: 'writeReviewCtrl'
     })
 
+    $stateProvider.state('project-details',{
+        url: '/project-details',
+        templateUrl: 'templates/projects/project-details.html',
+        controller: 'projectDetailsCtrl'
+    })
+
     $urlRouterProvider.otherwise('/home');
 }]);

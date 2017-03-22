@@ -390,3 +390,39 @@ function checkLocalStorage(name) {
         return true;
     }
 }
+
+function getImageUrl(id) {
+    db.ref('images/' + id).once('value', function(snapshot) {
+        console.log(snapshot.val());
+        if (snapshot.val()) {
+            if (snapshot.val().cdn) {
+                console.log('http://cdn.roofpik.com/image/' + snapshot.val().path + '/' + snapshot.val().imgName + '.jpg');
+                return 'http://cdn.roofpik.com/image/' + snapshot.val().path + '/' + snapshot.val().imgName + '.jpg';
+            } else {
+                console.log('139.162.9.71/images/' + snapshot.val().imgName + '.jpg');
+                return '139.162.9.71/images/' + snapshot.val().imgName + '.jpg';
+            }
+        }
+    })
+}
+
+function camelCaseToTitleCase(camelCase) {
+    if (camelCase == null || camelCase == "") {
+        return camelCase;
+    }
+
+    camelCase = camelCase.trim();
+    var newText = "";
+    for (var i = 0; i < camelCase.length; i++) {
+        if (/[A-Z]/.test(camelCase[i]) && i != 0 && /[a-z]/.test(camelCase[i - 1])) {
+            newText += " ";
+        }
+        if (i == 0 && /[a-z]/.test(camelCase[i])) {
+            newText += camelCase[i].toUpperCase();
+        } else {
+            newText += camelCase[i];
+        }
+    }
+
+    return newText;
+}

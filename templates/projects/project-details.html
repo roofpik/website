@@ -1,22 +1,9 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, initial-scale=1.0, user-scalable=0">
-    <link rel="icon" href="images/general/favicon.png" type="image/png">
-    <!--Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="css/materialize.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-</head>
-
-<body>
+<div>
     <div class="row img_detail">
         <img src="images/home/home-bg.jpg" class="responsive-img">
         <div class="dt_abs">
-            <h3 class="white-text text-sd mgbn">Property Heading</h3>
-            <h5 class="white-text text-sd">Sector 48, Gurgaon</h5>
+            <h3 class="white-text text-sd mgbn">{{project.name}}</h3>
+            <h5 class="white-text text-sd">{{project.location.displayAdd}}</h5>
         </div>
     </div>
     <div class="row">
@@ -28,19 +15,19 @@
                             <!--  <i class="material-icons abs teal-text text-accent-4">vpn_key</i> -->
                             <h5 class="ft12 mgan"> Possession</h5>
                             <h4 class="mgan ft15 b truncate">Ready to move</h4>
-                            <p class="mgan ft12">Nov 2015</p>
+                            <p class="mgan ft12">{{project.general.yop}}</p>
                         </div>
                         <div class="col s4 pda10">
                             <!-- <i class="material-icons abs left cyan-text text-accent-4">place</i> -->
                             <h5 class="ft12 mgan">Address</h5>
-                            <h4 class="mgan ft15 b truncate">Sector 61, Gurgaon</h4>
-                            <p class="mgan ft12">City: Gurgaon</p>
+                            <h4 class="mgan ft15 b truncate">{{project.location.displayAdd}}</h4>
+                            <p class="mgan ft12">Gurgaon</p>
                         </div>
                         <div class="col s4 pda10">
                             <!--  <i class="material-icons abs left deep-purple-text text-accent-1 ">details</i> -->
                             <h5 class="ft12 mgan"> Project Details</h5>
-                            <h4 class="mgan ft15 b truncate">900 Units</h4>
-                            <p class="mgan ft12">13 towers</p>
+                            <h4 class="mgan ft15 b truncate">{{project.general.units}} Units</h4>
+                            <p class="mgan ft12">{{project.general.tower}} towers</p>
                         </div>
                     </div>
                 </div>
@@ -84,34 +71,34 @@
                     <div class="row" id="Overview">
                         <div class="col s12 pdb20">
                             <h3 class="heading mgbn">Overview</h3>
-                            <div class="ft14 grey-text">M3M Merlin Gurgaon</div>
+                            <div class="ft14 grey-text">{{project.name}}</div>
                         </div>
                         <div class="col s12">
                             <div class="row pdt10">
                                 <div class="col s3 pdb10">
-                                    <div class="ft14"> Under Construction </div>
-                                    <div class="grey-text ft12">status</div>
+                                    <div class="ft14">{{project.general.security}}</div>
+                                    <div class="grey-text ft12">Security</div>
                                 </div>
                                 <div class="col s3 pdb10">
-                                    <div class="ft14"> 13.34 Acres </div>
-                                    <div class="grey-text ft12">total area</div>
+                                    <div class="ft14">{{project.general.rent}}</div>
+                                    <div class="grey-text ft12">Rent</div>
                                 </div>
                                 <div class="col s3 pdb10">
-                                    <div class="ft14"> 510 </div>
-                                    <div class="grey-text ft12">total launched apartments</div>
+                                    <div class="ft14">{{project.general.power}}</div>
+                                    <div class="grey-text ft12">Power Backup</div>
                                 </div>
                                 <div class="col s3 pdb10">
-                                    <div class="ft14"> Sep'11 </div>
-                                    <div class="grey-text ft12">launch date</div>
+                                    <div class="ft14">{{project.general.carParking}}</div>
+                                    <div class="grey-text ft12">Car Parking</div>
                                 </div>
                                 <div class="col s3 pdb10">
-                                    <div class="ft14"> New and Resale </div>
-                                    <div class="grey-text ft12">availability</div>
+                                    <div class="ft14">{{project.general.website}}</div>
+                                    <div class="grey-text ft12">Website</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col s12 ft14 grey-text text-darken-2">
-                            <p>M3M Merlin is situated in Gurgaons Sector 67. The community has 3 and 4BHK apartments and penthouses. These units are completed and available through resale and the developer. Spread across 13.34 acres. in terms of super built-up areas. Some of the units have access to the terrace and a servants room built in the apartment. There are various amenities available to home owners such as childrens play zone, gymnasium and jogging track. M3M is one of Gurgaons reputed property developers with ten pro... <a href="">more</a></p>
+                            <p>{{project.general.about1}}<a href="" ng-hide="showMoreClicked" ng-click="showMoreClicked = !showMoreClicked">...more</a><span ng-show="showMoreClicked">{{project.general.about2}}</span></p>
                         </div>
                     </div>
                     <div class="row mgln mgrn" id="Project_Location">
@@ -123,20 +110,26 @@
                         <div class="col s4">
                             Site Address
                             <br>
-                            <div class="grey-text"> M3M Merlin
-                                <br> Sector 67,
-                                <br> Gurgaon
+                            <div class="grey-text"> {{project.name}}
+                                <br> {{project.location.addline1}}
+                                <br> {{project.location.addline2}}
                             </div>
                         </div>
                     </div>
                     <div class="row mgrn">
                         <div class="col s12">
-                            <h3 class="heading">Salient Features</h3>
-                            <ul class="salient">
-                                <li>Good location with connectivity to South Delhi, NH-8.</li>
-                                <li>Singapore style world-class apartments</li>
-                                <li>World class amenities and elegant interiors</li>
-                            </ul>
+                            <div ng-show="project.highlights.pros">
+                                <h3 class="heading">Pros</h3>
+                                <ul class="salient">
+                                    <li ng-repeat="pro in pros">{{pro}}</li>
+                                </ul>
+                            </div>
+                            <div ng-show="project.highlights.cons">
+                                <h3 class="heading">Cons</h3>
+                                <ul class="salient">
+                                    <li ng-repeat="con in cons">{{con}}</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <div class="row mgrn" id="Units_Sizes">
@@ -541,63 +534,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mgbn" id="Specifications">
+                    <div class="row mgbn" id="Specifications" ng-show="project.specifications">
                         <div class="col s12">
                             <h5 class="ft15 mgtn b pdb10">Specifications</h5>
                         </div>
-                        <div class="col s6">
+                        <div class="col s6" ng-repeat="(key, val) in specifications">
                             <h5 class="ft14 mgtn pdb10">
                                  <img class="mgr10 left" src="images/homeicon/Business Center.png"> 
-                                 <span class="mgt5 inlineb">Flooring</span>
+                                 <span class="mgt5 inlineb">{{key}}</span>
                             </h5>
-                            <div class="row ft12 mgt10 mgbn">
-                                <div class="col s4 grey-text">Master Bedroom:</div>
-                                <div class="col s8 grey-text text-darken-2">Laminated Wooden</div>
-                            </div>
-                            <div class="row ft12 mgt10 mgbn">
-                                <div class="col s4 grey-text">Kitchen:</div>
-                                <div class="col s8 grey-text text-darken-2">Anti Skid Tiles</div>
-                            </div>
-                            <div class="row ft12 mgt10 mgbn">
-                                <div class="col s4 grey-text">Balcony:</div>
-                                <div class="col s8 grey-text text-darken-2">Anti skid ceramic Tiles</div>
-                            </div>
-                            <div class="row ft12 mgt10 mgbn">
-                                <div class="col s4 grey-text">Other Bedroom:</div>
-                                <div class="col s8 grey-text text-darken-2">Wooden Flooring</div>
-                            </div>
-                            <div class="row ft12 mgt10 mgbn">
-                                <div class="col s4 grey-text">Living/Dining:</div>
-                                <div class="col s8 grey-text text-darken-2">Vitrified tiles</div>
+                            <div class="row ft12 mgt10 mgbn" ng-repeat="(key1, val1) in val">
+                                <div class="col s4 grey-text">{{key1}}:</div>
+                                <div class="col s8 grey-text text-darken-2">{{val1}}</div>
                             </div>
                         </div>
-                        <div class="col s6">
-                            <h5 class="ft14 mgtn pdb10">
-                                 <img class="mgr10 left" src="images/homeicon/Business Center.png"> 
-                                 <span class="mgt5 inlineb">Flooring</span>
-                            </h5>
-                            <div class="row ft12 mgt10 mgbn">
-                                <div class="col s4 grey-text">Master Bedroom:</div>
-                                <div class="col s8 grey-text text-darken-2">Laminated Wooden</div>
-                            </div>
-                            <div class="row ft12 mgt10 mgbn">
-                                <div class="col s4 grey-text">Kitchen:</div>
-                                <div class="col s8 grey-text text-darken-2">Anti Skid Tiles</div>
-                            </div>
-                            <div class="row ft12 mgt10 mgbn">
-                                <div class="col s4 grey-text">Balcony:</div>
-                                <div class="col s8 grey-text text-darken-2">Anti skid ceramic Tiles</div>
-                            </div>
-                            <div class="row ft12 mgt10 mgbn">
-                                <div class="col s4 grey-text">Other Bedroom:</div>
-                                <div class="col s8 grey-text text-darken-2">Wooden Flooring</div>
-                            </div>
-                            <div class="row ft12 mgt10 mgbn">
-                                <div class="col s4 grey-text">Living/Dining:</div>
-                                <div class="col s8 grey-text text-darken-2">Vitrified tiles</div>
-                            </div>
-                        </div>
-                        <div class="col s12 mgt10"><a href="" class="right">more specifications...</a></div>
                     </div>
                     <div class="row mgbn" id="gallery">
                         <div class="col s12">
@@ -1027,173 +977,13 @@
             </div>
         </div>
     </div>
-    </div>
-    <div id="view_map_popup" class="modal">
-        <div class="modal-content">
-            <div class="row">
-                <div class="col s12">
-                    <div id="mapCanvas" class="mapht"></div>
-                </div>
+</div>
+<div id="view_map_popup" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <div class="col s12">
+                <div id="mapCanvas" class="mapht"></div>
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-    <script src="js/materialize.min.js"></script>
-    <!-- controllers -->
-    <script src="js/angular.min.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBw11e3mCdbPwpJCwtxHn5yCGt1uwErX24&callback=initMap">
-    </script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script>
-    function initMap() {
-
-        var map;
-        var bounds = new google.maps.LatLngBounds();
-        var mapOptions = {
-            mapTypeId: 'roadmap'
-
-        };
-
-
-        // Display a map on the web page
-        map = new google.maps.Map(document.getElementById("mapCanvas"), mapOptions);
-        map.setTilt(50);
-
-        // Multiple markers location, latitude, and longitude
-
-        var markers = [
-
-            ['Vipul Trade Center, NY', 28.406909, 77.042623],
-
-
-        ];
-
-
-
-        // Info window content
-        var infoWindowContent = [
-
-            ['<div class="row relative mgbn">' +
-                '<div class="col s4 imglist pdb10">' +
-                '<a href=""> <img src="images/olive.jpg" class="responsive-img"></a>' +
-                '</div>' +
-                '<div class="col s6 pdln">' +
-                '<div class="truncate grey-text ft12">lorem ipsum</div>' +
-                '<h2 class="ft18 b mgbn mgt5 truncate"><a href="" class="redt"> The Olive Heights</a></h2>' +
-                '<h6 class="mgbn ft12 truncate b text-darken-2 mgt5">' +
-                '<a href="" class="grey-text"> Golf Course Road, Sector 56</a>' +
-                '</h6>' +
-                '<div class="grey-text mgt5 ft12">lorem ipsum</div>' +
-                '</div>' +
-                '<div class="col s2 pdln right-align">' +
-                '<span class="pdl10 pdr10 b grnbg white-text">4.7</span>' +
-                '<div class="ft11 grey-text mgt5">7832 votes </div>' +
-                '<div class="ft11 grey-text">4233 reviews</div>' +
-                '</div>' +
-                '</div>'
-            ],
-
-        ];
-
-
-        // Add multiple markers to map
-        var infoWindow = new google.maps.InfoWindow({
-
-            }),
-            marker, i;
-
-        // Place each marker on the map  
-        for (i = 0; i < markers.length; i++) {
-            var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
-            bounds.extend(position);
-            marker = new google.maps.Marker({
-                position: position,
-                map: map,
-                title: markers[i][0],
-                icon: markers[i][3],
-                animation: google.maps.Animation.DROP
-
-            });
-
-
-            // Add info window to marker    
-            google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
-                return function() {
-                    infoWindow.setContent(infoWindowContent[i][0]);
-
-                    infoWindow.open(map, marker);
-
-
-                }
-            })(marker, i));
-
-
-
-            // Center the map to fit all markers on the screen
-            map.fitBounds(bounds);
-        }
-
-        // Set zoom level
-        var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
-            this.setZoom(13);
-            google.maps.event.removeListener(boundsListener);
-
-        });
-
-
-    }
-
-    // Load initialize function
-    google.maps.event.addDomListener(window, 'load', initMap);
-    </script>
-    <!-- controllers -->
-    <script>
-    $(document).ready(function() {
-        $('ul.tabs').tabs();
-        Materialize.updateTextFields();
-
-        $('.button-collapse').sideNav({
-            menuWidth: 300, // Default is 240
-            edge: 'left', // Choose the horizontal origin
-            closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-            draggable: true // Choose whether you can drag to open on touch screens
-        });
-        $('select').material_select();
-        $('.slider').slider();
-        $('.dropdown-button').dropdown();
-        $('.carousel').carousel();
-        $('.modal').modal();
-
-    });
-    </script>
-    <script type="text/javascript">
-    $('.gallery').each(function() { // the containers for all your galleries
-        $(this).magnificPopup({
-            delegate: 'a', // the selector for gallery item
-            type: 'image',
-            gallery: {
-                enabled: true
-            }
-        });
-    });
-    </script>
-    <script type="text/javascript">
-    $(function() {
-        var menu = $('#fixsub_hd'),
-            pos = menu.offset();
-        $(window).scroll(function() {
-            if ($(this).scrollTop() > pos.top + menu.height() && menu.hasClass('displayn')) {
-                menu.fadeOut('fast', function() {
-                    $(this).removeClass('displayn').addClass('fixed').fadeIn('fast');
-                });
-            } else if ($(this).scrollTop() <= pos.top && menu.hasClass('fixed')) {
-                menu.fadeOut('fast', function() {
-                    $(this).removeClass('fixed').addClass('displayn').fadeIn('fast');
-                });
-            }
-        });
-    });
-    </script>
-</body>
-
-</html>
+</div>
