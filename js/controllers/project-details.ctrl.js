@@ -474,4 +474,16 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl) {
             });
         }, 100);
     }
+
+    $scope.submitQuery = function(){
+        console.log($scope.query);
+        $scope.query.projectId = $scope.projectId;
+        $scope.query.projectName = $scope.project.name;
+        $scope.query.cityId = $scope.cityId;
+        $scope.query.micromarketId = $scope.micromarketId;
+        $scope.query.localityId = $scope.localityId;
+        db.ref('query').push($scope.query).then(function(){
+            swal('Query Submitted', 'Our executives will call you back', 'success');
+        })
+    }
 })

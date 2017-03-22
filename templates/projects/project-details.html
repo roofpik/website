@@ -150,15 +150,25 @@
                                             <ul class="tabs">
                                                 <li class="tab col">
                                                     <a href="#subtab1" class="active">₹ 2.49 Cr<br>
-                                        <span class="subh ft11 grey-text">3121 sq ft</span></a></li>
+                                        				<span class="subh ft11 grey-text">3121 sq ft</span>
+                                        			</a>
+                                        		</li>
                                                 <li class="tab col"><a href="#subtab2">₹ 2.70 Cr<br>
-                                        <span class="subh ft11 grey-text">3125 sq ft</span></a></li>
+                                        				<span class="subh ft11 grey-text">3125 sq ft</span>
+                                        			</a>
+                                        		</li>
                                                 <li class="tab col"><a href="#subtab3">₹ 2.80 Cr<br>
-                                        <span class="subh ft11 grey-text">3125 sq ft</span></a></li>
+                                        				<span class="subh ft11 grey-text">3125 sq ft</span>
+                                        			</a>
+                                        		</li>
                                                 <li class="tab col"><a href="#subtab4">₹ 2.90 Cr<br>
-                                        <span class="subh ft11 grey-text">3125 sq ft</span></a></li>
+                                        				<span class="subh ft11 grey-text">3125 sq ft</span>
+                                        			</a>
+                                        		</li>
                                                 <li class="tab col"><a href="#subtab5">₹ 2.95 Cr<br>
-                                        <span class="subh ft11 grey-text">3125 sq ft</span></a></li>
+                                        				<span class="subh ft11 grey-text">3125 sq ft</span>
+                                        			</a>
+                                        		</li>
                                             </ul>
                                         </div>
                                         <div id="subtab1" class="col s12">
@@ -338,11 +348,11 @@
                                     <div class="row">
                                         <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center" ng-repeat="(key1, value1) in value" ng-show="project.amenities[key][key1] != 'NA'">
                                             <img ng-src="{{value1.img}}" alt="">
-                                            <span class="ht45 block">{{value1.name}}</span>
-                                            <!-- <p class="mgan ft12" ng-show="project.amenities[key][key1] !='No'">{{value1.name}}<span ng-show="project.amenities[key][key1] != 'Yes' && project.amenities[key][key1] !='No'">({{project.amenities[key][key1]}})</span></p>
-                                            <p class="mgan ft12" ng-show="project.amenities[key][key1] =='No'">
+                                            <!-- <span class="ht45 block">{{value1.name}}</span> -->
+                                            <span class="ht45 block" ng-show="project.amenities[key][key1] !='No'">{{value1.name}}<span ng-show="project.amenities[key][key1] != 'Yes' && project.amenities[key][key1] !='No'">({{project.amenities[key][key1]}})</span></span>
+                                            <span class="ht45 block" ng-show="project.amenities[key][key1] =='No'">
                                                 <s>{{value1.name}}</s>
-                                            </p> -->
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -764,26 +774,26 @@
                             <h3 class="mgan ft16 red-text">Search</h3>
                             <p class="ft12 grey-text">Enter your details to get callback</p>
                         </div>
-                        <form>
+                        <form name="queryForm">
                             <div class="input-field col s12">
-                                <input placeholder="Email" type="text" class="validate mgb5 ft12">
+                                <input placeholder="Email" type="email" class="validate mgb5 ft12" ng-model="query.email" required>
                             </div>
                             <div class="input-field col s4 ft12">
                                 <select class="ft12">
                                     <option value="" disabled selected>India</option>
-                                    <option value="1">Option 1</option>
+                                    <!-- <option value="1">Option 1</option>
                                     <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
+                                    <option value="3">Option 3</option> -->
                                 </select>
                             </div>
                             <div class="input-field col s1 pdt12">
                                 +91
                             </div>
                             <div class="input-field col s7">
-                                <input placeholder="Mobile No." type="text" class="validate mgb5 ft12">
+                                <input placeholder="Mobile No." type="number" class="validate mgb5 ft12" ng-minlength = "10" ng-maxlength="10" ng-model="query.mobileNum" required>
                             </div>
                             <div class="col s12 mgtmn mgt10">
-                                <button class="btn btn-full"><i class="material-icons left">phone</i> Get Callback</button>
+                                <button class="btn btn-full" ng-disabled="queryForm.$invalid" ng-click="submitQuery()"><i class="material-icons left">phone</i> Get Callback</button>
                                 <p class="ft11 grey-text center">Calling hours are from 9 a.m to 10 p.m IST</p>
                             </div>
                         </form>
