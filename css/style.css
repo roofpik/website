@@ -97,6 +97,7 @@ hr{border-top: solid 1px #ddd !important;
     background-color: #ff5a5f;
     color: #fff !important;
 }
+.zd1{z-index: 1;}
 .ft20i i {
     font-size: 18px !important;
 }
@@ -104,10 +105,11 @@ hr{border-top: solid 1px #ddd !important;
 .ft18i i {
     font-size: 18px !important; float: left;
 }
-
+.pdlr100{padding:50px 20% !important;}
+.pdlrp{padding:0px 20% !important;}
 #login_signup_popup{width: 400px; height: 300px;}
-
-
+.bgwhite_tr{background-color: rgba(255,255,255, 0.9);}
+.bgblack_tr{background-color: rgba(0,0,0, 0.5);}
 .adva_btn{padding: 0px !important;  float: right;}
 .bdmn{border-bottom: none !important;}
 .dropdown-content li>a, .dropdown-content li>span{padding:8px 10px !important; font-size: 14px;}
@@ -153,6 +155,9 @@ hr{border-top: solid 1px #ddd !important;
 .btnnum:hover, .btnnum:focus{background-color: #26a69a; color: #fff;}
 .bhkactive{background-color: #ff5a5f; color: #fff;}
 
+.rtfix_cor{position: absolute; width: 300px; z-index: 99; top:0; right: 0; padding: 30px 20px !important;
+ bottom: 0; margin: auto; height: 400px;}
+
 .imglist{height: 110px;}
 .imglist img{ width: 100%; height: 100%;}
 .mgtb_big{margin-top: 120px; margin-bottom: 60px;}
@@ -162,7 +167,7 @@ hr{border-top: solid 1px #ddd !important;
 .shdsm{
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 }
-.abs{position: absolute;}
+.abs{position: absolute !important;}
 .spleft{display: inline-block;}
 .abs_city{position: absolute; display: none; top: 62px;  border: 1px solid #ddd; left: 0; width: 750px; 
   background-color: #fff; z-index: 999 !important; padding:0 10px 10px 10px;}
@@ -341,6 +346,7 @@ footer{width: 100%}
 .inlineb{display: inline-block;}
 .block{display: block;}
 .ht10{height: 10px}
+.busin_bnht{height: 375px}
 
 .alink:hover{text-decoration: underline;}
 .alink{line-height: 30px; color: rgb(0, 166, 153)}
@@ -382,6 +388,9 @@ footer{width: 100%}
 .ftw100{font-weight: 300;}
 .btfacebook:hover, .btgoogle:hover{opacity: 0.9;}
 
+.dotted{border-bottom: dotted 1px #ff5a5f;}
+.imgcir_req{border-radius: 50%; width: 150px !important; height: 150px; overflow:hidden;}
+
 .displayn{display: none !important;}
 .fixed{display: block !important;}
 .gallery{width: 100%; padding: 10px;}
@@ -392,7 +401,7 @@ footer{width: 100%}
 .menu_sub li a{float: left; display: inline-block; color:#666; margin-right:30px; line-height: 48px;}
 .menu_sub li a:hover, .menu_sub li a:focus {color: #ff5a5f;}
 
-.circle{width: 120px; height: 120px; overflow: hidden; border-radius: 50%; vertical-align: middle; margin:0 20px 20px 0; border: 4px solid #ddd; display: inline-block;}
+.circle_h{width: 120px; height: 120px; overflow: hidden; border-radius: 50%; vertical-align: middle; margin:0 20px 20px 0; border: 4px solid #ddd; display: inline-block;}
 .linkroot nav {
     height: 30px;
     padding-top: 5px;
@@ -418,6 +427,10 @@ footer{width: 100%}
 
 .mapht, #map{height: 400px; width: 100%}
 
+.imghn{width: 100px !important; height: 100px !important;}
+
+.indic_color .indicators .indicator-item.active{background-color: #999 !important;}
+.indic_color .indicators .indicator-item{background-color: #eee !important;}
 .arrow_box {
     position: relative; padding: 4px 7px;
     background: #26a69a;
@@ -518,19 +531,21 @@ input[type=text], input[type=email], .input-field .prefix ~ textarea, .select-wr
 .input-field label {
     font-size: 13px;
 }
+.wdfull{width: 100%;}
 .gm-style-iw > div, .gm-style-iw > div > div {overflow: visible !important;}
 .smclose, .btfiltersm, .miconleft, .miconright{display: none;}
 .filter_fix{display: block;}
 .img_adver{height: 500px; overflow: hidden;}
 .img_adver img{ width: 100%; height: 100%; }
-.parallax img {
+/*.parallax img {
     position: fixed;
-}
+}*/
 .htv100 {
     height: 100vh !important;
     display: block;
 }
 .pdt100{padding-top: 130px !important;}
+.img32{width: 32px !important; height: 32px !important}
 
 /*Arpit*/
 
@@ -759,8 +774,8 @@ i.left { margin-right: 10px; }
 .imgcir{width: 40px; height: 40px;}
 .modal .modal-content{padding:15px;}
 
-.circle{width: 100px; height: 100px;}
-.circle .ft12{font-size: 11px !important;}
+.circle_h{width: 100px; height: 100px;}
+.circle_h .ft12{font-size: 11px !important;}
 .tabs .tab a{font-size: 13px;}
 #seesample_popup, #addatip_popup{width: 90%;}
 
