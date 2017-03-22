@@ -6,9 +6,11 @@
     <link rel="icon" href="images/general/favicon.png" type="image/png">
     <!--Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
     <link rel="stylesheet" href="css/materialize.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
     <!--  <script src="https://cdn.anychart.com/js/7.13.0/anychart-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.anychart.com/css/7.13.0/anychart-ui.min.css" /> -->
     <style>
@@ -44,27 +46,9 @@
     <footer>
         <div footer></div>
     </footer>
-    <!-- <div id="login_signup_popup" class="modal white">
-        <div class="modal-contant pda20">
-            <div class="row mgbn">
-                <div class="col s12 pdb10 mgt10">
-                    <a href="#!" class=" modal-action modal-close block grey-text right"><i class="material-icons">close</i></a>
-                    <h3 class="ft15 ftw300  grey-text text-darken-2"> <i class="material-icons grey-text mgmnst3 ft20 left mgr10">lock_outline</i> Login / Sign Up</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12 center">
-                    <a href="" class="btn btn-full btfacebook btn-large b blue darken-4 white-text">
-                        <img src="images/general/facebook1.png" class="left facebookicon"> Log in with Facebook</a>
-                    <div class="row mgln mgrn pdt30">
-                        <hr class="mgmnsb10">
-                        <span class="inline white pdl10 pdr10 grey-text"> OR</span>
-                    </div>
-                    <a href="" class="btn white btn-large btgoogle b btn-full bodall grey-text text-darken-2"><img src="images/general/googleplusicon.png" class="left icongoogle"> Log in with Google</a>
-                </div>
-            </div>
-        </div>
-    </div> -->
+    <div id="login_signup_popup" class="modal white">
+        <div login></div>
+    </div>
     <!-- footer part start -->
     <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
@@ -73,6 +57,7 @@
     
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/config.js"></script>
+    <script type="text/javascript" src="js/sweetalert.min.js"></script>
     <script type="text/javascript" src="js/directives/directives.js"></script>
     <!-- controllers -->
     <script type="text/javascript" src="js/controllers/home.ctrl.js"></script>
