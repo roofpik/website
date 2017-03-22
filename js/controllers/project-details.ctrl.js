@@ -1,4 +1,4 @@
-app.controller('projectDetailsCtrl', function($scope, $timeout) {
+app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl) {
     function initMap() {
 
         var map;
@@ -147,20 +147,26 @@ app.controller('projectDetailsCtrl', function($scope, $timeout) {
     $scope.cons = [];
     $scope.specifications = {};
     db.ref('project/country/' + $scope.countryId + '/city/' + $scope.cityId + '/residential/micromarket/' + $scope.micromarketId + '/locality/' + $scope.localityId + '/projects/' + $scope.projectId).once('value', function(snapshot) {
-        console.log(snapshot.val());
+        // console.log(snapshot.val());
         $timeout(function() {
             $scope.project = snapshot.val();
-            console.log($scope.project['cover-image']);
-            $scope.coverImage = getImageUrl($scope.project['cover-image']);
-            for(key in $scope.project.specifications){
-            	var x = camelCaseToTitleCase(key);
-            	$scope.specifications[x] = {};
-            	for(key1 in $scope.project.specifications[key]){
-            		var y = camelCaseToTitleCase(key1);
-            		$scope.specifications[x][y] = $scope.project.specifications[key][key1];
-            	}
+            var defer = $q.defer();
+            var t = imageUrl.getUrl($scope.project['cover-image'], defer);
+            t.then(function(response) {
+                $scope.coverImage = response;
+            });
+
+            getImages($scope.project.images);
+
+            for (key in $scope.project.specifications) {
+                var x = camelCaseToTitleCase(key);
+                $scope.specifications[x] = {};
+                for (key1 in $scope.project.specifications[key]) {
+                    var y = camelCaseToTitleCase(key1);
+                    $scope.specifications[x][y] = $scope.project.specifications[key][key1];
+                }
             }
-            console.log($scope.project.specifications);
+            // console.log($scope.project.specifications);
             if ($scope.project.highlights) {
                 if ($scope.project.highlights.pros) {
                     $scope.pros = $scope.project.highlights.pros.split("*");
@@ -171,18 +177,26 @@ app.controller('projectDetailsCtrl', function($scope, $timeout) {
 
             }
             if ($scope.project.general.about) {
-                console.log($scope.project.general.about.length);
+                // console.log($scope.project.general.about.length);
                 if ($scope.project.general.about.length > 500) {
                     $scope.project.general.about1 = $scope.project.general.about.substring(0, 500);
                     $scope.project.general.about2 = $scope.project.general.about.substring(501, $scope.project.general.about.length);
                 } else {
                     $scope.project.general.about1 = $scope.project.general.about;
                 }
-            } else {
-                console.log('else');
             }
-            console.log($scope.coverImage);
         })
-
     })
+    $scope.images = [];
+
+    function getImages(images){
+    	for(key in images){
+    		var defer = $q.defer();
+            var t = imageUrl.getUrl(key, defer);
+            t.then(function(response) {
+                $scope.images.push(response);
+            });
+    	}
+    	console.log($scope.images);
+    }
 })
