@@ -331,652 +331,468 @@
                             <div class="row relative">
                                 <div class="col s12 relative">
                                     <ul class="tabs">
-                                        <li class="tab col"><a class="active" href="#basic">Basic</a></li>
-                                        <li class="tab col"><a href="#convenience">Convenience</a></li>
-                                        <li class="tab col"><a href="#entertainment">Entertainment</a></li>
-                                        <li class="tab col"><a href="#safety">Safety</a></li>
-                                        <li class="tab col"><a href="#services">Services</a></li>
-                                        <li class="tab col"><a href="#sports">Sports</a></li>
+                                        <li class="tab col" ng-repeat="(key, value) in amenitiesPresent" ng-show="amenitiesPresent[key].present" ng-click="selectedTab == key"><a ng-class="selectedTab==key?'active': 'normal'" ng-href="{{value.hrefLink}}">{{value.name}}</a></li>
                                     </ul>
                                 </div>
-                                <div id="basic" class="col s12">
+                                <div id="{{key}}" class="col s12" ng-repeat="(key, value) in allAmenities">
                                     <div class="row">
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="convenience" class="col s12">
-                                    <div class="row">
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="entertainment" class="col s12">
-                                    <div class="row">
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="safety" class="col s12">
-                                    <div class="row">
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="services" class="col s12">
-                                    <div class="row">
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="sports" class="col s12">
-                                    <div class="row">
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
+                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center" ng-repeat="(key1, value1) in value" ng-show="project.amenities[key][key1] != 'NA'">
+                                            <img ng-src="{{value1.img}}" alt="">
+                                            <span class="ht45 block">{{value1.name}}</span>
+                                            <!-- <p class="mgan ft12" ng-show="project.amenities[key][key1] !='No'">{{value1.name}}<span ng-show="project.amenities[key][key1] != 'Yes' && project.amenities[key][key1] !='No'">({{project.amenities[key][key1]}})</span></p>
+                                            <p class="mgan ft12" ng-show="project.amenities[key][key1] =='No'">
+                                                <s>{{value1.name}}</s>
+                                            </p> -->
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row mgbn" id="Specifications" ng-show="project.specifications">
-                        <div class="col s12">
-                            <h5 class="ft15 mgtn b pdb10">Specifications</h5>
-                        </div>
-                        <div class="col s6" ng-repeat="(key, val) in specifications">
-                            <h5 class="ft14 mgtn pdb10">
-                                 <img class="mgr10 left" src="images/homeicon/Business Center.png"> 
-                                 <span class="mgt5 inlineb">{{key}}</span>
-                            </h5>
-                            <div class="row ft12 mgt10 mgbn" ng-repeat="(key1, val1) in val">
-                                <div class="col s4 grey-text">{{key1}}:</div>
-                                <div class="col s8 grey-text text-darken-2">{{val1}}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mgbn" id="gallery">
-                        <div class="col s12">
-                            <h5 class="ft15 mgtn b pdb10">Gallery</h5>
-                        </div>
-                        <div class="row mgan">
-                            <div class="gallery">
-                                <a href="images/home/writebg.jpg"><img src="images/home/writebg.jpg"></a>
-                                <!-- <a href="images/home/write-bg.jpg"><img src="images/home/write-bg.jpg"></a>
-                                <a href="images/home/writebg.jpg"><img src="images/home/writebg.jpg"></a>
-                                <a href="images/home/write-bg.jpg"><img src="images/home/write-bg.jpg"></a> -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row pd48">
-                        <div class="col s5">
-                            <h5 class="ft15 mgtn b pdb10">User Rating</h5>
-                            <div class="row mgbn ft12">
-                                <div class="col s6 mgrn">
-                                    <input type="checkbox" class="filled-in" id="filled-in-box2">
-                                    <label class="ft12" for="filled-in-box2">Excellent </label>
-                                </div>
-                                <div class="col s3 no-padding">
-                                    <span class="progress mgbn  ht10 grey lighten-2">
-                                      <span class="determinate" id="excellentStar" style="width: 10%;">
-                                      </span>
-                                    </span>
-                                </div>
-                                <div class="col s3 grey-text mgt5">0</div>
-                            </div>
-                            <div class="row mgbn ft12">
-                                <div class="col s6 mgrn">
-                                    <input type="checkbox" class="filled-in" id="filled-in-box3">
-                                    <label class="ft12" for="filled-in-box3">Very Good </label>
-                                </div>
-                                <div class="col s3 no-padding">
-                                    <span class="progress mgbn  ht10 grey lighten-2">
-                                      <span class="determinate" id="excellentStar" style="width: 20%;">
-                                      </span>
-                                    </span>
-                                </div>
-                                <div class="col s3 grey-text mgt5">0</div>
-                            </div>
-                            <div class="row mgbn ft12">
-                                <div class="col s6 mgrn">
-                                    <input type="checkbox" class="filled-in" id="filled-in-box4">
-                                    <label class="ft12" for="filled-in-box4">Good </label>
-                                </div>
-                                <div class="col s3 no-padding">
-                                    <span class="progress mgbn  ht10 grey lighten-2">
-                                      <span class="determinate" id="excellentStar" style="width: 40%;">
-                                      </span>
-                                    </span>
-                                </div>
-                                <div class="col s3 grey-text mgt5">0</div>
-                            </div>
-                            <div class="row mgbn ft12">
-                                <div class="col s6 mgrn">
-                                    <input type="checkbox" class="filled-in" id="filled-in-box5">
-                                    <label class="ft12" for="filled-in-box5">Average </label>
-                                </div>
-                                <div class="col s3 no-padding">
-                                    <span class="progress mgbn  ht10 grey lighten-2">
-                                      <span class="determinate" id="excellentStar" style="width: 50%;">
-                                      </span>
-                                    </span>
-                                </div>
-                                <div class="col s3 grey-text mgt5">0</div>
-                            </div>
-                            <div class="row mgbn ft12">
-                                <div class="col s6 mgrn">
-                                    <input type="checkbox" class="filled-in" id="filled-in-box6">
-                                    <label class="ft12" for="filled-in-box6">Bad </label>
-                                </div>
-                                <div class="col s3 no-padding">
-                                    <span class="progress mgbn  ht10 grey lighten-2">
-                                      <span class="determinate" id="excellentStar" style="width: 70%;">
-                                      </span>
-                                    </span>
-                                </div>
-                                <div class="col s3 grey-text mgt5">0</div>
-                            </div>
-                        </div>
-                        <div class="col s3">
-                            <h5 class="ft15 mgtn b pdb10">Resident Type</h5>
-                            <div class="row mgbn">
-                                <div class="col s12">
-                                    <input type="checkbox" class="filled-in" id="type1">
-                                    <label class="ft12" for="type1">Owners </label>
-                                </div>
-                                <div class="col s12">
-                                    <input type="checkbox" class="filled-in" id="type2">
-                                    <label class="ft12" for="type2">Tenants </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col s4">
-                            <h5 class="ft15 mgtn b pdb10">Rating Summary</h5>
-                            <div class="row">
-                                <div class="col s12 ft12 ft18i mgt5">
-                                    <span class="left mgr10">  <i class="material-icons green-text">star</i>
-                                    <i class="material-icons green-text">star</i>
-                                    <i class="material-icons green-text">star</i>
-                                    <i class="material-icons green-text">star_half</i>
-                                    <i class="material-icons grey-text">star_border</i>
-                                    </span>
-                                    <span>  (3.5) Security</span>
-                                </div>
-                                <div class="col s12 ft12 ft18i mgt5">
-                                    <span class="left mgr10">  <i class="material-icons green-text">star</i>
-                                    <i class="material-icons green-text">star</i>
-                                    <i class="material-icons green-text">star</i>
-                                    <i class="material-icons green-text">star_half</i>
-                                    <i class="material-icons grey-text">star_border</i>
-                                    </span>
-                                    <span>  (2) Amenities</span>
-                                </div>
-                                <div class="col s12 ft12 ft18i mgt5">
-                                    <span class="left mgr10">  <i class="material-icons green-text">star</i>
-                                    <i class="material-icons green-text">star</i>
-                                    <i class="material-icons green-text">star</i>
-                                    <i class="material-icons green-text">star_half</i>
-                                    <i class="material-icons grey-text">star_border</i>
-                                    </span>
-                                    <span> (4) Green Areas</span>
-                                </div>
-                                <div class="col s12 ft12 ft18i mgt5">
-                                    <span class="left mgr10">  <i class="material-icons green-text">star</i>
-                                    <i class="material-icons green-text">star</i>
-                                    <i class="material-icons green-text">star</i>
-                                    <i class="material-icons green-text">star_half</i>
-                                    <i class="material-icons grey-text">star_border</i>
-                                    </span>
-                                    <span> (5) Parking</span>
-                                </div>
-                                <div class="col s12 ft12 ft18i mgt5">
-                                    <span class="left mgr10">  <i class="material-icons green-text">star</i>
-                                    <i class="material-icons green-text">star</i>
-                                    <i class="material-icons green-text">star</i>
-                                    <i class="material-icons green-text">star_half</i>
-                                    <i class="material-icons grey-text">star_border</i>
-                                    </span>
-                                    <span> (2.5) Infrastructure</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col s12">
-                            <a href="#facilities_popup" class="right">more...</a>
-                        </div>
-                        <div id="facilities_popup" class="modal">
-                            <div class="modal-content">
-                                <h5 class="ft15 mgtn b mgbn">Facilities</h5>
-                                <div class="row mgbn mgt10">
-                                    <div class="col s4">
-                                        <span class="progress mgbn  ht10 grey lighten-2">
-                                           <span class="determinate" style="width: 50%;"></span>
-                                        </span>
-                                    </div>
-                                    <div class="col s8 mgt3">Good schools</div>
-                                </div>
-                                <div class="row mgbn mgt5">
-                                    <div class="col s4">
-                                        <span class="progress mgbn  ht10 grey lighten-2">
-                                          <span class="determinate" style="width: 75%;"></span>
-                                        </span>
-                                    </div>
-                                    <div class="col s8 mgt3">Good Markets</div>
-                                </div>
-                                <div class="row mgbn mgt5">
-                                    <div class="col s4">
-                                        <span class="progress mgbn  ht10 grey lighten-2">
-                                          <span class="determinate" style="width: 100%;"> 
-                                          </span>
-                                        </span>
-                                    </div>
-                                    <div class="col s8 mgt3">Reputed Hospitals</div>
-                                </div>
-                                <div class="row mgbn mgt5">
-                                    <div class="col s4">
-                                        <span class="progress mgbn  ht10 grey lighten-2">
-                                          <span class="determinate" style="width: 80%;"> 
-                                          </span>
-                                        </span>
-                                    </div>
-                                    <div class="col s8 mgt3">Daily Need Items</div>
-                                </div>
-                                <div class="row mgbn mgt5">
-                                    <div class="col s4">
-                                        <span class="progress mgbn  ht10 grey lighten-2">
-                                          <span class="determinate" style="width: 100%;"> 
-                                          </span>
-                                        </span>
-                                    </div>
-                                    <div class="col s8 mgt3">Public Transport</div>
-                                </div>
-                                <div class="row mgbn mgt5">
-                                    <div class="col s4">
-                                        <span class="progress mgbn  ht10 grey lighten-2">
-                                          <span class="determinate" style="width: 100%;"> 
-                                          </span>
-                                        </span>
-                                    </div>
-                                    <div class="col s8 mgt3">Apartment layout efficient</div>
-                                </div>
-                                <div class="row mgbn mgt5">
-                                    <div class="col s4">
-                                        <span class="progress mgbn  ht10 grey lighten-2">
-                                          <span class="determinate" style="width: 100%;"> 
-                                          </span>
-                                        </span>
-                                    </div>
-                                    <div class="col s8 mgt3">24x7 electricity</div>
-                                </div>
-                                <div class="row mgbn mgt5">
-                                    <div class="col s4">
-                                        <span class="progress mgbn  ht10 grey lighten-2">
-                                          <span class="determinate" style="width: 100%;"> 
-                                          </span>
-                                        </span>
-                                    </div>
-                                    <div class="col s8 mgt3">Regular/clean water supply</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <section>
-                        <div class="row bdbtm ft13 grey-text text-darken-2 mgan" id="Reviews">
-                            <div class="col s2 b pdb20">
-                                <img class="imgcir mgt10" src="images/general/noImage.png">
-                            </div>
-                            <div class="col s10">
-                                <p><b> Rajneesh Sharma </b> | Sep 01, 16</p>
-                                <p class="grey-text review ft20i mgbn mgtmn">
-                                    <i class="material-icons blue-text">star</i>
-                                    <i class="material-icons blue-text">star</i>
-                                    <i class="material-icons blue-text">star</i>
-                                    <i class="material-icons blue-text">star</i>
-                                    <i class="material-icons">star</i>
-                                </p>
-                                <p><b>Wonderful ambience - greenery all around</b></p>
-                                <p class="justify">One entry and exit point has been constructed so thats a very big advantage and guards are always present. Clubhouse is there and it has a good ambience and is very well maintained. There are wide open green areas. It is spread across the Sohna Road and Golf Course Road Extension. There are some problems with the power backup. Housemaids are easily available. Basement and open parking is maintained and twice a day they have guards around. Here we have high-rise buildings with very good layout, main road connectivity is good which provides for easy transportation. Sohna Road is a problem as service roads are bad if you are coming in or going out of the society it is bad but inside, the ambience is wonderful. <a href="">more...</a></p>
-                            </div>
-                        </div>
-                        <div class="row bodb bodt pdt10 pdb10 mgln mgrn">
-                            <div class="col s12 center">
-                                <a href="">more reviews...</a>
-                            </div>
-                        </div>
-                    </section>
-                    <div class="row mgln mgrn mgbn" id="Popular_Projects">
-                        <h3 class="heading"> Popular Projects </h3>
-                        <div class="slider ht400">
-                            <ul class="slides white ht350">
-                                <li>
-                                    <div class="row mns8 mgbn">
-                                        <div class="col s4 pdlr8">
-                                            <div class="card boxsdn mgtn rdsan pdbn mgbn">
-                                                <div class="card-image">
-                                                    <img src="images/general/bestech.jpg">
-                                                </div>
-                                                <div class="card-content pdt8 pdln pdrn pdbn">
-                                                    <a href="" class="a48">
-                                                        <h5 class="truncate mgan ft15 lineh18 b lts">₹11469 Vipul Greens</h5>
-                                                        <h6 class="truncate mgt3 mgbn ft15 lineh18  lts">Sohna Road, Sector 48</h6>
-                                                        <div class="star lineh16 mgt5">
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <span class="ft12 lts4 lineh16">(3.95) 91 Reviews</span>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col s4 pdlr8">
-                                            <div class="card boxsdn mgtn rdsan pdbn mgbn">
-                                                <div class="card-image">
-                                                    <img src="images/general/bestech.jpg">
-                                                </div>
-                                                <div class="card-content pdt8 pdln pdrn pdbn">
-                                                    <a href="" class="a48">
-                                                        <h5 class="truncate mgan ft15 lineh18 b lts">₹11469 Vipul Greens</h5>
-                                                        <h6 class="truncate mgt3 mgbn ft15 lineh18  lts">Sohna Road, Sector 48</h6>
-                                                        <div class="star lineh16 mgt5">
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <span class="ft12 lts4 lineh16">(3.95) 91 Reviews</span>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col s4 pdlr8">
-                                            <div class="card boxsdn mgtn rdsan pdbn mgbn">
-                                                <div class="card-image">
-                                                    <img src="images/general/bestech.jpg">
-                                                </div>
-                                                <div class="card-content pdt8 pdln pdrn pdbn">
-                                                    <a href="" class="a48">
-                                                        <h5 class="truncate mgan ft15 lineh18 b lts">₹11469 Vipul Greens</h5>
-                                                        <h6 class="truncate mgt3 mgbn ft15 lineh18  lts">Sohna Road, Sector 48</h6>
-                                                        <div class="star lineh16 mgt5">
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <span class="ft12 lts4 lineh16">(3.95) 91 Reviews</span>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row mns8 mgbn">
-                                        <div class="col s4 pdlr8">
-                                            <div class="card boxsdn mgtn rdsan pdbn mgbn">
-                                                <div class="card-image">
-                                                    <img src="images/general/bestech.jpg">
-                                                </div>
-                                                <div class="card-content pdt8 pdln pdrn pdbn">
-                                                    <a href="" class="a48">
-                                                        <h5 class="truncate mgan ft15 lineh18 b lts">₹11469 Sohna Road</h5>
-                                                        <h6 class="truncate mgt3 mgbn ft15 lineh18  lts">Sohna Road, Sector 48</h6>
-                                                        <div class="star lineh16 mgt5">
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <span class="ft12 lts4 lineh16">(3.95) 91 Reviews</span>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col s4 pdlr8">
-                                            <div class="card boxsdn mgtn rdsan pdbn mgbn">
-                                                <div class="card-image">
-                                                    <img src="images/general/bestech.jpg">
-                                                </div>
-                                                <div class="card-content pdt8 pdln pdrn pdbn">
-                                                    <a href="" class="a48">
-                                                        <h5 class="truncate mgan ft15 lineh18 b lts">₹11469 Sohna Road</h5>
-                                                        <h6 class="truncate mgt3 mgbn ft15 lineh18  lts">Sohna Road, Sector 48</h6>
-                                                        <div class="star lineh16 mgt5">
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <span class="ft12 lts4 lineh16">(3.95) 91 Reviews</span>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col s4 pdlr8">
-                                            <div class="card boxsdn mgtn rdsan pdbn mgbn">
-                                                <div class="card-image">
-                                                    <img src="images/general/bestech.jpg">
-                                                </div>
-                                                <div class="card-content pdt8 pdln pdrn pdbn">
-                                                    <a href="" class="a48">
-                                                        <h5 class="truncate mgan ft15 lineh18 b lts">₹11469 Sohna Road</h5>
-                                                        <h6 class="truncate mgt3 mgbn ft15 lineh18  lts">Sohna Road, Sector 48</h6>
-                                                        <div class="star lineh16 mgt5">
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <i class="material-icons left ft15 mgr1 stargrn">star</i>
-                                                            <span class="ft12 lts4 lineh16">(3.95) 91 Reviews</span>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
-                <div class="col s4 relative">
-                    <div class="rtfixabs white card">
-                        <div class="row mgan">
-                            <div class="col s12 ft15 center pda10">
-                                We will take care of
-                                <br>
-                                <h3 class="mgan ft16 red-text">Search</h3>
-                                <p class="ft12 grey-text">Enter your details to get callback</p>
-                            </div>
-                            <form>
-                                <div class="input-field col s12">
-                                    <input placeholder="Email" type="text" class="validate mgb5 ft12">
-                                </div>
-                                <div class="input-field col s4 ft12">
-                                    <select class="ft12">
-                                        <option value="" disabled selected>India</option>
-                                        <option value="1">Option 1</option>
-                                        <option value="2">Option 2</option>
-                                        <option value="3">Option 3</option>
-                                    </select>
-                                </div>
-                                <div class="input-field col s1 pdt12">
-                                    +91
-                                </div>
-                                <div class="input-field col s7">
-                                    <input placeholder="Mobile No." type="text" class="validate mgb5 ft12">
-                                </div>
-                                <div class="col s12 mgtmn mgt10">
-                                    <button class="btn btn-full"><i class="material-icons left">phone</i> Get Callback</button>
-                                    <p class="ft11 grey-text center">Calling hours are from 9 a.m to 10 p.m IST</p>
-                                </div>
-                            </form>
+                <div class="row mgbn" id="Specifications" ng-show="project.specifications">
+                    <div class="col s12">
+                        <h5 class="ft15 mgtn b pdb10">Specifications</h5>
+                    </div>
+                    <div class="col s6" ng-repeat="(key, val) in specifications">
+                        <h5 class="ft14 mgtn pdb10">
+                                 <img class="mgr10 left" src="images/homeicon/Business Center.png"> 
+                                 <span class="mgt5 inlineb">{{key}}</span>
+                            </h5>
+                        <div class="row ft12 mgt10 mgbn" ng-repeat="(key1, val1) in val">
+                            <div class="col s4 grey-text">{{key1}}:</div>
+                            <div class="col s8 grey-text text-darken-2">{{val1}}</div>
                         </div>
+                    </div>
+                </div>
+                <div class="row mgbn" id="gallery">
+                    <div class="col s12">
+                        <h5 class="ft15 mgtn b pdb10">Gallery</h5>
+                    </div>
+                    <div class="row mgan">
+                        <div class="gallery">
+                            <a ng-href="{{img}}" ng-repeat="img in images track by $index"><img ng-src="{{img}}"></a>
+                            <!-- <a href="images/home/write-bg.jpg"><img src="images/home/write-bg.jpg"></a>
+                                <a href="images/home/writebg.jpg"><img src="images/home/writebg.jpg"></a>
+                                <a href="images/home/write-bg.jpg"><img src="images/home/write-bg.jpg"></a> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row pd48">
+                    <div class="col s5">
+                        <h5 class="ft15 mgtn b pdb10">User Rating</h5>
+                        <div class="row mgbn ft12">
+                            <div class="col s6 mgrn">
+                                <input type="checkbox" class="filled-in" id="filled-in-box2">
+                                <label class="ft12" for="filled-in-box2">Excellent </label>
+                            </div>
+                            <div class="col s3 no-padding">
+                                <span class="progress mgbn  ht10 grey lighten-2">
+                                      <span class="determinate" id="excellentStar" style="width: 10%;">
+                                      </span>
+                                </span>
+                            </div>
+                            <div class="col s3 grey-text mgt5">0</div>
+                        </div>
+                        <div class="row mgbn ft12">
+                            <div class="col s6 mgrn">
+                                <input type="checkbox" class="filled-in" id="filled-in-box3">
+                                <label class="ft12" for="filled-in-box3">Very Good </label>
+                            </div>
+                            <div class="col s3 no-padding">
+                                <span class="progress mgbn  ht10 grey lighten-2">
+                                      <span class="determinate" id="excellentStar" style="width: 20%;">
+                                      </span>
+                                </span>
+                            </div>
+                            <div class="col s3 grey-text mgt5">0</div>
+                        </div>
+                        <div class="row mgbn ft12">
+                            <div class="col s6 mgrn">
+                                <input type="checkbox" class="filled-in" id="filled-in-box4">
+                                <label class="ft12" for="filled-in-box4">Good </label>
+                            </div>
+                            <div class="col s3 no-padding">
+                                <span class="progress mgbn  ht10 grey lighten-2">
+                                      <span class="determinate" id="excellentStar" style="width: 40%;">
+                                      </span>
+                                </span>
+                            </div>
+                            <div class="col s3 grey-text mgt5">0</div>
+                        </div>
+                        <div class="row mgbn ft12">
+                            <div class="col s6 mgrn">
+                                <input type="checkbox" class="filled-in" id="filled-in-box5">
+                                <label class="ft12" for="filled-in-box5">Average </label>
+                            </div>
+                            <div class="col s3 no-padding">
+                                <span class="progress mgbn  ht10 grey lighten-2">
+                                      <span class="determinate" id="excellentStar" style="width: 50%;">
+                                      </span>
+                                </span>
+                            </div>
+                            <div class="col s3 grey-text mgt5">0</div>
+                        </div>
+                        <div class="row mgbn ft12">
+                            <div class="col s6 mgrn">
+                                <input type="checkbox" class="filled-in" id="filled-in-box6">
+                                <label class="ft12" for="filled-in-box6">Bad </label>
+                            </div>
+                            <div class="col s3 no-padding">
+                                <span class="progress mgbn  ht10 grey lighten-2">
+                                      <span class="determinate" id="excellentStar" style="width: 70%;">
+                                      </span>
+                                </span>
+                            </div>
+                            <div class="col s3 grey-text mgt5">0</div>
+                        </div>
+                    </div>
+                    <div class="col s3">
+                        <h5 class="ft15 mgtn b pdb10">Resident Type</h5>
+                        <div class="row mgbn">
+                            <div class="col s12">
+                                <input type="checkbox" class="filled-in" id="type1">
+                                <label class="ft12" for="type1">Owners </label>
+                            </div>
+                            <div class="col s12">
+                                <input type="checkbox" class="filled-in" id="type2">
+                                <label class="ft12" for="type2">Tenants </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s4">
+                        <h5 class="ft15 mgtn b pdb10">Rating Summary</h5>
+                        <div class="row">
+                            <div class="col s12 ft12 ft18i mgt5">
+                                <span class="left mgr10">  <i class="material-icons green-text">star</i>
+                                    <i class="material-icons green-text">star</i>
+                                    <i class="material-icons green-text">star</i>
+                                    <i class="material-icons green-text">star_half</i>
+                                    <i class="material-icons grey-text">star_border</i>
+                                    </span>
+                                <span>  (3.5) Security</span>
+                            </div>
+                            <div class="col s12 ft12 ft18i mgt5">
+                                <span class="left mgr10">  <i class="material-icons green-text">star</i>
+                                    <i class="material-icons green-text">star</i>
+                                    <i class="material-icons green-text">star</i>
+                                    <i class="material-icons green-text">star_half</i>
+                                    <i class="material-icons grey-text">star_border</i>
+                                    </span>
+                                <span>  (2) Amenities</span>
+                            </div>
+                            <div class="col s12 ft12 ft18i mgt5">
+                                <span class="left mgr10">  <i class="material-icons green-text">star</i>
+                                    <i class="material-icons green-text">star</i>
+                                    <i class="material-icons green-text">star</i>
+                                    <i class="material-icons green-text">star_half</i>
+                                    <i class="material-icons grey-text">star_border</i>
+                                    </span>
+                                <span> (4) Green Areas</span>
+                            </div>
+                            <div class="col s12 ft12 ft18i mgt5">
+                                <span class="left mgr10">  <i class="material-icons green-text">star</i>
+                                    <i class="material-icons green-text">star</i>
+                                    <i class="material-icons green-text">star</i>
+                                    <i class="material-icons green-text">star_half</i>
+                                    <i class="material-icons grey-text">star_border</i>
+                                    </span>
+                                <span> (5) Parking</span>
+                            </div>
+                            <div class="col s12 ft12 ft18i mgt5">
+                                <span class="left mgr10">  <i class="material-icons green-text">star</i>
+                                    <i class="material-icons green-text">star</i>
+                                    <i class="material-icons green-text">star</i>
+                                    <i class="material-icons green-text">star_half</i>
+                                    <i class="material-icons grey-text">star_border</i>
+                                    </span>
+                                <span> (2.5) Infrastructure</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <a href="#facilities_popup" class="right">more...</a>
+                    </div>
+                    <div id="facilities_popup" class="modal">
+                        <div class="modal-content">
+                            <h5 class="ft15 mgtn b mgbn">Facilities</h5>
+                            <div class="row mgbn mgt10">
+                                <div class="col s4">
+                                    <span class="progress mgbn  ht10 grey lighten-2">
+                                           <span class="determinate" style="width: 50%;"></span>
+                                    </span>
+                                </div>
+                                <div class="col s8 mgt3">Good schools</div>
+                            </div>
+                            <div class="row mgbn mgt5">
+                                <div class="col s4">
+                                    <span class="progress mgbn  ht10 grey lighten-2">
+                                          <span class="determinate" style="width: 75%;"></span>
+                                    </span>
+                                </div>
+                                <div class="col s8 mgt3">Good Markets</div>
+                            </div>
+                            <div class="row mgbn mgt5">
+                                <div class="col s4">
+                                    <span class="progress mgbn  ht10 grey lighten-2">
+                                          <span class="determinate" style="width: 100%;"> 
+                                          </span>
+                                    </span>
+                                </div>
+                                <div class="col s8 mgt3">Reputed Hospitals</div>
+                            </div>
+                            <div class="row mgbn mgt5">
+                                <div class="col s4">
+                                    <span class="progress mgbn  ht10 grey lighten-2">
+                                          <span class="determinate" style="width: 80%;"> 
+                                          </span>
+                                    </span>
+                                </div>
+                                <div class="col s8 mgt3">Daily Need Items</div>
+                            </div>
+                            <div class="row mgbn mgt5">
+                                <div class="col s4">
+                                    <span class="progress mgbn  ht10 grey lighten-2">
+                                          <span class="determinate" style="width: 100%;"> 
+                                          </span>
+                                    </span>
+                                </div>
+                                <div class="col s8 mgt3">Public Transport</div>
+                            </div>
+                            <div class="row mgbn mgt5">
+                                <div class="col s4">
+                                    <span class="progress mgbn  ht10 grey lighten-2">
+                                          <span class="determinate" style="width: 100%;"> 
+                                          </span>
+                                    </span>
+                                </div>
+                                <div class="col s8 mgt3">Apartment layout efficient</div>
+                            </div>
+                            <div class="row mgbn mgt5">
+                                <div class="col s4">
+                                    <span class="progress mgbn  ht10 grey lighten-2">
+                                          <span class="determinate" style="width: 100%;"> 
+                                          </span>
+                                    </span>
+                                </div>
+                                <div class="col s8 mgt3">24x7 electricity</div>
+                            </div>
+                            <div class="row mgbn mgt5">
+                                <div class="col s4">
+                                    <span class="progress mgbn  ht10 grey lighten-2">
+                                          <span class="determinate" style="width: 100%;"> 
+                                          </span>
+                                    </span>
+                                </div>
+                                <div class="col s8 mgt3">Regular/clean water supply</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <section>
+                    <div class="row bdbtm ft13 grey-text text-darken-2 mgan" id="Reviews">
+                        <div class="col s2 b pdb20">
+                            <img class="imgcir mgt10" src="images/general/noImage.png">
+                        </div>
+                        <div class="col s10">
+                            <p><b> Rajneesh Sharma </b> | Sep 01, 16</p>
+                            <p class="grey-text review ft20i mgbn mgtmn">
+                                <i class="material-icons blue-text">star</i>
+                                <i class="material-icons blue-text">star</i>
+                                <i class="material-icons blue-text">star</i>
+                                <i class="material-icons blue-text">star</i>
+                                <i class="material-icons">star</i>
+                            </p>
+                            <p><b>Wonderful ambience - greenery all around</b></p>
+                            <p class="justify">One entry and exit point has been constructed so thats a very big advantage and guards are always present. Clubhouse is there and it has a good ambience and is very well maintained. There are wide open green areas. It is spread across the Sohna Road and Golf Course Road Extension. There are some problems with the power backup. Housemaids are easily available. Basement and open parking is maintained and twice a day they have guards around. Here we have high-rise buildings with very good layout, main road connectivity is good which provides for easy transportation. Sohna Road is a problem as service roads are bad if you are coming in or going out of the society it is bad but inside, the ambience is wonderful. <a href="">more...</a></p>
+                        </div>
+                    </div>
+                    <div class="row bodb bodt pdt10 pdb10 mgln mgrn">
+                        <div class="col s12 center">
+                            <a href="">more reviews...</a>
+                        </div>
+                    </div>
+                </section>
+                <div class="row mgln mgrn mgbn" id="Popular_Projects">
+                    <h3 class="heading"> Popular Projects </h3>
+                    <div class="slider ht400">
+                        <ul class="slides white ht350">
+                            <li>
+                                <div class="row mns8 mgbn">
+                                    <div class="col s4 pdlr8">
+                                        <div class="card boxsdn mgtn rdsan pdbn mgbn">
+                                            <div class="card-image">
+                                                <img src="images/general/bestech.jpg">
+                                            </div>
+                                            <div class="card-content pdt8 pdln pdrn pdbn">
+                                                <a href="" class="a48">
+                                                    <h5 class="truncate mgan ft15 lineh18 b lts">₹11469 Vipul Greens</h5>
+                                                    <h6 class="truncate mgt3 mgbn ft15 lineh18  lts">Sohna Road, Sector 48</h6>
+                                                    <div class="star lineh16 mgt5">
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <span class="ft12 lts4 lineh16">(3.95) 91 Reviews</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col s4 pdlr8">
+                                        <div class="card boxsdn mgtn rdsan pdbn mgbn">
+                                            <div class="card-image">
+                                                <img src="images/general/bestech.jpg">
+                                            </div>
+                                            <div class="card-content pdt8 pdln pdrn pdbn">
+                                                <a href="" class="a48">
+                                                    <h5 class="truncate mgan ft15 lineh18 b lts">₹11469 Vipul Greens</h5>
+                                                    <h6 class="truncate mgt3 mgbn ft15 lineh18  lts">Sohna Road, Sector 48</h6>
+                                                    <div class="star lineh16 mgt5">
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <span class="ft12 lts4 lineh16">(3.95) 91 Reviews</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col s4 pdlr8">
+                                        <div class="card boxsdn mgtn rdsan pdbn mgbn">
+                                            <div class="card-image">
+                                                <img src="images/general/bestech.jpg">
+                                            </div>
+                                            <div class="card-content pdt8 pdln pdrn pdbn">
+                                                <a href="" class="a48">
+                                                    <h5 class="truncate mgan ft15 lineh18 b lts">₹11469 Vipul Greens</h5>
+                                                    <h6 class="truncate mgt3 mgbn ft15 lineh18  lts">Sohna Road, Sector 48</h6>
+                                                    <div class="star lineh16 mgt5">
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <span class="ft12 lts4 lineh16">(3.95) 91 Reviews</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row mns8 mgbn">
+                                    <div class="col s4 pdlr8">
+                                        <div class="card boxsdn mgtn rdsan pdbn mgbn">
+                                            <div class="card-image">
+                                                <img src="images/general/bestech.jpg">
+                                            </div>
+                                            <div class="card-content pdt8 pdln pdrn pdbn">
+                                                <a href="" class="a48">
+                                                    <h5 class="truncate mgan ft15 lineh18 b lts">₹11469 Sohna Road</h5>
+                                                    <h6 class="truncate mgt3 mgbn ft15 lineh18  lts">Sohna Road, Sector 48</h6>
+                                                    <div class="star lineh16 mgt5">
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <span class="ft12 lts4 lineh16">(3.95) 91 Reviews</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col s4 pdlr8">
+                                        <div class="card boxsdn mgtn rdsan pdbn mgbn">
+                                            <div class="card-image">
+                                                <img src="images/general/bestech.jpg">
+                                            </div>
+                                            <div class="card-content pdt8 pdln pdrn pdbn">
+                                                <a href="" class="a48">
+                                                    <h5 class="truncate mgan ft15 lineh18 b lts">₹11469 Sohna Road</h5>
+                                                    <h6 class="truncate mgt3 mgbn ft15 lineh18  lts">Sohna Road, Sector 48</h6>
+                                                    <div class="star lineh16 mgt5">
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <span class="ft12 lts4 lineh16">(3.95) 91 Reviews</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col s4 pdlr8">
+                                        <div class="card boxsdn mgtn rdsan pdbn mgbn">
+                                            <div class="card-image">
+                                                <img src="images/general/bestech.jpg">
+                                            </div>
+                                            <div class="card-content pdt8 pdln pdrn pdbn">
+                                                <a href="" class="a48">
+                                                    <h5 class="truncate mgan ft15 lineh18 b lts">₹11469 Sohna Road</h5>
+                                                    <h6 class="truncate mgt3 mgbn ft15 lineh18  lts">Sohna Road, Sector 48</h6>
+                                                    <div class="star lineh16 mgt5">
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <i class="material-icons left ft15 mgr1 stargrn">star</i>
+                                                        <span class="ft12 lts4 lineh16">(3.95) 91 Reviews</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col s4 relative">
+                <div class="rtfixabs white card">
+                    <div class="row mgan">
+                        <div class="col s12 ft15 center pda10">
+                            We will take care of
+                            <br>
+                            <h3 class="mgan ft16 red-text">Search</h3>
+                            <p class="ft12 grey-text">Enter your details to get callback</p>
+                        </div>
+                        <form>
+                            <div class="input-field col s12">
+                                <input placeholder="Email" type="text" class="validate mgb5 ft12">
+                            </div>
+                            <div class="input-field col s4 ft12">
+                                <select class="ft12">
+                                    <option value="" disabled selected>India</option>
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                    <option value="3">Option 3</option>
+                                </select>
+                            </div>
+                            <div class="input-field col s1 pdt12">
+                                +91
+                            </div>
+                            <div class="input-field col s7">
+                                <input placeholder="Mobile No." type="text" class="validate mgb5 ft12">
+                            </div>
+                            <div class="col s12 mgtmn mgt10">
+                                <button class="btn btn-full"><i class="material-icons left">phone</i> Get Callback</button>
+                                <p class="ft11 grey-text center">Calling hours are from 9 a.m to 10 p.m IST</p>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <div id="view_map_popup" class="modal">
     <div class="modal-content">
