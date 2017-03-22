@@ -58,11 +58,11 @@ app.controller('searchCtrl', function($scope) {
 });
 
 app.controller('popularSearchCtrl', function($scope) {
-    console.log('popular working');
+    // console.log('popular working');
 });
 
 app.controller('microMarketsCtrl', function($scope) {
-    console.log('micro working');
+    // console.log('micro working');
     Highcharts.chart('chart1', {
         chart: {
             plotBackgroundColor: null,

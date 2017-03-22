@@ -34,22 +34,23 @@
                     </div>
                     <ul class="right">
                         <li> <a href="write-review.html" class="btn btn-primary mgln mgr10 ft12 capitalize xs-wd"><i class="material-icons left bticon">create</i> Write Review</a></li>
-                        <li style="display: block;">
-                            <a href="#login_signup_popup" class="btn mgln mgr10 ft12 mgln capitalize xs-wd">
+                        <li ng-hide="loginStatus">
+                            <a href="#login_signup_popup" id="open-login" class="btn mgln mgr10 ft12 mgln capitalize xs-wd">
                                 <i class="material-icons left bticon">lock_outline</i> Login/Sign Up</a>
                         </li>
-                        <li class="" style="display: none;">
+                        <li class="" ng-show="loginStatus">
                             <a href="" class="dropdown-button btn btn-flat mgln ft12 mgr10 capitalize" data-activates="dropdown1">
-                                <img class="display-img left" src="images/general/noImage.png">Digamber Sharma</a>
+                                <img class="display-img left" ng-src="{{user.photoURL}}">{{user.displayName}}</a>
                             <ul id="dropdown1" class="dropdown-content droplogin">
-                                <li>
+                                <!-- <li>
                                     <a href="">
                                         <i class="material-icons left">person</i>My Profile</a>
                                 </li>
-                                <li class="divider"></li>
+                                <li class="divider"></li> -->
                                 <li>
-                                    <a href="">
-                                        <i class="material-icons left">power_settings_new</i>Logout</a>
+                                    <a href="" ng-click="logout()">
+                                        <i class="material-icons left">power_settings_new</i>Logout
+                                    </a>
                                 </li>
                             </ul>
                         </li>

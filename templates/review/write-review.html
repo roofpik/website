@@ -274,7 +274,7 @@
                             </div>
                         </div>
                         <!-- <button class="lighten-1 btn btn-primary block mgt20 wd100" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating || !projectSelected|| !loginStatus)?'disabled':'normal'" ng-click="submitReview()">Submit Your Review</button> -->
-                        <button class="lighten-1 btn btn-primary block mgt20 wd100" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating)?'disabled':'normal'" ng-click="submitReview()">Submit Your Review</button>
+                        <button class="lighten-1 btn btn-primary block mgt20 wd100" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating|| !loginStatus)?'disabled':'normal'" ng-click="submitReview()">Submit Your Review</button>
                         <p ng-hide="loginStatus" id="loginSignup">Please login/signup to submit review *</p>
                     </form>
                 </div>

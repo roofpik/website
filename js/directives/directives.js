@@ -3,9 +3,65 @@ app.directive('header', function() {
         restrict: 'A', //This menas that it will be used as an attribute and NOT as an element. I don't like creating custom HTML elements
         replace: false,
         scope: { user: '=' }, // This is one of the cool things :). Will be explained in post.
-        templateUrl: "templates/directives/header.html"
-            // controller: 'headerCtrl'
+        templateUrl: "templates/directives/header.html",
+        controller: 'headerCtrl'
     }
+});
+
+app.controller('headerCtrl', function($scope, $timeout, $rootScope) {
+    $scope.user = {};
+    $scope.loginStatus = false;
+    $scope.$watch('loginStatus', function() {
+        $timeout(function() {
+            $scope.loginStatus = $rootScope.loginStatus;
+            if ($rootScope.loginStatus) {
+                $scope.user = firebase.auth().currentUser;
+            } else {
+                $scope.user = {};
+                $scope.user.photoURL = null;
+                $scope.user.displayName = null;
+            }
+        }, 0);
+    });
+
+    $rootScope.$on("loggedIn", function() {
+        console.log('called');
+        $timeout(function() {
+            $scope.user = firebase.auth().currentUser;
+            $scope.loginStatus = true;
+        }, 0);
+    });
+
+    $scope.logout = function() {
+        swal({
+                title: "Logout!",
+                text: "Are You Sure You Want To Logout?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, log me out!",
+                closeOnConfirm: true,
+            },
+            function() {
+                firebase.auth().signOut().then(function(response) {
+                    $timeout(function() {
+                        $rootScope.uid = null;
+                        $timeout(function() {
+                            $rootScope.loginStatus = false;
+                            $scope.user = {};
+                            $scope.user.photoURL = null;
+                            $scope.user.displayName = null;
+                            $scope.loginStatus = false;
+                        }, 0);
+                        localStorage.setItem('loginStatus', false);
+                        sweetAlert("Logout Successful", "You have successfully logged out!", "success");
+                    }, 100);
+
+                }, function(error) {
+                    var timestamp = new Date().getTime();
+                });
+            });
+    };
 });
 
 app.directive('footer', function() {
@@ -27,17 +83,15 @@ app.directive('login', function() {
     }
 });
 
-app.controller('loginCtrl', function($scope, $http, $timeout) {
+app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope) {
     var ip = '';
     var token = '';
     var user = {};
     var mobileNumber;
     $scope.loginWithGoogle = function() {
-        console.log('clicked');
         var provider = new firebase.auth.GoogleAuthProvider();
         provider.addScope('https://www.googleapis.com/auth/plus.login');
         firebase.auth().signInWithPopup(provider).then(function(result) {
-            console.log(result);
             token = result.credential.accessToken;
             user = result.user;
             checkRegistered(result.user);
@@ -85,10 +139,18 @@ app.controller('loginCtrl', function($scope, $http, $timeout) {
     };
 
     function checkRegistered(user) {
-        console.log(user);
         db.ref('users/' + user.uid).once('value', function(snapshot) {
             if (snapshot.val()) {
                 $('.modal').modal('close');
+                var data = firebase.auth().get
+                $rootScope.uid = user.uid;
+                $rootScope.photoURL = user.photoURL;
+                $rootScope.displayName = user.displayName;
+                $timeout(function() {
+                    $rootScope.loginStatus = true;
+                }, 0);
+                localStorage.setItem('loginStatus', true);
+                localStorage.setItem('uid', JSON.stringify(user.uid));
                 swal("Success", "You have successfully logged in", "success");
             } else {
                 console.log(user);
@@ -110,7 +172,15 @@ app.controller('loginCtrl', function($scope, $http, $timeout) {
                         photoURL: user.providerData[0].photoURL,
                         token: token,
                         gid: user.providerData[0].uid
+                    },
+                    registration: {
+                        device: navigator.userAgent.toLowerCase(),
+                        platform: 'website',
+                        regType: 'online'
                     }
+                }
+                if (ip) {
+                    userData.registration.signupIp = JSON.parse(ip);
                 }
                 if (name[1]) {
                     userData.lname = name[1]
@@ -123,6 +193,14 @@ app.controller('loginCtrl', function($scope, $http, $timeout) {
                 }
 
                 db.ref('users/' + user.uid).update(userData).then(function() {
+                    $rootScope.uid = userData.uid;
+                    $rootScope.photoURL = userData.photoURL;
+                    $rootScope.displayName = user.displayName;
+                    $timeout(function() {
+                        $rootScope.loginStatus = true;
+                    }, 0);
+                    localStorage.setItem('loginStatus', true);
+                    localStorage.setItem('uid', JSON.stringify(user.uid));
                     $('.modal').modal('close');
                     swal({
                             title: "Verify mobile number",
@@ -152,12 +230,6 @@ app.controller('loginCtrl', function($scope, $http, $timeout) {
         })
     }
 
-    // function showRegisteredMsg(){
-    //     console.log(mobileNumber.length);
-    //     if(mobileNumber.length){
-
-    //     }
-    // }
     $scope.mobileVerified = false;
 
     function sendOTP(mobile) {
@@ -305,4 +377,16 @@ function reviewRatings() {
             };
         }
     };
+}
+
+function deleteLocalStorage(name) {
+    localStorage.removeItem(name);
+}
+
+function checkLocalStorage(name) {
+    if (localStorage.getItem(name) === null) {
+        return false;
+    } else {
+        return true;
+    }
 }

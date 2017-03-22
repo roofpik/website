@@ -1,4 +1,4 @@
-app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams) {
+app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams, $rootScope) {
 
     $('.modal').modal();
     $('ul.tabs').tabs();
@@ -57,13 +57,13 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams) {
     $scope.countryId = '-K_43TEI8cBodNbwlKqJ';
     $scope.user = {};
     $scope.review = {
-        ratings: {}
-    }
-    // $scope.selectedProject = {};
+            ratings: {}
+        }
+        // $scope.selectedProject = {};
     $scope.selectedProject = {
-    	name: 'Vipul Greens',
-    	type: 'residential',
-    	id: '1234'
+        name: 'Vipul Greens',
+        type: 'residential',
+        id: '1234'
     }
 
     $scope.ratingParams = [{
@@ -107,19 +107,39 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams) {
             $scope.review.ratings.infrastructure = rating;
         }
     };
-
-    $scope.submitReview = function() {
-        console.log($scope.review);
+    $rootScope.$watch('loginStatus', function() {
+            $timeout(function() {
+                if ($rootScope.loginStatus) {
+                    $scope.loginStatus = true;
+                    $scope.user = firebase.auth().currentUser;
+                } else {
+                    $scope.loginStatus = false;
+                }
+            }, 0)
+        })
+        // console.log(checkLocalStorage('loginStatus'));
+    if (checkLocalStorage('loginStatus')) {
+        $timeout(function() {
+            $scope.loginStatus = JSON.parse(localStorage.getItem('loginStatus'));
+            // console.log($scope.loginStatus);
+            if (JSON.parse(localStorage.getItem('loginStatus'))) {
+                $scope.user = firebase.auth().currentUser;
+            } else {
+                $rootScope.$emit("callShowLogin");
+            }
+        },0);
+    } else {
+        $rootScope.$emit("callShowLogin");
     }
 
     $scope.submitReview = function() {
         var reviewPath = '';
         var userReviewPath = '';
         var newKey = '';
-        // $scope.review.userName = $scope.user.displayName;
-        $scope.review.userName = 'Anu Porwal';
-        // $scope.review.userId = $scope.user.uid;
-        $scope.review.userId = '2cQ2XQ7w7pdT9WGq2nyGJhrPSOo2';
+        $scope.review.userName = $scope.user.displayName;
+        // $scope.review.userName = 'Anu Porwal';
+        $scope.review.userId = $scope.user.uid;
+        // $scope.review.userId = '2cQ2XQ7w7pdT9WGq2nyGJhrPSOo2';
         $scope.review.blocked = false;
         $scope.review.createdDate = new Date().getTime();
         $scope.review.dataFormat = 1;
@@ -136,28 +156,28 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams) {
             createdDate: $scope.review.createdDate
         }
         if ($scope.selectedProject.type == 'residential') {
-            newKey = db.ref('reviews/country/'+$scope.countryId+ '/city/' + $scope.cityId + '/residential/' + $scope.selectedProject.id).push().key;
+            newKey = db.ref('reviews/country/' + $scope.countryId + '/city/' + $scope.cityId + '/residential/' + $scope.selectedProject.id).push().key;
             $scope.userReviewData.id = $scope.selectedProject.id;
             $scope.userReviewData.name = $scope.selectedProject.name;
-            reviewPath = 'reviews/country/'+$scope.countryId+ '/city/' + $scope.cityId + '/residential/' + $scope.selectedProject.id + '/' + newKey;
+            reviewPath = 'reviews/country/' + $scope.countryId + '/city/' + $scope.cityId + '/residential/' + $scope.selectedProject.id + '/' + newKey;
             userReviewPath = 'userReviews/' + $scope.review.userId + '/residential/' + newKey;
         } else if ($scope.selectedProject.type == 'location') {
-            newKey = db.ref('reviews/country/'+$scope.countryId + '/city/' + $scope.cityId + '/location/' + $scope.selectedProject.id).push().key;
+            newKey = db.ref('reviews/country/' + $scope.countryId + '/city/' + $scope.cityId + '/location/' + $scope.selectedProject.id).push().key;
             $scope.userReviewData.id = $scope.selectedProject.id;
             $scope.userReviewData.name = $scope.selectedProject.name;
-            reviewPath = 'reviews/country/'+$scope.countryId + '/city/' + $scope.cityId + '/location/' + $scope.selectedProject.id + '/' + newKey;
+            reviewPath = 'reviews/country/' + $scope.countryId + '/city/' + $scope.cityId + '/location/' + $scope.selectedProject.id + '/' + newKey;
             userReviewPath = 'userReviews/' + $scope.review.userId + '/location/' + newKey;
         } else if ($scope.selectedProject.type == 'locality') {
-            newKey = db.ref('reviews/country/'+$scope.countryId + '/city/' +$scope.cityId + '/locality/' + $scope.selectedProject.id).push().key;
+            newKey = db.ref('reviews/country/' + $scope.countryId + '/city/' + $scope.cityId + '/locality/' + $scope.selectedProject.id).push().key;
             $scope.userReviewData.id = $scope.selectedProject.id;
             $scope.userReviewData.name = $scope.selectedProject.name;
-            reviewPath = 'reviews/country/'+$scope.countryId + '/city/' + $scope.cityId + '/locality/' + $scope.selectedProject.id + '/' + newKey;
+            reviewPath = 'reviews/country/' + $scope.countryId + '/city/' + $scope.cityId + '/locality/' + $scope.selectedProject.id + '/' + newKey;
             userReviewPath = 'userReviews/' + $scope.review.userId + '/locality/' + newKey;
         } else if ($scope.selectedProject.type == 'cghs') {
-            newKey = db.ref('reviews/country/'+$scope.countryId + '/city/' + $scope.cityId + '/cghs/' + $scope.selectedProject.id).push().key;
+            newKey = db.ref('reviews/country/' + $scope.countryId + '/city/' + $scope.cityId + '/cghs/' + $scope.selectedProject.id).push().key;
             $scope.userReviewData.id = $scope.selectedProject.id;
             $scope.userReviewData.name = $scope.selectedProject.name;
-            reviewPath = 'reviews/country/'+$scope.countryId + '/city/' + $scope.cityId + '/cghs/' + $scope.selectedProject.id + '/' + newKey;
+            reviewPath = 'reviews/country/' + $scope.countryId + '/city/' + $scope.cityId + '/cghs/' + $scope.selectedProject.id + '/' + newKey;
             userReviewPath = 'userReviews/' + $scope.review.userId + '/cghs/' + newKey;
         }
 
