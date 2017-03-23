@@ -77,7 +77,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl) {
 
 
     }
-
+    initMap();
     // Load initialize function
     google.maps.event.addDomListener(window, 'load', initMap);
     $('ul.tabs').tabs();
@@ -401,6 +401,9 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl) {
             if ($scope.project.amenities) {
                 generateAmenitiesList($scope.project.amenities);
             }
+            if ($scope.project.units) {
+                generateConfigurations($scope.project.units);
+            }
             for (key in $scope.project.specifications) {
                 var x = camelCaseToTitleCase(key);
                 $scope.specifications[x] = {};
@@ -430,6 +433,104 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl) {
             }
         })
     })
+
+    $scope.configurations = {};
+
+    function generateConfigurations(config) {
+        for (key in config) {
+            if ($scope.configurations[config[key].bhk]) {
+                if (config[key].type == $scope.configurations[config[key].bhk].type) {
+                    config[key].hrefLink = '#area' + config[key].area;
+                    $scope.configurations[config[key].bhk].units[config[key].area] = config[key];
+                } else {
+                    $scope.configurations[config[key].bhk + 'a'] = {
+                        bhk: config[key].bhk,
+                        type: config[key].type,
+                        hrefLink: '#bhk' + config[key].bhk + 'a',
+                        units: {}
+                    }
+                    config[key].hrefLink = '#area' + config[key].area;
+                    $scope.configurations[config[key].bhk].units[config[key].area] = config[key];
+                }
+            } else {
+                $scope.configurations[config[key].bhk] = {
+                    bhk: config[key].bhk,
+                    type: config[key].type,
+                    hrefLink: '#bhk' + config[key].bhk,
+                    units: {}
+                }
+                config[key].hrefLink = '#area' + config[key].area;
+                $scope.configurations[config[key].bhk].units[config[key].area] = config[key];
+            }
+        }
+        console.log($scope.configurations);
+        var start = 0;
+        var unitStart = 0;
+        for (key in $scope.configurations) {
+            if (start == 0) {
+                $scope.configurations[key].selected = true;
+                for (key1 in $scope.configurations[key].units) {
+                    if (unitStart == 0) {
+                        $scope.configurations[key].units[key1].selected = true;
+                        unitStart = 1;
+                    } else {
+                        $scope.configurations[key].units[key1].selected = false;
+                    }
+                }
+                start = 1;
+            } else {
+                $scope.configurations[key].selected = false;
+                for (key1 in $scope.configurations[key].units) {
+                    if (unitStart == 0) {
+                        $scope.configurations[key].units[key1].selected = true;
+                        unitStart = 1;
+                    } else {
+                        $scope.configurations[key].units[key1].selected = false;
+                    }
+                }
+            }
+        }
+        $timeout(function() {
+            $('ul.tabs').tabs();
+        }, 100);
+    }
+
+    $scope.selectConfig = function(config) {
+        unitStart = 0;
+        for (key in $scope.configurations) {
+            if (config.hrefLink == $scope.configurations[key].hrefLink) {
+                $scope.configurations[key].selected = true;
+                for (key1 in $scope.configurations[key].units) {
+                    if (unitStart == 0) {
+                        $scope.configurations[key].units[key1].selected = true;
+                        unitStart = 1;
+                    } else {
+                        $scope.configurations[key].units[key1].selected = false;
+                    }
+                }
+            } else {
+                $scope.configurations[key].selected = false;
+                for (key1 in $scope.configurations[key].units) {
+                    $scope.configurations[key].units[key1].selected = false;
+                }
+            }
+        }
+        console.log($scope.configurations);
+    }
+
+    $scope.selectUnit = function(config, unit){
+        for (key in $scope.configurations) {
+            if (config.hrefLink == $scope.configurations[key].hrefLink) {
+                for (key1 in $scope.configurations[key].units) {
+                    if (unit.hrefLink == $scope.configurations[key].units[key1].hrefLink) {
+                        $scope.configurations[key].units[key1].selected = true;
+                    } else {
+                        $scope.configurations[key].units[key1].selected = false;
+                    }
+                }
+            }
+        }
+    }
 
     function generateAmenitiesList(amenities) {
         for (key in amenities) {
@@ -475,14 +576,14 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl) {
         }, 100);
     }
 
-    $scope.submitQuery = function(){
+    $scope.submitQuery = function() {
         console.log($scope.query);
         $scope.query.projectId = $scope.projectId;
         $scope.query.projectName = $scope.project.name;
         $scope.query.cityId = $scope.cityId;
         $scope.query.micromarketId = $scope.micromarketId;
         $scope.query.localityId = $scope.localityId;
-        db.ref('query').push($scope.query).then(function(){
+        db.ref('query').push($scope.query).then(function() {
             swal('Query Submitted', 'Our executives will call you back', 'success');
         })
     }
