@@ -38,5 +38,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         controller: 'projectDetailsCtrl'
     })
 
+    $stateProvider.state('listing',{
+        url: '/listing?category&bhk&micro&loc&builder&rent&ptype',
+        templateUrl: 'templates/projects/listing.html',
+        controller: 'listingCtrl'
+    })
+
     $urlRouterProvider.otherwise('/home');
 }]);

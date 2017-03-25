@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, initial-scale=1.0, user-scalable=0">
-    <link rel="icon" href="images/general/favicon.png" type="image/png">
-    <!--Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="css/materialize.min.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
+<div style="margin-top:100px;">
     <div class="row mgbn">
         <div class="container">
             <div class="row linkroot mgbn">
@@ -32,95 +20,75 @@
                     <form>
                         <div class="row mgan">
                             <div class="row pdt2 mgbn">
-                                <h3 class="ft14 b bodb mgb10 pdb10">Project Segment</h3>
+                                <h3 class="ft14 b bodb mgb10 pdb10">Project Categories</h3>
                                 <div class="row mgt10 mgbn mgln mgrn">
-                                    <div class="mgt5" ng-repeat="item in segments">
-                                        <input type="checkbox" id="Economy" class="filled-in" />
-                                        <label class="ft12" for="Economy">Economy</label>
-                                    </div>
-                                    <div class="mgt5" ng-repeat="item in segments">
-                                        <input type="checkbox" id="High" class="filled-in" />
-                                        <label class="ft12" for="High">High End</label>
-                                    </div>
-                                    <div class="mgt5" ng-repeat="item in segments">
-                                        <input type="checkbox" id="Luxury" class="filled-in" />
-                                        <label class="ft12" for="Luxury">Luxury</label>
-                                    </div>
-                                    <div class="mgt5" ng-repeat="item in segments">
-                                        <input type="checkbox" id="Ultra" class="filled-in" />
-                                        <label class="ft12" for="Ultra">Ultra Luxury</label>
+                                    <div class="mgt5" ng-repeat="item in categories">
+                                        <input type="checkbox" ng-model="selected.category[item.id]" id="{{item.id}}" ng-change="applyFilters()" class="filled-in" />
+                                        <label class="ft12" for="{{item.id}}">{{item.name}}</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row pdt2 mgbn">
                                 <h3 class="ft14 b bodb mgb10 pdb10">Bedroom</h3>
                                 <div class="filterList row mgan">
-                                    <div class="col s6 pdln mgt5">
-                                        <input type="checkbox" id="1bhk" class="filled-in" />
-                                        <label class="ft12" for="1bhk">1 BHK</label>
-                                    </div>
-                                    <div class="col s6 pdln mgt5">
-                                        <input type="checkbox" id="2bhk" class="filled-in" />
-                                        <label class="ft12" for="2bhk">2 BHK</label>
-                                    </div>
-                                    <div class="col s6 pdln mgt5">
-                                        <input type="checkbox" id="3bhk" class="filled-in" />
-                                        <label class="ft12" for="3bhk">3 BHK</label>
-                                    </div>
-                                    <div class="col s6 pdln mgt5">
-                                        <input type="checkbox" id="4bhk" class="filled-in" />
-                                        <label class="ft12" for="4bhk">4 BHK</label>
-                                    </div>
-                                    <div class="col s6 pdln mgt5">
-                                        <input type="checkbox" id="5bhk" class="filled-in" />
-                                        <label class="ft12" for="5bhk">5 BHK</label>
-                                    </div>
-                                    <div class="col s6 pdln mgt5">
-                                        <input type="checkbox" id="6bhk" class="filled-in" />
-                                        <label class="ft12" for="6bhk">6+ BHK</label>
+                                    <div class="col s6 pdln mgt5" ng-repeat="item in [1, 2, 3, 4, 5, 6]">
+                                        <input type="checkbox" class="filled-in" ng-model="selected.bhk[item]" ng-change="applyFilters()" id="{{item}}" />
+                                        <label for="{{item}}">{{item}} BHK</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row pdt2 mgbn">
-                                <h3 class="ft14 b bodb mgb10 pdb10">Locality</h3>
+                                <h3 class="ft14 b bodb mgb10 pdb10">Property Types</h3>
+                                <div class="row mgt10 mgbn mgln mgrn">
+                                    <div class="mgt5" ng-repeat="item in propertyTypes">
+                                        <input type="checkbox" ng-model="selected.ptype[item.id]" id="{{item.id}}" ng-change="applyFilters()" class="filled-in" />
+                                        <label class="ft12" for="{{item.id}}">{{item.name}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row pdt2 mgbn">
+                                <h3 class="ft14 b bodb mgb10 pdb10">Micromarket</h3>
+                                <hr>
                                 <div class="input-field mgtn bodinp">
-                                    <input class="inpfilter search_list" placeholder="Search"><i class="material-icons search_ilist">search</i>
+                                    <input class="inpfilter search_list" ng-model="searchMicromarket" placeholder="Search"><i class="material-icons search_ilist">search</i>
                                     <div class="search-results"></div>
                                 </div>
                                 <div class="filterList mgt10">
-                                    <div class="mgt5" ng-repeat="locality in localities | filter: searchLocality">
-                                        <input type="checkbox" class="filled-in" id="locality" />
-                                        <label class="ft12" for="locality">localityName</label>
+                                    <div class="mgt5" ng-repeat="micro in micromarkets| filter: searchMicromarket">
+                                        <input type="checkbox" class="filled-in" id="{{micro.key}}" ng-change="applyFilters()" ng-model="selected.micro[micro.key]" />
+                                        <label class="ft12" for="{{micro.key}}">{{micro.name}}</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row pdt2 mgbn">
                                 <h3 class="ft14 b bodb mgb10 pdb10">Location</h3>
+                                <hr>
                                 <div class="input-field mgtn bodinp">
-                                    <input class="inpfilter search_list" placeholder="Search"><i class="material-icons search_ilist">search</i>
+                                    <input class="inpfilter search_list" ng-model="searchLocation" placeholder="Search"><i class="material-icons search_ilist">search</i>
                                     <div class="search-results"></div>
                                 </div>
                                 <div class="filterList mgt10">
-                                    <div class="mgt5" ng-repeat="location in locations | filter:searchLocation">
-                                        <input type="checkbox" class="filled-in" id="location-name" />
-                                        <label class="ft12" for="location-name">location name</label>
+                                    <div class="mgt5" ng-repeat="location in locations| filter: searchlocation">
+                                        <input type="checkbox" class="filled-in" id="{{location.key}}" ng-change="applyFilters()" ng-model="selected.loc[location.key]" />
+                                        <label class="ft12" for="{{location.key}}">{{location.name}}</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row pdt2 mgbn">
                                 <h3 class="ft14 b bodb mgb10 pdb10">Builders</h3>
+                                <hr>
                                 <div class="input-field mgtn bodinp">
-                                    <input class="inpfilter search_list" placeholder="Search"><i class="material-icons search_ilist">search</i>
+                                    <input class="inpfilter search_list" ng-model="searchBuilder" placeholder="Search"><i class="material-icons search_ilist">search</i>
                                     <div class="search-results"></div>
                                 </div>
                                 <div class="filterList mgt10">
-                                    <div class="mgt5">
-                                        <input type="checkbox" class="filled-in" id="builderid" />
-                                        <label class="ft12" for="builderid">builderName</label>
+                                    <div class="mgt5" ng-repeat="builder in builders| filter: searchBuilder">
+                                        <input type="checkbox" class="filled-in" id="{{builder.key}}" ng-change="applyFilters()" ng-model="selected.builder[builder.key]" />
+                                        <label class="ft12" for="{{builder.key}}">{{builder.name}}</label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row pdt2 mgbn">
+                            <!-- <div class="row pdt2 mgbn">
                                 <h3 class="ft14 b bodb mgb10 pdb10">Rating</h3>
                                 <div class="filterList mgt10">
                                     <input type="checkbox" class="filled-in" id="star" />
@@ -133,11 +101,11 @@
                                         <i class="material-icons pdt2 ft14 text-darken-2">star_half</i>
                                     </span></label>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row pdt2 mgbn">
                                 <h3 class="ft14 b bodb mgb10 pdb10">Price</h3>
-                                <div class="filterList row mgbn">
-                                    <div class="col s6 relative">
+                                <div class="row mgbn">
+                                    <div class="col s5 relative">
                                         <input type="number" placeholder="₹ Min" class="filled-in ft12" id="min-price" ng-model="price.min" />
                                         <div class="search-results price_m white shdsm" style="display: none;">
                                             <ul class="left-align">
@@ -149,7 +117,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="col s6 relative">
+                                    <div class="col s5 relative">
                                         <input type="number" placeholder="₹ Max" class="filled-in ft12" id="max-price" ng-model="price.max" />
                                         <div class="search-results price_m white shdsm" style="display: none">
                                             <ul class="left-align">
@@ -160,9 +128,12 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    <div class="col s2 relative">
+                                        <p ng-click="applyFilters()">Go</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row pdt2 mgbn">
+                            <!-- <div class="row pdt2 mgbn">
                                 <h3 class="ft14 b bodb mgb10 pdb10">Area</h3>
                                 <div class="filterList row mgbn">
                                     <div class="col s6 relative">
@@ -189,88 +160,50 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </form>
                 </div>
                 <div class="col s7 m8 pdl30">
                     <div class="row mgan">
                         <!-- card project list repeat start -->
-                        <div class="col s12 card pdt10 pdbn white">
+                        <div class="col s12 card pdt10 pdbn white" ng-repeat="project in projects">
                             <div class="row relative mgbn">
                                 <div class="col s4 imglist pdb10">
                                     <a href=""> <img src="images/olive.jpg" class="responsive-img"></a>
                                 </div>
                                 <div class="col s6 pdln">
-                                    <div class="truncate grey-text ft12">lorem ipsum</div>
-                                    <h2 class="ft18 b mgbn mgt5 truncate"><a href="" class="redt"> The Olive Heights</a></h2>
+                                    <!-- <div class="truncate grey-text ft12">lorem ipsum</div> -->
+                                    <h2 class="ft18 b mgbn mgt5 truncate"><a href="" class="redt">{{project.name}}</a></h2>
                                     <h6 class="mgbn ft12 truncate b text-darken-2 mgt5">
-                                <a href="" class="grey-text"> Golf Course Road, Sector 56</a></h6>
-                                    <div class="grey-text mgt5 ft12">lorem ipsum</div>
+                                <a href="" class="grey-text">{{project.location.display}}</a></h6>
+                                    <!-- <div class="grey-text mgt5 ft12">lorem ipsum</div> -->
                                 </div>
-                                <div class="col s2 pdln right-align">
+                                <!-- <div class="col s2 pdln right-align">
                                     <span class="pdl10 pdr10 b grnbg white-text">4.7</span>
                                     <div class="ft11 grey-text mgt5">7832 votes </div>
                                     <div class="ft11 grey-text">4233 reviews</div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="row mgan bodt">
                                 <div class="col s4 listp grey-text pdln pdt10">
-                                    <p>CUISINES:</p>
-                                    <p>COST FOR TWO:</p>
-                                    <p>HOURS:</p>
-                                    <p>FEATURED IN:</p>
+                                    <p>BUILDER:</p>
+                                    <p>RENT:</p>
+                                    <p>PROPERTY TYPES:</p>
+                                    <!-- <p>FEATURED IN:</p> -->
                                 </div>
                                 <div class="col s8 listp grey-text text-darken-2 pdln pdt10 pdb10 pdrn">
-                                    <p>Modern Indian, North Indian</p>
-                                    <p>₹15,000</p>
-                                    <p>12:30 PM to 1 AM (Mon-Sun)</p>
-                                    <p>Microbreweries, Insta-worthy</p>
+                                    <p>{{project.builder}}</p>
+                                    <p>₹{{project.rent.min}} - ₹{{project.rent.max}}</p>
+                                    <p>{{project.propertyTypes}}</p>
+                                    <!-- <p>Microbreweries, Insta-worthy</p> -->
                                 </div>
                             </div>
-                            <div class="row bodt mgbn center grey lighten-5">
+                            <!-- <div class="row bodt mgbn center grey lighten-5">
                                 <a href="" class="col s4 grey-text text-darken-2 pda10 listbtn bod-right">Call</a>
                                 <a href="" class="col s4 b grey-text text-darken-2 pda10 listbtn bod-right">View Details</a>
                                 <a href="" class="col s4 grey-text text-darken-2 listbtn pda10">Bookmarks</a>
-                            </div>
-                        </div>
-                        <div class="col s12 card pdt10 pdbn white">
-                            <div class="row relative mgbn">
-                                <div class="col s4 imglist pdb10">
-                                    <a href=""> <img src="images/olive.jpg" class="responsive-img"></a>
-                                </div>
-                                <div class="col s6 pdln">
-                                    <div class="truncate grey-text ft12">lorem ipsum</div>
-                                    <h2 class="ft18 b mgbn mgt5 truncate"><a href="" class="redt"> The Olive Heights</a></h2>
-                                    <h6 class="mgbn ft12 truncate b text-darken-2 mgt5">
-                                <a href="" class="grey-text"> Golf Course Road, Sector 56</a></h6>
-                                    <div class="grey-text mgt5 ft12">lorem ipsum</div>
-                                </div>
-                                <div class="col s2 pdln right-align">
-                                    <span class="pdl10 pdr10 b grnbg white-text">4.7</span>
-                                    <div class="ft11 grey-text mgt5">7832 votes </div>
-                                    <div class="ft11 grey-text">4233 reviews</div>
-                                </div>
-                            </div>
-                            <div class="row mgan bodt">
-                                <div class="col s4 listp grey-text pdln pdt10">
-                                    <p>CUISINES:</p>
-                                    <p>COST FOR TWO:</p>
-                                    <p>HOURS:</p>
-                                    <p>FEATURED IN:</p>
-                                </div>
-                                <div class="col s8 listp grey-text text-darken-2 pdln pdt10 pdb10 pdrn">
-                                    <p>Modern Indian, North Indian</p>
-                                    <p>₹15,000</p>
-                                    <p>12:30 PM to 1 AM (Mon-Sun)</p>
-                                    <p>Microbreweries, Insta-worthy</p>
-                                </div>
-                            </div>
-                            <div class="row bodt mgbn center grey lighten-5">
-                                <a href="" class="col s4 grey-text text-darken-2 pda10 listbtn bod-right">Call</a>
-                                <a href="" class="col s4 b grey-text text-darken-2 pda10 listbtn bod-right">View Details</a>
-                                <a href="" class="col s4 grey-text text-darken-2 listbtn pda10">Bookmarks</a>
-                            </div>
+                            </div> -->
                         </div>
                         <!-- card project list repeat end -->
                     </div>
@@ -320,29 +253,4 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-    <script src="js/materialize.min.js"></script>
-    <!-- controllers -->
-    <script src="js/angular.min.js"></script>
-    <!-- controllers -->
-    <script>
-    $(document).ready(function() {
-        $('ul.tabs').tabs();
-        Materialize.updateTextFields();
-
-        $('.button-collapse').sideNav({
-            menuWidth: 300, // Default is 240
-            edge: 'left', // Choose the horizontal origin
-            closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-            draggable: true // Choose whether you can drag to open on touch screens
-        });
-        $('select').material_select();
-        $('.slider').slider();
-        $('.dropdown-button').dropdown();
-        $('.carousel').carousel();
-
-    });
-    </script>
-</body>
-
-</html>
+</div>
