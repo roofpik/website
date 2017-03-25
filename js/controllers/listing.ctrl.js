@@ -110,7 +110,7 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
             url: 'http://139.162.9.71/api/projectFilter',
             method: 'POST',
             params: {
-                loc: $stateParams.location,
+                loc: $stateParams.loc,
                 micro: $stateParams.micro,
                 ptype: $stateParams.ptype,
                 bhk: $stateParams.bhk,

@@ -43,7 +43,7 @@ app.controller('homeCtrl', function($scope, $state, $timeout) {
     $('.carousel').carousel();
 });
 
-app.controller('searchCtrl', function($scope, $timeout, $http) {
+app.controller('searchCtrl', function($scope, $timeout, $http, $state) {
     $('.modal').modal();
     $('ul.tabs').tabs();
     Materialize.updateTextFields();
@@ -62,19 +62,19 @@ app.controller('searchCtrl', function($scope, $timeout, $http) {
     $scope.defaultList = [{
         name: 'Apartment',
         category: 'default',
-        key: '1'
+        key: 'apartments'
     }, {
         name: 'Villa',
         category: 'default',
-        key: '2'
+        key: 'villa'
     }, {
         name: 'Row House',
         category: 'default',
-        key: '3'
+        key: 'rowHouse'
     }, {
         name: 'Penthouse',
         category: 'default',
-        key: '4'
+        key: 'penthouse'
     }];
 
     $scope.afterLocationDefaultList = [{
@@ -83,23 +83,23 @@ app.controller('searchCtrl', function($scope, $timeout, $http) {
         category: 'default1'
     }, {
         type: 'All Projects in ',
-        key: '',
+        key: 'all',
         category: 'default1'
     }, {
         type: 'Apartment in ',
-        key: '',
+        key: 'apartments',
         category: 'default1'
     }, {
         type: 'Villa in ',
-        key: '',
+        key: 'villa',
         category: 'default1'
     }, {
         type: 'Penthouse in ',
-        key: '',
+        key: 'penthouse',
         category: 'default1'
     }, {
         type: 'Row House in ',
-        key: '',
+        key: 'rowHouse',
         category: 'default1'
     }];
 
@@ -239,6 +239,7 @@ app.controller('searchCtrl', function($scope, $timeout, $http) {
             })
         }
     }
+    $scope.selectedProject = {};
 
     $scope.selectProject = function(item) {
         console.log(item);
@@ -253,9 +254,30 @@ app.controller('searchCtrl', function($scope, $timeout, $http) {
             //take to project list with the builder as filter
         } else if (item.category == 'default') {
             // take to project list with the property type as filter
-        } else if(item.category == 'default1'){
+            $scope.selectedProject = item;
+            $('#location-selection').focus();
+        } else if (item.category == 'default1') {
             console.log($scope.selectedLocation);
             // take to differnet views based on type
+            if (item.key == 'overview') {
+
+            } else if (item.key == 'all') {
+                if ($scope.selectedLocation.category == 'micromarket') {
+                    $state.go('listing', { micro: $scope.selectedLocation.key });
+                } else if ($scope.selectedLocation.category == 'locality') {
+                    $state.go('listing', { loc: $scope.selectedLocation.key });
+                } else {
+                    $state.go('listing');
+                }
+            } else {
+                if ($scope.selectedLocation.category == 'micromarket') {
+                    $state.go('listing', { ptype: item.key, micro: $scope.selectedLocation.key });
+                } else if ($scope.selectedLocation.category == 'locality') {
+                    $state.go('listing', { ptype: item.key, loc: $scope.selectedLocation.key });
+                } else {
+                    $state.go('listing', { ptype: item.key });
+                }
+            }
         }
     }
 
@@ -264,15 +286,23 @@ app.controller('searchCtrl', function($scope, $timeout, $http) {
         $scope.locationNameAdded = false;
         $scope.searchedLocation = loc.name;
         $scope.selectedLocation = loc;
-        if(!$scope.projectSelected){
+        if (!$scope.projectSelected) {
             $('#type-selection').focus();
+        } else {
+            if ($scope.selectedLocation.category == 'micromarket') {
+                $state.go('listing', { ptype: $scope.selectedProject.key, micro: $scope.selectedLocation.key });
+            } else if ($scope.selectedLocation.category == 'locality') {
+                $state.go('listing', { ptype: $scope.selectedProject.key, loc: $scope.selectedLocation.key });
+            } else {
+                $state.go('listing', { ptype: $scope.selectedProject.key });
+            }
         }
         $timeout(function() {
             $scope.showSearch1 = false;
         }, 500);
     }
 
-    $scope.toggleSearch = function(){
+    $scope.toggleSearch = function() {
         $scope.showBasicSearch = !$scope.showBasicSearch;
         if ($scope.showBasicSearch) {
             $scope.searchTitle = 'Guided Search';
