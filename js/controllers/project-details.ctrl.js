@@ -1,4 +1,5 @@
-app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl) {
+app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $stateParams) {
+    console.log($stateParams);
     function initMap() {
         var map;
         var bounds = new google.maps.LatLngBounds();

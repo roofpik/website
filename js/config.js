@@ -33,7 +33,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     })
 
     $stateProvider.state('project-details',{
-        url: '/project-details',
+        url: '/project-details?city&micro&locality&id',
         templateUrl: 'templates/projects/project-details.html',
         controller: 'projectDetailsCtrl'
     })

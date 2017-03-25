@@ -1,65 +1,45 @@
 <div class="transform center wdp70">
     <h5 class="xshdh"><b class="redt">Roofpik</b> Power Your Property Search with Genuine User Reviews </h5>
     <div id="searchboxhome" class="row radius2 pdr10 cardmg searchfix xspd0">
-        <div style="display: block" class="col s12 m10 l10 no-padding xswdfull xspd0">
+        <div class="col s12 m10 l10 no-padding xswdfull xspd0" ng-hide="showBasicSearch">
             <div class="row mgbn" ng-hide="searchByName">
                 <div class="col s12 m6 pdrn xswdfull xspd0">
                     <div class="input-field card col s12 ht45 no-padding bodl bodt bodb bod-right rdsan relative">
                         <span class="inpspn">Find :</span>
                         <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompleteFind inp_pdw boxsdn mgbn" ng-model="searchedText" ng-change="getSearchData()">
-                        <img src="images/general/buffering.gif" class="loading-icon" ng-show="searchingName" />
-                        <div class="search-results left-align" id="category-search">
+                        <img src="images/general/buffering.gif" class="loading-icon" ng-show="searchingProject"/>
+                        <div class="search-results left-align" ng-show="showSearch">
                             <ul class="collection homecoll white mgan">
-                                <li class="collection-item avatar">
-                                    <img src="images/homeicon/CGHS.png" class="circle" />
-                                    <span class="title ft13">CGHS</span>
-                                </li>
-                                <li class="collection-item avatar">
-                                    <img src="images/homeicon/Apartment.png" class="circle" />
-                                    <span class="title ft13">Apartment</span>
-                                </li>
-                                <li class="collection-item avatar">
-                                    <img src="images/homeicon/Villa-penthouse.png" class="circle" />
-                                    <span class="title ft13">Penthouse / Villa</span>
+                                <li class="collection-item" ng-repeat = "item in searchList" ng-click="selectProject(item)">
+                                    <!-- <img src="images/homeicon/CGHS.png" class="circle" /> -->
+                                    <span class="title ft13">{{item.name}}</span>
                                 </li>
                             </ul>
-                            <div class="pd5 grey lighten-4 ft12">More Options</div>
+                            <!-- <div class="pd5 grey lighten-4 ft12">More Options</div>
                             <ul class="collection homecoll mgan">
                                 <li class="collection-item avatar"><img src="images/homeicon/Commercial.png" class="circle" /> Explore Locality</li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
                 </div>
                 <div class="col s12 m6 pdln xswdfull xspd0">
                     <div class="input-field card col s12 ht45 no-padding bodt bodb bod-right rdsan">
                         <span class="inpspn">Near :</span>
-                        <input placeholder="Enter a Destination" class="autocompleteNear boxsdn inp_pdw mgbn">
-                        <img src="images/general/buffering.gif" class="loading-icon" />
-                        <div class="search-results left-align">
+                        <input placeholder="Enter a Destination" class="autocompleteNear boxsdn inp_pdw mgbn" id="location-selection"  ng-model="searchedLocation" ng-change="searchLocations()">
+                        <img src="images/general/buffering.gif" class="loading-icon" ng-show="searchingLocation"/>
+                        <div class="search-results left-align" ng-show= "showSearch1">
                             <ul class="collection homecoll white mgan">
-                                <li class="collection-item avatar">
-                                    <img src="images/homeicon/CGHS.png" class="circle" />
-                                    <span class="title ft13">CGHS</span>
+                                <li class="collection-item" ng-repeat= "item in locations" ng-click="selectLocation(item)">
+                                    <!-- <img src="images/homeicon/CGHS.png" class="circle" /> -->
+                                    <span class="title ft13">{{item.name}}</span>
                                 </li>
-                                <li class="collection-item avatar">
-                                    <img src="images/homeicon/Apartment.png" class="circle" />
-                                    <span class="title ft13">Apartment</span>
-                                </li>
-                                <li class="collection-item avatar">
-                                    <img src="images/homeicon/Villa-penthouse.png" class="circle" />
-                                    <span class="title ft13">Penthouse / Villa</span>
-                                </li>
-                            </ul>
-                            <div class="pd5 grey lighten-4 ft12">More Options</div>
-                            <ul class="collection homecoll mgan">
-                                <li class="collection-item avatar"><img src="images/homeicon/Commercial.png" class="circle" /> Explore Locality</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="advanced-search" style="display: none;" class="col s12 m10 l10 no-padding hide-on-med-and-down">
+        <div id="advanced-search" ng-show="showBasicSearch" class="col s12 m10 l10 no-padding hide-on-med-and-down">
             <div class="row mgbn relative">
                 <div class="col s3 m3 no-padding">
                     <div class="input-field card ht45 no-padding bod-right rdsan relative">
@@ -267,7 +247,7 @@
             <button class="btn btn-full pdl10 pdr10 resbtn ht45 overhidden" ng-click="search()">
                 <i class="material-icons left xs-mgt5">search</i>Search
             </button>
-            <a href="" class="adva_btn mgt10 hide-on-med-and-down">Basic Search</a>
+            <a href="" class="adva_btn mgt10 hide-on-med-and-down" ng-click="toggleSearch()">{{searchTitle}}</a>
         </div>
     </div>
 </div>
