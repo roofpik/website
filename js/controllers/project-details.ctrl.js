@@ -122,10 +122,10 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
     });
 
     $scope.countryId = '-K_43TEI8cBodNbwlKqJ';
-    $scope.cityId = '-KYJONgh0P98xoyPPYm9';
-    $scope.micromarketId = '-KfM5tQ-UKt6DtrWtzeE';
-    $scope.localityId = '-KfRC32KzT4Tjo0O14kI';
-    $scope.projectId = '-Kfp4KJG2TlJYKI6-iZ0';
+    $scope.cityId = $stateParams.city;
+    $scope.micromarketId = $stateParams.micro;
+    $scope.localityId = $stateParams.locality;
+    $scope.projectId = $stateParams.id;
     $scope.pros = [];
     $scope.cons = [];
     $scope.specifications = {};

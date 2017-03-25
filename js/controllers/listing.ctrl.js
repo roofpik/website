@@ -106,6 +106,7 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
     }
 
     function getProjects() {
+        $scope.projectsFetched = false;
         $http({
             url: 'http://139.162.9.71/api/projectFilter',
             method: 'POST',
@@ -121,8 +122,15 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
             }
         }).then(function mySucces(response) {
             console.log(response);
+            $scope.projectsFetched = true;
             $scope.projects = response.data.items;
+            if($scope.projects.length == 0){
+                $scope.noProjects= true;
+            } else {
+                $scope.noProjects = false;
+            }
             for (key in $scope.projects) {
+                $scope.projects[key].hrefLink = '#/project-details?city='+$scope.projects[key].location.citykey+'&micro='+$scope.projects[key].location.microkey+'&locality='+$scope.projects[key].location.lockey+'&id='+$scope.projects[key].key;
                 if ($scope.projects[key].propType) {
                     for (key1 in $scope.projects[key].propType) {
                         if ($scope.projects[key].propType[key1] == 'Yes') {
@@ -139,7 +147,7 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
             // $scope.searchingProject = false;
         }, function myError(err) {
             // console.log(err);
-            // $scope.searchingProject = false;
+            $scope.projectsFetched = false;
         })
     }
 

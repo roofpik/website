@@ -167,16 +167,17 @@
                 <div class="col s7 m8 pdl30">
                     <div class="row mgan">
                         <!-- card project list repeat start -->
-                        <div class="col s12 card pdt10 pdbn white" ng-repeat="project in projects">
+                        <div class="col s12 card pdt10 pdbn white" ng-repeat="project in projects" ng-hide="noProjects">
                             <div class="row relative mgbn">
                                 <div class="col s4 imglist pdb10">
-                                    <a href=""> <img src="images/olive.jpg" class="responsive-img"></a>
+                                    <a ng-href="{{project.hrefLink}}"> <img src="images/olive.jpg" class="responsive-img"></a>
                                 </div>
                                 <div class="col s6 pdln">
                                     <!-- <div class="truncate grey-text ft12">lorem ipsum</div> -->
-                                    <h2 class="ft18 b mgbn mgt5 truncate"><a href="" class="redt">{{project.name}}</a></h2>
+                                    <h2 class="ft18 b mgbn mgt5 truncate"><a ng-href="{{project.hrefLink}}" class="redt">{{project.name}}</a></h2>
                                     <h6 class="mgbn ft12 truncate b text-darken-2 mgt5">
-                                <a href="" class="grey-text">{{project.location.display}}</a></h6>
+                                        <a ng-href="{{project.hrefLink}}" class="grey-text">{{project.location.display}}</a>
+                                    </h6>
                                     <!-- <div class="grey-text mgt5 ft12">lorem ipsum</div> -->
                                 </div>
                                 <!-- <div class="col s2 pdln right-align">
@@ -204,6 +205,9 @@
                                 <a href="" class="col s4 b grey-text text-darken-2 pda10 listbtn bod-right">View Details</a>
                                 <a href="" class="col s4 grey-text text-darken-2 listbtn pda10">Bookmarks</a>
                             </div> -->
+                        </div>
+                        <div class="col s12 card pdt10 pdbn white" ng-show="noProjects && projectsFetched">
+                            <h2 class="ft18 b mgbn mgt5 truncate"><a href="" class="redt">No Projects</a></h2>
                         </div>
                         <!-- card project list repeat end -->
                     </div>
