@@ -80,7 +80,7 @@
                                     <div class="grey-text ft12">Security</div>
                                 </div>
                                 <div class="col s3 pdb10">
-                                    <div class="ft14">{{project.general.rent}}</div>
+                                    <div class="ft14">₹ {{project.general.rent}}</div>
                                     <div class="grey-text ft12">Rent</div>
                                 </div>
                                 <div class="col s3 pdb10">
@@ -105,7 +105,8 @@
                         <h3 class="heading">Project Location</h3>
                         <div class="col s8 pdln relative">
                             <img src="images/general/map-img.jpg" class="responsive-img">
-                            <a class="btn mgtn transform" href="#view_map_popup">View on Map</a>
+                            <a class="btn mgtn transform modal-trigger" href="" ng-click="openModal()">View on Map</a>
+                            <!-- <a class="btn mgtn transform modal-trigger" href="#view_map_popup">View on Map</a> -->
                         </div>
                         <div class="col s4">
                             Site Address

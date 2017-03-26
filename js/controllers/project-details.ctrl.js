@@ -1,6 +1,7 @@
 app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $stateParams) {
     console.log($stateParams);
     function initMap() {
+        console.log('called');
         var map;
         var bounds = new google.maps.LatLngBounds();
         var mapOptions = {
@@ -15,7 +16,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
         // Multiple markers location, latitude, and longitude
 
         var markers = [
-            ['Vipul Trade Center, NY', 28.406909, 77.042623],
+            [$scope.project.name, $scope.project.location.lat, $scope.project.location.lng]
         ];
 
         // Info window content
@@ -23,21 +24,21 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
 
             ['<div class="row relative mgbn">' +
                 '<div class="col s4 imglist pdb10">' +
-                '<a href=""> <img src="images/olive.jpg" class="responsive-img"></a>' +
+                '<a href=""> <img src="'+$scope.coverImage+'" class="responsive-img"></a>' +
                 '</div>' +
                 '<div class="col s6 pdln">' +
-                '<div class="truncate grey-text ft12">lorem ipsum</div>' +
-                '<h2 class="ft18 b mgbn mgt5 truncate"><a href="" class="redt"> The Olive Heights</a></h2>' +
+                '<div class="truncate grey-text ft12">'+$scope.project.general.website+'</div>' +
+                '<h2 class="ft18 b mgbn mgt5 truncate"><a href="" class="redt">'+$scope.project.name+'</a></h2>' +
                 '<h6 class="mgbn ft12 truncate b text-darken-2 mgt5">' +
-                '<a href="" class="grey-text"> Golf Course Road, Sector 56</a>' +
+                '<a href="" class="grey-text">'+$scope.project.location.displayAdd+'</a>' +
                 '</h6>' +
-                '<div class="grey-text mgt5 ft12">lorem ipsum</div>' +
+                '<div class="grey-text mgt5 ft12">Rent: ₹ '+$scope.project.general.rent+'</div>' +
                 '</div>' +
-                '<div class="col s2 pdln right-align">' +
-                '<span class="pdl10 pdr10 b grnbg white-text">4.7</span>' +
-                '<div class="ft11 grey-text mgt5">7832 votes </div>' +
-                '<div class="ft11 grey-text">4233 reviews</div>' +
-                '</div>' +
+                // '<div class="col s2 pdln right-align">' +
+                // '<span class="pdl10 pdr10 b grnbg white-text">4.7</span>' +
+                // '<div class="ft11 grey-text mgt5">7832 votes </div>' +
+                // '<div class="ft11 grey-text">4233 reviews</div>' +
+                // '</div>' +
                 '</div>'
             ],
 
@@ -45,7 +46,6 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
 
         // Add multiple markers to map
         var infoWindow = new google.maps.InfoWindow({
-
             }),
             marker, i;
 
@@ -78,9 +78,8 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
 
 
     }
-    initMap();
     // Load initialize function
-    google.maps.event.addDomListener(window, 'load', initMap);
+    // google.maps.event.addDomListener(window, 'load', initMap);
     $('ul.tabs').tabs();
     Materialize.updateTextFields();
 
@@ -94,7 +93,9 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
     $('.slider').slider();
     $('.dropdown-button').dropdown();
     $('.carousel').carousel();
-    $('.modal').modal();
+    $timeout(function(){
+        $('.modal').modal();
+    },1000);
 
     $('.gallery').each(function() { // the containers for all your galleries
         $(this).magnificPopup({
@@ -389,7 +390,6 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
         }
     };
     db.ref('project/country/' + $scope.countryId + '/city/' + $scope.cityId + '/residential/micromarket/' + $scope.micromarketId + '/locality/' + $scope.localityId + '/projects/' + $scope.projectId).once('value', function(snapshot) {
-        // console.log(snapshot.val());
         $timeout(function() {
             $scope.project = snapshot.val();
             var defer = $q.defer();
@@ -574,7 +574,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
                     }
                 });
             });
-        }, 100);
+        }, 1000);
     }
 
     $scope.submitQuery = function() {
@@ -587,5 +587,10 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
         db.ref('query').push($scope.query).then(function() {
             swal('Query Submitted', 'Our executives will call you back', 'success');
         })
+    }
+
+    $scope.openModal = function(){
+        $('#view_map_popup').modal('open');
+        initMap();
     }
 })
