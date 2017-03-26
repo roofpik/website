@@ -24,7 +24,12 @@
             <div class="row">
                 <div class="col s12 m12 l9">
                     <div class="row mgbn linehth5">
+<<<<<<< HEAD
                         <div class="col s6 m4 l4 pda10">
+=======
+                        <div class="col s4 pda10">
+                            <!--  <i class="material-icons abs teal-text text-accent-4">vpn_key</i> -->
+>>>>>>> 410724eaea7fae9dad3cc2fb8d70b0f6400ea2cf
                             <h5 class="ft12 mgan"> Possession</h5>
                             <h4 class="mgan ft15 b truncate">Ready to move</h4>
                             <p class="mgan ft12">Nov 2015</p>
@@ -34,7 +39,12 @@
                             <h4 class="mgan ft15 b truncate">Sector 61, Gurgaon</h4>
                             <p class="mgan ft12">City: Gurgaon</p>
                         </div>
+<<<<<<< HEAD
                         <div class="col s6 m4 l4 pda10">
+=======
+                        <div class="col s4 pda10">
+                            <!--  <i class="material-icons abs left deep-purple-text text-accent-1 ">details</i> -->
+>>>>>>> 410724eaea7fae9dad3cc2fb8d70b0f6400ea2cf
                             <h5 class="ft12 mgan"> Project Details</h5>
                             <h4 class="mgan ft15 b truncate">900 Units</h4>
                             <p class="mgan ft12">13 towers</p>
@@ -1042,10 +1052,20 @@
         var bounds = new google.maps.LatLngBounds();
         var mapOptions = {
             mapTypeId: 'roadmap'
+<<<<<<< HEAD
+
+        };
+=======
 
         };
 
+>>>>>>> 410724eaea7fae9dad3cc2fb8d70b0f6400ea2cf
 
+        // Display a map on the web page
+        map = new google.maps.Map(document.getElementById("mapCanvas"), mapOptions);
+        map.setTilt(50);
+
+<<<<<<< HEAD
         // Display a map on the web page
         map = new google.maps.Map(document.getElementById("mapCanvas"), mapOptions);
         map.setTilt(50);
@@ -1056,10 +1076,21 @@
 
             ['Vipul Trade Center, NY', 28.406909, 77.042623],
 
+=======
+        // Multiple markers location, latitude, and longitude
+
+        var markers = [
+
+            ['Vipul Trade Center, NY', 28.406909, 77.042623],
+
+
+        ];
+>>>>>>> 410724eaea7fae9dad3cc2fb8d70b0f6400ea2cf
 
         ];
 
 
+<<<<<<< HEAD
 
         // Info window content
         var infoWindowContent = [
@@ -1105,8 +1136,60 @@
                 animation: google.maps.Animation.DROP
 
             });
+=======
+        // Info window content
+        var infoWindowContent = [
+
+            ['<div class="row relative mgbn">' +
+                '<div class="col s4 imglist pdb10">' +
+                '<a href=""> <img src="images/olive.jpg" class="responsive-img"></a>' +
+                '</div>' +
+                '<div class="col s6 pdln">' +
+                '<div class="truncate grey-text ft12">lorem ipsum</div>' +
+                '<h2 class="ft18 b mgbn mgt5 truncate"><a href="" class="redt"> The Olive Heights</a></h2>' +
+                '<h6 class="mgbn ft12 truncate b text-darken-2 mgt5">' +
+                '<a href="" class="grey-text"> Golf Course Road, Sector 56</a>' +
+                '</h6>' +
+                '<div class="grey-text mgt5 ft12">lorem ipsum</div>' +
+                '</div>' +
+                '<div class="col s2 pdln right-align">' +
+                '<span class="pdl10 pdr10 b grnbg white-text">4.7</span>' +
+                '<div class="ft11 grey-text mgt5">7832 votes </div>' +
+                '<div class="ft11 grey-text">4233 reviews</div>' +
+                '</div>' +
+                '</div>'
+            ],
+
+        ];
 
 
+        // Add multiple markers to map
+        var infoWindow = new google.maps.InfoWindow({
+
+            }),
+            marker, i;
+
+        // Place each marker on the map  
+        for (i = 0; i < markers.length; i++) {
+            var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+            bounds.extend(position);
+            marker = new google.maps.Marker({
+                position: position,
+                map: map,
+                title: markers[i][0],
+                icon: markers[i][3],
+                animation: google.maps.Animation.DROP
+
+            });
+
+>>>>>>> 410724eaea7fae9dad3cc2fb8d70b0f6400ea2cf
+
+            // Add info window to marker    
+            google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
+                return function() {
+                    infoWindow.setContent(infoWindowContent[i][0]);
+
+<<<<<<< HEAD
             // Add info window to marker    
             google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
                 return function() {
@@ -1132,6 +1215,28 @@
         });
 
 
+=======
+                    infoWindow.open(map, marker);
+
+
+                }
+            })(marker, i));
+
+
+
+            // Center the map to fit all markers on the screen
+            map.fitBounds(bounds);
+        }
+
+        // Set zoom level
+        var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+            this.setZoom(13);
+            google.maps.event.removeListener(boundsListener);
+
+        });
+
+
+>>>>>>> 410724eaea7fae9dad3cc2fb8d70b0f6400ea2cf
     }
 
     // Load initialize function

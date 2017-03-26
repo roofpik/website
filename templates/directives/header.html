@@ -1,0 +1,80 @@
+<div>
+    <div class="navbar headerfix">
+        <nav class="white boxsdn">
+            <div class="nav-wrapper">
+                <div class="row">
+                    <div class="col no-padding">
+                        <a href="#" data-activates="slide-out" class="button-collapse show-on-large grey-text left">
+                            <i class="material-icons">menu</i></a>
+                        <a href="#home" class="rooflogo left"><img src="images/general/logoicon.png"></a>
+                    </div>
+                    <div class="col s4 m5 l6 pdln hide-on-med-and-down">
+                        <div class="search_header">
+                            <i class="material-icons searchtopicon">search</i>
+                            <input type="text" name="" placeholder="search" class="mgbn">
+                            <div class="search-results resultfind" ng-show="false">
+                                <ul class="collection homecoll white mgan">
+                                    <li class="collection-item avatar">
+                                        <span class="b ft13">Gurgaon</span>
+                                        <span class="ft12">CGHS</span>
+                                    </li>
+                                    <li class="collection-item avatar">
+                                        <span class="b ft13">Gurgaon</span>
+                                        <span class="ft12">Apartment</span>
+                                    </li>
+                                    <li class="collection-item avatar">
+                                        <span class="b ft13">Gurgaon</span>
+                                        <span class="ft12">Penthouse / Villa</span>
+                                    </li>
+                                    <li class="collection-item avatar b">More Options</li>
+                                    <li class="collection-item avatar"> Explore Locality</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="right">
+                        <li> <a href="/#/write-review" class="btn btn-primary mgln mgr10 ft12 capitalize xs-wd"><i class="material-icons left bticon">create</i> Write Review</a></li>
+                        <li ng-hide="loginStatus">
+                            <a href="#login_signup_popup" id="open-login" class="btn mgln mgr10 ft12 mgln capitalize xs-wd">
+                                <i class="material-icons left bticon">lock_outline</i> Login/Sign Up</a>
+                        </li>
+                        <li class="" ng-show="loginStatus">
+                            <a href="" class="dropdown-button btn btn-flat mgln ft12 mgr10 capitalize" data-activates="dropdown1">
+                                <img class="display-img left" ng-src="{{user.photoURL}}">{{user.displayName}}</a>
+                            <ul id="dropdown1" class="dropdown-content droplogin">
+                                <!-- <li>
+                                    <a href="">
+                                        <i class="material-icons left">person</i>My Profile</a>
+                                </li>
+                                <li class="divider"></li> -->
+                                <li>
+                                    <a href="" ng-click="logout()">
+                                        <i class="material-icons left">power_settings_new</i>Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <span class="right ft12 grey-text mgr30 xsnr10">
+                        <i class="material-icons left tiny bticont mgrn">location_on</i>Gurgaon</span>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div id="slide-out" class="side-nav over_hidden">
+        <div class="row mgan">
+            <a href="#home" class="logoslide mgt10"><img src="images/general/logo.png"></a>
+        </div>
+        <div class="row over_hidden mgbn">
+            <ul>
+                <li><a href="#about-us" class="">About</a></li>
+                <li><a href="#cover-stories">Cover Stories</a></li>
+                <li><a href="#blogs">Blogs</a></li>
+                <li><a href="#write-review">Write Review</a></li>
+                <li><a href="#faq"> FAQ's </a></li>
+                <li><a href="#contact-us">Contact us</a></li>
+                <li><a href="#!">Terms & Privacy</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
