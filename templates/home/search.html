@@ -56,11 +56,11 @@
                             <div class="abs_check" id="{{val.hrefLink}}" ng-repeat="(key, val) in micromarkets" ng-show="val.selected">
                                 <ul>
                                     <li>
-                                        <input type="checkbox" id="all" ng-model="filters.micro[key]"/>
+                                        <input type="checkbox" id="all" ng-model="filters.micro[key]" ng-change="selectAllLocality(key)"/>
                                         <label for="all"><b>Select All</b></label>
                                     </li>
                                     <li ng-repeat="item in val.localities">
-                                        <input type="checkbox" id="{{item.key}}" value="" ng-model="filters.locations[item.key]"/>
+                                        <input type="checkbox" id="{{item.key}}" value="{{item.key}}" ng-model="filters.locations[key][item.key]"/>
                                         <label for="{{item.key}}">{{item.name}}</label>
                                     </li>
                                 </ul>
@@ -72,11 +72,11 @@
                 </div>
                 <div class="col s2 m2 pdrn">
                     <div class="input-field card col s12 ht45 bod-right rdsan relative seldrop">
-                        <select ng-model ="filters.propertyType" ng-change="search()">
+                        <select ng-model ="filters.ptype">
                             <option value="" disabled selected>Select</option>
                             <option value="apartments">Apartments</option>
                             <option value="villa">Villas</option>
-                            <option value="penthouse">Penthouse</option>
+                            <option value="pehthouse">Penthouse</option>
                             <option value="rowHouse">Row House</option>
                         </select>
                     </div>
@@ -96,37 +96,24 @@
                 <div class="col s2 m2 pdrn ">
                     <div class="input-field card col s12 ht45 no-padding bod-right rdsan relative">
                         <span class="inpspn ft15">₹</span>
-                        <input type="text" placeholder="filters.rent.min" id="type-selection" class="autocompleteFind inp_pdwsm  mgbn" ng-model="searchedText">
-                        <!-- <div class="search-results price_m white shdsm" style="display: block">
+                        <input type="text" placeholder="Enter Amount" ng-model="filters.rent.min" ng-change="priceChanging('min')" id="min-price" class="autocompleteFind inp_pdwsm  mgbn">
+                        <div class="search-results price_m white shdsm" style="display: block" ng-show="showMinPrice">
                             <ul class="left-align">
-                                <li>₹ 5000</li>
-                                <li>₹ 5000</li>
-                                <li>₹ 7000</li>
-                                <li>₹ 7000</li>
-                                <li>₹ 11000</li>
-                                <li>₹ 7000</li>
-                                <li>₹ 7000</li>
-                                <li>₹ 11000</li>
+                                <li ng-repeat="price in priceList" ng-show="price < maxPrice" ng-click="selectPrice(price, 'min')">₹ {{price}}</li>
                             </ul>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
+
                 <div class="col s2 m2 pdln">
                     <div class="input-field card col s12 ht45 no-padding rdsan">
                         <span class="inpspn ft15">₹</span>
-                        <input placeholder="filters.rent.max" class="autocompleteNear inp_pdwsm mgbn">
-                        <!-- <div class="search-results price_m white shdsm" style="display: block">
-                            <ul class="left-align">
-                                <li>₹ 5000</li>
-                                <li>₹ 5000</li>
-                                <li>₹ 7000</li>
-                                <li>₹ 7000</li>
-                                <li>₹ 11000</li>
-                                <li>₹ 7000</li>
-                                <li>₹ 7000</li>
-                                <li>₹ 11000</li>
+                        <input placeholder="Enter Amount" ng-model="filters.rent.max" id="max-price" ng-change="priceChanging('max')" class="autocompleteNear inp_pdwsm mgbn">
+                        <div class="search-results price_m white shdsm" style="display: block" ng-show="showMaxPrice">
+                           <ul class="left-align">
+                                <li ng-repeat="price in priceList" ng-show="price > minPrice" ng-click="selectPrice(price, 'max')">₹ {{price}}</li>
                             </ul>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
