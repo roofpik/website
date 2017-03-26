@@ -2,8 +2,8 @@
     <div class="row img_detail mgbn">
         <img ng-src="{{coverImage}}" class="responsive-img">
         <div class="dt_abs">
-            <h3 class="white-text text-sd mgbn">{{micromarket.name}}</h3>
-            <h5 class="white-text text-sd">Gurgaon, Haryana</h5>
+            <h3 class="white-text text-sd mgbn">{{city.name}}</h3>
+            <h5 class="white-text text-sd">Haryana</h5>
         </div>
     </div>
     <div class="row white shdsm displayn" id="fixsub_hd">
@@ -43,7 +43,7 @@
                     <div class="nav-wrapper">
                         <div class="col s12">
                             <a href="" class="breadcrumb">Home</a>
-                            <a href="" class="breadcrumb">{{micromarket.name}}</a>
+                            <a href="" class="breadcrumb">{{city.name}}</a>
                             <!-- <a href="" class="breadcrumb">lorem ipsum</a> -->
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                     <div class="row" id="Overview">
                         <div class="col s12 pdb20">
                             <h3 class="heading mgbn">Overview</h3>
-                            <div class="ft14 grey-text">{{micromarket.name}}</div>
+                            <div class="ft14 grey-text">{{city.name}}</div>
                         </div>
                         <div class="col s12">
                             <div class="row pdt10">
@@ -81,7 +81,7 @@
                             </div>
                         </div>
                         <div class="col s12 ft14 grey-text text-darken-2">
-                            <p>{{micromarket.about1}}<a href="" ng-hide="showMoreClicked" ng-click="showMoreClicked = !showMoreClicked">...more</a><span ng-show="showMoreClicked">{{micromarket.about2}}</span></p>
+                            <p>{{city.about1}}<a href="" ng-hide="showMoreClicked" ng-click="showMoreClicked = !showMoreClicked">...more</a><span ng-show="showMoreClicked">{{city.about2}}</span></p>
                         </div>
                     </div>
                     <div class="row">
@@ -198,9 +198,9 @@
                         <div class="col s4">
                             Site Address
                             <br>
-                            <div class="grey-text">{{micromarket.name}}
-                                <br> Gurgaon
-                                <br> Haryana
+                            <div class="grey-text">{{city.name}}
+                               <!--  <br> Gurgaon
+                                <br> Haryana -->
                             </div>
                         </div>
                     </div>

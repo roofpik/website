@@ -1,31 +1,31 @@
-app.controller('localityDetailsCtrl', function($scope, $timeout, $stateParams, $http, $q, imageUrl) {
-    $scope.locality = {};
+app.controller('cityDetailsCtrl', function($scope, $timeout, $stateParams, $http, $q, imageUrl) {
+    $scope.city = {};
     $scope.pros = [];
     $scope.cons = [];
-    db.ref('locations/country/-K_43TEI8cBodNbwlKqJ/locality/city/'+$stateParams.city+'/micromarket/'+$stateParams.micro+'/places/'+$stateParams.loc).once('value', function(snapshot) {
+    db.ref('locations/country/-K_43TEI8cBodNbwlKqJ/city/' + $stateParams.city).once('value', function(snapshot) {
         $timeout(function() {
             if (snapshot.val()) {
-                $scope.locality = snapshot.val();
+                $scope.city = snapshot.val();
                 var defer = $q.defer();
-                var t = imageUrl.getUrl($scope.locality['cover-image'], defer);
+                var t = imageUrl.getUrl($scope.city['cover-image'], defer);
                 t.then(function(response) {
                     $scope.coverImage = response;
                 });
-                if ($scope.locality.about) {
-                    // console.log($scope.locality.about.length);
-                    if ($scope.locality.about.length > 500) {
-                        $scope.locality.about1 = $scope.locality.about.substring(0, 500);
-                        $scope.locality.about2 = $scope.locality.about.substring(501, $scope.locality.about.length);
+                if ($scope.city.about) {
+                    // console.log($scope.city.about.length);
+                    if ($scope.city.about.length > 500) {
+                        $scope.city.about1 = $scope.city.about.substring(0, 500);
+                        $scope.city.about2 = $scope.city.about.substring(501, $scope.city.about.length);
                     } else {
-                        $scope.locality.about1 = $scope.locality.about;
+                        $scope.city.about1 = $scope.city.about;
                     }
                 }
-                if ($scope.locality.highlight) {
-                    if ($scope.locality.highlight.pros) {
-                        $scope.pros = $scope.locality.highlight.pros.split("*");
+                if ($scope.city.highlight) {
+                    if ($scope.city.highlight.pros) {
+                        $scope.pros = $scope.city.highlight.pros.split("*");
                     }
-                    if ($scope.locality.highlight.cons) {
-                        $scope.cons = $scope.locality.highlight.cons.split("*");
+                    if ($scope.city.highlight.cons) {
+                        $scope.cons = $scope.city.highlight.cons.split("*");
                     }
 
                 }
@@ -51,7 +51,7 @@ app.controller('localityDetailsCtrl', function($scope, $timeout, $stateParams, $
 
         var markers = [
 
-            [$scope.locality.name, $scope.locality.lat, $scope.locality.lng]
+            [$scope.city.name, $scope.city.lat, $scope.city.lng]
 
 
         ];
@@ -67,7 +67,7 @@ app.controller('localityDetailsCtrl', function($scope, $timeout, $stateParams, $
                 '</div>' +
                 '<div class="col s6 pdln">' +
                 '<div class="truncate grey-text ft12">lorem ipsum</div>' +
-                '<h2 class="ft18 b mgbn mgt5 truncate"><a href="" class="redt">' + $scope.locality.name + '</a></h2>' +
+                '<h2 class="ft18 b mgbn mgt5 truncate"><a href="" class="redt">' + $scope.city.name + '</a></h2>' +
                 '<h6 class="mgbn ft12 truncate b text-darken-2 mgt5">' +
                 '<a href="" class="grey-text"> Golf Course Road, Sector 56</a>' +
                 '</h6>' +
@@ -183,4 +183,3 @@ app.controller('localityDetailsCtrl', function($scope, $timeout, $stateParams, $
         initMap();
     }
 })
-

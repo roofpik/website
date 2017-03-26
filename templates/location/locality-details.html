@@ -1,9 +1,9 @@
 <div>
     <div class="row img_detail mgbn">
-        <img src="images/home/home-bg.jpg" class="responsive-img">
+        <img ng-src="{{coverImage}}" class="responsive-img">
         <div class="dt_abs">
-            <h3 class="white-text text-sd mgbn">Property Heading</h3>
-            <h5 class="white-text text-sd">Sector 48, Gurgaon</h5>
+            <h3 class="white-text text-sd mgbn">{{locality.name}}</h3>
+            <h5 class="white-text text-sd">Gurgaon, Haryana</h5>
         </div>
     </div>
     <div class="row white shdsm displayn" id="fixsub_hd">
@@ -43,8 +43,8 @@
                     <div class="nav-wrapper">
                         <div class="col s12">
                             <a href="" class="breadcrumb">Home</a>
-                            <a href="" class="breadcrumb">Blogs</a>
-                            <a href="" class="breadcrumb">lorem ipsum</a>
+                            <a href="" class="breadcrumb">{{locality.name}}</a>
+                            <!-- <a href="" class="breadcrumb">lorem ipsum</a> -->
                         </div>
                     </div>
                 </nav>
@@ -54,7 +54,7 @@
                     <div class="row" id="Overview">
                         <div class="col s12 pdb20">
                             <h3 class="heading mgbn">Overview</h3>
-                            <div class="ft14 grey-text">M3M Merlin Gurgaon</div>
+                            <div class="ft14 grey-text">{{locality.name}}</div>
                         </div>
                         <div class="col s12">
                             <div class="row pdt10">
@@ -81,7 +81,7 @@
                             </div>
                         </div>
                         <div class="col s12 ft14 grey-text text-darken-2">
-                            <p>M3M Merlin is situated in Gurgaons Sector 67. The community has 3 and 4BHK apartments and penthouses. These units are completed and available through resale and the developer. Spread across 13.34 acres. in terms of super built-up areas. Some of the units have access to the terrace and a servants room built in the apartment. There are various amenities available to home owners such as childrens play zone, gymnasium and jogging track. M3M is one of Gurgaons reputed property developers with ten pro... <a href="">more</a></p>
+                            <p>{{locality.about1}}<a href="" ng-hide="showMoreClicked" ng-click="showMoreClicked = !showMoreClicked">...more</a><span ng-show="showMoreClicked">{{locality.about2}}</span></p>
                         </div>
                     </div>
                     <div class="row">
@@ -193,340 +193,32 @@
                         <h3 class="heading">Project Location</h3>
                         <div class="col s8 pdln relative">
                             <img src="images/general/map-img.jpg" class="responsive-img">
-                            <a class="btn mgtn transform" href="#view_map_popup">View on Map</a>
+                            <a class="btn mgtn transform" href="" ng-click="openModal()">View on Map</a>
                         </div>
                         <div class="col s4">
                             Site Address
                             <br>
-                            <div class="grey-text"> M3M Merlin
-                                <br> Sector 67,
+                            <div class="grey-text">{{locality.name}}
                                 <br> Gurgaon
+                                <br> Haryana
                             </div>
                         </div>
                     </div>
-                    <!--  <div class="row mgrn">
-                        <div class="col s12">
-                            <h3 class="heading">Best Proprty Location in Gurgaon</h3>
-                            <ul class="locationli">
-                                <li>
-                                    <a href="">
-                                        <div class="redt">Property in Sector 47 <span class="green-text">
-                                <i class="material-icons ft15">thumb_up</i> 75%</span>
-                                        </div>
-                                        <div class="ft12 grey-text"> Avg. Rate <span class="b grey-text text-darken-2">₹10,750 / sq. ft</span> </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <div class="redt">Property in Sector 47 <span class="green-text">
-                                <i class="material-icons ft15">thumb_up</i> 75%</span>
-                                        </div>
-                                        <div class="ft12 grey-text"> Avg. Rate <span class="b grey-text text-darken-2">₹10,750 / sq. ft</span> </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <div class="redt">Property in Sector 47 <span class="grey-text">
-                                <i class="material-icons ft15">thumb_down</i> 75%</span>
-                                        </div>
-                                        <div class="ft12 grey-text"> Avg. Rate <span class="b grey-text text-darken-2">₹9,750 / sq. ft</span> </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <div class="redt">Property in Sector 47 <span class="green-text">
-                                <i class="material-icons ft15">thumb_up</i> 75%</span>
-                                        </div>
-                                        <div class="ft12 grey-text"> Avg. Rate <span class="b grey-text text-darken-2">₹10,750 / sq. ft</span> </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div> -->
                     <div class="row mgrn">
                         <div class="col s6">
-                            <h3 class="heading"><i class="material-icons green-text left">thumb_up</i> Best Proprty Location in Gurgaon</h3>
+                            <h3 class="heading"><i class="material-icons green-text left">thumb_up</i>Pros</h3>
                             <ul class="salient salientfull">
-                                <li>Good location with connectivity to South Delhi, NH-8.</li>
-                                <li>Singapore style world-class apartments</li>
-                                <li>World class amenities and elegant interiors</li>
+                                <li ng-repeat="pro in pros">{{pro}}</li>
+                                <!-- <li>Singapore style world-class apartments</li>
+                                <li>World class amenities and elegant interiors</li> -->
                             </ul>
                         </div>
                         <div class="col s6">
-                            <h3 class="heading"> <i class="material-icons grey-text left">thumb_down</i> Best Proprty Location in Gurgaon</h3>
+                            <h3 class="heading"> <i class="material-icons grey-text left">thumb_down</i> Cons</h3>
                             <ul class="salient salientfull">
-                                <li>Good location with connectivity to South Delhi, NH-8.</li>
-                                <li>Singapore style world-class apartments</li>
-                                <li>World class amenities and elegant interiors</li>
+                                <li ng-repeat="con in cons">{{con}}</li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="row mgrn mgbn" id="Amenities">
-                        <div class="col s12">
-                            <h3 class="heading">Amenities</h3>
-                            <div class="row relative">
-                                <div class="col s12 relative">
-                                    <ul class="tabs">
-                                        <li class="tab col"><a class="active" href="#basic">Basic</a></li>
-                                        <li class="tab col"><a href="#convenience">Convenience</a></li>
-                                        <li class="tab col"><a href="#entertainment">Entertainment</a></li>
-                                        <li class="tab col"><a href="#safety">Safety</a></li>
-                                        <li class="tab col"><a href="#services">Services</a></li>
-                                        <li class="tab col"><a href="#sports">Sports</a></li>
-                                    </ul>
-                                </div>
-                                <div id="basic" class="col s12">
-                                    <div class="row">
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="convenience" class="col s12">
-                                    <div class="row">
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="entertainment" class="col s12">
-                                    <div class="row">
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="safety" class="col s12">
-                                    <div class="row">
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="services" class="col s12">
-                                    <div class="row">
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="sports" class="col s12">
-                                    <div class="row">
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                        <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center">
-                                            <img src="images/icons/cctv.png" alt="">
-                                            <span class="ht45 block">  Car Parking</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mgbn" id="Specifications">
-                        <div class="col s12">
-                            <h5 class="ft15 mgtn b pdb10">Specifications</h5>
-                        </div>
-                        <div class="col s6">
-                            <h5 class="ft14 mgtn pdb10">
-                                 <img class="mgr10 left" src="images/homeicon/Business Center.png"> 
-                                 <span class="mgt5 inlineb">Flooring</span>
-                            </h5>
-                            <div class="row ft12 mgt10 mgbn">
-                                <div class="col s4 grey-text">Master Bedroom:</div>
-                                <div class="col s8 grey-text text-darken-2">Laminated Wooden</div>
-                            </div>
-                            <div class="row ft12 mgt10 mgbn">
-                                <div class="col s4 grey-text">Kitchen:</div>
-                                <div class="col s8 grey-text text-darken-2">Anti Skid Tiles</div>
-                            </div>
-                            <div class="row ft12 mgt10 mgbn">
-                                <div class="col s4 grey-text">Balcony:</div>
-                                <div class="col s8 grey-text text-darken-2">Anti skid ceramic Tiles</div>
-                            </div>
-                            <div class="row ft12 mgt10 mgbn">
-                                <div class="col s4 grey-text">Other Bedroom:</div>
-                                <div class="col s8 grey-text text-darken-2">Wooden Flooring</div>
-                            </div>
-                            <div class="row ft12 mgt10 mgbn">
-                                <div class="col s4 grey-text">Living/Dining:</div>
-                                <div class="col s8 grey-text text-darken-2">Vitrified tiles</div>
-                            </div>
-                        </div>
-                        <div class="col s6">
-                            <h5 class="ft14 mgtn pdb10">
-                                 <img class="mgr10 left" src="images/homeicon/Business Center.png"> 
-                                 <span class="mgt5 inlineb">Flooring</span>
-                            </h5>
-                            <div class="row ft12 mgt10 mgbn">
-                                <div class="col s4 grey-text">Master Bedroom:</div>
-                                <div class="col s8 grey-text text-darken-2">Laminated Wooden</div>
-                            </div>
-                            <div class="row ft12 mgt10 mgbn">
-                                <div class="col s4 grey-text">Kitchen:</div>
-                                <div class="col s8 grey-text text-darken-2">Anti Skid Tiles</div>
-                            </div>
-                            <div class="row ft12 mgt10 mgbn">
-                                <div class="col s4 grey-text">Balcony:</div>
-                                <div class="col s8 grey-text text-darken-2">Anti skid ceramic Tiles</div>
-                            </div>
-                            <div class="row ft12 mgt10 mgbn">
-                                <div class="col s4 grey-text">Other Bedroom:</div>
-                                <div class="col s8 grey-text text-darken-2">Wooden Flooring</div>
-                            </div>
-                            <div class="row ft12 mgt10 mgbn">
-                                <div class="col s4 grey-text">Living/Dining:</div>
-                                <div class="col s8 grey-text text-darken-2">Vitrified tiles</div>
-                            </div>
-                        </div>
-                        <div class="col s12 mgt10"><a href="" class="right">more specifications...</a></div>
                     </div>
                     <div class="row mgbn" id="gallery">
                         <div class="col s12">

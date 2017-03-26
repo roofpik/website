@@ -487,7 +487,7 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state) {
                     // micromarket key needed
                     // $state.go('locality-details', {city: $scope.cityId, micro: $scope.selectedLocation.key, loc: $scope.selectedLocation.key });
                 } else {
-                    // $state.go('listing');
+                    $state.go('micromarket-details', { city: $scope.cityId});
                 }
             } else if (item.key == 'all') {
                 if ($scope.selectedLocation.category == 'micromarket') {

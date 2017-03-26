@@ -1,9 +1,34 @@
-app.controller('micromarketDetailsCtrl', function($scope, $timeout, $stateParams, $http) {
+app.controller('micromarketDetailsCtrl', function($scope, $timeout, $stateParams, $http, $q, imageUrl) {
     $scope.micromarket = {};
+    $scope.pros = [];
+    $scope.cons = [];
     db.ref('locations/country/-K_43TEI8cBodNbwlKqJ/micromarket/city/' + $stateParams.city + '/places/' + $stateParams.micro).once('value', function(snapshot) {
         $timeout(function() {
             if (snapshot.val()) {
                 $scope.micromarket = snapshot.val();
+                var defer = $q.defer();
+                var t = imageUrl.getUrl($scope.micromarket['cover-image'], defer);
+                t.then(function(response) {
+                    $scope.coverImage = response;
+                });
+                if ($scope.micromarket.about) {
+                    // console.log($scope.micromarket.about.length);
+                    if ($scope.micromarket.about.length > 500) {
+                        $scope.micromarket.about1 = $scope.micromarket.about.substring(0, 500);
+                        $scope.micromarket.about2 = $scope.micromarket.about.substring(501, $scope.micromarket.about.length);
+                    } else {
+                        $scope.micromarket.about1 = $scope.micromarket.about;
+                    }
+                }
+                if ($scope.micromarket.highlight) {
+                    if ($scope.micromarket.highlight.pros) {
+                        $scope.pros = $scope.micromarket.highlight.pros.split("*");
+                    }
+                    if ($scope.micromarket.highlight.cons) {
+                        $scope.cons = $scope.micromarket.highlight.cons.split("*");
+                    }
+
+                }
             }
         }, 0);
     })
@@ -26,7 +51,7 @@ app.controller('micromarketDetailsCtrl', function($scope, $timeout, $stateParams
 
         var markers = [
 
-            ['Vipul Trade Center, NY', 28.406909, 77.042623],
+            [$scope.micromarket.name, $scope.micromarket.lat, $scope.micromarket.lng]
 
 
         ];
@@ -38,11 +63,11 @@ app.controller('micromarketDetailsCtrl', function($scope, $timeout, $stateParams
 
             ['<div class="row relative mgbn">' +
                 '<div class="col s4 imglist pdb10">' +
-                '<a href=""> <img src="images/olive.jpg" class="responsive-img"></a>' +
+                '<a href=""> <img src="' + $scope.coverImage + '" class="responsive-img"></a>' +
                 '</div>' +
                 '<div class="col s6 pdln">' +
                 '<div class="truncate grey-text ft12">lorem ipsum</div>' +
-                '<h2 class="ft18 b mgbn mgt5 truncate"><a href="" class="redt"> The Olive Heights</a></h2>' +
+                '<h2 class="ft18 b mgbn mgt5 truncate"><a href="" class="redt">' + $scope.micromarket.name + '</a></h2>' +
                 '<h6 class="mgbn ft12 truncate b text-darken-2 mgt5">' +
                 '<a href="" class="grey-text"> Golf Course Road, Sector 56</a>' +
                 '</h6>' +
@@ -107,7 +132,7 @@ app.controller('micromarketDetailsCtrl', function($scope, $timeout, $stateParams
     }
 
     // Load initialize function
-    google.maps.event.addDomListener(window, 'load', initMap);
+    // google.maps.event.addDomListener(window, 'load', initMap);
 
 
     $(document).ready(function() {
@@ -152,4 +177,9 @@ app.controller('micromarketDetailsCtrl', function($scope, $timeout, $stateParams
             }
         });
     });
+
+    $scope.openModal = function() {
+        $('#view_map_popup').modal('open');
+        initMap();
+    }
 })
