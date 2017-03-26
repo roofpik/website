@@ -1609,3 +1609,11 @@ input[type=email],
     overflow-y: auto;
     max-height: 200px;
 }
+
+.apply-price-filter {
+    background: #2bbbad;
+    line-height: 50px;
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 5px;
+}
