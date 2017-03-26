@@ -44,5 +44,17 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         controller: 'listingCtrl'
     })
 
+    $stateProvider.state('micromarket-details',{
+        url: '/micromarket-details?city&micro',
+        templateUrl: 'templates/location/micromarket-details.html',
+        controller: 'micromarketDetailsCtrl'
+    })
+
+    $stateProvider.state('locality-details',{
+        url: '/locality-details?city&micro&loc',
+        templateUrl: 'templates/location/locality-details.html',
+        controller: 'localityDetailsCtrl'
+    })
+
     $urlRouterProvider.otherwise('/home');
 }]);

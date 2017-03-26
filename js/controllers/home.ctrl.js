@@ -112,6 +112,8 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state) {
     $scope.locationNameAdded = false;
     $scope.searchTitle = 'Basic Search';
     $scope.showBasicSearch = false;
+    $scope.cityId = '-KYJONgh0P98xoyPPYm9';
+    $scope.filters = {};
 
     $("#type-selection").focusin(function() {
         $timeout(function() {
@@ -139,6 +141,47 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state) {
             $scope.showSearch1 = false;
         }, 500);
     });
+
+    db.ref('locations/country/-K_43TEI8cBodNbwlKqJ/micromarket/city/-KYJONgh0P98xoyPPYm9/places').once('value', function(snapshot) {
+        $timeout(function() {
+            $scope.micromarkets = snapshot.val();
+            getLocations();
+        }, 0)
+    })
+
+    function getLocations() {
+        db.ref('locations/country/-K_43TEI8cBodNbwlKqJ/locality/city/-KYJONgh0P98xoyPPYm9/micromarket').once('value', function(snapshot) {
+            var c = 0;
+            $timeout(function() {
+                for (key in snapshot.val()) {
+                    if (c == 0) {
+                        $scope.micromarkets[key].selected = true;
+                        c = 1;
+                    } else {
+                        $scope.micromarkets[key].selected = false;
+                    }
+                    for (key1 in snapshot.val()[key].places) {
+                        if (!$scope.micromarkets[key].localities) {
+                            $scope.micromarkets[key].localities = {};
+                        }
+                        $scope.micromarkets[key].hrefLink = "#a" + key;
+                        $scope.micromarkets[key].localities[key1] = snapshot.val()[key].places[key1];
+                    }
+                }
+                console.log($scope.micromarkets);
+            }, 0)
+        })
+    }
+
+    $scope.selectLocality = function(id){
+        for(key in $scope.micromarkets){
+            if(key == id){
+                $scope.micromarkets[key].selected = true;
+            } else {
+                $scope.micromarkets[key].selected = false;
+            }
+        }
+    }
 
     // get search results based on the string in input box
     $scope.getSearchData = function() {
@@ -198,6 +241,25 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state) {
         }
     }
 
+    $scope.search = function(){
+        if($scope.showBasicSearch){
+            console.log($scope.filters);
+        }
+    }
+
+    $scope.selectBhk = function(bhk){
+        console.log(bhk);
+        if(!$scope.filters.bhk){
+            $scope.filters.bhk = {};
+        }
+        if($scope.filters.bhk[bhk]){
+            delete $scope.filters.bhk[bhk]
+        } else {
+            $scope.filters.bhk[bhk] = true;
+        }
+        console.log($scope.filters.bhk);
+    }
+
     $scope.searchLocations = function() {
         if ($scope.searchedLocation.length > 2) {
             $scope.searchingLocation = true;
@@ -250,6 +312,7 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state) {
         $scope.searchedText = item.name;
         if (item.category == 'residential') {
             //take to project details page
+            // $state.go('project-details', {});
         } else if (item.category == 'builder') {
             //take to project list with the builder as filter
         } else if (item.category == 'default') {
@@ -260,7 +323,14 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state) {
             console.log($scope.selectedLocation);
             // take to differnet views based on type
             if (item.key == 'overview') {
-
+                if ($scope.selectedLocation.category == 'micromarket') {
+                    $state.go('micromarket-details', { city: $scope.cityId, micro: $scope.selectedLocation.key });
+                } else if ($scope.selectedLocation.category == 'locality') {
+                    // micromarket key needed
+                    // $state.go('locality-details', {city: $scope.cityId, micro: $scope.selectedLocation.key, loc: $scope.selectedLocation.key });
+                } else {
+                    // $state.go('listing');
+                }
             } else if (item.key == 'all') {
                 if ($scope.selectedLocation.category == 'micromarket') {
                     $state.go('listing', { micro: $scope.selectedLocation.key });

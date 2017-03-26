@@ -50,131 +50,18 @@
                             <div class="col s12">
                                 <h5 class="ft16 left-align">Neighborhoods</h5>
                                 <ul class="tabs left-align">
-                                    <li class="tab"><a href="#atest1" class="active ft12">Tab 1</a></li>
-                                    <li class="tab"><a class="ft12" href="#atest2">Tab 2</a></li>
-                                    <li class="tab"><a class="ft12" href="#atest3">Tab 3</a></li>
-                                    <li class="tab"><a class="ft12" href="#atest4">Tab 4 Tab 4</a></li>
-                                    <li class="tab"><a class="ft12" href="#atest5">Tab 5</a></li>
-                                    <li class="tab"><a class="ft12" href="#atest6">Tab 6 Tab 6 Tab 6</a></li>
+                                    <li class="tab" ng-repeat="(key, val) in micromarkets"><a ng-href="{{val.hrefLink}}" ng-class="val.selected?'active':'normal'" class="ft12" ng-click="selectLocality(key)">{{val.name}}</a></li>
                                 </ul>
                             </div>
-                            <div class="abs_check" id="atest1">
+                            <div class="abs_check" id="{{val.hrefLink}}" ng-repeat="(key, val) in micromarkets" ng-show="val.selected">
                                 <ul>
                                     <li>
-                                        <input type="checkbox" id="c1" />
-                                        <label for="c1">Red</label>
+                                        <input type="checkbox" id="all" ng-model="filters.micro[key]"/>
+                                        <label for="all"><b>Select All</b></label>
                                     </li>
-                                    <li>
-                                        <input type="checkbox" id="c2" />
-                                        <label for="c2">Blue</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="c3" />
-                                        <label for="c3">Green</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="c4" />
-                                        <label for="c4">Green</label>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="abs_check" id="atest2">
-                                <ul>
-                                    <li>
-                                        <input type="checkbox" id="c4" />
-                                        <label for="c4">One</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="c5" />
-                                        <label for="c5">Two</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="c6" />
-                                        <label for="c6">Three</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="c7" />
-                                        <label for="c7">Three</label>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="abs_check" id="atest3">
-                                <ul>
-                                    <li>
-                                        <input type="checkbox" id="cc4" />
-                                        <label for="cc4">One</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="cc5" />
-                                        <label for="cc5">Two</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="cc6" />
-                                        <label for="cc6">Three</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="cc7" />
-                                        <label for="cc7">Three</label>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="abs_check" id="atest4">
-                                <ul>
-                                    <li>
-                                        <input type="checkbox" id="dc4" />
-                                        <label for="dc4">One</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="dc5" />
-                                        <label for="dc5">Two</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="dc6" />
-                                        <label for="dc6">Three</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="dc7" />
-                                        <label for="dc7">Three</label>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="abs_check" id="atest5">
-                                <ul>
-                                    <li>
-                                        <input type="checkbox" id="ec4" />
-                                        <label for="ec4">One</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="ec5" />
-                                        <label for="ec5">Two</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="ec6" />
-                                        <label for="ec6">Three</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="ec7" />
-                                        <label for="ec7">Three</label>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="abs_check" id="atest6">
-                                <ul>
-                                    <li>
-                                        <input type="checkbox" id="fc4" />
-                                        <label for="fc4">One</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="fc5" />
-                                        <label for="fc5">Two</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="fc6" />
-                                        <label for="fc6">Three</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="fc7" />
-                                        <label for="fc7">Three</label>
+                                    <li ng-repeat="item in val.localities">
+                                        <input type="checkbox" id="{{item.key}}" value="" ng-model="filters.locations[item.key]"/>
+                                        <label for="{{item.key}}">{{item.name}}</label>
                                     </li>
                                 </ul>
                             </div>
@@ -185,31 +72,32 @@
                 </div>
                 <div class="col s2 m2 pdrn">
                     <div class="input-field card col s12 ht45 bod-right rdsan relative seldrop">
-                        <select>
+                        <select ng-model ="filters.propertyType" ng-change="search()">
                             <option value="" disabled selected>Select</option>
-                            <option value="1">Apartments</option>
-                            <option value="2">Affordable Homes</option>
-                            <option value="3">Penthouse/Villa</option>
+                            <option value="apartments">Apartments</option>
+                            <option value="villa">Villas</option>
+                            <option value="penthouse">Penthouse</option>
+                            <option value="rowHouse">Row House</option>
                         </select>
                     </div>
                 </div>
                 <div class="col s3 m3 right-align pdrn">
                     <div class="input-field col s12 ht45 no-padding rdsan relative">
                         <ul class="mgtn">
-                            <li title="1 BHK" class="btnnum bhkactive shdsm">1</li>
-                            <li title="2 BHK" class="btnnum shdsm">2</li>
-                            <li title="3 BHK" class="btnnum shdsm">3</li>
-                            <li title="4 BHK" class="btnnum shdsm">4</li>
-                            <li title="5 BHK" class="btnnum shdsm">5</li>
-                            <li title="6+ BHK" class="btnnum shdsm">6+</li>
+                            <li title="1 BHK" class="btnnum shdsm" ng-class="filters.bhk['1']?'bhkactive':'normal'" ng-click="selectBhk('1')">1</li>
+                            <li title="2 BHK" class="btnnum shdsm" ng-class="filters.bhk['2']?'bhkactive':'normal'" ng-click="selectBhk('2')">2</li>
+                            <li title="3 BHK" class="btnnum shdsm" ng-class="filters.bhk['3']?'bhkactive':'normal'" ng-click="selectBhk('3')">3</li>
+                            <li title="4 BHK" class="btnnum shdsm" ng-class="filters.bhk['4']?'bhkactive':'normal'" ng-click="selectBhk('4')">4</li>
+                            <li title="5 BHK" class="btnnum shdsm" ng-class="filters.bhk['5']?'bhkactive':'normal'" ng-click="selectBhk('5')">5</li>
+                            <li title="6+ BHK" class="btnnum shdsm" ng-class="filters.bhk['6+']?'bhkactive':'normal'" ng-click="selectBhk('6+')">6+</li>
                         </ul>
                     </div>
                 </div>
                 <div class="col s2 m2 pdrn ">
                     <div class="input-field card col s12 ht45 no-padding bod-right rdsan relative">
                         <span class="inpspn ft15">₹</span>
-                        <input type="text" placeholder="min.rent" id="type-selection" class="autocompleteFind inp_pdwsm  mgbn" ng-model="searchedText">
-                        <div class="search-results price_m white shdsm" style="display: block">
+                        <input type="text" placeholder="filters.rent.min" id="type-selection" class="autocompleteFind inp_pdwsm  mgbn" ng-model="searchedText">
+                        <!-- <div class="search-results price_m white shdsm" style="display: block">
                             <ul class="left-align">
                                 <li>₹ 5000</li>
                                 <li>₹ 5000</li>
@@ -220,14 +108,14 @@
                                 <li>₹ 7000</li>
                                 <li>₹ 11000</li>
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="col s2 m2 pdln">
                     <div class="input-field card col s12 ht45 no-padding rdsan">
                         <span class="inpspn ft15">₹</span>
-                        <input placeholder="max.rent" class="autocompleteNear inp_pdwsm mgbn">
-                        <div class="search-results price_m white shdsm" style="display: block">
+                        <input placeholder="filters.rent.max" class="autocompleteNear inp_pdwsm mgbn">
+                        <!-- <div class="search-results price_m white shdsm" style="display: block">
                             <ul class="left-align">
                                 <li>₹ 5000</li>
                                 <li>₹ 5000</li>
@@ -238,7 +126,7 @@
                                 <li>₹ 7000</li>
                                 <li>₹ 11000</li>
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
