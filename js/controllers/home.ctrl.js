@@ -1,32 +1,5 @@
 app.controller('homeCtrl', function($scope, $state, $timeout) {
-    // $timeout(function(){
-    //     $state.go('project-details', {city: '-KYJONgh0P98xoyPPYm9', micro: '-KfM5tQ-UKt6DtrWtzeE', locality: '-KfRC32KzT4Tjo0O14kI', id:'-Kfp4KJG2TlJYKI6-iZ0'});
-    // }, 5000);
-    // anychart.onDocumentReady(function() {
-    //     // create pie chart with passed data
-    //     chart = anychart.pie([
-    //         ['Department Stores', 6371664],
-    //         ['Discount Stores', 7216301],
-    //         ['Men\'s/Women\'s Stores', 1486621],
-    //         ['Juvenile Specialty Stores', 786622],
-    //         ['All other outlets', 900000]
-    //     ]);
 
-    //     // set container id for the chart
-    //     chart.container('chart1');
-
-    //     // set chart title text settings
-    //     chart.legend(false);
-
-    //     //set chart radius
-    //     chart.radius('50%');
-
-    //     // create empty area in pie chart
-    //     chart.innerRadius('40%');
-
-    //     // initiate chart drawing
-    //     chart.draw();
-    // });
     $('.modal').modal();
     $('ul.tabs').tabs();
     Materialize.updateTextFields();
@@ -41,6 +14,8 @@ app.controller('homeCtrl', function($scope, $state, $timeout) {
     $('.slider').slider();
     $('.dropdown-button').dropdown();
     $('.carousel').carousel();
+
+    
 });
 
 app.controller('searchCtrl', function($scope, $timeout, $http, $state) {
