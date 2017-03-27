@@ -15,7 +15,7 @@ app.controller('homeCtrl', function($scope, $state, $timeout) {
     $('.dropdown-button').dropdown();
     $('.carousel').carousel();
 
-    
+
 });
 
 app.controller('searchCtrl', function($scope, $timeout, $http, $state) {
@@ -35,20 +35,24 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state) {
     $('.carousel').carousel();
 
     $scope.defaultList = [{
-        name: 'Apartment',
-        category: 'default',
+        name: 'Apartments',
+        subtitle: 'in Gurgaon',
+        category: false,
         key: 'apartments'
     }, {
         name: 'Villa',
-        category: 'default',
+        subtitle: 'in Gurgaon',
+        category: false,
         key: 'villa'
     }, {
         name: 'Row House',
-        category: 'default',
+        subtitle: 'in Gurgaon',
+        category: false,
         key: 'rowHouse'
     }, {
         name: 'Penthouse',
-        category: 'default',
+        subtitle: 'in Gurgaon',
+        category: false,
         key: 'penthouse'
     }];
 
@@ -85,7 +89,7 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state) {
     $scope.searchingLocation = false;
     $scope.searchingProject = false;
     $scope.locationNameAdded = false;
-    $scope.searchTitle = 'Basic Search';
+    $scope.searchTitle = 'Advanced Search';
     $scope.showBasicSearch = false;
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.filters = {};
@@ -230,7 +234,8 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state) {
                 if (!$scope.locationNameAdded) {
                     $scope.searchList = $scope.afterLocationDefaultList;
                     for (key in $scope.searchList) {
-                        $scope.searchList[key].name = $scope.searchList[key].type + $scope.selectedLocation.name;
+                        $scope.searchList[key].name = $scope.searchList[key].type;
+                        $scope.searchList[key].subtitle = $scope.selectedLocation.name;
                     }
                     $scope.locationNameAdded = true;
                 }
@@ -508,9 +513,9 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state) {
     $scope.toggleSearch = function() {
         $scope.showBasicSearch = !$scope.showBasicSearch;
         if ($scope.showBasicSearch) {
-            $scope.searchTitle = 'Guided Search';
-        } else {
             $scope.searchTitle = 'Basic Search';
+        } else {
+            $scope.searchTitle = 'Advanced Search';
         }
 
         $('select').material_select();

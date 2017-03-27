@@ -838,6 +838,14 @@ input:focus + div.search-results,
     padding: 5px;
     border: 0;
     cursor: pointer;
+     line-height: 30px;
+}
+
+.homecoll .collection-item .title{
+    color: #212121;
+    font-size: 14px;
+    font-weight: 400;
+
 }
 
 .pd48 {
@@ -846,7 +854,7 @@ input:focus + div.search-results,
 }
 
 .homecoll .collection-item:hover {
-    background-color: #eee;
+    background-color: #f7f7f7;
 }
 
 .homecoll .collection-item.avatar .title {

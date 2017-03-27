@@ -6,13 +6,15 @@
                 <div class="col s12 m6 pdrn xswdfull xspd0">
                     <div class="input-field card col s12 ht45 no-padding bodl bodt bodb bod-right rdsan relative">
                         <span class="inpspn">Find :</span>
-                        <input type="text" placeholder="Apartments, Commercials, PG" id="type-selection" class="autocompleteFind inp_pdw boxsdn mgbn" ng-model="searchedText" ng-change="getSearchData()">
+                        <input type="text" placeholder="search by project name, builder" id="type-selection" class="autocompleteFind inp_pdw boxsdn mgbn" ng-model="searchedText" ng-change="getSearchData()">
                         <img src="images/general/buffering.gif" class="loading-icon" ng-show="searchingProject"/>
                         <div class="search-results left-align" ng-show="showSearch">
                             <ul class="collection homecoll white mgan">
                                 <li class="collection-item" ng-repeat = "item in searchList" ng-click="selectProject(item)">
                                     <!-- <img src="images/homeicon/CGHS.png" class="circle" /> -->
-                                    <span class="title ft13">{{item.name}}</span>
+                                    <span class="title ft14">{{item.name}}</span>
+                                    <span class="subtitle ft12" ng-show="item.subtitle">{{item.subtitle}}</span>
+                                    <span class="subtitle ft12" ng-show="item.category">{{item.category}}</span>
                                 </li>
                             </ul>
                             <!-- <div class="pd5 grey lighten-4 ft12">More Options</div>
