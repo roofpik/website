@@ -23,27 +23,46 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
     $scope.defaultList = [{
         name: 'Apartments',
         subtitle: 'in Gurgaon',
-        category: false,
         key: 'apartment',
-        type: 'default'
+        category: 'default'
     }, {
         name: 'Villa',
         subtitle: 'in Gurgaon',
-        category: false,
         key: 'villa',
-        type: 'default'
+        category: 'default'
     }, {
         name: 'Row House',
         subtitle: 'in Gurgaon',
-        category: false,
         key: 'rowhouse',
-        type: 'default'
+        category: 'default'
     }, {
         name: 'Penthouse',
         subtitle: 'in Gurgaon',
-        category: false,
         key: 'penthouse',
-        type: 'default'
+        category: 'default'
+    }];
+
+
+    $scope.defaulLoctList = [{
+        name: 'Sohna Road',
+        subtitle: 'in Gurgaon',
+        key: '-KfQiNMHw7UE1alv1hSr',
+        category: 'default'
+    }, {
+        name: 'Golf Course Extn Road',
+        subtitle: 'in Gurgaon',
+        key: 'micro',
+        category: 'default'
+    }, {
+        name: 'Row House',
+        subtitle: 'in Gurgaon',
+        key: 'rowhouse',
+        category: 'default'
+    }, {
+        name: 'Penthouse',
+        subtitle: 'in Gurgaon',
+        key: 'penthouse',
+        category: 'default'
     }];
 
     $scope.afterLocationDefaultList = [{
@@ -75,7 +94,7 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
     $scope.searchedLocation = '';
     $scope.searchedText = '';
     $scope.showSearch = false;
-    $scope.showSearch1 = false;
+    $scope.showLocSearch = false;
     $scope.searchingLocation = false;
     $scope.searchingProject = false;
     $scope.locationNameAdded = false;
@@ -169,16 +188,16 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
         }, 1000);
     });
     $("#location-selection").focusin(function() {
-        $timeout(function() {
-            $scope.showSearch1 = true;
             if ($scope.searchedLocation.length == 0) {
                 $scope.searchLocations();
             }
+        $timeout(function() {
+            $scope.showLocSearch = true;
         }, 100);
     });
     $("#location-selection").focusout(function() {
         $timeout(function() {
-            $scope.showSearch1 = false;
+            $scope.showLocSearch = false;
         }, 1000);
     });
 
@@ -442,9 +461,12 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
     $scope.selectedProject = {};
 
     $scope.selectProject = function(item) {
-        if(item.type == 'default'){
+        if (item.category == 'default') {
             $window.location.href = '/#/search/2017/property/gurgaon/residential/all?ptype=' + item.key;
+        } else if (item.category == 'residential') {
+            $window.location.href = item.url;
         }
+
 
         // $scope.projectSelected = true;
         // $timeout(function() {
@@ -493,7 +515,6 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
     }
 
     $scope.selectLocation = function(loc) {
-        console.log('called');
         $scope.locationNameAdded = false;
         $scope.searchedLocation = loc.name;
         $scope.selectedLocation = loc;
@@ -509,7 +530,7 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
             }
         }
         $timeout(function() {
-            $scope.showSearch1 = false;
+            $scope.showLocSearch = false;
         }, 500);
     }
 
