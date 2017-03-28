@@ -1,0 +1,55 @@
+<main>
+    <style>
+    header,
+    footer {
+        display: none;
+    }
+    </style>
+    <div class="row ht300 white relative">
+        <div class="transform center wdp70">
+            <h5><b class="redt">Roofpik</b> Power Your Property Search with Genuine User Reviews </h5>
+            <div id="searchboxhome" class="row radius2 pdr10 cardmg searchfix">
+                <div class="col s12 m10 no-padding">
+                    <div class="row mgbn" ng-hide="searchByName">
+                        <div class="col s12 m6 pdrn ">
+                            <div class="input-field card col s12 ht45 no-padding bod-right rdsan relative">
+                                <span class="inpspn">Find :</span>
+                                <input type="text" placeholder="Apartments, Commercials, PG" id="projsearch" class="autocompleteFind inp_pdw mgbn" ng-model="projsearch.txt" ng-focus="projsearchFocus()" ng-blur="projsearchBlur()" ng-change="getprojsearch()">
+                                <img src="images/general/buffering.gif" class="loading-icon" ng-show="projsearch.loading" />
+                                <div class="search-results left-align" ng-show="projsearch.status && !projsearch.loading">
+                                    <ul class="collection homecoll white mgan">
+                                        <li class="collection-item avatar" ng-repeat="projItem in projsearch.data" ng-click="getprojitem(projItem)">
+                                            <span class="title ft14">{{projItem.name}}</span>
+                                            <span class="subtitle ft13">{{projItem.subtitle}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 m6 pdln">
+                            <div class="input-field card col s12 ht45 no-padding rdsan">
+                                <span class="inpspn">Near :</span>
+                                <input type="text" placeholder="Enter a Locality" id="locsearch" class="autocompleteNear inp_pdw mgbn" ng-model="locsearch.txt" ng-focus="locsearchFocus()" ng-blur="locsearchBlur()" ng-change="getlocsearch()">
+                                <img src="images/general/buffering.gif" class="loading-icon" ng-show="locsearch.loading" />
+                                <div class="search-results left-align" ng-show="locsearch.status">
+                                    <ul class="collection homecoll white mgan">
+                                        <li class="collection-item avatar" ng-repeat="locItem in locsearch.data" ng-click="getlocitem(locItem)">
+                                            <span class="title ft14">{{locItem.name}}</span>
+                                            <span class="subtitle ft13">{{locItem.subtitle}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-field col m2 s12 no-padding">
+                    <button class="btn btn-full pdl10 pdr10 resbtn ht45 overhidden " ng-click="search()">
+                        <i class="material-icons left">search</i> Search
+                    </button>
+                    <a href="" class="adva_btn mgt10">Advanced Search</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

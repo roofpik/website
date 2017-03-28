@@ -1,4 +1,10 @@
-<div style="margin-top:100px;">
+<div>
+    <style>
+    header,
+    footer {
+        display: none;
+    }
+    </style>
     <div class="row mgbn">
         <div class="container">
             <div class="row linkroot mgbn">
@@ -13,161 +19,78 @@
             </div>
         </div>
     </div>
-    <div class="row mgbn">
-        <div class="container mgt10">
-            <div class="row mgan">
-                <div id="boxfilterlist" class="col s2 m4">
+    <div class="row bg-grey">
+        <div class="container">
+            <div class="row list-heading">
+                <div class="col s12">
+                  <h5>  Projects in Gurgaon </h5>
+                </div>
+            </div>
+            <div class="row">
+                <div id="boxfilterlist" class="col s2 m3">
                     <form>
-                        <div class="row mgan">
-                            <div class="row pdt2 mgbn">
-                                <h3 class="ft14 b bodb mgb10 pdb10">Project Categories</h3>
-                                <div class="row mgt10 mgbn mgln mgrn">
-                                    <div class="mgt5" ng-repeat="item in categories">
-                                        <input type="checkbox" ng-model="selected.category[item.id]" id="{{item.id}}" ng-change="applyFilters()" class="filled-in" />
-                                        <label class="ft12" for="{{item.id}}">{{item.name}}</label>
-                                    </div>
-                                </div>
+                        <div class="row filter-heading">
+                            <div class="col s12">
+                                <span> Filters </span>
                             </div>
-                            <div class="row pdt2 mgbn">
-                                <h3 class="ft14 b bodb mgb10 pdb10">Bedroom</h3>
-                                <div class="filterList row mgan">
-                                    <div class="col s6 pdln mgt5" ng-repeat="item in [1, 2, 3, 4, 5, 6]">
-                                        <input type="checkbox" class="filled-in" ng-model="selected.bhk[item]" ng-change="applyFilters()" id="{{item}}" />
-                                        <label for="{{item}}">{{item}} BHK</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row pdt2 mgbn">
-                                <h3 class="ft14 b bodb mgb10 pdb10">Property Types</h3>
-                                <div class="row mgt10 mgbn mgln mgrn">
-                                    <div class="mgt5" ng-repeat="item in propertyTypes">
-                                        <input type="checkbox" ng-model="selected.ptype[item.id]" id="{{item.id}}" ng-change="applyFilters()" class="filled-in" />
-                                        <label class="ft12" for="{{item.id}}">{{item.name}}</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row pdt2 mgbn">
-                                <h3 class="ft14 b bodb mgb10 pdb10">Micromarket</h3>
-                                <hr>
-                                <div class="input-field mgtn bodinp">
-                                    <input class="inpfilter search_list" ng-model="searchMicromarket" placeholder="Search"><i class="material-icons search_ilist">search</i>
-                                    <div class="search-results"></div>
-                                </div>
-                                <div class="filterList mgt10">
-                                    <div class="mgt5" ng-repeat="micro in micromarkets| filter: searchMicromarket">
-                                        <input type="checkbox" class="filled-in" id="{{micro.key}}" ng-change="applyFilters()" ng-model="selected.micro[micro.key]" />
-                                        <label class="ft12" for="{{micro.key}}">{{micro.name}}</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row pdt2 mgbn">
-                                <h3 class="ft14 b bodb mgb10 pdb10">Location</h3>
-                                <hr>
-                                <div class="input-field mgtn bodinp">
-                                    <input class="inpfilter search_list" ng-model="searchLocation" placeholder="Search"><i class="material-icons search_ilist">search</i>
-                                    <div class="search-results"></div>
-                                </div>
-                                <div class="filterList mgt10">
-                                    <div class="mgt5" ng-repeat="location in locations| filter: searchlocation">
-                                        <input type="checkbox" class="filled-in" id="{{location.key}}" ng-change="applyFilters()" ng-model="selected.loc[location.key]" />
-                                        <label class="ft12" for="{{location.key}}">{{location.name}}</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row pdt2 mgbn">
-                                <h3 class="ft14 b bodb mgb10 pdb10">Builders</h3>
-                                <hr>
-                                <div class="input-field mgtn bodinp">
-                                    <input class="inpfilter search_list" ng-model="searchBuilder" placeholder="Search"><i class="material-icons search_ilist">search</i>
-                                    <div class="search-results"></div>
-                                </div>
-                                <div class="filterList mgt10">
-                                    <div class="mgt5" ng-repeat="builder in builders| filter: searchBuilder">
-                                        <input type="checkbox" class="filled-in" id="{{builder.key}}" ng-change="applyFilters()" ng-model="selected.builder[builder.key]" />
-                                        <label class="ft12" for="{{builder.key}}">{{builder.name}}</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- <div class="row pdt2 mgbn">
-                                <h3 class="ft14 b bodb mgb10 pdb10">Rating</h3>
-                                <div class="filterList mgt10">
-                                    <input type="checkbox" class="filled-in" id="star" />
-                                    <label class="ft12" for="star">
-                                        <span class="block ft12 grey-text truncate">
-                                    <i class="material-icons pdt2 ft14 text-darken-2">star</i>
-                                     <i class="material-icons pdt2 ft14 text-darken-2">star</i>
-                                      <i class="material-icons pdt2 ft14 text-darken-2">star</i>
-                                       <i class="material-icons pdt2 ft14 text-darken-2">star</i>
-                                        <i class="material-icons pdt2 ft14 text-darken-2">star_half</i>
-                                    </span></label>
-                                </div>
-                            </div> -->
-                            <div class="row pdt2 mgbn">
-                                <h3 class="ft14 b bodb mgb10 pdb10">Price</h3>
-                                <div class="row mgbn">
-                                    <div class="col s5 relative">
-                                        <input type="number" placeholder="₹ Min" class="filled-in ft12" id="min-price" ng-model="price.min" />
-                                        <div class="search-results price_m white shdsm" style="display: none;">
-                                            <ul class="left-align">
-                                                <li>₹ 5000</li>
-                                                <li>₹ 5000</li>
-                                                <li>₹ 7000</li>
-                                                <li>₹ 7000</li>
-                                                <li>₹ 11000</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col s5 relative">
-                                        <input type="number" placeholder="₹ Max" class="filled-in ft12" id="max-price" ng-model="price.max" />
-                                        <div class="search-results price_m white shdsm" style="display: none">
-                                            <ul class="left-align">
-                                                <li>₹ 5000</li>
-                                                <li>₹ 5000</li>
-                                                <li>₹ 7000</li>
-                                                <li>₹ 7000</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col s2 relative">
-                                        <span class="apply-price-filter" ng-click="applyFilters()">Go</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- <div class="row pdt2 mgbn">
-                                <h3 class="ft14 b bodb mgb10 pdb10">Area</h3>
-                                <div class="filterList row mgbn">
-                                    <div class="col s6 relative">
-                                        <input type="number" placeholder="Ft. Min" class="filled-in ft12" id="min-area" ng-model="area.min" />
-                                        <div class="search-results price_m white shdsm" style="display: none">
-                                            <ul class="left-align">
-                                                <li>Ft 5000</li>
-                                                <li>Ft 5000</li>
-                                                <li>Ft 7000</li>
-                                                <li>Ft 7000</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col s6 relative">
-                                        <input type="number" placeholder="Ft. Max" class="filled-in ft12" id="max-area" ng-model="area.max" />
-                                        <div class="search-results price_m white shdsm" style="display: none">
-                                            <ul class="left-align">
-                                                <li>Ft 5000</li>
-                                                <li>Ft 5000</li>
-                                                <li>Ft 7000</li>
-                                                <li>Ft 7000</li>
-                                                <li>Ft 11000</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
                         </div>
+                        <hr>
+                        <div class="row price-filter">
+                            <div class="col s12">
+                                <h3 class="ft14 b">Rent</h3>
+                            </div>
+                            <div class="col s12">
+                                <div id="price"></div>
+                            </div>
+                            <div class="col s6" ng-hide="true">
+                                <input id="minP" placeholder="₹ Min" type="number" ng-change="minChange()" ng-model="data.pmin" />
+                            </div>
+                            <div class="col s6" ng-hide="true">
+                                <input id="maxP" placeholder="₹ Max" type="number" ng-change="maxChange()" ng-model="data.pmax" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <h3 class="ft14 b">Project Categories</h3>
+                            </div>
+                            <div class="col s12 mgt5" ng-repeat="item in categories">
+                                <input type="checkbox" ng-model="selected.category[item.id]" id="{{item.id}}" ng-change="addFilter(item.id, 'category')" class="filled-in" />
+                                <label class="ft11" for="{{item.id}}">{{item.name}}</label>
+                                <label class="ft10 fright" for="num">10</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <h3 class="ft14 b">Bedroom</h3>
+                            </div>
+                            <div class="col s6 mgt5" ng-repeat="item in [1, 2, 3, 4, 5, 6]">
+                                <input type="checkbox" class="filled-in" ng-model="selected.bhk[item]" ng-change="addFilter(item, 'bhk')" id="{{item}}" />
+                                <label class="ft11" for="{{item}}">{{item}} BHK</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <h3 class="ft14 b">Property Types</h3>
+                            </div>
+                            <div class="col s12 mgt5" ng-repeat="item in propertyTypes">
+                                <input type="checkbox" ng-model="selected.ptype[item.id]" id="{{item.id}}" ng-change="addFilter(item.id, 'ptype')" class="filled-in" />
+                                <label class="ft11" for="{{item.id}}">{{item.name}}</label>
+                                <label class="ft10 fright" for="num">10</label>
+                            </div>
+                        </div>
+                        <div class="row pdt2 mgbn">
+                            <div class="col s12">
+                                <span class="more-filter" ng-click="moreFilters()">More Filters</span>
+                            </div>
+                        </div>
+                        <!-- Modal Trigger -->
+                        <!-- Modal Structure -->
                     </form>
                 </div>
-                <div class="col s7 m8 pdl30">
-                    <div class="row mgan">
+                <div class="col s7 projList">
+                    <div class="row">
                         <!-- card project list repeat start -->
-                        <div class="col s12 card pdt10 pdbn white" ng-repeat="project in projects" ng-hide="noProjects">
+                        <div class="col s12 card white" ng-repeat="project in projects" ng-hide="noProjects">
                             <div class="row relative mgbn">
                                 <div class="col s4 imglist pdb10">
                                     <a ng-href="{{project.hrefLink}}"> <img src="images/olive.jpg" class="responsive-img"></a>
@@ -212,49 +135,49 @@
                         <!-- card project list repeat end -->
                     </div>
                 </div>
-                <div class="col s3 hide-on-med-and-down">
-                    <div class="row card mgb10 pdt10 mgln pdr10 white">
-                        <h3 class="mgan ft16 b pdl10 pdr10">Lorem ipsum</h3>
-                        <p class="ft12 grey-text pdl10 pdr10 mgtn mgb10">Go out for a meal</p>
-                        <div class="col s6 pdl10 pdb10 pdrn mgb10 relative">
-                            <div class="rt_img b white-text center">4.7</div>
-                            <a href=""> <img src="images/olive.jpg" class="responsive-img"></a>
-                            <a href="" class="grey-text truncate ft13 mgtn  text-darken-2 "> Modern Indian, North Indian</a>
-                            <p class="mgtn mgbn grey-text ft12">Just the right place for some fantastic sea-food</p>
+            </div>
+        </div>
+        <div id="modal1" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h4>Additional Filters</h4>
+                <div class="row">
+                    <div class="col s4">
+                        <div class="row pdt2 mgbn">
+                            <h3 class="ft14 b bodb mgb10 pdb10">Micromarket</h3>
+                            <div class="filterList mgt10">
+                                <div class="mgt5" ng-repeat="micro in micromarkets">
+                                    <input type="checkbox" class="filled-in" id="{{micro.key}}" ng-change="applyFilters()" ng-model="selected.micro[micro.key]" />
+                                    <label class="ft12" for="{{micro.key}}">{{micro.name}}</label>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col s6 pdl10 pdb10 pdrn mgb10 relative">
-                            <div class="rt_img b white-text center">4.7</div>
-                            <a href=""> <img src="images/olive.jpg" class="responsive-img"></a>
-                            <a href="" class="grey-text truncate ft13 mgtn  text-darken-2 "> Modern Indian, North Indian</a>
-                            <p class="mgtn mgbn grey-text ft12">Just the right place for some fantastic sea-food</p>
+                    </div>
+                    <div class="col s4">
+                        <div class="row pdt2 mgbn">
+                            <h3 class="ft14 b bodb mgb10 pdb10">Location</h3>
+                            <div class="filterList mgt10">
+                                <div class="mgt5" ng-repeat="location in locations">
+                                    <input type="checkbox" class="filled-in" id="{{location.key}}" ng-change="applyFilters()" ng-model="selected.loc[location.key]" />
+                                    <label class="ft12" for="{{location.key}}">{{location.name}}</label>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col s6 pdl10 pdb10 pdrn mgb10 relative">
-                            <div class="rt_img b white-text center">4.7</div>
-                            <a href=""> <img src="images/olive.jpg" class="responsive-img"></a>
-                            <a href="" class="grey-text truncate ft13 mgtn  text-darken-2 "> Modern Indian, North Indian</a>
-                            <p class="mgtn mgbn grey-text ft12">Just the right place for some fantastic sea-food</p>
-                        </div>
-                        <div class="col s6 pdl10 pdb10 pdrn mgb10 relative">
-                            <div class="rt_img b white-text center">4.7</div>
-                            <a href=""> <img src="images/olive.jpg" class="responsive-img"></a>
-                            <a href="" class="grey-text truncate ft13 mgtn  text-darken-2 "> Modern Indian, North Indian</a>
-                            <p class="mgtn mgbn grey-text ft12">Just the right place for some fantastic sea-food</p>
-                        </div>
-                        <div class="col s6 pdl10 pdb10 pdrn mgb10 relative">
-                            <div class="rt_img b white-text center">4.7</div>
-                            <a href=""> <img src="images/olive.jpg" class="responsive-img"></a>
-                            <a href="" class="grey-text truncate ft13 mgtn  text-darken-2 "> Modern Indian, North Indian</a>
-                            <p class="mgtn mgbn grey-text ft12">Just the right place for some fantastic sea-food</p>
-                        </div>
-                        <div class="col s6 pdl10 pdb10 pdrn mgb10 relative">
-                            <div class="rt_img b white-text center">4.7</div>
-                            <a href=""> <img src="images/olive.jpg" class="responsive-img"></a>
-                            <a href="" class="grey-text truncate ft13 mgtn  text-darken-2 "> Modern Indian, North Indian</a>
-                            <p class="mgtn mgbn grey-text ft12">Just the right place for some fantastic sea-food</p>
+                    </div>
+                    <div class="col s4">
+                        <div class="row pdt2 mgbn">
+                            <h3 class="ft14 b bodb mgb10 pdb10">Builders</h3>
+                            <div class="filterList mgt10">
+                                <div class="mgt5" ng-repeat="builder in builders">
+                                    <input type="checkbox" class="filled-in" id="{{builder.key}}" ng-change="applyFilters()" ng-model="selected.builder[builder.key]" />
+                                    <label class="ft12" for="{{builder.key}}">{{builder.name}}</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="modal-footer">
+                <a ng-click="closeFilter()" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+            </div>
         </div>
     </div>
-</div>
