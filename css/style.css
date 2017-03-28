@@ -101,6 +101,7 @@ hr{border-top: solid 1px #ddd !important;
 .ft20i i {
     font-size: 18px !important;
 }
+.left40{left: 40% !important;}
 
 .ft18i i {
     font-size: 18px !important; float: left;
@@ -569,6 +570,13 @@ input[type=text], input[type=email], .input-field .prefix ~ textarea, .select-wr
 
 .mnst5{margin-top: -5px;}
 .wd70{width: 70%;}
+.buffering{width: 70px; height: 70px;}
+
+
+
+
+
+
 
 /*Arpit*/
 
