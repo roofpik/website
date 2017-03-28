@@ -201,6 +201,10 @@ hr {
     margin-top: 65px !important;
 }
 
+.mgt70 {
+    margin-top: 70px !important;
+}
+
 .mgr1 {
     margin-right: 1px !important;
 }
@@ -442,9 +446,9 @@ hr {
     width: calc(100% - 35px) !important;
 }
 
-.select-wrapper input.select-dropdown {
+/*.select-wrapper input.select-dropdown {
     border-bottom: none;
-}
+}*/
 
 .mgmnst3 {
     margin-top: -3px;
@@ -1617,6 +1621,15 @@ input[type=email],
     width: 70px;
     height: 70px;
 }
+/*write review css*/
+.btnsm {
+    height: 25px !important;
+    line-height: 25px !important;
+    font-size: 11px !important; color: #444; background-color: #eee; border: solid 1px #eee;
+}
+
+.btnsm:hover, .btnsm:focus{background-color: #26a69a; color: #fff; font-weight: 700; border-color:#26a69a;}
+/*write review start*/
 .fixedall{position: fixed; z-index: 99999; width: 100%;}
 /*loading css start*/
 .cs-loader {
@@ -1715,6 +1728,11 @@ input[type=email],
   animation: lol 3s 500ms infinite ease-in-out;
 }
 /*loading css end*/
+.navfooter{position: fixed; bottom: 60px; left: 0; z-index: 9}
+.navfooter a {background-color: transparent !important;
+ padding:0 0 0 10px !important; height: 40px; line-height: 40px;}
+
+
 
 /*Arpit*/
 
