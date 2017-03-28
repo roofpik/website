@@ -1323,6 +1323,13 @@ footer {
     background-color: #eee !important;
 }
 
+.carousel .indicators .indicator-item {
+    background-color: #eee;
+}
+.carousel .indicators .indicator-item.active {
+    background-color: #999;
+}
+
 .arrow_box {
     position: relative;
     padding: 4px 7px;
@@ -1621,6 +1628,9 @@ input[type=email],
     width: 70px;
     height: 70px;
 }
+.micro_overy{overflow-y: auto; height: 340px;}
+
+
 /*write review css*/
 .btnsm {
     height: 25px !important;
@@ -1872,6 +1882,10 @@ input[type=email],
     }
 }
 
+.micro-markets .card-title {
+        font-size: 17px !important;
+       
+    }
 
 /*responsive media css*/
 
@@ -1900,6 +1914,9 @@ input[type=email],
         box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.2);
         padding-bottom: 50px !important;
     }
+}
+@media screen and (min-width:601px) and (max-width: 992px) {
+.micro_overy{overflow-y: auto; height: auto;}
 }
 
 @media screen and (min-width:0px) and (max-width: 1079px) {

@@ -2,9 +2,10 @@
     <h3 class="heading">
        Popular Projects                   
     </h3>
-    <div class="slider ht400">
-        <ul class="slides white ht350">
-            <li>
+    
+<div class="row relative ht400 mgan">
+        <ul class="carousel carousel-slider white ht350" data-indicators="true">
+            <li class="carousel-item">
                 <div class="row mns8 mgbn">
                     <div class="col s4 pdlr8">
                         <div class="card boxsdn mgtn rdsan pdbn mgbn">
@@ -71,7 +72,7 @@
                     </div>
                 </div>
             </li>
-            <li>
+            <li class="carousel-item">
                 <div class="row mns8 mgbn">
                     <div class="col s4 pdlr8">
                         <div class="card boxsdn mgtn rdsan pdbn mgbn">
@@ -140,4 +141,17 @@
             </li>
         </ul>
     </div>
+ 
+   
+<script>
+    
+     $(function() {
+        $('.carousel.carousel-slider').carousel({
+            full_width: true
+        });
+    });
+</script>
+
 </div>
+
+
