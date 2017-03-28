@@ -11,10 +11,9 @@
                         <div class="search-results left-align" ng-show="showSearch">
                             <ul class="collection homecoll white mgan">
                                 <li class="collection-item" ng-repeat = "item in searchList" ng-click="selectProject(item)">
-                                    <!-- <img src="images/homeicon/CGHS.png" class="circle" /> -->
                                     <span class="title ft14">{{item.name}}</span>
                                     <span class="subtitle ft12" ng-show="item.subtitle">{{item.subtitle}}</span>
-                                    <span class="subtitle ft12" ng-show="item.category && item.category != 'default'">{{item.category}}</span>
+                                    <span class="subtitle ft12" ng-show="item.category">{{item.category}}</span>
                                 </li>
                             </ul>
                         </div>
@@ -23,11 +22,12 @@
                 <div class="col s12 m6 pdln xswdfull xspd0">
                     <div class="input-field card col s12 ht45 no-padding bodt bodb bod-right rdsan">
                         <span class="inpspn">Near :</span>
-                        <input placeholder="Enter a Location" class="autocompleteNear boxsdn inp_pdw mgbn" id="location-selection"  ng-model="searchedLocation" ng-change="searchLocations()">
+                        <input placeholder="Enter a Destination" class="autocompleteNear boxsdn inp_pdw mgbn" id="location-selection"  ng-model="searchedLocation" ng-change="searchLocations()">
                         <img src="images/general/buffering.gif" class="loading-icon" ng-show="searchingLocation"/>
-                        <div class="search-results left-align" ng-show= "showLocSearch">
+                        <div class="search-results left-align" ng-show= "showSearch1">
                             <ul class="collection homecoll white mgan">
                                 <li class="collection-item" ng-repeat= "item in locations" ng-click="selectLocation(item)">
+                                    <!-- <img src="images/homeicon/CGHS.png" class="circle" /> -->
                                     <span class="title ft13">{{item.name}}</span>
                                 </li>
                             </ul>

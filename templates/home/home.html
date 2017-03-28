@@ -1,7 +1,7 @@
 <main>
- <div class="row white relative htv100 fixedall">
+    <div class="row white relative htv100 fixedall" id="page-load">
         <div class="transform center mgtn wdp70">
-            <h5 class="xshdh"><b class="redt">Roofpik</b> Power Your Property Search with Genuine User Reviews </h5>
+            <h5 class="xshdh" id="load-text">  </h5>
             <div class="row center">
                 <div class="col s12 mgt20">
                     <div class="cs-loader">
@@ -19,6 +19,25 @@
             </div>
         </div>
     </div>
+    <script>
+     $('#page-load').hide();
+    var text = ["<b class='redt'>Roofpik</b> Power Your Property Search with Genuine User Reviews", "World's<b class='redt'> First</b> Property Reviewing Website", "Reviews are becoming the digital version of <b class='redt'>word-of-mouth</b> - Huffingtonpost"]
+    count = 0;
+    setInterval(function() {
+        if(count == 2){
+            count = 0
+        };
+
+        $("#load-text").fadeOut(500, function() {
+            $('#load-text').html(text[count]);
+            $("#load-text").fadeIn(1200);
+            count = count + 1;
+        });
+        
+    }, 6000);
+    $('#load-text').html(text[count]);
+    count = count + 1;
+    </script>
     <div class="row ht300 xsht5 white relative" ui-view="search">
     </div>
     <section class="micro-markets" ui-view="microMarkets"></section>

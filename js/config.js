@@ -62,5 +62,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         controller: 'cityDetailsCtrl'
     })
 
+
+      $stateProvider.state('test',{
+        url: '/test',
+        templateUrl: 'templates/test.html',
+        controller: 'testCtrl'
+    })
+
     $urlRouterProvider.otherwise('/home');
 }]);
