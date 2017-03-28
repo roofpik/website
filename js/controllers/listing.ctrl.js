@@ -1,5 +1,6 @@
-app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $state) {
+app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $state, $location) {
     console.log($stateParams);
+    console.log($location.search());
     $('ul.tabs').tabs();
     Materialize.updateTextFields();
 

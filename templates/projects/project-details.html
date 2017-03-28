@@ -162,7 +162,9 @@
                                                 <!-- <div class="col s5"><img src="images/home/merlin-floor.jpeg" class="responsive-img"></div> -->
                                                 <div class="col s7 pdl30 pdt30 relative">
                                                     <a href="" class="ft15 red-text">{{unit.bhk}} BHK ({{unit.area}}sq ft) <span ng-show="unit.servantRoom == 'Yes'">+ Servant Room</span></a>
-                                                    <p class="ft24 bodb pdb20"> ₹ {{unit.rent}} <!-- <span class="ft12 grey-text pdl30">₹ 7975/ sq ft</span></p> -->
+                                                    <p class="ft24 bodb pdb20" ng-show="unit.rent"> ₹ {{unit.rent}} </p>
+                                                    <p class="ft24 bodb pdb20" ng-hide="unit.rent"> Rent Not Available </p>
+
                                                     <div class="row mgln mgrn bodb">
                                                         <div class="col s6 pdb20"><i class="material-icons"></i> {{unit.bathroom}} <span class="grey-text">Bathrooms</span></div>
                                                         <div class="col s6 pdb20"><i class="material-icons"></i> {{unit.bedroom}} <span class="grey-text">Bedrooms</span></div>
@@ -182,7 +184,7 @@
                             <div class="row relative">
                                 <div class="col s12 relative">
                                     <ul class="tabs">
-                                        <li class="tab col" ng-repeat="(key, value) in amenitiesPresent" ng-show="amenitiesPresent[key].present" ng-click="selectedTab == key"><a ng-class="selectedTab==key?'active': 'normal'" ng-href="{{value.hrefLink}}">{{value.name}}</a></li>
+                                        <li class="tab col" ng-repeat="(key, value) in amenitiesType" ng-show="amenitiesType[key].present" ng-click="selectedTab == key"><a ng-class="selectedTab==key?'active': 'normal'" ng-href="{{value.hrefLink}}">{{value.name}}</a></li>
                                     </ul>
                                 </div>
                                 <div id="{{key}}" class="col s12" ng-repeat="(key, value) in allAmenities">
@@ -190,7 +192,7 @@
                                         <div class="col s2 wd20p pda10 mgt10 mgb10 imgic_amn center" ng-repeat="(key1, value1) in value" ng-show="project.amenities[key][key1] != 'NA'">
                                             <img ng-src="{{value1.img}}" alt="">
                                             <!-- <span class="ht45 block">{{value1.name}}</span> -->
-                                            <span class="ht45 block" ng-show="project.amenities[key][key1] !='No'">{{value1.name}}<span ng-show="project.amenities[key][key1] != 'Yes' && project.amenities[key][key1] !='No'">({{project.amenities[key][key1]}})</span></span>
+                                            <span class="ht45 block" ng-show="project.amenities[key][key1] !='No'">{{value1.name}}</span>
                                             <span class="ht45 block" ng-show="project.amenities[key][key1] =='No'">
                                                 <s>{{value1.name}}</s>
                                             </span>

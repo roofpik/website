@@ -18,42 +18,32 @@ app.controller('homeCtrl', function($scope, $state, $timeout) {
 
 });
 
-app.controller('searchCtrl', function($scope, $timeout, $http, $state) {
-    $('.modal').modal();
-    $('ul.tabs').tabs();
-    Materialize.updateTextFields();
-
-    $('.button-collapse').sideNav({
-        menuWidth: 300, // Default is 240
-        edge: 'left', // Choose the horizontal origin
-        closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-        draggable: true // Choose whether you can drag to open on touch screens
-    });
-    // $('select').material_select();
-    $('.slider').slider();
-    $('.dropdown-button').dropdown();
-    $('.carousel').carousel();
+app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) {
 
     $scope.defaultList = [{
         name: 'Apartments',
         subtitle: 'in Gurgaon',
         category: false,
-        key: 'apartments'
+        key: 'apartment',
+        type: 'default'
     }, {
         name: 'Villa',
         subtitle: 'in Gurgaon',
         category: false,
-        key: 'villa'
+        key: 'villa',
+        type: 'default'
     }, {
         name: 'Row House',
         subtitle: 'in Gurgaon',
         category: false,
-        key: 'rowHouse'
+        key: 'rowhouse',
+        type: 'default'
     }, {
         name: 'Penthouse',
         subtitle: 'in Gurgaon',
         category: false,
-        key: 'penthouse'
+        key: 'penthouse',
+        type: 'default'
     }];
 
     $scope.afterLocationDefaultList = [{
@@ -96,16 +86,83 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state) {
     $scope.showMinPrice = false;
     $scope.showMaxPrice = false;
     $scope.minPrice = 0;
-    $scope.maxPrice = 50000;
-    $scope.priceList = [10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 55000, 60000, 65000, 70000, 75000, 80000, 85000, 90000, 95000, 100000, 105000, 110000, 115000, 120000, 125000, 130000, 135000, 140000, 145000, 150000];
+    $scope.maxPrice = 500000;
+    $scope.priceList = [10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 55000, 60000, 65000, 70000, 75000, 80000, 85000, 90000, 95000, 100000, 105000, 110000, 115000, 120000, 125000, 130000, 135000, 140000, 145000, 150000, 200000, 500000];
     $("#type-selection").focusin(function() {
+        if ($scope.searchedText.length == 0) {
+            $scope.getSearchData();
+        }
         $timeout(function() {
             $scope.showSearch = true;
-            if ($scope.searchedText.length == 0) {
-                $scope.getSearchData();
-            }
         }, 100);
     });
+
+
+    // get search results based on the string in input box
+    $scope.getSearchData = function() {
+        var textStart = 0;
+        if ($scope.selectedLocation) {
+            if ($scope.searchedText.length > 2) {
+                $scope.searchingProject = true;
+                $scope.searchList = [];
+                $http({
+                    url: 'http://139.162.9.71/api/mainSearchByLoc',
+                    method: 'POST',
+                    params: {
+                        val: $scope.searchedText,
+                        lockey: $scope.selectedLocation.key,
+                        loctype: $scope.selectedLocation.category
+                    }
+                }).then(function mySucces(response) {
+                    console.log(response);
+                    $scope.searchList = response.data.data.data;
+                    $scope.searchingProject = false;
+                }, function myError(err) {
+                    // console.log(err);
+                    $scope.searchingProject = false;
+                })
+            } else {
+                if (!$scope.locationNameAdded) {
+                    $scope.searchList = $scope.afterLocationDefaultList;
+                    for (key in $scope.searchList) {
+                        $scope.searchList[key].name = $scope.searchList[key].type;
+                        $scope.searchList[key].subtitle = $scope.selectedLocation.name;
+                    }
+                    $scope.locationNameAdded = true;
+                }
+            }
+        } else {
+            if ($scope.searchedText.length > 2) {
+                if (textStart == 0) {
+                    textStart = 1
+                    $scope.searchingProject = true;
+                    $scope.searchList = [];
+                    $http({
+                        url: 'http://139.162.9.71/api/mainSearch',
+                        method: 'POST',
+                        params: {
+                            val: $scope.searchedText
+                        }
+                    }).then(function mySucces(response) {
+                        textStart = 0;
+                        if (response.data.status == 200) {
+                            $scope.searchList = response.data.items;
+                        }
+                        $scope.searchingProject = false;
+                    }, function myError(err) {
+                        // console.log(err);
+                        textStart = 1;
+                        $scope.searchingProject = false;
+                    })
+                }
+            } else {
+                $scope.searchList = $scope.defaultList;
+            }
+        }
+    }
+
+
+
     $("#type-selection").focusout(function() {
         $timeout(function() {
             $scope.showSearch = false;
@@ -207,64 +264,7 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state) {
         console.log($scope.minPrice);
     }
 
-    // get search results based on the string in input box
-    $scope.getSearchData = function() {
-        if ($scope.selectedLocation) {
-            if ($scope.searchedText.length > 2) {
-                $scope.searchingProject = true;
-                $scope.searchList = [];
-                console.log($scope.selectedLocation);
-                $http({
-                    url: 'http://139.162.9.71/api/mainSearchByLoc',
-                    method: 'POST',
-                    params: {
-                        val: $scope.searchedText,
-                        lockey: $scope.selectedLocation.key,
-                        loctype: $scope.selectedLocation.category
-                    }
-                }).then(function mySucces(response) {
-                    console.log(response);
-                    $scope.searchList = response.data.data.data;
-                    $scope.searchingProject = false;
-                }, function myError(err) {
-                    // console.log(err);
-                    $scope.searchingProject = false;
-                })
-            } else {
-                if (!$scope.locationNameAdded) {
-                    $scope.searchList = $scope.afterLocationDefaultList;
-                    for (key in $scope.searchList) {
-                        $scope.searchList[key].name = $scope.searchList[key].type;
-                        $scope.searchList[key].subtitle = $scope.selectedLocation.name;
-                    }
-                    $scope.locationNameAdded = true;
-                }
-            }
-        } else {
-            if ($scope.searchedText.length > 2) {
-                $scope.searchingProject = true;
-                $scope.searchList = [];
-                $http({
-                    url: 'http://139.162.9.71/api/mainSearch',
-                    method: 'POST',
-                    params: {
-                        val: $scope.searchedText
-                    }
-                }).then(function mySucces(response) {
-                    console.log(response);
-                    if (response.data.status == 200) {
-                        $scope.searchList = response.data.items;
-                    }
-                    $scope.searchingProject = false;
-                }, function myError(err) {
-                    // console.log(err);
-                    $scope.searchingProject = false;
-                })
-            } else {
-                $scope.searchList = $scope.defaultList;
-            }
-        }
-    }
+
 
     $scope.search = function() {
         if ($scope.showBasicSearch) {
@@ -442,51 +442,54 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state) {
     $scope.selectedProject = {};
 
     $scope.selectProject = function(item) {
-        console.log(item);
-        $scope.projectSelected = true;
-        $timeout(function() {
-            $scope.showSearch = false;
-        }, 500);
-        $scope.searchedText = item.name;
-        if (item.category == 'residential') {
-            //take to project details page
-            // $state.go('project-details', {});
-        } else if (item.category == 'builder') {
-            //take to project list with the builder as filter
-        } else if (item.category == 'default') {
-            // take to project list with the property type as filter
-            $scope.selectedProject = item;
-            $('#location-selection').focus();
-        } else if (item.category == 'default1') {
-            console.log($scope.selectedLocation);
-            // take to differnet views based on type
-            if (item.key == 'overview') {
-                if ($scope.selectedLocation.category == 'micromarket') {
-                    $state.go('micromarket-details', { city: $scope.cityId, micro: $scope.selectedLocation.key });
-                } else if ($scope.selectedLocation.category == 'locality') {
-                    // micromarket key needed
-                    // $state.go('locality-details', {city: $scope.cityId, micro: $scope.selectedLocation.key, loc: $scope.selectedLocation.key });
-                } else {
-                    $state.go('micromarket-details', { city: $scope.cityId});
-                }
-            } else if (item.key == 'all') {
-                if ($scope.selectedLocation.category == 'micromarket') {
-                    $state.go('listing', { micro: $scope.selectedLocation.key });
-                } else if ($scope.selectedLocation.category == 'locality') {
-                    $state.go('listing', { loc: $scope.selectedLocation.key });
-                } else {
-                    $state.go('listing');
-                }
-            } else {
-                if ($scope.selectedLocation.category == 'micromarket') {
-                    $state.go('listing', { ptype: item.key, micro: $scope.selectedLocation.key });
-                } else if ($scope.selectedLocation.category == 'locality') {
-                    $state.go('listing', { ptype: item.key, loc: $scope.selectedLocation.key });
-                } else {
-                    $state.go('listing', { ptype: item.key });
-                }
-            }
+        if(item.type == 'default'){
+            $window.location.href = '/#/search/2017/property/gurgaon/residential/all?ptype=' + item.key;
         }
+
+        // $scope.projectSelected = true;
+        // $timeout(function() {
+        //     $scope.showSearch = false;
+        // }, 500);
+        // $scope.searchedText = item.name;
+        // if (item.category == 'residential') {
+        //     //take to project details page
+        //     // $state.go('project-details', {});
+        // } else if (item.category == 'builder') {
+        //     //take to project list with the builder as filter
+        // } else if (item.category == 'default') {
+        //     // take to project list with the property type as filter
+        //     $scope.selectedProject = item;
+        //     $('#location-selection').focus();
+        // } else if (item.category == 'default1') {
+        //     console.log($scope.selectedLocation);
+        //     // take to differnet views based on type
+        //     if (item.key == 'overview') {
+        //         if ($scope.selectedLocation.category == 'micromarket') {
+        //             $state.go('micromarket-details', { city: $scope.cityId, micro: $scope.selectedLocation.key });
+        //         } else if ($scope.selectedLocation.category == 'locality') {
+        //             // micromarket key needed
+        //             // $state.go('locality-details', {city: $scope.cityId, micro: $scope.selectedLocation.key, loc: $scope.selectedLocation.key });
+        //         } else {
+        //             $state.go('micromarket-details', { city: $scope.cityId });
+        //         }
+        //     } else if (item.key == 'all') {
+        //         if ($scope.selectedLocation.category == 'micromarket') {
+        //             $state.go('listing', { micro: $scope.selectedLocation.key });
+        //         } else if ($scope.selectedLocation.category == 'locality') {
+        //             $state.go('listing', { loc: $scope.selectedLocation.key });
+        //         } else {
+        //             $state.go('listing');
+        //         }
+        //     } else {
+        //         if ($scope.selectedLocation.category == 'micromarket') {
+        //             $state.go('listing', { ptype: item.key, micro: $scope.selectedLocation.key });
+        //         } else if ($scope.selectedLocation.category == 'locality') {
+        //             $state.go('listing', { ptype: item.key, loc: $scope.selectedLocation.key });
+        //         } else {
+        //             $state.go('listing', { ptype: item.key });
+        //         }
+        //     }
+        // }
     }
 
     $scope.selectLocation = function(loc) {

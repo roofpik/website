@@ -33,13 +33,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     })
 
     $stateProvider.state('project-details',{
-        url: '/project-details?city&micro&locality&id',
+        url: '/rent/property/2017/gurgaon/residential/:micro/:locality/:builder/:project',
         templateUrl: 'templates/projects/project-details.html',
         controller: 'projectDetailsCtrl'
     })
 
     $stateProvider.state('listing',{
-        url: '/listing?category&bhk&micro&loc&builder&rent&ptype',
+        url: '/search/2017/property/gurgaon/residential/:location',
         templateUrl: 'templates/projects/listing.html',
         controller: 'listingCtrl'
     })
