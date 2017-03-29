@@ -1,125 +1,46 @@
-<div class="transform center wdp70">
-    <h5 class="xshdh"><b class="redt">Roofpik</b> Power Your Property Search with Genuine User Reviews </h5>
-    <div id="searchboxhome" class="row radius2 pdr10 cardmg searchfix xspd0">
-        <div class="col s12 m10 l10 no-padding xswdfull xspd0" ng-hide="showBasicSearch">
-            <div class="row mgbn" ng-hide="searchByName">
-                <div class="col s12 m6 pdrn xswdfull xspd0">
-                    <div class="input-field card col s12 ht45 no-padding bodl bodt bodb bod-right rdsan relative">
-                        <span class="inpspn">Find :</span>
-                        <input type="text" placeholder="search by project name, builder" id="type-selection" class="autocompleteFind inp_pdw boxsdn mgbn" ng-model="searchedText" ng-change="getSearchData()">
-                        <img src="images/general/buffering.gif" class="loading-icon" ng-show="searchingProject"/>
-                        <div class="search-results left-align" ng-show="showSearch">
-                            <ul class="collection homecoll white mgan">
-                                <li class="collection-item" ng-repeat = "item in searchList" ng-click="selectProject(item)">
-                                    <span class="title ft13 b">{{item.name}}</span>
-                                    <span class="subtitle ft12" ng-show="item.subtitle">{{item.subtitle}}</span>
-                                    <span class="subtitle ft12" ng-show="item.category">{{item.category}}</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 m6 pdln xswdfull xspd0">
-                    <div class="input-field card col s12 ht45 no-padding bodt bodb bod-right rdsan">
-                        <span class="inpspn">Near :</span>
-                        <input placeholder="Enter a Destination" class="autocompleteNear boxsdn inp_pdw mgbn" id="location-selection"  ng-model="searchedLocation" ng-change="searchLocations()">
-                        <img src="images/general/buffering.gif" class="loading-icon" ng-show="searchingLocation"/>
-                        <div class="search-results left-align" ng-show= "showSearch1">
-                            <ul class="collection homecoll white mgan">
-                                <li class="collection-item" ng-repeat= "item in locations" ng-click="selectLocation(item)">
-                                    <!-- <img src="images/homeicon/CGHS.png" class="circle" /> -->
-                                    <span class="title ft13">{{item.name}}</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="advanced-search" ng-show="showBasicSearch" class="col s12 m10 l10 no-padding hide-on-med-and-down">
-            <div class="row mgbn relative">
-                <div class="col s3 m3 no-padding">
-                    <div class="input-field card ht45 no-padding bod-right rdsan relative">
-                        <button onclick="$('.abs_city') .toggle ()" class="btn white no-padding grey-text pdrn ht45 lin45">Neighborhoods <i class="material-icons right">arrow_drop_down</i></button>
-                    </div>
-                    <div class="abs_city mgt10">
-                        <div class="row">
-                            <div class="col s12">
-                                <h5 class="ft16 left-align">Neighborhoods</h5>
-                                <ul class="tabs left-align">
-                                    <li class="tab" ng-repeat="(key, val) in micromarkets"><a ng-href="{{val.hrefLink}}" ng-class="val.selected?'active':'normal'" class="ft12" ng-click="selectLocality(key)">{{val.name}}</a></li>
-                                </ul>
-                            </div>
-                            <div class="abs_check" id="{{val.hrefLink}}" ng-repeat="(key, val) in micromarkets" ng-show="val.selected">
-                                <ul>
-                                    <li>
-                                        <input type="checkbox" id="all" ng-model="filters.micro[key]" ng-change="selectAllLocality(key)"/>
-                                        <label for="all"><b>Select All</b></label>
-                                    </li>
-                                    <li ng-repeat="item in val.localities">
-                                        <input type="checkbox" id="{{item.key}}" value="{{item.key}}" ng-model="filters.locations[key][item.key]"/>
-                                        <label for="{{item.key}}">{{item.name}}</label>
-                                    </li>
-                                </ul>
+    <div class="row ht300 white relative">
+        <div class="transform center wdp70">
+            <h5><b class="redt">Roofpik</b> Power Your Property Search with Genuine User Reviews </h5>
+            <div id="searchboxhome" class="row radius2 pdr10 cardmg searchfix">
+                <div class="col s12 m10 no-padding">
+                    <div class="row mgbn" ng-hide="searchByName">
+                        <div class="col s12 m6 pdrn ">
+                            <div class="input-field card col s12 ht45 no-padding bod-right rdsan relative">
+                                <span class="inpspn">Find :</span>
+                                <input type="text" placeholder="Apartments, Commercials, PG" id="projsearch" class="autocompleteFind inp_pdw mgbn" ng-model="projsearch.txt" ng-focus="projsearchFocus()" ng-blur="projsearchBlur()" ng-change="getprojsearch()">
+                                <img src="images/general/buffering.gif" class="loading-icon" ng-show="projsearch.loading" />
+                                <div class=" left-align" ng-show="projsearch.status && !projsearch.loading">
+                                    <ul class="collection homecoll white mgan">
+                                        <li class="collection-item avatar" ng-repeat="projItem in projsearch.data" ng-click="getprojitem(projItem)">
+                                            <span class="title ft14">{{projItem.name}}</span>
+                                            <span class="subtitle ft13">{{projItem.subtitle}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                        <div class="clearfix"></div>
-                        <button onclick="$('.abs_city') .css ('display','none')" class="btn right">Done/Close</button>
-                    </div>
-                </div>
-                <div class="col s2 m2 pdrn">
-                    <div class="input-field card col s12 ht45 bod-right rdsan relative seldrop">
-                        <select ng-model ="filters.ptype">
-                            <option value="" disabled selected>Select</option>
-                            <option value="apartments">Apartments</option>
-                            <option value="villa">Villas</option>
-                            <option value="pehthouse">Penthouse</option>
-                            <option value="rowHouse">Row House</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col s3 m3 right-align pdrn">
-                    <div class="input-field col s12 ht45 no-padding rdsan relative">
-                        <ul class="mgtn">
-                            <li title="1 BHK" class="btnnum shdsm" ng-class="filters.bhk['1']?'bhkactive':'normal'" ng-click="selectBhk('1')">1</li>
-                            <li title="2 BHK" class="btnnum shdsm" ng-class="filters.bhk['2']?'bhkactive':'normal'" ng-click="selectBhk('2')">2</li>
-                            <li title="3 BHK" class="btnnum shdsm" ng-class="filters.bhk['3']?'bhkactive':'normal'" ng-click="selectBhk('3')">3</li>
-                            <li title="4 BHK" class="btnnum shdsm" ng-class="filters.bhk['4']?'bhkactive':'normal'" ng-click="selectBhk('4')">4</li>
-                            <li title="5 BHK" class="btnnum shdsm" ng-class="filters.bhk['5']?'bhkactive':'normal'" ng-click="selectBhk('5')">5</li>
-                            <li title="6+ BHK" class="btnnum shdsm" ng-class="filters.bhk['6+']?'bhkactive':'normal'" ng-click="selectBhk('6+')">6+</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col s2 m2 pdrn ">
-                    <div class="input-field card col s12 ht45 no-padding bod-right rdsan relative">
-                        <span class="inpspn ft15">₹</span>
-                        <input type="text" placeholder="Enter Amount" ng-model="filters.rent.min" ng-change="priceChanging('min')" id="min-price" class="autocompleteFind inp_pdwsm  mgbn">
-                        <div class="search-results price_m white shdsm" style="display: block" ng-show="showMinPrice">
-                            <ul class="left-align">
-                                <li ng-repeat="price in priceList" ng-show="price < maxPrice" ng-click="selectPrice(price, 'min')">₹ {{price}}</li>
-                            </ul>
+                        <div class="col s12 m6 pdln">
+                            <div class="input-field card col s12 ht45 no-padding rdsan">
+                                <span class="inpspn">Near :</span>
+                                <input type="text" placeholder="Enter a Locality" id="locsearch" class="autocompleteNear inp_pdw mgbn" ng-model="locsearch.txt" ng-focus="locsearchFocus()" ng-blur="locsearchBlur()" ng-change="getlocsearch()">
+                                <img src="images/general/buffering.gif" class="loading-icon" ng-show="locsearch.loading" />
+                                <div class=" left-align" ng-show="locsearch.status">
+                                    <ul class="collection homecoll white mgan">
+                                        <li class="collection-item avatar" ng-repeat="locItem in locsearch.data" ng-click="getlocitem(locItem)">
+                                            <span class="title ft14">{{locItem.name}}</span>
+                                            <span class="subtitle ft13">{{locItem.subtitle}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col s2 m2 pdln">
-                    <div class="input-field card col s12 ht45 no-padding rdsan">
-                        <span class="inpspn ft15">₹</span>
-                        <input placeholder="Enter Amount" ng-model="filters.rent.max" id="max-price" ng-change="priceChanging('max')" class="autocompleteNear inp_pdwsm mgbn">
-                        <div class="search-results price_m white shdsm" style="display: block" ng-show="showMaxPrice">
-                           <ul class="left-align">
-                                <li ng-repeat="price in priceList" ng-show="price > minPrice" ng-click="selectPrice(price, 'max')">₹ {{price}}</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="input-field col m2 s12 no-padding">
+                    <button class="btn btn-full pdl10 pdr10 resbtn ht45 overhidden " ng-click="search()">
+                        <i class="material-icons left">search</i> Search
+                    </button>
                 </div>
             </div>
-        </div>
-        <div class="input-field col m2 l2 s12 xswdfull no-padding">
-            <button class="btn btn-full pdl10 pdr10 resbtn ht45 overhidden" ng-click="search()">
-                <i class="material-icons left xs-mgt5">search</i>Search
-            </button>
-            <a href="" class="adva_btn mgt10 hide-on-med-and-down" ng-click="toggleSearch()">{{searchTitle}}</a>
         </div>
     </div>
-</div>

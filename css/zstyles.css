@@ -1,0 +1,86 @@
+.sec-paddind { padding: 80px 0 40px;}
+.h-services .over { margin-top: -150px;}
+.z-services {  box-shadow: 0 5px 15px #eee;  background: #fff; padding: 50px 30px;}
+.z-services span {font-size: 40px;  color: #888;}
+.h-services .h-block {background: #fafafa;}
+.h-block .block-content {  padding:69px 0;}
+.h-block .block-content h4 {  position: relative;  padding-bottom: 10px;}
+.h-block .block-content h4:after { content: ''; width: 60px; height: 1px;background: #d00355; position: absolute; bottom: 0;left: 0;}
+.parallax-container .section { width: 100%;}
+.block-content .block-icon span { display: inline-block;  width: 30px;  height: 30px;  text-align: center;  line-height: 30px; background: #999;}
+.h-block img {float: left}
+#aboutUs-banner h5 {margin: 0}
+#aboutUs-banner h1 {margin:0;}
+.leading-charge figure {margin: 0; box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);}
+.leading-charge figure figcaption {padding:0 15px;}
+.leading-charge figure h6 {font-weight: bold;}
+.leading-charge figure p {margin: 10px 0}
+.round-circle { width: 100px; height: 100px; border-radius: 50%; border:2px solid #e4394f; color: #e4394f; display: inline-block; line-height: 100px; font-size: 20px; font-weight: bold; }
+.weMaks h5 {margin-top: -50px}
+.weMaks h6 {text-transform: uppercase;}
+.weMaks .parallax {opacity: .5}
+.sub_form { font-size: 1.3em; color: #a07950}
+.sub_form input { width: 200px; text-align: left; border-radius: 40px; border:1px solid #a07950; padding-left: 10px}
+.sub_form label { text-align: left; padding-left: 10px}
+.sub_form .btn { border-radius: 50%; height: 47px; line-height: 47px; font-size: 1.2em; width: 47px; padding: 0; margin-left:10px}
+.mar-tab ul.collapsible {box-shadow: none; margin-top: 0}
+.mar-tab .collapsible-header span {font-size: 16px; margin-right:7px;}
+.mar-tab .collapsible-header em {font-style: normal;}
+.mar-tab .collapsible-header {font-size: 16px;}
+.mar-tab .collapsible-body {line-height: 1.8}
+.mar-tab .collapsible-body ul li {padding-left: 10px}
+.mar-tab .collapsible-body .lnr {font-size: 11px; margin-left: -15px;}
+#careers-ban .parallax:after {content: ""; position:absolute; top: 0; left: 0; bottom: 0; right: 0; background: rgba(0,0,0,.6)}
+.openings_card_sec {  background-color: #f8f8f8; padding-top: 30px; padding-bottom:40px }
+.openings_card_sec .card_sec { padding: 40px 10px; margin-bottom: 30px; text-align: center; color: #666; border: 1px solid #eee;moz-transition: all .2s ease-in-out;
+ o-transition: all .2s ease-in-out; background-color: #fff; width: 100%;}
+ .openings_card_sec .card_sec:hover {cursor: pointer; color: #333; box-shadow: rgba(0,0,0,.1) 0 0 40px;}
+.abt .right {text-align: left;}
+.abt .offset-m1 { margin-top: 30px;}
+
+.grid { background-color: #f8f8f8; padding-bottom:20px;  padding-top:20px;}
+.grid img { max-width: 100%; }
+
+.team_arya .team_images img {cursor:pointer;;-webkit-transition: all .2s linear;oz-transition: opacity .2s linear; o-transition: opacity .2s linear; transition: all .2s linear; width: 70px; opacity: .5;}
+.transformImg { transform: scale(1.6);}
+.team_arya .quote{width:50px;opacity:.2;margin-bottom:1.8em}
+.team_arya p {font-size:24px;font-weight:300;line-height:1.8em;margin-bottom:1em}
+.team_arya h4{font-size:16px;color:#666;font-weight:400;margin-bottom:4em} 
+.team_arya .info h4{margin:40px 0 0;font-size:14px;color:#000;opacity:1!important;line-height:1.4em}
+.mar-zero {margin: 0}
+@media only screen and (min-width : 993px) {
+.about-banner .parallax-container {height: 670px;}
+.mar-t-200 { margin-top:200px;}
+.mar-t-100 { margin-top:100px;}
+.mar-t-40 { margin-top: 40px;}
+.mar-t-60 { margin-top: 60px;}
+.mar-t-80 { margin-top: 80px;}
+.mar-b-80 { margin-bottom: 80px;}
+.mar-b-60 { margin-bottom: 60px;}
+.mar-b-40 { margin-bottom: 40px;}
+.mar-b-20 { margin-bottom: 20px;}
+.leading-charge figure {margin: 0 20px;}
+.mar-tab .collapsible-body { padding: 1em 1.3em }
+}
+
+@media only screen and (max-width : 992px) {
+.parallax-container .section { position: absolute;  top: 40%;}
+#aboutUs-banner .section { top: 10%;}
+.mar-t-200 { margin-top:120px;}
+
+.mar-t-40 { margin-top:20px;}
+}
+
+
+@media only screen and (max-width : 600px) {
+.parallax-container .section {top: 10%}
+.weMaks {min-height: 500px}
+.z-services {margin-bottom: 40px;}
+#aboutUs-banner .section {top: 0;}
+.leading-charge figure {margin: 0 0 40px; }
+.logo-partners .m3 {margin-bottom: 20px}
+
+.abt .right-align,
+.abt .right {text-align: center !important;}
+.abt .offset-m1 { margin-top: 0;}
+}
