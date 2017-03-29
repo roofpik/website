@@ -68,6 +68,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         templateUrl: 'templates/test.html',
         controller: 'testCtrl'
     })
+      $stateProvider.state('testLogin',{
+        url: '/test-login',
+        templateUrl: 'templates/test-login.html',
+        controller: 'testLoginCtrl'
+    })
 
     $urlRouterProvider.otherwise('/home');
 }]);

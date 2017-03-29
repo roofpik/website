@@ -23,7 +23,7 @@
         <div class="container">
             <div class="row list-heading">
                 <div class="col s12">
-                  <h5>  Projects in Gurgaon </h5>
+                    <h5>  Projects in Gurgaon </h5>
                 </div>
             </div>
             <div class="row">
@@ -87,53 +87,49 @@
                         <!-- Modal Structure -->
                     </form>
                 </div>
-                <div class="col s7 projList">
-                    <div class="row">
-                        <!-- card project list repeat start -->
-                        <div class="col s12 card white" ng-repeat="project in projects" ng-hide="noProjects">
-                            <div class="row relative mgbn">
-                                <div class="col s4 imglist pdb10">
-                                    <a ng-href="{{project.hrefLink}}"> <img src="images/olive.jpg" class="responsive-img"></a>
-                                </div>
-                                <div class="col s6 pdln">
-                                    <!-- <div class="truncate grey-text ft12">lorem ipsum</div> -->
-                                    <h2 class="ft18 b mgbn mgt5 truncate"><a ng-href="{{project.hrefLink}}" class="redt">{{project.name}}</a></h2>
-                                    <h6 class="mgbn ft12 truncate b text-darken-2 mgt5">
-                                        <a ng-href="{{project.hrefLink}}" class="grey-text">{{project.location.display}}</a>
-                                    </h6>
-                                    <!-- <div class="grey-text mgt5 ft12">lorem ipsum</div> -->
-                                </div>
-                                <!-- <div class="col s2 pdln right-align">
-                                    <span class="pdl10 pdr10 b grnbg white-text">4.7</span>
-                                    <div class="ft11 grey-text mgt5">7832 votes </div>
-                                    <div class="ft11 grey-text">4233 reviews</div>
-                                </div> -->
+                <div class="col s8 projList">
+                    <div class="col s12 card pdt10 pdbn white" ng-repeat="project in projects">
+                        <div class="row relative mgb10">
+                            <div class="col s3 proj-thumb">
+                            <a href=""> <img src="https://b.zmtcdn.com/data/pictures/4/18337894/5c8d1f1cf48de80e3d8c4f8ae888e0e4_featured_v2.jpeg" class="responsive-img"></a>
                             </div>
-                            <div class="row mgan bodt">
-                                <div class="col s4 listp grey-text pdln pdt10">
-                                    <p>BUILDER:</p>
-                                    <p>RENT:</p>
-                                    <p>PROPERTY TYPES:</p>
-                                    <!-- <p>FEATURED IN:</p> -->
-                                </div>
-                                <div class="col s8 listp grey-text text-darken-2 pdln pdt10 pdb10 pdrn">
-                                    <p>{{project.builder}}</p>
-                                    <p>₹{{project.rent.min}} - ₹{{project.rent.max}}</p>
-                                    <p>{{project.propertyTypes}}</p>
-                                    <!-- <p>Microbreweries, Insta-worthy</p> -->
-                                </div>
+                            <div class="col s6 pdln xspdl10">
+                                
+                                <div class="truncate ft12 pl-l1">High End</div>
+                                <h2 class="ft18 b mgbn mgt5 truncate"><a href="" class="pl-l2"> {{project.name}}</a></h2>
+                                <h6 class="mgbn ft13 truncate b text-darken-2 mgt5">
+                                <a href="" class="pl-l3"> {{project.location.display}}</a></h6>
+                                <div class=" pl-l4 mgt5 ft12">#1 of 23 Projects in Gurgaon</div>
                             </div>
-                            <!-- <div class="row bodt mgbn center grey lighten-5">
-                                <a href="" class="col s4 grey-text text-darken-2 pda10 listbtn bod-right">Call</a>
-                                <a href="" class="col s4 b grey-text text-darken-2 pda10 listbtn bod-right">View Details</a>
-                                <a href="" class="col s4 grey-text text-darken-2 listbtn pda10">Bookmarks</a>
-                            </div> -->
+                            <div class="col s3 pdln right-align">
+                                <span class="pdl10 pdr10 b grnbg white-text">4.7</span>
+                                <div class="ft11 grey-text mgt5">7832 votes </div>
+                                <div class="ft11 grey-text">4233 reviews</div>
+                            </div>
                         </div>
-                        <div class="col s12 card pdt10 pdbn white" ng-show="noProjects && projectsFetched">
-                            <h2 class="ft18 b mgbn mgt5 truncate"><a href="" class="redt">No Projects</a></h2>
+                        <div class="row mgan bodt">
+                            <div class="col s3 listp dgrey-text pdln pdt10">
+                               
+                                <p>Rent of 3BHK:</p>
+                                 <p>Builder:</p>
+                                <p>Property Type:</p>
+                                <p>Style:</p>
+
+                            </div>
+                            <div class="col s8 listp vgrey-text pdln pdt10 pdb10 pdrn">
+                                <p>₹{{project.rent.min}}</p>
+                                <p>{{project.builder}}</p>
+                                <p>{{project.propertyTypes}}</p>
+                                <p>Best Amenities, Ultra Luxury</p>
+                            </div>
                         </div>
-                        <!-- card project list repeat end -->
+                        <div class="row bodt mgbn center grey lighten-5">
+                            <a href="" class="col s4 m4 grey-text text-darken-2 pda10 listbtn bod-right hide-on-small-only">Schedule Visit</a>
+                            <a href="" class="col s12 m4 grey-text text-darken-2 pda10 listbtn bod-right">View Details</a>
+                            <a href="" ng-disabled="true" class="col s4 m4 grey-text b redt listbtn pda10 hide-on-small-only">Write Review</span></a>
+                        </div>
                     </div>
+                   
                 </div>
             </div>
         </div>
