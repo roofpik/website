@@ -361,7 +361,8 @@ hr {
 
 #login_signup_popup {
     width: 400px;
-    height: 300px;
+    height: auto;
+    max-height: 80%;
 }
 
 .bgwhite_tr {

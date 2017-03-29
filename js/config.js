@@ -31,6 +31,40 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         templateUrl: 'templates/review/write-review.html',
         controller: 'writeReviewCtrl'
     })
+    $stateProvider.state('contact-us', {
+        url: '/contact-us',
+        templateUrl: 'templates/static/contact-us.html'      
+    })
+    $stateProvider.state('verified', {
+        url: '/verified',
+        templateUrl: 'templates/static/verified.html'      
+    })
+    $stateProvider.state('requirement', {
+        url: '/requirement',
+        templateUrl: 'templates/static/requirement.html'      
+    })
+    $stateProvider.state('guidelines', {
+        url: '/guidelines',
+        templateUrl: 'templates/static/guidelines.html'      
+    })
+     $stateProvider.state('about-us', {
+        url: '/about-us',
+        templateUrl: 'templates/static/about.html'      
+    })
+      $stateProvider.state('careers', {
+        url: '/careers',
+        templateUrl: 'templates/static/careers.html'      
+    })
+       $stateProvider.state('marketing', {
+        url: '/marketing',
+        templateUrl: 'templates/static/marketing.html'      
+    })
+     $stateProvider.state('business-advantage', {
+        url: '/business-advantage',
+        templateUrl: 'templates/static/business-advantage.html'      
+    })
+            
+     
 
     $stateProvider.state('project-details',{
         url: '/rent/property/2017/gurgaon/residential/:micro/:locality/:builder/:project',
