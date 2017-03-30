@@ -1,9 +1,56 @@
-app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams, $rootScope) {
-   $scope.data = {};
+app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams, $rootScope, $http) {
+    $scope.data = {};
     $scope.data.textlength = 0;
     $scope.data.text = '';
     $scope.textcount = false;
+    hideLoading();
     $('select').material_select();
+    var user;
+
+    firebase.auth().onAuthStateChanged(function(data) {
+        if (data) {
+            // data is signed in.
+            user = data;
+
+        } else {
+            // No user is signed in.
+            $timeout(function() {
+                $('#login_signup_popup').modal({
+                    dismissible: false
+                });
+
+                $('#login_signup_popup').modal('open');
+                $('.modal-close').hide()
+            }, 2000)
+
+        }
+    });
+
+
+    function getProjects(){
+        $http({
+            url: 'http://139.162.9.71/api/projLocSearch',
+            method: 'POST',
+            params: {val: $scope.searchtxt}
+        }).then(function (response) {
+            $scope.projectsData = true;
+            $scope.allData = response.data.items.data;
+        })
+
+    }
+
+    $scope.searchData = function(){
+        // console.log($scope.searchtxt)
+        getProjects();
+    }
+
+    $scope.selectedProj = function(item){
+        console.log(item);
+         $scope.projectsData = false;
+         $scope.searchtxt = item.name
+    }
+
+
     $scope.reviewText = function() {
         if ($scope.review.reviewText) {
             $scope.data.textlength = $scope.review.reviewText.length;
@@ -97,39 +144,40 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams, $root
 
 
     $scope.submitReview = function() {
-        var reviewPath = '';
-        var userReviewPath = '';
-        var newKey = '';
-        $scope.review.userName = $scope.user.displayName;
-        $scope.review.userId = $scope.user.uid;
-        $scope.review.blocked = false;
-        $scope.review.created = new Date().getTime();
-        $scope.review.updated = $scope.review.created;
-        $scope.review.wordCount = ($scope.review.reviewText).length;
-        $scope.review.source = 'website';
-        $scope.review.status = 'uploaded';
-        var updates = {};
+        console.log($scope.review)
+        // var reviewPath = '';
+        // var userReviewPath = '';
+        // var newKey = '';
+        // $scope.review.userName = $scope.user.displayName;
+        // $scope.review.userId = $scope.user.uid;
+        // $scope.review.blocked = false;
+        // $scope.review.created = new Date().getTime();
+        // $scope.review.updated = $scope.review.created;
+        // $scope.review.wordCount = ($scope.review.reviewText).length;
+        // $scope.review.source = 'website';
+        // $scope.review.status = 'uploaded';
+        // var updates = {};
 
-        newKey = db.ref('reviews/country/' + $scope.countryId + '/city/' + $scope.cityId + '/residential/' + $scope.selectedProject.id).push().key;
-        $scope.userReviewData.id = $scope.selectedProject.id;
-        $scope.userReviewData.name = $scope.selectedProject.name;
-        reviewPath = 'reviews/country/' + $scope.countryId + '/city/' + $scope.cityId + '/residential/' + $scope.selectedProject.id + '/' + newKey;
-        userReviewPath = 'userReviews/' + $scope.review.userId + '/residential/' + newKey;
+        // newKey = db.ref('reviews/country/' + $scope.countryId + '/city/' + $scope.cityId + '/residential/' + $scope.selectedProject.id).push().key;
+        // $scope.userReviewData.id = $scope.selectedProject.id;
+        // $scope.userReviewData.name = $scope.selectedProject.name;
+        // reviewPath = 'reviews/country/' + $scope.countryId + '/city/' + $scope.cityId + '/residential/' + $scope.selectedProject.id + '/' + newKey;
+        // userReviewPath = 'userReviews/' + $scope.review.userId + '/residential/' + newKey;
 
 
-        if (Object.keys($scope.review.ratings).length == 0) {
-            delete $scope.review.ratings;
-        }
+        // if (Object.keys($scope.review.ratings).length == 0) {
+        //     delete $scope.review.ratings;
+        // }
 
-        updates[reviewPath] = $scope.review;
-        updates[userReviewPath] = $scope.userReviewData;
-        console.log(updates);
-        return;
-        db.ref().update(updates).then(function() {
-            $timeout(function() {
-                swal("Review Submitted", "Your review has been successfully submitted", "success");
-            }, 0);
-        })
+        // updates[reviewPath] = $scope.review;
+        // updates[userReviewPath] = $scope.userReviewData;
+        // console.log(updates);
+        // return;
+        // db.ref().update(updates).then(function() {
+        //     $timeout(function() {
+        //         swal("Review Submitted", "Your review has been successfully submitted", "success");
+        //     }, 0);
+        // })
     }
 
 });

@@ -1,23 +1,33 @@
 <div>
+<style>
+.projdata{
+    max-height: 250px;
+    overflow-y:scroll; 
+}
+</style>
     <div class="row mgt70">
         <div class="container">
             <div class="row relative">
                 <div class="col s12 m12 l8 pdr30 rightsd">
                     <h3 class="heading mgt30">Write Review</h3>
-                    <form name="reviewForm">                    
-                        <div class="row mgln mgrn">                          
-                             <div class="col s12 pdln ft18 b bodb pdb10 mgt20">
+                    <form name="reviewForm">
+                        <div class="row mgln mgrn">
+                            <div class="col s12 pdln ft18 b bodb pdb10 mgt20">
                                 Tell us about yourself?
                             </div>
                         </div>
-
-                        <div class="row mgbn">                           
+                        <div class="row mgbn">
                             <div class="col s12 input-field">
-                                <input id="project-name" type="text" ng-model="review.project" required>
+                                <input id="project-name" type="text" ng-model="searchtxt" ng-change="searchData()" required>
                                 <label for="project-name">Select Project/Locality/Location</label>
                             </div>
+                            <div class="col s12" ng-show="projectsData">
+                                <ul class="collection projdata">
+                                    <li class="collection-item" ng-repeat="item in allData" ng-click="selectedProj(item)">{{item.name}} <span>{{item.category}}</span></li>
+                                </ul>
                             </div>
-                            <div class="row mgbn">
+                        </div>
+                        <div class="row mgbn">
                             <div class="col s12 m4 input-field">
                                 <select ng-model="review.userType">
                                     <option value="" disabled selected>Choose your option</option>
@@ -53,12 +63,12 @@
                                 <label for="review-title">House/Flat No</label>
                             </div>
                             <div class="input-field col s12 m4">
-                                <input id="review-title" type="text" ng-model="review.yob" required>
+                                <input id="review-title" type="text" ng-model="review.block" required>
                                 <label for="review-title">Tower/Block</label>
                             </div>
                         </div>
-                        <div class="row mgln mgrn">                          
-                              <div class="col s12 pdln ft18 b bodb pdb10 mgt20">
+                        <div class="row mgln mgrn">
+                            <div class="col s12 pdln ft18 b bodb pdb10 mgt20">
                                 Your first-hand experiences really help other residents. Thanks!
                             </div>
                         </div>
@@ -109,13 +119,16 @@
                                 </div>
                                 <div class="col s12 m6 no-padding grey-text xspdt10 xspdl10">
                                     <div class="col pdrn xspdln">
-                                        <input class="btn btnsm" type="button" value="Not Sure">
+                                        <input class="btn btnsm" type="button" value="Not Sure" ng-click="review.school = 'Not Sure'">
                                     </div>
                                     <div class="col">
-                                        <input class="btn btnsm" type="button" value="No">
+                                        <input class="btn btnsm" type="button" value="No" ng-click="review.school = 'No'">
                                     </div>
                                     <div class="col no-padding xspdn">
-                                        <input class="btn btnsm" type="button" value="Yes">
+                                        <input class="btn btnsm" type="button"  value="Yes" ng-click="review.school = 'Yes'">
+                                    </div>
+                                    <div class="col">
+                                    {{review.school}}
                                     </div>
                                 </div>
                             </div>
@@ -125,13 +138,13 @@
                                 </div>
                                 <div class="col s12 m6 no-padding grey-text xspdt10 xspdl10">
                                     <div class="col pdrn xspdln">
-                                        <input class="btn btnsm" type="button" value="Not Sure">
+                                        <input class="btn btnsm" type="button" value="Not Sure" ng-model="review.market">
                                     </div>
                                     <div class="col">
-                                        <input class="btn btnsm" type="button" value="No">
+                                        <input class="btn btnsm" type="button" value="No" ng-model="review.market">
                                     </div>
                                     <div class="col no-padding xspdn">
-                                        <input class="btn btnsm" type="button" value="Yes">
+                                        <input class="btn btnsm" type="button" value="Yes" ng-model="review.market">
                                     </div>
                                 </div>
                             </div>
@@ -141,64 +154,13 @@
                                 </div>
                                 <div class="col s12 m6 no-padding grey-text xspdt10 xspdl10">
                                     <div class="col pdrn xspdln">
-                                        <input class="btn btnsm" type="button" value="Not Sure">
+                                        <input class="btn btnsm" type="button" value="Not Sure" ng-model="review.hospital">
                                     </div>
                                     <div class="col">
-                                        <input class="btn btnsm" type="button" value="No">
+                                        <input class="btn btnsm" type="button" value="No" ng-model="review.hospital">
                                     </div>
                                     <div class="col no-padding xspdn">
-                                        <input class="btn btnsm" type="button" value="Yes">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mgb10 mgt20">
-                                <div class="col s12 m4 ft13">Good Schools?</div>
-                                <div class="col s12 m6 no-padding grey-text">
-                                    <div class="col">
-                                        <input class="with-gap" name="group2" type="radio" id="schoolsNotSure" ng-model="review.goodSchools" value="Not Sure">
-                                        <label for="schoolsNotSure">Not Sure</label>
-                                    </div>
-                                    <div class="col">
-                                        <input class="with-gap" name="group2" type="radio" id="schoolsNo" ng-model="review.goodSchools" value="No">
-                                        <label for="schoolsNo">No</label>
-                                    </div>
-                                    <div class="col xspdn">
-                                        <input class="with-gap" name="group2" type="radio" id="schoolsYes" ng-model="review.goodSchools" value="Yes">
-                                        <label for="schoolsYes">Yes</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mgb10">
-                                <div class="col s12 m4 ft13">Good Markets?</div>
-                                <div class="col s12 m6 no-padding grey-text">
-                                    <div class="col">
-                                        <input class="with-gap" name="group3" type="radio" id="marketsNotSure" ng-model="review.markets" value="Not Sure">
-                                        <label for="marketsNotSure">Not Sure</label>
-                                    </div>
-                                    <div class="col">
-                                        <input class="with-gap" name="group3" type="radio" id="marketsNo" ng-model="review.markets" value="No">
-                                        <label for="marketsNo">No</label>
-                                    </div>
-                                    <div class="col xspdn">
-                                        <input class="with-gap" name="group3" type="radio" id="marketsYes" ng-model="review.markets" value="Yes">
-                                        <label for="marketsYes">Yes</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mgb10">
-                                <div class="col s12 m4 ft13">Reputed Hospitals?</div>
-                                <div class="col s12 m6 no-padding grey-text">
-                                    <div class="col">
-                                        <input class="with-gap" name="group4" type="radio" id="hospitalsNotSure" ng-model="review.goodHospitals" value="Not Sure">
-                                        <label for="hospitalsNotSure">Not Sure</label>
-                                    </div>
-                                    <div class="col">
-                                        <input class="with-gap" name="group4" type="radio" id="hospitalsNo" ng-model="review.goodHospitals" value="No">
-                                        <label for="hospitalsNo">No</label>
-                                    </div>
-                                    <div class="col xspdn">
-                                        <input class="with-gap" name="group4" type="radio" id="hospitalsYes" ng-model="review.goodHospitals" value="Yes">
-                                        <label for="hospitalsYes">Yes</label>
+                                        <input class="btn btnsm" type="button" value="Yes" ng-model="review.hospital">
                                     </div>
                                 </div>
                             </div>
@@ -318,7 +280,7 @@
                             </div>
                         </div>
                         <!-- <button class="lighten-1 btn btn-primary block mgt20 wd100" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating || !projectSelected|| !loginStatus)?'disabled':'normal'" ng-click="submitReview()">Submit Your Review</button> -->
-                        <button class="lighten-1 btn btn-primary block mgt20 wd100" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating|| !loginStatus)?'disabled':'normal'" ng-click="submitReview()">Submit Your Review</button>
+                        <button class="lighten-1 btn btn-primary block mgt20 wd100" ng-click="submitReview()">Submit Your Review</button>
                         <p ng-hide="loginStatus" id="loginSignup">Please login/signup to submit review *</p>
                     </form>
                 </div>

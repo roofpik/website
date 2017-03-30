@@ -79,7 +79,9 @@ app.controller('headerCtrl', function($scope, $timeout, $rootScope, $state) {
 
 
 
-
+     $('#login_signup_popup').modal({
+            dismissible: false
+        });
     $scope.openLogin = function() {
         $('#login_signup_popup').modal({
             dismissible: false
