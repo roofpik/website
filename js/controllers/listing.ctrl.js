@@ -93,14 +93,14 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
         if ($scope.data[key]) {
             l = $scope.data[key].toString().split(',')
             $scope.selected[key] = {}
-            for (i in l) {  
+            for (i in l) {
                 $scope.selected[key][l[i]] = true;
             }
         }
     }
 
     function consFilter() {
-         $('.fd-load').addClass('blur');
+        $('.fd-load').addClass('blur');
 
         // $scope.loading = true;
         fil = ''
@@ -133,7 +133,6 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
 
 
     function getProjects() {
-        console.log($scope.data)
 
         $http({
             url: 'http://139.162.9.71/api/projectFilter',
@@ -141,9 +140,13 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
             params: $scope.data
         }).then(function mySucces(response) {
             // $scope.loading = false;
-            console.log(response.data.items);
-             $('.fd-load').removeClass('blur');
+
+            $('.fd-load').removeClass('blur');
             $scope.projects = response.data.items;
+            $timeout(function(){
+                hideLoading()
+            }, 2000)
+            
         })
 
     }
@@ -231,16 +234,15 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
         })
     }
 
-    function tspaces(val){
-     return   val.replace(/\s+/g, '-').toLowerCase()
+    function tspaces(val) {
+        return val.replace(/\s+/g, '-').toLowerCase()
 
     }
 
-    $scope.showProjDetails = function(item){
-        $window.location.href = '#/rent/property/2017/gurgaon/residential/' 
-        + tspaces(item.location.microname) + '/' + tspaces(item.location.locname) + '/' +
-         tspaces(item.builder) + '/' + tspaces(item.name) +
-         '-project?l=' + item.location.lockey +'&m=' + item.location.microkey + '&p=' + item.key;
+    $scope.showProjDetails = function(item) {
+        $window.location.href = '#/rent/property/2017/gurgaon/residential/' + tspaces(item.location.microname) + '/' + tspaces(item.location.locname) + '/' +
+            tspaces(item.builder) + '/' + tspaces(item.name) +
+            '-project?l=' + item.location.lockey + '&m=' + item.location.microkey + '&p=' + item.key;
         // sohna-road/sector-47/builder-unitech/unitech-uniworld-gardens-1-projectmb?l=-KfRBpXGseQp9wlIZ97e&m=-KfM5tQ-UKt6DtrWtzeE&p=-KYMv8uRJQMpqBa-I-hn"
     }
 

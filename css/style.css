@@ -4,6 +4,10 @@ body {
     font-weight: 300;
 }
 
+header, footer, .main-content{
+    display:none;
+}
+
 .rooflogo {
     width: 35px !important;
     line-height: 110%;

@@ -1,14 +1,23 @@
+app.directive('loading', function() {
+    return {
+        restrict: 'EA', //This menas that it will be used as an attribute and NOT as an element. I don't like creating custom HTML elements
+        replace: false, // This is one of the cool things :). Will be explained in post.
+        templateUrl: "templates/directives/loading.html"
+    }
+});
+
+
+
 app.directive('header', function() {
     return {
-        restrict: 'A', //This menas that it will be used as an attribute and NOT as an element. I don't like creating custom HTML elements
-        replace: false,
-        scope: { user: '=' }, // This is one of the cool things :). Will be explained in post.
+        restrict: 'EA', //This menas that it will be used as an attribute and NOT as an element. I don't like creating custom HTML elements
+        replace: false, // This is one of the cool things :). Will be explained in post.
         templateUrl: "templates/directives/header.html",
         controller: 'headerCtrl'
     }
 });
 
-app.controller('headerCtrl', function($scope, $timeout, $rootScope) {
+app.controller('headerCtrl', function($scope, $timeout, $rootScope, $state) {
     $scope.user = {};
     $scope.loginStatus = false;
     $scope.$watch('loginStatus', function() {
@@ -23,6 +32,10 @@ app.controller('headerCtrl', function($scope, $timeout, $rootScope) {
             }
         }, 0);
     });
+
+    $scope.gotoHome = function(){
+        $state.go('home');
+    }
 
     $rootScope.$on("loggedIn", function() {
         console.log('called');
@@ -64,9 +77,9 @@ app.controller('headerCtrl', function($scope, $timeout, $rootScope) {
     };
 
 
-     $('.modal').modal();
-    $('ul.tabs').tabs();
-    Materialize.updateTextFields();
+    $('.modal').modal();
+
+
 
     $('.button-collapse').sideNav({
         menuWidth: 300, // Default is 240
@@ -74,10 +87,8 @@ app.controller('headerCtrl', function($scope, $timeout, $rootScope) {
         closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
         draggable: true // Choose whether you can drag to open on touch screens
     });
-    $('select').material_select();
-    $('.slider').slider();
-    $('.dropdown-button').dropdown();
-    $('.carousel').carousel();
+
+
 });
 
 app.directive('footer', function() {
