@@ -18,7 +18,17 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
     db.ref('project/country/' + $scope.countryId + '/city/' + $scope.cityId + '/residential/micromarket/' + $scope.micromarketId + '/locality/' + $scope.localityId + '/projects/' + $scope.projectId).once('value', function(snapshot) {
 
         $scope.project = snapshot.val();
-
+        console.log($scope.project.images)
+        $scope.img = {}
+        for(img in $scope.project.images){
+            db.ref('images/'+img).once('value', function(data){
+                item = data.val()
+                $scope.img[item['key']] = item;
+                if(item['imgCat'] == 'cover'){
+                    $scope.cover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-l.jpg';
+                }
+            });
+        }
         // Images needs to binded
 
         if ($scope.project.amenities) {

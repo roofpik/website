@@ -46,7 +46,7 @@ app.controller('testCtrl', function($scope, $timeout, $http, $window) {
     $scope.getprojitem = function(item) {
         if (item.category == 'default' || item.category == 'residential') { $scope.projsearch.txt = item.name; } 
         else if (item.category == 'locSearch') { $scope.projsearch.txt = item.name + ' ' + item.subtitle; }
-
+        console.log(item.url)
         $timeout(function() {
             if (item.category == 'default') {
                 $window.location.href = '/#/search/2017/property/gurgaon/residential/all?ptype=' + item.key;

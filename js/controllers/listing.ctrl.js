@@ -1,10 +1,21 @@
-app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $state, $location) {
+app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $state, $location, $window) {
     $timeout(function() {
 
         var slider = document.getElementById('price');
 
+        if ($location.search().rmin) {
+            rstart = $location.search().rmin
+        } else {
+            rstart = 0
+        }
+        if ($location.search().rmax) {
+            rend = $location.search().rmax
+        } else {
+            rend = 200000
+        }
+
         noUiSlider.create(slider, {
-            start: [0, 200000],
+            start: [rstart, rend],
             tooltips: true,
             connect: true,
             step: 5000,
@@ -16,9 +27,6 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
 
         slider.noUiSlider.on('change', function() {
             val = slider.noUiSlider.get();
-            // $('#minP').val();
-            // $('#maxP').val(val[1]);
-
 
             var inputMin = $('#minP');
             inputMin.val(parseFloat(val[0], 10));
@@ -44,6 +52,20 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
         builder: '',
         category: ''
     };
+    $scope.selected = {};
+
+    for (key in $location.search()) {
+        if ($location.search()[key]) {
+            if (key == 'rmin' || key == 'rmax') {
+                $scope.data[key] = parseInt($location.search()[key]);
+            } else {
+                $scope.data[key] = $location.search()[key];
+            }
+
+        }
+    }
+
+
 
     $scope.moreFilters = function() {
         $('#modal1').modal('open');
@@ -54,28 +76,80 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
     }
 
     $scope.minChange = function() {
-        getProjects();
+        consFilter();
 
+
+        // getProjects();
 
     }
     $scope.maxChange = function() {
+        var f = consFilter();
+
+
+        // getProjects();
+    }
+
+    for (key in $scope.data) {
+        if ($scope.data[key]) {
+            l = $scope.data[key].toString().split(',')
+            $scope.selected[key] = {}
+            for (i in l) {  
+                $scope.selected[key][l[i]] = true;
+            }
+        }
+    }
+
+    function consFilter() {
+         $('.fd-load').addClass('blur');
+
+        // $scope.loading = true;
+        fil = ''
+        for (key in $scope.data) {
+            if ($scope.data[key]) {
+                if (fil == '') {
+                    fil = '?' + key + '=' + $scope.data[key];
+                } else {
+                    fil = fil + '&' + key + '=' + $scope.data[key];
+                }
+                if ($scope.selected[key]) {
+                    $scope.selected[key][$scope.data[key]] = true;
+                } else {
+                    $scope.selected[key] = {}
+                    $scope.selected[key][$scope.data[key]] = true;
+                }
+            }
+        }
+
+        if (history.pushState) {
+            var newurl = window.location.href.split('?')[0] + fil;
+
+            window.history.pushState({ path: newurl }, '', newurl);
+        }
+
         getProjects();
+
     }
 
 
 
     function getProjects() {
+        console.log($scope.data)
 
         $http({
             url: 'http://139.162.9.71/api/projectFilter',
             method: 'POST',
-            params: $scope.filters
+            params: $scope.data
         }).then(function mySucces(response) {
-            conosle.log(response);
+            // $scope.loading = false;
+            console.log(response.data.items);
+             $('.fd-load').removeClass('blur');
+            $scope.projects = response.data.items;
         })
 
     }
-    
+
+    getProjects()
+
 
     var count = 0;
     $scope.addFilter = function(id, type) {
@@ -83,7 +157,7 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
             $scope.data[type] = id.toString();
 
         } else {
-            filter =  $scope.data[type].split(',');
+            filter = $scope.data[type].split(',');
             for (index in filter) {
                 if (filter[index] == id) {
                     count = count + 1
@@ -95,25 +169,9 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
             }
             $scope.data[type] = filter.join();
         }
-        getProjects()
+        consFilter();
     }
 
-
-    $('ul.tabs').tabs();
-    Materialize.updateTextFields();
-
-    $('.button-collapse').sideNav({
-        menuWidth: 300, // Default is 240
-        edge: 'left', // Choose the horizontal origin
-        closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-        draggable: true // Choose whether you can drag to open on touch screens
-    });
-    $('select').material_select();
-    $('.slider').slider();
-    $('.dropdown-button').dropdown();
-    $('.carousel').carousel();
-
-    $scope.selected = {};
     $scope.categories = [
         { name: 'Best Amenities', id: 'bestAmenities' },
         { name: 'Luxury', id: 'luxury' },
@@ -125,24 +183,18 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
         { name: 'Senior Living', id: 'seniorLiving' }
     ];
 
+
     $scope.propertyTypes = [
         { name: 'Apartments', id: 'apartment' },
         { name: 'Villas', id: 'villa' },
         { name: 'Penthouse', id: 'penthouse' },
         { name: 'Row House', id: 'rowhouse' }
     ];
-    $scope.availablePropertyTypes = {
-        'apartment': 'Apartments',
-        'villa': 'Villas',
-        'penthouse': 'Penthouse',
-        'rowhouse': 'Row House'
-    }
+
 
     $scope.micromarkets = [];
     $scope.locations = [];
     $scope.builders = [];
-    var parameters = {};
-    $scope.price = {};
     getLocations();
 
     function getLocations() {
@@ -175,109 +227,21 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
                 for (key in snapshot.val()) {
                     $scope.builders.push(snapshot.val()[key]);
                 }
-                mapParameters();
             }, 0);
         })
     }
 
-    function mapParameters() {
-        for (key in $stateParams) {
-            if ($stateParams[key]) {
-                console.log(key, $stateParams[key]);
-                if (key == 'rent') {
-                    var data = $stateParams[key].split(',');
-                    $scope.price.min = parseInt(data[0]);
-                    $scope.price.max = parseInt(data[1]);
-                } else {
-                    var data = $stateParams[key].split(',');
-                    console.log(data);
-                    for (key1 in data) {
-                        if (!$scope.selected[key]) {
-                            $scope.selected[key] = {};
-                        }
-                        $scope.selected[key][data[key1]] = true;
-                    }
-                }
-            }
-        }
-        getProjects();
-        console.log($scope.selected);
+    function tspaces(val){
+     return   val.replace(/\s+/g, '-').toLowerCase()
+
     }
 
-    function getProjects() {
-        $scope.projectsFetched = false;
-        $http({
-            url: 'http://139.162.9.71/api/projectFilter',
-            method: 'POST',
-            params: {
-                loc: $stateParams.loc,
-                micro: $stateParams.micro,
-                ptype: $stateParams.ptype,
-                bhk: $stateParams.bhk,
-                rmin: $scope.selected.min,
-                rmax: $scope.selected.max,
-                builder: $stateParams.builder,
-                category: $stateParams.category
-            }
-        }).then(function mySucces(response) {
-            console.log(response);
-            $scope.projectsFetched = true;
-            $scope.projects = response.data.items;
-            if ($scope.projects.length == 0) {
-                $scope.noProjects = true;
-            } else {
-                $scope.noProjects = false;
-            }
-            for (key in $scope.projects) {
-                $scope.projects[key].hrefLink = '#/project-details?city=' + $scope.projects[key].location.citykey + '&micro=' + $scope.projects[key].location.microkey + '&locality=' + $scope.projects[key].location.lockey + '&id=' + $scope.projects[key].key;
-                if ($scope.projects[key].propType) {
-                    for (key1 in $scope.projects[key].propType) {
-                        if ($scope.projects[key].propType[key1] == 'Yes') {
-                            if ($scope.projects[key].propertyTypes) {
-                                $scope.projects[key].propertyTypes += ', ';
-                            } else {
-                                $scope.projects[key].propertyTypes = '';
-                            }
-                            $scope.projects[key].propertyTypes += $scope.availablePropertyTypes[key1];
-                        }
-                    }
-                }
-            }
-            // $scope.searchingProject = false;
-        }, function myError(err) {
-            // console.log(err);
-            $scope.projectsFetched = false;
-        })
+    $scope.showProjDetails = function(item){
+        $window.location.href = '#/rent/property/2017/gurgaon/residential/' 
+        + tspaces(item.location.microname) + '/' + tspaces(item.location.locname) + '/' +
+         tspaces(item.builder) + '/' + tspaces(item.name) +
+         '-project?l=' + item.location.lockey +'&m=' + item.location.microkey + '&p=' + item.key;
+        // sohna-road/sector-47/builder-unitech/unitech-uniworld-gardens-1-projectmb?l=-KfRBpXGseQp9wlIZ97e&m=-KfM5tQ-UKt6DtrWtzeE&p=-KYMv8uRJQMpqBa-I-hn"
     }
 
-    $scope.applyFilters = function() {
-        console.log($scope.selected);
-        for (key in $scope.selected) {
-            console.log(key, $scope.selected[key]);
-            if ($scope.selected[key]) {
-                var data = '';
-                for (key1 in $scope.selected[key]) {
-                    console.log(key1, $scope.selected[key][key1]);
-                    if ($scope.selected[key][key1]) {
-                        if (data.length != 0) {
-                            data += ','
-                        }
-                        data += key1;
-                    }
-                }
-                parameters[key] = data;
-            }
-        }
-        if ($scope.price) {
-            if ($scope.price.min && $scope.price.max) {
-                if ($scope.price.min <= $scope.price.max) {
-                    parameters.rent = $scope.price.min + ',' + $scope.price.max;
-                } else {
-                    Materialize.toast("Minimum rent should be less than maximum rent");
-                }
-            }
-        }
-        console.log(parameters);
-        $state.go('listing', { category: parameters.category, bhk: parameters.bhk, micro: parameters.micro, loc: parameters.loc, builder: parameters.builder, rent: parameters.rent, ptype: parameters.ptype });
-    }
 })

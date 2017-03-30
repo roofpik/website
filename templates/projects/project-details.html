@@ -1,6 +1,6 @@
 <div>
     <div class="row img_detail">
-        <img ng-src="{{coverImage}}" class="responsive-img">
+        <img ng-src="{{cover}}" class="responsive-img">
         <div class="dt_abs">
             <h3 class="white-text text-sd mgbn">{{project.name}}</h3>
             <h5 class="white-text text-sd">{{project.location.displayAdd}}</h5>
@@ -81,7 +81,7 @@
                                 </div>
                                 <div class="col s3 pdb10">
                                     <div class="ft14">₹ {{project.general.rent}}</div>
-                                    <div class="grey-text ft12">Rent</div>
+                                    <div class="grey-text ft12">Rent (3 BHK Approx)</div>
                                 </div>
                                 <div class="col s3 pdb10">
                                     <div class="ft14">{{project.general.power}}</div>
@@ -92,8 +92,8 @@
                                     <div class="grey-text ft12">Car Parking</div>
                                 </div>
                                 <div class="col s3 pdb10">
-                                    <div class="ft14">{{project.general.website}}</div>
-                                    <div class="grey-text ft12">Website</div>
+                                    <div class="ft14"></div>
+                                    <div class="grey-text ft12"> <a href="{{project.general.website}}" target="_blank">Website</a></div>
                                 </div>
                             </div>
                         </div>

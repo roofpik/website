@@ -6,8 +6,8 @@ app.controller('homeCtrl', function($scope, $state, $timeout) {
 
 app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) {
 
-  
-  $scope.projsearch = {};
+
+    $scope.projsearch = {};
     $scope.projsearch.status = false;
     var projdefault = [{
         name: 'Apartments',
@@ -34,7 +34,6 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
 
 
     $scope.projsearchFocus = function() {
-        console.log('called');
         $scope.projsearch.status = true;
         if (!$scope.projsearch.txt && !$scope.projsearch.locfilter) {
             $scope.projsearch.data = projdefault;
@@ -52,8 +51,12 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
     }
 
     $scope.getprojitem = function(item) {
-        if (item.category == 'default' || item.category == 'residential') { $scope.projsearch.txt = item.name; } 
-        else if (item.category == 'locSearch') { $scope.projsearch.txt = item.name + ' ' + item.subtitle; }
+        console.log(item);
+        if (item.category == 'default' || item.category == 'residential') {
+            $scope.projsearch.txt = item.name;
+        } else if (item.category == 'locSearch') {
+            $scope.projsearch.txt = item.name + ' ' + item.subtitle;
+        }
 
         $timeout(function() {
             if (item.category == 'default') {
@@ -61,10 +64,10 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
             } else if (item.category == 'residential') {
                 $window.location.href = item.url;
             } else if (item.category == 'locSearch') {
-                $window.location.href = item.url;
+                $window.location.href = item.url + '&ptype=' + item.ptype;
             }
 
-        }, 1000);
+        }, 500);
 
     }
 
@@ -125,28 +128,33 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
         name: 'All Projects in',
         subtitle: '',
         url: '',
-        category: 'locSearch'
+        category: 'locSearch',
+        ptype: ''
     }, {
         name: 'Apartments in',
         subtitle: '',
         url: '',
-        category: 'locSearch'
+        category: 'locSearch',
+        ptype: 'apartment'
     }, {
         name: 'Villas in',
         subtitle: '',
         url: '',
-        category: 'locSearch'
+        category: 'locSearch',
+        ptype: 'villa'
     }, {
         name: 'Pent House in',
         subtitle: '',
         url: '',
-        category: 'locSearch'
+        category: 'locSearch',
+        ptype: 'penthouse'
     }, {
         name: 'Row House in',
         subtitle: '',
         url: '',
-        category: 'locSearch'
-    }, ];
+        category: 'locSearch',
+        ptype: 'rowhouse'
+    }];
 
 
     $scope.locsearchFocus = function() {
@@ -168,12 +176,20 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
 
     }
 
+    var selectLocation;
 
     $scope.getlocitem = function(item) {
+
+        if (item.category == 'micro') {
+            filter = 'micro'
+        } else if (item.category == 'locality') {
+            filter = 'loc'
+        }
+        selectLocation = item;
         $scope.locsearch.txt = item.name;
         for (locProjItem in locProjTxt) {
             locProjTxt[locProjItem].subtitle = item.name;
-            locProjTxt[locProjItem].url = '/#/search/2017/property/gurgaon/residential/all?ptype=' + item.key
+            locProjTxt[locProjItem].url = '/#/search/2017/property/gurgaon/residential/all?' + filter + '=' + item.key
         }
         $scope.projsearch.locfilter = true;
         $scope.projsearch.data = locProjTxt;
@@ -203,7 +219,7 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
 
         }
     }
-    
+
 });
 
 app.controller('popularSearchCtrl', function($scope) {
