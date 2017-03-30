@@ -78,6 +78,7 @@ app.controller('headerCtrl', function($scope, $timeout, $rootScope) {
     $('.slider').slider();
     $('.dropdown-button').dropdown();
     $('.carousel').carousel();
+
 });
 
 app.directive('footer', function() {
