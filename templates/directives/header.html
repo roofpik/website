@@ -1,5 +1,5 @@
 <div>
-    <div class="navbar headerfix">
+    <div class="navbar headerfix boxsdn">
         <nav class="white boxsdn">
             <div class="nav-wrapper">
                 <div class="row">
@@ -9,18 +9,19 @@
                         <a href="" class="rooflogo left"><img src="images/general/logoicon.png" ng-click="gotoHome()"> </a>
                     </div>
                     <ul class="right">
-                        <li> <a href="/#/write-review" class="btn btn-primary mgln mgr10 ft12 b capitalize xs-wd"><i class="material-icons left bticon">create</i> Write Review</a></li>
+                   <!--  <i class="material-icons left bticon">create</i>  -->
+                        <li> <a href="/#/write-review" class="btnhd xs-wd">Write Review</a></li>
                         <li ng-hide="loginStatus">
-                            <a ng-click="openLogin()" id="open-login" class="btn mgln mgr10 ft12 mgln b capitalize xs-wd">
-                                <i class="material-icons left bticon">lock_outline</i> Login/Sign Up</a>
+                            <a ng-click="openLogin()" id="open-login" class="btnhd mgln xs-wd">
+                                Login/Sign Up</a>
+                                 <!-- <i class="material-icons left bticon">lock_outline</i> -->
                         </li>
-                        <li class="" ng-show="loginStatus">
-                            <a href="" class="dropdown-button btn btn-flat mgln ft12 mgr10 capitalize" data-activates="dropdown1">
-                                <img class="display-img left" ng-src="{{user.photoURL}}">{{user.displayName}}
-                <span ng-click="logout()">Logout</span>
+                        <li class="btnhd_prof" >
+                            <a href="" class="btnhd">
+                                <img class="display-img left" ng-src="{{user.photoURL}}">Digamber Sharma{{user.displayName}}               
                                 </a>
                                 
-                            <ul id="dropdown1" class="dropdown-content droplogin">
+                            <ul class="pda10 bodall">
                                 <!-- <li>
                                     <a href="">
                                         <i class="material-icons left">person</i>My Profile</a>
@@ -28,13 +29,13 @@
                                 <li class="divider"></li> -->
                                 <li>
                                     <a href="" ng-click="logout()">
-                                        <i class="material-icons left">power_settings_new</i>Logout
+                                        <i class="material-icons left grey-text">power_settings_new</i> Logout
                                     </a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
-                    <span class="right ft12 grey-text mgr30 xsnr10">
+                    <span class="right ft12 grey-text xsnr10">
                         <i class="material-icons left tiny bticont mgrn">location_on</i>Gurgaon</span>
                 </div>
             </div>

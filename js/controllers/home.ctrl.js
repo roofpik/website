@@ -22,6 +22,7 @@ app.controller('homeCtrl', function($scope, $state, $timeout) {
 
 
     $timeout(function() {
+         $('.parallax').parallax();
         hideLoading();
     }, loadTime);
 
