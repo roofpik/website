@@ -1742,8 +1742,9 @@ input[type=email],
 .navfooter{position: fixed; bottom: 60px; left: 0; z-index: 9}
 .navfooter a {background-color: transparent !important;
  padding:0 0 0 10px !important; height: 40px; line-height: 40px;}
-
-
+/*careers page*/
+.care_ul {}
+.care_ul li{list-style-type: disc !important; list-style-position: inside;}
 
 /*Arpit*/
 
