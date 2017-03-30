@@ -1,5 +1,18 @@
 app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $stateParams, $location) {
 
+
+  $('.gallery').each(function() { // the containers for all your galleries
+        $(this).magnificPopup({
+            delegate: 'a', // the selector for gallery item
+            type: 'image',
+            gallery: {
+                enabled: true
+            }
+        });
+    });
+
+  
+
     // Load initialize function
     // google.maps.event.addDomListener(window, 'load', initMap);
 
