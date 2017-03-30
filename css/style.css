@@ -30,6 +30,17 @@ header, footer, .main-content{
 .logoslide:hover {
     background-color: transparent !important;
 }
+.btnhd{background-color: transparent !important; font-size: 13px; color:#484848; margin: 17px 16px 0 16px !important; line-height: 110%;  font-weight: normal; padding: 8px 0 !important;}
+.btnhd:hover{background-color: transparent !important; border-bottom: 2px solid #767676;}
+.btnhd_prof a:hover{background-color: transparent !important; border-bottom:none !important;}
+.btnhd_prof ul{display: none !important; min-height: 50px; width: 150px; 
+ position: absolute !important; top:52px; right: 10px; background-color: #fff; padding-top: 0px !important;}
+.btnhd_prof ul li a{ color:#484848; line-height: 40px !important; padding: 0px !important;}
+.btnhd_prof ul li { display: block;}
+.btnhd_prof ul li a i{ line-height: 40px !important; height: 40px !important;}
+.btnhd_prof ul li a:hover{ color:#484848; width: 150px; line-height: 40px !important; padding: 0px !important;}
+.btnhd_prof:hover ul{display: block !important; }
+
 
 .headerfix {
     border-bottom: 1px solid #dce0e0;
@@ -998,6 +1009,7 @@ footer {
     height: 36px;
     width: 36px;
     margin-right: 10px;
+    margin-top: -10px;
     border-radius: 50%;
 }
 
