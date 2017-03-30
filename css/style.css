@@ -327,8 +327,15 @@ hr {
     color: #FF5A5F !important;
 }
 
-.btn-primary,
-.listbtn:hover {
+#schedule_visit{width: 350px;}
+.listbtn_active{border-color: #ff5a5f;
+    background-color: #ff5a5f;
+    color: #fff !important;}
+
+.listbtn:hover{ color: #FF5A5F !important; font-weight: bold; cursor: pointer;}
+
+.btn-primary
+ {
     border-color: #ff5a5f;
     background-color: #ff5a5f;
     color: #fff !important;
@@ -2216,7 +2223,7 @@ input[type=email],
 }
 .filterList {
     overflow-y: auto;
-    max-height: 200px;
+    max-height: 42vh;
 }
 
 .apply-price-filter {
