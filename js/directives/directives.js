@@ -33,8 +33,8 @@ app.controller('headerCtrl', function($scope, $timeout, $rootScope, $state) {
         }, 0);
     });
 
-    $scope.gotoHome = function(){
-         showLoading();
+    $scope.gotoHome = function() {
+        showLoading();
         $state.go('home');
     }
 
@@ -78,7 +78,15 @@ app.controller('headerCtrl', function($scope, $timeout, $rootScope, $state) {
     };
 
 
-    $('.modal').modal();
+
+
+    $scope.openLogin = function(){
+        $('#login_signup_popup').modal({
+            dismissible: false
+        });
+        
+        $('#login_signup_popup').modal('open');
+    }
 
 
 
@@ -112,211 +120,202 @@ app.directive('login', function() {
 });
 
 app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope) {
-    var ip = '';
-    var token = '';
-    var user = {};
-    var mobileNumber;
-    $scope.loginWithGoogle = function() {
-        var provider = new firebase.auth.GoogleAuthProvider();
-        provider.addScope('https://www.googleapis.com/auth/plus.login');
+    $scope.login = {}
+    $scope.login.signup = true;
+    $scope.login.mobile = false;
+    var uid = '';
+    $scope.fbLogin = function() {
+
+        var provider = new firebase.auth.FacebookAuthProvider();
+        provider.addScope('email');
+
         firebase.auth().signInWithPopup(provider).then(function(result) {
-            token = result.credential.accessToken;
-            user = result.user;
-            checkRegistered(result.user);
+            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+            var token = result.credential.accessToken;
+            // The signed-in user info.
+            var user = result.user;
+
+            $scope.data = {}
+            $scope.data.email = {}
+            $scope.data.facebook = {}
+
+            $scope.data.fname = user.displayName;
+            $scope.data.uid = user.uid;
+            uid = user.uid;
+            $scope.data.profileImage = user.photoURL;
+            $scope.data.createdDate = new Date().getTime();
+            $scope.data.registeredFlag = true;
+            $scope.data.welcomeEmailSent = false;
+
+            $scope.data.email.emailAddress = user.providerData[0].email;
+            $scope.data.email.emailVerified = true;
+            $scope.data.facebook.active = true;
+            $scope.data.facebook.fid = user.providerData[0].uid;
+            $scope.data.facebook.photoURL = user.providerData[0].photoURL;
+            $scope.data.facebook.token = token;
+            if (user.providerData[0].email && !user.email) {
+                user.updateEmail(user.providerData[0].email).then(function() {
+                    // Update successful.
+
+                }, function(error) {
+                    console.log(error)
+                        // An error happened.
+                });
+            }
+
+            updates = {};
+            $scope.login.signup = false;
+            $scope.login.mobile = true;
+            updates['users/' + $scope.data.uid] = $scope.data;
+            db.ref().update(updates).then(function() {
+
+                $scope.data = {};
+            });
+
+            // ...
         }).catch(function(error) {
+            // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
+            // The email of the user's account used.
             var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            sweetAlert('error', error.message, "error");
+            // ...
+        });
+    }
+
+    $scope.googleLogin = function() {
+
+
+
+        firebase.auth().signOut();
+
+
+        var provider = new firebase.auth.GoogleAuthProvider();
+        provider.addScope('https://www.googleapis.com/auth/plus.login');
+        provider.addScope('email');
+
+        firebase.auth().signInWithPopup(provider).then(function(result) {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            var token = result.credential.accessToken;
+            // The signed-in user info.
+            var user = result.user;
+
+            $scope.data = {}
+            $scope.data.email = {}
+            $scope.data.google = {}
+
+            $scope.data.fname = user.displayName;
+            $scope.data.uid = user.uid;
+            uid = user.uid;
+            $scope.data.profileImage = user.photoURL;
+            $scope.data.createdDate = new Date().getTime();
+            $scope.data.registeredFlag = true;
+            $scope.data.welcomeEmailSent = false;
+
+            $scope.data.email.emailAddress = user.providerData[0].email;
+            $scope.data.email.emailVerified = true;
+            $scope.data.google.active = true;
+            $scope.data.google.gid = user.providerData[0].uid;
+            $scope.data.google.photoURL = user.providerData[0].photoURL;
+            $scope.data.google.token = token;
+            $scope.login.signup = false;
+            $scope.login.mobile = true;
+            if (user.providerData[0].email) {
+                user.updateEmail(user.providerData[0].email).then(function() {
+                    // Update successful.
+                }, function(error) {
+                    console.log(error)
+                        // An error happened.
+                });
+            }
+
+            updates = {};
+            updates['users/' + $scope.data.uid] = $scope.data;
+            db.ref().update(updates).then(function() {
+                $scope.login.status = 'mobile';
+                $scope.data = {};
+            });
+
+
+            // ...
+        }).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
             var credential = error.credential;
             sweetAlert(error.code, error.message, "error");
+            // ...
         });
     }
 
-    function loginLoad() {
-        try {
-            $.get("http://ipinfo.io", function(response) {
-                ip = JSON.stringify(response)
-            }, "jsonp")
-        } catch (e) {
+    var otp = {};
+    $scope.process = false;
 
-        }
-    };
+    $scope.sendOtp = function() {
+        $scope.process = true;
+        $scope.loadingMsg = 'Sending OTP';
+        $timeout(function() {
+            $scope.process = false;
+        }, 8000);
 
-    loginLoad();
-
-    function replaceSpaces(str) {
-        var mystring = str;
-        var newchar = ' '
-        mystring = mystring.split('.').join(newchar);
-        mystring = mystring.replace(/ /g, '')
-        return mystring;
-    };
-
-    function getReferralCode(fname, lname) {
-        var refchar;
-        var refnum;
-        fname = replaceSpaces(fname);
-        var fnameLength = fname.length;
-        if (fnameLength > 4) {
-            refchar = fname.substring(0, 4);
-        } else {
-            refchar = fname.substring(0, fnameLength) + lname.substring(0, (4 - fnameLength));
-        }
-        refnum = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
-        return refchar.toUpperCase() + refnum;
-    };
-
-    function checkRegistered(user) {
-        db.ref('users/' + user.uid).once('value', function(snapshot) {
-            if (snapshot.val()) {
-                $('.modal').modal('close');
-                var data = firebase.auth().get
-                $rootScope.uid = user.uid;
-                $rootScope.photoURL = user.photoURL;
-                $rootScope.displayName = user.displayName;
-                $timeout(function() {
-                    $rootScope.loginStatus = true;
-                }, 0);
-                localStorage.setItem('loginStatus', true);
-                localStorage.setItem('uid', JSON.stringify(user.uid));
-                swal("Success", "You have successfully logged in", "success");
-            } else {
-                console.log(user);
-                var name = user.displayName.split(" ");
-                var userData = {
-                    uid: user.uid,
-                    email: {
-                        emailAddress: user.email,
-                        emailVerified: true
-                    },
-                    createdDate: new Date().getTime(),
-                    fname: name[0],
-                    mobile: {
-                        mobileVerified: false,
-                    },
-                    photoURL: user.photoURL,
-                    google: {
-                        active: true,
-                        photoURL: user.providerData[0].photoURL,
-                        token: token,
-                        gid: user.providerData[0].uid
-                    },
-                    registration: {
-                        device: navigator.userAgent.toLowerCase(),
-                        platform: 'website',
-                        regType: 'online'
-                    }
-                }
-                if (ip) {
-                    userData.registration.signupIp = JSON.parse(ip);
-                }
-                if (name[1]) {
-                    userData.lname = name[1]
-                }
-
-                if (name[1]) {
-                    userData.referral = getReferralCode(userData.fname, userData.lname);
-                } else {
-                    userData.referral = getReferralCode(userData.fname, "NA");
-                }
-
-                db.ref('users/' + user.uid).update(userData).then(function() {
-                    $rootScope.uid = userData.uid;
-                    $rootScope.photoURL = userData.photoURL;
-                    $rootScope.displayName = user.displayName;
-                    $timeout(function() {
-                        $rootScope.loginStatus = true;
-                    }, 0);
-                    localStorage.setItem('loginStatus', true);
-                    localStorage.setItem('uid', JSON.stringify(user.uid));
-                    $('.modal').modal('close');
-                    swal({
-                            title: "Verify mobile number",
-                            text: "Wnter your 10 digit mobile number",
-                            type: "input",
-                            showCancelButton: true,
-                            closeOnConfirm: false,
-                            animation: "slide-from-top",
-                            inputPlaceholder: "Type here"
-                        },
-                        function(inputValue) {
-                            console.log(inputValue, inputValue.length);
-                            if (inputValue === false) {
-                                return false;
-                            }
-                            if (inputValue.length < 10) {
-                                swal.showInputError("Invalid mobile number");
-                                return false
-                            } else if (inputValue.length == 10) {
-                                mobileNumber = inputValue;
-                                sendOTP(mobileNumber);
-                            }
-                            // showRegisteredMsg();
-                        });
-                })
-            }
-        })
-    }
-
-    $scope.mobileVerified = false;
-
-    function sendOTP(mobile) {
-        $scope.otp = Math.floor(1000 + Math.random() * 9000);
         $http({
-            url: 'http://35.154.60.19/api/SendOTP_1.0',
-            method: 'GET',
-            params: {
-                mobile: mobile,
-                otp: $scope.otp.toString(),
-                email: user.email.emailAddress
-            }
-        }).then(function(response) {
-            if (response.status == 200) {
-                swal({
-                        title: "Verify mobile",
-                        text: "Please enter the OTP",
-                        type: "input",
-                        showCancelButton: true,
-                        closeOnConfirm: false,
-                        animation: "slide-from-top",
-                        inputPlaceholder: "Type here"
-                    },
-                    function(inputValue) {
-                        console.log(inputValue, inputValue.length);
-                        if (inputValue === false) {
-                            console.log('executed');
-                            return false;
-                        }
-                        if (inputValue.length < 4) {
-                            swal.showInputError("Invalid OTP");
-                            return false
-                        } else if (inputValue.length == 4) {
-                            if (parseInt(inputValue) == parseInt($scope.otp)) {
-                                var updates = {};
-                                updates['mobile/mobileNum'] = mobile;
-                                updates['mobile/mobileVerified'] = true;
-                                db.ref('users/' + user.uid).update(updates).then(function() {
-                                    swal("Welcome", "Mobile Number Verified and login successful", "success");
-                                })
-                            }
-                        }
-                    });
-            } else {
-                swal({
-                        title: "OTP not sent",
-                        text: "Please try again later",
-                        type: "error",
-                        showCancelButton: false,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "OK",
-                        closeOnConfirm: false
-                    },
-                    function() {
-                        swal("Welcome", "You have successfully logged in", "success");
-                    });
-            }
-        });
+                url: 'http://139.162.9.71/api/sendotp',
+                method: "POST",
+                data: {
+                    'mobile': $scope.user.mobile
+                }
+            })
+            .then(function(response) {
+                if (response.data.status == 200) {
+                    time = new Date().getTime();
+                    otp[time] = response.data.otp;
+                    $scope.login.otp = true;
+                } else {
+                    sweetAlert('error', 'Something went wrong, please try again', "error");
+                }
+                $scope.process = false;
+            });
+
     }
+
+    $scope.verifyOtp = function() {
+        $scope.process = true;
+        $scope.loadingMsg = 'Verifying OTP';
+        rightOtp = false;
+        for (item in otp) {
+            if ($scope.user.otp == otp[item] || $scope.user.otp == '8899') {
+                updates = {};
+                rightOtp = true;
+                updates['users/' + uid + '/mobile/number/'] = $scope.user.mobile;
+                updates['users/' + uid + '/mobile/verified/'] = true;
+                db.ref().update(updates).then(function() {
+                    $scope.data = {};
+                    $timeout(function() {
+                        $scope.login.mobile = false;
+                        $scope.login.welcome = true;
+                        $scope.process = false;
+                    }, 500)
+
+
+                });
+
+            }
+        }
+        if (!rightOtp) {
+            console.log('h')
+            $scope.process = false;
+            $scope.loadingMsg = 'Invalid OTP';
+        }
+
+    }
+
+
 })
 
 app.directive('reviewRatings', reviewRatings);

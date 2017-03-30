@@ -8,34 +8,10 @@
                             <i class="material-icons">menu</i></a>
                         <a href= "" class="rooflogo left"><img src="images/general/logoicon.png" ng-click="gotoHome()"> </a>
                     </div>
-                    <div class="col s4 m5 l6 pdln hide-on-med-and-down">
-                        <div class="search_header">
-                            <i class="material-icons searchtopicon">search</i>
-                            <input type="text" name="" placeholder="search" class="mgbn">
-                            <div class="search-results resultfind" ng-show="false">
-                                <ul class="collection homecoll white mgan">
-                                    <li class="collection-item avatar">
-                                        <span class="b ft13">Gurgaon</span>
-                                        <span class="ft12">CGHS</span>
-                                    </li>
-                                    <li class="collection-item avatar">
-                                        <span class="b ft13">Gurgaon</span>
-                                        <span class="ft12">Apartment</span>
-                                    </li>
-                                    <li class="collection-item avatar">
-                                        <span class="b ft13">Gurgaon</span>
-                                        <span class="ft12">Penthouse / Villa</span>
-                                    </li>
-                                    <li class="collection-item avatar b">More Options</li>
-                                    <li class="collection-item avatar"> Explore Locality</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                     <ul class="right">
                         <li> <a href="/#/write-review" class="btn btn-primary mgln mgr10 ft12 b capitalize xs-wd"><i class="material-icons left bticon">create</i> Write Review</a></li>
                         <li ng-hide="loginStatus">
-                            <a href="#login_signup_popup" id="open-login" class="btn mgln mgr10 ft12 mgln b capitalize xs-wd">
+                            <a ng-click="openLogin()" id="open-login" class="btn mgln mgr10 ft12 mgln b capitalize xs-wd">
                                 <i class="material-icons left bticon">lock_outline</i> Login/Sign Up</a>
                         </li>
                         <li class="" ng-show="loginStatus">

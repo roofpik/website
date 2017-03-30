@@ -1,5 +1,7 @@
 app.controller('testLoginCtrl', function($scope) {
 
+    $scope.status = 'login';
+
     $scope.fbLogin = function() {
 
         var provider = new firebase.auth.FacebookAuthProvider();
@@ -30,6 +32,7 @@ app.controller('testLoginCtrl', function($scope) {
             if (user.providerData[0].email) {
                 user.updateEmail(user.providerData[0].email).then(function() {
                     // Update successful.
+                    $scope.status = 'mobile';
                 }, function(error) {
                     console.log(error)
                         // An error happened.
@@ -59,8 +62,6 @@ app.controller('testLoginCtrl', function($scope) {
     }
 
     $scope.googleLogin = function() {
-
-
 
         firebase.auth().signOut();
 

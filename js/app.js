@@ -11,6 +11,7 @@ firebase.initializeApp(config);
 var db = firebase.database();
 
 app.run(function($rootScope, $timeout) {
+    
     $rootScope.loginStatus = false;
     $rootScope.uid = null;
     firebase.auth().onAuthStateChanged(function(user) {
@@ -20,7 +21,7 @@ app.run(function($rootScope, $timeout) {
             $rootScope.$emit("loggedIn");
             localStorage.setItem('loginStatus', true);
             localStorage.setItem('uid', JSON.stringify(user.uid));
-            $('.modal').modal('close');
+            // $('.modal').modal('close');
             $rootScope.photoURL = user.photoURL;
             $rootScope.displayName = user.displayName;
         } else {
