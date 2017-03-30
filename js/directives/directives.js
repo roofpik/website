@@ -62,6 +62,22 @@ app.controller('headerCtrl', function($scope, $timeout, $rootScope) {
                 });
             });
     };
+
+
+     $('.modal').modal();
+    $('ul.tabs').tabs();
+    Materialize.updateTextFields();
+
+    $('.button-collapse').sideNav({
+        menuWidth: 300, // Default is 240
+        edge: 'left', // Choose the horizontal origin
+        closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        draggable: true // Choose whether you can drag to open on touch screens
+    });
+    $('select').material_select();
+    $('.slider').slider();
+    $('.dropdown-button').dropdown();
+    $('.carousel').carousel();
 });
 
 app.directive('footer', function() {
