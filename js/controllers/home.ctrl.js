@@ -1,6 +1,29 @@
 app.controller('homeCtrl', function($scope, $state, $timeout) {
 
+    var allcookies = document.cookie;
 
+    var loadTime = 6000;
+    cookiearray = allcookies.split(';');
+    console.log(cookiearray)
+    for (var i = 0; i < cookiearray.length; i++) {
+        name = cookiearray[i].split('=')[0];
+        value = cookiearray[i].split('=')[1];
+        if (name == 'user') {
+            showLoading();
+            loadTime = 1000;
+        }
+    }
+
+    if (cookiearray[0] == "") {
+        showLoading('stext');
+        document.cookie = "user=true";
+    }
+
+
+
+    $timeout(function() {
+        hideLoading();
+    }, loadTime);
 
 });
 
@@ -51,12 +74,15 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
     }
 
     $scope.getprojitem = function(item) {
-        console.log(item);
+        showLoading();
+
         if (item.category == 'default' || item.category == 'residential') {
             $scope.projsearch.txt = item.name;
         } else if (item.category == 'locSearch') {
             $scope.projsearch.txt = item.name + ' ' + item.subtitle;
         }
+
+
 
         $timeout(function() {
             if (item.category == 'default') {
@@ -226,8 +252,10 @@ app.controller('popularSearchCtrl', function($scope) {
     // console.log('popular working');
 });
 
-app.controller('microMarketsCtrl', function($scope) {
-    // console.log('micro working');
+app.controller('microMarketsCtrl', function($scope, $timeout) {
+    $timeout(function(){
+
+
     Highcharts.chart('chart1', {
         chart: {
             plotBackgroundColor: null,
@@ -332,9 +360,12 @@ app.controller('microMarketsCtrl', function($scope) {
         $('#chart1').css('top', '-18px');
         $('#chart2').css('position', 'absolute');
         $('#chart2').css('top', '-18px');
-    }, 1000);
+
+    }, 500);
+
+      },4000);
 });
 
 app.controller('popularProjectsCtrl', function($scope) {
-    $('.slider').slider();
+   
 })

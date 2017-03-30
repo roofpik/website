@@ -33,14 +33,21 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
         $scope.project = snapshot.val();
         console.log($scope.project.images)
         $scope.img = {}
-        for(img in $scope.project.images){
-            db.ref('images/'+img).once('value', function(data){
+        for (img in $scope.project.images) {
+            db.ref('images/' + img).once('value', function(data) {
                 item = data.val()
                 $scope.img[item['key']] = item;
-                if(item['imgCat'] == 'cover'){
-                    $scope.cover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-l.jpg';
+                if (item['imgCat'] == 'cover') {
+                    $scope.xscover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xs.jpg';
+
+                    // $scope.mcover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-m.jpg';
+                    // $("<img/>")
+                    //     .on('load', function() { console.log("image loaded correctly"); })
+
+                    // $scope.lcover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-l.jpg';
                 }
             });
+            hideLoading();
         }
         // Images needs to binded
 
@@ -187,7 +194,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
                 if (amenities[key][key1] != 'NA' || amenities[key][key1] != 'No') {
                     try {
                         $scope.amenitiesType[key].present = true;
-                    } catch (err) { console.log(key,key1) }
+                    } catch (err) { console.log(key, key1) }
                 }
             }
         }
