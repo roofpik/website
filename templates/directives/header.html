@@ -6,7 +6,7 @@
                     <div class="col no-padding">
                         <a href="#" data-activates="slide-out" class="button-collapse show-on-large grey-text left">
                             <i class="material-icons">menu</i></a>
-                        <a href= "" class="rooflogo left"><img src="images/general/logoicon.png" ng-click="gotoHome()"> </a>
+                        <a href="" class="rooflogo left"><img src="images/general/logoicon.png" ng-click="gotoHome()"> </a>
                     </div>
                     <ul class="right">
                         <li> <a href="/#/write-review" class="btn btn-primary mgln mgr10 ft12 b capitalize xs-wd"><i class="material-icons left bticon">create</i> Write Review</a></li>
@@ -16,7 +16,10 @@
                         </li>
                         <li class="" ng-show="loginStatus">
                             <a href="" class="dropdown-button btn btn-flat mgln ft12 mgr10 capitalize" data-activates="dropdown1">
-                                <img class="display-img left" ng-src="{{user.photoURL}}">{{user.displayName}}</a>
+                                <img class="display-img left" ng-src="{{user.photoURL}}">{{user.displayName}}
+                <span ng-click="logout()">Logout</span>
+                                </a>
+                                
                             <ul id="dropdown1" class="dropdown-content droplogin">
                                 <!-- <li>
                                     <a href="">
@@ -53,28 +56,28 @@
                 <li><a href="#!">Terms & Privacy</a></li>
             </ul>
         </div>
-         <footer class="navfooter grey lighten-4 pdt10">
-                <div class="row mgbn pdleftright">
-                    <div class="col left pdt10 left-align">
-                        <h6 class="grey-text mgtn">Follow us</h6>
-                    </div>
-                    <div class="col right right-align">
-                        <a class="right" href="https://www.facebook.com/roofpik" target="_blank">
-                            <img src="images/general/facebook.png">
-                        </a>
-                        <a class="right" href="https://www.linkedin.com/company/roofpik?trk=job_view_topcard_company_name" target="_blank">
-                            <img src="images/general/linked-in.png">
-                        </a>
-                        <a class="right" href="https://www.twitter.com/roofpik" target="_blank">
-                            <img src="images/general/twitter.png">
-                        </a>
-                    </div>
+        <footer class="navfooter grey lighten-4 pdt10">
+            <div class="row mgbn pdleftright">
+                <div class="col left pdt10 left-align">
+                    <h6 class="grey-text mgtn">Follow us</h6>
                 </div>
-                <div class="footer-copyright center pdt10 pdb10 grey lighten-3">
-                    <div class="ft12 grey-text">
-                        © AlphaBinary Technologies Pvt Ltd
-                    </div>
+                <div class="col right right-align">
+                    <a class="right" href="https://www.facebook.com/roofpik" target="_blank">
+                        <img src="images/general/facebook.png">
+                    </a>
+                    <a class="right" href="https://www.linkedin.com/company/roofpik?trk=job_view_topcard_company_name" target="_blank">
+                        <img src="images/general/linked-in.png">
+                    </a>
+                    <a class="right" href="https://www.twitter.com/roofpik" target="_blank">
+                        <img src="images/general/twitter.png">
+                    </a>
                 </div>
-            </footer>
+            </div>
+            <div class="footer-copyright center pdt10 pdb10 grey lighten-3">
+                <div class="ft12 grey-text">
+                    © AlphaBinary Technologies Pvt Ltd
+                </div>
+            </div>
+        </footer>
     </div>
 </div>

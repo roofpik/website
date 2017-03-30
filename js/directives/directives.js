@@ -80,11 +80,11 @@ app.controller('headerCtrl', function($scope, $timeout, $rootScope, $state) {
 
 
 
-    $scope.openLogin = function(){
+    $scope.openLogin = function() {
         $('#login_signup_popup').modal({
             dismissible: false
         });
-        
+
         $('#login_signup_popup').modal('open');
     }
 
@@ -163,14 +163,7 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope) {
                 });
             }
 
-            updates = {};
-            $scope.login.signup = false;
-            $scope.login.mobile = true;
-            updates['users/' + $scope.data.uid] = $scope.data;
-            db.ref().update(updates).then(function() {
-
-                $scope.data = {};
-            });
+            registerUser()
 
             // ...
         }).catch(function(error) {
@@ -221,8 +214,7 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope) {
             $scope.data.google.gid = user.providerData[0].uid;
             $scope.data.google.photoURL = user.providerData[0].photoURL;
             $scope.data.google.token = token;
-            $scope.login.signup = false;
-            $scope.login.mobile = true;
+
             if (user.providerData[0].email) {
                 user.updateEmail(user.providerData[0].email).then(function() {
                     // Update successful.
@@ -232,12 +224,7 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope) {
                 });
             }
 
-            updates = {};
-            updates['users/' + $scope.data.uid] = $scope.data;
-            db.ref().update(updates).then(function() {
-                $scope.login.status = 'mobile';
-                $scope.data = {};
-            });
+            registerUser()
 
 
             // ...
@@ -252,6 +239,35 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope) {
             sweetAlert(error.code, error.message, "error");
             // ...
         });
+    }
+
+
+
+    function registerUser() {
+        db.ref('users/' + $scope.data.uid).once('value', function(snapshot) {
+            if (!snapshot.val()) {
+                updates = {};
+
+                $timeout(function() {
+                    $scope.login.signup = false;
+                    $scope.login.mobile = true;
+                }, 1000);
+
+                updates['users/' + $scope.data.uid] = $scope.data;
+                db.ref().update(updates).then(function() {
+                    $scope.data = {};
+                });
+            } else {
+
+                $('#login_signup_popup').modal('close');
+                Materialize.toast("You have successfully loggedin!", 1500);
+            }
+
+        })
+
+
+
+
     }
 
     var otp = {};
