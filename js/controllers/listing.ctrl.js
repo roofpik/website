@@ -1,8 +1,17 @@
 app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $state, $location, $window) {
     $('html,body').scrollTop(0);
+      $('.button-collapse').sideNav({
+      menuWidth: 300, // Default is 300
+      edge: 'right', // Choose the horizontal origin
+      closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+      draggable: true // Choose whether you can drag to open on touch screens
+    }
+  );
+        
     $timeout(function() {
 
         var slider = document.getElementById('price');
+        var slider2 = document.getElementById('price2');
 
         if ($location.search().rmin) {
             rstart = $location.search().rmin
@@ -28,6 +37,31 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
 
         slider.noUiSlider.on('change', function() {
             val = slider.noUiSlider.get();
+
+            var inputMin = $('#minP');
+            inputMin.val(parseFloat(val[0], 10));
+            inputMin.trigger('input');
+
+            var inputMax = $('#maxP');
+            inputMax.val(parseFloat(val[1], 10));
+            inputMax.trigger('input');
+
+        });
+
+
+           noUiSlider.create(slider2, {
+            start: [rstart, rend],
+            tooltips: true,
+            connect: true,
+            step: 5000,
+            range: {
+                'min': 5000,
+                'max': 200000
+            }
+        });
+
+        slider2.noUiSlider.on('change', function() {
+            val = slider2.noUiSlider.get();
 
             var inputMin = $('#minP');
             inputMin.val(parseFloat(val[0], 10));

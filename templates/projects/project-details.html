@@ -8,34 +8,38 @@
             </div>
         </div>
     </section>
-    <div class="row">
-        <div class="container">
-            <div class="row">
-                <div class="col s8">
-                    <div class="row mgbn linehth5">
-                        <div class="col s4 pda10">
-                            <!--  <i class="material-icons abs teal-text text-accent-4">vpn_key</i> -->
-                            <h5 class="ft12 mgan"> Possession</h5>
-                            <h4 class="mgan ft15 b truncate">Ready to move</h4>
-                            <p class="mgan ft12">{{project.general.yop}}</p>
+    <section>
+        <div class="row container h-services">
+            <div class="col s12 m8 pdln pdrn">
+                <div class="row over center">
+                    <div class="col m4 s12">
+                        <div class="z-services">
+                            <i class="material-icons medium">redeem</i>
+                            <h5 class="mgbn ft12"> Possession</h5>
+                            <h4 class="mgbn mgt5 ft15 b truncate">Ready to move</h4>
+                            <p class="mgt5 ft12">{{project.general.yop}}</p>
                         </div>
-                        <div class="col s4 pda10">
-                            <!-- <i class="material-icons abs left cyan-text text-accent-4">place</i> -->
-                            <h5 class="ft12 mgan">Address</h5>
-                            <h4 class="mgan ft15 b truncate">{{project.location.displayAdd}}</h4>
-                            <p class="mgan ft12">Gurgaon</p>
+                    </div>
+                    <div class="col m4 s12">
+                        <div class="z-services">
+                            <i class="material-icons medium">date_range</i>
+                            <h5 class="mgbn ft12 ">Address</h5>
+                            <h4 class="mgbn mgt5 ft15 b truncate">{{project.location.displayAdd}}</h4>
+                            <p class="mgt5 ft12">Gurgaon</p>
                         </div>
-                        <div class="col s4 pda10">
-                            <!--  <i class="material-icons abs left deep-purple-text text-accent-1 ">details</i> -->
-                            <h5 class="ft12 mgan"> Project Details</h5>
-                            <h4 class="mgan ft15 b truncate">{{project.general.units}} Units</h4>
-                            <p class="mgan ft12">{{project.general.tower}} towers</p>
+                    </div>
+                    <div class="col m4 s12">
+                        <div class="z-services">
+                            <i class="material-icons medium">event_seat</i>
+                            <h5 class="mgbn ft12 "> Project Details</h5>
+                            <h4 class="mgbn mgt5 ft15 b truncate">{{project.general.units}} Units</h4>
+                            <p class="mgt5 ft12">{{project.general.tower}} towers</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     <div class="row white shdsm displayn" id="fixsub_hd">
         <div class="container">
             <ul class="menu_sub mgan">
@@ -140,7 +144,7 @@
                     <div class="row mgrn" id="Units_Sizes">
                         <div class="col s12">
                             <h3 class="heading">Units & Sizes</h3>
-                            <div class="row mgbn units_tab">
+                            <!--  <div class="row mgbn units_tab">
                                 <div class="col s12">
                                     <ul class="tabs">
                                         <li class="tab col" ng-repeat="config in configurations" ng-click="selectConfig(config)" ng-class="config.selected? 'active': 'normal'">
@@ -163,20 +167,68 @@
                                         </div>
                                         <div id="{{unit.hrefLink}}" class="col s12" ng-repeat="unit in config.units" ng-show="unit.selected">
                                             <div class="row">
-                                                <!-- <div class="col s5"><img src="images/home/merlin-floor.jpeg" class="responsive-img"></div> -->
                                                 <div class="col s7 pdl30 pdt30 relative">
                                                     <a href="" class="ft15 red-text">{{unit.bhk}} BHK ({{unit.area}}sq ft) <span ng-show="unit.servantRoom == 'Yes'">+ Servant Room</span></a>
                                                     <p class="ft24 bodb pdb20" ng-show="unit.rent"> ₹ {{unit.rent}} </p>
                                                     <p class="ft24 bodb pdb20" ng-hide="unit.rent"> Rent Not Available </p>
                                                     <div class="row mgln mgrn bodb">
                                                         <div class="col s6 pdb20"><i class="material-icons"></i> {{unit.bathroom}} <span class="grey-text">Bathrooms</span></div>
-                                                        <div class="col s6 pdb20"><i class="material-icons"></i> {{unit.bedroom}} <span class="grey-text">Bedrooms</span></div>
+                                                        <div class="col s6 pdb20"><i class="material-icons"></i> {{unit.bedroom}} <span class="grey-text">Bedrooms</span>
+                                                        </div>
+
                                                         <div class="col s6 pdb20"><i class="material-icons"></i> 4 <span class="grey-text">Bathrooms</span></div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div> -->
+                            <div class="row mgbn units_tab">
+                                <div class="col s12">
+                                    <ul class="tabs">
+                                        <li class="tab col left-align" ng-repeat="config in configurations" ng-click="selectConfig(config)" ng-class="config.selected? 'active': 'normal'">
+                                            <a class="active pdln" ng-href="{{config.hrefLink}}">{{config.bhk}} BHK<br>
+                                                <span class="subh ft11 grey-text">{{config.type}}</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div id="{{config.hrefLink}}" class="col s12">
+                                    <table class="striped">
+                                        <thead>
+                                            <tr>
+                                                <th>BHK</th>
+                                                <th>SQ FT</th>
+                                                <th>Prices</th>
+                                                <th>Bathrooms</th>
+                                                <th>Bedrooms</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>3 BHK</td>
+                                                <td>2086 sq ft</td>
+                                                <td>₹ 31000</td>
+                                                <td>3 bathroom</td>
+                                                <td>3 Bedrooms</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3 BHK</td>
+                                                <td>2086 sq ft</td>
+                                                <td>₹ 31000</td>
+                                                <td>3 bathroom</td>
+                                                <td>3 Bedrooms</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3 BHK</td>
+                                                <td>2086 sq ft</td>
+                                                <td>₹ 31000</td>
+                                                <td>3 bathroom</td>
+                                                <td>3 Bedrooms</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -205,7 +257,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mgbn" id="Specifications" ng-show="project.specifications">
+                    <div class="row" id="Specifications" ng-show="project.specifications">
                         <div class="col s12">
                             <h5 class="ft15 mgtn b pdb10">Specifications</h5>
                         </div>
@@ -219,19 +271,15 @@
                                 <div class="col s8 grey-text text-darken-2">{{val1}}</div>
                             </div>
                         </div>
+                        <div class="col s12 mgt10 pdb20"><a ng-click="showSpecifications()" class="right modal-trigger pointer">more specifications...</a></div>
                     </div>
                     <div class="row mgbn" id="gallery">
                         <div class="col s12">
                             <h5 class="ft15 mgtn b pdb10">Gallery</h5>
                         </div>
                         <div class="row mgan">
-                            <div class="gallery">
-                            
-                                <!--   <a ng-href="{{img}}" ng-repeat="img in images track by $index">
-                            }
-                            }
-                            <img ng-src="{{img}}"></a> -->
-                                <a ng-href="{{img.url}}" ng-repeat="img in images"><img ng-src="{{img.url}}"></a>
+                            <div class="gallery galleryrowfix">                            
+                                <a ng-href="{{img.url}}" ng-repeat="img in images"><img ng-src="{{img.url}}"></a>                              
                             </div>
                         </div>
                     </div>
@@ -509,6 +557,26 @@
                     <div id="mapCanvas" class="mapht"></div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div id="more_specifications" class="modal modal-fixed-footer white">    
+        <div class="modal-content">
+         <h5 class="ft15 mgtn b pdb10">Specifications</h5>
+            <div class="row">
+                <div class="col s12" ng-repeat="(key, val) in specifications">
+                    <h5 class="ft14 pdb10">
+                                 <img class="mgr10 left" src="images/homeicon/Business Center.png"> 
+                                 <span class="mgt5 inlineb">{{key}}</span>
+                            </h5>
+                    <div class="row ft12 mgt10 mgbn" ng-repeat="(key1, val1) in val">
+                        <div class="col s4 grey-text">{{key1}}:</div>
+                        <div class="col s8 grey-text text-darken-2">{{val1}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a ng-click="closeFilter()" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
         </div>
     </div>
 </div>

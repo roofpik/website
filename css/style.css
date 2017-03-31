@@ -30,17 +30,24 @@ body {
 .logoslide:hover {
     background-color: transparent !important;
 }
-.btnhd{background-color: transparent !important; font-size: 13px; color:#484848; margin: 17px 16px 0 16px !important; line-height: 110%;  font-weight: normal; padding: 8px 0 !important;}
+.btnhd{background-color: transparent !important; font-size: 13px; color:#484848; margin: 17px 16px 0 16px !important;
+ line-height: 110%;  font-weight: normal; padding: 8px 0 !important;}
 .btnhd:hover{background-color: transparent !important; border-bottom: 2px solid #767676;}
-.btnhd_prof a:hover{background-color: transparent !important; border-bottom:none !important;}
-.btnhd_prof ul{display: none !important; min-height: 50px; width: 150px; 
- position: absolute !important; top:52px; right: 10px; background-color: #fff; padding-top: 0px !important;}
-.btnhd_prof ul li a{ color:#484848; line-height: 40px !important; padding: 0px !important;}
-.btnhd_prof ul li { display: block;}
-.btnhd_prof ul li a i{ line-height: 40px !important; height: 40px !important;}
-.btnhd_prof ul li a:hover{ color:#484848; width: 150px; line-height: 40px !important; padding: 0px !important;}
-.btnhd_prof:hover ul{display: block !important; }
 
+/*top log out button css*/
+.btnhd_prof a:hover {background-color: transparent !important; border-bottom:none !important;} 
+
+.btnhd_prof{padding-bottom: 10px; position: relative;}
+.btnhd_prof ul{display: none !important; position: absolute; right: 0; float: right; margin-top: 10px;  min-height: 50px;
+ border: 1px solid #DBDBDB !important; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1) !important;
+  background-color: #fff; padding-top: 0px !important;}
+
+.btnhd_prof ul li a{ color:#484848; font-weight: normal; line-height: 40px !important; font-size: 13px; padding: 16px 0; border-bottom: 1px solid #f2f2f2; padding: 0px !important;}
+.btnhd_prof ul li { display: block; font-size: 11px;width: 100%; padding: 0 16px;}
+.btnhd_prof ul li a i{ line-height: 40px !important; height: 30px !important; font-size: 20px;}
+.btnhd_prof ul li a:hover{ color:#484848; display: block;  border-bottom: 1px solid #767676 !important;}
+.btnhd_prof:hover ul{display: block !important; }
+/*top log out button css end*/
 
 .headerfix {
     border-bottom: 1px solid #dce0e0;
@@ -343,9 +350,9 @@ hr {
 }
 
 #schedule_visit{width: 350px;}
-.listbtn_active{border-color: #ff5a5f;
-    background-color: #ff5a5f;
-    color: #fff !important;}
+.listbtn_active{/*border-color: #ff5a5f;
+    background-color: #ff5a5f;*/
+    color: #ff5a5f !important;}
 
 .listbtn:hover{ color: #FF5A5F !important; font-weight: bold; cursor: pointer;}
 
@@ -1041,6 +1048,9 @@ footer {
 .ht400 {
     height: 400px !important;
 }
+.ht450 {
+    height: 450px !important;
+}
 
 .ht350 {
     height: 350px !important;
@@ -1247,11 +1257,14 @@ footer {
     padding: 10px;
 }
 
+.galleryrowfix{height: 160px !important; overflow:hidden !important;}
+
 .gallery a img {
     width: 25%;
     height: 150px;
     float: left;
     padding-right: 5px;
+    margin-bottom: 5px;
 }
 
 .green-text {
@@ -1921,6 +1934,7 @@ input[type=email],
 /*responsive media css*/
 
 @media only screen and (max-width: 992px) {
+    .projList{padding-left: 10px !important;}
     .side-nav a {
         padding: 0 32px;
     }

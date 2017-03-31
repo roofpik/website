@@ -2,7 +2,6 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
 
 
 
-
     $scope.countryId = '-K_43TEI8cBodNbwlKqJ';
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.micromarketId = $location.search().m;
@@ -13,6 +12,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
     $scope.specifications = {};
     $scope.allAmenities = amenities;
     hideLoading();
+ 
 
     $scope.amenitiesType = amenitiesType;
 
@@ -63,6 +63,13 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
             
 
         }
+
+
+        $scope.showSpecifications = function(){
+             $('#more_specifications').modal();
+             $('#more_specifications').modal('open');
+
+        }
         // Images needs to binded
 
         if ($scope.project.amenities) {
@@ -78,6 +85,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
                 var y = camelCaseToTitleCase(key1);
                 $scope.specifications[x][y] = $scope.project.specifications[key][key1];
             }
+           
         }
         // console.log($scope.project.specifications);
         if ($scope.project.highlights) {
@@ -87,6 +95,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
             if ($scope.project.highlights.cons) {
                 $scope.cons = $scope.project.highlights.cons.split("*");
             }
+
 
         }
         if ($scope.project.general.about) {
