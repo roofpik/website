@@ -1,4 +1,5 @@
 app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $state, $location, $window) {
+    $('html,body').scrollTop(0);
     $timeout(function() {
 
         var slider = document.getElementById('price');

@@ -1,20 +1,7 @@
 app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $stateParams, $location) {
 
 
-  $('.gallery').each(function() { // the containers for all your galleries
-        $(this).magnificPopup({
-            delegate: 'a', // the selector for gallery item
-            type: 'image',
-            gallery: {
-                enabled: true
-            }
-        });
-    });
 
-  
-
-    // Load initialize function
-    // google.maps.event.addDomListener(window, 'load', initMap);
 
     $scope.countryId = '-K_43TEI8cBodNbwlKqJ';
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
@@ -25,6 +12,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
     $scope.cons = [];
     $scope.specifications = {};
     $scope.allAmenities = amenities;
+    hideLoading();
 
     $scope.amenitiesType = amenitiesType;
 
@@ -32,22 +20,48 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
 
         $scope.project = snapshot.val();
         console.log($scope.project.images)
-        $scope.img = {}
+        $scope.images = {}
         for (img in $scope.project.images) {
             db.ref('images/' + img).once('value', function(data) {
                 item = data.val()
-                $scope.img[item['key']] = item;
+                $scope.images[item['key']] = {'url':'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-m.jpg'};
                 if (item['imgCat'] == 'cover') {
-                    $scope.xscover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xs.jpg';
+                    // $('#cover-m').hide();
+                    // $('#cover-l').hide();
+                    // $scope.xscover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xs.jpg';
+                    $scope.cover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-m.jpg';
+                    //  $scope.lcover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xl.jpg';
 
-                    // $scope.mcover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-m.jpg';
-                    // $("<img/>")
-                    //     .on('load', function() { console.log("image loaded correctly"); })
+                    // $("#cover-m").on('load', function() {
+                    //     $('#cover-xs').hide()
+                    //     $('#cover-m').show()
 
-                    // $scope.lcover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-l.jpg';
+
+
+
+                    // });
+
+                    // $("#cover-l").on('load', function() {
+                    //     console.log('kk')
+                    //     $('#cover-m').hide()
+                    //     $('#cover-l').show()
+                    // });
+
+
                 }
+                
+                $('.gallery').each(function() { // the containers for all your galleries
+                $(this).magnificPopup({
+                    delegate: 'a', // the selector for gallery item
+                    type: 'image',
+                    gallery: {
+                        enabled: true
+                    }
+                });
             });
-            hideLoading();
+            });
+            
+
         }
         // Images needs to binded
 
@@ -221,10 +235,5 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
         db.ref('query').push($scope.query).then(function() {
             swal('Query Submitted', 'Our executives will call you back', 'success');
         })
-    }
-
-    $scope.openModal = function() {
-        $('#view_map_popup').modal('open');
-        initMap();
     }
 })

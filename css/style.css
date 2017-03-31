@@ -4,7 +4,7 @@ body {
     font-weight: 300;
 }
 
-header, footer, .main-content{
+.main-content{
     display:none;
 }
 
@@ -1572,6 +1572,12 @@ input[type=email],
 
 .htv100 {
     height: 100vh !important;
+    display: block;
+}
+
+
+.htv90 {
+    height: 90vh !important;
     display: block;
 }
 

@@ -37,19 +37,26 @@
     .micro-markets .card {
         overflow: hidden;
     }
+
+    .content-sec{
+        min-height: 800px;
+    }
     </style>
 </head>
 
 <body ng-app="roofpikWeb">
 <!-- Loading -->
-<loading></loading>
+
     <!-- header part start -->
     <header>
         <div header></div>
     </header>
     <!-- header part end -->
     <!-- content part end -->
+    <div class="content-sec">
+    <loading></loading>
     <div ui-view autoscroll="true" class="main-content"></div>
+    </div>
     <!-- content part end -->
     <!-- footer part start -->
     <footer>

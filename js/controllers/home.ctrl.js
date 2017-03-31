@@ -2,16 +2,15 @@ app.controller('homeCtrl', function($scope, $state, $timeout) {
 
     var allcookies = document.cookie;
 
-    var loadTime = 6000;
+    var loadTime = 3000;
     cookiearray = allcookies.split(';');
-    console.log(cookiearray)
     for (var i = 0; i < cookiearray.length; i++) {
         name = cookiearray[i].split('=')[0];
         value = cookiearray[i].split('=')[1];
         if (name == 'user') {
-            showLoading();
-            loadTime = 1000;
+            loadTime = 0;
         }
+        
     }
 
     if (cookiearray[0] == "") {
@@ -22,7 +21,7 @@ app.controller('homeCtrl', function($scope, $state, $timeout) {
 
 
     $timeout(function() {
-         $('.parallax').parallax();
+         
         hideLoading();
     }, loadTime);
 

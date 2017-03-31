@@ -35,7 +35,7 @@ app.run(function($rootScope, $timeout) {
     $rootScope.$on('$stateChangeStart',
         function() {
             // do something
-            hideLoading()
+            hideLoading();
         })
 });
 
@@ -43,10 +43,9 @@ app.run(function($rootScope, $timeout) {
 
 function hideLoading() {
     clearInterval(lint);
-    $('#page-load').fadeOut(1000, function() {
-        $('header').fadeIn(200);
-        $('footer').fadeIn(200);
-        $('.main-content').fadeIn(1000);
+    $('#page-load').fadeOut(500, function() {
+        $('.main-content').fadeIn(500);
+        $('.parallax').parallax();
     });
 
 
@@ -80,8 +79,6 @@ function showLoading(type) {
     count = count + 1;
 
     $('#page-load').fadeIn(200, function() {
-        $('header').hide();
-        $('footer').hide();
         $('.main-content').hide();
     });
 

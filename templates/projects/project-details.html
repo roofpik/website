@@ -1,7 +1,7 @@
 <div>
     <section class="mgt65">
         <div class="row img_detail">
-            <img ng-src="{{cover}}" class="responsive-img">
+            <img ng-src="{{cover}}" class="responsive-img" id="cover-xs">
             <div class="dt_abs">
                 <h3 class="white-text text-sd mgbn mgt65">{{project.name}}</h3>
                 <h5 class="white-text text-sd">{{project.location.displayAdd}}</h5>
@@ -209,7 +209,7 @@
                         <div class="col s12">
                             <h5 class="ft15 mgtn b pdb10">Specifications</h5>
                         </div>
-                        <div class="col s12 m6 xspdt pdb20" ng-repeat="(key, val) in specifications">
+                        <div class="col s12 m6" ng-repeat="(key, val) in specifications">
                             <h5 class="ft14 pdb10">
                                  <img class="mgr10 left" src="images/homeicon/Business Center.png"> 
                                  <span class="mgt5 inlineb">{{key}}</span>
@@ -226,11 +226,12 @@
                         </div>
                         <div class="row mgan">
                             <div class="gallery">
+                            
                                 <!--   <a ng-href="{{img}}" ng-repeat="img in images track by $index">
+                            }
+                            }
                             <img ng-src="{{img}}"></a> -->
-                                <a href="images/home/write-bg.jpg"><img src="images/home/write-bg.jpg"></a>
-                                <a href="images/home/writebg.jpg"><img src="images/home/writebg.jpg"></a>
-                                <a href="images/home/write-bg.jpg"><img src="images/home/write-bg.jpg"></a>
+                                <a ng-href="{{img.url}}" ng-repeat="img in images"><img ng-src="{{img.url}}"></a>
                             </div>
                         </div>
                     </div>

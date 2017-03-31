@@ -34,7 +34,6 @@ app.controller('headerCtrl', function($scope, $timeout, $rootScope, $state) {
     });
 
     $scope.gotoHome = function() {
-        showLoading();
         $state.go('home');
     }
 
