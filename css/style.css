@@ -1,13 +1,13 @@
 body {
     font-size: 13px;
     color: #484848;
-    font-weight: 300;
+    font-weight: 300; background-color: #fff;
 }
 
 .main-content{
     display:none;
 }
-
+.searchhome{padding-top: 100px;}
 .rooflogo {
     width: 35px !important;
     line-height: 110%;
@@ -27,6 +27,8 @@ body {
     padding: 10px 0 0 30px !important;
 }
 
+
+
 .logoslide:hover {
     background-color: transparent !important;
 }
@@ -35,10 +37,10 @@ body {
 .btnhd:hover{background-color: transparent !important; border-bottom: 2px solid #767676;}
 
 /*top log out button css*/
-.btnhd_prof a:hover {background-color: transparent !important; border-bottom:none !important;} 
+.btnhd_prof a:hover {background-color: transparent !important; border-bottom:none !important;}
 
 .btnhd_prof{padding-bottom: 10px; position: relative;}
-.btnhd_prof ul{display: none !important; position: absolute; right: 0; float: right; margin-top: 10px;  min-height: 50px;
+.btnhd_prof ul{display: none !important; position: absolute; width: 150px; right: 0; float: right; margin-top: 10px;  min-height: 50px;
  border: 1px solid #DBDBDB !important; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1) !important;
   background-color: #fff; padding-top: 0px !important;}
 
@@ -736,7 +738,7 @@ hr {
     z-index: 9998;
     display: block !important;
     position: absolute;
-    width: 100%;
+    width: 101%;
     max-height: 250px !important;
     overflow-y: auto;
 }
@@ -2122,11 +2124,22 @@ input[type=email],
 }
 
 @media screen and (min-width:0px) and (max-width: 600px) {
+    .m-h5{font-size: 1.5rem;
+    line-height: 140%;}
 .micro_overy{height: auto !important;}
     .transformfix{width: 80%;}
     .arrow_box {
         display: none;
     }
+.searchfix_xs {
+    position: absolute;
+    left: 50%;
+    z-index: 9;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+ .search-results ul.homecoll li.collection-item{line-height: 30px !important;}
+
     .xs_bdaw {
         border-bottom: 2px solid #fff !important;
         border-left: none;
@@ -2148,9 +2161,7 @@ input[type=email],
     h4 {
         font-size: 1.50rem
     }
-    h5 {
-        font-size: 1.10rem;
-    }
+   
     .dt_abs {
         left: 25px;
     }
