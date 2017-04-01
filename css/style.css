@@ -122,6 +122,8 @@ body {
     margin-bottom: -10px
 }
 
+.over_auto{max-height: 70%; overflow-y: auto;}
+
 hr {
     border-top: solid 1px #ddd !important;
     border-left: 0;
@@ -731,8 +733,8 @@ hr {
 }
 .imgic_amn{height: 100px;}
 .search-results {
-    z-index: 999;
-    display: none;
+    z-index: 9998;
+    display: block !important;
     position: absolute;
     width: 100%;
     max-height: 250px !important;
@@ -2116,9 +2118,12 @@ input[type=email],
     .wd20p {
         width: 25% !important;
     }
+    .dis67n{display: none;}
 }
 
 @media screen and (min-width:0px) and (max-width: 600px) {
+.micro_overy{height: auto !important;}
+    .transformfix{width: 80%;}
     .arrow_box {
         display: none;
     }
@@ -2135,6 +2140,8 @@ input[type=email],
     .img_location {
         height: 200px
     }
+    .btnhd{margin-top: 14px !important;}
+
     h3 {
         font-size: 2rem;
     }
