@@ -123,3 +123,12 @@ app.controller('testLoginCtrl', function($scope) {
             });
      }
 });
+
+
+app.controller('testReviewCtrl', function($scope){
+    console.log('k');
+    $('select').material_select();
+    $scope.change = function(){
+        console.log($scope.data);
+    }
+})
