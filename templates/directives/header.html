@@ -9,24 +9,19 @@
                         <a href="" class="rooflogo left"><img src="images/general/logoicon.png" ng-click="gotoHome()"> </a>
                     </div>
                     <ul class="right">
-                   <!--  <i class="material-icons left bticon">create</i>  -->
+                        <!--  <i class="material-icons left bticon">create</i>  -->
                         <li> <a href="/#/write-review" class="btnhd xs-wd">Write Review</a></li>
                         <li ng-hide="loginStatus">
                             <a ng-click="openLogin()" id="open-login" class="btnhd mgln xs-wd">
                                 Login/Sign Up</a>
-                                 <!-- <i class="material-icons left bticon">lock_outline</i> -->
+                            <!-- <i class="material-icons left bticon">lock_outline</i> -->
                         </li>
-                        <li class="btnhd_prof" >
+                        <li class="btnhd_prof">
                             <a href="" class="btnhd">
-                                <img class="display-img left" ng-src="{{user.photoURL}}">{{user.displayName}}               
-                                </a>
-                                
-                            <ul class="pda10 bodall">
-                                <!-- <li>
-                                    <a href="">
-                                        <i class="material-icons left">person</i>My Profile</a>
-                                </li>
-                                <li class="divider"></li> -->
+                                <img class="display-img left" ng-src="{{user.photoURL}}">{{user.displayName}}
+                            </a>
+                            <ul>
+                                <li> <a href="/#/write-review"><i class="material-icons left grey-text">edit</i>Write Review</a> </li>
                                 <li>
                                     <a href="" ng-click="logout()">
                                         <i class="material-icons left grey-text">power_settings_new</i> Logout
@@ -36,7 +31,7 @@
                         </li>
                     </ul>
                     <span class="right ft12 grey-text xsnr10">
-                        <i class="material-icons left tiny bticont mgrn">location_on</i>Gurgaon</span>
+                        <i class="material-icons left ft15 bticont mgrn">location_on</i>Gurgaon</span>
                 </div>
             </div>
         </nav>
