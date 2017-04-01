@@ -2124,6 +2124,7 @@ input[type=email],
 }
 
 @media screen and (min-width:0px) and (max-width: 600px) {
+    .starrating{height: 45px;}
     .m-h5{font-size: 1.5rem;
     line-height: 140%;}
 .micro_overy{height: auto !important;}
