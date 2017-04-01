@@ -144,5 +144,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         controller: 'testLoginCtrl'
     })
 
+        $stateProvider.state('testreview',{
+        url: '/test-review',
+        templateUrl: 'templates/review/test-review.html',
+        controller: 'testReviewCtrl'
+    })
+
     $urlRouterProvider.otherwise('/home');
 }]);

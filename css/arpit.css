@@ -274,3 +274,38 @@
          color: #383838;
          font-weight: 400;
      }
+
+
+
+.xtbtn-active{
+        background-color: #26a69a !important;
+    color: #fff !important;
+    font-weight: 700 !important;
+    border-color: #26a69a !important;
+}
+
+.error{
+    color:red;
+}
+
+.projdata{
+        margin-top: 0px;
+    top: -2px;
+}
+
+.projdata li{
+    cursor: pointer;
+}
+.projdata li:hover{
+    background: #f7f7f7;
+}
+
+#project-name{
+    margin-bottom: 0px;
+}
+
+.write-review select{
+    border: 0;
+    border-bottom: 1px solid #f2f2f2;
+}
+
