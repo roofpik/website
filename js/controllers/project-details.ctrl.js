@@ -11,7 +11,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
     $scope.cons = [];
     $scope.specifications = {};
     $scope.allAmenities = amenities;
- 
+
 
     $scope.amenitiesType = amenitiesType;
 
@@ -23,19 +23,40 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
         for (img in $scope.project.images) {
             db.ref('images/' + img).once('value', function(data) {
                 item = data.val()
-                $scope.images[item['key']] = {'url':'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-m.jpg'};
+                $scope.images[item['key']] = { 'url': 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-m.jpg' };
                 if (item['imgCat'] == 'cover') {
                     // $('#cover-m').hide();
                     // $('#cover-l').hide();
                     // $scope.xscover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xs.jpg';
-                    $scope.cover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-m.jpg';
+                    $scope.cover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xs.jpg';
+                    
+                    $scope.coverl = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xl.jpg';
+
+                    $('#cover-l').on('load', function() {
+                        $('#cover-xs').addClass('hidden');
+                        $('#cover-l').removeClass('hidden');
+
+                    });
+
+                    // image.onload = function() {
+                    //     console.log('called');
+                    //     $scope.cover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-l.jpg';
+                    //     //do something...
+                    // }
+                    // image.onerror = function() {
+                    //     console.error("Cannot load image");
+                    //     //do something else...
+                    // }
+
                     //  $scope.lcover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xl.jpg';
 
                     // $("#cover-m").on('load', function() {
                     //     $('#cover-xs').hide()
                     //     $('#cover-m').show()
 
-
+                    $('#zoomIn').on('load', function() {
+                        $('#zoomIn').removeClass('hidden');
+                    });
 
 
                     // });
@@ -48,28 +69,28 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
 
 
                 }
-                
+
                 $('.gallery').each(function() { // the containers for all your galleries
-                $(this).magnificPopup({
-                    delegate: 'a', // the selector for gallery item
-                    type: 'image',
-                    gallery: {
-                        enabled: true
-                    }
+                    $(this).magnificPopup({
+                        delegate: 'a', // the selector for gallery item
+                        type: 'image',
+                        gallery: {
+                            enabled: true
+                        }
+                    });
                 });
             });
-            });
-            
+
 
         }
 
 
-        $scope.showSpecifications = function(){
-             $('#more_specifications').modal();
-             $('#more_specifications').modal('open');
+        $scope.showSpecifications = function() {
+                $('#more_specifications').modal();
+                $('#more_specifications').modal('open');
 
-        }
-        // Images needs to binded
+            }
+            // Images needs to binded
 
         if ($scope.project.amenities) {
             generateAmenitiesList($scope.project.amenities);
@@ -84,7 +105,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
                 var y = camelCaseToTitleCase(key1);
                 $scope.specifications[x][y] = $scope.project.specifications[key][key1];
             }
-           
+
         }
         // console.log($scope.project.specifications);
         if ($scope.project.highlights) {
