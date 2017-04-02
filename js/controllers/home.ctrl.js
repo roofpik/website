@@ -1,5 +1,5 @@
 app.controller('homeCtrl', function($scope, $state, $timeout) {
-
+    $('.modal').modal('close');
     var allcookies = document.cookie;
 
     var loadTime = 3000;
@@ -14,16 +14,9 @@ app.controller('homeCtrl', function($scope, $state, $timeout) {
     }
 
     if (cookiearray[0] == "") {
-        showLoading('stext');
         document.cookie = "user=true";
     }
-
-
-
-    $timeout(function() {
-         
-        hideLoading();
-    }, loadTime);
+     $('.parallax').parallax();
 
 });
 
@@ -74,7 +67,6 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
     }
 
     $scope.getprojitem = function(item) {
-        showLoading();
 
         if (item.category == 'default' || item.category == 'residential') {
             $scope.projsearch.txt = item.name;
@@ -248,9 +240,6 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
 
 });
 
-app.controller('popularSearchCtrl', function($scope) {
-    // console.log('popular working');
-});
 
 app.controller('microMarketsCtrl', function($scope, $timeout) {
     $timeout(function(){
@@ -363,9 +352,16 @@ app.controller('microMarketsCtrl', function($scope, $timeout) {
 
     }, 500);
 
-      },4000);
+      },2000);
 });
 
-app.controller('popularProjectsCtrl', function($scope) {
+app.controller('popularSearchCtrl', function($scope, $timeout) {
+
+    db.ref('search').once('value', function(snapshot){
+        $timeout(function(){
+            $scope.popularSearch = snapshot.val();
+        }, 50)
+        
+    });
    
 })

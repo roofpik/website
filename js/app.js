@@ -35,54 +35,54 @@ app.run(function($rootScope, $timeout) {
     $rootScope.$on('$stateChangeStart',
         function() {
             // do something
-            hideLoading();
+            // hideLoading();
         })
 });
 
 
 
-function hideLoading() {
-    clearInterval(lint);
-    $('#page-load').fadeOut(500, function() {
-        $('.main-content').fadeIn(500);
-        $('.parallax').parallax();
-    });
+// function hideLoading() {
+//     clearInterval(lint);
+//     $('#page-load').fadeOut(500, function() {
+//         $('.main-content').fadeIn(500);
+//         $('.parallax').parallax();
+//     });
 
 
 
 
-}
-var lint;
+// }
+// var lint;
 
-function showLoading(type) {
-    if (type == "stext") {
-        var text = ["<b class='redt'>Roofpik</b> Power Your Property Search with Genuine User Reviews", "World's<b class='redt'> First</b> Property Reviewing Website", "Reviews are becoming the digital version of <b class='redt'>word-of-mouth</b> - Huffingtonpost"]
-    } else {
-        var text = []
-    }
-    count = 0;
-    setInterval(function() {
-        if (count == 2) {
-            count = 0
-        };
+// function showLoading(type) {
+//     if (type == "stext") {
+//         var text = ["<b class='redt'>Roofpik</b> Power Your Property Search with Genuine User Reviews", "World's<b class='redt'> First</b> Property Reviewing Website", "Reviews are becoming the digital version of <b class='redt'>word-of-mouth</b> - Huffingtonpost"]
+//     } else {
+//         var text = []
+//     }
+//     count = 0;
+//     setInterval(function() {
+//         if (count == 2) {
+//             count = 0
+//         };
 
-        $("#load-text").fadeOut(500, function() {
-            $('#load-text').html(text[count]);
-            $("#load-text").fadeIn(1000);
-            count = count + 1;
-        });
+//         $("#load-text").fadeOut(500, function() {
+//             $('#load-text').html(text[count]);
+//             $("#load-text").fadeIn(1000);
+//             count = count + 1;
+//         });
 
-    }, 4000);
+//     }, 4000);
 
 
-    $('#load-text').html(text[count]);
-    count = count + 1;
+//     $('#load-text').html(text[count]);
+//     count = count + 1;
 
-    $('#page-load').fadeIn(200, function() {
-        $('.main-content').hide();
-    });
+//     $('#page-load').fadeIn(200, function() {
+//         $('.main-content').hide();
+//     });
 
-    setTimeout(function() {
-        hideLoading();
-    }, 8000)
-}
+//     setTimeout(function() {
+//         hideLoading();
+//     }, 8000)
+// }

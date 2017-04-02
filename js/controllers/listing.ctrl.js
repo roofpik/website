@@ -1,13 +1,14 @@
 app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $state, $location, $window) {
     $('html,body').scrollTop(0);
-      $('.button-collapse').sideNav({
-      menuWidth: 300, // Default is 300
-      edge: 'right', // Choose the horizontal origin
-      closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-      draggable: true // Choose whether you can drag to open on touch screens
-    }
-  );
-        
+    $('.button-collapse1').sideNav({
+        menuWidth: 300, // Default is 300
+        edge: 'right', // Choose the horizontal origin
+        closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        draggable: true // Choose whether you can drag to open on touch screens
+    });
+
+
+
     $timeout(function() {
 
         var slider = document.getElementById('price');
@@ -49,7 +50,7 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
         });
 
 
-           noUiSlider.create(slider2, {
+        noUiSlider.create(slider2, {
             start: [rstart, rend],
             tooltips: true,
             connect: true,
@@ -178,15 +179,22 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
 
             $('.fd-load').removeClass('blur');
             $scope.projects = response.data.items;
-            $timeout(function(){
-                hideLoading()
-            }, 2000)
-            
+            $timeout(function() {
+                // $('input#date').characterCounter();
+            }, 1000)
+
         })
 
     }
 
-    getProjects()
+    getProjects();
+    $scope.visit = {};
+
+    $scope.visitDate = function(){
+        console.log($scope.visit.date);
+    }
+
+
 
 
     var count = 0;

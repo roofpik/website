@@ -77,8 +77,7 @@
         <div class="container">
             <div class="row list-heading">
                 <div class="col s12">
-                    <h5>  Projects in Gurgaon  <a href="#" data-activates="slide-out1" class="right button-collapse hide-on-large-only"><i class="material-icons">menu</i></a></h5>
-                   
+                    <h5>  Projects in Gurgaon  <a href="#" data-activates="slide-out1" class="right button-collapse1 hide-on-large-only"><i class="material-icons">menu</i></a></h5>
                 </div>
             </div>
             <div class="row">
@@ -241,18 +240,31 @@
                         <p class="ft12 grey-text">Enter your details to get callback</p>
                     </div>
                     <form name="queryForm" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength">
-                        <div class="input-field col s12">
-                            <input placeholder="Email" type="email" class="validate mgb5 ft12 ng-pristine ng-untouched ng-valid-email ng-invalid ng-invalid-required" ng-model="query.email" required="">
-                        </div>
                         <div class="input-field col s1 pdt12">
                             +91
                         </div>
                         <div class="input-field col s11">
-                            <input placeholder="Mobile No." type="number" class="validate mgb5 ft12 ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength" ng-minlength="10" ng-maxlength="10" ng-model="query.mobileNum" required="">
+                            <input placeholder="Mobile No." type="number" class="validate mgb5 ft12 ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength" ng-minlength="10" ng-maxlength="10" ng-model="query.mobileNum">
+                        </div>
+                        <div class="input-field col s11">
+                            <div class="row">
+                            <div class="col s4">
+                            <input type="text" placeholder="DD " ng-model="visit.date" >
+                            <span>Date</span>
+                            </div>
+                             <div class="col s4">
+                            <input type="text" placeholder="MM" ng-model="visit.month" >
+                            <span>Month</span>
+                            </div>
+                            <div class="col s4">
+                            <input type="text" placeholder="Hour" ng-model="visit.time" >
+                            <span>Time</span>
+                            </div>
+                            </div>
                         </div>
                         <div class="col s12 mgtmn mgt10">
                             <button class="btn btn-full" ng-disabled="queryForm.$invalid" ng-click="submitQuery()" disabled="disabled"><i class="material-icons left">phone</i> Get Callback</button>
-                            <p class="ft11 grey-text center">Calling hours are from 9 a.m to 10 p.m IST</p>
+                            <p class="ft11 grey-text center">Calling hours are from 9 a.m to 7 p.m IST</p>
                         </div>
                     </form>
                 </div>
@@ -262,3 +274,4 @@
             </div>
         </div>
     </div>
+</div>

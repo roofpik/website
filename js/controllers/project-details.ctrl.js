@@ -11,7 +11,6 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
     $scope.cons = [];
     $scope.specifications = {};
     $scope.allAmenities = amenities;
-    hideLoading();
  
 
     $scope.amenitiesType = amenitiesType;
