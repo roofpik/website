@@ -36,7 +36,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
 
     $stateProvider.state('write-review', {
-        url: '/write-review?id&type',
+        url: '/write-review?key&name&type',
         templateUrl: 'templates/review/write-review.html',
         controller: 'writeReviewCtrl'
     })

@@ -1,7 +1,9 @@
-app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams, $rootScope, $http) {
-var user;
+app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams, $rootScope, $http, $location) {
+    var user;
     var cityId = '-KYJONgh0P98xoyPPYm9';
     var countryId = '-K_43TEI8cBodNbwlKqJ';
+
+
 
     function initialize() {
         $scope.data = {};
@@ -23,6 +25,23 @@ var user;
 
 
     initialize();
+
+
+        if ($location.search().key) {
+        $scope.review.project.key = $location.search().key;
+    }
+    if ($location.search().name) {
+        $scope.review.project.name = $location.search().name;
+        $scope.projectsData = false;
+        $scope.searchtxt = $location.search().name;
+        $timeout(function(){
+                Materialize.updateTextFields();
+        }, 500);
+        
+    }
+    if ($location.search().tyep) {
+        $scope.review.project.type = $location.search().type;
+    }
 
 
 
@@ -69,12 +88,12 @@ var user;
 
     $scope.selectedProj = function(item) {
         $scope.projectsData = false;
-        $scope.searchtxt = item.name
+        $scope.searchtxt = item.name;
         $scope.review.project.key = item.key;
         $scope.review.project.name = item.name;
         $scope.review.project.type = item.category;
 
-        
+
         Materialize.updateTextFields();
 
 

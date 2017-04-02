@@ -190,7 +190,7 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
     getProjects();
     $scope.visit = {};
 
-    $scope.visitDate = function(){
+    $scope.visitDate = function() {
         console.log($scope.visit.date);
     }
 
@@ -265,6 +265,30 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
                 getBuilders();
             }, 0)
         })
+    }
+
+    $scope.scheduleVisit = function(proj) {
+        $scope.visit.project ={};
+        $scope.visit.project.key = proj.key;
+        $scope.visit.project.location = proj.location;
+        $scope.visit.project.location = proj.location;
+        $scope.visit.project.name = proj.name;
+    }
+
+    $scope.submitQuery = function() {
+        updates = {}
+        var newPostKey = firebase.database().ref().child('openQuery').push().key;
+        $scope.visit.created = new Date().getTime();
+        $scope.visit.status = 'submitted';
+
+        updates['/openQuery/country/-K_43TEI8cBodNbwlKqJ/city/-KYJONgh0P98xoyPPYm9/query/' + newPostKey] = $scope.visit;
+        db.ref().update(updates).then(function() {
+            Materialize.toast('You have successfully submit details!', 3000, 'rounded');
+        })
+    }
+
+    $scope.writeReview = function(proj){
+        $state.go('write-review', {'key':proj.key, 'name': proj.name, 'type': 'residential'})
     }
 
     function getBuilders() {

@@ -1,22 +1,6 @@
 app.controller('homeCtrl', function($scope, $state, $timeout) {
     $('.modal').modal('close');
-    var allcookies = document.cookie;
-
-    var loadTime = 3000;
-    cookiearray = allcookies.split(';');
-    for (var i = 0; i < cookiearray.length; i++) {
-        name = cookiearray[i].split('=')[0];
-        value = cookiearray[i].split('=')[1];
-        if (name == 'user') {
-            loadTime = 0;
-        }
-        
-    }
-
-    if (cookiearray[0] == "") {
-        document.cookie = "user=true";
-    }
-     $('.parallax').parallax();
+    $('.parallax').parallax();
 
 });
 
@@ -47,16 +31,11 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
         category: 'default'
     }];
 
-
-
     $scope.projsearchFocus = function() {
         $scope.projsearch.status = true;
         if (!$scope.projsearch.txt && !$scope.projsearch.locfilter) {
             $scope.projsearch.data = projdefault;
-        } else {
-
         }
-
     }
 
     $scope.projsearchBlur = function() {
@@ -110,10 +89,6 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
 
         }
     }
-
-
-
-
 
 
     $scope.locsearch = {}
@@ -181,10 +156,7 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
         if (!$scope.locsearch.txt) {
             $scope.locsearch.data = locdefault;
             $scope.projsearch.locfilter = false;
-        } else {
-
         }
-
     }
 
     $scope.locsearchBlur = function() {
@@ -239,129 +211,3 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
     }
 
 });
-
-
-app.controller('microMarketsCtrl', function($scope, $timeout) {
-    $timeout(function(){
-
-
-    Highcharts.chart('chart1', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie',
-            margin: [0, 0, 0, 0],
-            spacingTop: 0,
-            spacingBottom: 0,
-            spacingLeft: 0,
-            spacingRight: 0
-        },
-        title: {
-            text: null
-        },
-        tooltip: {
-            pointFormat: ' <b>{point.y}</b>'
-        },
-        plotOptions: {
-            pie: {
-                size: '100%',
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                }
-            }
-        },
-        series: [{
-            name: 'Brands',
-            colorByPoint: true,
-            data: [{
-                name: 'Villas',
-                y: 22,
-                sliced: true,
-                selected: true
-            }, {
-                name: 'Apartments',
-                y: 70
-            }, {
-                name: 'Penthouse',
-                y: 18
-            }, {
-                name: 'Row House',
-                y: 15
-            }]
-        }]
-    });
-
-
-    Highcharts.chart('chart2', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie',
-            margin: [0, 0, 0, 0],
-            spacingTop: 0,
-            spacingBottom: 0,
-            spacingLeft: 0,
-            spacingRight: 0
-        },
-        title: {
-            text: null
-        },
-        tooltip: {
-            pointFormat: ' <b>{point.y}</b>'
-        },
-        plotOptions: {
-            pie: {
-                size: '100%',
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                }
-            }
-        },
-        series: [{
-            name: 'Brands',
-            colorByPoint: true,
-            data: [{
-                name: 'Villas',
-                y: 18,
-                sliced: true,
-                selected: true
-            }, {
-                name: 'Apartments',
-                y: 22
-            }, {
-                name: 'Penthouse',
-                y: 19
-            }, {
-                name: 'Row House',
-                y: 10
-            }]
-        }]
-    });
-
-    setTimeout(function() {
-        $('#chart1').css('position', 'absolute');
-        $('#chart1').css('top', '-18px');
-        $('#chart2').css('position', 'absolute');
-        $('#chart2').css('top', '-18px');
-
-    }, 500);
-
-      },2000);
-});
-
-app.controller('popularSearchCtrl', function($scope, $timeout) {
-
-    db.ref('search').once('value', function(snapshot){
-        $timeout(function(){
-            $scope.popularSearch = snapshot.val();
-        }, 50)
-        
-    });
-   
-})
