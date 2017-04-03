@@ -1523,9 +1523,11 @@ input[type=email],
     font-size: 13px;
 }
 
+.listing_rightfix{right: 4%; top: 26%;}
+
 .wdfull {
     width: 100%;
-}
+} 
 
 .gm-style-iw > div,
 .gm-style-iw > div > div {
@@ -1590,6 +1592,11 @@ input[type=email],
 
 .htv100 {
     height: 100vh !important;
+    display: block;
+}
+
+.htvF65 {
+    height:calc(70vh - 65px);
     display: block;
 }
 
@@ -1991,6 +1998,7 @@ input[type=email],
     .filterList div label {
         font-size: 11px !important;
     }
+    
 }
 
 @media screen and (min-width:1080px) and (max-width: 1120px) {
@@ -2001,6 +2009,7 @@ input[type=email],
         width: 290px !important;
         right: 4% !important;
     }
+
 }
 
 @media screen and (min-width:993px) and (max-width: 1200px) {
@@ -2009,6 +2018,7 @@ input[type=email],
         top: -24px;
         left: auto;
     }
+    .listing_rightfix{right: 0% !important;}
 }
 
 @media screen and (min-width:0px) and (max-width: 767px) {

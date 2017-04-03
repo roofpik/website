@@ -1,6 +1,7 @@
     .type-in {
         float: left;
         position: relative;
+        width: 100%
     }
     
     .thumb {
