@@ -27,7 +27,6 @@
  }
 
 
-
   .write-review h3{
     line-height: 50px;
   }
@@ -304,12 +303,4 @@
     height: 100%;
     margin-top: -65px;
 }
-.popular-search h5 {
-    margin-bottom: 50px;
-}
-.partners {
-    margin-bottom: 50px;
-}
-.partners h5 {
-    margin-bottom: 50px;
-}
+
