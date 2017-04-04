@@ -31,6 +31,11 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
         category: 'default'
     }];
 
+
+    $scope.search = function(){
+        $('#projsearch').focus();
+    }
+
     $scope.projsearchFocus = function() {
         $scope.projsearch.status = true;
         if (!$scope.projsearch.txt && !$scope.projsearch.locfilter) {
