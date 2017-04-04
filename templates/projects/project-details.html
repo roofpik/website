@@ -26,26 +26,34 @@
                     <div class="col m4 s12">
                         <div class="z-services">
                             <i class="material-icons medium">redeem</i>
-                            <h5 class="mgbn ft12"> Possession</h5>
-                            <h4 class="mgbn mgt5 ft15 b truncate">Ready to move</h4>
-                            <p class="mgt5 ft12">{{project.general.yop}}</p>
+                            <h5 class="mgbn ft12"> Style</h5>
+                             <h4 class="mgbn mgt5 ft15 b truncate">{{projectsummary.general.segment}}</h4>
+                            <p class="mgt5 ft12">{{projectsummary.general.style}}</p>
+                           <!--  <h4 class="mgbn mgt5 ft15 b truncate">Ready to move</h4>
+                            <p class="mgt5 ft12">{{project.general.yop}}</p> -->
                         </div>
                     </div>
                     <div class="col m4 s12">
                         <div class="z-services">
                             <i class="material-icons medium">date_range</i>
-                            <h5 class="mgbn ft12 ">Address</h5>
-                            <h4 class="mgbn mgt5 ft15 b truncate">{{project.location.displayAdd}}</h4>
-                            <p class="mgt5 ft12">Gurgaon</p>
+                            <h5 class="mgbn ft12 ">Rent</h5>
+                            <h4 class="mgbn mgt5 ft15 b truncate">{{projectsummary.rentsummary.min}} - {{projectsummary.rentsummary.max}}</h4>
+                            <p class="mgt5 ft12">{{projectsummary.general.ptype}}</p>
+                           <!--  <h4 class="mgbn mgt5 ft15 b truncate">{{project.location.displayAdd}}</h4>
+                            <p class="mgt5 ft12">Gurgaon</p> -->
                         </div>
                     </div>
                     <div class="col m4 s12">
                         <div class="z-services">
                             <i class="material-icons medium">event_seat</i>
-                            <h5 class="mgbn ft12 "> Project Details</h5>
-                            <h4 class="mgbn mgt5 ft15 b truncate">{{project.general.units}} Units</h4>
+                            <h5 class="mgbn ft12 "> Reviews</h5>
+                            <h4 class="mgbn mgt5 ft15 b truncate">{{projectsummary.review.count}} Reviews</h4>
+                            <p class="mgt5 ft12">{{projectsummary.review.rating}} Rating</p>
+                            <p class="mgt5 ft12">{{projectsummary.review.score}} Roofpik Score</p>
+
+                            <!-- <h4 class="mgbn mgt5 ft15 b truncate">{{project.general.units}} Units</h4>
                             <p class="mgt5 ft12">{{project.general.tower}} towers</p>
-                        </div>
+ -->                        </div>
                     </div>
                 </div>
             </div>
@@ -88,7 +96,7 @@
                     <div class="row" id="Overview">
                         <div class="col s12 pdb20">
                             <h3 class="heading mgbn">Overview</h3>
-                            <div class="ft14 grey-text">{{project.name}}</div>
+                            <div class="ft14 grey-text">{{project.name}} <a href="{{project.general.website}}" target="_blank"> - Website</a></div>
                         </div>
                         <div class="col s12">
                             <div class="row pdt10">
@@ -104,13 +112,13 @@
                                     <div class="ft14">{{project.general.power}}</div>
                                     <div class="grey-text ft12">Power Backup</div>
                                 </div>
-                                <div class="col s3 pdb10">
+                                <div class="col s3 pdb10" ng-show="project.general.carParking">
                                     <div class="ft14">{{project.general.carParking}}</div>
                                     <div class="grey-text ft12">Car Parking</div>
                                 </div>
                                 <div class="col s3 pdb10">
                                     <div class="ft14"></div>
-                                    <div class="grey-text ft12"> <a href="{{project.general.website}}" target="_blank">Website</a></div>
+                                    <div class="grey-text ft12"> </div>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +130,7 @@
                         <h3 class="heading">Project Location</h3>
                         <div class="col s8 pdln relative">
                             <img src="images/general/map-img.jpg" class="responsive-img">
-                            <a class="btn mgtn transform modal-trigger" href="" ng-click="openModal()">View on Map</a>
+                            <a class="btn mgtn transform modal-trigger" href="http://www.google.com/maps/place/{{project.location.lat}},{{project.location.lng}}" target="_blank" >View on Map</a>
                             <!-- <a class="btn mgtn transform modal-trigger" href="#view_map_popup">View on Map</a> -->
                         </div>
                         <div class="col s4">
@@ -155,50 +163,10 @@
                     <div class="row mgrn" id="Units_Sizes">
                         <div class="col s12">
                             <h3 class="heading">Units & Sizes</h3>
-                            <!--  <div class="row mgbn units_tab">
-                                <div class="col s12">
-                                    <ul class="tabs">
-                                        <li class="tab col" ng-repeat="config in configurations" ng-click="selectConfig(config)" ng-class="config.selected? 'active': 'normal'">
-                                            <a class="active" ng-href="{{config.hrefLink}}">{{config.bhk}} BHK<br>
-                                                <span class="subh ft11 grey-text">{{config.type}}</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div id="{{config.hrefLink}}" class="col s12" ng-repeat="config in configurations" ng-show="config.selected">
-                                    <div class="row units_subtab">
-                                        <div class="col s12">
-                                            <ul class="tabs">
-                                                <li class="tab col" ng-repeat="unit in config.units" ng-click="selectUnit(config, unit)">
-                                                    <a ng-href="{{unit.hrefLink}}" class="active">₹ {{unit.rent}}<br>
-                                                        <span class="subh ft11 grey-text">{{unit.area}} sq ft</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div id="{{unit.hrefLink}}" class="col s12" ng-repeat="unit in config.units" ng-show="unit.selected">
-                                            <div class="row">
-                                                <div class="col s7 pdl30 pdt30 relative">
-                                                    <a href="" class="ft15 red-text">{{unit.bhk}} BHK ({{unit.area}}sq ft) <span ng-show="unit.servantRoom == 'Yes'">+ Servant Room</span></a>
-                                                    <p class="ft24 bodb pdb20" ng-show="unit.rent"> ₹ {{unit.rent}} </p>
-                                                    <p class="ft24 bodb pdb20" ng-hide="unit.rent"> Rent Not Available </p>
-                                                    <div class="row mgln mgrn bodb">
-                                                        <div class="col s6 pdb20"><i class="material-icons"></i> {{unit.bathroom}} <span class="grey-text">Bathrooms</span></div>
-                                                        <div class="col s6 pdb20"><i class="material-icons"></i> {{unit.bedroom}} <span class="grey-text">Bedrooms</span>
-                                                        </div>
-
-                                                        <div class="col s6 pdb20"><i class="material-icons"></i> 4 <span class="grey-text">Bathrooms</span></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
                             <div class="row mgbn units_tab">
                                 <div class="col s12">
-                                    <ul class="tabs">
-                                        <li class="tab col left-align" ng-repeat="config in configurations" ng-click="selectConfig(config)" ng-class="config.selected? 'active': 'normal'">
+                                    <ul class="tabs tabcnf">
+                                        <li class="tab col left-align" ng-repeat="config in configurations" id="{{config.bhk}}{{config.type}}">
                                             <a class="active pdln" ng-href="{{config.hrefLink}}">{{config.bhk}} BHK<br>
                                                 <span class="subh ft11 grey-text">{{config.type}}</span>
                                             </a>
@@ -244,13 +212,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mgrn mgbn" id="Amenities">
+                    <div class="row mgrn mgbn" id="Amenities" ng-show="displayAmenities">
                         <div class="col s12">
                             <h3 class="heading">Amenities</h3>
                             <div class="row relative">
                                 <div class="col s12 relative">
-                                    <ul class="tabs">
-                                        <li class="tab col" ng-repeat="(key, value) in amenitiesType" ng-show="amenitiesType[key].present" ng-click="selectedTab == key"><a ng-class="selectedTab==key?'active': 'normal'" ng-href="{{value.hrefLink}}">{{value.name}}</a></li>
+                                    <ul class="tabs tabam">
+                                        <li class="tab col" ng-repeat="(key, value) in amenitiesType" ng-show="amenitiesType[key].present" ng-click="selectedTab == key" id="{{value.name}}"><a ng-class="selectedTab==key?'active': 'normal'" ng-href="{{value.hrefLink}}">{{value.name}}</a></li>
                                     </ul>
                                 </div>
                                 <div id="{{key}}" class="col s12" ng-repeat="(key, value) in allAmenities">
@@ -268,11 +236,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" id="Specifications" ng-show="project.specifications">
+                    <div class="row" id="shortspecifications" ng-show="shortspecifications">
                         <div class="col s12">
                             <h5 class="ft15 mgtn b pdb10">Specifications</h5>
                         </div>
-                        <div class="col s12 m6" ng-repeat="(key, val) in specifications">
+                        <div class="col s12 m6" ng-repeat="(key, val) in shortspecifications">
                             <h5 class="ft14 pdb10">
                                  <img class="mgr10 left" src="images/homeicon/Business Center.png"> 
                                  <span class="mgt5 inlineb">{{key}}</span>
@@ -304,11 +272,12 @@
                                 </div>
                                 <div class="col s3 no-padding">
                                     <span class="progress mgbn  ht10 grey lighten-2">
-                                      <span class="determinate" id="excellentStar" style="width: 10%;">
+                                      <span class="determinate" id="prog5" >
                                       </span>
                                     </span>
                                 </div>
-                                <div class="col s3 grey-text mgt5">0</div>
+                                <div class="col s3 grey-text mgt5" ng-show="reviewsummary.overall['5']">{{reviewsummary.overall['5']}}</div>
+                                 <div class="col s3 grey-text mgt5" ng-hide="reviewsummary.overall['5']">0</div>
                             </div>
                             <div class="row mgbn ft12">
                                 <div class="col s6 mgrn">
@@ -317,11 +286,12 @@
                                 </div>
                                 <div class="col s3 no-padding">
                                     <span class="progress mgbn  ht10 grey lighten-2">
-                                      <span class="determinate" id="excellentStar" style="width: 20%;">
+                                      <span class="determinate" id="prog4" >
                                       </span>
                                     </span>
                                 </div>
-                                <div class="col s3 grey-text mgt5">0</div>
+                                <div class="col s3 grey-text mgt5" ng-show="reviewsummary.overall['4']">{{reviewsummary.overall['4']}}</div>
+                                 <div class="col s3 grey-text mgt5" ng-hide="reviewsummary.overall['4']">0</div>
                             </div>
                             <div class="row mgbn ft12">
                                 <div class="col s6 mgrn">
@@ -330,11 +300,12 @@
                                 </div>
                                 <div class="col s3 no-padding">
                                     <span class="progress mgbn  ht10 grey lighten-2">
-                                      <span class="determinate" id="excellentStar" style="width: 40%;">
+                                      <span class="determinate" id="prog3" >
                                       </span>
                                     </span>
                                 </div>
-                                <div class="col s3 grey-text mgt5">0</div>
+                                <div class="col s3 grey-text mgt5" ng-show="reviewsummary.overall['3']">{{reviewsummary.overall['3']}}</div>
+                                <div class="col s3 grey-text mgt5" ng-hide="reviewsummary.overall['3']">0</div>
                             </div>
                             <div class="row mgbn ft12">
                                 <div class="col s6 mgrn">
@@ -343,11 +314,12 @@
                                 </div>
                                 <div class="col s3 no-padding">
                                     <span class="progress mgbn  ht10 grey lighten-2">
-                                      <span class="determinate" id="excellentStar" style="width: 50%;">
+                                      <span class="determinate" id="prog2" >
                                       </span>
                                     </span>
                                 </div>
-                                <div class="col s3 grey-text mgt5">0</div>
+                                <div class="col s3 grey-text mgt5" ng-show="reviewsummary.overall['2']">{{reviewsummary.overall['2']}}</div>
+                                 <div class="col s3 grey-text mgt5" ng-hide="reviewsummary.overall['2']">0</div>
                             </div>
                             <div class="row mgbn ft12">
                                 <div class="col s6 mgrn">
@@ -356,11 +328,14 @@
                                 </div>
                                 <div class="col s3 no-padding">
                                     <span class="progress mgbn  ht10 grey lighten-2">
-                                      <span class="determinate" id="excellentStar" style="width: 70%;">
+                                      <span class="determinate" id="prog1">
                                       </span>
                                     </span>
                                 </div>
-                                <div class="col s3 grey-text mgt5">0</div>
+
+                                <div class="col s3 grey-text mgt5" ng-show="reviewsummary.overall['1']">{{reviewsummary.overall['1']}}</div>
+                                <div class="col s3 grey-text mgt5" ng-hide="reviewsummary.overall['1']">0</div>
+
                             </div>
                         </div>
                         <div class="col s3">
@@ -368,11 +343,11 @@
                             <div class="row mgbn">
                                 <div class="col s12">
                                     <input type="checkbox" class="filled-in" id="type1">
-                                    <label class="ft12" for="type1">Owners </label>
+                                    <label class="ft12" for="type1">Owners ({{reviewsummary.usertype.Owner}})</label>
                                 </div>
                                 <div class="col s12">
                                     <input type="checkbox" class="filled-in" id="type2">
-                                    <label class="ft12" for="type2">Tenants </label>
+                                    <label class="ft12" for="type2">Tenants  ({{reviewsummary.usertype.Tenant}}) </label>
                                 </div>
                             </div>
                         </div>
