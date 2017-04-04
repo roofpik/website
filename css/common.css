@@ -82,9 +82,7 @@ a {
     padding-bottom: 0px !important;
 }
 
-.mgmnsb10 {
-    margin-bottom: -10px
-}
+
 
 .pd48 {
     padding-bottom: 48px !important;
@@ -460,7 +458,7 @@ input:focus + div.search-results,
 }
 
 .search-results {
-    z-index: 9998;
+    z-index: 97;
     display: block !important;
     position: absolute;
     width: 101%;

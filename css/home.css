@@ -40,6 +40,38 @@
     height: 28px;
 }
 
+.bg-home-img {
+     background: url(http://www.yustusa.com/9/2015/06/natural-modern-interior-amazing-home-interior-design-that-has-wooden-floor-can-be-decor-with-white-ceiling-can-add-the-beauty-inside-the-modern-house-design-ideas-.jpg) no-repeat center center fixed;
+     -webkit-background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover;
+     background-size: cover;
+ }
+ .m-h5 {
+     font-size: 32px;
+     line-height: 40px;
+     margin-bottom: 30px;
+     color: #fff;
+ }
+ 
+ .searchfix_xs {
+     background: rgba(4, 4, 4, 0.43);
+     padding: 10px 30px 20px;
+ }
+
+
+
+  .write-review h3{
+    line-height: 50px;
+  }
+
+  .write-review a{
+    margin-top:20px;
+  }
+
+
+
+
 @media screen and (min-width:0px) and (max-width: 600px) {
     .searchfix_xs {
         position: absolute;

@@ -13,6 +13,8 @@
     -o-animation: fadeInDown 0.5s;
     animation: fadeInDown 0.5s;
 }
+
+
 .rooflogo {
     width: 35px !important;
     line-height: 110%;
@@ -31,6 +33,7 @@
     width: 130px !important;
     padding: 10px 0 0 30px !important;
 }
+
 .logoslide:hover {
     background-color: transparent !important;
 }
@@ -40,26 +43,97 @@
     overflow-y: auto;
 }
 
-.navfooter{position: fixed; bottom: 60px; left: 0; z-index: 9}
-.navfooter a {background-color: transparent !important;
- padding:0 0 0 10px !important; height: 40px; line-height: 40px;}
+.navfooter {
+    position: fixed;
+    bottom: 60px;
+    left: 0;
+    z-index: 9
+}
+
+.navfooter a {
+    background-color: transparent !important;
+    padding: 0 0 0 10px !important;
+    height: 40px;
+    line-height: 40px;
+}
+
 
 /*top log out button css*/
-.btnhd_prof a:hover {background-color: transparent !important; border-bottom:none !important;}
-.btnhd_prof{padding-bottom: 10px; position: relative;}
-.btnhd_prof ul{display: none !important; position: absolute; width: 150px; right: 0; float: right; margin-top: 10px;  min-height: 50px;
- border: 1px solid #DBDBDB !important; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1) !important;
-  background-color: #fff; padding-top: 0px !important;}
-.btnhd_prof ul li a{ color:#484848; font-weight: normal; line-height: 40px !important; font-size: 13px; padding: 16px 0; border-bottom: 1px solid #f2f2f2; padding: 0px !important;}
-.btnhd_prof ul li { display: block; font-size: 11px;width: 100%; padding: 0 16px;}
-.btnhd_prof ul li a i{ line-height: 40px !important; height: 30px !important; font-size: 20px;}
-.btnhd_prof ul li a:hover{ color:#484848; display: block;  border-bottom: 1px solid #767676 !important;}
-.btnhd_prof:hover ul{display: block !important; }
+
+.btnhd_prof a:hover {
+    background-color: transparent !important;
+    border-bottom: none !important;
+}
+
+.btnhd_prof {
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.btnhd_prof ul {
+    display: none !important;
+    position: absolute;
+    width: 150px;
+    right: 0;
+    float: right;
+    margin-top: 10px;
+    min-height: 50px;
+    border: 1px solid #DBDBDB !important;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1) !important;
+    background-color: #fff;
+    padding-top: 0px !important;
+}
+
+.btnhd_prof ul li a {
+    color: #484848;
+    font-weight: normal;
+    line-height: 40px !important;
+    font-size: 13px;
+    padding: 16px 0;
+    border-bottom: 1px solid #f2f2f2;
+    padding: 0px !important;
+}
+
+.btnhd_prof ul li {
+    display: block;
+    font-size: 11px;
+    width: 100%;
+    padding: 0 16px;
+}
+
+.btnhd_prof ul li a i {
+    line-height: 40px !important;
+    height: 30px !important;
+    font-size: 20px;
+}
+
+.btnhd_prof ul li a:hover {
+    color: #484848;
+    display: block;
+    border-bottom: 1px solid #767676 !important;
+}
+
+.btnhd_prof:hover ul {
+    display: block !important;
+}
+
 
 /*top log out button css end*/
-.btnhd{background-color: transparent !important; font-size: 13px; color:#484848; margin: 17px 16px 0 16px !important;
- line-height: 110%;  font-weight: normal; padding: 8px 0 !important;}
-.btnhd:hover{background-color: transparent !important; border-bottom: 2px solid #767676;}
+
+.btnhd {
+    background-color: transparent !important;
+    font-size: 13px;
+    color: #484848;
+    margin: 17px 16px 0 16px !important;
+    line-height: 110%;
+    font-weight: normal;
+    padding: 8px 0 !important;
+}
+
+.btnhd:hover {
+    background-color: transparent !important;
+    border-bottom: 2px solid #767676;
+}
 
 .display-img {
     height: 36px;
@@ -68,6 +142,7 @@
     margin-top: -10px;
     border-radius: 50%;
 }
+
 .linkroot nav {
     height: 30px;
     padding-top: 5px;
@@ -76,6 +151,7 @@
     box-shadow: none;
     background-color: #fff;
 }
+
 .breadcrumb:before {
     font-size: 20px;
     color: #666;
@@ -89,6 +165,145 @@
 
 .breadcrumb:last-child {
     color: #26a69a;
+}
+
+.htv90 {
+    height: 90vh !important;
+    display: block;
+}
+
+.fixedall {
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+}
+
+
+/*loading css start*/
+
+.cs-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.cs-loader-inner {
+    transform: translateY(-50%);
+    top: 50%;
+    position: absolute;
+    width: calc(100% - 200px);
+    color: #26a69a;
+    padding: 0 100px;
+    text-align: center;
+    margin: auto;
+    left: 0;
+    right: 0;
+}
+
+.cs-loader-inner label {
+    font-size: 20px;
+    opacity: 0;
+    display: inline-block;
+    color: #26a69a;
+}
+
+@keyframes lol {
+    0% {
+        opacity: 0;
+        transform: translateX(-300px);
+    }
+    33% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+    66% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(300px);
+    }
+}
+
+@-webkit-keyframes lol {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(-300px);
+    }
+    33% {
+        opacity: 1;
+        -webkit-transform: translateX(0px);
+    }
+    66% {
+        opacity: 1;
+        -webkit-transform: translateX(0px);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: translateX(300px);
+    }
+}
+
+.cs-loader-inner label:nth-child(6) {
+    -webkit-animation: lol 3s infinite ease-in-out;
+    animation: lol 3s infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(5) {
+    -webkit-animation: lol 3s 100ms infinite ease-in-out;
+    animation: lol 3s 100ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(4) {
+    -webkit-animation: lol 3s 200ms infinite ease-in-out;
+    animation: lol 3s 200ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(3) {
+    -webkit-animation: lol 3s 300ms infinite ease-in-out;
+    animation: lol 3s 300ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(2) {
+    -webkit-animation: lol 3s 400ms infinite ease-in-out;
+    animation: lol 3s 400ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(1) {
+    -webkit-animation: lol 3s 500ms infinite ease-in-out;
+    animation: lol 3s 500ms infinite ease-in-out;
+}
+
+
+/*loading css end*/
+
+.mgmnst3 {
+    margin-top: -3px;
+}
+
+#login_signup_popup {
+    width: 400px;
+    height: auto;
+    max-height: 80%;
+}
+
+.btfacebook:hover,
+.btgoogle:hover {
+    opacity: 0.9;
+}
+
+.icongoogle,
+.facebookicon {
+    width: 24px;
+    height: 24px;
+    margin-top: 14px;
+}
+
+.mgmnsb10 {
+    margin-bottom: -10px
 }
 
 
@@ -108,12 +323,12 @@ footer {
 .footerlink a:hover {
     text-decoration: underline;
 }
+
 .pmg5 p {
     margin: 0 !important;
     line-height: 25px;
 }
+
 .spleft {
     display: inline-block;
 }
-
-

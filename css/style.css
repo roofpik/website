@@ -1,20 +1,4 @@
 
-.searchhome{padding-top: 100px;}
-
-
-
-
-
-
-
-
-
-.lin45 {
-    line-height: 45px;
-    text-align: left !important;
-    text-transform: capitalize;
-}
-
 .select-dropdown {
     font-size: 12px !important
 }
@@ -50,11 +34,7 @@
     padding: 0px 20% !important;
 }
 
-#login_signup_popup {
-    width: 400px;
-    height: auto;
-    max-height: 80%;
-}
+
 
 .bgwhite_tr {
     background-color: rgba(255, 255, 255, 0.9);
@@ -140,9 +120,7 @@
     border-bottom: none;
 }*/
 
-.mgmnst3 {
-    margin-top: -3px;
-}
+
 
 .rt_img {
     position: absolute;
@@ -587,12 +565,7 @@
 }
 
 
-.icongoogle,
-.facebookicon {
-    width: 24px;
-    height: 24px;
-    margin-top: 14px;
-}
+
 
 
 /*detail*/
@@ -669,11 +642,6 @@
     filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#000000', GradientType=0);
 }
 
-
-.btfacebook:hover,
-.btgoogle:hover {
-    opacity: 0.9;
-}
 
 .dotted {
     border-bottom: dotted 1px #ff5a5f;
@@ -991,10 +959,7 @@
 }
 
 
-.htv90 {
-    height: 90vh !important;
-    display: block;
-}
+
 
 .pdt100 {
     padding-top: 130px !important;
@@ -1085,104 +1050,8 @@
 
 .btnsm:hover, .btnsm:focus{background-color: #26a69a; color: #fff; font-weight: 700; border-color:#26a69a;}
 /*write review start*/
-.fixedall{position: fixed; z-index: 99999; width: 100%;}
-/*loading css start*/
-.cs-loader {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-}
 
-.cs-loader-inner {
-  transform: translateY(-50%);
-  top: 50%;
-  position: absolute;
-  width: calc(100% - 200px);
-  color: #26a69a;
-  padding: 0 100px;
-  text-align: center;
-      margin: auto;
-    left: 0;
-    right: 0;
-}
 
-.cs-loader-inner label {
-  font-size: 20px;
-  opacity: 0;
-  display:inline-block;
-   color: #26a69a;
-}
-
-@keyframes lol {
-  0% {
-    opacity: 0;
-    transform: translateX(-300px);
-  }
-  33% {
-    opacity: 1;
-    transform: translateX(0px);
-  }
-  66% {
-    opacity: 1;
-    transform: translateX(0px);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(300px);
-  }
-}
-
-@-webkit-keyframes lol {
-  0% {
-    opacity: 0;
-    -webkit-transform: translateX(-300px);
-  }
-  33% {
-    opacity: 1;
-    -webkit-transform: translateX(0px);
-  }
-  66% {
-    opacity: 1;
-    -webkit-transform: translateX(0px);
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: translateX(300px);
-  }
-}
-
-.cs-loader-inner label:nth-child(6) {
-  -webkit-animation: lol 3s infinite ease-in-out;
-  animation: lol 3s infinite ease-in-out;
-}
-
-.cs-loader-inner label:nth-child(5) {
-  -webkit-animation: lol 3s 100ms infinite ease-in-out;
-  animation: lol 3s 100ms infinite ease-in-out;
-}
-
-.cs-loader-inner label:nth-child(4) {
-  -webkit-animation: lol 3s 200ms infinite ease-in-out;
-  animation: lol 3s 200ms infinite ease-in-out;
-}
-
-.cs-loader-inner label:nth-child(3) {
-  -webkit-animation: lol 3s 300ms infinite ease-in-out;
-  animation: lol 3s 300ms infinite ease-in-out;
-}
-
-.cs-loader-inner label:nth-child(2) {
-  -webkit-animation: lol 3s 400ms infinite ease-in-out;
-  animation: lol 3s 400ms infinite ease-in-out;
-}
-
-.cs-loader-inner label:nth-child(1) {
-  -webkit-animation: lol 3s 500ms infinite ease-in-out;
-  animation: lol 3s 500ms infinite ease-in-out;
-}
-/*loading css end*/
 
 /*careers page*/
 .care_ul {}

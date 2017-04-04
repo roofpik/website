@@ -1,12 +1,6 @@
      /*Arpit*/
      
- /*    #page-load {
-         position: fixed;
-         width: 100%;
-         top: 65px;
-         display: none;
-     }*/
-     
+
      .blur {
          color: transparent;
          text-shadow: rgba(0, 0, 0, 0.95) 0px 0px 10px;
@@ -56,14 +50,7 @@
          vertical-align: middle;
      }
      
-     .cssload-loader {
-         width: 16px;
-         height: 16px;
-         border-radius: 50%;
-         margin: 0px;
-         display: inline-block;
-         position: relative;
-         vertical-align: middle;
+ .cssload-loader {       
          background-color: rgba(250, 167, 65, 0.97);
      }
      
@@ -187,16 +174,3 @@
      }
 
 
-
-
-.popular-search h5{
-    margin-bottom: 50px;
-}
-
-.partners{
-    margin-bottom: 50px;
-}
-
-.partners h5{
-    margin-bottom: 50px;
-}
