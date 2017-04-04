@@ -1,268 +1,334 @@
-app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $stateParams, $location) {
+app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $stateParams, $location, $http) {
 
 
 
-    $scope.countryId = '-K_43TEI8cBodNbwlKqJ';
-    $scope.cityId = '-KYJONgh0P98xoyPPYm9';
-    $scope.micromarketId = $location.search().m;
-    $scope.localityId = $location.search().l;
-    $scope.projectId = $location.search().p;
-    $scope.pros = [];
-    $scope.cons = [];
-    $scope.specifications = {};
-    $scope.allAmenities = amenities;
+  $scope.countryId = '-K_43TEI8cBodNbwlKqJ';
+  $scope.cityId = '-KYJONgh0P98xoyPPYm9';
+  $scope.micromarketId = $location.search().m;
+  $scope.localityId = $location.search().l;
+  $scope.projectId = $location.search().p;
+  $scope.pros = [];
+  $scope.cons = [];
+  $scope.specifications = {};
+  $scope.shortspecifications = {};
+  $scope.allAmenities = amenities;
+  $scope.amenitiesType = amenitiesType;
 
+  function getProjects() {
 
-    $scope.amenitiesType = amenitiesType;
+    $http({
+      url: 'http://139.162.9.71/api/projectSearchKey',
+      method: 'POST',
+      params: { 'key': $scope.projectId }
+    }).then(function mySucces(response) {
+      // $scope.loading = false;
+      $scope.projectsummary = response.data.items[0].data;
 
-    db.ref('project/country/' + $scope.countryId + '/city/' + $scope.cityId + '/residential/micromarket/' + $scope.micromarketId + '/locality/' + $scope.localityId + '/projects/' + $scope.projectId).once('value', function(snapshot) {
-
-        $scope.project = snapshot.val();
-        console.log($scope.project.images)
-        $scope.images = {}
-        for (img in $scope.project.images) {
-            db.ref('images/' + img).once('value', function(data) {
-                item = data.val()
-                $scope.images[item['key']] = { 'url': 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-m.jpg' };
-                if (item['imgCat'] == 'cover') {
-                    // $('#cover-m').hide();
-                    // $('#cover-l').hide();
-                    // $scope.xscover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xs.jpg';
-                    $scope.cover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xs.jpg';
-                    
-                    $scope.coverl = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xl.jpg';
-
-                    $('#cover-l').on('load', function() {
-                        $('#cover-xs').addClass('hidden');
-                        $('#cover-l').removeClass('hidden');
-
-                    });
-
-                    // image.onload = function() {
-                    //     console.log('called');
-                    //     $scope.cover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-l.jpg';
-                    //     //do something...
-                    // }
-                    // image.onerror = function() {
-                    //     console.error("Cannot load image");
-                    //     //do something else...
-                    // }
-
-                    //  $scope.lcover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xl.jpg';
-
-                    // $("#cover-m").on('load', function() {
-                    //     $('#cover-xs').hide()
-                    //     $('#cover-m').show()
-
-                    $('#zoomIn').on('load', function() {
-                        $('#zoomIn').removeClass('hidden');
-                    });
-
-
-                    // });
-
-                    // $("#cover-l").on('load', function() {
-                    //     console.log('kk')
-                    //     $('#cover-m').hide()
-                    //     $('#cover-l').show()
-                    // });
-
-
-                }
-
-                $('.gallery').each(function() { // the containers for all your galleries
-                    $(this).magnificPopup({
-                        delegate: 'a', // the selector for gallery item
-                        type: 'image',
-                        gallery: {
-                            enabled: true
-                        }
-                    });
-                });
-            });
-
-
-        }
-
-
-        $scope.showSpecifications = function() {
-                $('#more_specifications').modal();
-                $('#more_specifications').modal('open');
-
-            }
-            // Images needs to binded
-
-        if ($scope.project.amenities) {
-            generateAmenitiesList($scope.project.amenities);
-        }
-        if ($scope.project.units) {
-            generateConfigurations($scope.project.units);
-        }
-        for (key in $scope.project.specifications) {
-            var x = camelCaseToTitleCase(key);
-            $scope.specifications[x] = {};
-            for (key1 in $scope.project.specifications[key]) {
-                var y = camelCaseToTitleCase(key1);
-                $scope.specifications[x][y] = $scope.project.specifications[key][key1];
-            }
-
-        }
-        // console.log($scope.project.specifications);
-        if ($scope.project.highlights) {
-            if ($scope.project.highlights.pros) {
-                $scope.pros = $scope.project.highlights.pros.split("*");
-            }
-            if ($scope.project.highlights.cons) {
-                $scope.cons = $scope.project.highlights.cons.split("*");
-            }
-
-
-        }
-        if ($scope.project.general.about) {
-            // console.log($scope.project.general.about.length);
-            if ($scope.project.general.about.length > 500) {
-                $scope.project.general.about1 = $scope.project.general.about.substring(0, 500);
-                $scope.project.general.about2 = $scope.project.general.about.substring(501, $scope.project.general.about.length);
-            } else {
-                $scope.project.general.about1 = $scope.project.general.about;
-            }
-        }
 
     })
 
-    $scope.configurations = {};
+  }
 
-    function generateConfigurations(config) {
-        for (key in config) {
-            if ($scope.configurations[config[key].bhk]) {
-                if (config[key].type == $scope.configurations[config[key].bhk].type) {
-                    config[key].hrefLink = '#area' + config[key].area;
-                    $scope.configurations[config[key].bhk].units[config[key].area] = config[key];
-                } else {
-                    $scope.configurations[config[key].bhk + 'a'] = {
-                        bhk: config[key].bhk,
-                        type: config[key].type,
-                        hrefLink: '#bhk' + config[key].bhk + 'a',
-                        units: {}
-                    }
-                    config[key].hrefLink = '#area' + config[key].area;
-                    $scope.configurations[config[key].bhk].units[config[key].area] = config[key];
-                }
-            } else {
-                $scope.configurations[config[key].bhk] = {
-                    bhk: config[key].bhk,
-                    type: config[key].type,
-                    hrefLink: '#bhk' + config[key].bhk,
-                    units: {}
-                }
-                config[key].hrefLink = '#area' + config[key].area;
-                $scope.configurations[config[key].bhk].units[config[key].area] = config[key];
-            }
-        }
-        console.log($scope.configurations);
-        var start = 0;
-        var unitStart = 0;
-        for (key in $scope.configurations) {
-            if (start == 0) {
-                $scope.configurations[key].selected = true;
-                for (key1 in $scope.configurations[key].units) {
-                    if (unitStart == 0) {
-                        $scope.configurations[key].units[key1].selected = true;
-                        unitStart = 1;
-                    } else {
-                        $scope.configurations[key].units[key1].selected = false;
-                    }
-                }
-                start = 1;
-            } else {
-                $scope.configurations[key].selected = false;
-                for (key1 in $scope.configurations[key].units) {
-                    if (unitStart == 0) {
-                        $scope.configurations[key].units[key1].selected = true;
-                        unitStart = 1;
-                    } else {
-                        $scope.configurations[key].units[key1].selected = false;
-                    }
-                }
-            }
-        }
-        $timeout(function() {
-            $('ul.tabs').tabs();
-        }, 100);
-    }
+  getProjects();
 
-    $scope.selectConfig = function(config) {
-        unitStart = 0;
-        for (key in $scope.configurations) {
-            if (config.hrefLink == $scope.configurations[key].hrefLink) {
-                $scope.configurations[key].selected = true;
-                for (key1 in $scope.configurations[key].units) {
-                    if (unitStart == 0) {
-                        $scope.configurations[key].units[key1].selected = true;
-                        unitStart = 1;
-                    } else {
-                        $scope.configurations[key].units[key1].selected = false;
-                    }
-                }
-            } else {
-                $scope.configurations[key].selected = false;
-                for (key1 in $scope.configurations[key].units) {
-                    $scope.configurations[key].units[key1].selected = false;
-                }
-            }
+
+  function getReviewSummary() {
+
+    $http({
+      url: 'http://139.162.9.71/api/projectSearchReviewSummary',
+      method: 'POST',
+      params: { 'key': $scope.projectId }
+    }).then(function mySucces(response) {
+      // $scope.loading = false;
+      $scope.reviewsummary = response.data.items[0].data;
+      console.log($scope.reviewsummary);
+      orsum = 0
+      for (key in $scope.reviewsummary.overall) {
+        orsum = orsum + $scope.reviewsummary.overall[key];
+      }
+      oratings = [1, 2, 3, 4, 5]
+      for (index in oratings) {
+        if ($scope.reviewsummary.overall[oratings[index]]) {
+          $('#prog' + oratings[index]).css('width', $scope.reviewsummary.overall[oratings[index]] / orsum * 100 + '%');
+        }
+      }
+
+
+    })
+
+  }
+
+  getReviewSummary();
+
+  db.ref('project/country/' + $scope.countryId + '/city/' + $scope.cityId + '/residential/micromarket/' + $scope.micromarketId + '/locality/' + $scope.localityId + '/projects/' + $scope.projectId).once('value', function(snapshot) {
+
+    $scope.project = snapshot.val();
+    $scope.images = {}
+    for (img in $scope.project.images) {
+      db.ref('images/' + img).once('value', function(data) {
+        item = data.val()
+        $scope.images[item['key']] = { 'url': 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-m.jpg' };
+        if (item['imgCat'] == 'cover') {
+          // $('#cover-m').hide();
+          // $('#cover-l').hide();
+          // $scope.xscover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xs.jpg';
+          $scope.cover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xs.jpg';
+
+          $scope.coverl = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xl.jpg';
+
+          $('#cover-l').on('load', function() {
+            $('#cover-xs').addClass('hidden');
+            $('#cover-l').removeClass('hidden');
+
+          });
+
+          $('#zoomIn').on('load', function() {
+            $('#zoomIn').removeClass('hidden');
+          });
+
         }
 
-        $timeout(function() {
-            $('ul.tabs').tabs();
-        }, 500);
-    }
-
-    $scope.selectUnit = function(config, unit) {
-        for (key in $scope.configurations) {
-            if (config.hrefLink == $scope.configurations[key].hrefLink) {
-                for (key1 in $scope.configurations[key].units) {
-                    if (unit.hrefLink == $scope.configurations[key].units[key1].hrefLink) {
-                        $scope.configurations[key].units[key1].selected = true;
-                    } else {
-                        $scope.configurations[key].units[key1].selected = false;
-                    }
-                }
+        $('.gallery').each(function() { // the containers for all your galleries
+          $(this).magnificPopup({
+            delegate: 'a', // the selector for gallery item
+            type: 'image',
+            gallery: {
+              enabled: true
             }
-        }
-    }
+          });
+        });
+      });
 
-    function generateAmenitiesList(amenities) {
-        for (key in amenities) {
-            for (key1 in amenities[key]) {
-                if (amenities[key][key1] != 'NA' || amenities[key][key1] != 'No') {
-                    try {
-                        $scope.amenitiesType[key].present = true;
-                    } catch (err) { console.log(key, key1) }
-                }
-            }
-        }
 
-        for (key in $scope.amenitiesType) {
-            if ($scope.amenitiesType[key].present) {
-                $scope.showAmenities = true;
-            }
-        }
-        $timeout(function() {
-            $('ul.tabs').tabs();
-        }, 500);
     }
 
 
+    $scope.showSpecifications = function() {
+        $('#more_specifications').modal();
+        $('#more_specifications').modal('open');
 
-    $scope.submitQuery = function() {
-        console.log($scope.query);
-        $scope.query.projectId = $scope.projectId;
-        $scope.query.projectName = $scope.project.name;
-        $scope.query.cityId = $scope.cityId;
-        $scope.query.micromarketId = $scope.micromarketId;
-        $scope.query.localityId = $scope.localityId;
-        db.ref('query').push($scope.query).then(function() {
-            swal('Query Submitted', 'Our executives will call you back', 'success');
-        })
+      }
+      // Images needs to binded
+
+    if ($scope.project.amenities) {
+      generateAmenitiesList($scope.project.amenities);
     }
+    if ($scope.project.units) {
+      generateConfigurations($scope.project.units);
+    }
+
+    counts = 0;
+    for (key in $scope.project.specifications) {
+
+
+
+      if (counts < 2) {
+        var x = camelCaseToTitleCase(key);
+        $scope.specifications[x] = {};
+        $scope.shortspecifications[x] = {};
+        for (key1 in $scope.project.specifications[key]) {
+          var y = camelCaseToTitleCase(key1);
+
+          $scope.shortspecifications[x][y] = $scope.project.specifications[key][key1];
+          $scope.specifications[x][y] = $scope.project.specifications[key][key1];
+
+          // $scope.specifications[x][y] = $scope.project.specifications[key][key1];
+        }
+
+        counts = counts + 1;
+
+        // console.log(key, $scope.project.specifications[key]);
+      } else {
+        var x = camelCaseToTitleCase(key);
+        $scope.specifications[x] = {};
+        for (key1 in $scope.project.specifications[key]) {
+          var y = camelCaseToTitleCase(key1);
+
+          $scope.specifications[x][y] = $scope.project.specifications[key][key1];
+          // $scope.specifications[x][y] = $scope.project.specifications[key][key1];
+        }
+
+        counts = counts + 1;
+
+
+      }
+    }
+
+
+
+    // console.log($scope.project.specifications);
+    if ($scope.project.highlights) {
+      if ($scope.project.highlights.pros) {
+        $scope.pros = $scope.project.highlights.pros.split("*");
+      }
+      if ($scope.project.highlights.cons) {
+        $scope.cons = $scope.project.highlights.cons.split("*");
+      }
+
+
+    }
+    if ($scope.project.general.about) {
+      // console.log($scope.project.general.about.length);
+      if ($scope.project.general.about.length > 500) {
+        $scope.project.general.about1 = $scope.project.general.about.substring(0, 500);
+        $scope.project.general.about2 = $scope.project.general.about.substring(501, $scope.project.general.about.length);
+      } else {
+        $scope.project.general.about1 = $scope.project.general.about;
+      }
+    }
+
+  })
+
+  $scope.configurations = {};
+
+  function generateConfigurations(config) {
+    for (key in config) {
+
+      if ($scope.configurations[config[key].bhk]) {
+        if (config[key].type == $scope.configurations[config[key].bhk].type) {
+          config[key].hrefLink = '#area' + config[key].area;
+          $scope.configurations[config[key].bhk].units[config[key].area] = config[key];
+        } else {
+          $scope.configurations[config[key].bhk + 'a'] = {
+            bhk: config[key].bhk,
+            type: config[key].type,
+            hrefLink: '#bhk' + config[key].bhk + 'a',
+            units: {}
+          }
+          config[key].hrefLink = '#area' + config[key].area;
+          $scope.configurations[config[key].bhk].units[config[key].area] = config[key];
+        }
+      } else {
+        $scope.configurations[config[key].bhk] = {
+          bhk: config[key].bhk,
+          type: config[key].type,
+          hrefLink: '#bhk' + config[key].bhk,
+          units: {}
+        }
+        config[key].hrefLink = '#area' + config[key].area;
+        $scope.configurations[config[key].bhk].units[config[key].area] = config[key];
+      }
+    }
+    // console.log($scope.configurations);
+    var start = 0;
+    var unitStart = 0;
+    for (key in $scope.configurations) {
+      if (start == 0) {
+        $scope.configurations[key].selected = true;
+        for (key1 in $scope.configurations[key].units) {
+          if (unitStart == 0) {
+            $scope.configurations[key].units[key1].selected = true;
+            unitStart = 1;
+          } else {
+            $scope.configurations[key].units[key1].selected = false;
+          }
+        }
+        start = 1;
+      } else {
+        $scope.configurations[key].selected = false;
+        for (key1 in $scope.configurations[key].units) {
+          if (unitStart == 0) {
+            $scope.configurations[key].units[key1].selected = true;
+            unitStart = 1;
+          } else {
+            $scope.configurations[key].units[key1].selected = false;
+          }
+        }
+      }
+    }
+    $timeout(function() {
+      t = 0;
+      for (cf in $scope.configurations) {
+        if (t == 0) {
+          $('.tabcnf').tabs();
+          $('.tabcnf').tabs('select_tab', cf + $scope.configurations[cf]['type']);
+          t++;
+        }
+      }
+
+    }, 100);
+  }
+
+  $scope.selectConfig = function(config) {
+    unitStart = 0;
+    for (key in $scope.configurations) {
+      if (config.hrefLink == $scope.configurations[key].hrefLink) {
+        $scope.configurations[key].selected = true;
+        for (key1 in $scope.configurations[key].units) {
+          if (unitStart == 0) {
+            $scope.configurations[key].units[key1].selected = true;
+            unitStart = 1;
+          } else {
+            $scope.configurations[key].units[key1].selected = false;
+          }
+        }
+      } else {
+        $scope.configurations[key].selected = false;
+        for (key1 in $scope.configurations[key].units) {
+          $scope.configurations[key].units[key1].selected = false;
+        }
+      }
+    }
+
+    c
+
+    $timeout(function() {
+
+      $('ul.tabs').tabs();
+    }, 500);
+  }
+
+  $scope.selectUnit = function(config, unit) {
+
+    for (key in $scope.configurations) {
+      if (config.hrefLink == $scope.configurations[key].hrefLink) {
+        for (key1 in $scope.configurations[key].units) {
+          if (unit.hrefLink == $scope.configurations[key].units[key1].hrefLink) {
+            $scope.configurations[key].units[key1].selected = true;
+          } else {
+            $scope.configurations[key].units[key1].selected = false;
+          }
+        }
+      }
+    }
+  }
+
+  function generateAmenitiesList(amenities) {
+    for (key in amenities) {
+      for (key1 in amenities[key]) {
+        if (amenities[key][key1] != 'NA' || amenities[key][key1] != 'No') {
+          try {
+            $scope.amenitiesType[key].present = true;
+          } catch (err) {
+            // console.log(key, key1) ;
+          }
+        }
+      }
+    }
+
+    for (key in $scope.amenitiesType) {
+      if ($scope.amenitiesType[key].present) {
+        $scope.showAmenities = true;
+      }
+    }
+    $timeout(function() {
+      $('.tabam').tabs();
+      $scope.displayAmenities = true;
+      $('.tabam').tabs('select_tab', 'basic');
+    }, 500);
+  }
+
+
+
+  $scope.submitQuery = function() {
+    console.log($scope.query);
+    $scope.query.projectId = $scope.projectId;
+    $scope.query.projectName = $scope.project.name;
+    $scope.query.cityId = $scope.cityId;
+    $scope.query.micromarketId = $scope.micromarketId;
+    $scope.query.localityId = $scope.localityId;
+    db.ref('query').push($scope.query).then(function() {
+      swal('Query Submitted', 'Our executives will call you back', 'success');
+    })
+  }
 })
