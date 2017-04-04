@@ -1,4 +1,4 @@
-app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $stateParams, $location) {
+app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $stateParams, $location, $http) {
 
 
 
@@ -10,15 +10,59 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
     $scope.pros = [];
     $scope.cons = [];
     $scope.specifications = {};
+    $scope.shortspecifications = {};
     $scope.allAmenities = amenities;
-
-
     $scope.amenitiesType = amenitiesType;
+
+    function getProjects() {
+
+        $http({
+            url: 'http://139.162.9.71/api/projectSearchKey',
+            method: 'POST',
+            params: { 'key': $scope.projectId }
+        }).then(function mySucces(response) {
+            // $scope.loading = false;
+            $scope.projectsummary = response.data.items[0].data;
+
+
+        })
+
+    }
+
+    getProjects();
+
+
+    function getReviewSummary() {
+
+        $http({
+            url: 'http://139.162.9.71/api/projectSearchReviewSummary',
+            method: 'POST',
+            params: { 'key': $scope.projectId }
+        }).then(function mySucces(response) {
+            // $scope.loading = false;
+            $scope.reviewsummary = response.data.items[0].data;
+            console.log($scope.reviewsummary);
+            orsum = 0
+            for(key in $scope.reviewsummary.overall){
+                orsum = orsum + $scope.reviewsummary.overall[key];
+            }
+            oratings = [1, 2, 3, 4, 5]
+            for (index in oratings) {
+                if ($scope.reviewsummary.overall[oratings[index]]) {
+                    $('#prog' + oratings[index]).css('width', $scope.reviewsummary.overall[oratings[index]]/orsum * 100 + '%');
+                }
+            }
+
+
+        })
+
+    }
+
+    getReviewSummary();
 
     db.ref('project/country/' + $scope.countryId + '/city/' + $scope.cityId + '/residential/micromarket/' + $scope.micromarketId + '/locality/' + $scope.localityId + '/projects/' + $scope.projectId).once('value', function(snapshot) {
 
         $scope.project = snapshot.val();
-        console.log($scope.project.images)
         $scope.images = {}
         for (img in $scope.project.images) {
             db.ref('images/' + img).once('value', function(data) {
@@ -29,7 +73,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
                     // $('#cover-l').hide();
                     // $scope.xscover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xs.jpg';
                     $scope.cover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xs.jpg';
-                    
+
                     $scope.coverl = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xl.jpg';
 
                     $('#cover-l').on('load', function() {
@@ -38,35 +82,9 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
 
                     });
 
-                    // image.onload = function() {
-                    //     console.log('called');
-                    //     $scope.cover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-l.jpg';
-                    //     //do something...
-                    // }
-                    // image.onerror = function() {
-                    //     console.error("Cannot load image");
-                    //     //do something else...
-                    // }
-
-                    //  $scope.lcover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xl.jpg';
-
-                    // $("#cover-m").on('load', function() {
-                    //     $('#cover-xs').hide()
-                    //     $('#cover-m').show()
-
                     $('#zoomIn').on('load', function() {
                         $('#zoomIn').removeClass('hidden');
                     });
-
-
-                    // });
-
-                    // $("#cover-l").on('load', function() {
-                    //     console.log('kk')
-                    //     $('#cover-m').hide()
-                    //     $('#cover-l').show()
-                    // });
-
 
                 }
 
@@ -98,15 +116,46 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
         if ($scope.project.units) {
             generateConfigurations($scope.project.units);
         }
-        for (key in $scope.project.specifications) {
-            var x = camelCaseToTitleCase(key);
-            $scope.specifications[x] = {};
-            for (key1 in $scope.project.specifications[key]) {
-                var y = camelCaseToTitleCase(key1);
-                $scope.specifications[x][y] = $scope.project.specifications[key][key1];
-            }
 
+        counts = 0;
+        for (key in $scope.project.specifications) {
+
+
+
+            if (counts < 2) {
+                var x = camelCaseToTitleCase(key);
+                $scope.specifications[x] = {};
+                $scope.shortspecifications[x] = {};
+                for (key1 in $scope.project.specifications[key]) {
+                    var y = camelCaseToTitleCase(key1);
+
+                    $scope.shortspecifications[x][y] = $scope.project.specifications[key][key1];
+                    $scope.specifications[x][y] = $scope.project.specifications[key][key1];
+
+                    // $scope.specifications[x][y] = $scope.project.specifications[key][key1];
+                }
+
+                counts = counts + 1;
+
+                // console.log(key, $scope.project.specifications[key]);
+            } else {
+                var x = camelCaseToTitleCase(key);
+                $scope.specifications[x] = {};
+                for (key1 in $scope.project.specifications[key]) {
+                    var y = camelCaseToTitleCase(key1);
+
+                    $scope.specifications[x][y] = $scope.project.specifications[key][key1];
+                    // $scope.specifications[x][y] = $scope.project.specifications[key][key1];
+                }
+
+                counts = counts + 1;
+
+
+            }
         }
+
+
+
         // console.log($scope.project.specifications);
         if ($scope.project.highlights) {
             if ($scope.project.highlights.pros) {
@@ -134,6 +183,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
 
     function generateConfigurations(config) {
         for (key in config) {
+
             if ($scope.configurations[config[key].bhk]) {
                 if (config[key].type == $scope.configurations[config[key].bhk].type) {
                     config[key].hrefLink = '#area' + config[key].area;
@@ -159,7 +209,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
                 $scope.configurations[config[key].bhk].units[config[key].area] = config[key];
             }
         }
-        console.log($scope.configurations);
+        // console.log($scope.configurations);
         var start = 0;
         var unitStart = 0;
         for (key in $scope.configurations) {
@@ -187,7 +237,15 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
             }
         }
         $timeout(function() {
-            $('ul.tabs').tabs();
+            t = 0;
+            for (cf in $scope.configurations) {
+                if (t == 0) {
+                    $('.tabcnf').tabs();
+                    $('.tabcnf').tabs('select_tab', cf + $scope.configurations[cf]['type']);
+                    t++;
+                }
+            }
+
         }, 100);
     }
 
@@ -212,12 +270,16 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
             }
         }
 
+        c
+
         $timeout(function() {
+
             $('ul.tabs').tabs();
         }, 500);
     }
 
     $scope.selectUnit = function(config, unit) {
+
         for (key in $scope.configurations) {
             if (config.hrefLink == $scope.configurations[key].hrefLink) {
                 for (key1 in $scope.configurations[key].units) {
@@ -237,7 +299,9 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
                 if (amenities[key][key1] != 'NA' || amenities[key][key1] != 'No') {
                     try {
                         $scope.amenitiesType[key].present = true;
-                    } catch (err) { console.log(key, key1) }
+                    } catch (err) {
+                        // console.log(key, key1) ;
+                    }
                 }
             }
         }
@@ -248,7 +312,9 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
             }
         }
         $timeout(function() {
-            $('ul.tabs').tabs();
+            $('.tabam').tabs();
+            $scope.displayAmenities = true;
+            $('.tabam').tabs('select_tab', 'basic');
         }, 500);
     }
 
