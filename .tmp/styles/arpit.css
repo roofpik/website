@@ -1,0 +1,310 @@
+     /*Arpit*/
+     
+ /*    #page-load {
+         position: fixed;
+         width: 100%;
+         top: 65px;
+         display: none;
+     }*/
+     
+     .blur {
+         color: transparent;
+         text-shadow: rgba(0, 0, 0, 0.95) 0px 0px 10px;
+         opacity: 0.3;
+     }
+     
+     .micro-markets .sohna-road {
+         position: absolute;
+         top: 220px;
+         right: 230px;
+     }
+     
+     .micro-markets .golf-course-extn-rd {
+         position: absolute;
+         top: 180px;
+         right: 180px;
+         text-align: center;
+     }
+     
+     .micro-markets .golf-course-extn-rd p,
+     .micro-markets .sohna-road p {
+         margin: 0px;
+         color: #26a69a;
+         font-weight: 700;
+     }
+     
+     .micro-markets .responsive-img {
+         opacity: 0.5;
+     }
+     
+     .wrapper {
+         padding-left: 0px;
+         padding-right: 0px;
+         margin: 0px auto;
+         display: block;
+         width: 65px;
+         text-align: center;
+     }
+     
+     .cssload-loader {
+         width: 16px;
+         height: 16px;
+         border-radius: 50%;
+         margin: 0px;
+         display: inline-block;
+         position: relative;
+         vertical-align: middle;
+     }
+     
+     .cssload-loader {
+         width: 16px;
+         height: 16px;
+         border-radius: 50%;
+         margin: 0px;
+         display: inline-block;
+         position: relative;
+         vertical-align: middle;
+         background-color: rgba(250, 167, 65, 0.97);
+     }
+     
+     .cssload-loader,
+     .cssload-loader:before,
+     .cssload-loader:after {
+         animation: 1.15s infinite ease-in-out;
+         -o-animation: 1.15s infinite ease-in-out;
+         -ms-animation: 1.15s infinite ease-in-out;
+         -webkit-animation: 1.15s infinite ease-in-out;
+         -moz-animation: 1.15s infinite ease-in-out;
+     }
+     
+     .cssload-loader:before,
+     .cssload-loader:after {
+         width: 80%;
+         height: 80%;
+         border-radius: 50%;
+         position: absolute;
+         top: 0;
+         left: 0;
+     }
+     
+     .cssload-loader:before,
+     .cssload-loader:after {
+         content: "";
+     }
+     
+     .cssload-loader:before {
+         content: '';
+         border: 2px solid white;
+         top: 1.2px;
+         left: 1.6px;
+         animation-name: cssload-animation;
+         -o-animation-name: cssload-animation;
+         -ms-animation-name: cssload-animation;
+         -webkit-animation-name: cssload-animation;
+         -moz-animation-name: cssload-animation;
+     }
+     
+     @keyframes cssload-animation {
+         0% {
+             transform: scale(0);
+         }
+         100% {
+             transform: scale(1);
+         }
+     }
+     
+     @-ms-keyframes cssload-animation {
+         0% {
+             -ms-transform: scale(0);
+         }
+         100% {
+             -ms-transform: scale(1);
+         }
+     }
+     
+     .price-filter h3 {
+         margin-bottom: 35px;
+     }
+     
+     .price-filter {
+         margin-bottom: 50px;
+     }
+     
+     .fright {
+         float: right;
+         line-height: 24px;
+     }
+     
+     .more-filter {
+         padding: 10px 20px;
+         background: #eaeaea;
+         margin: 10px 0;
+         float: right;
+         cursor: pointer;
+         font-weight: 300;
+     }
+     
+     .more-filter:hover {
+         font-weight: 500;
+     }
+     
+     .more-filter:active {
+         font-weight: 300;
+     }
+     
+     #boxfilterlist [type="checkbox"].filled-in:not(:checked)+label:after {
+         height: 14px;
+         width: 14px;
+         border: 2px solid #a2a2a2;
+         top: 5px;
+     }
+     
+     #boxfilterlist [type="checkbox"]+label {
+         height: 21px;
+     }
+     
+     #boxfilterlist [type="checkbox"].filled-in:checked+label:before {
+         top: 4px;
+         left: -1px;
+         width: 8px;
+         height: 10px;
+     }
+     
+     #boxfilterlist [type="checkbox"].filled-in:checked+label:after {
+         top: 5px;
+         width: 14px;
+         height: 14px;
+     }
+     
+     #boxfilterlist .ft11 {
+         font-weight: 400;
+         color: #444;
+     }
+     
+     .bg-grey {
+         background: #F3F3F3 !important;
+     }
+     
+     #boxfilterlist {
+         background: #fff;
+         border-radius: 2px;
+         padding: 0 20px;
+     }
+     
+     .filter-heading {
+         margin: 10px 0;
+     }
+     
+     .filter-heading span {
+         font-size: 18px;
+         font-weight: 500;
+     }
+     
+     .projList {
+         padding-left: 30px !important;
+     }
+     
+     .list-heading h5 {
+         margin: 40px 0 20px;
+     }
+     
+     .projList .card {
+         margin-top: 0px;
+         padding-top: 10px;
+     }
+     
+     .pl-l1 {
+         color: #737373;
+         font-weight: 500;
+         padding-left: 2px;
+     }
+     
+     .pl-l2 {
+         color: #ef1016;
+     }
+     
+     .pl-l3 {
+         color: #3c3c3c;
+         font-weight: 500;
+         line-height: 18px;
+     }
+     
+     .pl-l4 {
+         color: #26a69a;
+         font-weight: 500;
+     }
+     
+     .proj-thumb img {
+         width: 120px;
+         height: 100px;
+     }
+     
+     .dgrey-text {
+         color: #717171;
+         font-weight: 500;
+     }
+     
+     .vgrey-text {
+         color: #383838;
+         font-weight: 400;
+     }
+     
+     .xtbtn-active {
+         background-color: #26a69a !important;
+         color: #fff !important;
+         font-weight: 700 !important;
+         border-color: #26a69a !important;
+     }
+     
+     .error {
+         color: red;
+     }
+     
+     .projdata {
+         margin-top: 0px;
+         top: -2px;
+     }
+     
+     .projdata li {
+         cursor: pointer;
+     }
+     
+     .projdata li:hover {
+         background: #f7f7f7;
+     }
+     
+     #project-name {
+         margin-bottom: 0px;
+     }
+     
+     .write-review select {
+         border: 0;
+         border-bottom: 1px solid #f2f2f2;
+     }
+     
+     .content-sec {
+         margin-top: 65px;
+     }
+
+
+
+.search-home input{
+    border-bottom: 0px;
+}
+
+.search-home .valign-wrapper{
+    height: 100%;
+    margin-top: -65px;
+}
+
+.popular-search h5{
+    margin-bottom: 50px;
+}
+
+.partners{
+    margin-bottom: 50px;
+}
+
+.partners h5{
+    margin-bottom: 50px;
+}

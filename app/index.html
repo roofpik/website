@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, initial-scale=1.0, user-scalable=0">
+  <link rel="icon" href="images/general/favicon.png" type="image/png">
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+  <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+  <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css" />
+  <link rel="stylesheet" href="bower_components/materialize/bin/materialize.css" />
+  <link rel="stylesheet" href="bower_components/nouislider/distribute/nouislider.min.css" />
+  <link rel="stylesheet" href="bower_components/magnific-popup/dist/magnific-popup.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/arpit.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/zstyles.css">
+  <!-- endbuild -->
+  <!--Google Icon Font-->
+  <!--  <script src="https://cdn.anychart.com/js/7.13.0/anychart-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.anychart.com/css/7.13.0/anychart-ui.min.css" /> -->
+  <style>
+  .highcharts-container {
+    position: inherit !important;
+  }
+  
+  .highcharts-tooltip {
+    z-index: 9998;
+  }
+  
+  .micro-markets .card-title {
+    font-size: 17px;
+    font-weight: 500;
+  }
+  
+  .micro-markets .card {
+    overflow: hidden;
+  }
+  
+  .content-sec {
+    min-height: 800px;
+  }
+  </style>
+</head>
+
+<body ng-app="roofpikWeb">
+  <!-- Loading -->
+  <!-- header part start -->
+  <header>
+    <div header></div>
+  </header>
+  <!-- header part end -->
+  <!-- content part end -->
+  <div class="content-sec">
+    <!--     <loading></loading> -->
+    <div ui-view autoscroll="true" class="main-content"></div>
+  </div>
+  <!-- content part end -->
+  <!-- footer part start -->
+  <footer>
+    <div footer></div>
+  </footer>
+  <div id="login_signup_popup" class="modal white">
+    <div login></div>
+  </div>
+  <!-- footer part start -->
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-messages/angular-messages.js"></script>
+  <script src="bower_components/angular-material/angular-material.js"></script>
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/angular-momentjs/angular-momentjs.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/underscore/underscore.js"></script>
+  <script src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="bower_components/angular-sweetalert/SweetAlert.js"></script>
+  <script src="bower_components/firebase/firebase.js"></script>
+  <script src="bower_components/angularfire/dist/angularfire.js"></script>
+  <script src="bower_components/materialize/bin/materialize.js"></script>
+  <script src="bower_components/nouislider/distribute/nouislider.js"></script>
+  <script src="bower_components/magnific-popup/dist/jquery.magnific-popup.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:js({.tmp,app}) scripts/app.js -->
+  <script type="text/javascript" src="resources/general/scripts/app.js"></script>
+  <script type="text/javascript" src="resources/general/scripts/config.js"></script>
+  <script type="text/javascript" src="scripts/directives/directives.js"></script>
+  <script type="text/javascript" src="resources/general/scripts/imageUrl.service.js"></script>
+  <script type="text/javascript" src="resources/general/scripts/config.service.js"></script>
+  <!-- controllers -->
+  <script type="text/javascript" src="resources/amenities.js"></script>
+  <script type="text/javascript" src="resources/home/controllers/home.ctrl.js"></script>
+  <script type="text/javascript" src="resources/home/services/home.service.js"></script>
+  <script type="text/javascript" src="resources/review/controllers/write-review.ctrl.js"></script>
+  <script type="text/javascript" src="resources/project/controllers/project-details.ctrl.js"></script>
+  <script type="text/javascript" src="resources/project/controllers/listing.ctrl.js"></script>
+  <script type="text/javascript" src="resources/location/controllers/micromarket-details.ctrl.js"></script>
+  <script type="text/javascript" src="resources/location/controllers/locality-details.ctrl.js"></script>
+  <script type="text/javascript" src="resources/location/controllers/city-details.ctrl.js"></script>
+  <script type="text/javascript" src="resources/review/controllers/test.ctrl.js"></script>
+  <script type="text/javascript" src="resources/review/controllers/testLogin.ctrl.js"></script>
+  <!-- controllers -->
+  <!-- endbuild -->
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+  var Tawk_API = Tawk_API || {},
+    Tawk_LoadStart = new Date();
+  (function() {
+    var s1 = document.createElement("script"),
+      s0 = document.getElementsByTagName("script")[0];
+    s1.async = true;
+    s1.src = 'https://embed.tawk.to/58e1666bf97dd14875f5b542/default';
+    s1.charset = 'UTF-8';
+    s1.setAttribute('crossorigin', '*');
+    s0.parentNode.insertBefore(s1, s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+    .type-in {
+        float: left;
+        position: relative;
+    }
+    
+    .thumb {
+        font-size: 0;
+        position: relative;
+    }
+    
+    .thumb img {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+    }
+    
+    .post-info {
+        text-align: center;
+        padding: 40px;
+        width: 100%;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+        filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000', GradientType=0);
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        color: #fff;
+        z-index: 1;
+        left: 0;
+    }
+    
+    .post-cat {
+        font-family: Georgia;
+        font-weight: 400;
+        font-style: normal;
+        display: inline-block;
+    }
+    
+    .post-cat a {
+        background-color: #ffcc0d;
+        text-transform: uppercase;
+        color: #000;
+        padding: 2px 8px;
+        margin-right: 8px;
+        border-radius: 2px;
+        font-size: 11px;
+        display: inline-block;
+        margin-bottom: 2px;
+    }
+    
+    .story-main a,
+    .story-main a:visited,
+    .story-main a:focus {
+        text-decoration: none !important;
+        outline: 0 !important;
+        color: #fff;
+    }
+    
+    .col.s8 .post-title {
+        font-size: 44px;
+        margin-top: 16px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, .3);
+        color: #fff;
+    }
+    
+    .col.s4 .post-title {
+        font-size: 24px;
+        line-height: 1.3;
+    }
+    
+    .post-meta {
+        font-family: Georgia;
+        font-weight: 400;
+        font-style: normal;
+        color: #888;
+    }
+    
+    .type-in .post-meta div {
+        color: #fff;
+        margin-right: 10px;
+        font-size: 14px;
+        display: inline;
+        font-weight: 700;
+    }
+    
+    .avatar {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        vertical-align: baseline;
+    }
+    
+    .post-author a {
+        font-weight: bold;
+    }
+    
+    .mgt15 {
+        margin-top: 15px;
+    }
+    
+    .twonins-header {
+        text-align: center;
+        margin: 100px 0 50px;
+    }
+    
+    .twonins-header .main-title {
+        font-size: 44px;
+        color: #000;
+    }
+    
+    .story-content {
+        padding: 30px 10px;
+    }
+    
+    .story-meta {
+        text-align: center;
+    }
+    
+    .story-meta span {
+        color: #bbb;
+        padding-right: 3px;
+    }
+    
+    .story-title {
+        font-size: 24px;
+    }

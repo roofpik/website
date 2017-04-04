@@ -1,0 +1,6 @@
+1) No Grunt/Gulp.
+2) Structure is not consistent.
+3) No minimization of the code.
+4) Alot of timeouts in the code (I dont know why are these used for?).
+5) Directives are used for simple templating purpose which is incorrect.
+6) Bower is not used for package managing purpose.

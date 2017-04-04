@@ -1,0 +1,69 @@
+<div>
+    <div class="modal-contant pda20" >
+        <!-- login sign up section start -->
+        <section ng-show="login.signup">
+            <div class="row mgbn">
+                <div class="col s12 pdb10 mgt10">
+                    <a class=" modal-action modal-close block grey-text right"><i class="material-icons">close</i></a>
+                    <h3 class="ft15 ftw300  grey-text text-darken-2"> <i class="material-icons grey-text mgmnst3 ft20 left mgr10">lock_outline</i> Login / Sign Up</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 center">
+                    <a href="" class="btn btn-full btfacebook btn-large b blue darken-4 white-text" ng-click="fbLogin()">
+                        <img src="images/general/facebook1.png" class="left facebookicon" > Log in with Facebook</a>
+                    <div class="row mgln mgrn pdt30">
+                        <hr class="mgmnsb10">
+                        <span class="inline white pdl10 pdr10 grey-text"> OR</span>
+                    </div>
+                    <a href="" class="btn white btn-large btgoogle b btn-full bodall grey-text text-darken-2" ng-click="googleLogin()"><img src="images/general/googleplusicon.png" class="left icongoogle"> Log in with Google</a>
+                </div>
+            </div>
+        </section>
+        <!-- login sign up section end -->
+        <!-- both mobile and OTP section start -->
+        <section ng-show="login.mobile">
+            <!--enter mobile number section start -->
+            <div class="row">
+                <div class="col s12 pdb10 mgt10 center">
+                    <i class="material-icons medium">phone</i>
+                    <h3 class="ft15 ftw300  grey-text text-darken-2"> Enter your 10 digit mobile number</h3>
+                </div>
+                <div class="input-field col s12">
+                    <input id="first_name" type="text" class="validate mgb10" ng-model="user.mobile">
+                    <label for="first_name">10 Digit Mobile Number</label>
+                </div>
+                <div class="col s12 center mgt20">
+                    <a href="" class="btn btn-full btn-large b darken-4 white-text" ng-disabled="process" ng-click="sendOtp()"> Send OTP</a>
+                </div>
+            </div>
+            <!--enter mobile number section end -->
+            <!--otp section start -->
+            <div class="row" ng-show="login.otp">
+                <div class="input-field col s12">
+                    <input id="otp" type="text" class="validate mgb10" ng-model="user.otp">
+                    <label for="otp">Enter 4 digit OTP</label>
+                </div>
+                <div class="col s12 center mgt20">
+                    <a href="" class="btn btn-full btn-large b darken-4 white-text" ng-disabled="process" ng-click="verifyOtp()"> Verify OTP</a>
+                </div>
+
+            </div>
+            <div class="col s12" ng-show="process">{{loadingMsg}}</div>
+            <!--otp section end -->
+        </section>
+        <!--both mobile and OTP section end -->
+        <!-- section successfully start -->
+        <section ng-show="login.welcome">
+         <a class=" modal-action modal-close block grey-text right"><i class="material-icons">close</i></a>
+            <div class="row">
+                <div class="col s12 pdb10 mgt10 center">
+                    <i class="material-icons medium  green-text">done_all</i>
+                    <h3 class="ft15 ftw300  grey-text text-darken-4">Welcome to Roofpik!</h3>
+                    <h4 class="ft12 ftw300  grey-text text-darken-4">You have successfully registered</h4>
+                </div>
+            </div>
+        </section>
+        <!-- section successfully end -->
+    </div>
+</div>

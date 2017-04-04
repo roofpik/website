@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, initial-scale=1.0, user-scalable=0">
+  <link rel="icon" href="images/general/favicon.png" type="image/png">
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <link rel="stylesheet" href="styles/vendor.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <!--Google Icon Font-->
+  <!--  <script src="https://cdn.anychart.com/js/7.13.0/anychart-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.anychart.com/css/7.13.0/anychart-ui.min.css" /> -->
+  <style>
+  .highcharts-container {
+    position: inherit !important;
+  }
+  
+  .highcharts-tooltip {
+    z-index: 9998;
+  }
+  
+  .micro-markets .card-title {
+    font-size: 17px;
+    font-weight: 500;
+  }
+  
+  .micro-markets .card {
+    overflow: hidden;
+  }
+  
+  .content-sec {
+    min-height: 800px;
+  }
+  </style>
+</head>
+
+<body ng-app="roofpikWeb">
+  <!-- Loading -->
+  <!-- header part start -->
+  <header>
+    <div header></div>
+  </header>
+  <!-- header part end -->
+  <!-- content part end -->
+  <div class="content-sec">
+    <!--     <loading></loading> -->
+    <div ui-view autoscroll="true" class="main-content"></div>
+  </div>
+  <!-- content part end -->
+  <!-- footer part start -->
+  <footer>
+    <div footer></div>
+  </footer>
+  <div id="login_signup_popup" class="modal white">
+    <div login></div>
+  </div>
+  <!-- footer part start -->
+  <script src="scripts/vendor.js"></script>
+  <script src="scripts/app.js"></script>
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+  var Tawk_API = Tawk_API || {},
+    Tawk_LoadStart = new Date();
+  (function() {
+    var s1 = document.createElement("script"),
+      s0 = document.getElementsByTagName("script")[0];
+    s1.async = true;
+    s1.src = 'https://embed.tawk.to/58e1666bf97dd14875f5b542/default';
+    s1.charset = 'UTF-8';
+    s1.setAttribute('crossorigin', '*');
+    s0.parentNode.insertBefore(s1, s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+
+</html>
