@@ -27,9 +27,9 @@
                         <div class="z-services">
                             <i class="material-icons medium">redeem</i>
                             <h5 class="mgbn ft12"> Style</h5>
-                             <h4 class="mgbn mgt5 ft15 b truncate">{{projectsummary.general.segment}}</h4>
+                            <h4 class="mgbn mgt5 ft15 b truncate">{{projectsummary.general.segment}}</h4>
                             <p class="mgt5 ft12">{{projectsummary.general.style}}</p>
-                           <!--  <h4 class="mgbn mgt5 ft15 b truncate">Ready to move</h4>
+                            <!--  <h4 class="mgbn mgt5 ft15 b truncate">Ready to move</h4>
                             <p class="mgt5 ft12">{{project.general.yop}}</p> -->
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                             <h5 class="mgbn ft12 ">Rent</h5>
                             <h4 class="mgbn mgt5 ft15 b truncate">{{projectsummary.rentsummary.min}} - {{projectsummary.rentsummary.max}}</h4>
                             <p class="mgt5 ft12">{{projectsummary.general.ptype}}</p>
-                           <!--  <h4 class="mgbn mgt5 ft15 b truncate">{{project.location.displayAdd}}</h4>
+                            <!--  <h4 class="mgbn mgt5 ft15 b truncate">{{project.location.displayAdd}}</h4>
                             <p class="mgt5 ft12">Gurgaon</p> -->
                         </div>
                     </div>
@@ -48,12 +48,16 @@
                             <i class="material-icons medium">event_seat</i>
                             <h5 class="mgbn ft12 "> Reviews</h5>
                             <h4 class="mgbn mgt5 ft15 b truncate">{{projectsummary.review.count}} Reviews</h4>
-                            <p class="mgt5 ft12">{{projectsummary.review.rating}} Rating</p>
+                            <p>
+                                <i class="material-icons">star</i>
+                                <i class="material-icons">star</i>
+                                <i class="material-icons">star</i>
+                                <i class="material-icons">star_half</i>
+                                <i class="material-icons">star_border</i>
+                            </p>
+                            <!--    <p class="mgt5 ft12">{{projectsummary.review.rating}} Rating</p> -->
                             <p class="mgt5 ft12">{{projectsummary.review.score}} Roofpik Score</p>
-
-                            <!-- <h4 class="mgbn mgt5 ft15 b truncate">{{project.general.units}} Units</h4>
-                            <p class="mgt5 ft12">{{project.general.tower}} towers</p>
- -->                        </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -130,7 +134,7 @@
                         <h3 class="heading">Project Location</h3>
                         <div class="col s8 pdln relative">
                             <img src="images/general/map-img.jpg" class="responsive-img">
-                            <a class="btn mgtn transform modal-trigger" href="http://www.google.com/maps/place/{{project.location.lat}},{{project.location.lng}}" target="_blank" >View on Map</a>
+                            <a class="btn mgtn transform modal-trigger" href="http://www.google.com/maps/place/{{project.location.lat}},{{project.location.lng}}" target="_blank">View on Map</a>
                             <!-- <a class="btn mgtn transform modal-trigger" href="#view_map_popup">View on Map</a> -->
                         </div>
                         <div class="col s4">
@@ -163,17 +167,22 @@
                     <div class="row mgrn" id="Units_Sizes">
                         <div class="col s12">
                             <h3 class="heading">Units & Sizes</h3>
-                            <div class="row mgbn units_tab">
-                                <div class="col s12">
-                                    <ul class="tabs tabcnf">
-                                        <li class="tab col left-align" ng-repeat="config in configurations" id="{{config.bhk}}{{config.type}}">
-                                            <a class="active pdln" ng-href="{{config.hrefLink}}">{{config.bhk}} BHK<br>
-                                                <span class="subh ft11 grey-text">{{config.type}}</span>
-                                            </a>
-                                        </li>
-                                    </ul>
+                            <div class="row mgbn">
+                                <div class="col s12 units_project">
+                               <!--  <a class="active" id="tabone" ng-href="{{config.hrefLink}}" ng-repeat="config in configurations">{{config.bhk}} BHK<br>
+                                      <span class="block ft11 grey-text">{{config.type}}</span>
+                                    </a> -->
+                                    <a class="active" id="tabone" ng-href="">3 BHK<br>
+                                      <span class="block ft11 grey-text">Aparments</span>
+                                    </a>
+                                     <a class="" id="tabone" ng-href="">4 BHK<br>
+                                      <span class="block ft11 grey-text">Aparments</span>
+                                    </a>
+                                     <a class="" id="tabone" ng-href="">5 BHK<br>
+                                      <span class="block ft11 grey-text">Aparments</span>
+                                    </a>
                                 </div>
-                                <div id="{{config.hrefLink}}" class="col s12">
+                                <div id="tabone" class="col s12">
                                     <table class="striped">
                                         <thead>
                                             <tr>
@@ -277,7 +286,7 @@
                                     </span>
                                 </div>
                                 <div class="col s3 grey-text mgt5" ng-show="reviewsummary.overall['5']">{{reviewsummary.overall['5']}}</div>
-                                 <div class="col s3 grey-text mgt5" ng-hide="reviewsummary.overall['5']">0</div>
+                                <div class="col s3 grey-text mgt5" ng-hide="reviewsummary.overall['5']">0</div>
                             </div>
                             <div class="row mgbn ft12">
                                 <div class="col s6 mgrn">
@@ -291,7 +300,7 @@
                                     </span>
                                 </div>
                                 <div class="col s3 grey-text mgt5" ng-show="reviewsummary.overall['4']">{{reviewsummary.overall['4']}}</div>
-                                 <div class="col s3 grey-text mgt5" ng-hide="reviewsummary.overall['4']">0</div>
+                                <div class="col s3 grey-text mgt5" ng-hide="reviewsummary.overall['4']">0</div>
                             </div>
                             <div class="row mgbn ft12">
                                 <div class="col s6 mgrn">
@@ -319,7 +328,7 @@
                                     </span>
                                 </div>
                                 <div class="col s3 grey-text mgt5" ng-show="reviewsummary.overall['2']">{{reviewsummary.overall['2']}}</div>
-                                 <div class="col s3 grey-text mgt5" ng-hide="reviewsummary.overall['2']">0</div>
+                                <div class="col s3 grey-text mgt5" ng-hide="reviewsummary.overall['2']">0</div>
                             </div>
                             <div class="row mgbn ft12">
                                 <div class="col s6 mgrn">
@@ -332,10 +341,8 @@
                                       </span>
                                     </span>
                                 </div>
-
                                 <div class="col s3 grey-text mgt5" ng-show="reviewsummary.overall['1']">{{reviewsummary.overall['1']}}</div>
                                 <div class="col s3 grey-text mgt5" ng-hide="reviewsummary.overall['1']">0</div>
-
                             </div>
                         </div>
                         <div class="col s3">
@@ -347,7 +354,7 @@
                                 </div>
                                 <div class="col s12">
                                     <input type="checkbox" class="filled-in" id="type2">
-                                    <label class="ft12" for="type2">Tenants  ({{reviewsummary.usertype.Tenant}}) </label>
+                                    <label class="ft12" for="type2">Tenants ({{reviewsummary.usertype.Tenant}}) </label>
                                 </div>
                             </div>
                         </div>
@@ -527,7 +534,8 @@
                         </div>
                         <div class="row pda20 white card">
                             <div class="col s12 ft15">
-                                <p class="ft12 grey-text b">Your Overall rating *</p>
+                            <p class="ft14 b mgtn">Your overall rating</p>
+                                <p class="ft12 grey-text b">Click to rate *</p>
                             </div>
                             <div class="col s12 grey-text pointer">
                                 <span class="left starrating">
