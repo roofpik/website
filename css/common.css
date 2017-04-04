@@ -1,7 +1,17 @@
 body {
     font-size: 13px;
     color: #484848;
-    font-weight: 300; background-color: #fff;
+    font-weight: 300;
+    background-color: #fff;
+}
+
+.transform {
+    position: absolute;
+    left: 50%;
+    margin-top: 30px;
+    z-index: 9;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .transformfix {
@@ -12,10 +22,26 @@ body {
     transform: translate(-50%, -50%);
 }
 
+.wdfull {
+    width: 100%;
+}
+
+.pointer,
+a {
+    cursor: pointer;
+}
+
+.pdb20 {
+    padding-bottom: 20px !important;
+}
+
+
 /*css genral start*/
+
 .b {
     font-weight: 700;
 }
+
 .pdt10 {
     padding-top: 10px !important;
 }
@@ -60,7 +86,19 @@ body {
     margin-bottom: -10px
 }
 
-.over_auto{max-height: 70%; overflow-y: auto;}
+.pd48 {
+    padding-bottom: 48px !important;
+    padding-top: 48px !important;
+}
+.heading {
+    font-size: 19px !important;
+    font-weight: 300;
+    line-height: 24px !important;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    color: #484848;
+    margin-bottom: 24px;
+}
 
 hr {
     border-top: solid 1px #ddd !important;
@@ -166,6 +204,7 @@ hr {
 .mgt70 {
     margin-top: 70px !important;
 }
+
 .mgt150 {
     margin-top: 150px !important;
 }
@@ -237,26 +276,33 @@ hr {
 .abs {
     position: absolute !important;
 }
+
 .bdmn {
     border-bottom: none !important;
 }
+
 .container {
     max-width: 1080px;
     width: 1080px;
     position: relative;
 }
+
 .responsive-img {
     width: 100%
 }
+
 .ht45 {
     height: 45px;
 }
+
 .bod-right {
     border-right: 1px solid #ddd;
 }
+
 .htfull {
     height: 100%
 }
+
 .min-htall {
     min-height: 400px;
 }
@@ -268,6 +314,7 @@ hr {
 .ht400 {
     height: 400px !important;
 }
+
 .ht450 {
     height: 450px !important;
 }
@@ -275,13 +322,23 @@ hr {
 .ht350 {
     height: 350px !important;
 }
+
 .inlineb {
     display: inline-block;
+}
+.over_hidden {
+    overflow: hidden !important;
+}
+
+.boxsdn {
+    box-shadow: none !important;
+    border: none !important;
 }
 
 .block {
     display: block;
 }
+
 .bodt {
     border-top: 1px solid #ddd;
 }
@@ -301,6 +358,7 @@ hr {
 .pdt30 {
     padding-top: 25px !important;
 }
+
 .bdrw {
     border-right: 2px solid #fff;
 }
@@ -312,16 +370,161 @@ hr {
 .bdtw {
     border-top: 2px solid #fff;
 }
+
 .htv100 {
     height: 100vh !important;
     display: block;
 }
+
 .fixed {
     display: block !important;
 }
+
 .ftw100 {
     font-weight: 300;
 }
+
 .relative {
     position: relative;
+}
+
+.wdp70 {
+    width: 80%;
+}
+
+.stargrn {
+    color: rgb(0, 166, 153)
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    border-color: #ff7e82;
+    background-color: #ff7e82;
+}
+
+.grnbg {
+    background-color: #26a69a;
+    line-height: 25px;
+    display: inline-block;
+}
+
+.redt {
+    color: #FF5A5F !important;
+}
+
+.radius2 {
+    border-radius: 2px;
+}
+
+.radiust2 {
+    border-radius: 2px 0 0 0;
+}
+
+.radiusr2 {
+    border-radius: 0 2px 0 0;
+}
+
+.rdsan {
+    border-radius: 0px !important;
+}
+
+.input-field .prefix {
+    width: 2rem;
+    font-size: 1.7rem;
+    padding-top: 7px;
+    color: #9e9e9e;
+}
+
+input[type=text],
+input[type=email],
+.input-field .prefix ~ textarea,
+.select-wrapper input.select-dropdown {
+    border-color: #ddd;
+}
+
+.input-field label {
+    font-size: 13px;
+}
+
+.card .card-image img {
+    border-radius: 0px !important;
+}
+
+input:focus + div.search-results,
+.autocompleteFind:focus + .search-results {
+    display: block !important;
+}
+
+.search-results {
+    z-index: 9998;
+    display: block !important;
+    position: absolute;
+    width: 101%;
+    max-height: 250px !important;
+    overflow-y: auto;
+}
+
+.homecoll .collection-item.avatar {
+    min-height: 32px;
+    padding-left: 50px;
+}
+
+.homecoll .collection-item.avatar .circle {
+    width: 24px;
+    height: 24px;
+    left: 10px
+}
+
+.homecoll .collection-item {
+    padding: 5px;
+    border: 0;
+    cursor: pointer;
+}
+
+.homecoll .collection-item:hover {
+    background-color: #eee;
+}
+
+.homecoll .collection-item.avatar .title {
+    color: #2c2c2c;
+}
+
+
+.btn-primary {
+    border-color: #ff5a5f;
+    background-color: #ff5a5f;
+    color: #fff !important;
+}
+
+.btn-fix {
+    top: 30px;
+    left: 39%;
+}
+
+.btn {
+    padding: 0 15px;
+}
+
+.btn,
+.btn:hover,
+.btn:focus {
+    box-shadow: none;
+}
+
+.rtfixabs {
+    position: fixed;
+    width: 300px;
+    z-index: 9;
+    top: 10%;
+    right: 7%;
+    padding: 30px 20px !important;
+    margin-left: 40px !important;
+}
+
+.modal .modal-content {
+    padding: 15px;
 }

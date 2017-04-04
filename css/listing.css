@@ -1,0 +1,156 @@
+ .filter-heading {
+     margin: 10px 0;
+ }
+ 
+ .filter-heading span {
+     font-size: 18px;
+     font-weight: 500;
+ }
+ 
+ .price-filter h3 {
+     margin-bottom: 35px;
+ }
+ 
+ .price-filter {
+     margin-bottom: 50px;
+ }
+ 
+ .fright {
+     float: right;
+     line-height: 24px;
+ }
+ 
+ #boxfilterlist [type="checkbox"].filled-in:not(:checked)+label:after {
+     height: 14px;
+     width: 14px;
+     border: 2px solid #a2a2a2;
+     top: 5px;
+ }
+ 
+ #boxfilterlist [type="checkbox"]+label {
+     height: 21px;
+ }
+ 
+ #boxfilterlist [type="checkbox"].filled-in:checked+label:before {
+     top: 4px;
+     left: -1px;
+     width: 8px;
+     height: 10px;
+ }
+ 
+ #boxfilterlist [type="checkbox"].filled-in:checked+label:after {
+     top: 5px;
+     width: 14px;
+     height: 14px;
+ }
+ 
+ #boxfilterlist .ft11 {
+     font-weight: 400;
+     color: #444;
+ }
+ 
+ #boxfilterlist {
+     background: #fff;
+     border-radius: 2px;
+     padding: 0 20px;
+ }
+ 
+ .bg-grey {
+     background: #F3F3F3 !important;
+ }
+ 
+ .list-heading h5 {
+     margin: 40px 0 20px;
+ }
+ 
+ .more-filter {
+     padding: 10px 20px;
+     background: #eaeaea;
+     margin: 10px 0;
+     float: right;
+     cursor: pointer;
+     font-weight: 300;
+ }
+ 
+ .more-filter:hover {
+     font-weight: 500;
+ }
+ 
+ .more-filter:active {
+     font-weight: 300;
+ }
+ 
+ .projList {
+     padding-left: 30px !important;
+ }
+ 
+ .projList .card {
+     margin-top: 0px;
+     padding-top: 10px;
+ }
+ 
+ .proj-thumb img {
+     width: 120px;
+     height: 100px;
+ }
+ 
+ .pl-l1 {
+     color: #737373;
+     font-weight: 500;
+     padding-left: 2px;
+ }
+ 
+ .pl-l2 {
+     color: #ef1016;
+ }
+ 
+ .pl-l3 {
+     color: #3c3c3c;
+     font-weight: 500;
+     line-height: 18px;
+ }
+ 
+ .pl-l4 {
+     color: #26a69a;
+     font-weight: 500;
+ }
+ 
+ .listp p {
+     font-size: 12px;
+     margin: 0px;
+     line-height: 22px;
+ }
+ 
+ .dgrey-text {
+     color: #717171;
+     font-weight: 500;
+ }
+ 
+ .vgrey-text {
+     color: #383838;
+     font-weight: 400;
+ }
+ 
+ .listing_rightfix {
+     right: 4%;
+     top: 26%;
+ }
+ 
+ .filterList {
+     overflow-y: auto;
+     max-height: 42vh;
+ }
+ 
+ #schedule_visit {
+     width: 350px;
+ }
+ 
+ .listbtn_active {
+     color: #ff5a5f !important;
+ }
+ 
+ .listbtn:hover {
+     color: #FF5A5F !important;
+     font-weight: bold;
+     cursor: pointer;
+ }

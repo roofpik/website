@@ -1,8 +1,55 @@
-.search-home input{
+.search-home input {
     border-bottom: 0px;
 }
 
-.search-home .valign-wrapper{
+.search-home .valign-wrapper {
     height: 100%;
     margin-top: -65px;
+}
+
+.cardmg {
+    margin: 10px 0;
+}
+
+.searchfix {
+    display: block !important;
+    margin: 0 !important;
+}
+
+.inpspn {
+    position: absolute;
+    left: 10px;
+    top: 0px;
+    z-index: 11;
+    line-height: 45px;
+    font-weight: bold;
+}
+
+.inp_pdw {
+    padding-left: 60px !important;
+    padding-right: 10px !important;
+    width: calc(100% - 70px) !important;
+}
+
+.loading-icon {
+    position: absolute !important;
+    right: 8px;
+    top: 8px;
+    z-index: 9 !important;
+    width: 28px;
+    height: 28px;
+}
+
+@media screen and (min-width:0px) and (max-width: 600px) {
+    .searchfix_xs {
+        position: absolute;
+        left: 50%;
+        z-index: 9;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .m-h5 {
+        font-size: 1.5rem;
+        line-height: 140%;
+    }
 }
