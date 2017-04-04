@@ -29,6 +29,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         templateUrl: 'templates/story/story.html'
     })
 
+     $stateProvider.state('story-details', {
+        url: '/story/details',
+        templateUrl: 'templates/story/story-details.html'
+    })
+
 
 
 

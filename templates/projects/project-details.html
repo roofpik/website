@@ -1,14 +1,14 @@
 <div>
-<style>
-.hidden{
-    display:none;
-}
-
-.img_detail{
-    background: #5a5a5a;
-    min-height: 300px;
-}
-</style>
+    <style>
+    .hidden {
+        display: none;
+    }
+    
+    .img_detail {
+        background: #5a5a5a;
+        min-height: 300px;
+    }
+    </style>
     <section class="mgt65">
         <div class="row img_detail">
             <img ng-src="{{cover}}" class="responsive-img" id="cover-xs">
@@ -257,8 +257,8 @@
                             <h5 class="ft15 mgtn b pdb10">Gallery</h5>
                         </div>
                         <div class="row mgan">
-                            <div class="gallery galleryrowfix">                            
-                                <a ng-href="{{img.url}}" ng-repeat="img in images"><img ng-src="{{img.url}}"></a>                              
+                            <div class="gallery galleryrowfix">
+                                <a ng-href="{{img.url}}" ng-repeat="img in images"><img ng-src="{{img.url}}"></a>
                             </div>
                         </div>
                     </div>
@@ -507,14 +507,12 @@
                     <div class="row mg48 mgln mgrn hide-on-med-and-down" ui-view="popularProjects"></div>
                 </div>
                 <div class="col s12 m12 l4 relative sm_rtfixabs">
-                    <div class="rtfixabs white card">
-                        <div class="row mgan">
+                    <div class="rtfixabs">
+                        <div class="row pda20 white card">
                             <div class="col s12 ft15 center">
-                             
                                 <p class="ft12 grey-text">Schedule site visit</p>
                             </div>
                             <form name="queryForm">
-                               
                                 <div class="input-field col s2 pdt12">
                                     +91
                                 </div>
@@ -522,14 +520,27 @@
                                     <input placeholder="Mobile No." type="number" class="validate mgb5 ft12" ng-minlength="10" ng-maxlength="10" ng-model="query.mobileNum" required>
                                 </div>
                                 <div class="col s12 mgtmn mgt10">
-                                    <button class="btn btn-full"  ng-click="submitQuery()"><i class="material-icons left">phone</i> Get Callback</button>
+                                    <button class="btn btn-full" ng-click="submitQuery()"><i class="material-icons left">phone</i> Get Callback</button>
                                     <p class="ft11 grey-text center">Calling hours are from 9 a.m to 10 p.m IST</p>
                                 </div>
                             </form>
                         </div>
+                        <div class="row pda20 white card">
+                            <div class="col s12 ft15">
+                                <p class="ft12 grey-text b">Your Overall rating *</p>
+                            </div>
+                            <div class="col s12 grey-text pointer">
+                                <span class="left starrating">
+                                       <i class="material-icons pointer">star_border</i>
+                                       <i class="material-icons pointer">star_border</i>
+                                       <i class="material-icons pointer">star_border</i>
+                                       <i class="material-icons pointer">star_border</i>
+                                       <i class="material-icons pointer">star_border</i>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -542,9 +553,9 @@
             </div>
         </div>
     </div>
-    <div id="more_specifications" class="modal modal-fixed-footer white">    
+    <div id="more_specifications" class="modal modal-fixed-footer white">
         <div class="modal-content">
-         <h5 class="ft15 mgtn b pdb10">Specifications</h5>
+            <h5 class="ft15 mgtn b pdb10">Specifications</h5>
             <div class="row">
                 <div class="col s12" ng-repeat="(key, val) in specifications">
                     <h5 class="ft14 pdb10">
