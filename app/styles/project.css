@@ -1,0 +1,18 @@
+.units_project {
+    margin-bottom: 10px;
+}
+
+.units_project a {
+ font-size: 14px; display: inline-block; float: left;
+ margin-right: 30px; cursor: pointer; color: #333;
+
+}
+.units_project a:hover { color: #26a69a;}
+.units_project a.active {
+    font-size: 20px;
+    color: #26a69a; margin-top: -5px;
+    background-color: #fff;
+    transform: scale(1.08);
+    transform-origin: left bottom;
+    font-weight: 400;   
+}
