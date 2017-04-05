@@ -1,79 +1,79 @@
 <div>
-    <div class="navbar headerfix boxsdn">
-        <nav class="white boxsdn">
-            <div class="nav-wrapper">
-                <div class="row">
-                    <div class="col no-padding">
-                        <a href="#" data-activates="slide-out" class="button-collapse show-on-large grey-text left">
-                            <i class="material-icons">menu</i></a>
-                        <a href="" class="rooflogo left"><img src="images/general/logoicon.png" ng-click="gotoHome()"> </a>
-                    </div>
-                    <ul class="right">
-                        <!--  <i class="material-icons left bticon">create</i>  -->
-                        <li class="hide-on-small-only"> <a href="/#/write-review" class="btnhd">Write Review</a></li>
-                        <li ng-hide="loginStatus">
-                            <a ng-click="openLogin()" id="open-login" class="btnhd mgln">
+  <div class="navbar headerfix boxsdn">
+    <nav class="white boxsdn">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col no-padding">
+            <a href="#" data-activates="slide-out" class="button-collapse show-on-large grey-text left">
+              <i class="material-icons">menu</i></a>
+            <a href="" class="rooflogo left"><img src="images/general/logoicon.png" ng-click="gotoHome()"> </a>
+          </div>
+          <ul class="right">
+            <!--  <i class="material-icons left bticon">create</i>  -->
+            <li class="hide-on-small-only"> <a href="/#/write-review" class="btnhd">Write Review</a></li>
+            <li ng-hide="loginStatus">
+              <a ng-click="openLogin()" id="open-login" class="btnhd mgln">
                                 Login/Sign Up</a>
-                            <!-- <i class="material-icons left bticon">lock_outline</i> -->
-                        </li>
-                        <li class="btnhd_prof" ng-show="loginStatus">
-                            <a href="" class="btnhd">
-                                <img class="display-img left" ng-src="{{user.photoURL}}">{{user.displayName}}
-                            </a>
-                            <ul>
-                                <li> <a href="/#/write-review"><i class="material-icons left grey-text">edit</i>Write Review</a> </li>
-                                <li>
-                                    <a href="" ng-click="logout()">
-                                        <i class="material-icons left grey-text">power_settings_new</i> Logout
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <span class="right ft12 grey-text xsnr10 hide-on-small-only">
+              <!-- <i class="material-icons left bticon">lock_outline</i> -->
+            </li>
+            <li class="btnhd_prof" ng-show="loginStatus">
+              <a href="" class="btnhd">
+                <img class="display-img left" ng-src="{{user.photoURL}}">{{user.displayName}}
+              </a>
+              <ul>
+                <li> <a href="/#/write-review"><i class="material-icons left grey-text">edit</i>Write Review</a> </li>
+                <li>
+                  <a href="" ng-click="logout()">
+                    <i class="material-icons left grey-text">power_settings_new</i> Logout
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <span class="right ft12 grey-text xsnr10 hide-on-small-only">
                         <i class="material-icons left ft15 bticont mgrn">location_on</i>Gurgaon</span>
-                </div>
-            </div>
-        </nav>
-    </div>
-    <div id="slide-out" class="side-nav over_hidden">
-        <div class="row mgan">
-            <a href="#home" class="logoslide mgt10"><img src="images/general/logo.png"></a>
         </div>
-        <div class="row over_auto mgbn">
-            <ul>
-                <li><a href="#about-us" class="">About</a></li>
-                <li><a href="/#/cover-stories">Cover Stories</a></li>
-                <li><a href="/#/blogs">Blogs</a></li>
-                <li><a href="/#/write-review">Write Review</a></li>
-                <li><a href="/#/careers"> Careers </a></li>
-                <li><a href="/#/faq"> FAQ's </a></li>
-                <li><a href="/#/contact-us">Contact us</a></li>
-                <li><a href="#!">Terms & Privacy</a></li>
-            </ul>
-        </div>
-        <footer class="navfooter grey lighten-4 pdt10">
-            <div class="row mgbn pdleftright">
-                <div class="col left pdt10 left-align">
-                    <h6 class="grey-text mgtn">Follow us</h6>
-                </div>
-                <div class="col right right-align">
-                    <a class="right" href="https://www.facebook.com/roofpik" target="_blank">
-                        <img src="images/general/facebook.png">
-                    </a>
-                    <a class="right" href="https://www.linkedin.com/company/roofpik?trk=job_view_topcard_company_name" target="_blank">
-                        <img src="images/general/linked-in.png">
-                    </a>
-                    <a class="right" href="https://www.twitter.com/roofpik" target="_blank">
-                        <img src="images/general/twitter.png">
-                    </a>
-                </div>
-            </div>
-            <div class="footer-copyright center pdt10 pdb10 grey lighten-3">
-                <div class="ft12 grey-text">
-                    © AlphaBinary Technologies Pvt Ltd
-                </div>
-            </div>
-        </footer>
+      </div>
+    </nav>
+  </div>
+  <div id="slide-out" class="side-nav over_hidden">
+    <div class="row mgan">
+      <a href="#home" class="logoslide mgt10"><img src="images/general/logo.png"></a>
     </div>
+    <div class="row over_auto mgbn">
+      <ul>
+        <li><a href="#about-us" class="">About</a></li>
+        <li><a href="/#/cover-stories">Cover Stories</a></li>
+        <li><a href="/#/blogs">Blogs</a></li>
+        <li><a href="/#/write-review">Write Review</a></li>
+        <li><a href="/#/careers"> Careers </a></li>
+        <li><a href="/#/faq"> FAQ's </a></li>
+        <li><a href="/#/contact-us">Contact us</a></li>
+        <li><a href="#!">Terms & Privacy</a></li>
+      </ul>
+    </div>
+    <footer class="navfooter grey lighten-4 pdt10">
+      <div class="row mgbn pdleftright">
+        <div class="col left pdt10 left-align">
+          <h6 class="grey-text mgtn">Follow us</h6>
+        </div>
+        <div class="col right right-align">
+          <a class="right" href="https://www.facebook.com/roofpik" target="_blank">
+            <img src="images/general/facebook.png">
+          </a>
+          <a class="right" href="https://www.linkedin.com/company/roofpik?trk=job_view_topcard_company_name" target="_blank">
+            <img src="images/general/linked-in.png">
+          </a>
+          <a class="right" href="https://www.twitter.com/roofpik" target="_blank">
+            <img src="images/general/twitter.png">
+          </a>
+        </div>
+      </div>
+      <div class="footer-copyright center pdt10 pdb10 grey lighten-3">
+        <div class="ft12 grey-text">
+          © AlphaBinary Technologies Pvt Ltd
+        </div>
+      </div>
+    </footer>
+  </div>
 </div>
