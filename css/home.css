@@ -68,6 +68,14 @@
   .write-review a{
     margin-top:20px;
   }
+.alink:hover {
+    text-decoration: underline;
+}
+
+.alink {
+    line-height: 30px;
+    color: rgb(0, 166, 153)
+}
 
 
 

@@ -1,0 +1,25 @@
+
+.imgcir_req {
+    border-radius: 50%;
+    width: 150px !important;
+    height: 150px;
+    overflow: hidden;
+}
+.dotted {
+    border-bottom: dotted 1px #ff5a5f;
+}
+.imghn {
+    width: 100px !important;
+    height: 100px !important;
+}
+.indic_color .indicators .indicator-item.active {
+    background-color: #999 !important;
+}
+
+.indic_color .indicators .indicator-item {
+    background-color: #eee !important;
+}
+.img32 {
+    width: 32px !important;
+    height: 32px !important
+}

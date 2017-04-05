@@ -16,3 +16,16 @@
     transform-origin: left bottom;
     font-weight: 400;   
 }
+.h-services .over { margin-top: -150px;}
+.h-services .h-block {background: #fafafa;}
+.z-services {  box-shadow: 0 5px 15px #eee;  background: #fff; padding: 50px 30px;}
+.z-services span {font-size: 40px;  color: #888;}
+.galleryrowfix{height: 160px !important; overflow:hidden !important;}
+
+.miconleft,
+.miconright {
+    display: none;
+}
+.subh {
+    display: block;
+}
