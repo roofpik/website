@@ -27,7 +27,7 @@
             </div>
             <div class="col s12 m12 l4">
                 <div class="row mgt30">
-                    <div class="col s12" ng-repeat="fsmall in featuredsmall">
+                    <div class="col s12" ng-repeat="fsmall in featuredsmall" ng-click="showDetails(fsmall.key)">
                         <div class="margaret-first-column type-in twonins-post-1">
                             <div class="thumb">
                                 <img ng-src="{{fsmall.imgsrc}}" class="responsive-img">

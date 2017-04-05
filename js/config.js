@@ -31,7 +31,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     })
 
      $stateProvider.state('story-details', {
-        url: '/story/details',
+        url: '/story/details?key',
         templateUrl: 'templates/story/story-details.html',
         controller:'storyDetailsCtrl'
     })

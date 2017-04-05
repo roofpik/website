@@ -1,4 +1,4 @@
-app.controller('storyListCtrl', function($scope, $timeout) {
+app.controller('storyListCtrl', function($scope, $timeout, $state) {
     var allStory;
     var storyLink = 'story/data/country/-K_43TEI8cBodNbwlKqJ/city/-KYJONgh0P98xoyPPYm9';
     $scope.stories = {};
@@ -49,11 +49,18 @@ app.controller('storyListCtrl', function($scope, $timeout) {
     });
 
 
+    $scope.showStory = function(key){
+
+        $state.go('story-details', {'key': key})
+
+    }
+
+
 });
 
 
 
-app.controller('storyDetailsCtrl', function($scope, $timeout, $location, $window) {
+app.controller('storyDetailsCtrl', function($scope, $timeout, $location, $window, $state) {
     var allStory;
     var storykey = $location.search().key;
 
@@ -122,6 +129,11 @@ app.controller('storyDetailsCtrl', function($scope, $timeout, $location, $window
 
         }, 200);
     });
+
+
+    $scope.showDetails = function(key){
+          $state.go('story-details', {'key': key});
+    }
 
 
 });
