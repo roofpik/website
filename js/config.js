@@ -26,7 +26,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     // static pages start    
     $stateProvider.state('story', {
         url: '/story/gurgaon',
-        templateUrl: 'templates/story/story.html'
+        templateUrl: 'templates/story/story.html',
+        controller: 'storyListCtrl'
     })
 
      $stateProvider.state('story-details', {
