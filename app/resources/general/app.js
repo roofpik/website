@@ -1,11 +1,11 @@
 var app = angular.module('roofpikWeb', ['ui.router', 'firebase']);
 
 var config = {
-  apiKey: "AIzaSyBSSYFQ2ZhbF7d0fwTIiHVOL1GTHAWpilA",
-  authDomain: "roofpik-new.firebaseapp.com",
-  databaseURL: "https://roofpik-new.firebaseio.com",
-  storageBucket: "roofpik-new.appspot.com",
-  messagingSenderId: "362004565118"
+  apiKey: "AIzaSyBNZqun4Ti9zhd5ClUh_Ax2V59jYPYGK_4",
+  authDomain: "roofpikweb.firebaseapp.com",
+  databaseURL: "https://roofpikweb.firebaseio.com",
+  storageBucket: "roofpikweb.appspot.com",
+  messagingSenderId: "877889560997"
 };
 firebase.initializeApp(config);
 var db = firebase.database();

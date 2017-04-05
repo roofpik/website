@@ -2,9 +2,9 @@
     .module('roofpikWeb')
     .factory('Auth', authService);
 
-  authService.$inject = ['$firebaseAuth'];
+  authService.$inject = ['$firebaseAuth', '$http', '$rootScope'];
 
-  function authService($firebaseAuth) {
+  function authService($firebaseAuth,$http,$rootScope) {
     var firebaseAuthObject = $firebaseAuth();
 
     var service = {
@@ -14,7 +14,8 @@
       logout: logout,
       isLoggedIn: isLoggedIn,
       signInWithPopup: signInWithPopup,
-      sendWelcomeEmail: sendWelcomeEmail
+      sendWelcomeEmail: sendWelcomeEmail,
+      sendOtp: sendOtp
     };
 
     return service;
@@ -46,6 +47,22 @@
       // firebaseDataService.emails.push({
       //   emailAddress: emailAddress
       // });
+    }
+
+    function sendOtp(data) {
+
+      return $http({
+        method: 'POST',
+        crossDomain: true,
+        dataType: "JSONP",
+        url: $rootScope.domain + '/api/sendotp',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data: $.param(data)
+
+      });
+
     }
 
   };

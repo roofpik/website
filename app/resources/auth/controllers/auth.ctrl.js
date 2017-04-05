@@ -1,4 +1,4 @@
-app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope, Auth) {
+app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope, Auth, Firebase) {
   $scope.login = {}
   $scope.login.signup = true;
   $scope.login.mobile = false;
@@ -122,7 +122,7 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope, Auth) 
 
 
   function registerUser() {
-    db.ref('users/' + $scope.data.uid).once('value', function(snapshot) {
+    Firebase.once('users/' + $scope.data.uid, function(snapshot) {
       if (!snapshot.val()) {
         updates = {};
 
@@ -132,7 +132,7 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope, Auth) 
         }, 1000);
 
         updates['users/' + $scope.data.uid] = $scope.data;
-        db.ref().update(updates).then(function() {
+        Firebase.update(updates).then(function() {
           $scope.data = {};
         });
       } else {
@@ -142,10 +142,6 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope, Auth) 
       }
 
     })
-
-
-
-
   }
 
   var otp = {};
@@ -158,12 +154,8 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope, Auth) 
       $scope.process = false;
     }, 8000);
 
-    $http({
-        url: $rootScope.domain + '/api/sendotp',
-        method: "POST",
-        data: {
-          'mobile': $scope.user.mobile
-        }
+    Auth.sendOtp({
+        'mobile': $scope.user.mobile
       })
       .then(function(response) {
         if (response.data.status == 200) {
@@ -188,7 +180,7 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope, Auth) 
         rightOtp = true;
         updates['users/' + uid + '/mobile/number/'] = $scope.user.mobile;
         updates['users/' + uid + '/mobile/verified/'] = true;
-        db.ref().update(updates).then(function() {
+        Firebase.update(updates).then(function() {
           $scope.data = {};
           $timeout(function() {
             $scope.login.mobile = false;
