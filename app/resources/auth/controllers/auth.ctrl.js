@@ -1,14 +1,13 @@
-app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope) {
+app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope, Auth) {
   $scope.login = {}
   $scope.login.signup = true;
   $scope.login.mobile = false;
   var uid = '';
-  $scope.fbLogin = function() {
 
+  $scope.fbLogin = function() {
     var provider = new firebase.auth.FacebookAuthProvider();
     provider.addScope('email');
-
-    firebase.auth().signInWithPopup(provider).then(function(result) {
+    Auth.signInWithPopup(provider).then(function(result) {
       // This gives you a Facebook Access Token. You can use it to access the Facebook API.
       var token = result.credential.accessToken;
       // The signed-in user info.
@@ -62,14 +61,14 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope) {
 
 
 
-    firebase.auth().signOut();
+    Auth.logout();
 
 
     var provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('https://www.googleapis.com/auth/plus.login');
     provider.addScope('email');
 
-    firebase.auth().signInWithPopup(provider).then(function(result) {
+    Auth.signInWithPopup(provider).then(function(result) {
       // This gives you a Google Access Token. You can use it to access the Google API.
       var token = result.credential.accessToken;
       // The signed-in user info.
@@ -160,7 +159,7 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope) {
     }, 8000);
 
     $http({
-        url: 'http://139.162.9.71/api/sendotp',
+        url: $rootScope.domain + '/api/sendotp',
         method: "POST",
         data: {
           'mobile': $scope.user.mobile
