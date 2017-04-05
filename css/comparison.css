@@ -1,0 +1,96 @@
+
+.nthbg:nth-child(2n) {
+    background-color: #eee;
+}
+
+.nthbg {
+    background-color: #fff;
+    border-left: solid 1px #ddd;
+    box-shadow: -1px 1px 3px #ddd;
+}
+
+.nthbg .col {
+    height: 40px;
+    padding-left: 20px!important;
+    border-right: solid 1px #ddd;
+}
+
+.nthbghd {
+    background-color: #eee;
+    border-left: solid 1px #ddd;
+    box-shadow: -1px 1px 3px #ddd;
+}
+
+.nthbghd .col {
+    height: 80px;
+    border-right: solid 1px #ddd;
+}
+.line40 {
+    line-height: 40px
+}
+.search_comp {
+    width: 100%;
+    padding: 20px;
+    float: left;
+    color: #666;
+    height: 100%;
+    position: relative;
+    display: block;
+}
+
+.search_comp input {
+    border: none !important;
+    color: #666;
+    padding-right: 30px;
+    width: calc(100% - 10px)
+}
+
+.search_comp input:focus,
+.search_comp input:focus:not([readonly]),
+.search_comp input:hover {
+    box-shadow: none !important;
+    border: none !important;
+}
+
+
+.search_compicon {
+    position: absolute;
+    width: 30px;
+    top: 32px;
+    right: 10px;
+}
+
+.search_comp_find {
+    width: 100%;
+    margin-left: -20px;
+    margin-top: 12px;
+}
+
+.search_comp_find .homecoll .collection-item.avatar {
+    background-color: #fafafa;
+    border-bottom: solid 1px #ddd;
+    padding-left: 45px;
+    color: #444;
+}
+
+.search_comp_find .homecoll .collection-item.avatar:nth-child(2n) {
+    background-color: #fff;
+}
+
+.search_comp_find .homecoll {
+    border-bottom: none;
+}
+
+.search_comp_find .homecoll .collection-item.avatar:hover {
+    background-color: #eee;
+}
+
+.mnst5 {
+    margin-top: -5px;
+}
+
+
+.bothsd {
+    box-shadow: inset 8px 0 9px -8px rgba(0, 0, 0, 0.2);
+}
+

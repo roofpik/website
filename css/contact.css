@@ -1,0 +1,46 @@
+.cir_cont {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    line-height: 40px;
+    border-radius: 50%;
+}
+
+.cir_contimg {
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-right: 10px;
+    line-height: 40px;
+}
+.cir_cont {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    line-height: 40px;
+    border-radius: 50%;
+}
+
+.cir_contimg {
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-right: 10px;
+    line-height: 40px;
+}
+
+
+.borderrds20 {
+    border-radius: 30px;
+    color: #666;
+    font-size: 14px;
+}
+
+.borderrds20 span {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 10px;
+}
+
+
+
