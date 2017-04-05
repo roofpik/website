@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col s8">
+        <div class="col s8 pdln">
             <div class="margaret-first-column type-in twonins-post-1">
                 <div class="thumb">
                     <img ng-src="{{featuredlarge.imgsrc}}" class="responsive-img">
@@ -39,19 +39,17 @@
                 </div>
             </div>
         </div>
-        <div class="col s4">
-            <div class="row">
-                <div class="col s12" ng-repeat="fsmall in featuredsmall">
+        <div class="col s4 pdrn">
+            <div class="row mgbn">
+                <div class="col s12 nthpd5" ng-repeat="fsmall in featuredsmall">
                     <div class="margaret-first-column type-in twonins-post-1">
                         <div class="thumb">
                             <img ng-src="{{fsmall.imgsrc}}" class="responsive-img">
                         </div>
-                        <div class="post-info">
-                            <div class="post-cat">
-                                <a href="">{{fsmall.projName}}</a>
-                            </div>
-                            <h2 class="post-title">
-                            <a href=""> {{fsmall.name}} </a>
+                        <div class="post-info pda20">
+                           
+                            <h2 class="post-title mgan">
+                            <a href="" class="flow-text"> {{fsmall.name}} </a>
                         </h2>
                             <div class="post-meta">
                                 <div class="post-author">
@@ -66,6 +64,9 @@
                                     <a href="">1</a>
                                 </div>
                             </div>
+                             <div class="post-cat mgt5">
+                                <a href="">{{fsmall.projName}}</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -73,13 +74,13 @@
         </div>
     </div>
     <div class="row" ng-repeat="story in stories">
-        <div class="col s12 hoverable" ng-if="$odd">
-            <div class="row">
-                <div class="col s12 m6">
-                    <img ng-src="{{story.imgsrc}}" class="responsive-img"/>
+        <div class="col s12 hoverable pointer" ng-if="$odd">
+            <div class="row mgbn valign-wrapper">
+                <div class="col s12 m6 no-padding">
+                    <img ng-src="{{story.imgsrc}}" class="responsive-img block"/>
                 </div>
-                <div class="col s12 m6 valign-wrapper">
-                    <div class="story-content valign">
+                <div class="col s12 m6">
+                    <div class="pda10">
                         <div class="story-meta">
                             <span class="story-date">{{story.date | date}} /</span>
                             <span class="story-author">by  {{story.authorname}} /</span>
@@ -95,10 +96,10 @@
                 </div>
             </div>
         </div>
-        <div class="col s12 hoverable" ng-if="$even">
-            <div class="row">
-                <div class="col s12 m6 valign-wrapper">
-                    <div class="story-content valign">
+        <div class="col s12 hoverable pointer" ng-if="$even">
+            <div class="row mgbn valign-wrapper">
+                <div class="col s12 m6">
+                    <div class="pda10">
                         <div class="story-meta">
                             <span class="story-date">{{story.date | date}}  /</span>
                             <span class="story-author">by  {{story.authorname}} /</span>
@@ -112,8 +113,8 @@
                         <!-- .entry-footer -->
                     </div>
                 </div>
-                <div class="col s12 m6">
-                    <img ng-src="{{story.imgsrc}}" class="responsive-img" />
+                <div class="col s12 m6 no-padding">
+                    <img ng-src="{{story.imgsrc}}" class="responsive-img block" />
                 </div>
             </div>
         </div>
