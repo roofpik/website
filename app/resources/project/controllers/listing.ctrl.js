@@ -9,6 +9,130 @@ app.controller('listingCtrl', function($scope, $rootScope, $timeout, $stateParam
 
 
 
+  $scope.initialize_data = function() {
+
+
+    getLocations(function() {
+      getLocalities(function() {
+        getBuilders(function() {
+          $scope.data = {
+            loc: '',
+            micro: '',
+            ptype: '',
+            bhk: '',
+            rmin: '',
+            rmax: '',
+            builder: '',
+            category: ''
+          };
+          $scope.selected = {};
+          for (key in $location.search()) {
+            if ($location.search()[key]) {
+              if (key == 'rmin' || key == 'rmax') {
+                $scope.data[key] = parseInt($location.search()[key]);
+              } else {
+                $scope.data[key] = $location.search()[key];
+              }
+
+            }
+          }
+
+          for (key in $scope.data) {
+            if ($scope.data[key]) {
+              l = $scope.data[key].toString().split(',')
+              $scope.selected[key] = {}
+              for (i in l) {
+                $scope.selected[key][l[i]] = true;
+                if (key === 'loc') {
+                  $scope.selectedLocations = $scope.locations.filter($scope.idFilter.bind(null, l[i]));
+                  if ($scope.selectedLocations && $scope.selectedLocations.length > 0) {
+                    $scope.selectedLocations[0].selected = true;
+                    $scope.sort($scope.locations, function() {
+                      $scope.selectedLocations = jQuery.extend(true, [], $scope.locations.filter($scope.selectedFilter.bind(null, true)));
+                      if ($scope.selectedLocations.length > $scope.limit) {
+                        $scope.listLimitLoc = $scope.selectedLocations.length;
+                      } else {
+                        $scope.listLimitLoc = $scope.limit;
+                      }
+                    });
+                  }
+                } else if (key === 'builder') {
+                  $scope.selectedBuilders = $scope.builders.filter($scope.idFilter.bind(null, l[i]));
+                  if ($scope.selectedBuilders && $scope.selectedBuilders.length > 0) {
+                    $scope.selectedBuilders[0].selected = true;
+                    $scope.sort($scope.builders, function() {
+                      $scope.selectedBuilders = jQuery.extend(true, [], $scope.builders.filter($scope.selectedFilter.bind(null, true)));
+                      if ($scope.selectedBuilders.length > $scope.limit) {
+                        $scope.listLimitBuilder = $scope.selectedBuilders.length;
+                      } else {
+                        $scope.listLimitBuilder = $scope.limit;
+                      }
+                    });
+                  }
+                } else if (key === 'micro') {
+                  $scope.selectedMicros = $scope.micromarkets.filter($scope.idFilter.bind(null, l[i]));
+                  if ($scope.selectedMicros && $scope.selectedMicros.length > 0) {
+                    $scope.selectedMicros[0].selected = true;
+                    $scope.sort($scope.micromarkets, function() {
+                      $scope.selectedMicros = jQuery.extend(true, [], $scope.micromarkets.filter($scope.selectedFilter.bind(null, true)));
+                      if ($scope.selectedMicros.length > $scope.limit) {
+                        $scope.listLimitMicro = $scope.selectedMicros.length;
+                      } else {
+                        $scope.listLimitMicro = $scope.limit;
+                      }
+                    });
+                  }
+                }
+              }
+            }
+          }
+          $scope.closeFilter();
+          getProjects();
+
+        });
+      });
+    });
+
+    function getLocations(callback) {
+      Firebase.once('locations/country/-K_43TEI8cBodNbwlKqJ/locality/city/-KYJONgh0P98xoyPPYm9/micromarket', function(snapshot) {
+        $timeout(function() {
+          for (key in snapshot.val()) {
+            for (key1 in snapshot.val()[key].places) {
+              $scope.locations.push(snapshot.val()[key].places[key1]);
+            }
+          }
+          if (callback)
+            callback();
+        }, 0)
+      })
+    }
+
+    function getLocalities(callback) {
+      Firebase.once('locations/country/-K_43TEI8cBodNbwlKqJ/micromarket/city/-KYJONgh0P98xoyPPYm9/places', function(snapshot) {
+        $timeout(function() {
+          for (key in snapshot.val()) {
+            $scope.micromarkets.push(snapshot.val()[key]);
+          }
+          if (callback)
+            callback();
+        }, 0)
+      })
+    }
+
+    function getBuilders(callback) {
+      Firebase.once('builder', function(snapshot) {
+        $timeout(function() {
+          for (key in snapshot.val()) {
+            $scope.builders.push(snapshot.val()[key]);
+          }
+          if (callback)
+            callback();
+        }, 0);
+      })
+    }
+
+
+  }
   $timeout(function() {
 
     var slider = document.getElementById('price');
@@ -78,64 +202,76 @@ app.controller('listingCtrl', function($scope, $rootScope, $timeout, $stateParam
 
   }, 500)
 
-  $scope.data = {
-    loc: '',
-    micro: '',
-    ptype: '',
-    bhk: '',
-    rmin: '',
-    rmax: '',
-    builder: '',
-    category: ''
-  };
-  $scope.selected = {};
-  for (key in $location.search()) {
-    if ($location.search()[key]) {
-      if (key == 'rmin' || key == 'rmax') {
-        $scope.data[key] = parseInt($location.search()[key]);
-      } else {
-        $scope.data[key] = $location.search()[key];
-      }
 
-    }
-  }
 
 
 
   $scope.moreFilters = function(type) {
+    $scope.modelType = type;
     $scope.moreFiltersObj = {};
     $scope.moreFiltersObj[type] = true;
     $('#additional_filters').modal('open');
   }
 
+  $scope.sort = function(data, callback) {
+    if (data) {
+      data.sort(function(a, b) {
+        if (!a.selected) {
+          a.selected = false;
+        }
+        if (!b.selected) {
+          b.selected = false;
+        }
+        return (a.selected === b.selected) ? 0 : a.selected ? -1 : 1;
+      });
+      if (callback) {
+        callback();
+      }
+    }
+  }
   $scope.closeFilter = function() {
     $scope.moreFiltersObj = {};
+    if ($scope.modelType === 'loc') {
+      $scope.sort($scope.locations, function() {
+        $scope.selectedLocations = jQuery.extend(true, [], $scope.locations.filter($scope.selectedFilter.bind(null, true)));
+        if ($scope.selectedLocations.length > $scope.limit) {
+          $scope.listLimitLoc = $scope.selectedLocations.length;
+        } else {
+          $scope.listLimitLoc = $scope.limit;
+        }
+      });
+    } else if ($scope.modelType === 'builder') {
+      $scope.sort($scope.builders, function() {
+        $scope.selectedBuilders = jQuery.extend(true, [], $scope.builders.filter($scope.selectedFilter.bind(null, true)));
+        if ($scope.selectedBuilders.length > $scope.limit) {
+          $scope.listLimitBuilder = $scope.selectedBuilders.length;
+        } else {
+          $scope.listLimitBuilder = $scope.limit;
+        }
+      });
+    } else if ($scope.modelType === 'micro') {
+      $scope.sort($scope.micromarkets, function() {
+        $scope.selectedMicros = jQuery.extend(true, [], $scope.micromarkets.filter($scope.selectedFilter.bind(null, true)));
+        if ($scope.selectedMicros.length > $scope.limit) {
+          $scope.listLimitMicro = $scope.selectedMicros.length;
+        } else {
+          $scope.listLimitMicro = $scope.limit;
+        }
+      });
+    }
     $('#additional_filters').modal('close');
   }
 
   $scope.minChange = function() {
     consFilter();
-
-
     // getProjects();
-
   }
   $scope.maxChange = function() {
     var f = consFilter();
-
-
     // getProjects();
   }
 
-  for (key in $scope.data) {
-    if ($scope.data[key]) {
-      l = $scope.data[key].toString().split(',')
-      $scope.selected[key] = {}
-      for (i in l) {
-        $scope.selected[key][l[i]] = true;
-      }
-    }
-  }
+
 
   function consFilter() {
     $('.fd-load').addClass('blur');
@@ -184,9 +320,11 @@ app.controller('listingCtrl', function($scope, $rootScope, $timeout, $stateParam
 
   }
 
-  getProjects();
   $scope.visit = {};
-
+  $scope.listLimitLoc = 6;
+  $scope.listLimitBuilder = 6;
+  $scope.listLimitMicro = 6;
+  $scope.limit = 6;
   $scope.visitDate = function() {
     console.log($scope.visit.date);
   }
@@ -194,8 +332,8 @@ app.controller('listingCtrl', function($scope, $rootScope, $timeout, $stateParam
 
 
 
-  var count = 0;
-  $scope.addFilter = function(id, type) {
+  $scope.addFilter = function(id, type, model) {
+    var count = 0;
     if (!$scope.data[type]) {
       $scope.data[type] = id.toString();
 
@@ -212,7 +350,60 @@ app.controller('listingCtrl', function($scope, $rootScope, $timeout, $stateParam
       }
       $scope.data[type] = filter.join();
     }
+    if (type === 'loc') {
+      var location = $scope.locations.filter($scope.idFilter.bind(null, id));
+      if (location && location.length > 0) {
+        location[0].selected = $scope.selected.loc[id];
+      }
+      if (!model) {
+        $scope.sort($scope.locations, function() {
+          $scope.selectedLocations = jQuery.extend(true, [], $scope.locations.filter($scope.selectedFilter.bind(null, true)));
+          if ($scope.selectedLocations.length > $scope.limit) {
+            $scope.listLimitLoc = $scope.selectedLocations.length;
+          } else {
+            $scope.listLimitLoc = $scope.limit;
+          }
+        });
+      }
+    } else if (type === 'builder') {
+      var builder = $scope.builders.filter($scope.idFilter.bind(null, id));
+      if (builder && builder.length > 0) {
+        builder[0].selected = $scope.selected.builder[id];
+      }
+      if (!model) {
+        $scope.sort($scope.builders, function() {
+          $scope.selectedBuilders = jQuery.extend(true, [], $scope.builders.filter($scope.selectedFilter.bind(null, true)));
+          if ($scope.selectedBuilders.length > $scope.limit) {
+            $scope.listLimitBuilder = $scope.selectedBuilders.length;
+          } else {
+            $scope.listLimitBuilder = $scope.limit;
+          }
+        });
+      }
+    } else if (type === 'micro') {
+      var micro = $scope.micromarkets.filter($scope.idFilter.bind(null, id));
+      if (micro && micro.length > 0) {
+        micro[0].selected = $scope.selected.micro[id];
+      }
+      if (!model) {
+        $scope.sort($scope.micromarkets, function() {
+          $scope.selectedMicros = jQuery.extend(true, [], $scope.micromarkets.filter($scope.selectedFilter.bind(null, true)));
+          if ($scope.selectedMicros.length > $scope.limit) {
+            $scope.listLimitMicro = $scope.selectedMicros.length;
+          } else {
+            $scope.listLimitMicro = $scope.limit;
+          }
+        });
+      }
+    }
     consFilter();
+  }
+
+  $scope.idFilter = function(id, value, index, array) {
+    return value.key == id;
+  }
+  $scope.selectedFilter = function(selected, value, index, array) {
+    return value.selected == selected;
   }
 
   $scope.categories = [
@@ -238,31 +429,7 @@ app.controller('listingCtrl', function($scope, $rootScope, $timeout, $stateParam
   $scope.micromarkets = [];
   $scope.locations = [];
   $scope.builders = [];
-  getLocations();
 
-  function getLocations() {
-    Firebase.once('locations/country/-K_43TEI8cBodNbwlKqJ/locality/city/-KYJONgh0P98xoyPPYm9/micromarket', function(snapshot) {
-      $timeout(function() {
-        for (key in snapshot.val()) {
-          for (key1 in snapshot.val()[key].places) {
-            $scope.locations.push(snapshot.val()[key].places[key1]);
-          }
-        }
-        getLocalities();
-      }, 0)
-    })
-  }
-
-  function getLocalities() {
-    Firebase.once('locations/country/-K_43TEI8cBodNbwlKqJ/micromarket/city/-KYJONgh0P98xoyPPYm9/places', function(snapshot) {
-      $timeout(function() {
-        for (key in snapshot.val()) {
-          $scope.micromarkets.push(snapshot.val()[key]);
-        }
-        getBuilders();
-      }, 0)
-    })
-  }
 
   $scope.scheduleVisit = function(proj) {
     $scope.visit.project = {};
@@ -288,15 +455,7 @@ app.controller('listingCtrl', function($scope, $rootScope, $timeout, $stateParam
     $state.go('write-review', { 'key': proj.key, 'name': proj.name, 'type': 'residential' })
   }
 
-  function getBuilders() {
-    Firebase.once('builder', function(snapshot) {
-      $timeout(function() {
-        for (key in snapshot.val()) {
-          $scope.builders.push(snapshot.val()[key]);
-        }
-      }, 0);
-    })
-  }
+
 
   function tspaces(val) {
     return val.replace(/\s+/g, '-').toLowerCase()

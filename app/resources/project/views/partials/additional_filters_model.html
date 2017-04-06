@@ -1,12 +1,12 @@
 <div id="additional_filters" class="modal modal-fixed-footer">
   <div class="modal-content">
     <h4>Additional Filters</h4>
-    <div class="row mgbn" ng-if="moreFiltersObj.micromarkets">
+    <div class="row mgbn" ng-if="moreFiltersObj.micro">
       <div class="col s12">
         <div class="row pdt2 mgbn">
           <h3 class="ft14 b bodb mgb10 pdb10">Micromarkets</h3>
           <div class="col s4 mgt5" ng-repeat="micro in micromarkets">
-            <input type="checkbox" class="filled-in" id="{{micro.key}}" ng-change="applyFilters()" ng-model="selected.micro[micro.key]" />
+            <input type="checkbox" class="filled-in" id="{{micro.key}}" ng-change="addFilter(micro.key,'micro',true)" ng-model="selected.micro[micro.key]" />
             <label class="ft12" for="{{micro.key}}">{{micro.name}}</label>
           </div>
         </div>
@@ -14,21 +14,21 @@
     </div>
     <div class="row mgbn">
       <div class="col s12">
-        <div class="row pdt2 mgbn" ng-if="moreFiltersObj.locations">
+        <div class="row pdt2 mgbn" ng-if="moreFiltersObj.loc">
           <h3 class="ft14 b bodb mgb10 pdb10">Locations</h3>
           <div class="col s4 mgt5" ng-repeat="location in locations">
-            <input type="checkbox" class="filled-in" id="{{location.key}}" ng-change="applyFilters()" ng-model="selected.loc[location.key]" />
-            <label class="ft12" for="{{location.key}}">{{location.name}}</label>
+            <input type="checkbox" class="filled-in" id="{{location.key}}" ng-change="addFilter(location.key,'loc',true)" ng-model="selected.loc[location.key]" />
+            <label class="ft12" for="{{location.key}}">{{location.name}} {{location.selected}}</label>
           </div>
         </div>
       </div>
     </div>
     <div class="row mgbn">
-      <div class="col s12" ng-if="moreFiltersObj.builders">
+      <div class="col s12" ng-if="moreFiltersObj.builder">
         <div class="row pdt2 mgbn">
           <h3 class="ft14 b bodb mgb10 pdb10">Builders</h3>
           <div class="col s4 mgt5" ng-repeat="builder in builders">
-            <input type="checkbox" class="filled-in" id="{{builder.key}}" ng-change="applyFilters()" ng-model="selected.builder[builder.key]" />
+            <input type="checkbox" class="filled-in" id="{{builder.key}}" ng-change="addFilter(builder.key,'builder',true)" ng-model="selected.builder[builder.key]" />
             <label class="ft12" for="{{builder.key}}">{{builder.name}}</label>
           </div>
         </div>

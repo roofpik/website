@@ -1,4 +1,4 @@
-<div>
+<div ng-init="initialize_data()">
   <div class="side-nav hide-on-large-only" id="slide-out1">
     <form>
       <div class="row filter-heading">
@@ -134,42 +134,42 @@
               <div class="col s12">
                 <h3 class="ft14 b">Micromarkets</h3>
               </div>
-              <div class="col s12 mgt5" ng-repeat="item in micromarkets | limitTo:(2) % 3 == 1 ? 2 : 3">
+              <div class="col s12 mgt5" ng-repeat="item in micromarkets | limitTo:listLimitMicro">
                 <input type="checkbox" ng-model="selected.micro[item.key]" id="{{item.key}}" ng-change="addFilter(item.key, 'micro')" class="filled-in" />
                 <label class="ft11" for="{{item.key}}">{{item.name}}</label>
               </div>
             </div>
             <div class="row pdt2 mgbn">
               <div class="col s12">
-                <span class="more-filter" ng-click="moreFilters('micromarkets')">More Micromarkets</span>
+                <span class="more-filter" ng-click="moreFilters('micro')">More Micromarkets</span>
               </div>
             </div>
             <div class="row">
               <div class="col s12">
                 <h3 class="ft14 b">Locations</h3>
               </div>
-              <div class="col s6 mgt5" ng-repeat="item in locations">
-                <input type="checkbox" ng-model="selected.loc[item.key]" id="{{item.key}}" ng-change="addFilter(item.key, 'loc')" class="filled-in" />
-                <label class="ft11" for="{{item.key}}">{{item.name}}</label>
+              <div class="col s6 mgt5" ng-repeat="item in locations | limitTo:listLimitLoc">
+                <input type="checkbox" ng-model="selected.loc[item.key]" id="{{item.key}}" ng-change="addFilter(item.key, 'loc',false)" class="filled-in" />
+                <label class="ft11" for="{{item.key}}">{{item.name}} {{item.selected}}</label>
               </div>
             </div>
             <div class="row pdt2 mgbn">
               <div class="col s12">
-                <span class="more-filter" ng-click="moreFilters('locations')">More Locations</span>
+                <span class="more-filter" ng-click="moreFilters('loc')">More Locations</span>
               </div>
             </div>
             <div class="row">
               <div class="col s12">
                 <h3 class="ft14 b">Builders</h3>
               </div>
-              <div class="col s6 mgt5" ng-repeat="item in builders">
+              <div class="col s6 mgt5" ng-repeat="item in builders | limitTo:listLimitBuilder">
                 <input type="checkbox" ng-model="selected.builder[item.key]" id="{{item.key}}" ng-change="addFilter(item.key, 'builder')" class="filled-in" />
                 <label class="ft11" for="{{item.key}}">{{item.name}}</label>
               </div>
             </div>
             <div class="row pdt2 mgbn">
               <div class="col s12">
-                <span class="more-filter" ng-click="moreFilters('builders')">More Builders</span>
+                <span class="more-filter" ng-click="moreFilters('builder')">More Builders</span>
               </div>
             </div>
             <!-- Modal Trigger -->
