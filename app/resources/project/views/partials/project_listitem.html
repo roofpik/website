@@ -1,0 +1,39 @@
+<div class="col s12 card pdt10 pdbn pdln pdrn white">
+            <div class="row relative mgb10">
+              <div class="col s3 proj-thumb">
+                <a href=""> <img src="http://cdn.roofpik.com/image/{{project.thumbnail}}-s.jpg" class="responsive-img fd-load"></a>
+              </div>
+              <div class="col s6 pdln xspdl10">
+                <div class="truncate ft12 pl-l1 fd-load">{{project.segment}}</div>
+                <h2 class="ft18 b mgbn mgt5 truncate"><a href="" class="pl-l2  fd-load"> {{project.name}}</a></h2>
+                <h6 class="mgbn ft13 truncate b text-darken-2 mgt5">
+                                <a href="" class="pl-l3  fd-load"> {{project.location.display}}</a></h6>
+                <div class=" pl-l4 mgt5 ft12  fd-load">#{{project.rank}} Project in Gurgaon</div>
+              </div>
+              <div class="col s3 pdln right-align">
+                <span class="pdl10 pdr10 b grnbg white-text  fd-load" ng-hide="project.rating == 0">{{project.rating}}</span>
+                <span class="pdl10  b fd-load" ng-show="project.rating == 0">No Reviews</span>
+                <div class="ft11 grey-text mgt5  fd-load">{{project.score}} roofpik score</div>
+                <div class="ft11 grey-text  fd-load" ng-hide="project.reviews == 0">{{project.reviews}} reviews</div>
+              </div>
+            </div>
+            <div class="row mgan bodt">
+              <div class="col s3 listp dgrey-text pdt10  fd-load">
+                <p>Rent of 3BHK:</p>
+                <p>Builder:</p>
+                <p>Property Type:</p>
+                <p>Style:</p>
+              </div>
+              <div class="col s8 listp vgrey-text pdln pdt10 pdb10 pdrn  fd-load">
+                <p>₹{{project.rent}} (Approximate)</p>
+                <p>{{project.builder}}</p>
+                <p>{{project.ptype}}</p>
+                <p>{{project.style}}</p>
+              </div>
+            </div>
+            <div class="row bodt mgbn center grey lighten-5">
+              <a data-target="schedule_visit" class="col s4 m4 grey-text text-darken-2 pda10 modal-trigger listbtn bod-right hide-on-small-only" ng-click="scheduleVisit(project)">Schedule Visit</a>
+              <a class="col s12 m4 grey-text text-darken-2 pda10 listbtn bod-right fd-load" ng-click="showProjDetails(project)">View Details</a>
+              <a ng-click="writeReview(project)" class="col s4 m4 grey-text b listbtn_active pda10 hide-on-small-only fd-load">Write Review</a>
+            </div>
+          </div>

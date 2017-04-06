@@ -1,4 +1,4 @@
-app.controller('listingCtrl', function($scope, $rootScope, $timeout, $stateParams, $http, $state, $location, $window) {
+app.controller('listingCtrl', function($scope, $rootScope, $timeout, $stateParams, $http, $state, $location, $window, Project, Firebase) {
   $('html,body').scrollTop(0);
   $('.button-collapse1').sideNav({
     menuWidth: 300, // Default is 300
@@ -89,7 +89,6 @@ app.controller('listingCtrl', function($scope, $rootScope, $timeout, $stateParam
     category: ''
   };
   $scope.selected = {};
-
   for (key in $location.search()) {
     if ($location.search()[key]) {
       if (key == 'rmin' || key == 'rmax') {
@@ -103,12 +102,15 @@ app.controller('listingCtrl', function($scope, $rootScope, $timeout, $stateParam
 
 
 
-  $scope.moreFilters = function() {
-    $('#modal1').modal('open');
+  $scope.moreFilters = function(type) {
+    $scope.moreFiltersObj = {};
+    $scope.moreFiltersObj[type] = true;
+    $('#additional_filters').modal('open');
   }
 
   $scope.closeFilter = function() {
-    $('#modal1').modal('close');
+    $scope.moreFiltersObj = {};
+    $('#additional_filters').modal('close');
   }
 
   $scope.minChange = function() {
@@ -170,13 +172,8 @@ app.controller('listingCtrl', function($scope, $rootScope, $timeout, $stateParam
 
   function getProjects() {
 
-    $http({
-      url: $rootScope.domain + '/api/projectFilter',
-      method: 'POST',
-      params: $scope.data
-    }).then(function mySucces(response) {
+    Project.projectFilter($scope.data).then(function mySucces(response) {
       // $scope.loading = false;
-
       $('.fd-load').removeClass('blur');
       $scope.projects = response.data.items;
       $timeout(function() {
@@ -244,7 +241,7 @@ app.controller('listingCtrl', function($scope, $rootScope, $timeout, $stateParam
   getLocations();
 
   function getLocations() {
-    db.ref('locations/country/-K_43TEI8cBodNbwlKqJ/locality/city/-KYJONgh0P98xoyPPYm9/micromarket').once('value', function(snapshot) {
+    Firebase.once('locations/country/-K_43TEI8cBodNbwlKqJ/locality/city/-KYJONgh0P98xoyPPYm9/micromarket', function(snapshot) {
       $timeout(function() {
         for (key in snapshot.val()) {
           for (key1 in snapshot.val()[key].places) {
@@ -257,7 +254,7 @@ app.controller('listingCtrl', function($scope, $rootScope, $timeout, $stateParam
   }
 
   function getLocalities() {
-    db.ref('locations/country/-K_43TEI8cBodNbwlKqJ/micromarket/city/-KYJONgh0P98xoyPPYm9/places').once('value', function(snapshot) {
+    Firebase.once('locations/country/-K_43TEI8cBodNbwlKqJ/micromarket/city/-KYJONgh0P98xoyPPYm9/places', function(snapshot) {
       $timeout(function() {
         for (key in snapshot.val()) {
           $scope.micromarkets.push(snapshot.val()[key]);
@@ -282,7 +279,7 @@ app.controller('listingCtrl', function($scope, $rootScope, $timeout, $stateParam
     $scope.visit.status = 'submitted';
 
     updates['/openQuery/country/-K_43TEI8cBodNbwlKqJ/city/-KYJONgh0P98xoyPPYm9/query/' + newPostKey] = $scope.visit;
-    db.ref().update(updates).then(function() {
+    Firebase.update(updates).then(function() {
       Materialize.toast('You have successfully submit details!', 3000, 'rounded');
     })
   }
@@ -292,7 +289,7 @@ app.controller('listingCtrl', function($scope, $rootScope, $timeout, $stateParam
   }
 
   function getBuilders() {
-    db.ref('builder').once('value', function(snapshot) {
+    Firebase.once('builder', function(snapshot) {
       $timeout(function() {
         for (key in snapshot.val()) {
           $scope.builders.push(snapshot.val()[key]);

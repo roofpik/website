@@ -10,7 +10,7 @@ angular.module('roofpikWeb')
         method: 'POST',
         crossDomain: true,
         dataType: "JSONP",
-        url: 'http://' + $rootScope.domain + '/api/mainSearch',
+        url: $rootScope.domain + '/api/mainSearch',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
@@ -26,7 +26,7 @@ angular.module('roofpikWeb')
         method: 'POST',
         crossDomain: true,
         dataType: "JSONP",
-        url: 'http://' + $rootScope.domain + '/api/searchLocation',
+        url: $rootScope.domain + '/api/searchLocation',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
