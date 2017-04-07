@@ -1,0 +1,89 @@
+<section class="story-main mgt65">
+    <link rel="stylesheet" type="text/css" href="../../css/story.style.css">
+    <div class="row no-padding">
+        <div class="col s8 no-padding" ng-click="showblog(featuredlarge.key)">
+            <div class="margaret-first-column type-in twonins-post-1">
+                <div class="thumb">
+                    <img ng-src="{{featuredlarge.imgsrc}}" class="responsive-img">
+                </div>
+                <div class="post-info">
+                    <h2 class="post-title">
+                            <a href="">
+                                       {{featuredlarge.title}}
+                                                         </a>
+                        </h2>
+                    <div class="post-meta">
+                        <div class="date">
+                            {{featuredlarge.created | date}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s4 no-padding">
+            <div class="row no-padding">
+                <div class="col s12 no-padding" ng-repeat="fsmall in featuredsmall" ng-click="showblog(fsmall.key)">
+                    <div class="margaret-first-column type-in twonins-post-1">
+                        <div class="thumb">
+                            <img ng-src="{{fsmall.imgsrc}}" class="responsive-img">
+                        </div>
+                        <div class="post-info pda20">
+                            <h2 class="post-title mgan">
+                            <a href="" class="flow-text"> {{fsmall.title}} </a>
+                        </h2>
+                            <div class="post-meta">
+                                <div class="date">
+                                    {{fsmall.created | date}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="twonins-header">
+                <h3 class="main-title">Blogs</h3>
+                <div class="sub-title">
+                    <p>Read about what is happening in Real Estate</p>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-repeat="story in blogs">
+            <div class="col s12 hoverable pointer" ng-if="$odd" ng-click="showblog(story.key)">
+                <div class="row mgbn valign-wrapper">
+                    <div class="col s12 m6 no-padding">
+                        <img ng-src="{{story.imgsrc}}" class="responsive-img block" />
+                    </div>
+                    <div class="col s12 m6">
+                        <div class="pda10">
+                            <div class="story-meta">
+                                <span class="story-date">{{story.created | date}} /</span>
+                                <h3 class="story-title">{{story.title}} </h3>
+                            </div>
+                            <p>{{story.shortDesc}} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 hoverable pointer" ng-if="$even" ng-click="showblog(story.key)">
+                <div class="row mgbn valign-wrapper">
+                    <div class="col s12 m6">
+                        <div class="pda10">
+                            <div class="story-meta">
+                                <span class="story-date">{{story.created | date}} /</span>
+                                <h3 class="story-title">{{story.title}} </h3>
+                            </div>
+                            <p>{{story.shortDesc}} </p>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 no-padding">
+                        <img ng-src="{{story.imgsrc}}" class="responsive-img block" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

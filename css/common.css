@@ -186,6 +186,12 @@ hr {
     margin-bottom: 10px !important;
 }
 
+
+.mgb50 {
+    margin-bottom: 50px !important;
+}
+
+
 .mgl10 {
     margin-left: 10px !important;
 }
@@ -423,6 +429,10 @@ hr {
     color: #FF5A5F !important;
 }
 
+.dgyt {
+    color: #3c3c3c !important;
+}
+
 .radius2 {
     border-radius: 2px;
 }
@@ -622,6 +632,15 @@ input:focus + div.search-results,
 .mg48 {
     margin-top: 48px !important;
     margin-bottom: 48px !important;
+}
+.mg60 {
+    margin-top: 60px !important;
+    margin-bottom: 60px !important;
+}
+
+.mg120 {
+    margin-top: 120px !important;
+    margin-bottom: 120px !important;
 }
 .mns8 {
     margin-left: -8px !important;

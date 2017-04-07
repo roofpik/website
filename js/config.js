@@ -38,6 +38,19 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
 
 
+  $stateProvider.state('blog', {
+        url: '/blog/gurgaon',
+        templateUrl: 'templates/blog/blog.html',
+        controller: 'blogListCtrl'
+    })
+
+     $stateProvider.state('blog-details', {
+        url: '/blog/details?key',
+        templateUrl: 'templates/blog/blog-details.html',
+        controller:'blogDetailsCtrl'
+    })
+
+
 
 
 

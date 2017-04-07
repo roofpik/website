@@ -37,7 +37,7 @@
                         <div class="z-services">
                             <i class="material-icons medium">date_range</i>
                             <h5 class="mgbn ft12 ">Rent</h5>
-                            <h4 class="mgbn mgt5 ft15 b truncate">{{projectsummary.rentsummary.min}} - {{projectsummary.rentsummary.max}}</h4>
+                            <h4 class="mgbn mgt5 ft15 b truncate">{{projectsummary.rentsummary.min | number : fractionSize}} - {{projectsummary.rentsummary.max | number : fractionSize}}</h4>
                             <p class="mgt5 ft12">{{projectsummary.general.ptype}}</p>
                             <!--  <h4 class="mgbn mgt5 ft15 b truncate">{{project.location.displayAdd}}</h4>
                             <p class="mgt5 ft12">Gurgaon</p> -->
@@ -46,17 +46,14 @@
                     <div class="col m4 s12">
                         <div class="z-services">
                             <i class="material-icons medium">event_seat</i>
-                            <h5 class="mgbn ft12 "> Reviews</h5>
                             <h4 class="mgbn mgt5 ft15 b truncate">{{projectsummary.review.count}} Reviews</h4>
                             <p>
-                                <i class="material-icons">star</i>
-                                <i class="material-icons">star</i>
-                                <i class="material-icons">star</i>
-                                <i class="material-icons">star_half</i>
-                                <i class="material-icons">star_border</i>
+                                <i class="material-icons" ng-repeat="i in getNumber(stars.full)  track by $index">star</i>
+                                <i class="material-icons" ng-show="stars.half">star_half</i>
+                                <i class="material-icons" ng-repeat="i in getNumber(stars.none)  track by $index">star_border</i>
                             </p>
                             <!--    <p class="mgt5 ft12">{{projectsummary.review.rating}} Rating</p> -->
-                            <p class="mgt5 ft12">{{projectsummary.review.score}} Roofpik Score</p>
+                            <p class="mgt5 ft12">{{projectsummary.review.score | number : 1}} Roofpik Score</p>
                         </div>
                     </div>
                 </div>
@@ -109,7 +106,7 @@
                                     <div class="grey-text ft12">Security</div>
                                 </div>
                                 <div class="col s3 pdb10">
-                                    <div class="ft14">₹ {{project.general.rent}}</div>
+                                    <div class="ft14">₹ {{project.general.rent | number : fractionSize}}</div>
                                     <div class="grey-text ft12">Rent (3 BHK Approx)</div>
                                 </div>
                                 <div class="col s3 pdb10">

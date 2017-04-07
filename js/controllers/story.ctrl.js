@@ -131,7 +131,7 @@ app.controller('storyDetailsCtrl', function($scope, $timeout, $location, $window
     });
 
 
-    $scope.showDetails = function(key){
+    $scope.showStory = function(key){
           $state.go('story-details', {'key': key});
     }
 

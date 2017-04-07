@@ -31,6 +31,11 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
 
     getProjects();
 
+    $scope.getNumber = function(num) {
+        console.log(num)
+        return new Array(num);
+    }
+
 
     function getReviewSummary() {
 
@@ -40,16 +45,25 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
             params: { 'key': $scope.projectId }
         }).then(function mySucces(response) {
             // $scope.loading = false;
+
             $scope.reviewsummary = response.data.items[0].data;
             console.log($scope.reviewsummary);
+            $scope.stars = {};
+            $scope.stars.full = Math.floor($scope.reviewsummary.avgrating);
+
+            halfstar = Math.round($scope.reviewsummary.avgrating - $scope.stars.full);
+            if(halfstar == 1){
+                $scope.stars.half = true;
+            }
+            $scope.stars.none = 5 - Math.floor($scope.reviewsummary.avgrating) - halfstar;
             orsum = 0
-            for(key in $scope.reviewsummary.overall){
+            for (key in $scope.reviewsummary.overall) {
                 orsum = orsum + $scope.reviewsummary.overall[key];
             }
             oratings = [1, 2, 3, 4, 5]
             for (index in oratings) {
                 if ($scope.reviewsummary.overall[oratings[index]]) {
-                    $('#prog' + oratings[index]).css('width', $scope.reviewsummary.overall[oratings[index]]/orsum * 100 + '%');
+                    $('#prog' + oratings[index]).css('width', $scope.reviewsummary.overall[oratings[index]] / orsum * 100 + '%');
                 }
             }
 
@@ -61,7 +75,6 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
     getReviewSummary();
 
     db.ref('project/country/' + $scope.countryId + '/city/' + $scope.cityId + '/residential/micromarket/' + $scope.micromarketId + '/locality/' + $scope.localityId + '/projects/' + $scope.projectId).once('value', function(snapshot) {
-
         $scope.project = snapshot.val();
         $scope.images = {}
         for (img in $scope.project.images) {

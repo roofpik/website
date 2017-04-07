@@ -1,0 +1,28 @@
+<div class="mgt65">
+    <div class="parallax-container">
+        <div class="parallax"> <img ng-src="{{blogMain.imgsrc}}" class="responsive-img"></div>
+        <div class="transformfix center">
+            <h3 class="white-text text-sd mgbn mgtn"><b>{{blogMain.title}}</b></h3>
+        </div>
+    </div>
+    <section class="story-main container">
+        <link rel="stylesheet" type="text/css" href="../../css/story.style.css">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div ng-repeat="items in blogDetail">
+                    <h3>{{items.title}}</h3>
+                    <img ng-src="{{items.imgsrc}}" class="responsive-img" />
+                    <p> {{items.description}} </p>
+                </div>
+            </div>
+            <p>
+                <div class="fb-share-button" data-href="https://m.roofpik.com/story/gurgaon?v=1" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fm.roofpik.com%2Fstory%2Fgurgaon%3Fv%3D1&amp;src=sdkpreparse">Share</a></div>
+            </p>
+        </div>
+        <script>
+        $(document).ready(function() {
+            $('.parallax').parallax();
+        });
+        </script>
+    </section>
+</div>
