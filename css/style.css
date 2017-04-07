@@ -333,6 +333,7 @@
         box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.2);
         padding-bottom: 50px !important;
     }
+    #aboutUs-banner h1{font-size: 30px;}
 }
 @media screen and (min-width:601px) and (max-width: 992px) {
 .micro_overy{overflow-y: auto; height: auto;}
@@ -401,6 +402,7 @@
         right: -5px
     }
    
+   .about-values{margin: 20px 0px  !important;}
  
     .xswdfull {
         width: 100% !important;
