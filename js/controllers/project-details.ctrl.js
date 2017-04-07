@@ -32,7 +32,6 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
     getProjects();
 
     $scope.getNumber = function(num) {
-        console.log(num)
         return new Array(num);
     }
 
@@ -47,12 +46,11 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
             // $scope.loading = false;
 
             $scope.reviewsummary = response.data.items[0].data;
-            console.log($scope.reviewsummary);
             $scope.stars = {};
             $scope.stars.full = Math.floor($scope.reviewsummary.avgrating);
 
             halfstar = Math.round($scope.reviewsummary.avgrating - $scope.stars.full);
-            if(halfstar == 1){
+            if (halfstar == 1) {
                 $scope.stars.half = true;
             }
             $scope.stars.none = 5 - Math.floor($scope.reviewsummary.avgrating) - halfstar;
@@ -249,18 +247,15 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
                 }
             }
         }
-        $timeout(function() {
-            t = 0;
-            for (cf in $scope.configurations) {
-                if (t == 0) {
-                    $('.tabcnf').tabs();
-                    $('.tabcnf').tabs('select_tab', cf + $scope.configurations[cf]['type']);
-                    t++;
-                }
-            }
-
-        }, 100);
+        var fconf = $scope.configurations[Object.keys($scope.configurations)[0]];
+        $scope.currentconfig = fconf.bhk + fconf.type;
     }
+
+    $scope.showConfig = function(config) {
+        $scope.currentconfig = config.bhk + config.type;
+    }
+
+    $scope.currentconfig = '3apartment';
 
     $scope.selectConfig = function(config) {
         unitStart = 0;
