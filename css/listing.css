@@ -154,3 +154,11 @@
      font-weight: bold;
      cursor: pointer;
  }
+ .flticon{padding-right: 20px;}
+
+
+ @media screen and (min-width:0px) and (max-width: 400px) {
+
+ .flticon{padding-right: 5px;}
+
+ }

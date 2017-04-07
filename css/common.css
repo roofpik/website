@@ -326,10 +326,7 @@ hr {
     height: 350px !important;
 }
 
-.img_detail {
-    height: 500px;
-    overflow: hidden;
-}
+
 
 .text-sd {
     text-shadow: 0 0 5px #666;
@@ -481,8 +478,7 @@ input:focus + div.search-results,
 }
 
 .search-results {
-    z-index: 97;
-    display: block !important;
+    z-index: 97;   
     position: absolute;
     width: 101%;
     max-height: 250px !important;
