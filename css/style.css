@@ -1,4 +1,22 @@
 
+@import url("header.css");
+@import url("common.css");
+@import url("home.css");
+@import url("listing.css");
+@import url("project.css");
+@import url("write-review.css");
+@import url("advertise.css");
+@import url("blogs.css");
+@import url("requirement.css");
+@import url("story.style.css");
+@import url("careers.css");
+@import url("homecoverstories.css");
+@import url("location.css");
+@import url("comparison.css");
+@import url("contact.css");
+@import url("zstyles.css");
+
+
 
 
 
@@ -102,7 +120,7 @@
 .btnnum:focus {
     background-color: #26a69a;
     color: #fff;
-*/}
+}*/
 
 /*.bhkactive {
     background-color: #ff5a5f;
@@ -302,7 +320,7 @@
         top: 0 !important;
     }
     .img_detail {
-        height: auto;
+        height: auto !important; 
     }
     .menu_sub li a {
         margin-right: 15px !important;
@@ -328,6 +346,7 @@
     i.left {
         margin-right: 10px;
     }
+    .wdp70 {width: 90%;}
 }
 
 @media screen and (min-width:993px) and (max-width: 1079px) {
@@ -359,6 +378,7 @@
         left: auto;
     }
     .listing_rightfix{right: 0% !important;}
+    .wdp70 {width: 90%;}
 }
 
 @media screen and (min-width:0px) and (max-width: 767px) {
@@ -393,7 +413,7 @@
     .xspdl0 {
         padding-left: 0px !important;
     }
-   
+   .xspdlrn{padding-left: 0 !important; padding-right: 0 !important;}
    
     #fixsub_hd {
         display: none !important;
@@ -526,6 +546,7 @@
     #login_signup_popup {
         width: 96%;
     }
+
     .xsnr10 {
         margin-right: 10px !important;
     }

@@ -1,6 +1,12 @@
 app.controller('homeCtrl', function($scope, $state, $timeout) {
     $('.modal').modal('close');
     $('.parallax').parallax();
+    $timeout(function(){
+ $('.carousel.carousel-slider').carousel({
+            full_width: true
+        });
+    },1000)
+     
 
 });
 
