@@ -45,7 +45,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     })
 
      $stateProvider.state('blog-details', {
-        url: '/blog/details?key',
+        url: '/blog/gurgaon/details/:url?key',
         templateUrl: 'templates/blog/blog-details.html',
         controller:'blogDetailsCtrl'
     })

@@ -1,9 +1,11 @@
 app.controller('blogListCtrl', function($scope, $timeout, $state) {
     var allblog;
-    var blogLink = 'blog/main';
+    var blogLink = 'blog/main/';
     $scope.stories = {};
     $scope.featuredsmall = {};
+
     db.ref(blogLink).once('value', function(snapshot) {
+        console.log(snapshot.val());
         $timeout(function() {
 
             $scope.blogs = snapshot.val();
@@ -37,10 +39,13 @@ app.controller('blogListCtrl', function($scope, $timeout, $state) {
         }, 500);
     });
 
+    function rspec(val) {
+        return val.replace(/[^\w\s]/gi, '-')
+    }
 
-    $scope.showblog = function(key) {
-        console.log(key)
-        $state.go('blog-details', { 'key': key })
+    $scope.showblog = function(data) {
+        console.log(data)
+        $state.go('blog-details', { 'url': rspec(data.url), 'key': data.key })
 
     }
 

@@ -170,17 +170,14 @@
                                <!--  <a class="active" id="tabone" ng-href="{{config.hrefLink}}" ng-repeat="config in configurations">{{config.bhk}} BHK<br>
                                       <span class="block ft11 grey-text">{{config.type}}</span>
                                     </a> -->
-                                    <a class="active" id="tabone" ng-href="">3 BHK<br>
-                                      <span class="block ft11 grey-text">Aparments</span>
+                                    <a  ng-class="currentconfig==config.bhk+config.type?'active': 'normal'"  ng-repeat="config in configurations" ng-click="showConfig(config)">{{config.bhk}} BHK<br>
+                                      <span class="block ft11 grey-text">{{config.type}}</span>
                                     </a>
-                                     <a class="" id="tabone" ng-href="">4 BHK<br>
-                                      <span class="block ft11 grey-text">Aparments</span>
-                                    </a>
-                                     <a class="" id="tabone" ng-href="">5 BHK<br>
-                                      <span class="block ft11 grey-text">Aparments</span>
-                                    </a>
+                                    
                                 </div>
                                 <div id="tabone" class="col s12">
+
+
                                     <table class="striped">
                                         <thead>
                                             <tr>
@@ -191,28 +188,16 @@
                                                 <th>Bedrooms</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>3 BHK</td>
-                                                <td>2086 sq ft</td>
-                                                <td>₹ 31000</td>
-                                                <td>3 bathroom</td>
-                                                <td>3 Bedrooms</td>
+                                        <tbody ng-repeat="items in configurations">
+                                            <tr ng-repeat="unit in items.units" ng-show="unit.bhk+unit.type == currentconfig">
+
+                                                <td>{{unit.bhk}} BHK</td>
+                                                <td>{{unit.area}} SQ FT</td>
+                                                <td>₹ {{unit.rent| number : fractionSize}}</td>
+                                                <td>{{unit.bathroom}} bathroom</td>
+                                                <td>{{unit.bedroom}} Bedrooms</td>
                                             </tr>
-                                            <tr>
-                                                <td>3 BHK</td>
-                                                <td>2086 sq ft</td>
-                                                <td>₹ 31000</td>
-                                                <td>3 bathroom</td>
-                                                <td>3 Bedrooms</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3 BHK</td>
-                                                <td>2086 sq ft</td>
-                                                <td>₹ 31000</td>
-                                                <td>3 bathroom</td>
-                                                <td>3 Bedrooms</td>
-                                            </tr>
+                
                                         </tbody>
                                     </table>
                                 </div>

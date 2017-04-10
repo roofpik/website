@@ -32,47 +32,13 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
     getProjects();
 
     $scope.getNumber = function(num) {
-        console.log(num)
         return new Array(num);
     }
 
 
-    function getReviewSummary() {
-
-        $http({
-            url: 'http://139.162.9.71/api/projectSearchReviewSummary',
-            method: 'POST',
-            params: { 'key': $scope.projectId }
-        }).then(function mySucces(response) {
-            // $scope.loading = false;
-
-            $scope.reviewsummary = response.data.items[0].data;
-            console.log($scope.reviewsummary);
-            $scope.stars = {};
-            $scope.stars.full = Math.floor($scope.reviewsummary.avgrating);
-
-            halfstar = Math.round($scope.reviewsummary.avgrating - $scope.stars.full);
-            if(halfstar == 1){
-                $scope.stars.half = true;
-            }
-            $scope.stars.none = 5 - Math.floor($scope.reviewsummary.avgrating) - halfstar;
-            orsum = 0
-            for (key in $scope.reviewsummary.overall) {
-                orsum = orsum + $scope.reviewsummary.overall[key];
-            }
-            oratings = [1, 2, 3, 4, 5]
-            for (index in oratings) {
-                if ($scope.reviewsummary.overall[oratings[index]]) {
-                    $('#prog' + oratings[index]).css('width', $scope.reviewsummary.overall[oratings[index]] / orsum * 100 + '%');
-                }
-            }
 
 
-        })
-
-    }
-
-    getReviewSummary();
+    // getReviewSummary();
 
     db.ref('project/country/' + $scope.countryId + '/city/' + $scope.cityId + '/residential/micromarket/' + $scope.micromarketId + '/locality/' + $scope.localityId + '/projects/' + $scope.projectId).once('value', function(snapshot) {
         $scope.project = snapshot.val();
@@ -249,18 +215,15 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
                 }
             }
         }
-        $timeout(function() {
-            t = 0;
-            for (cf in $scope.configurations) {
-                if (t == 0) {
-                    $('.tabcnf').tabs();
-                    $('.tabcnf').tabs('select_tab', cf + $scope.configurations[cf]['type']);
-                    t++;
-                }
-            }
-
-        }, 100);
+        var fconf = $scope.configurations[Object.keys($scope.configurations)[0]];
+        $scope.currentconfig = fconf.bhk + fconf.type;
     }
+
+    $scope.showConfig = function(config) {
+        $scope.currentconfig = config.bhk + config.type;
+    }
+
+    $scope.currentconfig = '3apartment';
 
     $scope.selectConfig = function(config) {
         unitStart = 0;
@@ -344,4 +307,42 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
             swal('Query Submitted', 'Our executives will call you back', 'success');
         })
     }
+
+
+    function reviewSummary(){
+
+         $http({
+            url: 'http://139.162.9.71/api/ProjKeyRatings?',
+            method: 'POST',
+            params: { 'pkey': $scope.projectId }
+        }).then(function mySucces(response) {
+
+            console.log(response.data.items[0])
+            $scope.reviewsummary = response.data.items[0];
+            $scope.stars = {};
+            $scope.stars.full = Math.floor($scope.reviewsummary.star_rating.avg_star);
+
+            halfstar = Math.round($scope.reviewsummary.star_rating.avg_star - $scope.stars.full);
+            if (halfstar == 1) {
+                $scope.stars.half = true;
+            }
+            $scope.stars.none = 5 - Math.floor($scope.reviewsummary.star_rating.avg_star) - halfstar;
+            orsum = 0
+            for (key in $scope.reviewsummary.type) {
+                orsum = orsum + $scope.reviewsummary.type[key];
+            }
+            oratings = [1, 2, 3, 4, 5]
+            for (index in oratings) {
+                if ($scope.reviewsummary.star_rating[oratings[index]+'_star']) {
+                    $('#prog' + oratings[index]).css('width', $scope.reviewsummary.star_rating[oratings[index]+'_star'] / orsum * 100 + '%');
+                }
+            }
+
+            $scope.projectsummary.review.count = orsum
+            // console.log(response.data.items[0]);
+
+        })
+    }
+
+    reviewSummary()
 })
