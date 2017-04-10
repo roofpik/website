@@ -106,7 +106,7 @@
                                 <textarea id="textarea1" class="materialize-textarea validate mgbn" ng-model="review.main.detail" ng-change="reviewText()"></textarea>
                                 <label for="textarea1">Type your review</label>
                             </div>
-                            <div class="col s12 text-count right-align" ng-hide="textcount"> <span class="validate" id="textcount">{{data.textlength}}</span>/100 </div>
+                            <div class="col s12 text-count right-align" ng-hide="textcount"> <span class="validate" id="textcount">{{data.textlength}}</span>/100 (Minimum 100 characters) </div>
                             <div class="col s12 pdb10 b">
                                 <span ng-show="!data.textcount" class="error">Minimum 100 characters required</span>
                                 <span ng-show="review.main.detail == null && validate" class="error">Minimum 100 characters</span>
