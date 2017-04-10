@@ -1,2 +1,6 @@
-.care_ul {}
-.care_ul li{list-style-type: disc !important; list-style-position: inside;}
+.top-values {
+    padding: 25px 15px;
+    margin: 0 10px;
+    background: rgba(204, 204, 204, 0.28);
+    font-size: 22px;
+}
