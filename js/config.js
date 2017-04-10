@@ -77,6 +77,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         templateUrl: 'templates/static/business-advantage.html'
     })
 
+    $stateProvider.state('business-advantage-form', {
+        url: '/business-advantage-form',
+        templateUrl: 'templates/static/business-advantage-form.html'
+    })
+
     $stateProvider.state('careers', {
         url: '/careers',
         templateUrl: 'templates/static/careers.html'
