@@ -18,7 +18,7 @@
           <h3 class="ft14 b bodb mgb10 pdb10">Locations</h3>
           <div class="col s4 mgt5" ng-repeat="location in locations">
             <input type="checkbox" class="filled-in" id="{{location.key}}" ng-change="addFilter(location.key,'loc',true)" ng-model="selected.loc[location.key]" />
-            <label class="ft12" for="{{location.key}}">{{location.name}} {{location.selected}}</label>
+            <label class="ft12" for="{{location.key}}">{{location.name}}</label>
           </div>
         </div>
       </div>

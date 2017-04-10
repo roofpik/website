@@ -8,7 +8,8 @@
     var service = {
       db: db,
       update: update,
-      once: once
+      once: once,
+      push: push
     };
 
     return service;
@@ -21,5 +22,10 @@
     function once(url, callback) {
       var db = firebase.database().ref(url);
       return db.once('value', callback);
+    }
+
+    function push(url,data) {
+      var db = firebase.database().ref(url);
+      return db.push(data);
     }
   };

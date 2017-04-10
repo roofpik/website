@@ -47,40 +47,40 @@ app.controller('listingCtrl', function($scope, $rootScope, $timeout, $stateParam
                   $scope.selectedLocations = $scope.locations.filter($scope.idFilter.bind(null, l[i]));
                   if ($scope.selectedLocations && $scope.selectedLocations.length > 0) {
                     $scope.selectedLocations[0].selected = true;
-                    $scope.sort($scope.locations, function() {
-                      $scope.selectedLocations = jQuery.extend(true, [], $scope.locations.filter($scope.selectedFilter.bind(null, true)));
-                      if ($scope.selectedLocations.length > $scope.limit) {
-                        $scope.listLimitLoc = $scope.selectedLocations.length;
-                      } else {
-                        $scope.listLimitLoc = $scope.limit;
-                      }
-                    });
+                    // $scope.sort($scope.locations, function() {
+                    //   $scope.selectedLocations = jQuery.extend(true, [], $scope.locations.filter($scope.selectedFilter.bind(null, true)));
+                    //   if ($scope.selectedLocations.length > $scope.limit) {
+                    //     $scope.listLimitLoc = $scope.selectedLocations.length;
+                    //   } else {
+                    //     $scope.listLimitLoc = $scope.limit;
+                    //   }
+                    // });
                   }
                 } else if (key === 'builder') {
                   $scope.selectedBuilders = $scope.builders.filter($scope.idFilter.bind(null, l[i]));
                   if ($scope.selectedBuilders && $scope.selectedBuilders.length > 0) {
                     $scope.selectedBuilders[0].selected = true;
-                    $scope.sort($scope.builders, function() {
-                      $scope.selectedBuilders = jQuery.extend(true, [], $scope.builders.filter($scope.selectedFilter.bind(null, true)));
-                      if ($scope.selectedBuilders.length > $scope.limit) {
-                        $scope.listLimitBuilder = $scope.selectedBuilders.length;
-                      } else {
-                        $scope.listLimitBuilder = $scope.limit;
-                      }
-                    });
+                    // $scope.sort($scope.builders, function() {
+                    //   $scope.selectedBuilders = jQuery.extend(true, [], $scope.builders.filter($scope.selectedFilter.bind(null, true)));
+                    //   if ($scope.selectedBuilders.length > $scope.limit) {
+                    //     $scope.listLimitBuilder = $scope.selectedBuilders.length;
+                    //   } else {
+                    //     $scope.listLimitBuilder = $scope.limit;
+                    //   }
+                    // });
                   }
                 } else if (key === 'micro') {
                   $scope.selectedMicros = $scope.micromarkets.filter($scope.idFilter.bind(null, l[i]));
                   if ($scope.selectedMicros && $scope.selectedMicros.length > 0) {
                     $scope.selectedMicros[0].selected = true;
-                    $scope.sort($scope.micromarkets, function() {
-                      $scope.selectedMicros = jQuery.extend(true, [], $scope.micromarkets.filter($scope.selectedFilter.bind(null, true)));
-                      if ($scope.selectedMicros.length > $scope.limit) {
-                        $scope.listLimitMicro = $scope.selectedMicros.length;
-                      } else {
-                        $scope.listLimitMicro = $scope.limit;
-                      }
-                    });
+                    // $scope.sort($scope.micromarkets, function() {
+                    //   $scope.selectedMicros = jQuery.extend(true, [], $scope.micromarkets.filter($scope.selectedFilter.bind(null, true)));
+                    //   if ($scope.selectedMicros.length > $scope.limit) {
+                    //     $scope.listLimitMicro = $scope.selectedMicros.length;
+                    //   } else {
+                    //     $scope.listLimitMicro = $scope.limit;
+                    //   }
+                    // });
                   }
                 }
               }
@@ -234,29 +234,29 @@ app.controller('listingCtrl', function($scope, $rootScope, $timeout, $stateParam
     if ($scope.modelType === 'loc') {
       $scope.sort($scope.locations, function() {
         $scope.selectedLocations = jQuery.extend(true, [], $scope.locations.filter($scope.selectedFilter.bind(null, true)));
-        if ($scope.selectedLocations.length > $scope.limit) {
-          $scope.listLimitLoc = $scope.selectedLocations.length;
-        } else {
-          $scope.listLimitLoc = $scope.limit;
-        }
+        // if ($scope.selectedLocations.length > $scope.limit) {
+        //   $scope.listLimitLoc = $scope.selectedLocations.length;
+        // } else {
+        //   $scope.listLimitLoc = $scope.limit;
+        // }
       });
     } else if ($scope.modelType === 'builder') {
       $scope.sort($scope.builders, function() {
         $scope.selectedBuilders = jQuery.extend(true, [], $scope.builders.filter($scope.selectedFilter.bind(null, true)));
-        if ($scope.selectedBuilders.length > $scope.limit) {
-          $scope.listLimitBuilder = $scope.selectedBuilders.length;
-        } else {
-          $scope.listLimitBuilder = $scope.limit;
-        }
+        // if ($scope.selectedBuilders.length > $scope.limit) {
+        //   $scope.listLimitBuilder = $scope.selectedBuilders.length;
+        // } else {
+        //   $scope.listLimitBuilder = $scope.limit;
+        // }
       });
     } else if ($scope.modelType === 'micro') {
       $scope.sort($scope.micromarkets, function() {
         $scope.selectedMicros = jQuery.extend(true, [], $scope.micromarkets.filter($scope.selectedFilter.bind(null, true)));
-        if ($scope.selectedMicros.length > $scope.limit) {
-          $scope.listLimitMicro = $scope.selectedMicros.length;
-        } else {
-          $scope.listLimitMicro = $scope.limit;
-        }
+        // if ($scope.selectedMicros.length > $scope.limit) {
+        //   $scope.listLimitMicro = $scope.selectedMicros.length;
+        // } else {
+        //   $scope.listLimitMicro = $scope.limit;
+        // }
       });
     }
     $('#additional_filters').modal('close');
@@ -355,46 +355,47 @@ app.controller('listingCtrl', function($scope, $rootScope, $timeout, $stateParam
       if (location && location.length > 0) {
         location[0].selected = $scope.selected.loc[id];
       }
-      if (!model) {
-        $scope.sort($scope.locations, function() {
-          $scope.selectedLocations = jQuery.extend(true, [], $scope.locations.filter($scope.selectedFilter.bind(null, true)));
-          if ($scope.selectedLocations.length > $scope.limit) {
-            $scope.listLimitLoc = $scope.selectedLocations.length;
-          } else {
-            $scope.listLimitLoc = $scope.limit;
-          }
-        });
-      }
+      // if (!model) {
+      //   $scope.sort($scope.locations, function() {
+      //     $scope.selectedLocations = jQuery.extend(true, [], $scope.locations.filter($scope.selectedFilter.bind(null, true)));
+      //     if ($scope.selectedLocations.length > $scope.limit) {
+      //       $scope.listLimitLoc = $scope.selectedLocations.length;
+      //     } else {
+      //       $scope.listLimitLoc = $scope.limit;
+      //     }
+      //   });
+      // }
     } else if (type === 'builder') {
       var builder = $scope.builders.filter($scope.idFilter.bind(null, id));
       if (builder && builder.length > 0) {
         builder[0].selected = $scope.selected.builder[id];
       }
-      if (!model) {
-        $scope.sort($scope.builders, function() {
-          $scope.selectedBuilders = jQuery.extend(true, [], $scope.builders.filter($scope.selectedFilter.bind(null, true)));
-          if ($scope.selectedBuilders.length > $scope.limit) {
-            $scope.listLimitBuilder = $scope.selectedBuilders.length;
-          } else {
-            $scope.listLimitBuilder = $scope.limit;
-          }
-        });
-      }
+      // if (!model) {
+      //   $scope.sort($scope.builders, function() {
+      //     $scope.selectedBuilders = jQuery.extend(true, [], $scope.builders.filter($scope.selectedFilter.bind(null, true)));
+      //     if ($scope.selectedBuilders.length > $scope.limit) {
+      //       $scope.listLimitBuilder = $scope.selectedBuilders.length;
+      //     } else {
+      //       $scope.listLimitBuilder = $scope.limit;
+      //     }
+      //   });
+      // }
     } else if (type === 'micro') {
       var micro = $scope.micromarkets.filter($scope.idFilter.bind(null, id));
       if (micro && micro.length > 0) {
         micro[0].selected = $scope.selected.micro[id];
       }
-      if (!model) {
-        $scope.sort($scope.micromarkets, function() {
-          $scope.selectedMicros = jQuery.extend(true, [], $scope.micromarkets.filter($scope.selectedFilter.bind(null, true)));
-          if ($scope.selectedMicros.length > $scope.limit) {
-            $scope.listLimitMicro = $scope.selectedMicros.length;
-          } else {
-            $scope.listLimitMicro = $scope.limit;
-          }
-        });
-      }
+      // if (!model) {
+      //   $scope.sort($scope.micromarkets, function() {
+      //     $scope.selectedMicros = jQuery.extend(true, [], $scope.micromarkets.filter($scope.selectedFilter.bind(null, true)));
+      //     if ($scope.selectedMicros.length > $scope.limit) {
+      //       $scope.listLimitMicro = $scope.selectedMicros.length;
+      //     } else {
+      //       $scope.listLimitMicro = $scope.limit;
+      //     }
+      //   });
+      // }
+
     }
     consFilter();
   }

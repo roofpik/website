@@ -1,4 +1,4 @@
-app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $stateParams, $location, $http) {
+app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $stateParams, $location, Config, Project, Firebase) {
 
 
 
@@ -13,68 +13,80 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
   $scope.shortspecifications = {};
   $scope.allAmenities = amenities;
   $scope.amenitiesType = amenitiesType;
+  $scope.reviews = [];
+  $scope.reviewFilters = { userType: '', ratings: '', pagination: 1 };
+  $scope.loadMoreShow = true;
+  $scope.averageRating = 8.5;
+  $scope.query = {};
+  $scope.reviewsummary1 = {
+    abcd: {
+      rating: 8.5
+    }
+  };
+  $scope.projectsummary = {};
 
-  function getProjects() {
+  $scope.getReviews = function() {
 
-    $http({
-      url: 'http://139.162.9.71/api/projectSearchKey',
-      method: 'POST',
-      params: { 'key': $scope.projectId }
-    }).then(function mySucces(response) {
+    var queryString = "";
+    queryString += "pkey=" + $scope.projectId;
+    queryString += "&userType=" + $scope.reviewFilters.userType;
+    queryString += "&ratings=" + $scope.reviewFilters.ratings;
+    queryString += "&pagination=" + $scope.reviewFilters.pagination;
+    Project.reviewSearch(queryString).then(function mySucces(response) {
+      // $scope.loading = false;
+      var items = response.data.items;
+      if (items) {
+        if (items.length < 10) {
+          $scope.loadMoreShow = false;
+        }
+        $scope.reviews = $scope.reviews.concat(items);
+      }
+    })
+  }
+
+
+  function getProjects(callback) {
+
+    Project.projectSearchKey({ 'key': $scope.projectId }).then(function mySucces(response) {
       // $scope.loading = false;
       $scope.projectsummary = response.data.items[0].data;
-
-
     })
 
+    $scope.getReviews();
+    if (callback) {
+      callback();
+    }
   }
 
-  getProjects();
+  getProjects(function() {
+    reviewSummary()
+  });
 
-
-  function getReviewSummary() {
-
-    $http({
-      url: 'http://139.162.9.71/api/projectSearchReviewSummary',
-      method: 'POST',
-      params: { 'key': $scope.projectId }
-    }).then(function mySucces(response) {
-      // $scope.loading = false;
-      $scope.reviewsummary = response.data.items[0].data;
-      console.log($scope.reviewsummary);
-      orsum = 0
-      for (key in $scope.reviewsummary.overall) {
-        orsum = orsum + $scope.reviewsummary.overall[key];
-      }
-      oratings = [1, 2, 3, 4, 5]
-      for (index in oratings) {
-        if ($scope.reviewsummary.overall[oratings[index]]) {
-          $('#prog' + oratings[index]).css('width', $scope.reviewsummary.overall[oratings[index]] / orsum * 100 + '%');
-        }
-      }
-
-
-    })
-
+  $scope.getDate = function(date) {
+    var newDate = new Date();
+    newDate.setTime(date * 1000);
+    dateString = newDate.toUTCString();
+    return dateString;
   }
+  $scope.getNumber = function(num) {
+      return new Array(num);
+    }
+    // getReviewSummary();
 
-  getReviewSummary();
-
-  db.ref('project/country/' + $scope.countryId + '/city/' + $scope.cityId + '/residential/micromarket/' + $scope.micromarketId + '/locality/' + $scope.localityId + '/projects/' + $scope.projectId).once('value', function(snapshot) {
-
+  Firebase.once('project/country/' + $scope.countryId + '/city/' + $scope.cityId + '/residential/micromarket/' + $scope.micromarketId + '/locality/' + $scope.localityId + '/projects/' + $scope.projectId, function(snapshot) {
     $scope.project = snapshot.val();
-    $scope.images = {}
+    $scope.images = {};
     for (img in $scope.project.images) {
-      db.ref('images/' + img).once('value', function(data) {
+      Firebase.once('images/' + img, function(data) {
         item = data.val()
-        $scope.images[item['key']] = { 'url': 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-m.jpg' };
+        $scope.images[item['key']] = { 'url': Config.cdn + '/image/' + item['path'] + item['imgName'] + '-m.jpg' };
         if (item['imgCat'] == 'cover') {
           // $('#cover-m').hide();
           // $('#cover-l').hide();
-          // $scope.xscover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xs.jpg';
-          $scope.cover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xs.jpg';
+          // $scope.xscover = Config.cdn+'/image/' + item['path'] + item['imgName'] + '-xs.jpg';
+          $scope.cover = Config.cdn + '/image/' + item['path'] + item['imgName'] + '-xs.jpg';
 
-          $scope.coverl = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xl.jpg';
+          $scope.coverl = Config.cdn + '/image/' + item['path'] + item['imgName'] + '-xl.jpg';
 
           $('#cover-l').on('load', function() {
             $('#cover-xs').addClass('hidden');
@@ -104,6 +116,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
 
 
     $scope.showSpecifications = function() {
+
         $('#more_specifications').modal();
         $('#more_specifications').modal('open');
 
@@ -119,8 +132,6 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
 
     counts = 0;
     for (key in $scope.project.specifications) {
-
-
 
       if (counts < 2) {
         var x = camelCaseToTitleCase(key);
@@ -236,18 +247,15 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
         }
       }
     }
-    $timeout(function() {
-      t = 0;
-      for (cf in $scope.configurations) {
-        if (t == 0) {
-          $('.tabcnf').tabs();
-          $('.tabcnf').tabs('select_tab', cf + $scope.configurations[cf]['type']);
-          t++;
-        }
-      }
-
-    }, 100);
+    var fconf = $scope.configurations[Object.keys($scope.configurations)[0]];
+    $scope.currentconfig = fconf.bhk + fconf.type;
   }
+
+  $scope.showConfig = function(config) {
+    $scope.currentconfig = config.bhk + config.type;
+  }
+
+  $scope.currentconfig = '3apartment';
 
   $scope.selectConfig = function(config) {
     unitStart = 0;
@@ -327,8 +335,69 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
     $scope.query.cityId = $scope.cityId;
     $scope.query.micromarketId = $scope.micromarketId;
     $scope.query.localityId = $scope.localityId;
-    db.ref('query').push($scope.query).then(function() {
+    Firebase.push('query', $scope.query).then(function() {
       swal('Query Submitted', 'Our executives will call you back', 'success');
+    })
+  }
+
+  $scope.reviewFilterChange = function(mode, value) {
+    var count = 0;
+    if (!$scope.reviewFilters[mode]) {
+      $scope.reviewFilters[mode] = value.toString();
+
+    } else {
+      filter = $scope.reviewFilters[mode].split(',');
+      for (index in filter) {
+        if (filter[index] == value) {
+          count = count + 1
+          filter.splice(index, 1);
+        }
+      }
+      if (count == 0) {
+        filter.push(value.toString())
+      }
+      $scope.reviewFilters[mode] = filter.join();
+    }
+
+    $scope.getReviews();
+  }
+  $scope.loadMore = function() {
+    $scope.reviewFilters.pagination = $scope.reviewFilters.pagination + 1;
+    $scope.getReviews();
+  }
+
+  function reviewSummary() {
+    $scope.reviewsummaryratings = {};
+    Project.ProjKeyRatings({ 'pkey': $scope.projectId }).then(function mySucces(response) {
+      console.log(response.data.items[0])
+      $scope.reviewsummary = response.data.items[0];
+      $scope.stars = {};
+      $scope.stars.full = Math.floor($scope.reviewsummary.star_rating.avg_star);
+
+      halfstar = Math.round($scope.reviewsummary.star_rating.avg_star - $scope.stars.full);
+      if (halfstar == 1) {
+        $scope.stars.half = true;
+      }
+      $scope.stars.none = 5 - Math.floor($scope.reviewsummary.star_rating.avg_star) - halfstar;
+      orsum = 0
+      for (key in $scope.reviewsummary.type) {
+        orsum = orsum + $scope.reviewsummary.type[key];
+      }
+      for (key in $scope.reviewsummary.ratings) {
+        if ($scope.reviewsummary.ratings[key]) {
+          $scope.reviewsummaryratings[key] = parseFloat($scope.reviewsummary.ratings[key]);
+        }
+      }
+      oratings = [1, 2, 3, 4, 5]
+      for (index in oratings) {
+        if ($scope.reviewsummary.star_rating[oratings[index] + '_star']) {
+          $('#prog' + oratings[index]).css('width', $scope.reviewsummary.star_rating[oratings[index] + '_star'] / orsum * 100 + '%');
+        }
+      }
+
+      $scope.projectsummary.review.count = orsum
+        // console.log(response.data.items[0]);
+
     })
   }
 })

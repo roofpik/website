@@ -150,7 +150,7 @@
               </div>
               <div class="col s6 mgt5" ng-repeat="item in locations | limitTo:listLimitLoc">
                 <input type="checkbox" ng-model="selected.loc[item.key]" id="{{item.key}}" ng-change="addFilter(item.key, 'loc',false)" class="filled-in" />
-                <label class="ft11" for="{{item.key}}">{{item.name}} {{item.selected}}</label>
+                <label class="ft11" for="{{item.key}}">{{item.name}}</label>
               </div>
             </div>
             <div class="row pdt2 mgbn">

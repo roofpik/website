@@ -12,6 +12,7 @@ var db = firebase.database();
 
 app.run(['$rootScope', '$timeout', 'Config', function($rootScope, $timeout, Config) {
   $rootScope.domain = Config.domain;
+  $rootScope.cdn = Config.cdn;
   $rootScope.loginStatus = false;
   $rootScope.uid = null;
   firebase.auth().onAuthStateChanged(function(user) {

@@ -123,6 +123,62 @@ function reviewRatings() {
   };
 }
 
+app.directive('averageStarRating', averageStarRating);
+
+function averageStarRating() {
+  return {
+    restrict: "EA",
+    template: "<span ng-repeat='star in stars'>" +
+      "      <i ng-if='star.full==true' class='material-icons green-text'>star</i>" + //&#9733
+      "      <i ng-if='star.half==true' class='material-icons green-text'>star_half</i>" + //&#9733
+      "      <i ng-if='star.empty==true' class='material-icons grey-text'>star_border</i>" + //&#9733
+      "</span>",
+    scope: {
+      averageRatingValue: "=ngModel",
+      max: "=?", //optional: default is 5
+    },
+    link: function(scope, elem, attrs) {
+      if (scope.max == undefined) { scope.max = 5; }
+
+      function isFloat(n) {
+        return Number(n) === n && n % 1 !== 0;
+      }
+
+      function updateStars() {
+        // console.log(scope.averageRatingValue);
+        if (scope.averageRatingValue > scope.max) {
+          scope.averageRatingValue = scope.max;
+        }
+        scope.isHalf = isFloat(scope.averageRatingValue);
+        scope.value = Math.floor(scope.averageRatingValue);
+        scope.stars = [];
+        for (var i = 0; i < scope.value; i++) {
+          scope.stars.push({ full: true, empty: false, half: false });
+        }
+        if (scope.isHalf) {
+          scope.stars.push({ full: false, empty: false, half: true });
+        }
+        if (scope.isHalf) {
+          for (var i = scope.stars.length; i < scope.max; i++) {
+            scope.stars.push({ full: false, empty: true, half: false });
+          }
+        }
+        for (var i = scope.stars.length; i < scope.max; i++) {
+          scope.stars.push({ full: false, empty: true, half: false });
+
+        }
+      };
+      scope.$watch("averageRatingValue", function(oldVal, newVal) {
+        // if (newVal) {
+        updateStars();
+        // console.log(oldVal + ' ' + newVal);
+
+        // }
+      });
+    }
+  };
+};
+
 function deleteLocalStorage(name) {
   localStorage.removeItem(name);
 }
