@@ -1,0 +1,21 @@
+.business_sec4 h5{font-size: 17px; min-height: 45px;}
+.business_sec4 .col{padding-right: 20px;}
+.business_sec4 .col:last{padding-right: 10px;}
+.business_sec4 .col img{width: 100px; height: 100px;}
+
+.busi_packages .card{ min-height: 350px }
+.busi_packages .card h2{font-size: 1.5rem }
+.busi_packages .price{font-size: 2rem; color:#ff7e82; }
+
+.busi_leadcost .card{ padding:30px 10px; }
+.busi_leadcost .card{ min-height: 320px }
+.busi_leadcost .card h2{font-size: 1.5rem }
+.busi_leadcost .price{font-size: 2rem; color:#ff7e82; }
+.busi_channel .col{ min-height: 230px; }
+
+
+@media screen and (min-height: 0px) and (max-width: 600px){
+	.business_sec4 .col {margin-bottom: 40px;}
+.busi_leadcost .card, .busi_channel .col{ min-height: auto }
+.busi_channel, .busi_leadcost{display: block;}
+}
