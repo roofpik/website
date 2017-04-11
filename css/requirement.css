@@ -5,9 +5,7 @@
     height: 150px;
     overflow: hidden;
 }
-.dotted {
-    border-bottom: dotted 1px #ff5a5f;
-}
+
 .imghn {
     width: 100px !important;
     height: 100px !important;
