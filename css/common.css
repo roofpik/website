@@ -408,7 +408,9 @@ hr {
 .stargrn {
     color: rgb(0, 166, 153)
 }
-
+.dotted {
+    border-bottom: dotted 1px #ff5a5f;
+}
 .btn-full {
     width: 100%;
 }

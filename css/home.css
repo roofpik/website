@@ -104,9 +104,9 @@
     left: 25%;
     top: 130px;
 
-   /* -ms-transform: rotate(30deg);
+  /* -ms-transform: rotate(30deg);
     -webkit-transform: rotate(30deg);
-    transform: rotate(30deg);
+    transform: rotate(30deg);*/
 
     
 }
@@ -129,7 +129,7 @@
    
 }
 
-
+.mgtdoted{margin-top: 90px;}
 
 
 @media screen and (min-width:0px) and (max-width: 600px) {
