@@ -39,6 +39,11 @@
 .busi_mgl40{margin-left: -40px !important;}
 .busi_mgr40{margin-right: -20px !important;}
 
+.busi_channel img{
+	width:64px;
+	height:64px;
+}
+
 @media screen and (min-height: 0px) and (max-width: 600px){
 .business_sec4 .col {margin-bottom: 40px;}
 .busi_leadcost .card, .busi_channel .col{ min-height: auto }
