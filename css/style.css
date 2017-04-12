@@ -15,6 +15,7 @@
 @import url("comparison.css");
 @import url("business-advantage.css");
 @import url("contact.css");
+@import url("offers.css");
 @import url("zstyles.css");
 
 
@@ -309,7 +310,7 @@
 
 /*responsive media css*/
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 992px) {   
     .projList{padding-left: 10px !important;}
     .side-nav a {
         padding: 0 32px;
@@ -336,8 +337,10 @@
         padding-bottom: 50px !important;
     }
     #aboutUs-banner h1{font-size: 30px;}
+     .offer_img{height: auto !important;}
 }
 @media screen and (min-width:601px) and (max-width: 992px) {
+     .offer_img{height: 150px !important;}
 .micro_overy{overflow-y: auto; height: auto;}
 }
 
@@ -443,6 +446,8 @@
 }
 
 @media screen and (min-width:0px) and (max-width: 600px) {
+
+    .offer_link a{padding: 15px;}
     .starrating{height: 45px;}
 
 .micro_overy{height: auto !important;}

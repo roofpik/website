@@ -1,0 +1,6 @@
+.offer_img{height: 175px !important;}
+.offer_img img{height: 100%;}
+.fixbot{bottom: 0px; left: 0;}
+.offer_link a{padding: 30px; display: inline-block; text-align: center; color: #666; font-weight: 500; }
+.offer_link a i{font-size: 32px; display: block;}
+.offer_link a:hover{color: #ff7e82; background-color: #fafafa;}
