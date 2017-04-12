@@ -397,6 +397,8 @@ hr {
     font-weight: 300;
 }
 
+.bluel-text{color: #1ab0d3;}
+
 .relative {
     position: relative;
 }
@@ -420,6 +422,7 @@ hr {
     border-color: #ff7e82;
     background-color: #ff7e82;
 }
+.aboutb .z-services{min-height: 350px !important;}
 
 .grnbg {
     background-color: #26a69a;
@@ -610,7 +613,7 @@ input:focus + div.search-results,
 .ft20i i {
     font-size: 18px !important;
 }
-
+.ft40{font-size: 40px;}
 .imgcir {
     width: 50px;
     height: 50px;

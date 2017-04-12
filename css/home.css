@@ -92,7 +92,7 @@
 .tabline1,
 .tabline2,
 .tabline3,
-.tabline4 {
+.tabline4, .tabline5 {
     position: absolute;
     z-index: 9;
     height: 5px;
@@ -100,33 +100,43 @@
     border-bottom: dashed 1px #F44336;
 }
 
+
 .tabline1 {
     left: 25%;
-    top: 130px;
-
+    top: 200px;
   /* -ms-transform: rotate(30deg);
     -webkit-transform: rotate(30deg);
-    transform: rotate(30deg);*/
-
-    
+    transform: rotate(30deg);*/    
 }
 
 .tabline2 {
-    left: 20%; border-color: #26a69a;
-    top: 61%;
+    left: 21%; border-color: #26a69a;
+    top: 295px;  width: 170px;
    
 }
 
 .tabline3 {
-    right: 17%; border-color: #ff9800;
-    top: 100px; width: 230px;
+    right: 22%; border-color: #ff9800;
+    top: 170px; width: 150px;
     
 }
 
 .tabline4 {
-    right: 19%; border-color: #2196F3;
-    top: 56%;
+    right: 20%; border-color: #2196F3;
+    top: 55%;
    
+}
+
+.tabline5 {
+    left: 50%;
+    top: 135px;
+width: 100px;
+
+ -ms-transform: rotate(70deg);
+    -webkit-transform: rotate(70deg);
+    transform: rotate(70deg);
+
+    
 }
 
 .mgtdoted{margin-top: 90px;}
