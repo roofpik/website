@@ -4,3 +4,4 @@
     background: rgba(204, 204, 204, 0.28);
     font-size: 22px;
 }
+.team_images img{border-radius: 50%; width: 80px !important; height:80px;}
