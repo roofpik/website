@@ -770,6 +770,9 @@ input:focus + div.search-results,
     height: 250px !important;
 }
 
+
+.ulbulit li{list-style-type: disc !important; margin-left: 20px; margin-top: 5px;}
+
 .busin_bnht {
     height: 375px
 }

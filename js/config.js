@@ -84,7 +84,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
     $stateProvider.state('offers', {
         url: '/offers',
-        templateUrl: 'templates/static/offers.html'
+        templateUrl: 'templates/static/offers.html',
+         controller: 'OffersCtrl'
     })
 
     $stateProvider.state('careers', {
