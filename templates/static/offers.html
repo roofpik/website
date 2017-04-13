@@ -1,15 +1,13 @@
 <div class="mgt65">
     <div class="row mgan center white offer_link">
-       <a href="" ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11] track  by $index">
-        <i class="material-icons">language</i>
-           Movie
-       </a>
-       
+        <a href="" ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11] track  by $index">
+            <i class="material-icons">language</i> Movie
+        </a>
     </div>
     <section>
         <div class="row mgln mgrn pda10">
-            <div class="col s12 m4 l3" ng-repeat="i in [1,2,3,4,5,6,7,8] track by $index">
-                <a href="" class="card block grey-text text-darken-2">
+            <div  class="col s12 m4 l3" ng-repeat="i in [1,2,3,4,5,6,7,8] track by $index">
+                <a href="#offer_modal" class="modal-trigger card block grey-text text-darken-2">
                     <div class="row">
                         <div class="col s12 no-padding relative offer_img">
                             <div class="abs white b fixrt col">
@@ -40,6 +38,16 @@
             </div>
         </div>
     </section>
+
+    <div id="offer_modal" class="modal">
+        <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+    </div>
     <script>
     $(document).ready(function() {
         $('ul.tabs').tabs();
