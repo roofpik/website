@@ -7,7 +7,7 @@
     <section>
         <div class="row mgln mgrn pda10">
             <div  class="col s12 m4 l3" ng-repeat="i in [1,2,3,4,5,6,7,8] track by $index">
-                <a href="#offer_modal" class="modal-trigger card block grey-text text-darken-2">
+                <a onclick="#offer_modal_popup" data-target="offer_modal_popup" class="card block grey-text text-darken-2">
                     <div class="row">
                         <div class="col s12 no-padding relative offer_img">
                             <div class="abs white b fixrt col">
@@ -39,13 +39,33 @@
         </div>
     </section>
 
-    <div id="offer_modal" class="modal">
+    <div id="offer_modal_popup" class="modal">
         <div class="modal-content">
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
+             <div class="card block grey-text text-darken-2">
+                    <div class="row">
+                        <div class="col s12 no-padding relative offer_img">                           
+                            <img src="https://img1.nbstatic.in/la-webp-s/5785d92952faff000ecb197f.jpg" class="responsive-img">
+                        </div>
+                        <div class="col s12">
+                            <h5 class="mgbn ft17 truncate">Heading lorem ipsum</h5>
+                            <p class="mgtn">27 Locations</p>
+                            <p> Get 40% Cashback</p>
+                        </div>
+                        <div class="col s12">
+                            <div class="row mgan">
+                                <div class="col s12 bodt pdln pdrn pdt10 pdb10">
+                                    <div class="bodall pda10 b red-text left">80% Off</div>
+                                    <div class="green-text ft17 right">
+                                        <del class="block ft11 grey-text right-align">₹ 11,000</del>
+                                        ₹ 11,000</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
         <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
         </div>
     </div>
     <script>
