@@ -46,8 +46,8 @@
 .team_arya .team_images img {cursor:pointer;;-webkit-transition: all .2s linear;oz-transition: opacity .2s linear; o-transition: opacity .2s linear; transition: all .2s linear; width: 70px; opacity: .5;}
 .transformImg { transform: scale(1.6);}
 .team_arya .quote{width:50px;opacity:.2;margin-bottom:1.8em}
-.team_arya p {font-size:24px;font-weight:300;line-height:1.8em;margin-bottom:1em}
-.team_arya h4{font-size:16px;color:#666;font-weight:400;margin-bottom:4em} 
+.team_arya p {font-size:17px;font-weight:300;line-height:1.5em;margin-bottom:1em}
+.team_arya h4{font-size:16px;color:#666;font-weight:400;} 
 .team_arya .info h4{margin:40px 0 0;font-size:14px;color:#000;opacity:1!important;line-height:1.4em}
 .mar-zero {margin: 0}
 @media only screen and (min-width : 993px) {

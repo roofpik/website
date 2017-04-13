@@ -397,6 +397,8 @@ hr {
     font-weight: 300;
 }
 
+.bluel-text{color: #1ab0d3;}
+
 .relative {
     position: relative;
 }
@@ -420,6 +422,7 @@ hr {
     border-color: #ff7e82;
     background-color: #ff7e82;
 }
+.aboutb .z-services{min-height: 350px !important;}
 
 .grnbg {
     background-color: #26a69a;
@@ -481,6 +484,8 @@ input:focus + div.search-results,
 .shdsm {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
+
+.fixrt{right: 0}
 
 .search-results {
     z-index: 97;   
@@ -608,7 +613,7 @@ input:focus + div.search-results,
 .ft20i i {
     font-size: 18px !important;
 }
-
+.ft40{font-size: 40px;}
 .imgcir {
     width: 50px;
     height: 50px;

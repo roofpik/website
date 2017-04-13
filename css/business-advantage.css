@@ -48,4 +48,9 @@
 .business_sec4 .col {margin-bottom: 40px;}
 .busi_leadcost .card, .busi_channel .col{ min-height: auto }
 .busi_channel, .busi_leadcost{display: block;}
+ .busi_channel_form a{border-color: #ddd #ddd #fff #ddd;}
+ .busi_channel_form a:first-child{border-left:1px solid #ddd !important}
+.busi_channel_form a:last-child{border-right:1px solid #ddd !important;  border-bottom:1px solid #ddd !important;}
+.busi_channel_form a:hover{color:#ff7e82; border: 1px solid #ff7e82 !important;}
+.busi_channel_form a.active{color:#ff7e82; border: 1px solid #ff7e82 !important;}
 }
