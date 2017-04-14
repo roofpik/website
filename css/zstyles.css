@@ -48,7 +48,7 @@
 .team_arya .quote{width:50px;opacity:.2;margin-bottom:0px}
 .team_arya p {font-size:17px;font-weight:300;line-height:1.5em;margin-bottom:1em}
 .team_arya h4{font-size:16px;color:#666;font-weight:400;} 
-.team_arya .info h4{margin:40px 0 0;font-size:14px;color:#000;opacity:1!important;line-height:1.4em}
+.team_arya .info h4{margin:40px 0 0;font-size:14px;color:#444;opacity:1!important;line-height:1.4em}
 .mar-zero {margin: 0}
 @media only screen and (min-width : 993px) {
 .about-banner .parallax-container {height: 670px;}

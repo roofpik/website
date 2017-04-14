@@ -1,5 +1,6 @@
 app.controller('OffersCtrl', function($scope, $state, $timeout) {
 
+    $('.modal').modal();
 
     $('#offer_modal_popup').modal();
 
@@ -11,7 +12,7 @@ app.controller('OffersCtrl', function($scope, $state, $timeout) {
             // for (key in allCoupon) {
             //     for (img in allCoupon[key]) {
             //         db.ref('images/' + img).once('value', function(snapshot) {
-                    	
+
             //         });
             //     }
             // }
