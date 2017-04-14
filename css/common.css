@@ -389,6 +389,11 @@ hr {
     display: block;
 }
 
+.htv70 {
+    height: 70vh !important;
+    display: block;
+}
+
 .fixed {
     display: block !important;
 }
