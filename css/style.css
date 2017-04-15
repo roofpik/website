@@ -388,6 +388,7 @@
 }
 
 @media screen and (min-width:0px) and (max-width: 767px) {
+    h2{font-size: 2.56rem;}
     .miconleft,
     .miconright {
         position: absolute;
@@ -549,6 +550,7 @@
     .pdlr100 {
         padding: 50px 5% !important;
     }
+    .post-title{margin-top: 10px !important;}
 }
 
 @media screen and (min-width:0px) and (max-width: 400px) {
