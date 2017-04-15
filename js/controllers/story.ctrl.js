@@ -1,6 +1,6 @@
 app.controller('storyListCtrl', function($scope, $timeout, $state) {
     var allStory;
-    ga('send', 'story');
+    // ga('send', 'story');
     var storyLink = 'story/data/country/-K_43TEI8cBodNbwlKqJ/city/-KYJONgh0P98xoyPPYm9';
     $scope.stories = {};
     $scope.featuredsmall = {};

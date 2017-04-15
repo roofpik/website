@@ -8,7 +8,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
     $scope.localityId = $location.search().l;
     $scope.projectId = $location.search().p;
     gp = 'project-'+$scope.projectId;
-    ga('send', gp);
+    // ga('send', gp);
     $scope.pros = [];
     $scope.cons = [];
     $scope.specifications = {};

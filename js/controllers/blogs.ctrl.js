@@ -1,5 +1,5 @@
 app.controller('blogListCtrl', function($scope, $timeout, $state) {
-    ga('send', 'blog');
+    // ga('send', 'blog');
     var allblog;
     var blogLink = 'blog/main/';
     $scope.stories = {};

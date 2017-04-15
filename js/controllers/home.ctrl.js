@@ -1,5 +1,5 @@
 app.controller('homeCtrl', function($scope, $state, $timeout) {
-    ga('send', 'home');
+    // ga('send', 'home');
     $('.modal').modal('close');
     $('.parallax').parallax();
     $timeout(function() {

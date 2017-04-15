@@ -1,5 +1,5 @@
 app.controller('offersCtrl', function($scope, $state, $timeout, $rootScope) {
-    ga('send', 'offers');
+    // ga('send', 'offers');
     $('.modal').modal();
 
     $('#offer_modal_popup').modal();
