@@ -34,8 +34,7 @@ app.run(function($rootScope, $timeout) {
 
     $rootScope.$on('$stateChangeStart',
         function() {
-            // do something
-            // hideLoading();
+            $('#slide-out').sideNav('hide');
         })
 });
 

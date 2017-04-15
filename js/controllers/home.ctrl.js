@@ -1,12 +1,12 @@
 app.controller('homeCtrl', function($scope, $state, $timeout) {
     $('.modal').modal('close');
     $('.parallax').parallax();
-    $timeout(function(){
- $('.carousel.carousel-slider').carousel({
+    $timeout(function() {
+        $('.carousel.carousel-slider').carousel({
             full_width: true
         });
-    },1000)
-     
+    }, 1000)
+
 
 });
 
@@ -38,7 +38,7 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
     }];
 
 
-    $scope.search = function(){
+    $scope.search = function() {
         $('#projsearch').focus();
     }
 
@@ -84,19 +84,40 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
     $scope.getprojsearch = function() {
         if ($scope.projsearch.txt.length > 0 && textStart == 0) {
             $scope.projsearch.loading = true;
-            $http({
-                url: 'http://139.162.9.71/api/mainSearch',
-                method: 'POST',
-                params: {
-                    val: $scope.projsearch.txt
-                }
-            }).then(function(response) {
-                textStart = 0;
-                $scope.projsearch.loading = false;
-                if (response.data.status == 200) {
-                    $scope.projsearch.data = response.data.items;
-                }
-            });
+
+            if (!$scope.projsearch.locfilter) {
+                $http({
+                    url: 'http://139.162.9.71/api/v1/mainSearch',
+                    method: 'GET',
+                    params: {
+                        val: $scope.projsearch.txt
+                    }
+                }).then(function(response) {
+                    textStart = 0;
+                    $scope.projsearch.loading = false;
+                    if (response.data.status == 200) {
+                        $scope.projsearch.data = response.data.items;
+                    }
+                });
+            }
+            else{
+                 $http({
+                    url: 'http://139.162.9.71/api/v1/mainSearchByLoc',
+                    method: 'GET',
+                    params: {
+                        val: $scope.projsearch.txt,
+                        type: $scope.projsearch.locCat,
+                        key: $scope.projsearch.locKey
+                    }
+                }).then(function(response) {
+                    textStart = 0;
+                    $scope.projsearch.loading = false;
+                    if (response.data.status == 200) {
+                        $scope.projsearch.data = response.data.items;
+                    }
+                });
+
+            }
 
         }
     }
@@ -179,12 +200,18 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
 
     var selectLocation;
 
+    $scope.writeReview = function(){
+        $state.go('write-review');
+    }
+
     $scope.getlocitem = function(item) {
 
         if (item.category == 'micro') {
-            filter = 'micro'
+            filter = 'micro';
+            $scope.projsearch.locCat = 'micromarket';
         } else if (item.category == 'locality') {
-            filter = 'loc'
+            filter = 'loc';
+            $scope.projsearch.locCat = 'locality';
         }
         selectLocation = item;
         $scope.locsearch.txt = item.name;
@@ -193,6 +220,7 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
             locProjTxt[locProjItem].url = '/#/search/2017/property/gurgaon/residential/all?' + filter + '=' + item.key
         }
         $scope.projsearch.locfilter = true;
+        $scope.projsearch.locKey = item.key;
         $scope.projsearch.data = locProjTxt;
         $("#projsearch").focus();
 
@@ -205,8 +233,8 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
         if ($scope.locsearch.txt.length > 2 && textStart == 0) {
             $scope.locsearch.loading = true;
             $http({
-                url: 'http://139.162.9.71/api/searchLocation',
-                method: 'POST',
+                url: 'http://139.162.9.71/api/v1/searchLocation',
+                method: 'GET',
                 params: {
                     val: $scope.locsearch.txt
                 }
