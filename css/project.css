@@ -30,3 +30,10 @@
     display: block;
 }
 .pro_dtmnht .z-services{min-height: 290px;}
+
+.morecontent span {
+    display: none;
+}
+.morelink {
+    display: block;
+}
