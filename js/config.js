@@ -52,9 +52,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
 
 
-
-
-
     $stateProvider.state('write-review', {
         url: '/write-review?key&name&type',
         templateUrl: 'templates/review/write-review.html',
@@ -70,8 +67,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
     $stateProvider.state('advertise', {
         url: '/advertise',
-        templateUrl: 'templates/static/advertise.html',
-         controller: 'advertiseCtrl'
+        templateUrl: 'templates/static/advertise.html'
     })
 
     $stateProvider.state('business-advantage', {
@@ -82,8 +78,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
     $stateProvider.state('business-advantage-form', {
         url: '/business-advantage-form',
-        templateUrl: 'templates/static/business-advantage-form.html',
-         controller: 'BusinessAdvantageFormCtrl'
+        templateUrl: 'templates/static/business-advantage-form.html'
     })
 
     $stateProvider.state('offers', {
@@ -105,8 +100,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
     $stateProvider.state('comparison', {
         url: '/comparison',
-        templateUrl: 'templates/static/comparison.html',
-        controller: 'comparisonCtrl'
+        templateUrl: 'templates/static/comparison.html'
     })
 
     $stateProvider.state('contact-us', {
@@ -117,8 +111,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
     $stateProvider.state('corporate', {
         url: '/corporate',
-        templateUrl: 'templates/static/corporate.html',
-        controller: 'corporateCtrl'
+        templateUrl: 'templates/static/corporate.html'
     })
 
     $stateProvider.state('guidelines', {
@@ -129,26 +122,22 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
     $stateProvider.state('homecoverstories', {
         url: '/homecoverstories',
-        templateUrl: 'templates/static/homecoverstories.html',
-          controller: 'homecoverstoriesCtrl'
+        templateUrl: 'templates/static/homecoverstories.html'
     })
 
     $stateProvider.state('location', {
         url: '/location',
-        templateUrl: 'templates/static/location.html',
-         controller: 'locationCtrl'
+        templateUrl: 'templates/static/location.html'
     })
 
     $stateProvider.state('marketing', {
         url: '/marketing',
-        templateUrl: 'templates/static/marketing.html',
-        controller: 'marketingCtrl'
+        templateUrl: 'templates/static/marketing.html'
     })
 
     $stateProvider.state('requirement', {
         url: '/requirement',
-        templateUrl: 'templates/static/requirement.html',
-         controller: 'requirementCtrl'
+        templateUrl: 'templates/static/requirement.html'
     })
 
     $stateProvider.state('verified', {

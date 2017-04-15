@@ -1,4 +1,5 @@
 app.controller('homeCtrl', function($scope, $state, $timeout) {
+    ga('send', 'home');
     $('.modal').modal('close');
     $('.parallax').parallax();
     $timeout(function() {
@@ -99,9 +100,8 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
                         $scope.projsearch.data = response.data.items;
                     }
                 });
-            }
-            else{
-                 $http({
+            } else {
+                $http({
                     url: 'http://139.162.9.71/api/v1/mainSearchByLoc',
                     method: 'GET',
                     params: {
@@ -200,7 +200,7 @@ app.controller('searchCtrl', function($scope, $timeout, $http, $state, $window) 
 
     var selectLocation;
 
-    $scope.writeReview = function(){
+    $scope.writeReview = function() {
         $state.go('write-review');
     }
 

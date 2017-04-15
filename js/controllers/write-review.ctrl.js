@@ -1,8 +1,8 @@
-app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams, $rootScope, $http, $location) {
+app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams, $rootScope, $http, $location, $state) {
     var user;
     var cityId = '-KYJONgh0P98xoyPPYm9';
     var countryId = '-K_43TEI8cBodNbwlKqJ';
-
+    ga('send', 'write');
 
 
     function initialize() {
@@ -244,15 +244,59 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams, $root
             $scope.review.user.uname = user.displayName;
             $scope.review.user.uid = user.uid;
             $scope.review.user.photoURL = user.photoURL;
+
             var updates = {};
             url = 'allreviews/data/country/' + countryId + '/city/' + cityId + '/' + $scope.review.project.type + '/' + $scope.review.project.key
             updates[url + '/' + user.uid] = $scope.review;
             updates['allreviews/users/' + user.uid + '/' + $scope.review.project.key] = $scope.review.project;
             db.ref().update(updates).then(function() {
                 $timeout(function() {
-                    swal("Review Submitted", "Your review has been successfully submitted", "success");
+
+                    swal({
+                            title: "Review Submitted",
+                            text: "Your review has been successfully submitted!",
+                            type: "success",
+                            showCancelButton: false,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Avail Offers",
+                            closeOnConfirm: true
+                        },
+                        function() {
+                            $timeout(function() {
+                                $state.go('offers');
+                            }, 1000);
+
+                        });
+
+
                 }, 0);
-            })
+
+
+            });
+
+
+            $http({
+                url: 'http://139.162.9.71/api/v1/emailReview',
+                method: 'POST',
+                params: { email: user.email, name: user.displayName }
+            }).then(function mySucces(response) {
+
+            });
+
+            db.ref('users/' + user.uid + '/mobile/number/').once('value', function(snapshot) {
+                $timeout(function() {
+
+                    $http({
+                        url: 'http://139.162.9.71/api/v1/writeReviewSms',
+                        method: 'POST',
+                        params: { mobile: snapshot.val(), name: user.displayName }
+                    }).then(function mySucces(response) {
+                        $state.go('offers');
+                    });
+
+                }, 500)
+
+            });
 
 
         } else {
@@ -365,8 +409,8 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams, $root
 });
 
 
-app.filter('iif', function () {
-   return function(input, trueValue, falseValue) {
+app.filter('iif', function() {
+    return function(input, trueValue, falseValue) {
         return input ? trueValue : falseValue;
-   };
+    };
 });

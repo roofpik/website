@@ -1,5 +1,6 @@
 app.controller('storyListCtrl', function($scope, $timeout, $state) {
     var allStory;
+    ga('send', 'story');
     var storyLink = 'story/data/country/-K_43TEI8cBodNbwlKqJ/city/-KYJONgh0P98xoyPPYm9';
     $scope.stories = {};
     $scope.featuredsmall = {};
@@ -19,7 +20,7 @@ app.controller('storyListCtrl', function($scope, $timeout, $state) {
                             db.ref('images/' + project[story]['cover-image']).once('value', function(data) {
                                 $timeout(function() {
                                     img = data.val();
-                                    $scope.stories[img.parentKey].imgsrc = 'http://139.162.9.71/images/' + img.imgName + '.jpg';
+                                    $scope.stories[img.parentKey].imgsrc = 'http://cdn.roofpik.com/image/' + img.path  + img.imgName + '-m.jpg';
                                 }, 0);
                             })
                         }
@@ -83,7 +84,7 @@ app.controller('storyDetailsCtrl', function($scope, $timeout, $location, $window
                             db.ref('images/' + project[story]['cover-image']).once('value', function(data) {
                                 $timeout(function() {
                                     img = data.val();
-                                    $scope.stories[img.parentKey].imgsrc = 'http://139.162.9.71/images/' + img.imgName + '.jpg';
+                                    $scope.stories[img.parentKey].imgsrc = 'http://cdn.roofpik.com/image/' + img.path  + img.imgName + '-l.jpg';;
                                     setMetaTags();
                                 }, 0);
                             })

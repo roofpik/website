@@ -126,6 +126,7 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope) {
     $scope.login.signup = true;
     $scope.login.mobile = false;
     var uid = '';
+    var user;
     $scope.fbLogin = function() {
 
         var provider = new firebase.auth.FacebookAuthProvider();
@@ -135,7 +136,7 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope) {
             // This gives you a Facebook Access Token. You can use it to access the Facebook API.
             var token = result.credential.accessToken;
             // The signed-in user info.
-            var user = result.user;
+            user = result.user;
 
             $scope.data = {}
             $scope.data.email = {}
@@ -181,6 +182,7 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope) {
         });
     }
 
+
     $scope.googleLogin = function() {
 
 
@@ -196,7 +198,7 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope) {
             // This gives you a Google Access Token. You can use it to access the Google API.
             var token = result.credential.accessToken;
             // The signed-in user info.
-            var user = result.user;
+            user = result.user;
 
             $scope.data = {}
             $scope.data.email = {}
@@ -249,6 +251,15 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope) {
         db.ref('users/' + $scope.data.uid).once('value', function(snapshot) {
             if (!snapshot.val()) {
                 updates = {};
+                console.log($scope.data)
+
+                $http({
+                    url: 'http://139.162.9.71/api/v1/emailWelcome',
+                    method: 'POST',
+                    params: { email: $scope.data.email.emailAddress, name: $scope.data.fname }
+                }).then(function mySucces(response) {
+                    console.log(response)
+                });
 
                 $timeout(function() {
                     $scope.login.signup = false;
@@ -259,6 +270,7 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope) {
                 db.ref().update(updates).then(function() {
                     $scope.data = {};
                 });
+
             } else {
 
                 $('#login_signup_popup').modal('close');
@@ -302,7 +314,7 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope) {
 
     }
 
-    $scope.close = function(){
+    $scope.modalClose = function() {
         $('#login_signup_popup').modal('close');
     }
 
@@ -317,6 +329,21 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope) {
                 updates['users/' + uid + '/mobile/number/'] = $scope.user.mobile;
                 updates['users/' + uid + '/mobile/verified/'] = true;
                 db.ref().update(updates).then(function() {
+
+
+
+
+
+
+                    $http({
+                        url: 'http://139.162.9.71/api/v1/welcomeSms',
+                        method: 'POST',
+                        params: { mobile: $scope.user.mobile, name: user.displayName }
+                    }).then(function mySucces(response) {
+
+                    });
+
+
                     $scope.data = {};
                     $timeout(function() {
                         $scope.login.mobile = false;
@@ -389,8 +416,8 @@ function reviewRatings() {
             //Setting the previously selected rating
             scope.prevRating = 0;
             scope.$watch('currval', function() {
-            console.log(scope.currval)
-            Materialize.updateTextFields();
+                console.log(scope.currval)
+                Materialize.updateTextFields();
                 if (scope.currval) {
                     setRating(scope.currval);
                 }

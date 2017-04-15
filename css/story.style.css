@@ -4,6 +4,8 @@
     display: block;
 }
 
+
+
 /*DG CSS END*/
 
     .type-in {
@@ -11,6 +13,15 @@
         position: relative;
         width: 100%
     }
+
+        .type-in .story1{
+       max-height:480px;
+    }
+
+    .type-in .story2{
+       max-height:240px;
+    }
+    
     
     .thumb {
         font-size: 0;

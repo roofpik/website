@@ -7,6 +7,8 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
     $scope.micromarketId = $location.search().m;
     $scope.localityId = $location.search().l;
     $scope.projectId = $location.search().p;
+    gp = 'project-'+$scope.projectId;
+    ga('send', gp);
     $scope.pros = [];
     $scope.cons = [];
     $scope.specifications = {};
@@ -27,6 +29,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
         }).then(function mySucces(response) {
             // $scope.loading = false;
             $scope.projectsummary = response.data.items[0].data;
+
         })
 
     }

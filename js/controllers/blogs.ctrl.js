@@ -1,11 +1,11 @@
 app.controller('blogListCtrl', function($scope, $timeout, $state) {
+    ga('send', 'blog');
     var allblog;
     var blogLink = 'blog/main/';
     $scope.stories = {};
     $scope.featuredsmall = {};
 
     db.ref(blogLink).once('value', function(snapshot) {
-        console.log(snapshot.val());
         $timeout(function() {
 
             $scope.blogs = snapshot.val();
@@ -17,7 +17,7 @@ app.controller('blogListCtrl', function($scope, $timeout, $state) {
                     db.ref('images/' + $scope.blogs[key]['cover-image']).once('value', function(data) {
                         $timeout(function() {
                             img = data.val();
-                            $scope.blogs[img.parentKey].imgsrc = 'http://139.162.9.71/images/' + img.imgName + '.jpg';
+                            $scope.blogs[img.parentKey].imgsrc = 'http://cdn.roofpik.com/image/' + img.path  + img.imgName + '-m.jpg';
                         }, 0);
                     })
                 }
@@ -86,10 +86,10 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $location, $window,
                     for (key in $scope.blogDetail) {
 
                         if (img.imgCat == 'cover') {
-                            $scope.blogMain.imgsrc = 'http://139.162.9.71/images/' + img.imgName + '.jpg';
+                            $scope.blogMain.imgsrc = 'http://cdn.roofpik.com/image/' + img.path  + img.imgName + '-l.jpg';;
                         }
                         if ($scope.blogDetail[key].image == img.key) {
-                            $scope.blogDetail[key].imgsrc = 'http://139.162.9.71/images/' + img.imgName + '.jpg';
+                            $scope.blogDetail[key].imgsrc = 'http://cdn.roofpik.com/image/' + img.path  + img.imgName + '-l.jpg';;
                         }
                     }
                     console.log($scope.blogDetail);

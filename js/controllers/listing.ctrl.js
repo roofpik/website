@@ -1,4 +1,5 @@
 app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $state, $location, $window) {
+    ga('send', 'projectlist');
     $('html,body').scrollTop(0);
     $('.button-collapse1').sideNav({
         menuWidth: 300, // Default is 300
@@ -8,6 +9,15 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
     });
 
     $scope.showMore = true;
+
+
+    $scope.gotoReviews = function() {
+        $state.go('write-review');
+    }
+
+    $timeout(function() {
+        $("html, body").animate({ scrollTop: 0 }, "fast");
+    }, 500);
 
 
 
@@ -103,7 +113,7 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
 
         }
     }
-    
+
 
     $(window).scroll(function() {
         if ($(window).scrollTop() + $(window).height() >= ($(document).height() - 1000)) {
@@ -183,14 +193,14 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
     function getProjects() {
         $scope.showMore = true;
         $scope.data.pagination = 1;
-      
+
         $http({
             url: 'http://139.162.9.71/api/v1/projectFilter',
             method: 'GET',
             params: $scope.data
         }).then(function mySucces(response) {
             // $scope.loading = false;
-              $scope.ln = true;
+            $scope.ln = true;
             $('.fd-load').removeClass('blur');
             $scope.projects = response.data.items;
             $timeout(function() {
@@ -201,7 +211,7 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
 
     }
 
-  
+
     getProjects();
     $scope.visit = {};
 
@@ -340,9 +350,9 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
         $scope.visit.status = 'submitted';
         $scope.visit.type = 'project';
         updates['/enquiry/' + newPostKey] = $scope.visit;
-            Materialize.toast('Your query have been successfully submit!', 1000, 'rounded');
+        Materialize.toast('Your query have been successfully submit!', 1000, 'rounded');
         db.ref().update(updates).then(function() {
-            
+
         });
         $scope.dtstatus = true;
         $('#schedule_visit').modal('close');
@@ -356,7 +366,7 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
 
     }
 
-     $scope.submitQuery = function() {
+    $scope.submitQuery = function() {
         submitquery();
 
     }

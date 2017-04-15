@@ -13,3 +13,11 @@
 .bl_rimg img {
     height: 100px;
 }
+
+.type-in .story1 {
+    max-height: 480px;
+}
+
+.type-in .story2 {
+    max-height: 240px;
+}
