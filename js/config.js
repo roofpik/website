@@ -70,7 +70,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
     $stateProvider.state('advertise', {
         url: '/advertise',
-        templateUrl: 'templates/static/advertise.html'
+        templateUrl: 'templates/static/advertise.html',
+         controller: 'advertiseCtrl'
     })
 
     $stateProvider.state('business-advantage', {
@@ -81,7 +82,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
     $stateProvider.state('business-advantage-form', {
         url: '/business-advantage-form',
-        templateUrl: 'templates/static/business-advantage-form.html'
+        templateUrl: 'templates/static/business-advantage-form.html',
+         controller: 'BusinessAdvantageFormCtrl'
     })
 
     $stateProvider.state('offers', {
@@ -98,52 +100,62 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
     $stateProvider.state('comparison', {
         url: '/comparison',
-        templateUrl: 'templates/static/comparison.html'
+        templateUrl: 'templates/static/comparison.html',
+        controller: 'comparisonCtrl'
     })
 
     $stateProvider.state('contact-us', {
         url: '/contact-us',
-        templateUrl: 'templates/static/contact-us.html'
+        templateUrl: 'templates/static/contact-us.html',
+         controller: 'contactCtrl'
     })
 
     $stateProvider.state('corporate', {
         url: '/corporate',
-        templateUrl: 'templates/static/corporate.html'
+        templateUrl: 'templates/static/corporate.html',
+        controller: 'corporateCtrl'
     })
 
     $stateProvider.state('guidelines', {
         url: '/guidelines',
-        templateUrl: 'templates/static/guidelines.html'
+        templateUrl: 'templates/static/guidelines.html',
+         controller: 'guidelinesCtrl'
     })
 
     $stateProvider.state('homecoverstories', {
         url: '/homecoverstories',
-        templateUrl: 'templates/static/homecoverstories.html'
+        templateUrl: 'templates/static/homecoverstories.html',
+          controller: 'homecoverstoriesCtrl'
     })
 
     $stateProvider.state('location', {
         url: '/location',
-        templateUrl: 'templates/static/location.html'
+        templateUrl: 'templates/static/location.html',
+         controller: 'locationCtrl'
     })
 
     $stateProvider.state('marketing', {
         url: '/marketing',
-        templateUrl: 'templates/static/marketing.html'
+        templateUrl: 'templates/static/marketing.html',
+        controller: 'marketingCtrl'
     })
 
     $stateProvider.state('requirement', {
         url: '/requirement',
-        templateUrl: 'templates/static/requirement.html'
+        templateUrl: 'templates/static/requirement.html',
+         controller: 'requirementCtrl'
     })
 
     $stateProvider.state('verified', {
         url: '/verified',
-        templateUrl: 'templates/static/verified.html'
+        templateUrl: 'templates/static/verified.html',
+        controller: 'verifiedCtrl'
     })
 
      $stateProvider.state('terms', {
         url: '/terms',
-        templateUrl: 'templates/static/terms.html'
+        templateUrl: 'templates/static/terms.html',
+         controller: 'termsCtrl'
     })
 
     // static pages end

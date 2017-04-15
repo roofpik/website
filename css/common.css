@@ -615,6 +615,9 @@ input:focus + div.search-results,
     float: left;
 }
 
+.ft18i span p {
+    margin:0;
+}
 .ft20i i {
     font-size: 18px !important;
 }
