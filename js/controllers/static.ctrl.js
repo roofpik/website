@@ -55,3 +55,47 @@ app.controller('careerCtrl', function($scope) {
     }
 });
 
+// dg add 12 static pages controller start
+
+app.controller('advertiseCtrl', function($scope) {
+  
+});
+app.controller('BusinessAdvantageFormCtrl', function($scope) {
+  
+});
+app.controller('comparisonCtrl', function($scope) {
+  
+});
+app.controller('contactCtrl', function($scope) {
+  
+});
+app.controller('corporateCtrl', function($scope) {
+  
+});
+app.controller('guidelinesCtrl', function($scope) {
+  
+});
+varapp.controller('homecoverstoriesCtrl', function($scope) {
+  
+});
+app.controller('locationCtrl', function($scope) {
+  
+});
+app.controller('marketingCtrl', function($scope) {
+  
+});
+app.controller('requirementCtrl', function($scope) {
+  
+});
+app.controller('verifiedCtrl', function($scope) {
+  
+});
+app.controller('termsCtrl', function($scope) {
+  
+});
+
+
+
+
+
+
