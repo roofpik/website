@@ -38,6 +38,7 @@
     border-width: 15px;
     margin-top: -15px;*/
 }
+
 #seesample_popup,
 #addatip_popup {
     display: none;
@@ -71,13 +72,16 @@
     content: " ";
     z-index: 9;
 }
+
 .imgcir40 {
     width: 40px;
     height: 40px;
 }
+
 .morecontent span {
     display: none;
 }
+
 .morelink {
     display: block;
 }
@@ -92,12 +96,39 @@
 
 
 /*write review css*/
+
 .btnsm {
     height: 25px !important;
     line-height: 25px !important;
-    font-size: 11px !important; color: #444; background-color: #eee; border: solid 1px #eee;
+    font-size: 11px !important;
+    color: #444;
+    background-color: #eee;
+    border: solid 1px #eee;
 }
 
-.btnsm:hover, .btnsm:focus{background-color: #26a69a; color: #fff; font-weight: 700; border-color:#26a69a;}
-/*write review start*/
+.btnsm:hover,
+.btnsm:focus {
+    background-color: #26a69a;
+    color: #fff;
+    font-weight: 700;
+    border-color: #26a69a;
+}
 
+.xtbtn-active {
+    background-color: #26a69a;
+    color: #fff;
+    font-weight: 700;
+    border-color: #26a69a;
+}
+
+.projdata {
+    max-height: 250px;
+    overflow-y: scroll;
+}
+
+.error {
+    color: red;
+}
+
+
+/*write review start*/

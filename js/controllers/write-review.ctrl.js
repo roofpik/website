@@ -27,30 +27,54 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams, $root
     initialize();
 
 
-        if ($location.search().key) {
+    if ($location.search().key) {
+        allReviews();
         $scope.review.project.key = $location.search().key;
+        $scope.review.project.type = 'residential'
     }
     if ($location.search().name) {
         $scope.review.project.name = $location.search().name;
         $scope.projectsData = false;
         $scope.searchtxt = $location.search().name;
-        $timeout(function(){
-                Materialize.updateTextFields();
+        $timeout(function() {
+            Materialize.updateTextFields();
         }, 500);
-        
+
     }
     if ($location.search().tyep) {
         $scope.review.project.type = $location.search().type;
     }
+    $scope.allReviews = {};
+
+    function allReviews() {
+        $http({
+            url: 'http://139.162.9.71/api/v1/reviewSearch',
+            method: 'GET',
+            params: { pkey: $scope.review.project.key }
+        }).then(function mySucces(response) {
+            for (i in response.data.items) {
+                if (parseInt(i) < 3) {
+                    $scope.allReviews[i] = response.data.items[i];
+                }
+            }
+        });
+    }
 
 
 
+    var user;
 
     firebase.auth().onAuthStateChanged(function(data) {
         if (data) {
             // data is signed in.
             user = data;
             console.log(user);
+
+            if ($scope.review.project.key) {
+                allReviews();
+                getExistingReview();
+            }
+
 
         } else {
             // No user is signed in.
@@ -71,14 +95,27 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams, $root
     function getProjects() {
         $scope.review.project = {};
         $http({
-            url: 'http://139.162.9.71/api/projLocSearch',
-            method: 'POST',
+            url: 'http://139.162.9.71/api/v1/projLocSearch',
+            method: 'GET',
             params: { val: $scope.searchtxt }
         }).then(function(response) {
             $scope.projectsData = true;
             $scope.allData = response.data.items.data;
         })
 
+    }
+
+
+    function getExistingReview() {
+        link = 'allreviews/data/country/-K_43TEI8cBodNbwlKqJ/city/-KYJONgh0P98xoyPPYm9/' + $scope.review.project.type + '/' + $scope.review.project.key + '/' + user.uid;
+        db.ref(link).on('value', function(snapshot) {
+            if (snapshot.val()) {
+                $scope.review = snapshot.val();
+                $timeout(function() {
+                    Materialize.updateTextFields();
+                }, 500)
+            }
+        })
     }
 
     $scope.searchData = function() {
@@ -92,8 +129,8 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams, $root
         $scope.review.project.key = item.key;
         $scope.review.project.name = item.name;
         $scope.review.project.type = item.category;
-
-
+        allReviews();
+        getExistingReview();
         Materialize.updateTextFields();
 
 
@@ -127,23 +164,28 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams, $root
     $scope.ratingParams = [{
         name: 'Security',
         id: 2,
-        rtxt: ratingTxtVal[0]
+        rtxt: ratingTxtVal[0],
+        val: 'security'
     }, {
         name: 'Amenities',
         id: 3,
-        rtxt: ratingTxtVal[0]
+        rtxt: ratingTxtVal[0],
+        val: 'amenities'
     }, {
         name: 'Open and green areas',
         id: 4,
-        rtxt: ratingTxtVal[0]
+        rtxt: ratingTxtVal[0],
+        val: 'greenry'
     }, {
         name: 'Convenience of parking',
         id: 5,
-        rtxt: ratingTxtVal[0]
+        rtxt: ratingTxtVal[0],
+        val: 'parking'
     }, {
         name: 'Infrastructure',
         id: 6,
-        rtxt: ratingTxtVal[0]
+        rtxt: ratingTxtVal[0],
+        val: 'infrastructure'
     }];
 
 
@@ -249,8 +291,12 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams, $root
     function checkmain() {
         $scope.review.main.anonymous = false;
         $scope.review.main.block = false;
-        $scope.review.main.created = new Date().getTime();
-        $scope.review.main.updated = $scope.review.main.created;
+        if (!$scope.review.main.created) {
+            $scope.review.main.created = new Date().getTime();
+            $scope.review.main.updated = $scope.review.main.created;
+        } else {
+            $scope.review.main.updated = new Date().getTime();
+        }
         $scope.review.main.source = 'website';
         $scope.review.main.status = 'uploaded';
         $scope.review.main.mode = 'desktop';
@@ -264,7 +310,7 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams, $root
         if ($scope.review.user.type == null || $scope.review.user.age == null ||
             $scope.review.user.gender == null || $scope.review.user.livedwith == null ||
             $scope.review.user.house == null || $scope.review.user.block == null ||
-            $scope.ratingTxt.overall == 'Click to rate' || $scope.review.main.title == null ||
+            $scope.review.main.rating == null || $scope.review.main.title == null ||
             $scope.review.main.detail == null
         ) {
 
@@ -316,4 +362,11 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams, $root
 
     $('select').material_select();
 
+});
+
+
+app.filter('iif', function () {
+   return function(input, trueValue, falseValue) {
+        return input ? trueValue : falseValue;
+   };
 });

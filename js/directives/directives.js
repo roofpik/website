@@ -78,9 +78,9 @@ app.controller('headerCtrl', function($scope, $timeout, $rootScope, $state) {
 
 
 
-     $('#login_signup_popup').modal({
-            dismissible: false
-        });
+    $('#login_signup_popup').modal({
+        dismissible: false
+    });
     $scope.openLogin = function() {
         console.log('one')
         $('#login_signup_popup').modal({
@@ -283,7 +283,7 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope) {
         }, 8000);
 
         $http({
-                url: 'http://139.162.9.71/api/sendotp',
+                url: 'http://139.162.9.71/api/v1/sendOtp',
                 method: "POST",
                 data: {
                     'mobile': $scope.user.mobile
@@ -300,6 +300,10 @@ app.controller('loginCtrl', function($scope, $http, $timeout, $rootScope) {
                 $scope.process = false;
             });
 
+    }
+
+    $scope.close = function(){
+        $('#login_signup_popup').modal('close');
     }
 
     $scope.verifyOtp = function() {
@@ -356,7 +360,8 @@ function reviewRatings() {
             '</div>',
         scope: {
             ratingsObj: '=ratingsobj',
-            index: '=index'
+            index: '=index',
+            currval: '@currval'
         },
         link: function(scope, element, attrs) {
 
@@ -383,6 +388,13 @@ function reviewRatings() {
 
             //Setting the previously selected rating
             scope.prevRating = 0;
+            scope.$watch('currval', function() {
+            console.log(scope.currval)
+            Materialize.updateTextFields();
+                if (scope.currval) {
+                    setRating(scope.currval);
+                }
+            })
 
             scope.$watch('ratingsObj.rating', function(newValue, oldValue) {
                 setRating(newValue);

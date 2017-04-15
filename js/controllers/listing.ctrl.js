@@ -103,7 +103,7 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
 
         }
     }
-    $scope.ln = true;
+    
 
     $(window).scroll(function() {
         if ($(window).scrollTop() + $(window).height() >= ($(document).height() - 1000)) {
@@ -183,14 +183,14 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
     function getProjects() {
         $scope.showMore = true;
         $scope.data.pagination = 1;
-        $scope.ln = true;
+      
         $http({
             url: 'http://139.162.9.71/api/v1/projectFilter',
             method: 'GET',
             params: $scope.data
         }).then(function mySucces(response) {
             // $scope.loading = false;
-
+              $scope.ln = true;
             $('.fd-load').removeClass('blur');
             $scope.projects = response.data.items;
             $timeout(function() {
@@ -220,7 +220,8 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
             }).then(function mySucces(response) {
                 // $scope.loading = false;
                 // console.log(response)
-
+                console.log(response);
+                console.log($scope.projects);
                 len = $scope.projects.length;
                 if (response.data.items.length != 10) {
                     $scope.showMore = false;
