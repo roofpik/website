@@ -1,0 +1,114 @@
+<div>
+    <style>
+    body {
+        margin: 0; background-color: #fafafa;
+    }
+    
+    .gro_table {
+        width: 100%; background-color: #fff;
+        max-width: 650px;
+        padding: 0 15px;
+        font-family: arial;
+        border: 1px solid #eee;
+        margin: 0 auto;
+    }
+    
+    .bod_dash {
+        border-bottom: 1px dashed #ddd;
+    }
+    
+    .bodtop_dash {
+        border-top: 1px dashed #ddd;
+    }
+    
+    .bodtop_solid {
+        border-top: 1px solid #ddd;
+    }
+    
+    .gro_table td {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        line-height: 21px;
+        color: #333;
+    }
+    
+    h4,
+    p,
+    h5,
+    h3 {
+        margin: 5px;
+    }
+    
+    .pdl15 {
+        padding-left: 15px;
+    }
+    
+    .ft14 {
+        font-size: 14px
+    }    
+
+    footer{
+        display: none;
+    }
+
+    .newimg img{
+        /*width: 100% !important;*/
+    }
+   
+    </style>
+    <table class="gro_table">
+        <tr>
+            <td colspan="2" class="bod_dash"><img src="../images/general/logo.png" width="100" /></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding-top: 0px;">
+                <table>
+                    <tr>
+                        <td width="50%" class="bod_dash newimg"><img  class="materialboxed responsive-img" ng-src="{{cover}}" /></td>
+                        <td class="pdl15 bod_dash" valign="top" align="left">
+                            <h4>{{offer.name}}</h4>
+                            <p class="ft14">{{offer.coupon.title}}</p>
+                            <h4 class="ft14 mgt20">Discounted Price: Rs {{offer.coupon.discount}}</h4>
+                            <p class="ft12">MRP: Rs {{offer.coupon.mrp}}</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td class="bod_dash" width="50%">
+                <b>Roofpik code: {{offer.created}}</b>
+                <br> Valid until: {{offer.coupon.valid | date: 'd MMM yy'}}
+            </td>
+            <td class="bod_dash">
+                <b>Security Code: {{userData.security}}</b>
+                <br> Availed On: {{userData.created  | date: 'd MMM yy'}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding-top: 0px;">
+                <table>
+                    <tr>
+                        <td width="70%" style="font-size: 12px; line-height: 19px">
+                            <b> The merchant: {{offer.name}}</b>
+                            <br> {{offer.addLine1}}
+                            <br> {{offer.addLine2}}
+                            <br> {{offer.email}}
+                            <br> http://{{offer.website}}, Tel. {{offer.contact}}
+                            <br>
+                            <br>
+                            <b>Fine print</b>
+                            <p id="offerDetails"></p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="font-size: 11px" ng-show="{{offer.about}}">
+                About
+                <br> {{offer.about}}
+            </td>
+        </tr>
+    </table>
+</div>
