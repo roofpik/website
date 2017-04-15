@@ -1,4 +1,4 @@
-app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $stateParams, $location, $http) {
+app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $stateParams, $location, $http, $state) {
 
 
 
@@ -14,17 +14,16 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
     $scope.allAmenities = amenities;
     $scope.amenitiesType = amenitiesType;
 
+
     function getProjects() {
 
         $http({
-            url: 'http://139.162.9.71/api/projectSearchKey',
-            method: 'POST',
+            url: 'http://139.162.9.71/api/v1/projectDetails',
+            method: 'GET',
             params: { 'key': $scope.projectId }
         }).then(function mySucces(response) {
             // $scope.loading = false;
             $scope.projectsummary = response.data.items[0].data;
-
-
         })
 
     }
@@ -46,7 +45,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
         for (img in $scope.project.images) {
             db.ref('images/' + img).once('value', function(data) {
                 item = data.val()
-                $scope.images[item['key']] = { 'url': 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-m.jpg' };
+                $scope.images[item['key']] = { 'url': 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-l.jpg' };
                 if (item['imgCat'] == 'cover') {
                     // $('#cover-m').hide();
                     // $('#cover-l').hide();
@@ -81,6 +80,13 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
 
         }
 
+
+
+$scope.writeReview = function(){
+
+    $state.go('write-review', { 'key': $scope.project.key, 'name': $scope.project.name, 'type': 'residential' });
+
+}
 
         $scope.showSpecifications = function() {
                 $('#more_specifications').modal();
@@ -294,55 +300,162 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
         }, 500);
     }
 
+     $scope.visit = {};
+     $scope.visit.project = {};
 
 
     $scope.submitQuery = function() {
-        console.log($scope.query);
-        $scope.query.projectId = $scope.projectId;
-        $scope.query.projectName = $scope.project.name;
-        $scope.query.cityId = $scope.cityId;
-        $scope.query.micromarketId = $scope.micromarketId;
-        $scope.query.localityId = $scope.localityId;
-        db.ref('query').push($scope.query).then(function() {
-            swal('Query Submitted', 'Our executives will call you back', 'success');
-        })
+        $scope.visit.project.projectId = $scope.projectId;
+        $scope.visit.project.projectName = $scope.project.name;
+        $scope.visit.project.cityId = $scope.cityId;
+        $scope.visit.project.micromarketId = $scope.micromarketId;
+        $scope.visit.project.localityId = $scope.localityId;
+        updates = {}
+        var newPostKey = firebase.database().ref().child('enquiry').push().key;
+        $scope.visit.created = new Date().getTime();
+        $scope.visit.status = 'submitted';
+        $scope.visit.type = 'project';
+        updates['/enquiry/' + newPostKey] = $scope.visit;
+            Materialize.toast('Your query have been successfully submit!', 1000, 'rounded');
+        db.ref().update(updates).then(function() {
+            
+        });
     }
 
 
-    function reviewSummary(){
+    function reviewSummary() {
 
-         $http({
-            url: 'http://139.162.9.71/api/ProjKeyRatings?',
-            method: 'POST',
+        $http({
+            url: 'http://139.162.9.71/api/v1/projKeyRatings',
+            method: 'GET',
             params: { 'pkey': $scope.projectId }
         }).then(function mySucces(response) {
 
-            console.log(response.data.items[0])
             $scope.reviewsummary = response.data.items[0];
+            console.log($scope.reviewsummary);
             $scope.stars = {};
-            $scope.stars.full = Math.floor($scope.reviewsummary.star_rating.avg_star);
+            $scope.stars.full = Math.floor($scope.reviewsummary.avg_star);
 
-            halfstar = Math.round($scope.reviewsummary.star_rating.avg_star - $scope.stars.full);
+            halfstar = Math.round($scope.reviewsummary.avg_star - $scope.stars.full);
             if (halfstar == 1) {
                 $scope.stars.half = true;
             }
-            $scope.stars.none = 5 - Math.floor($scope.reviewsummary.star_rating.avg_star) - halfstar;
+            $scope.stars.none = 5 - Math.floor($scope.reviewsummary.avg_star) - halfstar;
             orsum = 0
             for (key in $scope.reviewsummary.type) {
                 orsum = orsum + $scope.reviewsummary.type[key];
             }
             oratings = [1, 2, 3, 4, 5]
             for (index in oratings) {
-                if ($scope.reviewsummary.star_rating[oratings[index]+'_star']) {
-                    $('#prog' + oratings[index]).css('width', $scope.reviewsummary.star_rating[oratings[index]+'_star'] / orsum * 100 + '%');
+                if ($scope.reviewsummary.star_rating[oratings[index] + '_star']) {
+                    $('#prog' + oratings[index]).css('width', $scope.reviewsummary.star_rating[oratings[index] + '_star'] / orsum * 100 + '%');
+                    $('#progc' + oratings[index]).html($scope.reviewsummary.star_rating[oratings[index] + '_star']);
                 }
             }
 
-            $scope.projectsummary.review.count = orsum
-            // console.log(response.data.items[0]);
+            // $scope.projectsummary.review.count = orsum
+
 
         })
     }
 
-    reviewSummary()
+    reviewSummary();
+
+
+
+     $scope.filters = {
+        pkey: $scope.projectId,
+        userType: '',
+        ratings: '',
+        pagination: 1
+    };
+
+
+    function allReviews() {
+        $http({
+            url: 'http://139.162.9.71/api/v1/reviewSearch',
+            method: 'GET',
+            params:  $scope.filters 
+        }).then(function mySucces(response) {
+            $scope.allReviews = response.data.items;
+
+        });
+    }
+
+    allReviews();
+    var pagreview = 1;
+    $scope.showMoreReviews = function() {
+
+        loadNextReviews();
+
+    };
+
+    function loadNextReviews() {
+
+        pagreview = pagreview + 1;
+        $http({
+            url: 'http://139.162.9.71/api/v1/reviewSearch',
+            method: 'GET',
+            params: {
+                'pkey': $scope.projectId,
+                'pagination': pagreview
+            }
+        }).then(function mySucces(response) {
+            currlen = $scope.allReviews.length;
+
+            for (i in response.data.items) {
+                item = parseInt(i) + parseInt(currlen);
+                $scope.allReviews[item] = response.data.items[i];
+            }
+        });
+
+    }
+
+
+
 })
+
+
+
+app.directive('ratings', function() {
+    return {
+        restrict: 'EA', //This menas that it will be used as an attribute and NOT as an element. I don't like creating custom HTML elements
+        replace: true, // This is one of the cool things :). Will be explained in post.
+        template: '<p>' +
+            '<i class="material-icons green-text" ng-repeat="i in getNumber(stars.full)  track by $index">star</i>' +
+            '<i class="material-icons green-text" ng-show="stars.half">star_half</i>' +
+            '<i class="material-icons" ng-repeat="i in getNumber(stars.none)  track by $index">star_border</i>' +
+            '</p>',
+        controller: 'ratingCtrl',
+        scope: {
+            ratingval: '@ratingval'
+        }
+    }
+});
+
+
+app.controller('ratingCtrl', function($scope) {
+    $scope.stars = {};
+
+    $scope.$watch('ratingval', function() {
+        $scope.stars.full = Math.floor($scope.ratingval);
+
+        halfstar = Math.round($scope.ratingval - $scope.stars.full);
+        if (halfstar == 1) {
+            $scope.stars.half = true;
+        }
+        $scope.stars.none = 5 - Math.floor($scope.ratingval) - halfstar;
+    });
+
+
+
+    $scope.getNumber = function(num) {
+        return new Array(num);
+    }
+});
+
+app.filter('capitalize', function() {
+    return function(input) {
+        return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+    }
+});

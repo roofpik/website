@@ -7,6 +7,8 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
         draggable: true // Choose whether you can drag to open on touch screens
     });
 
+    $scope.showMore = true;
+
 
 
     $timeout(function() {
@@ -86,7 +88,8 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
         rmin: '',
         rmax: '',
         builder: '',
-        category: ''
+        category: '',
+        pagination: 1
     };
     $scope.selected = {};
 
@@ -100,6 +103,14 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
 
         }
     }
+    $scope.ln = true;
+
+    $(window).scroll(function() {
+        if ($(window).scrollTop() + $(window).height() >= ($(document).height() - 1000)) {
+
+            loadNextproj();
+        }
+    });
 
 
 
@@ -137,11 +148,11 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
 
     function consFilter() {
         $('.fd-load').addClass('blur');
-
-        // $scope.loading = true;
+        console.log($scope.selected)
+            // $scope.loading = true;
         fil = ''
         for (key in $scope.data) {
-            if ($scope.data[key]) {
+            if ($scope.data[key] && key != 'pagination') {
                 if (fil == '') {
                     fil = '?' + key + '=' + $scope.data[key];
                 } else {
@@ -157,6 +168,7 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
         }
 
         if (history.pushState) {
+            console.log(fil);
             var newurl = window.location.href.split('?')[0] + fil;
 
             window.history.pushState({ path: newurl }, '', newurl);
@@ -169,10 +181,12 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
 
 
     function getProjects() {
-
+        $scope.showMore = true;
+        $scope.data.pagination = 1;
+        $scope.ln = true;
         $http({
-            url: 'http://139.162.9.71/api/projectFilter',
-            method: 'POST',
+            url: 'http://139.162.9.71/api/v1/projectFilter',
+            method: 'GET',
             params: $scope.data
         }).then(function mySucces(response) {
             // $scope.loading = false;
@@ -195,10 +209,43 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
     }
 
 
+    function loadNextproj() {
+        if ($scope.ln) {
+            $scope.ln = false;
+            $scope.data.pagination = parseInt($scope.data.pagination) + 1;
+            $http({
+                url: 'http://139.162.9.71/api/v1/projectFilter',
+                method: 'GET',
+                params: $scope.data
+            }).then(function mySucces(response) {
+                // $scope.loading = false;
+                // console.log(response)
+
+                len = $scope.projects.length;
+                if (response.data.items.length != 10) {
+                    $scope.showMore = false;
+                } else {
+                    $scope.ln = true;
+                }
+                for (i in response.data.items) {
+                    // console.log(response.data.items[i])
+                    ind = len + parseInt(i);
+                    $scope.projects[ind] = response.data.items[i];
+                }
+
+            })
+        }
+    }
+    $scope.showNext = function() {
+        loadNextproj();
+    };
+
+
 
 
     var count = 0;
     $scope.addFilter = function(id, type) {
+        console.log(id, type);
         if (!$scope.data[type]) {
             $scope.data[type] = id.toString();
 
@@ -266,29 +313,54 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
             }, 0)
         })
     }
+    $scope.dtstatus = false;
 
     $scope.scheduleVisit = function(proj) {
-        $scope.visit.project ={};
+        $scope.visit.project = {};
         $scope.visit.project.key = proj.key;
         $scope.visit.project.location = proj.location;
         $scope.visit.project.location = proj.location;
         $scope.visit.project.name = proj.name;
+
+        if (!$scope.dtstatus) {
+            $('#schedule_visit').modal('open');
+        } else {
+            submitquery();
+        }
     }
 
-    $scope.submitQuery = function() {
+
+    function submitquery() {
+
         updates = {}
-        var newPostKey = firebase.database().ref().child('openQuery').push().key;
+        var newPostKey = firebase.database().ref().child('enquiry').push().key;
         $scope.visit.created = new Date().getTime();
         $scope.visit.status = 'submitted';
-
-        updates['/openQuery/country/-K_43TEI8cBodNbwlKqJ/city/-KYJONgh0P98xoyPPYm9/query/' + newPostKey] = $scope.visit;
+        $scope.visit.type = 'project';
+        updates['/enquiry/' + newPostKey] = $scope.visit;
+            Materialize.toast('Your query have been successfully submit!', 1000, 'rounded');
         db.ref().update(updates).then(function() {
-            Materialize.toast('You have successfully submit details!', 3000, 'rounded');
-        })
+            
+        });
+        $scope.dtstatus = true;
+        $('#schedule_visit').modal('close');
+
     }
 
-    $scope.writeReview = function(proj){
-        $state.go('write-review', {'key':proj.key, 'name': proj.name, 'type': 'residential'})
+
+    $scope.submitQuickQuery = function() {
+        submitquery();
+        $scope.dtstatus = false;
+
+    }
+
+     $scope.submitQuery = function() {
+        submitquery();
+
+    }
+
+    $scope.writeReview = function(proj) {
+        $state.go('write-review', { 'key': proj.key, 'name': proj.name, 'type': 'residential' })
     }
 
     function getBuilders() {

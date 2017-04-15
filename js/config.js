@@ -64,7 +64,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     // static pages start    
     $stateProvider.state('about-us', {
         url: '/about-us',
-        templateUrl: 'templates/static/about.html'
+        templateUrl: 'templates/static/about.html',
+        controller: 'aboutCtrl'
     })
 
     $stateProvider.state('advertise', {
@@ -74,7 +75,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
     $stateProvider.state('business-advantage', {
         url: '/business-advantage',
-        templateUrl: 'templates/static/business-advantage.html'
+        templateUrl: 'templates/static/business-advantage.html',
+        controller: 'businessAdvantageCtrl'
     })
 
     $stateProvider.state('business-advantage-form', {
@@ -90,7 +92,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
     $stateProvider.state('careers', {
         url: '/careers',
-        templateUrl: 'templates/static/careers.html'
+        templateUrl: 'templates/static/careers.html',
+        controller: 'careerCtrl'
     })
 
     $stateProvider.state('comparison', {

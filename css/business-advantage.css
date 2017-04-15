@@ -3,7 +3,7 @@
 .business_sec4 .col:last{padding-right: 10px;}
 .business_sec4 .col img{width: 100px; height: 100px;}
 
-.busi_packages .card{ min-height: 350px }
+.busi_packages .card{ min-height: 250px }
 .busi_packages .card h2{font-size: 1.5rem }
 .busi_packages .price{font-size: 2rem; color:#ff7e82; }
 

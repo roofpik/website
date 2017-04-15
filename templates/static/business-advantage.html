@@ -222,24 +222,24 @@
                 <div class="col s12">
                     <div class="row">
                         <div class="input-field col s4 m2 offset-m2">
-                            <input id="review-title" type="text" class="validate" required>
-                            <label for="review-title">City</label>
+                            <input id="name" type="text" class="validate" required ng-model="data.name">
+                            <label for="name">Your full name</label>
                         </div>
                         <div class="input-field col s4 m2">
-                            <input id="review-title" type="text" class="validate" required>
-                            <label for="review-title">Your full name</label>
+                            <input id="compName" type="text" class="validate" required ng-model="data.company">
+                            <label for="compName">Company Name</label>
                         </div>
                         <div class="input-field col s4 m2">
-                            <input id="review-title" type="text" class="validate" required>
-                            <label for="review-title">Email</label>
+                            <input id="email" type="text" class="validate" required ng-model="data.email">
+                            <label for="email">Email</label>
                         </div>
                         <div class="input-field col s4 m2">
-                            <input id="review-title" type="text" class="validate" required>
-                            <label for="review-title">Phone Number</label>
+                            <input id="phone" type="text" class="validate" required ng-model="data.phone">
+                            <label for="phone">Phone Number</label>
                         </div>
                     </div>
                 </div>
-                <div class="col s12 center"><a href="" class="btn">Call me back</a></div>
+                <div class="col s12 center"><a class="btn" ng-click="businessEnquiry()">Call me back</a></div>
             </div>
         </div>
     </section>

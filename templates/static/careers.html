@@ -273,32 +273,32 @@
             <div class="col s12">
                 <div class="row">
                     <div class="input-field col s4 m3">
-                        <input id="review-title" type="text" class="validate" required>
+                        <input id="review-title" type="text" class="validate" required ng-model="data.name">
                         <label for="review-title">Your full name</label>
                     </div>
                     <div class="input-field col s4 m2">
-                        <input id="review-title" type="text" class="validate" required>
+                        <input id="review-title" type="text" class="validate" required  ng-model="data.location">
                         <label for="review-title">Current Location</label>
                     </div>
                     <div class="input-field col s4 m3">
-                        <input id="review-title" type="text" class="validate" required>
+                        <input id="review-title" type="text" class="validate" required  ng-model="data.position">
                         <label for="review-title">Position To Apply For</label>
                     </div>
                     <div class="input-field col s4 m2">
-                        <input id="review-title" type="text" class="validate" required>
+                        <input id="review-title" type="text" class="validate" required  ng-model="data.email">
                         <label for="review-title">Email</label>
                     </div>
                     <div class="input-field col s4 m2">
-                        <input id="review-title" type="text" class="validate" required>
+                        <input id="review-title" type="text" class="validate" required  ng-model="data.phone">
                         <label for="review-title">Phone Number</label>
                     </div>
                     <div class="input-field col s12">
-                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                        <textarea id="textarea1" class="materialize-textarea"  ng-model="data.summary"></textarea>
                         <label for="textarea1">Career Summary</label>
                     </div>
                 </div>
             </div>
-            <div class="col s12 center"><a href="" class="btn b">Submit</a></div>
+            <div class="col s12 center"><a ng-click="sendEnquiry()" class="btn b">Submit</a></div>
         </div>
     </div>
 </section>
