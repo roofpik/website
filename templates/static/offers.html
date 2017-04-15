@@ -6,7 +6,7 @@
     </div> -->
     <section>
         <div class="row mgln mgrn pda10">
-            <div class="col s12 m4 l3" ng-repeat="item in allCoupon" style="height:400px">
+            <div class="col s12 m4 l3 boxCoupon" ng-repeat="item in allCoupon" style="height:400px">
                 <a ng-click="checkReview(item.key)" class="card block grey-text text-darken-2">
                     <div class="row">
                         <div class="col s12 no-padding relative offer_img">
@@ -15,7 +15,7 @@
                         <div class="col s12">
                             <h5 class="mgbn ft17 truncate">{{item.name}}</h5>
                             <p class="mgtn">{{item.displayAdd}}</p>
-                            <p> {{item.coupon.title}}</p>
+                            <p class="minht70"> {{item.coupon.title}}</p>
                         </div>
                         <div class="col s12">
                             <div class="row mgan">
@@ -34,7 +34,7 @@
     </section>
     <div id="offer_modal_popup" class="modal offer_modal_popup">
         <div class="modal-content">
-            <div class="card block grey-text text-darken-2">
+            <div class="card block pda20 grey-text text-darken-2">
                 <div class="row">
                     <div class="col s12">
                         <h5 class="ft17 truncate">Please write a Review</h5>
@@ -50,7 +50,7 @@
     </div>
     <div id="offer_modal2_popup" class="modal offer_modal_popup">
         <div class="modal-content">
-            <div class="card block grey-text text-darken-2">
+            <div class="card block pda20 grey-text text-darken-2">
                 <div class="row">
                     <div class="col s12">
                         <h5 class="ft17 truncate">Please Login</h5>
