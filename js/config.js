@@ -141,6 +141,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         templateUrl: 'templates/static/verified.html'
     })
 
+     $stateProvider.state('terms', {
+        url: '/terms',
+        templateUrl: 'templates/static/terms.html'
+    })
+
     // static pages end
 
 
