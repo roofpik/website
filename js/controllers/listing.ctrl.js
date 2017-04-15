@@ -201,6 +201,7 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
 
     }
 
+  
     getProjects();
     $scope.visit = {};
 

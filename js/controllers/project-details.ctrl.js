@@ -13,6 +13,9 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
     $scope.shortspecifications = {};
     $scope.allAmenities = amenities;
     $scope.amenitiesType = amenitiesType;
+    $timeout(function() {
+        $("html, body").animate({ scrollTop: 0 }, "fast");
+    }, 500);
 
 
     function getProjects() {
@@ -82,11 +85,13 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
 
 
 
-$scope.writeReview = function(){
 
-    $state.go('write-review', { 'key': $scope.project.key, 'name': $scope.project.name, 'type': 'residential' });
 
-}
+        $scope.writeReview = function() {
+
+            $state.go('write-review', { 'key': $scope.project.key, 'name': $scope.project.name, 'type': 'residential' });
+
+        }
 
         $scope.showSpecifications = function() {
                 $('#more_specifications').modal();
@@ -165,6 +170,42 @@ $scope.writeReview = function(){
     })
 
     $scope.configurations = {};
+
+    function reviewsShort() {
+        var showChar = 400; // How many characters are shown by default
+        var ellipsestext = "...";
+        var moretext = "Show more";
+        var lesstext = "Show less";
+
+
+        $('.more').each(function() {
+            var content = $(this).html();
+
+            if (content.length > showChar) {
+
+                var c = content.substr(0, showChar);
+                var h = content.substr(showChar, content.length - showChar);
+
+                var html = c + '<span class="moreellipses">' + ellipsestext + '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+
+                $(this).html(html);
+            }
+
+        });
+
+        $(".morelink").click(function() {
+            if ($(this).hasClass("less")) {
+                $(this).removeClass("less");
+                $(this).html(moretext);
+            } else {
+                $(this).addClass("less");
+                $(this).html(lesstext);
+            }
+            $(this).parent().prev().toggle();
+            $(this).prev().toggle();
+            return false;
+        });
+    }
 
     function generateConfigurations(config) {
         for (key in config) {
@@ -300,8 +341,8 @@ $scope.writeReview = function(){
         }, 500);
     }
 
-     $scope.visit = {};
-     $scope.visit.project = {};
+    $scope.visit = {};
+    $scope.visit.project = {};
 
 
     $scope.submitQuery = function() {
@@ -316,9 +357,9 @@ $scope.writeReview = function(){
         $scope.visit.status = 'submitted';
         $scope.visit.type = 'project';
         updates['/enquiry/' + newPostKey] = $scope.visit;
-            Materialize.toast('Your query have been successfully submit!', 1000, 'rounded');
+        Materialize.toast('Your query have been successfully submit!', 1000, 'rounded');
         db.ref().update(updates).then(function() {
-            
+
         });
     }
 
@@ -363,22 +404,66 @@ $scope.writeReview = function(){
 
 
 
-     $scope.filters = {
+    $scope.filters = {
         pkey: $scope.projectId,
         userType: '',
         ratings: '',
         pagination: 1
     };
 
+    $scope.ratingf = {}
+    var rtfv = { 'exc': 5, 'vg': 4, 'good': 3, 'avg': 2, 'bad': 1 }
+
+    $scope.ratingFilter = function() {
+        $scope.filters.ratings = '';
+        for (key in $scope.ratingf) {
+            if ($scope.ratingf[key]) {
+                if ($scope.filters.ratings == '') {
+                    $scope.filters.ratings = rtfv[key];
+                } else {
+                    $scope.filters.ratings = $scope.filters.ratings + ',' + rtfv[key];
+                }
+            }
+
+        }
+        allReviews();
+    }
+    $scope.userTypef = {};
+    $scope.userTypeFilter = function() {
+        $scope.filters.userType = '';
+        for (key in $scope.userTypef) {
+            if ($scope.userTypef[key]) {
+                if ($scope.filters.userType == '') {
+                    $scope.filters.userType = key;
+                } else {
+                    $scope.filters.userType = $scope.filters.userType + ',' + key;
+                }
+            }
+
+        }
+        console.log($scope.filters);
+        allReviews();
+    }
+    $scope.reviewsProcess = true;
+
 
     function allReviews() {
+        $scope.filters.pagination = 1;
+        $scope.reviewsProcess = true;
+        $scope.reviewsEnd = false;
         $http({
             url: 'http://139.162.9.71/api/v1/reviewSearch',
             method: 'GET',
-            params:  $scope.filters 
+            params: $scope.filters
         }).then(function mySucces(response) {
             $scope.allReviews = response.data.items;
-
+            if (response.data.items.length != 10) {
+                $scope.reviewsEnd = true;
+            }
+            $timeout(function() {
+                reviewsShort();
+                $scope.reviewsProcess = false;
+            }, 1000)
         });
     }
 
@@ -392,17 +477,16 @@ $scope.writeReview = function(){
 
     function loadNextReviews() {
 
-        pagreview = pagreview + 1;
+        $scope.filters.pagination = $scope.filters.pagination + 1;
         $http({
             url: 'http://139.162.9.71/api/v1/reviewSearch',
             method: 'GET',
-            params: {
-                'pkey': $scope.projectId,
-                'pagination': pagreview
-            }
+            params: $scope.filters
         }).then(function mySucces(response) {
+            if (response.data.items.length != 10) {
+                $scope.reviewsEnd = true;
+            }
             currlen = $scope.allReviews.length;
-
             for (i in response.data.items) {
                 item = parseInt(i) + parseInt(currlen);
                 $scope.allReviews[item] = response.data.items[i];
