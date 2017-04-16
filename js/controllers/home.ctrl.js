@@ -4,7 +4,8 @@ app.controller('homeCtrl', function($scope, $state, $timeout) {
     $('.parallax').parallax();
     $timeout(function() {
         $('.carousel.carousel-slider').carousel({
-            full_width: true
+            full_width: true,
+            height: 350
         });
     }, 1000)
 

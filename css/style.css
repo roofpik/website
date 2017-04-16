@@ -595,7 +595,7 @@
         width: 90%;
     }
     .valign-wrapper {
-        display: block;
+        /*display: block;*/
     }
     .xsspdt10 {
         padding-top: 10px !important;
