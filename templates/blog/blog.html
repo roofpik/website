@@ -1,13 +1,13 @@
 <section class="story-main mgt65">
     <link rel="stylesheet" type="text/css" href="../../css/story.style.css">
     <div class="row no-padding">
-        <div class="col s8 no-padding" ng-click="showblog(featuredlarge)">
+        <div class="col s12 m8 no-padding" ng-click="showblog(featuredlarge)">
             <div class="margaret-first-column type-in twonins-post-1">
                 <div class="thumb">
                     <img ng-src="{{featuredlarge.imgsrc}}" class="responsive-img">
                 </div>
                 <div class="post-info">
-                    <h2 class="post-title">
+                    <h2 class="bi-post-title">
                             <a href="">
                                        {{featuredlarge.title}}
                                                          </a>
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <div class="col s4 no-padding">
+        <div class="col s12 m4 no-padding">
             <div class="row no-padding">
                 <div class="col s12 no-padding" ng-repeat="fsmall in featuredsmall" ng-click="showblog(fsmall)">
                     <div class="margaret-first-column type-in twonins-post-1">
@@ -28,7 +28,7 @@
                             <img ng-src="{{fsmall.imgsrc}}" class="responsive-img">
                         </div>
                         <div class="post-info pda20">
-                            <h2 class="post-title mgan">
+                            <h2 class="sm-post-title mgan">
                             <a href="" class="flow-text"> {{fsmall.title}} </a>
                         </h2>
                             <div class="post-meta">
@@ -53,7 +53,7 @@
         </div>
         <div class="row" ng-repeat="story in blogs">
             <div class="col s12 hoverable pointer" ng-if="$odd" ng-click="showblog(story)">
-                <div class="row mgbn valign-wrapper">
+                <div class="row mgbn val_xs valign-wrapper">
                     <div class="col s12 m6 no-padding">
                         <img ng-src="{{story.imgsrc}}" class="responsive-img block" />
                     </div>
@@ -69,8 +69,11 @@
                 </div>
             </div>
             <div class="col s12 hoverable pointer" ng-if="$even" ng-click="showblog(story)">
-                <div class="row mgbn valign-wrapper">
-                    <div class="col s12 m6">
+                <div class="row mgbn val_xs valign-wrapper">
+                <div class="col s12 m6 push-m6 no-padding">
+                        <img ng-src="{{story.imgsrc}}" class="responsive-img block" />
+                    </div>
+                    <div class="col s12 m6 pull-m6">
                         <div class="pda10">
                             <div class="story-meta">
                                 <span class="story-date">{{story.created | date}} /</span>
@@ -79,9 +82,7 @@
                             <p>{{story.shortDesc}} </p>
                         </div>
                     </div>
-                    <div class="col s12 m6 no-padding">
-                        <img ng-src="{{story.imgsrc}}" class="responsive-img block" />
-                    </div>
+                    
                 </div>
             </div>
         </div>

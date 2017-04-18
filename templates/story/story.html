@@ -75,7 +75,7 @@
         </div>
         <div class="row" ng-repeat="story in stories">
             <div class="col s12 hoverable pointer" ng-if="$odd" ng-click="showStory(story.key)">
-                <div class="row mgbn valign-wrapper">
+                <div class="row mgbn val_xs valign-wrapper">
                     <div class="col s12 m6 no-padding">
                         <img ng-src="{{story.imgsrc}}" class="responsive-img block" />
                     </div>
@@ -90,15 +90,18 @@
                             </div>
                             <!-- .entry-meta -->
                             <p>{{story.shortDesc}} </p>
-                            <a href="" class="nicole-post-button" ng-click="showStory(story.key)">Read More  </a>
+                            <a href="" class="nicole-post-button grey-text" ng-click="showStory(story.key)">Read More  </a>
                             <!-- .entry-footer -->
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col s12 hoverable pointer" ng-if="$even" ng-click="showStory(story.key)">
-                <div class="row mgbn valign-wrapper">
-                    <div class="col s12 m6">
+                <div class="row mgbn val_xs valign-wrapper">
+                 <div class="col s12 m6 push-m6 no-padding">
+                        <img ng-src="{{story.imgsrc}}" class="responsive-img block" />
+                    </div>
+                    <div class="col s12 m6 pull-m6">
                         <div class="pda10">
                             <div class="story-meta">
                                 <span class="story-date">{{story.date | date}}  /</span>
@@ -109,13 +112,11 @@
                             </div>
                             <!-- .entry-meta -->
                             <p>{{story.shortDesc}} </p>
-                            <a href="" class="nicole-post-button" ng-click="showStory(story.key)">Read More</a>
+                            <a href="" class="nicole-post-button grey-text" ng-click="showStory(story.key)">Read More</a>
                             <!-- .entry-footer -->
                         </div>
                     </div>
-                    <div class="col s12 m6 no-padding">
-                        <img ng-src="{{story.imgsrc}}" class="responsive-img block" />
-                    </div>
+                   
                 </div>
             </div>
         </div>

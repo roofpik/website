@@ -103,7 +103,7 @@
 
 .tabline1 {
     left: 25%;
-    top: 200px;
+    top: 250px;
   /* -ms-transform: rotate(30deg);
     -webkit-transform: rotate(30deg);
     transform: rotate(30deg);*/    
@@ -111,30 +111,30 @@
 
 .tabline2 {
     left: 21%; border-color: #26a69a;
-    top: 295px;  width: 170px;
+    top: 335px;  width: 190px;
    
 }
 
 .tabline3 {
     right: 22%; border-color: #ff9800;
-    top: 170px; width: 150px;
+    top: 230px; width: 150px;
     
 }
 
 .tabline4 {
     right: 20%; border-color: #2196F3;
-    top: 55%;
+    top: 58%;
    
 }
 
 .tabline5 {
-    left: 50%;
-    top: 135px;
-width: 100px;
+    left: 45%;
+    top: 175px;
+width: 130px;
 
- -ms-transform: rotate(70deg);
-    -webkit-transform: rotate(70deg);
-    transform: rotate(70deg);
+ -ms-transform: rotate(71deg);
+    -webkit-transform: rotate(71deg);
+    transform: rotate(71deg);
 
     
 }
