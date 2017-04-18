@@ -67,8 +67,9 @@ app.controller('comparisonCtrl', function($scope) {
   
 });
 app.controller('contactCtrl', function($scope) {
-  
+     
 });
+
 app.controller('corporateCtrl', function($scope) {
   
 });
