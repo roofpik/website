@@ -147,10 +147,12 @@
     height: 30px;
     padding-top: 5px;
     line-height: 30px;
-    color: #86aeb7;
+    color: #444 !important;
     box-shadow: none;
     background-color: #fff;
 }
+
+.linkroot nav a { font-weight: 400;}
 
 .breadcrumb:before {
     font-size: 20px;
@@ -159,12 +161,12 @@
 }
 
 .breadcrumb {
-    color: #86aeb7;
+    color: #444 !important;
     font-size: 13px;
 }
 
 .breadcrumb:last-child {
-    color: #26a69a;
+    color: #1ab0d3 !important;
 }
 
 .htv90 {

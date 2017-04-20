@@ -60,11 +60,22 @@
         </form>
     </div>
     <div class="row bg-grey mgt65">
+
         <section>
             <div class="row list-heading">
                 <div class="col s12 pdl30">
-                    <h5>  Projects in Gurgaon  <a href="#" data-activates="slide-out1" class="right flticon button-collapse1 hide-on-large-only"><i class="material-icons">menu</i></a></h5>
+                    <h5 class="mgbn">  Projects in Gurgaon  <a href="#" data-activates="slide-out1" class="right flticon button-collapse1 hide-on-large-only"><i class="material-icons">menu</i></a></h5>
                 </div>
+                 <div class="row linkroot mgan">
+                <nav class="bgtrans pdl20">
+                    <div class="nav-wrapper bgtrans">
+                        <div class="col s12">
+                            <a href="/#/home" class="breadcrumb">Home</a>
+                            <a href="" class="breadcrumb">Projects</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
             </div>
             <div class="row pdl30 pdr30 xspdlrn">
                 <div id="boxfilterlist" class="col s2 m3 l3 hide-on-med-and-down ">
@@ -134,13 +145,13 @@
                     <div class="col s12 card pdt10 pdbn pdln pdrn white" ng-repeat="project in projects track by $index" ng-show="!loading">
                         <div class="row relative mgb10">
                             <div class="col s3 proj-thumb">
-                                <a href=""> <img src="http://cdn.roofpik.com/image/{{project.thumbnail}}-s.jpg" class="responsive-img fd-load"></a>
+                                <a ng-click="showProjDetails(project)"> <img src="http://cdn.roofpik.com/image/{{project.thumbnail}}-s.jpg" class="responsive-img fd-load"></a>
                             </div>
                             <div class="col s6 pdln xspdl10">
                                 <div class="truncate ft12 pl-l1 fd-load">{{project.segment}}</div>
-                                <h2 class="ft18 b mgbn mgt5 truncate"><a href="" class="pl-l2  fd-load"> {{project.name}}</a></h2>
+                                <h2 class="ft18 b mgbn mgt5 truncate"><a ng-click="showProjDetails(project)" class="pl-l2  fd-load"> {{project.name}}</a></h2>
                                 <h6 class="mgbn ft13 truncate b text-darken-2 mgt5">
-                                <a href="" class="pl-l3  fd-load"> {{project.location.display}}</a></h6>
+                                <a ng-click="showProjDetails(project)" class="pl-l3  fd-load"> {{project.location.display}}</a></h6>
                                 <div class=" pl-l4 mgt5 ft12  fd-load">#{{project.rank}}  in {{project.citycount}} Projects Gurgaon</div>
                             </div>
                             <div class="col s3 pdln right-align">
@@ -171,8 +182,8 @@
                         </div>
                     </div>
                     <div class="col s12 center">
-                        <span ng-click="showNext()" ng-show="showMore">Show More</span>
-                        <span ng-click="showNext()" ng-show="!showMore">No more results</span>
+                        <span ng-click="showNext()" ng-show="showMore" class="b">Show More</span>
+                        <span ng-click="showNext()" ng-show="!showMore" class="red-text ft15 b">No more results</span>
                     </div>
                 </div>
                 <div class="col s12 m12 l3 no-padding hide-on-med-and-down">

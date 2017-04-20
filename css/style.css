@@ -490,7 +490,7 @@
         width: 100%;
     }
     .img_blogs {
-        height: 250px;
+        height: 250px !important;
     }
     #seesample_popup {
         left: 0px;
