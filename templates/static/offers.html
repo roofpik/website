@@ -1,13 +1,39 @@
 <div class="mgt65">
-    <!-- <div class="row mgan center white offer_link">
+    <!--  <div class="row mgan center white offer_link">
         <a href="" ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11] track  by $index">
             <i class="material-icons">language</i> Movie
         </a>
     </div> -->
+    <div class="clearfix"></div>
+    <div class="row  pda10 mgt30 mgln mgrn">
+        <div class="col s8 card offset-s2">
+            <div class="row mgan">
+                <div class="col s6 pda20 right-align mgt30">
+                    <h3>  extra
+            <br> savings</h3>
+                </div>
+                <div class="col s6 pda20 relative bodl">
+                    <div class="row mgan">
+                        <div class="col s9 bodall">
+                            <h5 class="b">20% CASHBACK</h5>
+                            <p>New Users only | Upto Rs. 500 | first transaction only</p>
+                            <div>
+                                <a href="" class="btn-flat bodall">New</a>
+                                <a href="" class="btn">Copy</a>
+                            </div>
+                            <div class="fixbot grey lighten-4 pda10 bodt mgt20">Valid till 30 Apr 2017
+                                <a href="" class="mgr10 right red-text">Know More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <section>
         <div class="row mgln mgrn pda10">
             <div class="col s12 m4 l3 boxCoupon" ng-repeat="item in allCoupon" style="height:400px">
-                <a ng-click="checkReview(item.key)" class="card block grey-text text-darken-2">
+                <a ng-click="checkReview(item.key)" class="card cardhov block grey-text text-darken-2">
                     <div class="row">
                         <div class="col s12 no-padding relative offer_img">
                             <img src="{{item.img}}" class="responsive-img">
@@ -44,9 +70,9 @@
                 </div>
             </div>
         </div>
-            <div class="modal-footer">
-        <a class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-    </div>
+        <div class="modal-footer">
+            <a class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
     </div>
     <div id="offer_modal2_popup" class="modal offer_modal_popup">
         <div class="modal-content">
@@ -59,11 +85,10 @@
                 </div>
             </div>
         </div>
-            <div class="modal-footer">
-        <a  class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        <div class="modal-footer">
+            <a class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
     </div>
-    </div>
-
     <script>
     $(document).ready(function() {
         $('ul.tabs').tabs();
