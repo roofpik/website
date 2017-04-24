@@ -1,6 +1,6 @@
 
 .imgcir_req {
-    border-radius: 50%;
+   /* border-radius: 50%;*/
     width: 150px !important;
     height: 150px;
     overflow: hidden;
@@ -11,11 +11,11 @@
     height: 100px !important;
 }
 .indic_color .indicators .indicator-item.active {
-    background-color: #999 !important;
+    background-color: #26a69a !important;
 }
 
 .indic_color .indicators .indicator-item {
-    background-color: #eee !important;
+    background-color: #999 !important;
 }
 .img32 {
     width: 32px !important;

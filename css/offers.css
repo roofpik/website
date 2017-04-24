@@ -8,3 +8,20 @@
 
 .boxCoupon .card{min-height: 370px;}
 .minht70{min-height: 60px;}
+.fixbot{margin-left: -11px; margin-right: -11px;}
+
+
+.cardhov{transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;}
+.cardhov:hover{box-shadow: 0 1px 25px rgba(153, 153, 153, 0.5);
+transform: translateY(-2px);
+}
+
+.txnew{height: 36px; line-height: 36px; padding: 0 20px;}
+.htfiximg{height: 150px;}
+.htfiximg img{height: 100%;}
+.boxbtnoff .card{}
+

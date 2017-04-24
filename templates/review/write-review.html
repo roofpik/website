@@ -9,7 +9,17 @@
         <div class="container">
             <div class="row relative">
                 <div class="col s12 m12 l8 pdr30 rightsd">
-                    <h3 class="heading mgt30">Write Review</h3>
+                    <h3 class="heading mgt30 mgbn">Write Review</h3>
+                    <div class="row linkroot mgan">
+                        <nav class="bgtrans">
+                            <div class="nav-wrapper bgtrans">
+                                <div class="col s12 pdln">
+                                    <a href="/#/home" class="breadcrumb">Home</a>
+                                    <a href="" class="breadcrumb">Write Review</a>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
                     <form name="reviewForm">
                         <div class="row mgln mgrn">
                             <div class="col s12 pdln ft18 b bodb pdb10 mgt20">
@@ -288,14 +298,57 @@
                     </form>
                 </div>
                 <div class="col s12 m12 l4 justify pdl30 xspdl10 mgt30 smxst">
+                <div class="row relative">
+                    <div class="col s12">
+                          <h5 class="mgtn ft15 b">Reviewing Tips</h5>
+                            <hr> Your review can directly impact someone’s decision to buy or rent property. So make it count by using these reviewing tips:
+                            <p>
+                                <b>Remain Relevant:</b> A review with the relevant details garners more ratings and trust. Avoid excessive complaints or compliments, provide specific details where possible, and be objective about your views. The best reviews state both pros and cons.
+                            </p>
+                            <div class="row mgbn mgt30">
+                         <h5 class="ft17 pdl10"><span class="orange-text">What</span> you can talk abuot in your review</h5>
+                            <div class="col s6">
+                                <h5 class="ft13 purple-text mgbn">Amenities:</h5>
+                                <p class="ft11 mgtn">How are the club-house and indoor/outdoor sports facilities</p>
+                            </div>
+                            <div class="col s6">
+                                <h5 class="ft13 blue-text mgbn">Security:</h5>
+                                <p class="ft11 mgtn">Availability of features like gated community,cctv,24x7 security etc.</p>
+                            </div>
+                            <div class="col s6">
+                                <h5 class="ft13 green-text mgbn">Infrastructure:</h5>
+                                <p class="ft11 mgtn">Quality of roads, street-lighting, traffic, air and noise pollution etc.</p>
+                            </div>
+                            <div class="col s6">
+                                <h5 class="ft13 red-text mgbn">Convenience:</h5>
+                                <p class="ft11 mgtn">Convenience of housemaids, quality of lifts, senior citizen, friendly, pet friendly etc.</p>
+                            </div>
+                            <div class="col s6">
+                                <h5 class="ft13 orange-text mgbn">Open Areas:</h5>
+                                <p class="ft11 mgtn">Parks and open/green areas, children play areas etc.</p>
+                            </div>
+                            <div class="col s6">
+                                <h5 class="ft13 lime-text mgbn">Near-By:</h5>
+                                <p class="ft11 mgtn">Best Schools, Markets, Hospitals, and Connectivity to public transport etc.</p>
+                            </div>
+                            <div class="col s12 ft10"><span class="black-text">90%</span> read reviews <span class="black-text">before</span> making decision - <span class="black-text">BrightLocal</span></div>
+                            </div>
+                           <p>
+                                <b>Honesty Helps:</b> Although this is a neutral platform for users to openly share their views, reviews with discriminatory, libellous, or profane content will not pass the verification stage. Share your own experiences and not what you’ve heard about the property or neighbourhood you’re reviewing.
+                            </p>
+                            <p>
+                               <b> Add Photos:</b> You may not be able to write a thousand words, so post a picture! Photos of the property, project, and locality help garner more readers for your review besides making it credible. 
+                            </p>
+                    </div>
+                </div>
                     <div class="row mgan relative">
                         <div class="col s12">
-                            <a onclick="$('#seesample_popup') .css ('display','block')" class="pointer ft12">
+                          <!--   <a onclick="$('#seesample_popup') .css ('display','block')" class="pointer ft12">
                                 Reviewing Tips
-                            </a>
+                            </a> -->
                             <h3 class="ft15 b" ng-show="{{allReview}}">Recent reviews of this property</h3>
                         </div>
-                        <div id="seesample_popup" class="white pda20">
+                      <!--   <div id="seesample_popup" class="white pda20">
                             <i onclick="$('#seesample_popup') .css ('display','none')" class="material-icons right ft17 grey-text pointer">close</i>
                             <h5 class="mgtn ft15 b">Reviewing Tips</h5>
                             <hr> Your review can directly impact someone’s decision to buy or rent property. So make it count by using these reviewing tips:
@@ -305,7 +358,10 @@
                             <p>
                                 <b>Honesty Helps:</b> Although this is a neutral platform for users to openly share their views, reviews with discriminatory, libellous, or profane content will not pass the verification stage. Share your own experiences and not what you’ve heard about the property or neighbourhood you’re reviewing.
                             </p>
-                        </div>
+                            <p>
+                               <b> Add Photos:</b> You may not be able to write a thousand words, so post a picture! Photos of the property, project, and locality help garner more readers for your review besides making it credible. 
+                            </p>
+                        </div> -->
                     </div>
                     <div class="row bdbtm ft13 grey-text text-darken-2 mgan" ng-repeat="review in allReviews">
                         <div class="col s12">

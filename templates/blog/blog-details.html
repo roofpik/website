@@ -5,11 +5,22 @@
             <h3 class="white-text text-sd mgbn mgtn"><b>{{blogMain.title}}</b></h3>
         </div>
     </div>
+     <div class="row linkroot mgan">
+        <nav class="bgtrans container">
+            <div class="nav-wrapper bgtrans">
+                <div class="col s12 pdln">
+                    <a href="/#/home" class="breadcrumb">Home</a>
+                    <a href="/#/blog/gurgaon" class="breadcrumb">Blogs</a>
+                    <a href="" class="breadcrumb">Blog Details</a>
+                </div>
+            </div>
+        </nav>
+    </div>
     <section class="story-main container">
         <link rel="stylesheet" type="text/css" href="../../css/story.style.css">
         <div class="row">
             <div class="col s12 m12 l12">
-                <div ng-repeat="items in blogDetail">
+                <div ng-repeat="items in blogDetail" class="blogimgbn">
                     <h3>{{items.title}}</h3>
                     <img ng-src="{{items.imgsrc}}" class="responsive-img" />
                     <p> {{items.description}} </p>

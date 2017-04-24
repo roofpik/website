@@ -91,6 +91,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         templateUrl: 'templates/static/offer-details.html',
          controller: 'offerDetailsCtrl'
     })
+    $stateProvider.state('offers-filter', {
+        url: '/offers-filter',
+        templateUrl: 'templates/static/offers-filter.html',
+         controller: 'OffersCtrl'
+    })
 
     $stateProvider.state('careers', {
         url: '/careers',

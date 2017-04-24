@@ -1,10 +1,10 @@
 <section class="story-main mgt65">
 <!--     <link rel="stylesheet" type="text/css" href="../../css/story.style.css"> -->
-    <div class="row no-padding">
+    <div class="row no-padding mgbn">
         <div class="col s12 m8 no-padding" ng-click="showStory(featuredlarge.key)">
             <div class="margaret-first-column type-in twonins-post-1">
                 <div class="thumb">
-                    <img ng-src="{{featuredlarge.imgsrc}}" class="responsive-img story1">
+                    <img ng-src="{{featuredlarge.imgsrc}}" class="responsive-img img_blogs">
                 </div>
                 <div class="post-info">
                     <div class="post-cat">
@@ -32,11 +32,11 @@
             </div>
         </div>
         <div class="col s12 m4 no-padding">
-            <div class="row no-padding">
+            <div class="row no-padding mgbn">
                 <div class="col s12 no-padding" ng-repeat="fsmall in featuredsmall" ng-click="showStory(fsmall.key)">
                     <div class="margaret-first-column type-in twonins-post-1">
                         <div class="thumb">
-                            <img ng-src="{{fsmall.imgsrc}}" class="responsive-img story2">
+                            <img ng-src="{{fsmall.imgsrc}}" class="responsive-img img_blogs_sm">
                         </div>
                         <div class="post-info pda20">
                             <h2 class="post-title mgan">
@@ -64,6 +64,16 @@
             </div>
         </div>
     </div>
+     <div class="row linkroot mgan">
+        <nav class="bgtrans container">
+            <div class="nav-wrapper bgtrans">
+                <div class="col s12 pdln">
+                    <a href="/#/home" class="breadcrumb">Home</a>
+                    <a href="" class="breadcrumb">Cover Story</a>
+                </div>
+            </div>
+        </nav>
+    </div>
     <div class="container">
         <div class="row">
             <div class="twonins-header">
@@ -75,7 +85,7 @@
         </div>
         <div class="row" ng-repeat="story in stories">
             <div class="col s12 hoverable pointer" ng-if="$odd" ng-click="showStory(story.key)">
-                <div class="row mgbn valign-wrapper">
+                <div class="row mgbn val_xs valign-wrapper">
                     <div class="col s12 m6 no-padding">
                         <img ng-src="{{story.imgsrc}}" class="responsive-img block" />
                     </div>
@@ -90,15 +100,18 @@
                             </div>
                             <!-- .entry-meta -->
                             <p>{{story.shortDesc}} </p>
-                            <a href="" class="nicole-post-button" ng-click="showStory(story.key)">Read More  </a>
+                            <a href="" class="nicole-post-button grey-text" ng-click="showStory(story.key)">Read More  </a>
                             <!-- .entry-footer -->
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col s12 hoverable pointer" ng-if="$even" ng-click="showStory(story.key)">
-                <div class="row mgbn valign-wrapper">
-                    <div class="col s12 m6">
+                <div class="row mgbn val_xs valign-wrapper">
+                 <div class="col s12 m6 push-m6 no-padding">
+                        <img ng-src="{{story.imgsrc}}" class="responsive-img block" />
+                    </div>
+                    <div class="col s12 m6 pull-m6">
                         <div class="pda10">
                             <div class="story-meta">
                                 <span class="story-date">{{story.date | date}}  /</span>
@@ -109,13 +122,11 @@
                             </div>
                             <!-- .entry-meta -->
                             <p>{{story.shortDesc}} </p>
-                            <a href="" class="nicole-post-button" ng-click="showStory(story.key)">Read More</a>
+                            <a href="" class="nicole-post-button grey-text" ng-click="showStory(story.key)">Read More</a>
                             <!-- .entry-footer -->
                         </div>
                     </div>
-                    <div class="col s12 m6 no-padding">
-                        <img ng-src="{{story.imgsrc}}" class="responsive-img block" />
-                    </div>
+                   
                 </div>
             </div>
         </div>

@@ -447,7 +447,9 @@
 }
 
 @media screen and (min-width:0px) and (max-width: 600px) {
-
+    .post-title{font-size: 20px;}
+.bi-post-title{font-size: 22px !important;}
+.val_xs{display: block !important;}
     .offer_link a{padding: 15px;}
     .starrating{height: 45px;}
 
@@ -488,7 +490,7 @@
         width: 100%;
     }
     .img_blogs {
-        height: 250px;
+        height: 250px !important;
     }
     #seesample_popup {
         left: 0px;
@@ -594,9 +596,8 @@
     #addatip_popup {
         width: 90%;
     }
-    .valign-wrapper {
-        display: block;
-    }
+    
+
     .xsspdt10 {
         padding-top: 10px !important;
     }

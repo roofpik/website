@@ -70,6 +70,31 @@ app.controller('contactCtrl', function($scope) {
 
 app.controller('guidelinesCtrl', function($scope) {
   ga('send', 'guidelines');
+     
+});
+
+app.controller('corporateCtrl', function($scope) {
+  
+});
+app.controller('guidelinesCtrl', function($scope) {
+  
+});
+varapp.controller('homecoverstoriesCtrl', function($scope) {
+  
+});
+app.controller('locationCtrl', function($scope) {
+  
+});
+app.controller('marketingCtrl', function($scope) {
+  
+});
+app.controller('requirementCtrl', function($scope) {
+
+     $timeout(function() {
+        $('.carousel.carousel-slider').carousel({
+            full_width: true
+        });
+    }, 1000)
 });
 
 
@@ -79,6 +104,10 @@ app.controller('verifiedCtrl', function($scope) {
 });
 app.controller('termsCtrl', function($scope) {
     ga('send', 'terms');
+  
+});
+
+app.controller('OffersFilterCtrl', function($scope) {
   
 });
 

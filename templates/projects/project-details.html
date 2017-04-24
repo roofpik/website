@@ -10,12 +10,23 @@
     }
     </style>
     <section class="mgt65">
-        <div class="row img_detail">
+     <div class="row linkroot mgan">
+                    <nav class="bgtrans pdl20">
+                        <div class="nav-wrapper bgtrans">
+                            <div class="col s12 pdln">
+                                <a href="/#/home" class="breadcrumb">Home</a>
+                                <a href="/#/search/2017/property/gurgaon/residential/" class="breadcrumb">Projects</a>
+                                <a href="" class="breadcrumb">Project Details</a>
+                            </div>
+                        </div>
+                    </nav>
+        </div>
+        <div class="row img_detail relative">
             <img ng-src="{{cover}}" class="responsive-img" id="cover-xs">
             <img ng-src="{{coverl}}" class="responsive-img hidden" id="cover-l">
             <div class="dt_abs">
                 <h3 class="white-text text-sd mgbn mgt65">{{project.name}}</h3>
-                <h5 class="white-text text-sd">{{project.location.displayAdd}}</h5>
+                <h5 class="white-text text-sd">{{project.location.displayAdd}}</h5>               
             </div>
         </div>
     </section>
@@ -137,7 +148,7 @@
                             <h5 class="ft15 mgtn b pdb10">Resident Type</h5>
                             <div class="row mgbn">
                                 <div class="col s12">
-                                    <input type="checkbox" ng-model="userTypef.owner" ng-change="userTypeFilter()"  class="filled-in" id="type1">
+                                    <input type="checkbox" ng-model="userTypef.owner" ng-change="userTypeFilter()" class="filled-in" id="type1">
                                     <label class="ft12" for="type1">Owners ({{reviewsummary.type.owner}})</label>
                                 </div>
                                 <div class="col s12">
@@ -191,7 +202,7 @@
                             <img class="imgcir mgt10" src="images/general/noImage.png">
                         </div>
                         <div class="col s10">
-                            <p ng-class="reviewsProcess ? 'blur'  : 'text'"><span class="ft14" > {{review.name | capitalize}} </span> | {{review.date | date : 'd MMM yy'}} </p>
+                            <p ng-class="reviewsProcess ? 'blur'  : 'text'"><span class="ft14"> {{review.name | capitalize}} </span> | {{review.date | date : 'd MMM yy'}} </p>
                             <p class="grey-text review ft20i mgbn ">
                                 <ratings ratingval="{{review.rating}}"></ratings>
                             </p>
@@ -202,7 +213,7 @@
                     <div class="row bodb bodt pdt10 pdb10 mgln mgrn">
                         <div class="col s12 center">
                             <a ng-click="showMoreReviews()" ng-show="!reviewsEnd">more reviews...</a>
-                            <span  ng-show="reviewsEnd">No More Reviews</span>
+                            <span ng-show="reviewsEnd">No More Reviews</span>
                         </div>
                     </div>
                 </div>
@@ -436,5 +447,4 @@
             <a ng-click="closeFilter()" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
         </div>
     </div>
-
 </div>

@@ -42,5 +42,20 @@
     margin-top: 10px;
 }
 
+.lineht3{line-height: 24px}
+
+.boxwhtr{background-color: rgba(255, 255, 255, 0.9); 
+ left: 23%; width: 350px;
+    z-index: 9;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.boxmap{background-color: rgba(255, 255, 255, 0.9); 
+ right: 23%; width: 350px;
+    z-index: 9;
+    top: 50%;
+    transform: translate(50%, -50%);
+}
 
 
