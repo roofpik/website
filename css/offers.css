@@ -21,6 +21,7 @@ transform: translateY(-2px);
 }
 
 .txnew{height: 36px; line-height: 36px; padding: 0 20px;}
-
-.boxbtnoff .card{height: 130px;}
+.htfiximg{height: 150px;}
+.htfiximg img{height: 100%;}
+.boxbtnoff .card{}
 
