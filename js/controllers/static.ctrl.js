@@ -79,7 +79,7 @@ app.controller('corporateCtrl', function($scope) {
 app.controller('guidelinesCtrl', function($scope) {
   
 });
-varapp.controller('homecoverstoriesCtrl', function($scope) {
+app.controller('homecoverstoriesCtrl', function($scope) {
   
 });
 app.controller('locationCtrl', function($scope) {
