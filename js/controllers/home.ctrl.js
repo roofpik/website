@@ -1,12 +1,18 @@
 app.controller('homeCtrl', function($scope, $state, $timeout) {
-    ga('send', 'home');
+    // ga('send', 'home');
     $('.modal').modal('close');
     $('.parallax').parallax();
     $timeout(function() {
-        $('.carousel.carousel-slider').carousel({
+        $('.carousel-slider').carousel({
             full_width: true
         });
-    }, 1000)
+
+        $timeout(function(){
+
+         $('.carousel-slider').height(350);
+        }, 1500);
+
+    }, 500)
 
 
 });

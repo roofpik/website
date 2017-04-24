@@ -1,6 +1,6 @@
 app.controller('businessAdvantageCtrl', function($scope) {
     $scope.data = {};
-    ga('send', 'business');
+    // ga('send', 'business');
     $scope.businessEnquiry = function() {
         var updates = {};
         $scope.data.created = new Date().getTime();
@@ -21,7 +21,7 @@ app.controller('businessAdvantageCtrl', function($scope) {
 
 app.controller('aboutCtrl', function($scope) {
     $scope.data = {};
-    ga('send', 'about');
+    // ga('send', 'about');
     $scope.sendEnquiry = function() {
         var updates = {};
         $scope.data.created = new Date().getTime();
@@ -40,7 +40,7 @@ app.controller('aboutCtrl', function($scope) {
 
 
 app.controller('careerCtrl', function($scope) {
-    ga('send', 'career');
+    // ga('send', 'career');
     $scope.data = {};
     $scope.sendEnquiry = function() {
         var updates = {};
@@ -64,12 +64,12 @@ app.controller('careerCtrl', function($scope) {
 
 
 app.controller('contactCtrl', function($scope) {
-    ga('send', 'contact');
+    // ga('send', 'contact');
   
 });
 
 app.controller('guidelinesCtrl', function($scope) {
-  ga('send', 'guidelines');
+  // ga('send', 'guidelines');
      
 });
 
@@ -95,15 +95,16 @@ app.controller('requirementCtrl', function($scope) {
             full_width: true
         });
     }, 1000)
+
 });
 
 
 app.controller('verifiedCtrl', function($scope) {
-    ga('send', 'verified');
+    // ga('send', 'verified');
   
 });
 app.controller('termsCtrl', function($scope) {
-    ga('send', 'terms');
+    // ga('send', 'terms');
   
 });
 

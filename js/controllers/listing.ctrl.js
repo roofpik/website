@@ -1,5 +1,5 @@
 app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $state, $location, $window) {
-    ga('send', 'projectlist');
+    // ga('send', 'projectlist');
     $('html,body').scrollTop(0);
     $('.button-collapse1').sideNav({
         menuWidth: 300, // Default is 300

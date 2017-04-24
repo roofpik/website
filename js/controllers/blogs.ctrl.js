@@ -1,5 +1,5 @@
 app.controller('blogListCtrl', function($scope, $timeout, $state) {
-    ga('send', 'blog');
+    // ga('send', 'blog');
     var allblog;
     var blogLink = 'blog/main/';
     $scope.stories = {};
@@ -14,10 +14,10 @@ app.controller('blogListCtrl', function($scope, $timeout, $state) {
             for (key in $scope.blogs) {
 
                 if ($scope.blogs[key]['cover-image']) {
-                    db.ref('images/' + $scope.blogs[key]['cover-image']).once('value', function(data) {
+                    db.ref('images/' + $scope.blogs[key]['cover-image']).orderByChild('created').once('value', function(data) {
                         $timeout(function() {
                             img = data.val();
-                            $scope.blogs[img.parentKey].imgsrc = 'http://cdn.roofpik.com/image/' + img.path  + img.imgName + '-m.jpg';
+                            $scope.blogs[img.parentKey].imgsrc = 'http://cdn.roofpik.com/image/' + img.path + img.imgName + '-m.jpg';
                         }, 0);
                     })
                 }
@@ -57,6 +57,49 @@ app.controller('blogListCtrl', function($scope, $timeout, $state) {
 
 
 app.controller('blogDetailsCtrl', function($scope, $timeout, $location, $window, $state) {
+    count = 0
+
+    $scope.featuredsmall = {}
+    db.ref('blog/main/').once('value', function(snapshot) {
+        $timeout(function() {
+
+            $scope.blogs1 = snapshot.val();
+
+            console.log($scope.blogs1)
+            for (key in $scope.blogs1) {
+
+                if ($scope.blogs1[key]['cover-image']) {
+                    db.ref('images/' + $scope.blogs1[key]['cover-image']).once('value', function(data) {
+                        $timeout(function() {
+                            img = data.val();
+                            $scope.blogs1[img.parentKey].imgsrc = 'http://cdn.roofpik.com/image/' + img.path + img.imgName + '-m.jpg';
+                        }, 0);
+                    })
+                }
+            }
+
+            for (blog in $scope.blogs1) {
+                count++;
+                if (5 < count && count < 10) {
+                    $scope.featuredsmall[blog] = $scope.blogs1[blog];
+                }
+
+            }
+
+        }, 500);
+    });
+
+    function rspec(val) {
+        return val.replace(/[^\w\s]/gi, '-')
+    }
+
+    $scope.showblog = function(data) {
+        console.log(data)
+        $state.go('blog-details', { 'url': rspec(data.url), 'key': data.key })
+
+    }
+
+
 
     var blogkey = $location.search().key;
 
@@ -86,13 +129,13 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $location, $window,
                     for (key in $scope.blogDetail) {
 
                         if (img.imgCat == 'cover') {
-                            $scope.blogMain.imgsrc = 'http://cdn.roofpik.com/image/' + img.path  + img.imgName + '-l.jpg';;
+                            $scope.blogMain.imgsrc = 'http://cdn.roofpik.com/image/' + img.path + img.imgName + '-l.jpg';;
                         }
                         if ($scope.blogDetail[key].image == img.key) {
-                            $scope.blogDetail[key].imgsrc = 'http://cdn.roofpik.com/image/' + img.path  + img.imgName + '-l.jpg';;
+                            $scope.blogDetail[key].imgsrc = 'http://cdn.roofpik.com/image/' + img.path + img.imgName + '-l.jpg';;
                         }
                     }
-                    console.log($scope.blogDetail);
+
                 }, 0);
             });
         };
@@ -129,6 +172,10 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $location, $window,
             $("head").append('<meta property="og:image" content="' + $scope.blogMain.imgsrc + '" />');
         });
     }
+
+
+
+
 
 
 

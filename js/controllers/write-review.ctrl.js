@@ -2,7 +2,7 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams, $root
     var user;
     var cityId = '-KYJONgh0P98xoyPPYm9';
     var countryId = '-K_43TEI8cBodNbwlKqJ';
-    ga('send', 'write');
+    // ga('send', 'write');
 
 
     function initialize() {

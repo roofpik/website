@@ -596,8 +596,11 @@
     #addatip_popup {
         width: 90%;
     }
-    
 
+    .valign-wrapper {
+        /*display: block;*/
+    }
+    
     .xsspdt10 {
         padding-top: 10px !important;
     }
