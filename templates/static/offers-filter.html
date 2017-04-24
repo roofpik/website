@@ -1,0 +1,157 @@
+<div class="mgt65">
+    <div class="row linkroot mgan">
+        <nav class="bgtrans pdl20">
+            <div class="nav-wrapper bgtrans">
+                <div class="col s12 pdln">
+                    <a href="/#/home" class="breadcrumb">Home</a>
+                    <a href="" class="breadcrumb">Offers Filter</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- <div class="row mgan center white offer_link">
+        <a href="" ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11] track  by $index">
+            <i class="material-icons">language</i> Movie
+        </a>
+    </div> -->
+    <div class="clearfix"></div>
+    <section>
+        <div class="row mgln mgrn">
+            <div class="col s12 m3 pda20">
+                <h3 class="ft14 b mgtn">Exciting Offers</h3>
+                <div class="row mgbn">
+                    <div class="col s12 mgt5">
+                        <input type="checkbox" id="Categories1" class="filled-in">
+                        <label class="ft11" for="Categories1">Restaurants</label>
+                    </div>
+                    <div class="col s12 mgt5">
+                        <input type="checkbox" id="Categories2" class="filled-in">
+                        <label class="ft11" for="Categories2">Cinemas</label>
+                    </div>
+                    <div class="col s12 mgt5">
+                        <input type="checkbox" id="Categories3" class="filled-in">
+                        <label class="ft11" for="Categories3">Hotels / Travel</label>
+                    </div>
+                    <div class="col s12 mgt5">
+                        <input type="checkbox" id="Categories4" class="filled-in">
+                        <label class="ft11" for="Categories4">Beauty & Spas </label>
+                    </div>
+                    <div class="col s12 mgt5">
+                        <input type="checkbox" id="Categories5" class="filled-in">
+                        <label class="ft11" for="Categories5">Fashion/Shop/Stores</label>
+                    </div>
+                    <div class="col s12 mgt5">
+                        <input type="checkbox" id="Categories6" class="filled-in">
+                        <label class="ft11" for="Categories6"> Health and Fitness</label>
+                    </div>
+                </div>
+                <h3 class="ft14 b">Everything you need for your home</h3>
+                <div class="row mgbn">
+                    <div class="col s12 mgt5">
+                        <input type="checkbox" id="Categories7" class="filled-in">
+                        <label class="ft11" for="Categories7">Interior Designers</label>
+                    </div>
+                    <div class="col s12 mgt5">
+                        <input type="checkbox" id="Categories8" class="filled-in">
+                        <label class="ft11" for="Categories8">Packers and movers</label>
+                    </div>
+                    <div class="col s12 mgt5">
+                        <input type="checkbox" id="Categories9" class="filled-in">
+                        <label class="ft11" for="Categories9">Online food delivery</label>
+                    </div>
+                    <div class="col s12 mgt5">
+                        <input type="checkbox" id="Categories10" class="filled-in">
+                        <label class="ft11" for="Categories10">Sanitarywares</label>
+                    </div>
+                    <div class="col s12 mgt5">
+                        <input type="checkbox" id="Categories11" class="filled-in">
+                        <label class="ft11" for="Categories11">Home related services</label>
+                    </div>
+                    <div class="col s12 mgt5">
+                        <input type="checkbox" id="Categories12" class="filled-in">
+                        <label class="ft11" for="Categories12">Furniture Rentals</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m9">
+                <div class="row mgbn">
+                    <div class="col s12 m4 boxCoupon" ng-repeat="item in allCoupon" style="height:400px">
+                        <a ng-click="checkReview(item.key)" class="card cardhov block grey-text text-darken-2">
+                            <div class="row">
+                                <div class="col s12 no-padding relative offer_img">
+                                    <img src="{{item.img}}" class="responsive-img">
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="mgbn ft17 truncate">{{item.name}}</h5>
+                                    <p class="mgtn">{{item.displayAdd}}</p>
+                                    <p class="minht70"> {{item.coupon.title}}</p>
+                                </div>
+                                <div class="col s12">
+                                    <div class="row mgan">
+                                        <div class="col s12 bodt pdln pdrn pdt10 pdb10">
+                                            <div class="bodall pda10 b red-text left" ng-show="item.coupon.offer">{{item.coupon.offer}} Off</div>
+                                            <div class="green-text ft17 right" ng-show="item.coupon.mrp && item.coupon.discount">
+                                                <del class="block ft11 grey-text right-align">₹ {{item.coupon.mrp}}</del>
+                                                ₹ {{item.coupon.discount}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="offer_modal_popup" class="modal offer_modal_popup">
+        <div class="modal-content">
+            <div class="card block pda20 grey-text text-darken-2">
+                <div class="row">
+                    <div class="col s12">
+                        <h5 class="ft17 truncate">Please write a Review</h5>
+                        <p> To Avail the coupons kindly write the review of the project or locality you live in.</p>
+                        <a ng-click="writeReview()" class="btn b">Write Review</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
+    <div id="offer_modal2_popup" class="modal offer_modal_popup">
+        <div class="modal-content">
+            <div class="card block pda20 grey-text text-darken-2">
+                <div class="row">
+                    <div class="col s12">
+                        <h5 class="ft17 truncate">Please Login</h5>
+                        <p> To Avail the coupons kindly login into your account.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
+    <script>
+    $(document).ready(function() {
+        $('ul.tabs').tabs();
+        Materialize.updateTextFields();
+
+        $('.button-collapse').sideNav({
+            menuWidth: 300, // Default is 240
+            edge: 'left', // Choose the horizontal origin
+            closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+            draggable: true // Choose whether you can drag to open on touch screens
+        });
+        $('select').material_select();
+        $('.slider').slider();
+        $('.dropdown-button').dropdown();
+        $('.carousel').carousel();
+        $('.modal').modal();
+        $('.parallax').parallax();
+
+    });
+    </script>
+</div>

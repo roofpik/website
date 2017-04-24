@@ -86,12 +86,22 @@ app.controller('marketingCtrl', function($scope) {
   
 });
 app.controller('requirementCtrl', function($scope) {
+
+     $timeout(function() {
+        $('.carousel.carousel-slider').carousel({
+            full_width: true
+        });
+    }, 1000)
   
 });
 app.controller('verifiedCtrl', function($scope) {
   
 });
 app.controller('termsCtrl', function($scope) {
+  
+});
+
+app.controller('OffersFilterCtrl', function($scope) {
   
 });
 

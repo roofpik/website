@@ -139,6 +139,9 @@ width: 130px;
     
 }
 
+.hd_home_cr{ left: 50%; bottom: -115px; transform: translate(-50%, -50%); z-index: 9; width: 265px}
+.hd_home_cr a{ width: 120px; height: 120px; font-weight: 500; padding: 43px 10px 10px 10px; line-height: 17px; border: 2px solid #ddd; float: left; margin-right: 20px; text-align: center; border-radius: 50%; }
+.hd_home_cr a:last-child{ margin-right: 0px; }
 .mgtdoted{margin-top: 90px;}
 
 
