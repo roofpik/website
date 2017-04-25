@@ -1,11 +1,6 @@
 app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $stateParams, $location, $http, $state) {
 
 
-// $scope.scrollTo = function(id) {
-//       $location.hash(id);
-//       $anchorScroll();
-//    }
-
     $scope.countryId = '-K_43TEI8cBodNbwlKqJ';
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
     $scope.micromarketId = $location.search().m;
@@ -44,7 +39,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
         return new Array(num);
     }
 
-
+ $('.scrollspy').scrollSpy();
 
 
     // getReviewSummary();

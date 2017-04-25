@@ -207,6 +207,12 @@ hr {
     margin-top: 65px !important;
 }
 
+.mgt45 {
+    margin-top: 45px !important;
+}
+
+.mns5{margin-top: -5px !important;}
+
 .mgt70 {
     margin-top: 70px !important;
 }
@@ -563,14 +569,16 @@ input:focus + div.search-results,
     padding: 15px;
 }
 
+.menu_sub{padding-top: 12px;}
+
 .menu_sub li a {
     float: left;
     display: inline-block;
     color: #666;
     margin-right: 30px;
-    line-height: 48px;
+    line-height: 25px;
 }
-
+.menu_sub li{float: left;}
 .menu_sub li a:hover,
 .menu_sub li a:focus {
     color: #ff5a5f;
@@ -821,7 +829,7 @@ input:focus + div.search-results,
 .dt_abs {
     position: absolute;
     left: 50px;
-    top: 50px;
+    top: 40px;
     z-index: 9;
 }
 

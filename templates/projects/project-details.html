@@ -1,4 +1,4 @@
-<div>
+<div class="mgt45">
     <style>
     .hidden {
         display: none;
@@ -9,35 +9,43 @@
         min-height: 300px;
     }
     </style>
-    <section class="mgt65">
-        <div class="row linkroot mgan">
-            <nav class="bgtrans pdl20">
-                <div class="nav-wrapper bgtrans">
-                    <div class="col s12 pdln">
-                        <a href="/#/home" class="breadcrumb">Home</a>
-                        <a href="/#/search/2017/property/gurgaon/residential/" class="breadcrumb">Projects</a>
-                        <a href="" class="breadcrumb">Project Details</a>
-                    </div>
-                </div>
-            </nav>
-        </div>
+    <section>
         <div class="row img_detail relative">
             <img ng-src="{{cover}}" class="responsive-img" id="cover-xs">
             <img ng-src="{{coverl}}" class="responsive-img hidden" id="cover-l">
+
             <div class="dt_abs">
-                <h3 class="white-text text-sd mgbn mgt65">{{project.name}}</h3>
+             <div class="row linkroot mgan">
+                    <nav class="whtrhd pdl10">
+                        <div class="nav-wrapper bgtrans mns5">
+                            <div class="col s12 pdln">
+                                <a href="/#/home" class="breadcrumb">Home</a>
+                                <a href="/#/search/2017/property/gurgaon/residential/" class="breadcrumb">Projects</a>
+                                <a href="" class="breadcrumb">Project Details</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <h3 class="white-text text-sd mgbn mgt30">{{project.name}}</h3>
                 <h5 class="white-text text-sd">{{project.location.displayAdd}}</h5>
+               
             </div>
         </div>
     </section>
     <div class="row white shdsm sub_header" id="fixsub_hd">
         <div class="container">
-            <ul class="menu_sub mgan">
+            <ul class="table-of-contents menu_sub mgan">
                 <li>
-                    <a ng-click="scrollToDiv('#Overview')" class="ft14">Overview</a>
+                    <a href="#Reviews_id" class="ft14">Reviews</a>
+                </li>
+                <li>
+                    <a href="#Overview" class="ft14">Overview</a>
                 </li>
                 <li>
                     <a href="#Project_Location" class="ft14">Project Location</a>
+                </li>
+                <li>
+                    <a href="#gallery" class="ft14">Gallery</a>
                 </li>
                 <li>
                     <a href="#Units_Sizes" class="ft14">Units & Sizes</a>
@@ -46,16 +54,7 @@
                     <a href="#Amenities" class="ft14">Amenities</a>
                 </li>
                 <li>
-                    <a href="#Specifications" class="ft14">Specifications</a>
-                </li>
-                <li>
-                    <a href="#gallery" class="ft14">Gallery</a>
-                </li>
-                <li>
-                    <a href="#Reviews" class="ft14">Reviews</a>
-                </li>
-                <li>
-                    <a href="#Popular_Projects" class="ft14">Popular Projects</a>
+                    <a href="#shortspecifications" class="ft14">Specifications</a>
                 </li>
             </ul>
         </div>
@@ -227,19 +226,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row bdbtm ft13 grey-text text-darken-2 mgan" ng-repeat="review in allReviews">
-                        <div class="col s2 b pdb20">
-                            <img class="imgcir mgt10" src="images/general/noImage.png">
+                    <section class="section scrollspy" id="Reviews_id">
+                        <div class="row bdbtm ft13 grey-text text-darken-2 mgan" ng-repeat="review in allReviews">
+                            <div class="col s2 b pdb20">
+                                <img class="imgcir mgt10" src="images/general/noImage.png">
+                            </div>
+                            <div class="col s10">
+                                <p ng-class="reviewsProcess ? 'blur'  : 'text'"><span class="ft14"> {{review.name | capitalize}} </span> | {{review.date | date : 'd MMM yy'}} </p>
+                                <p class="grey-text review ft20i mgbn ">
+                                    <ratings ratingval="{{review.rating}}"></ratings>
+                                </p>
+                                <p ng-class="reviewsProcess ? 'blur' : 'text'"><b>{{review.title | capitalize}}</b></p>
+                                <p class="justify more" ng-class="reviewsProcess ? 'blur' : 'text'">{{review.details | capitalize}}</p>
+                            </div>
                         </div>
-                        <div class="col s10">
-                            <p ng-class="reviewsProcess ? 'blur'  : 'text'"><span class="ft14"> {{review.name | capitalize}} </span> | {{review.date | date : 'd MMM yy'}} </p>
-                            <p class="grey-text review ft20i mgbn ">
-                                <ratings ratingval="{{review.rating}}"></ratings>
-                            </p>
-                            <p ng-class="reviewsProcess ? 'blur' : 'text'"><b>{{review.title | capitalize}}</b></p>
-                            <p class="justify more" ng-class="reviewsProcess ? 'blur' : 'text'">{{review.details | capitalize}}</p>
-                        </div>
-                    </div>
+                    </section>
                     <div class="row bodb bodt pdt10 pdb10 mgln mgrn">
                         <div class="col s12 center">
                             <a ng-click="showMoreReviews()" ng-show="!reviewsEnd">more reviews...</a>
@@ -254,7 +255,7 @@
         <div class="container">
             <div class="row">
                 <div class="col s12 m12 l8">
-                    <div class="row" id="Overview">
+                    <div class="row section scrollspy" id="Overview">
                         <div class="col s12 pdb20">
                             <h3 class="heading mgbn">Overview</h3>
                             <div class="ft14 grey-text">{{project.name}} <a href="{{project.general.website}}" target="_blank"> - Website</a></div>
@@ -287,14 +288,14 @@
                             <p>{{project.general.about1}}<a href="" ng-hide="showMoreClicked" ng-click="showMoreClicked = !showMoreClicked">...more</a><span ng-show="showMoreClicked">{{project.general.about2}}</span></p>
                         </div>
                     </div>
-                    <div class="row mgln mgrn" id="Project_Location">
+                    <div class="row mgln mgrn section scrollspy" id="Project_Location">
                         <h3 class="heading">Project Location</h3>
-                        <div class="col s8 pdln relative">
+                        <div class="col s12 m8 pdln relative">
                             <img src="images/general/map-img.jpg" class="responsive-img">
                             <a class="btn mgtn transform modal-trigger" href="http://www.google.com/maps/place/{{project.location.lat}},{{project.location.lng}}" target="_blank">View on Map</a>
                             <!-- <a class="btn mgtn transform modal-trigger" href="#view_map_popup">View on Map</a> -->
                         </div>
-                        <div class="col s4">
+                        <div class="col s12 m4">
                             Site Address
                             <br>
                             <div class="grey-text"> {{project.name}}
@@ -303,7 +304,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mgbn" id="gallery">
+                    <div class="row mgbn section scrollspy" id="gallery">
                         <div class="col s12">
                             <h5 class="ft15 mgtn b pdb10">Gallery</h5>
                         </div>
@@ -331,7 +332,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mgrn" id="Units_Sizes">
+                    <div class="row mgrn section scrollspy" id="Units_Sizes">
                         <div class="col s12">
                             <h3 class="heading">Units & Sizes</h3>
                             <div class="row mgbn">
@@ -368,7 +369,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mgrn mgbn" id="Amenities" ng-show="displayAmenities">
+                    <div class="row mgrn mgbn section scrollspy" id="Amenities" ng-show="displayAmenities">
                         <div class="col s12">
                             <h3 class="heading">Amenities</h3>
                             <div class="row relative">
@@ -392,7 +393,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" id="shortspecifications" ng-show="shortspecifications">
+                    <div class="row section scrollspy" id="shortspecifications" ng-show="shortspecifications">
                         <div class="col s12">
                             <h5 class="ft15 mgtn b pdb10">Specifications</h5>
                         </div>
