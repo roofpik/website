@@ -752,7 +752,7 @@ input:focus + div.search-results,
 
 #fixsub_hd {
     position: fixed;
-    top: 0;
+    top: 63px;
     left: 0;
     width: 100%;
     height: 50px;
@@ -847,3 +847,26 @@ input:focus + div.search-results,
 .gm-style-iw > div > div {
     overflow: visible !important;
 }
+.other-class{font-weight: 700;}
+.defclass{color: #069;}
+
+
+/*back to top css start*/
+.goToTop
+        {
+            position: fixed;
+            background-color: #000;
+            width: 30px; border-radius: 50%;
+            height: 30px; text-align: center;
+            bottom: 50px; padding-top: 3px;
+            right: 10px;
+            z-index: 10000; color: #fff;
+            cursor: pointer;
+            -moz-opacity: 0.80;
+            opacity: .80;
+            filter: alpha(opacity=80);
+        }
+        .goToTop:hover{-moz-opacity: 1;
+            opacity: 1;
+            filter: alpha(opacity=100);}
+/*back to top css end*/

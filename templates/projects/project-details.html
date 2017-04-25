@@ -10,26 +10,56 @@
     }
     </style>
     <section class="mgt65">
-     <div class="row linkroot mgan">
-                    <nav class="bgtrans pdl20">
-                        <div class="nav-wrapper bgtrans">
-                            <div class="col s12 pdln">
-                                <a href="/#/home" class="breadcrumb">Home</a>
-                                <a href="/#/search/2017/property/gurgaon/residential/" class="breadcrumb">Projects</a>
-                                <a href="" class="breadcrumb">Project Details</a>
-                            </div>
-                        </div>
-                    </nav>
+        <div class="row linkroot mgan">
+            <nav class="bgtrans pdl20">
+                <div class="nav-wrapper bgtrans">
+                    <div class="col s12 pdln">
+                        <a href="/#/home" class="breadcrumb">Home</a>
+                        <a href="/#/search/2017/property/gurgaon/residential/" class="breadcrumb">Projects</a>
+                        <a href="" class="breadcrumb">Project Details</a>
+                    </div>
+                </div>
+            </nav>
         </div>
         <div class="row img_detail relative">
             <img ng-src="{{cover}}" class="responsive-img" id="cover-xs">
             <img ng-src="{{coverl}}" class="responsive-img hidden" id="cover-l">
             <div class="dt_abs">
                 <h3 class="white-text text-sd mgbn mgt65">{{project.name}}</h3>
-                <h5 class="white-text text-sd">{{project.location.displayAdd}}</h5>               
+                <h5 class="white-text text-sd">{{project.location.displayAdd}}</h5>
             </div>
         </div>
     </section>
+    <div class="row white shdsm sub_header" id="fixsub_hd">
+        <div class="container">
+            <ul class="menu_sub mgan">
+                <li>
+                    <a ng-click="scrollToDiv('#Overview')" class="ft14">Overview</a>
+                </li>
+                <li>
+                    <a href="#Project_Location" class="ft14">Project Location</a>
+                </li>
+                <li>
+                    <a href="#Units_Sizes" class="ft14">Units & Sizes</a>
+                </li>
+                <li>
+                    <a href="#Amenities" class="ft14">Amenities</a>
+                </li>
+                <li>
+                    <a href="#Specifications" class="ft14">Specifications</a>
+                </li>
+                <li>
+                    <a href="#gallery" class="ft14">Gallery</a>
+                </li>
+                <li>
+                    <a href="#Reviews" class="ft14">Reviews</a>
+                </li>
+                <li>
+                    <a href="#Popular_Projects" class="ft14">Popular Projects</a>
+                </li>
+            </ul>
+        </div>
+    </div>
     <section>
         <div class="row container h-services pro_dtmnht">
             <div class="col s12 m12 l8 pdln pdrn">
@@ -447,4 +477,15 @@
             <a ng-click="closeFilter()" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
         </div>
     </div>
+    <script>
+    $(function() {
+        $(window).on('scroll', function() {
+            if ($(window).scrollTop() <= 120) {
+                $('.sub_header').addClass('hide');
+            } else if ($(window).scrollTop() >= 130) {
+                $('.sub_header').removeClass('hide');
+            }
+        });
+    });
+    </script>
 </div>

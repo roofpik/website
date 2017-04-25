@@ -68,6 +68,11 @@
     <div id="login_signup_popup" class="modal white ">
         <div login></div>
     </div>
+
+<div class="goToTop" style="display:none">
+<i class="material-icons">arrow_upward</i>
+</div>
+
     <!-- footer part start -->
     <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
     <script type="text/javascript " src="js/jquery-2.1.1.min.js"></script>
@@ -109,6 +114,21 @@ $.src="https://v2.zopim.com/?4iZqvHIp1YTGzYereLYoUdN7tRSElDZu";z.t=+new Date;$.
 type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 </script>
 <!--End of Zendesk Chat Script-->
+<!-- back to top js start -->
+<script>
+      $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('.goToTop').fadeIn();
+            } else {
+                $('.goToTop').fadeOut();
+            }
+        });
+        $('.goToTop').click(function () {
+            $("html, body").animate({ scrollTop: 0 }, 1000);
+            return false;
+        });
+</script>
+<!-- back to top js end -->
 
 
 </body>

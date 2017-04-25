@@ -108,9 +108,9 @@ app.controller('termsCtrl', function($scope) {
   
 });
 
-app.controller('OffersFilterCtrl', function($scope) {
+// app.controller('OffersFilterCtrl', function($scope) {
   
-});
+// });
 
 
 

@@ -1,6 +1,10 @@
 app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $stateParams, $location, $http, $state) {
 
 
+// $scope.scrollTo = function(id) {
+//       $location.hash(id);
+//       $anchorScroll();
+//    }
 
     $scope.countryId = '-K_43TEI8cBodNbwlKqJ';
     $scope.cityId = '-KYJONgh0P98xoyPPYm9';
@@ -540,6 +544,8 @@ app.controller('ratingCtrl', function($scope) {
         return new Array(num);
     }
 });
+
+
 
 app.filter('capitalize', function() {
     return function(input) {
