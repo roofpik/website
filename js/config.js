@@ -157,6 +157,25 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
          controller: 'termsCtrl'
     })
 
+     $stateProvider.state('all-news', {
+        url: '/all-news',
+        templateUrl: 'templates/static/all_news.html'
+         // controller: 'termsCtrl'
+    })
+
+     $stateProvider.state('pladge', {
+        url: '/pladge',
+        templateUrl: 'templates/static/take-pladge.html'
+         
+    })
+
+      $stateProvider.state('news-details', {
+        url: '/news-details',
+        templateUrl: 'templates/static/news_details.html'
+         
+    })
+
+
     // static pages end
 
 

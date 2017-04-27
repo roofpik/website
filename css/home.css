@@ -144,6 +144,8 @@ width: 130px;
 .hd_home_cr a:last-child{ margin-right: 0px; }
 .mgtdoted{margin-top: 90px;}
 
+.homefiximg{height: 200px}
+.homefiximg img{height: 130px}
 
 @media screen and (min-width:0px) and (max-width: 600px) {
     .searchfix_xs {
