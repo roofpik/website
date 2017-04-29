@@ -157,6 +157,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
          controller: 'termsCtrl'
     })
 
+      $stateProvider.state('faq', {
+        url: '/faq',
+        templateUrl: 'templates/static/faq.html'
+      
+    })
+
      $stateProvider.state('all-news', {
         url: '/all-news',
         templateUrl: 'templates/static/all_news.html'
