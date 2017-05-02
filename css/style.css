@@ -458,7 +458,8 @@
     .arrow_box {
         display: none;
     }
-
+   .valign_careers .valign-wrapper{display: block;}
+h1{font-size: 3.2rem}
  .search-results ul.homecoll li.collection-item{line-height: 30px !important;}
 
     .xs_bdaw {
@@ -536,6 +537,12 @@
     .xspdl10 {
         padding-left: 10px !important;
     }
+     .xspdl20 {
+        padding-left: 20px !important;
+    }
+    .xspdr20 {
+        padding-right: 20px !important;
+    }
     .xspdrn {
         padding-right: 0 !important;
     }
@@ -553,6 +560,10 @@
         padding: 50px 5% !important;
     }
     .post-title{margin-top: 10px !important;}
+.xsbox-cont{position: absolute !important; transform: none; left: auto; top: auto}
+.h-services .over { margin-top: -100px;}
+
+
 }
 
 @media screen and (min-width:0px) and (max-width: 400px) {

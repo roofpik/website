@@ -23,6 +23,34 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     });
 
 
+
+
+    //  $stateProvider.state('blog', {
+    //     url: '/blog/:city/:cityId/:from/:fromId',
+    //     views: {
+    //         '': {
+    //             templateUrl: 'templates/blogs/blogs.html',
+    //             controller: 'blogsCtrl'
+    //         },
+    //         'featuredBlogs@blog': {
+    //             templateUrl: 'templates/blogs/featured-blogs.html',
+    //             controller: 'featuredBlogsCtrl'
+    //         },
+    //         'popularLocalityBlogs@blog': {
+    //             templateUrl: 'templates/blogs/popular-locality-blogs.html',
+    //             controller: 'popularLocalityCtrl'
+    //         },
+    //         'shortBlogs@blog': {
+    //             templateUrl: 'templates/blogs/short-blogs.html',
+    //             controller: 'shortBlogsCtrl'
+    //         }
+    //     }
+    // });
+
+
+
+
+
     // static pages start    
     $stateProvider.state('story', {
         url: '/story/gurgaon',

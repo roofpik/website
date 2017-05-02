@@ -866,7 +866,7 @@ input:focus + div.search-results,
             background-color: #000;
             width: 30px; border-radius: 50%;
             height: 30px; text-align: center;
-            bottom: 50px; padding-top: 3px;
+            bottom: 90px; padding-top: 3px;
             right: 10px;
             z-index: 10000; color: #fff;
             cursor: pointer;
