@@ -213,6 +213,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     // static pages end
 
 
+ $stateProvider.state('property-management', {
+        url: '/property-management',
+        templateUrl: 'templates/static/property-management.html',
+        controller: 'propertymanagementCtrl'
+         
+    })
 
     $stateProvider.state('project-details', {
         url: '/rent/property/2017/gurgaon/residential/:micro/:locality/:builder/:project',
