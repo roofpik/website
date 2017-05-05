@@ -1,0 +1,9 @@
+
+.prop_htv100{height: calc(100vh - 65px) !important; display: block;}
+.wdtrans{width: 75%;}
+.property_sec h5{font-size: 15px; min-height: 25px;}
+.property_sec .col{padding-right: 20px; text-align: center !important;}
+.property_sec .col:last{padding-right: 10px;}
+.property_sec .col img{width: 100px; height: 100px;}
+
+.mainpht{min-height: 150px;}

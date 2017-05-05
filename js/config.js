@@ -211,14 +211,47 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
 
     // static pages end
+// new pages
 
-
- $stateProvider.state('property-management', {
+ $stateProvider.state('tenants', {
+        url: '/tenants',
+        templateUrl: 'templates/static/tenants.html',
+        controller: 'propertymanagementCtrl'         
+    })
+  $stateProvider.state('property-management', {
         url: '/property-management',
         templateUrl: 'templates/static/property-management.html',
-        controller: 'propertymanagementCtrl'
-         
+        controller: 'propertymanagementCtrl'         
     })
+   $stateProvider.state('maintenance', {
+        url: '/maintenance',
+        templateUrl: 'templates/static/maintenance.html',
+        controller: 'propertymanagementCtrl'         
+    })
+    $stateProvider.state('rent', {
+        url: '/rent',
+        templateUrl: 'templates/static/rent.html',
+        controller: 'propertymanagementCtrl'         
+    })
+    $stateProvider.state('compliance', {
+        url: '/compliance',
+        templateUrl: 'templates/static/compliance.html',
+        controller: 'propertymanagementCtrl'         
+    })
+    $stateProvider.state('emergencies', {
+        url: '/emergencies',
+        templateUrl: 'templates/static/emergencies.html',
+        controller: 'propertymanagementCtrl'         
+    })
+    $stateProvider.state('pricing', {
+        url: '/pricing',
+        templateUrl: 'templates/static/pricing.html',
+        controller: 'propertymanagementCtrl'         
+    })
+
+
+// new pages end
+
 
     $stateProvider.state('project-details', {
         url: '/rent/property/2017/gurgaon/residential/:micro/:locality/:builder/:project',
