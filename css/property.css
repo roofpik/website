@@ -5,5 +5,36 @@
 .property_sec .col{padding-right: 20px; text-align: center !important;}
 .property_sec .col:last{padding-right: 10px;}
 .property_sec .col img{width: 100px; height: 100px;}
-
 .mainpht{min-height: 150px;}
+
+.manag_menu li{display: inline-block;}
+.manag_menu li a{ display: inline-block; margin: 0px 15px; padding-bottom: 6px; line-height: 20px; font-size: 16px; color:#444;}
+.manag_menu li a:hover, .manag_menu li a:focus, .manag_menu li a.active{font-weight: 400; border-bottom: 1px solid #444; padding-bottom: 5px;}
+
+
+#nav-toggle-prop {
+    display:none;  
+    cursor: pointer; 
+}
+.menu-caption {
+    display:inline-block;
+    color:#fff;
+    padding:10px 18px;
+}
+
+
+@media screen and (max-width:767px) {
+    #nav-toggle-prop {
+        display:block;
+    }
+    .manag_menu li{display: block;}
+    }
+
+@media screen and (min-width:768px) and (max-width: 991px) {
+	.manag_menu li a {   
+    margin: 0px 10px;   
+    font-size: 13px;    
+}
+
+
+}

@@ -49,6 +49,9 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
 
 
+ 
+
+
 
 
     // static pages start    
@@ -247,6 +250,34 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         url: '/pricing',
         templateUrl: 'templates/static/pricing.html',
         controller: 'propertymanagementCtrl'         
+    })
+
+    $stateProvider.state('owner-property-details-form', {
+        url: '/owner-property-details-form',
+        templateUrl: 'templates/static/owner-property-details-form.html',
+        controller: 'ownerpropertydetails'
+    })
+
+    $stateProvider.state('owner-property-details', {
+        url: '/owner-property-details',
+        templateUrl: 'templates/static/owner-property-details.html',
+        controller: 'ownerpropertydetails'
+    })
+     $stateProvider.state('lease-details', {
+        url: '/lease-details',
+        templateUrl: 'templates/static/lease-details.html',
+        controller: 'ownerpropertydetails'
+    })
+
+    $stateProvider.state('lease-form', {
+        url: '/lease-form',
+        templateUrl: 'templates/static/lease-form.html',
+        controller: 'ownerpropertydetails'
+    })
+     $stateProvider.state('owner-inspection', {
+        url: '/owner-inspection',
+        templateUrl: 'templates/static/owner-inspection.html',
+        controller: 'ownerpropertydetails'
     })
 
 

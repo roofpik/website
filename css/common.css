@@ -881,7 +881,4 @@ input:focus + div.search-results,
         .goToTop:hover{-moz-opacity: 1;
             opacity: 1;
             filter: alpha(opacity=100);}
-.manag_menu li{display: inline-block;}
-.manag_menu li a{ display: inline-block; margin: 0px 15px; padding-bottom: 6px; line-height: 20px; font-size: 16px; color:#444;}
-.manag_menu li a:hover, .manag_menu li a:focus, .manag_menu li a.active{font-weight: 400; border-bottom: 1px solid #444; padding-bottom: 5px;}
 /*back to top css end*/

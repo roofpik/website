@@ -15,4 +15,24 @@ app.controller('propertymanagementCtrl', function($scope, $state, $timeout) {
     }, 500)
 
 
+
+var windowWidth = $(window).width();
+
+$("#nav-toggle-prop").click(function () {
+    $("#nav-prop ul").slideToggle();
+    $("#nav-prop ul").toggleClass("open");
+});
+
+$(window).resize(function () {
+    windowWidth = $(window).width();
+    if (windowWidth > 767) {
+        if ($("#nav-prop ul").is(":hidden")) {
+            $("#nav-prop ul").css("display","block");
+        }
+    }
+    else {
+        $("#nav-prop ul").css("display","none");
+    }
+})
+
 });
