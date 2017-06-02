@@ -1,5 +1,6 @@
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
     $locationProvider.hashPrefix('');
+     $locationProvider.html5Mode(true);
     $stateProvider.state('home', {
         url: '/home',
         views: {
