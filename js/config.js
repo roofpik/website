@@ -1,6 +1,6 @@
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
-    $locationProvider.hashPrefix('');
-     $locationProvider.html5Mode(true);
+    // $locationProvider.hashPrefix('');
+    // $locationProvider.html5Mode(true);
     $stateProvider.state('home', {
         url: '/home',
         views: {
@@ -31,24 +31,24 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         controller: 'storyListCtrl'
     })
 
-     $stateProvider.state('story-details', {
+    $stateProvider.state('story-details', {
         url: '/story/details?key',
         templateUrl: 'templates/story/story-details.html',
-        controller:'storyDetailsCtrl'
+        controller: 'storyDetailsCtrl'
     })
 
 
 
-  $stateProvider.state('blog', {
+    $stateProvider.state('blog', {
         url: '/blog/gurgaon',
         templateUrl: 'templates/blog/blog.html',
         controller: 'blogListCtrl'
     })
 
-     $stateProvider.state('blog-details', {
+    $stateProvider.state('blog-details', {
         url: '/blog/gurgaon/details/:url?key',
         templateUrl: 'templates/blog/blog-details.html',
-        controller:'blogDetailsCtrl'
+        controller: 'blogDetailsCtrl'
     })
 
 
@@ -57,6 +57,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         url: '/write-review?key&name&type',
         templateUrl: 'templates/review/write-review.html',
         controller: 'writeReviewCtrl'
+    })
+
+
+    $stateProvider.state('review', {
+        url: '/review',
+        templateUrl: 'templates/review/write-review-new.html',
+        controller: 'writeReviewNewCtrl'
     })
 
     // static pages start    
@@ -85,17 +92,17 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     $stateProvider.state('offers', {
         url: '/offers',
         templateUrl: 'templates/static/offers.html',
-         controller: 'offersCtrl'
+        controller: 'offersCtrl'
     })
-     $stateProvider.state('offer-details', {
+    $stateProvider.state('offer-details', {
         url: '/offer-details?key',
         templateUrl: 'templates/static/offer-details.html',
-         controller: 'offerDetailsCtrl'
+        controller: 'offerDetailsCtrl'
     })
     $stateProvider.state('offers-filter', {
         url: '/offers-filter',
         templateUrl: 'templates/static/offers-filter.html',
-         controller: 'OffersCtrl'
+        controller: 'OffersCtrl'
     })
 
     $stateProvider.state('careers', {
@@ -112,7 +119,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     $stateProvider.state('contact-us', {
         url: '/contact-us',
         templateUrl: 'templates/static/contact-us.html',
-         controller: 'contactCtrl'
+        controller: 'contactCtrl'
     })
 
     $stateProvider.state('corporate', {
@@ -123,7 +130,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     $stateProvider.state('guidelines', {
         url: '/guidelines',
         templateUrl: 'templates/static/guidelines.html',
-         controller: 'guidelinesCtrl'
+        controller: 'guidelinesCtrl'
     })
 
     $stateProvider.state('homecoverstories', {
@@ -152,10 +159,10 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         controller: 'verifiedCtrl'
     })
 
-     $stateProvider.state('terms', {
+    $stateProvider.state('terms', {
         url: '/terms',
         templateUrl: 'templates/static/terms.html',
-         controller: 'termsCtrl'
+        controller: 'termsCtrl'
     })
 
     // static pages end

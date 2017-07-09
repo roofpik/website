@@ -1,0 +1,198 @@
+<div>
+    <style>
+    .review-m {
+        display: none !important;
+    }
+    
+    .nav-wrapper .right {
+        display: none;
+    }
+    </style>
+    <div class="row mgt70 write-review">
+        <div class="container">
+            <div class="row relative">
+                <div class="col s12 m12 l8 pdr30 rightsd">
+                    <h3 class="heading mgt30 mgbn">Write Review</h3>
+                    <div class="row linkroot mgan">
+                        <nav class="bgtrans">
+                            <div class="nav-wrapper bgtrans">
+                                <div class="col s12 pdln">
+                                    <a href="/#/home" class="breadcrumb">Home</a>
+                                    <a href="" class="breadcrumb">Write Review</a>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <form name="reviewForm">
+                        <div class="row mgln mgrn">
+                            <div class="col s12 pdln ft18 b bodb pdb10 mgt20">
+                                Your first-hand experiences really help other residents. Thanks!
+                            </div>
+                        </div>
+                        <div class="row mgbn">
+                            <div class="col s12 input-field" id="pname">
+                                <input id="project-name" type="text" ng-model="searchtxt" ng-change="searchData()" autocomplete="off">
+                                <label for="project-name">Where do you live? (search project/locality)</label>
+                                <span ng-show="searchtxt == null && validate" class="error">This field is required</span>
+                            </div>
+                            <div class="col s12" ng-show="projectsData">
+                                <ul class="collection projdata">
+                                    <li class="collection-item" ng-repeat="item in allData" ng-click="selectedProj(item)">{{item.name}} </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row mgt20">
+                            <div class="col s12 pdb10 b">Your Overall rating *</div>
+                            <div class="col s12 relative align-left">
+                                <span class="left starrating">
+                                    <review-ratings ratingsobj='ratingsObject' index='1' currval="{{review.main.rating}}"></review-ratings>
+                                </span>
+                                <span class="arrow_box ratbox left b white-text">{{ratingTxt.overall}}</span>
+                            </div>
+                            <div class="col s12 pdb10"><span ng-show="ratingTxt.overall == 'Click to rate' && validate" class="error">This field is required</span></div>
+                        </div>
+                        <hr>
+                        <div class="row mgbn mgt20">
+                            <div class="col s12 pdb10 b">Review Title *</div>
+                            <div class="input-field col s12">
+                                <input id="review-title" type="text" class="validate" class="validate" ng-model="review.main.title">
+                                <label for="review-title">Type your review title</label>
+                            </div>
+                            <div class="col s12 pdb10">
+                                <span ng-show="review.main.title == null && validate" class="error">This field is required</span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 pdb10 b">Review text *</div>
+                            <div class="input-field col s12">
+                                <textarea id="textarea1" class="materialize-textarea validate mgbn" ng-model="review.main.detail" ng-change="reviewText()"></textarea>
+                                <label for="textarea1">Type your review</label>
+                            </div>
+                            <div class="col s12 text-count right-align" ng-hide="textcount"> <span class="validate" id="textcount">{{data.textlength}}</span>/100 (Minimum 100 characters) </div>
+                            <div class="col s12 pdb10">
+                                <span ng-show="!data.textcount" class="error">Minimum 100 characters required</span>
+                                <span ng-show="review.main.detail == null && validate" class="error">Minimum 100 characters</span>
+                            </div>
+                        </div>
+                        <button class="lighten-1 btn btn-primary block mgt20 wd100" ng-click="submitReview()">Submit Your Review</button>
+                    </form>
+                </div>
+                <div class="col s12 m12 l4 justify pdl30 xspdl10 mgt30 smxst">
+                    <div class="row relative">
+                        <div class="col s12">
+                            <h5 class="mgtn ft15 b">Reviewing Tips</h5>
+                            <hr> Your review can directly impact someone’s decision to buy or rent property. So make it count by using these reviewing tips:
+                            <p>
+                                <b>Remain Relevant:</b> A review with the relevant details garners more ratings and trust. Avoid excessive complaints or compliments, provide specific details where possible, and be objective about your views. The best reviews state both pros and cons.
+                            </p>
+                            <div class="row mgbn mgt30">
+                                <h5 class="ft17 pdl10"><span class="orange-text">What</span> you can talk abuot in your review</h5>
+                                <div class="col s6">
+                                    <h5 class="ft13 purple-text mgbn">Amenities:</h5>
+                                    <p class="ft11 mgtn">How are the club-house and indoor/outdoor sports facilities</p>
+                                </div>
+                                <div class="col s6">
+                                    <h5 class="ft13 blue-text mgbn">Security:</h5>
+                                    <p class="ft11 mgtn">Availability of features like gated community,cctv,24x7 security etc.</p>
+                                </div>
+                                <div class="col s6">
+                                    <h5 class="ft13 green-text mgbn">Infrastructure:</h5>
+                                    <p class="ft11 mgtn">Quality of roads, street-lighting, traffic, air and noise pollution etc.</p>
+                                </div>
+                                <div class="col s6">
+                                    <h5 class="ft13 red-text mgbn">Convenience:</h5>
+                                    <p class="ft11 mgtn">Convenience of housemaids, quality of lifts, senior citizen, friendly, pet friendly etc.</p>
+                                </div>
+                                <div class="col s6">
+                                    <h5 class="ft13 orange-text mgbn">Open Areas:</h5>
+                                    <p class="ft11 mgtn">Parks and open/green areas, children play areas etc.</p>
+                                </div>
+                                <div class="col s6">
+                                    <h5 class="ft13 lime-text mgbn">Near-By:</h5>
+                                    <p class="ft11 mgtn">Best Schools, Markets, Hospitals, and Connectivity to public transport etc.</p>
+                                </div>
+                                <div class="col s12 ft10"><span class="black-text">90%</span> read reviews <span class="black-text">before</span> making decision - <span class="black-text">BrightLocal</span></div>
+                            </div>
+                            <p>
+                                <b>Honesty Helps:</b> Although this is a neutral platform for users to openly share their views, reviews with discriminatory, libellous, or profane content will not pass the verification stage. Share your own experiences and not what you’ve heard about the property or neighbourhood you’re reviewing.
+                            </p>
+                            <p>
+                                <b> Add Photos:</b> You may not be able to write a thousand words, so post a picture! Photos of the property, project, and locality help garner more readers for your review besides making it credible.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row mgan relative">
+                        <div class="col s12">
+                            <!--   <a onclick="$('#seesample_popup') .css ('display','block')" class="pointer ft12">
+                                Reviewing Tips
+                            </a> -->
+                            <h3 class="ft15 b" ng-show="{{allReview}}">Recent reviews of this property</h3>
+                        </div>
+                        <!--   <div id="seesample_popup" class="white pda20">
+                            <i onclick="$('#seesample_popup') .css ('display','none')" class="material-icons right ft17 grey-text pointer">close</i>
+                            <h5 class="mgtn ft15 b">Reviewing Tips</h5>
+                            <hr> Your review can directly impact someone’s decision to buy or rent property. So make it count by using these reviewing tips:
+                            <p>
+                                <b>Remain Relevant:</b> A review with the relevant details garners more ratings and trust. Avoid excessive complaints or compliments, provide specific details where possible, and be objective about your views. The best reviews state both pros and cons.
+                            </p>
+                            <p>
+                                <b>Honesty Helps:</b> Although this is a neutral platform for users to openly share their views, reviews with discriminatory, libellous, or profane content will not pass the verification stage. Share your own experiences and not what you’ve heard about the property or neighbourhood you’re reviewing.
+                            </p>
+                            <p>
+                               <b> Add Photos:</b> You may not be able to write a thousand words, so post a picture! Photos of the property, project, and locality help garner more readers for your review besides making it credible. 
+                            </p>
+                        </div> -->
+                    </div>
+                    <div class="row bdbtm ft13 grey-text text-darken-2 mgan" ng-repeat="review in allReviews">
+                        <div class="col s12">
+                            <p><span class="ft14"> {{review.name | capitalize}} </span> | {{review.date | date : 'd MMM yy'}} </p>
+                            <p class="grey-text review ft20i mgbn ">
+                                <ratings ratingval="{{review.rating}}"></ratings>
+                            </p>
+                            <p><b>{{review.title | capitalize}}</b></p>
+                            <p class="justify">{{review.details | capitalize}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mgbn transformfix sign-up">
+        <div class="container reg_box50">
+            <div class="row relative">
+                <div class="col s12 card pda20">
+                    <div class="row">
+ 
+                            <div class="input-field col s6">
+                                <input id="name" type="text" class="validate mgb10" ng-model="user.name">
+                                <label for="name">Name</label>
+                            </div>
+                             <div class="input-field col s6">
+                                <input id="name" type="text" class="validate mgb10" ng-model="user.email">
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="name" type="text" class="validate mgb10" ng-model="user.password">
+                                <label for="password">Password</label>
+                            </div>
+                        <div class="input-field col s6">
+                            <input id="first_name" type="text" class="validate mgb10" ng-model="user.mobile">
+                            <label for="first_name">10 Digit Mobile Number</label>
+                        </div>
+                        <div class="col s3 center mgt20">
+                            <a href="" class="btn btn-full btn-large b darken-4 white-text" ng-click="sendOtp()"> Send OTP</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="otp" type="text" class="validate mgb10" ng-model="user.otp">
+                            <label for="otp">Enter 4 digit OTP</label>
+                        </div>
+                        <div class="col s12 center mgt6">
+                            <a href="" class="btn btn-full btn-large b darken-4 white-text" ng-click="verifyOtp()"> Verify OTP</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
