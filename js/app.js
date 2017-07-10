@@ -1,4 +1,4 @@
-var app = angular.module('roofpikWeb', ['ui.router']);
+var app = angular.module('roofpikWeb', ['ui.router' , 'gm']);
 
 var config = {
     apiKey: "AIzaSyBSSYFQ2ZhbF7d0fwTIiHVOL1GTHAWpilA",

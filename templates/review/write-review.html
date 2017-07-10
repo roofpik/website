@@ -23,72 +23,26 @@
                     <form name="reviewForm">
                         <div class="row mgln mgrn">
                             <div class="col s12 pdln ft18 b bodb pdb10 mgt20">
-                                Tell us about yourself?
+                                 Your first-hand experiences really help other residents. Thanks!
                             </div>
                         </div>
                         <div class="row mgbn">
-                            <div class="col s12 m4 input-field">
+                            <div class="col s12 input-field">
+                            <input id="place_name" type="text"  gm-places-autocomplete ng-model="autocomplete" placeholder="Seach locality and property" />
+                            </div>
+                            <div class="col s12 m6 input-field">
                                 <select ng-model="review.user.type" class="browser-default">
-                                    <option value="" disabled selected>Choose your option</option>
-                                    <option value="tenant">I live on rent</option>
-                                    <option value="owner">I own the place</option>
-                                    <option value="prospect">I visited for rent</option>
+                                    <option value="" disabled selected>I am living as</option>
+                                    <option value="tenant"> Tenant </option>
+                                    <option value="owner"> Owner </option>
                                 </select>
-                                <span ng-show="review.user.type == null && validate" class="error">This field is required</span>
                             </div>
-                            <div class="input-field col s12 m4">
-                                <input id="review-age" type="text" ng-model="review.user.age">
-                                <label for="review-age">Year of Birth (YYYY)</label>
-                                <span ng-show="review.user.age == null && validate" class="error">This field is required</span>
-                            </div>
-                            <div class="input-field col s12 m4">
-                                <select ng-model="review.user.gender" class="browser-default">
-                                    <option value="" disabled selected>Select Gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                </select>
-                                <span ng-show="review.user.gender == null && validate" class="error">This field is required</span>
-                            </div>
-                        </div>
-                        <div class="row mgbn">
-                            <div class="col s12 m4 input-field">
-                                <select ng-model="review.user.livedwith" class="browser-default">
-                                    <option value="" disabled selected>I am living with</option>
-                                    <option value="family">Family</option>
-                                    <option value="friends">Friends</option>
-                                    <option value="other">Other</option>
-                                    <option value="alone">Alone</option>
-                                </select>
-                                <span ng-show="review.user.livedwith == null && validate" class="error">This field is required</span>
-                            </div>
-                            <div class="input-field col s12 m4">
-                                <input id="review-house" type="text" ng-model="review.user.house">
-                                <label for="review-house">House/Flat No</label>
-                                <span ng-show="review.user.house == null && validate" class="error">This field is required</span>
-                            </div>
-                            <div class="input-field col s12 m4">
+                            <div class="input-field col s12 m6">
                                 <input id="review-block" type="text" ng-model="review.user.block">
                                 <label for="review-block">Tower/Block</label>
-                                <span ng-show="review.user.block == null && validate" class="error">This field is required</span>
                             </div>
                         </div>
-                        <div class="row mgln mgrn">
-                            <div class="col s12 pdln ft18 b bodb pdb10 mgt20">
-                                Your first-hand experiences really help other residents. Thanks!
-                            </div>
-                        </div>
-                        <div class="row mgbn">
-                            <div class="col s12 input-field" id="pname">
-                                <input id="project-name" type="text" ng-model="searchtxt" ng-change="searchData()" autocomplete="off">
-                                <label for="project-name">Where do you live? (search project/locality)</label>
-                                <span ng-show="searchtxt == null && validate" class="error">This field is required</span>
-                            </div>
-                            <div class="col s12" ng-show="projectsData">
-                                <ul class="collection projdata">
-                                    <li class="collection-item" ng-repeat="item in allData" ng-click="selectedProj(item)">{{item.name}} </li>
-                                </ul>
-                            </div>
-                        </div>
+    
                         <div class="row mgt20">
                             <div class="col s12 pdb10 b">Your Overall rating *</div>
                             <div class="col s12 relative align-left">
@@ -96,8 +50,7 @@
                                     <review-ratings ratingsobj='ratingsObject' index='1' currval="{{review.main.rating}}"></review-ratings>
                                 </span>
                                 <span class="arrow_box ratbox left b white-text">{{ratingTxt.overall}}</span>
-                            </div>
-                            <div class="col s12 pdb10"><span ng-show="ratingTxt.overall == 'Click to rate' && validate" class="error">This field is required</span></div>
+                            </div> 
                         </div>
                         <hr>
                         <div class="row mgbn mgt20">
@@ -106,180 +59,26 @@
                                 <input id="review-title" type="text" class="validate" class="validate" ng-model="review.main.title">
                                 <label for="review-title">Type your review title</label>
                             </div>
-                            <div class="col s12 pdb10">
-                                <span ng-show="review.main.title == null && validate" class="error">This field is required</span></div>
                         </div>
                         <div class="row">
-                            <div class="col s12 pdb10 b">Review text *</div>
+                            <div class="col s12 pdb10 b">Pros *</div>
                             <div class="input-field col s12">
-                                <textarea id="textarea1" class="materialize-textarea validate mgbn" ng-model="review.main.detail" ng-change="reviewText()"></textarea>
-                                <label for="textarea1">Type your review</label>
+                                <textarea id="textarea1" class="materialize-textarea validate mgbn" ng-model="review.main.pros"></textarea>
+                                <label for="textarea1">What are the positives of living at this place</label>
                             </div>
-                            <div class="col s12 text-count right-align" ng-hide="textcount"> <span class="validate" id="textcount">{{data.textlength}}</span>/100 (Minimum 100 characters) </div>
-                            <div class="col s12 pdb10">
-                                <span ng-show="!data.textcount" class="error">Minimum 100 characters required</span>
-                                <span ng-show="review.main.detail == null && validate" class="error">Minimum 100 characters</span>
+                        </div>
+                         <div class="row">
+                            <div class="col s12 pdb10 b">Cons *</div>
+                            <div class="input-field col s12">
+                                <textarea id="textarea1" class="materialize-textarea validate mgbn" ng-model="review.main.cons"></textarea>
+                                <label for="textarea1">What are the challenges of living at this place</label>
                             </div>
                         </div>
                         <div class="row mgln mgrn">
-                            <div class="col s12 pdln ft18 b bodb pdb10 mgt20 mgb10"> Could you say a little more about it?
-                                <div class="col s12 pdln mgt20 ft15 pdb10">We'd love your opinion! Anything you can share will help other residents choose their perfect house. Thanks.</div>
-                            </div>
-                            <div class="mgt20 row mgln mgrn">
-                                <div class="row mgbn" ng-repeat="item in ratingParams">
-                                    <div class="col s4 ft13 pdb10">{{item.name}}</div>
-                                    <div class="col s6 pdl0 grey-text pointer">
-                                        <span class="left starrating">
-                                       <review-ratings ratingsobj='ratingsObject' index='item.id' currval="
-                                        {{review.mainrating[item.val] | iif : review.mainrating[item.val] : 0}}">                                           
-                                        </review-ratings>
-
-                                    </span>
-                                        <span class="arrow_box ratbox left b white-text">{{item.rtxt}}</span>
-                                    </div>
-                                </div>
-                                <hr>
-                                <!-- closeby -->
-                                <div class="row mgb10 mgt20 xspdb10">
-                                    <div class="col s12 m4 ft13 b">Good Schools?
-                                        <p class="ft11 linht15 mgtn ftw100">Do you have good schools in near to your home?</p>
-                                    </div>
-                                    <div class="col s12 m6 no-padding grey-text xspdt10 xspdl10">
-                                        <div class="col no-padding xspdn">
-                                            <input class="btn btnsm" type="button" value="Yes" ng-click="review.closeby.school = 'Yes'" ng-class="{'xtbtn-active': review.closeby.school == 'Yes'}">
-                                        </div>
-                                        <div class="col">
-                                            <input class="btn btnsm" type="button" value="No" ng-click="review.closeby.school = 'No'" ng-class="{'xtbtn-active': review.closeby.school == 'No'}">
-                                        </div>
-                                        <div class="col pdrn xspdln">
-                                            <input class="btn btnsm" type="button" value="Not Sure" ng-click="review.closeby.school = 'Not Sure'" ng-class="{'xtbtn-active': review.closeby.school == 'Not Sure'}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mgb10 xspdb10">
-                                    <div class="col s12 m4 ft13 b">Good Markets?
-                                        <p class="ft11 linht15 mgtn ftw100">Do you easily get all your daily need items nearby?</p>
-                                    </div>
-                                    <div class="col s12 m6 no-padding grey-text xspdt10 xspdl10">
-                                        <div class="col no-padding xspdn">
-                                            <input class="btn btnsm" type="button" value="Yes" ng-click="review.closeby.market = 'Yes'" ng-class="{'xtbtn-active': review.closeby.market == 'Yes'}">
-                                        </div>
-                                        <div class="col">
-                                            <input class="btn btnsm" type="button" value="No" ng-click="review.closeby.market = 'No'" ng-class="{'xtbtn-active': review.closeby.market == 'No'}">
-                                        </div>
-                                        <div class="col pdrn xspdln">
-                                            <input class="btn btnsm" type="button" value="Not Sure" ng-click="review.closeby.market = 'Not Sure'" ng-class="{'xtbtn-active': review.closeby.market == 'Not Sure'}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mgb10 xspdb10">
-                                    <div class="col s12 m4 b ft13">Reputed Hospitals?
-                                        <p class="ft11 linht15 mgtn ftw100">Did you find good medical facilities near your project?</p>
-                                    </div>
-                                    <div class="col s12 m6 no-padding grey-text xspdt10 xspdl10">
-                                        <div class="col no-padding xspdn">
-                                            <input class="btn btnsm" type="button" value="Yes" ng-click="review.closeby.hospital = 'Yes'" ng-class="{'xtbtn-active': review.closeby.hospital == 'Yes'}">
-                                        </div>
-                                        <div class="col">
-                                            <input class="btn btnsm" type="button" value="No" ng-click="review.closeby.hospital = 'No'" ng-class="{'xtbtn-active': review.closeby.hospital == 'No'}">
-                                        </div>
-                                        <div class="col pdrn xspdln">
-                                            <input class="btn btnsm" type="button" value="Not Sure" ng-click="review.closeby.hospital = 'Not Sure'" ng-class="{'xtbtn-active': review.closeby.hospital == 'Not Sure'}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row mgb10 mgt20">
-                                    <div class="col s12 m4 ft13 pdb10">Daily Need Items?</div>
-                                    <div class="col s12 m6 no-padding grey-text">
-                                        <div class="col xspdn">
-                                            <input class="with-gap" name="group5" type="radio" id="dailyNeedsYes" ng-model="review.extra.location" value="Yes">
-                                            <label for="dailyNeedsYes">Yes</label>
-                                        </div>
-                                        <div class="col">
-                                            <input class="with-gap" name="group5" type="radio" id="dailyNeedsNo" ng-model="review.extra.location" value="No">
-                                            <label for="dailyNeedsNo">No</label>
-                                        </div>
-                                        <div class="col">
-                                            <input class="with-gap" name="group5" type="radio" id="dailyNeedsNotSure" ng-model="review.extra.location" value="Not Sure">
-                                            <label for="dailyNeedsNotSure">Not Sure</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mgb10">
-                                    <div class="col s12 m4 ft13 pdb10">Public Transport?</div>
-                                    <div class="col s12 m6 no-padding grey-text">
-                                        <div class="col xspdn">
-                                            <input class="with-gap" name="group6" type="radio" id="transportYes" ng-model="review.extra.transport" value="Yes">
-                                            <label for="transportYes">Yes</label>
-                                        </div>
-                                        <div class="col">
-                                            <input class="with-gap" name="group6" type="radio" id="transportNo" ng-model="review.extra.transport" value="No">
-                                            <label for="transportNo">No</label>
-                                        </div>
-                                        <div class="col">
-                                            <input class="with-gap" name="group6" type="radio" id="transportNotSure" ng-model="review.extra.transport" value="Not Sure">
-                                            <label for="transportNotSure">Not Sure</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mgb10">
-                                    <div class="col s12 m4 ft13 pdb10">Apartment Layout Efficient?</div>
-                                    <div class="col s12 m6 no-padding grey-text">
-                                        <div class="col xspdn">
-                                            <input class="with-gap" name="group7" type="radio" id="layoutYes" ng-model="review.extra.layout" value="Yes">
-                                            <label for="layoutYes">Yes</label>
-                                        </div>
-                                        <div class="col">
-                                            <input class="with-gap" name="group7" type="radio" id="layoutNo" ng-model="review.extra.layout" value="No">
-                                            <label for="layoutNo">No</label>
-                                        </div>
-                                        <div class="col">
-                                            <input class="with-gap" name="group7" type="radio" id="layoutNotSure" ng-model="review.extra.layout" value="Not Sure">
-                                            <label for="layoutNotSure">Not Sure</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mgb10">
-                                    <div class="col s12 m4 ft13 pdb10">24x7 Electricity?</div>
-                                    <div class="col s12 m6 no-padding grey-text">
-                                        <div class="col xspdn">
-                                            <input class="with-gap" name="group8" type="radio" id="electricityYes" ng-model="review.extra.electricity" value="Yes">
-                                            <label for="electricityYes">Yes</label>
-                                        </div>
-                                        <div class="col">
-                                            <input class="with-gap" name="group8" type="radio" id="electricityNo" ng-model="review.extra.electricity" value="No">
-                                            <label for="electricityNo">No</label>
-                                        </div>
-                                        <div class="col">
-                                            <input class="with-gap" name="group8" type="radio" id="electricityNotSure" ng-model="review.extra.electricity" value="Not Sure">
-                                            <label for="electricityNotSure">Not Sure</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mgb10">
-                                    <div class="col s12 m4 ft13 pdb10">Regular/Clean Water Supply?</div>
-                                    <div class="col s12 m6 no-padding grey-text">
-                                        <div class="col xspdn">
-                                            <input class="with-gap" name="group9" type="radio" id="waterYes" ng-model="review.extra.water" value="Yes">
-                                            <label for="waterYes">Yes</label>
-                                        </div>
-                                        <div class="col">
-                                            <input class="with-gap" name="group9" type="radio" id="waterNo" ng-model="review.extra.water" value="No">
-                                            <label for="waterNo">No</label>
-                                        </div>
-                                        <div class="col">
-                                            <input class="with-gap" name="group9" type="radio" id="waterNotSure" ng-model="review.extra.water" value="NotSure">
-                                            <label for="waterNotSure">Not Sure</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                            </div>
                             <div class="row mgbn mgt20 relative">
-                                <div class="col s12 pdb10 b">Add a tip to help residents choose a good house *</div>
+                                <div class="col s12 pdb10 b">Add a tip to help residents choose a good house</div>
                                 <div class="input-field col s12">
-                                    <input onclick="$('#addatip_popup') .css ('display','block')" id="review-tip" ng-model="review.other.reivewtip" type="text" class="validate">
+                                    <input onclick="$('#addatip_popup') .css ('display','block')" id="review-tip" ng-model="review.main.reivewtip" type="text" class="validate">
                                     <label for="review-title">Type your tip</label>
                                 </div>
                                 <div id="addatip_popup" class="white pda20">
@@ -294,7 +93,7 @@
                             </div>
                         </div>
                         <!-- <button class="lighten-1 btn btn-primary block mgt20 wd100" ng-class="(reviewForm.$invalid || !review.userType || !review.overallRating || !projectSelected|| !loginStatus)?'disabled':'normal'" ng-click="submitReview()">Submit Your Review</button> -->
-                        <button class="lighten-1 btn btn-primary block mgt20 wd100" ng-click="submitReview()">Submit Your Review</button>
+                        <button class="lighten-1 btn btn-primary block mgt20 wd100" ng-click="submitReview()" ng-enable="disbtn">Submit Your Review</button>
                     </form>
                 </div>
                 <div class="col s12 m12 l4 justify pdl30 xspdl10 mgt30 smxst">

@@ -54,7 +54,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
 
     $stateProvider.state('write-review', {
-        url: '/write-review?key&name&type',
+        url: '/write-review',
         templateUrl: 'templates/review/write-review.html',
         controller: 'writeReviewCtrl'
     })
@@ -176,7 +176,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     })
 
     $stateProvider.state('listing', {
-        url: '/search/2017/property/gurgaon/residential/:location',
+        url: '/search/2017/property/gurgaon/residential/',
         templateUrl: 'templates/projects/listing.html',
         controller: 'listingCtrl'
     })
