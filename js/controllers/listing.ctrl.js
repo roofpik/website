@@ -25,7 +25,7 @@ app.controller('listingCtrl', function($scope, $timeout, $stateParams, $http, $s
 
     $scope.submitQuery = function() {
       // console.log($scope.query);
-        var key = db.ref().key();
+        var key = db.ref().child('test').push().key;
         db.ref('test/questions/' + key).set($scope.query);
         $('#modalQues').modal('close');
         Materialize.toast('Your query is successfully submitted', 4000)
