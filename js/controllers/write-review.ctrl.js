@@ -115,6 +115,9 @@ app.controller('writeReviewCtrl', function($scope, $timeout, $stateParams, $root
 
     $scope.submitReview = function() {
 
+        Materialize.toast('We are submitting your review', 4000)
+
+
         $scope.review.user.uid = user.uid;
         $scope.review.main.place_id = $scope.data.place_id;
 
