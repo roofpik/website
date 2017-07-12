@@ -20,6 +20,10 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
                 templateUrl: 'templates/home/popular-searches.html',
                 controller: 'popularSearchCtrl'
             }
+            ,
+            'newcontent@home': {
+                templateUrl: 'templates/home/newcontent.html'
+            }
         }
     });
 
