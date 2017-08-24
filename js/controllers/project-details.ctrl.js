@@ -51,14 +51,14 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $q, imageUrl, $s
         for (img in $scope.project.images) {
             db.ref('images/' + img).once('value', function(data) {
                 item = data.val()
-                $scope.images[item['key']] = { 'url': 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-l.jpg' };
+                $scope.images[item['key']] = { 'url': 'http://139.162.9.71/images/' + item['imgName'] + '-l.jpg' };
                 if (item['imgCat'] == 'cover') {
                     // $('#cover-m').hide();
                     // $('#cover-l').hide();
-                    // $scope.xscover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xs.jpg';
-                    $scope.cover = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xs.jpg';
+                    // $scope.xscover = 'http://139.162.9.71/images/' + item['imgName'] + '-xs.jpg';
+                    $scope.cover = 'http://139.162.9.71/images/' + item['imgName'] + '-xs.jpg';
 
-                    $scope.coverl = 'http://cdn.roofpik.com/image/' + item['path'] + item['imgName'] + '-xl.jpg';
+                    $scope.coverl = 'http://139.162.9.71/images/' + item['imgName'] + '-xl.jpg';
 
                     $('#cover-l').on('load', function() {
                         $('#cover-xs').addClass('hidden');
